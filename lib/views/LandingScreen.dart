@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 
 class LandingScreen extends StatelessWidget {
+  static const String routeName = '/';
   const LandingScreen({Key? key}) : super(key: key);
 
   @override
@@ -62,7 +63,9 @@ class LandingScreen extends StatelessWidget {
                     width: 116,
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.pushNamed(context, RiwayatPage.routeName)
+                      },
                       child: Text(
                         "Masuk",
                         style:
