@@ -47,125 +47,129 @@ class RiwayatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: SvgPicture.asset('assets/images/scan_btn.svg'),
-        backgroundColor: Color(0XFF6C72CB),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  "Riwayat",
-                  style: kOpenSans.copyWith(
-                      color: kBlack, fontWeight: bold, fontSize: 16),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    "Riwayat",
+                    style: kOpenSans.copyWith(
+                        color: kBlack, fontWeight: bold, fontSize: 16),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 31,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 18),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 21),
-                      width: 296,
-                      height: 106,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFF0F0F0),
-                          borderRadius: BorderRadius.circular(6)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              history[index]['nama'],
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12, fontWeight: bold),
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Nominal : ",
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 12, fontWeight: semibold),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                history[index]['tipe']
-                                    ? Text(
-                                        "+ Rp. ${history[index]['nominal'].toString()}",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 10,
-                                            fontWeight: semibold,
-                                            color: Color(0xFF64BC26)),
-                                      )
-                                    : Text(
-                                        "- Rp. ${history[index]['nominal']}",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 10,
-                                            fontWeight: semibold,
-                                            color: kWarning),
-                                      ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Kategori : ",
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 12, fontWeight: semibold),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  history[index]['kategory'],
-                                  style: kOpenSans.copyWith(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Waktu : ",
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 12, fontWeight: semibold),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  history[index]['waktu'],
-                                  style: kOpenSans.copyWith(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  itemCount: history.length,
+                SizedBox(
+                  height: 31,
                 ),
-              )
-            ],
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 18),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 21),
+                        width: 296,
+                        height: 106,
+                        decoration: BoxDecoration(
+                            color: kWhite,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                history[index]['nama'],
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12, fontWeight: bold),
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Nominal : ",
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 12, fontWeight: semibold),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  history[index]['tipe']
+                                      ? Text(
+                                          "+ Rp. ${history[index]['nominal'].toString()}",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 10,
+                                              fontWeight: semibold,
+                                              color: kSuccess),
+                                        )
+                                      : Text(
+                                          "- Rp. ${history[index]['nominal']}",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 10,
+                                              fontWeight: semibold,
+                                              color: kWarning),
+                                        ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Kategori : ",
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 12, fontWeight: semibold),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    history[index]['kategory'],
+                                    style: kOpenSans.copyWith(fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Waktu : ",
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 12, fontWeight: semibold),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    history[index]['waktu'],
+                                    style: kOpenSans.copyWith(fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: history.length,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigator.pushNamed(context, DetailPengeluaran.routeName)
+        },
+        child: SvgPicture.asset('assets/images/scan_btn.svg'),
+        backgroundColor: kPurple,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
