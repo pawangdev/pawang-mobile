@@ -135,7 +135,7 @@ class _ScanStrukState extends State<ScanStruk> {
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(
-                    width: 65,
+                    width: 32,
                     height: 32,
                     padding: EdgeInsets.all(6),
                   ),
