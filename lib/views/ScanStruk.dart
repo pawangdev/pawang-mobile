@@ -18,9 +18,18 @@ class _ScanStrukState extends State<ScanStruk> {
 
   final ImagePicker _picker = ImagePicker();
 
-  Future getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    final inputImage = InputImage.fromFilePath(image!.path);
+  Future getImage(bool is_fromGal) async {
+    final XFile? image;
+    final inputImage;
+
+    if (is_fromGal) {
+      image = await _picker.pickImage(source: ImageSource.gallery);
+      inputImage = InputImage.fromFilePath(image!.path);
+    } else {
+      //AWMU GANTI" NAK KENE YO AD
+      image = await _picker.pickImage(source: ImageSource.gallery);
+      inputImage = InputImage.fromFilePath(image!.path);
+    }
 
     if (image != null) {
       setState(() {
@@ -76,7 +85,7 @@ class _ScanStrukState extends State<ScanStruk> {
       }
       counter = 0;
     }
-    
+
     temp = findTotal[0];
     for (double i in findTotal) {
       if (i >= temp) {
@@ -205,7 +214,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                   fontWeight: bold,
                                   color: kPurple),
                             ),
-                            onPressed: getImage,
+                            onPressed: () => getImage(true),
                             style: OutlinedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
