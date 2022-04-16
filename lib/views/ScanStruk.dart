@@ -20,20 +20,20 @@ class _ScanStrukState extends State<ScanStruk> {
 
   Future getImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final inputImage = InputImage.fromFilePath(image!.path);
 
     if (image != null) {
       setState(() {
         _image = image;
       });
-      searchTotal(image);
+      searchTotal(inputImage);
     }
   }
 
-  Future searchTotal(XFile image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
+  Future searchTotal(InputImage image) async {
     final textDetector = GoogleMlKit.vision.textDetector();
     final RecognisedText recognisedText =
-        await textDetector.processImage(inputImage);
+        await textDetector.processImage(image);
     final findTotal = <double>[];
     double total_belanja = 0;
     double temp;
@@ -102,7 +102,7 @@ class _ScanStrukState extends State<ScanStruk> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
+                  InkWell(
                     child: Container(
                       width: 32,
                       height: 32,
@@ -111,25 +111,12 @@ class _ScanStrukState extends State<ScanStruk> {
                         border: Border.all(color: kPurple),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: InkWell(
-                        child: SvgPicture.asset(
-                          'assets/images/back_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                        onTap: () => {
-                          // Navigator.pushNamed(context, Riwayat.routeName)
-                        },
+                      child: SvgPicture.asset(
+                        'assets/images/back_btn.svg',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        shadowColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        padding: MaterialStateProperty.all(EdgeInsets.zero)),
-                    onPressed: () {
+                    onTap: () {
                       // Navigator.pushNamed(context, Riwayat.routeName)
                     },
                   ),
