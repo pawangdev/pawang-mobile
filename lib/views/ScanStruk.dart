@@ -26,8 +26,7 @@ class _ScanStrukState extends State<ScanStruk> {
       image = await _picker.pickImage(source: ImageSource.gallery);
       inputImage = InputImage.fromFilePath(image!.path);
     } else {
-      //AWMU GANTI" NAK KENE YO AD
-      image = await _picker.pickImage(source: ImageSource.gallery);
+      image = await _picker.pickImage(source: ImageSource.camera);
       inputImage = InputImage.fromFilePath(image!.path);
     }
 
@@ -192,7 +191,7 @@ class _ScanStrukState extends State<ScanStruk> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)))),
-                        onPressed: () {}),
+                        onPressed: () => getImage(false)),
                     const SizedBox(
                       height: 12,
                     ),
