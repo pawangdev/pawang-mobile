@@ -29,7 +29,7 @@ class LandingScreen extends StatelessWidget {
                       height: 300,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/cuan1.png'),
+                          image: AssetImage('assets/images/girl_boy_landing.png'),
                         ),
                       ),
                     ),
