@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/views/LandingScreen.dart';
 import 'views/LandingScreen.dart';
 import 'package:pawang_mobile/views/DetailPengeluaran.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
 void main() {
   runApp(const MyApp());
