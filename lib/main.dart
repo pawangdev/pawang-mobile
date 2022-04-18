@@ -4,6 +4,7 @@ import 'package:pawang_mobile/views/LandingScreen.dart';
 import 'package:pawang_mobile/views/DetailPengeluaran.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/ScanStruk.dart';
+import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,9 +24,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LandingScreen(),
-        '/riwayat':(context) => RiwayatScreen(),
-        '/scan-struk':(context) => const ScanStruk(),
-        '/detail':(context) => const DetailPengeluaran()
+        '/riwayat': (context) => RiwayatScreen(),
+        '/scan-struk': (context) => const ScanStruk(),
+        '/detail': (context) => const DetailPengeluaran()
       },
       debugShowCheckedModeBanner: false,
     );
