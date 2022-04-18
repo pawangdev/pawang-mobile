@@ -14,7 +14,7 @@ class LandingScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height * 0.69,
               decoration: BoxDecoration(
                   color: kPurple,
                   borderRadius: BorderRadius.only(

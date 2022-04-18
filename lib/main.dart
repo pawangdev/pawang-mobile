@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LandingScreen(),
-        'riwayat':(context) => RiwayatScreen(),
+        '/riwayat':(context) => RiwayatScreen(),
         '/scan-struk':(context) => const ScanStruk(),
         '/detail':(context) => const DetailPengeluaran()
       },

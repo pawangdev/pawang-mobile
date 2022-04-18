@@ -195,11 +195,13 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         );
                       } else {
                         return Center(
-                            child: Text(
-                          "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
-                          style: kOpenSans.copyWith(
-                              color: kGray, fontSize: 14, fontWeight: medium),
-                        ));
+                          child: Text(
+                            "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
+                            style: kOpenSans.copyWith(
+                              color: kGray, fontSize: 14, fontWeight: medium
+                            ),
+                          )
+                        );
                       }
                     },
                   ),
