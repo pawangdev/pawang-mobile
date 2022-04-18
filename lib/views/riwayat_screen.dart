@@ -56,8 +56,8 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         return InkWell(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, DetailPengeluaran.routeName,
-                                arguments: snapshot.data!);
+                              context, DetailPengeluaran.routeName,
+                              arguments: snapshot.data[index]);
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 18),

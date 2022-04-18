@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 
-class DetailPengeluaran extends StatelessWidget {
+class DetailPengeluaran extends StatefulWidget {
   static const String routeName = "/detail";
   const DetailPengeluaran({Key? key}) : super(key: key);
 
   @override
+  State<DetailPengeluaran> createState() => _DetailPengeluaranState();
+}
+
+class _DetailPengeluaranState extends State<DetailPengeluaran> {
+  final TextEditingController nama_pengeluaran = TextEditingController();
+  final TextEditingController nominal_pengeluaran = TextEditingController();
+  final TextEditingController kategori_pengeluaran = TextEditingController();
+  final TextEditingController tanggal_pengeluaran = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
+    nama_pengeluaran.text = data.nama_pengeluaran;
+    nominal_pengeluaran.text = data.nominal_pengeluaran.toString();
+    kategori_pengeluaran.text = data.kategori_pengeluaran;
+    tanggal_pengeluaran.text = data.tanggal_pengeluaran;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -47,7 +64,8 @@ class DetailPengeluaran extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             onTap: () => {
-                              Navigator.pushNamed(context, RiwayatScreen.routeName)
+                              Navigator.pushNamed(
+                                context, RiwayatScreen.routeName)
                             },
                           ),
                         ),
@@ -79,6 +97,7 @@ class DetailPengeluaran extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // NAMA PENGELUARAN
                       Container(
                         margin: EdgeInsets.only(bottom: 30),
                         child: Column(
@@ -89,14 +108,15 @@ class DetailPengeluaran extends StatelessWidget {
                                   fontWeight: bold,
                                   color: kBlack,
                                 )),
-                            const TextField(
-                              decoration: InputDecoration(
-                                  hintText: 'Makan Siang',
-                                  suffixIcon: Icon(Icons.edit)),
+                            TextField(
+                              controller: nama_pengeluaran,
+                              decoration:
+                                  InputDecoration(suffixIcon: Icon(Icons.edit)),
                             ),
                           ],
                         ),
                       ),
+                      // NOMINAL
                       Container(
                         margin: EdgeInsets.only(bottom: 30),
                         child: Column(
@@ -107,14 +127,15 @@ class DetailPengeluaran extends StatelessWidget {
                                   fontWeight: bold,
                                   color: kBlack,
                                 )),
-                            const TextField(
+                            TextField(
+                              controller: nominal_pengeluaran,
                               decoration: InputDecoration(
-                                  hintText: '20000',
-                                  suffixIcon: Icon(Icons.edit)),
+                                suffixIcon: Icon(Icons.edit)),
                             ),
                           ],
                         ),
                       ),
+                      // KATEGORI PENGELUARAN
                       Container(
                         margin: EdgeInsets.only(bottom: 30),
                         child: Column(
@@ -125,14 +146,15 @@ class DetailPengeluaran extends StatelessWidget {
                                   fontWeight: bold,
                                   color: kBlack,
                                 )),
-                            const TextField(
+                            TextField(
+                              controller: kategori_pengeluaran,
                               decoration: InputDecoration(
-                                  hintText: 'Makan',
-                                  suffixIcon: Icon(Icons.edit)),
+                                suffixIcon: Icon(Icons.edit)),
                             ),
                           ],
                         ),
                       ),
+                      // TANGGAL PENGELUARAN
                       Container(
                         margin: EdgeInsets.only(bottom: 30),
                         child: Column(
@@ -143,10 +165,10 @@ class DetailPengeluaran extends StatelessWidget {
                                   fontWeight: bold,
                                   color: kBlack,
                                 )),
-                            const TextField(
+                            TextField(
+                              controller: tanggal_pengeluaran,
                               decoration: InputDecoration(
-                                  hintText: '12 April 2022',
-                                  suffixIcon: Icon(Icons.edit)),
+                                suffixIcon: Icon(Icons.edit)),
                             ),
                           ],
                         ),
@@ -155,6 +177,7 @@ class DetailPengeluaran extends StatelessWidget {
                   ),
                 ),
               ),
+              // BUTTON LIHAT STRUK
               Expanded(
                 flex: 1,
                 child: Container(
@@ -175,7 +198,8 @@ class DetailPengeluaran extends StatelessWidget {
                       ),
                       child: Text(
                         "Lihat Struk",
-                        style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
+                        style:
+                            kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
                       ),
                     ),
                   ),

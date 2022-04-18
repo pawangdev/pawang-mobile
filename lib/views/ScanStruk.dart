@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
@@ -94,141 +95,142 @@ class _ScanStrukState extends State<ScanStruk> {
         temp = i;
       }
     }
-    print('total belanja : ${total_belanja}');
+    Navigator.pushNamed(context, ValidasiScanScreen.routeName,
+        arguments: total_belanja);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kPurple),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/images/back_btn.svg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, RiwayatScreen.routeName);
-                    },
-                  ),
-                  Text(
-                    "Scan Struk",
-                    style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
-                  ),
-                  Container(
-                    width: 22,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 33,
-              ),
-              Center(
-                child: Text(
-                  "Mohon atur posisi struk agar dapat terdeteksi",
-                  style: kOpenSans.copyWith(color: kBlack),
-                ),
-              ),
-              const SizedBox(
-                height: 28,
-              ),
-              // ----- BOX IMAGE -----
-              SizedBox(
-                width: double.infinity,
-                child: Container(
-                  child: _image != null
-                      ? Image.file(File(_image!.path))
-                      : Center(
-                          child: Text(
-                            "Silahkan Inputkan Struk Terlebih Dahulu",
-                            style: kOpenSans.copyWith(
-                                color: kGray, fontSize: 12, fontWeight: medium),
-                          ),
-                        ),
-                  height: 440,
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: kGray),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Flexible(
-                fit: FlexFit.loose,
-                child: Column(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      child: SvgPicture.asset(
-                        'assets/images/scan_btn.svg',
-                        fit: BoxFit.cover,
+                    InkWell(
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kPurple),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/images/back_btn.svg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(kPurple),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(14)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)))),
-                      onPressed: () => getImage(false)
-                    ),
-                    const SizedBox(
-                      height: 12,
+                      onTap: () {
+                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                      },
                     ),
                     Text(
-                      "---------------------    Atau    ---------------------",
+                      "Scan Struk",
                       style: kOpenSans.copyWith(
-                          color: kGray, fontSize: 14, fontWeight: light),
+                          fontSize: 16, fontWeight: bold, color: kBlack),
                     ),
-                    const SizedBox(
-                      height: 12,
+                    Container(
+                      width: 22,
+                      height: 32,
+                      padding: EdgeInsets.all(6),
                     ),
-                    SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                            child: Text(
-                              "Pilih dari Galeri",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: bold,
-                                  color: kPurple),
-                            ),
-                            onPressed: () => getImage(true),
-                            style: OutlinedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                side: const BorderSide(color: kPurple),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))))),
                   ],
                 ),
-              )
-            ],
+                const SizedBox(
+                  height: 33,
+                ),
+                Center(
+                  child: Text(
+                    "Mohon atur posisi struk agar dapat terdeteksi",
+                    style: kOpenSans.copyWith(color: kBlack),
+                  ),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                // ----- BOX IMAGE -----
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    child: _image != null
+                        ? Image.file(File(_image!.path))
+                        : Center(
+                            child: Text(
+                              "Silahkan Inputkan Struk Terlebih Dahulu",
+                              style: kOpenSans.copyWith(
+                                  color: kGray, fontSize: 12, fontWeight: medium),
+                            ),
+                          ),
+                    height: 440, //MediaQuery.of(context).size.height * 0.65,
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kGray),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          child: SvgPicture.asset(
+                            'assets/images/scan_btn.svg',
+                            fit: BoxFit.cover,
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(kPurple),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(14)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)))),
+                          onPressed: () => getImage(false)),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        "---------------------    Atau    ---------------------",
+                        style: kOpenSans.copyWith(
+                            color: kGray, fontSize: 14, fontWeight: light),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                              child: Text(
+                                "Pilih dari Galeri",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kPurple),
+                              ),
+                              onPressed: () => getImage(true),
+                              style: OutlinedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  side: const BorderSide(color: kPurple),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12))))),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )
+    );
   }
 }

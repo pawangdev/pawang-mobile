@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingScreen(),
         '/riwayat': (context) => RiwayatScreen(),
         '/scan-struk': (context) => const ScanStruk(),
+        '/validasi-scan':(context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran()
       },
       debugShowCheckedModeBanner: false,
