@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   static const String routeName = '/';
@@ -29,7 +30,8 @@ class LandingScreen extends StatelessWidget {
                       height: 300,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/girl_boy_landing.png'),
+                          image:
+                              AssetImage('assets/images/girl_boy_landing.png'),
                         ),
                       ),
                     ),
@@ -64,7 +66,7 @@ class LandingScreen extends StatelessWidget {
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.pushNamed(context, RiwayatPage.routeName)
+                        Navigator.pushNamed(context, RiwayatScreen.routeName);
                       },
                       child: Text(
                         "Masuk",

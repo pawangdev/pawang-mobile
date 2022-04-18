@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
 class DetailPengeluaran extends StatelessWidget {
   static const String routeName = "/detail";
@@ -46,7 +47,7 @@ class DetailPengeluaran extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             onTap: () => {
-                              // Navigator.pushNamed(context, RiwayatScreen.routeName)
+                              Navigator.pushNamed(context, RiwayatScreen.routeName)
                             },
                           ),
                         ),

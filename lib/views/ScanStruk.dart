@@ -4,6 +4,7 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
@@ -125,7 +126,7 @@ class _ScanStrukState extends State<ScanStruk> {
                       ),
                     ),
                     onTap: () {
-                      // Navigator.pushNamed(context, Riwayat.routeName)
+                      Navigator.pushNamed(context, RiwayatScreen.routeName);
                     },
                   ),
                   Text(
@@ -134,7 +135,7 @@ class _ScanStrukState extends State<ScanStruk> {
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(
-                    width: 32,
+                    width: 22,
                     height: 32,
                     padding: EdgeInsets.all(6),
                   ),
@@ -180,18 +181,19 @@ class _ScanStrukState extends State<ScanStruk> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
-                        child: SvgPicture.asset(
-                          'assets/images/scan_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(14)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)))),
-                        onPressed: () => getImage(false)),
+                      child: SvgPicture.asset(
+                        'assets/images/scan_btn.svg',
+                        fit: BoxFit.cover,
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(14)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)))),
+                      onPressed: () => getImage(false)
+                    ),
                     const SizedBox(
                       height: 12,
                     ),

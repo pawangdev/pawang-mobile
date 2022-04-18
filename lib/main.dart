@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/views/LandingScreen.dart';
-import 'views/LandingScreen.dart';
 import 'package:pawang_mobile/views/DetailPengeluaran.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/ScanStruk.dart';
@@ -18,10 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pawang',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         fontFamily: "OpenSans",
       ),
-      home: const DetailPengeluaran(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LandingScreen(),
+        'riwayat':(context) => RiwayatScreen(),
+        '/scan-struk':(context) => const ScanStruk(),
+        '/detail':(context) => const DetailPengeluaran()
+      },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
