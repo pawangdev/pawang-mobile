@@ -22,7 +22,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   final TextEditingController kategori_pengeluaran = TextEditingController();
   final TextEditingController tanggal_pengeluaran = TextEditingController();
   String? filePath;
-  bool _validation = false;
+  bool _validated = false;
 
   Future<void> simpanData(PengeluaranModel data) async {
     try {
@@ -39,12 +39,8 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
     nominal_pengeluaran.text = args.nominal;
     filePath = args.filePath;
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Berhasil mendapatkan total belanja"),
-      backgroundColor: kSuccess
-    ));
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
@@ -54,37 +50,24 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      foregroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      shadowColor:
-                          MaterialStateProperty.all(Colors.transparent),
+                  InkWell(
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kPurple),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kPurple),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: InkWell(
-                        child: SvgPicture.asset(
-                          'assets/images/back_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                    child: SvgPicture.asset(
+                      'assets/images/back_btn.svg',
+                      fit: BoxFit.cover,
                     ),
                   ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
                   Text(
                     "Validasi Scan Struk",
                     style: kOpenSans.copyWith(
@@ -113,15 +96,15 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                   inputLabel: "Nama Pengeluaran",
                   inputController: nama_pengeluaran,
                   errorText:
-                      _validation ? 'Nama Pengeluaran wajib diisi' : null,
+                      _validated ? null : 'Nama Pengeluaran wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 10),
                 child: InputField(
                   inputLabel: "Nominal",
                   inputController: nominal_pengeluaran,
-                  errorText: _validation ? 'Nominal wajib diisi' : null,
+                  errorText: _validated ? null : 'Nominal wajib diisi',
                   enable: false,
                 ),
               ),
@@ -130,7 +113,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Kategori",
                   inputController: kategori_pengeluaran,
-                  errorText: _validation ? 'Kategori wajib diisi' : null,
+                  errorText: _validated ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
@@ -138,7 +121,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Tanggal",
                   inputController: tanggal_pengeluaran,
-                  errorText: _validation ? 'Tanggal wajib diisi' : null,
+                  errorText: _validated ? null : 'Tanggal wajib diisi',
                   keyboardType: TextInputType.none,
                   onTap: () {
                     showDatePicker(
@@ -179,20 +162,20 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                         onPressed: () {
                           setState(() {
                             nama_pengeluaran.text.isEmpty
-                                ? _validation = true
-                                : _validation = false;
+                                ? _validated = false
+                                : _validated = true;
                             nominal_pengeluaran.text.isEmpty
-                                ? _validation = true
-                                : _validation = false;
+                                ? _validated = false
+                                : _validated = true;
                             kategori_pengeluaran.text.isEmpty
-                                ? _validation = true
-                                : _validation = false;
+                                ? _validated = false
+                                : _validated = true;
                             tanggal_pengeluaran.text.isEmpty
-                                ? _validation = true
-                                : _validation = false;
+                                ? _validated = false
+                                : _validated = true;
                           });
-
-                          if (_validation == false) {
+      
+                          if (_validated == true) {
                             try {
                               PengeluaranModel data = PengeluaranModel(
                                   nama_pengeluaran: nama_pengeluaran.text,
@@ -208,7 +191,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                   content: Text("Sukses menyimpan data"),
                                   backgroundColor: kSuccess,
                                 ));
-
+      
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     RiwayatScreen.routeName, (route) => false);
                               });
