@@ -31,7 +31,7 @@ class CardPengeluaran extends StatelessWidget {
               children: [
                 Text(
                   "Nominal : ",
-                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semibold),
+                  style: kOpenSans.copyWith(fontSize: 11, fontWeight: semibold),
                 ),
                 SizedBox(
                   width: 3,
@@ -39,7 +39,7 @@ class CardPengeluaran extends StatelessWidget {
                 Text(
                   "- Rp. ${data.nominal_pengeluaran.toString()}",
                   style: kOpenSans.copyWith(
-                      fontSize: 10, fontWeight: semibold, color: kSecondary),
+                      fontSize: 11, fontWeight: semibold, color: kSecondary),
                 )
               ],
             ),
@@ -50,14 +50,14 @@ class CardPengeluaran extends StatelessWidget {
               children: [
                 Text(
                   "Kategori : ",
-                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semibold),
+                  style: kOpenSans.copyWith(fontSize: 11, fontWeight: semibold),
                 ),
                 SizedBox(
                   width: 3,
                 ),
                 Text(
                   data.kategori_pengeluaran,
-                  style: kOpenSans.copyWith(fontSize: 10),
+                  style: kOpenSans.copyWith(fontSize: 11),
                 ),
               ],
             ),
@@ -68,14 +68,14 @@ class CardPengeluaran extends StatelessWidget {
               children: [
                 Text(
                   "Waktu : ",
-                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semibold),
+                  style: kOpenSans.copyWith(fontSize: 11, fontWeight: semibold),
                 ),
                 SizedBox(
                   width: 3,
                 ),
                 Text(
                   data.tanggal_pengeluaran,
-                  style: kOpenSans.copyWith(fontSize: 10),
+                  style: kOpenSans.copyWith(fontSize: 11),
                 ),
               ],
             ),
