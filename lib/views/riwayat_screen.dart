@@ -45,6 +45,9 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                       color: kBlack, fontWeight: bold, fontSize: 16),
                 ),
               ),
+              const SizedBox(
+                height: 31,
+              ),
               FutureBuilder(
                 future: dataPengeluaran,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
