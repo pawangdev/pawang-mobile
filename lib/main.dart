@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
-import 'package:pawang_mobile/views/LandingScreen.dart';
-import 'package:pawang_mobile/views/DetailPengeluaran.dart';
+import 'package:pawang_mobile/views/landing_screen.dart';
+import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
-import 'package:pawang_mobile/views/ScanStruk.dart';
+import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingScreen(),
         '/riwayat': (context) => RiwayatScreen(),
         '/scan-struk': (context) => const ScanStruk(),
-        '/validasi-scan':(context) => const ValidasiScanScreen(),
+        '/validasi-scan': (context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran()
       },
       debugShowCheckedModeBanner: false,

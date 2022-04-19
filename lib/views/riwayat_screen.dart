@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
-import 'package:pawang_mobile/views/DetailPengeluaran.dart';
-import 'package:pawang_mobile/views/ScanStruk.dart';
+import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/scan_struk_screen.dart';
 
 class RiwayatScreen extends StatefulWidget {
   static const String routeName = '/riwayat';
@@ -56,8 +56,8 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         return InkWell(
                           onTap: () {
                             Navigator.pushNamed(
-                              context, DetailPengeluaran.routeName,
-                              arguments: snapshot.data[index]);
+                                context, DetailPengeluaran.routeName,
+                                arguments: snapshot.data[index]);
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 18),

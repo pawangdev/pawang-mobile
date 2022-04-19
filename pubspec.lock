@@ -90,7 +90,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -98,8 +97,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-=======
->>>>>>> feature/ValidasiScanStruk
   flutter_svg:
     dependency: "direct main"
     description:
@@ -229,7 +226,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-<<<<<<< HEAD
   path_provider_linux:
     dependency: transitive
     description:
@@ -251,8 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-=======
->>>>>>> feature/ValidasiScanStruk
   petitparser:
     dependency: transitive
     description:
@@ -260,7 +254,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
-<<<<<<< HEAD
   platform:
     dependency: transitive
     description:
@@ -338,8 +331,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-=======
->>>>>>> feature/ValidasiScanStruk
   sky_engine:
     dependency: transitive
     description: flutter

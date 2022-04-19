@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
-import 'package:pawang_mobile/views/ScanStruk.dart';
+import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 
 class ValidasiScanScreen extends StatefulWidget {
@@ -20,8 +20,8 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final nominal = ModalRoute.of(context)!.settings.arguments as ScanStruk;
-    nominal_pengeluaran.text = nominal.toString();
+    final nominal = ModalRoute.of(context)!.settings.arguments as String;
+    nominal_pengeluaran.text = nominal;
 
     return Scaffold(
       body: SafeArea(
@@ -59,7 +59,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                           fit: BoxFit.cover,
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, ScanStruk.routeName);
+                          Navigator.pop(context);
                         },
                       ),
                     ),
@@ -95,24 +95,11 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Nominal',
-                        style: kOpenSans.copyWith(
-                          fontWeight: bold,
-                          color: kBlack,
-                        )),
-                    TextField(
-                      controller: nominal_pengeluaran,
-                      enabled: false,
-                    ),
-                  ],
+                child: InputField(
+                  inputLabel: "Nominal",
+                  inputController: nominal_pengeluaran,
+                  enable: false,
                 ),
-                // child: InputField(
-                //   inputLabel: "Nominal",
-                //   inputController: nominal_pengeluaran,
-                // ),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
