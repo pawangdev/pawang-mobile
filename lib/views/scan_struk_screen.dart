@@ -172,7 +172,8 @@ class _ScanStrukState extends State<ScanStruk> {
                 height: 440, //MediaQuery.of(context).size.height * 0.65,
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  border: Border.all(color: kGray),
+                  border: Border.all(color: kGray, width: 0.5),
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),

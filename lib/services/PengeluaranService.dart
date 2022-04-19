@@ -5,23 +5,31 @@ import 'package:path/path.dart';
 class PengeluaranService {
   // PREPARING THE DATABASE
   Future<Database> initDB() async {
-    String path = await getDatabasesPath();
-    return openDatabase(
-      join(path, 'pengeluaran.db'),
-      onCreate: (database, version) async {
-        await database.execute(
-          "CREATE TABLE pengeluaran(id INTEGER PRIMARY KEY AUTOINCREMENT, nama_pengeluaran TEXT NOT NULL, nominal_pengeluaran REAL NOT NULL, kategori_pengeluaran TEXT NOT NULL, tanggal_pengeluaran TEXT NOT NULL)",
-        );
-      },
-      version: 1,
-    );
+    try {
+      String path = await getDatabasesPath();
+      return await openDatabase(
+        join(path, 'pengeluaran1.db'),
+        onCreate: (Database database, int version) async {
+          await database.execute(
+            "CREATE TABLE IF NOT EXISTS pengeluaran (id INTEGER PRIMARY KEY AUTOINCREMENT, nama_pengeluaran TEXT, nominal_pengeluaran REAL, kategori_pengeluaran TEXT, tanggal_pengeluaran TEXT)",
+          );
+        },
+        version: 1,
+      );
+    } catch (e) {
+      return throw Exception(e);
+    }
   }
 
   // CREATING THE DATABASE
   Future<void> create(PengeluaranModel pengeluaran) async {
-    final Database db = await initDB();
-    await db.insert('pengeluaran', pengeluaran.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    try {
+      final Database db = await initDB();
+      await db.insert('pengeluaran', pengeluaran.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // READING THE DATABASE

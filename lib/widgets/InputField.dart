@@ -6,11 +6,13 @@ class InputField extends StatelessWidget {
       {Key? key,
       required this.inputLabel,
       required this.inputController,
-      this.enable = true})
+      this.enable = true,
+      this.errorText})
       : super(key: key);
   final String inputLabel;
   final bool enable;
   final TextEditingController inputController;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class InputField extends StatelessWidget {
           enabled: enable,
           controller: inputController,
           decoration: InputDecoration(
+            errorText: errorText,
             fillColor: Color(0xFFF5F5F5),
             filled: true,
             border: OutlineInputBorder(

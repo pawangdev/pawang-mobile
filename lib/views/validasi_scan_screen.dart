@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/models/PengeluaranModel.dart';
+import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 
@@ -17,11 +20,20 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   final TextEditingController nominal_pengeluaran = TextEditingController();
   final TextEditingController kategori_pengeluaran = TextEditingController();
   final TextEditingController tanggal_pengeluaran = TextEditingController();
+  bool _validation = false;
 
   @override
   Widget build(BuildContext context) {
     final nominal = ModalRoute.of(context)!.settings.arguments as String;
     nominal_pengeluaran.text = nominal;
+
+    Future<void> simpanData(PengeluaranModel data) async {
+      try {
+        await PengeluaranService().create(data);
+      } catch (e) {
+        print(e);
+      }
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -91,6 +103,8 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
                   inputController: nama_pengeluaran,
+                  errorText:
+                      _validation ? 'Nama Pengeluaran wajib diisi' : null,
                 ),
               ),
               Container(
@@ -98,6 +112,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Nominal",
                   inputController: nominal_pengeluaran,
+                  errorText: _validation ? 'Nominal wajib diisi' : null,
                   enable: false,
                 ),
               ),
@@ -106,6 +121,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Kategori",
                   inputController: kategori_pengeluaran,
+                  errorText: _validation ? 'Kategori wajib diisi' : null,
                 ),
               ),
               Container(
@@ -113,6 +129,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Tanggal",
                   inputController: tanggal_pengeluaran,
+                  errorText: _validation ? 'Tanggal wajib diisi' : null,
                 ),
               ),
               Expanded(
@@ -133,7 +150,47 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            nama_pengeluaran.text.isEmpty
+                                ? _validation = true
+                                : _validation = false;
+                            nominal_pengeluaran.text.isEmpty
+                                ? _validation = true
+                                : _validation = false;
+                            kategori_pengeluaran.text.isEmpty
+                                ? _validation = true
+                                : _validation = false;
+                            tanggal_pengeluaran.text.isEmpty
+                                ? _validation = true
+                                : _validation = false;
+                          });
+
+                          if (_validation == false) {
+                            try {
+                              PengeluaranModel data = PengeluaranModel(
+                                  nama_pengeluaran: nama_pengeluaran.text,
+                                  nominal_pengeluaran:
+                                      double.parse(nominal_pengeluaran.text),
+                                  kategori_pengeluaran:
+                                      kategori_pengeluaran.text,
+                                  tanggal_pengeluaran:
+                                      tanggal_pengeluaran.text);
+                              simpanData(data).then((value) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text("Sukses menyimpan data")));
+
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    RiwayatScreen.routeName, (route) => false);
+                              });
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())));
+                            }
+                          }
+                        },
                         child: Text(
                           "Simpan Pengeluaran",
                           style: kOpenSans.copyWith(

@@ -44,110 +44,126 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                       color: kBlack, fontWeight: bold, fontSize: 16),
                 ),
               ),
-              SizedBox(
-                height: 31,
-              ),
               FutureBuilder(
                 future: dataPengeluaran,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, DetailPengeluaran.routeName,
-                                arguments: snapshot.data[index]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 18),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 21),
-                            width: 296,
-                            height: 106,
-                            decoration: BoxDecoration(
-                                color: kWhite,
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // NAMA PENGELUARAN
-                                Expanded(
-                                  child: Text(
-                                    snapshot.data![index].nama_pengeluaran,
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 12, fontWeight: bold),
+                    if (snapshot.data?.length != 0) {
+                      return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, DetailPengeluaran.routeName,
+                                  arguments: snapshot.data[index]);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 18),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 21),
+                              width: 296,
+                              height: 106,
+                              decoration: BoxDecoration(
+                                  color: kWhite,
+                                  borderRadius: BorderRadius.circular(6)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // NAMA PENGELUARAN
+                                  Expanded(
+                                    child: Text(
+                                      snapshot.data![index].nama_pengeluaran,
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 12, fontWeight: bold),
+                                    ),
                                   ),
-                                ),
-                                // NOMINAL
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Nominal : ",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 12, fontWeight: semibold),
-                                      ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        "+ Rp. ${snapshot.data![index].nominal_pengeluaran.toString()}",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 10,
-                                            fontWeight: semibold,
-                                            color: kWarning),
-                                      )
-                                    ],
+                                  // NOMINAL
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Nominal : ",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: semibold),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          "+ Rp. ${snapshot.data![index].nominal_pengeluaran.toString()}",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 10,
+                                              fontWeight: semibold,
+                                              color: kWarning),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                // KATEGORI
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Kategori : ",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 12, fontWeight: semibold),
-                                      ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        snapshot
-                                            .data![index].kategori_pengeluaran,
-                                        style: kOpenSans.copyWith(fontSize: 10),
-                                      ),
-                                    ],
+                                  // KATEGORI
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Kategori : ",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: semibold),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          snapshot.data![index]
+                                              .kategori_pengeluaran,
+                                          style:
+                                              kOpenSans.copyWith(fontSize: 10),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                // TANGGAL/WAKTU
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Waktu : ",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 12, fontWeight: semibold),
-                                      ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        snapshot
-                                            .data![index].tanggal_pengeluaran,
-                                        style: kOpenSans.copyWith(fontSize: 10),
-                                      ),
-                                    ],
+                                  // TANGGAL/WAKTU
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Waktu : ",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: semibold),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .data![index].tanggal_pengeluaran,
+                                          style:
+                                              kOpenSans.copyWith(fontSize: 10),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data?.length,
-                    );
+                          );
+                        },
+                        itemCount: snapshot.data?.length,
+                      );
+                    } else {
+                      return Expanded(
+                        child: Center(
+                            child: Text(
+                          "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
+                          style: kOpenSans.copyWith(
+                              color: kGray, fontSize: 14, fontWeight: medium),
+                          textAlign: TextAlign.center,
+                        )),
+                      );
+                    }
                   } else {
                     return Expanded(
                       child: Center(
