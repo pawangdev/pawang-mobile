@@ -48,6 +48,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   padding: EdgeInsets.only(top: 28, left: 32),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         width: 32,
@@ -70,7 +71,6 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width - 100,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -83,6 +83,11 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                             ),
                           ],
                         ),
+                      ),
+                      Container(
+                        width: 32,
+                        height: 32,
+                        padding: EdgeInsets.all(6),
                       ),
                     ],
                   ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
-import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 
 class ValidasiScanScreen extends StatefulWidget {
@@ -133,6 +134,23 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                   inputLabel: "Tanggal",
                   inputController: tanggal_pengeluaran,
                   errorText: _validation ? 'Tanggal wajib diisi' : null,
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2099))
+                        .then((date) {
+                      if (date != null) {
+                        initializeDateFormatting('id_ID', null);
+                        String format = DateFormat.yMMMMd('id_ID').format(date);
+                        setState(() {
+                          tanggal_pengeluaran.text = format;
+                        });
+                      }
+                    });
+                  },
                 ),
               ),
               Expanded(
