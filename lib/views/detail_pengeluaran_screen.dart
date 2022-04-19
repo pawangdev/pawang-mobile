@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
+import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/widgets/InputField.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 class DetailPengeluaran extends StatefulWidget {
   static const String routeName = "/detail";
@@ -18,10 +22,140 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
   final TextEditingController nominal_pengeluaran = TextEditingController();
   final TextEditingController kategori_pengeluaran = TextEditingController();
   final TextEditingController tanggal_pengeluaran = TextEditingController();
+  bool _validated = true;
+  bool _isEdited = false;
+
+  Future<void> updateData(PengeluaranModel _pengeluaran) async {
+    if (_pengeluaran != null) {
+      nama_pengeluaran.text = _pengeluaran.nama_pengeluaran;
+      nominal_pengeluaran.text = _pengeluaran.nominal_pengeluaran.toString();
+      kategori_pengeluaran.text = _pengeluaran.kategori_pengeluaran;
+      tanggal_pengeluaran.text = _pengeluaran.tanggal_pengeluaran;
+    }
+
+    await showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext ctx) {
+          return ListView(
+            padding: EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+            children: <Widget>[
+              Center(
+                child: Text(
+                  "Edit Pengeluaran",
+                  style: kOpenSans.copyWith(
+                      fontSize: 16, fontWeight: bold, color: kBlack),
+                ),
+              ),
+              // NAMA PENGELUARAN
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: InputField(
+                  inputLabel: "Nama Pengeluaran",
+                  inputController: nama_pengeluaran,
+                  errorText: _validated ? null : 'Nama Pengeluaran wajib diisi',
+                ),
+              ),
+              // NOMINAL
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: InputField(
+                  inputLabel: "Nominal",
+                  inputController: nominal_pengeluaran,
+                  errorText: _validated ? null : 'Nominal wajib diisi',
+                ),
+              ),
+              // KATEGORI
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: InputField(
+                  inputLabel: "Kategori",
+                  inputController: kategori_pengeluaran,
+                  errorText: _validated ? null : 'Kategori wajib diisi',
+                ),
+              ),
+              // TANGGAL
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: InputField(
+                  inputLabel: "Tanggal",
+                  inputController: tanggal_pengeluaran,
+                  errorText: _validated ? null : 'Tanggal wajib diisi',
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2099))
+                        .then((date) {
+                      if (date != null) {
+                        initializeDateFormatting('id_ID', null);
+                        String format = DateFormat.yMMMMd('id_ID').format(date);
+                        setState(() {
+                          tanggal_pengeluaran.text = format;
+                        });
+                      }
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: Text(
+                    "Simpan Perubahan",
+                    style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
+                  ),
+                  onPressed: () async {
+                    try {
+                      _pengeluaran.nama_pengeluaran = nama_pengeluaran.text;
+                      _pengeluaran.nominal_pengeluaran =
+                          nominal_pengeluaran.text as double;
+                      _pengeluaran.kategori_pengeluaran =
+                          kategori_pengeluaran.text;
+                      _pengeluaran.tanggal_pengeluaran = tanggal_pengeluaran.text;
+
+                      _isEdited = true;
+                      await PengeluaranService().update(_pengeluaran).then((value) => 
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Perubahan berhasil disimpan"),
+                          backgroundColor: kSuccess,
+                        )));
+                      Navigator.pop(context);
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(kPurple),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(kDefaultBorderRadius),
+                        ),
+                      ),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(vertical: 12))),
+                ),
+              ),
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
+    var data = ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
+    final int _id = data.id;
+
+    if (_isEdited) {
+      data = PengeluaranService().getData(_id) as PengeluaranModel;
+    }
+
     nama_pengeluaran.text = data.nama_pengeluaran;
     nominal_pengeluaran.text = data.nominal_pengeluaran.toString();
     kategori_pengeluaran.text = data.kategori_pengeluaran;
@@ -35,7 +169,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.100,
+                  height: MediaQuery.of(context).size.height * 0.11,
                   decoration: const BoxDecoration(
                     color: kPurple,
                     borderRadius: BorderRadius.only(
@@ -97,7 +231,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
             Expanded(
               flex: 10,
               child: Container(
-                margin: EdgeInsets.only(top: 58),
+                margin: EdgeInsets.only(top: 40),
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,8 +249,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               )),
                           TextField(
                             controller: nama_pengeluaran,
-                            decoration:
-                                InputDecoration(suffixIcon: Icon(Icons.edit)),
+                            enabled: false,
                           ),
                         ],
                       ),
@@ -134,8 +267,6 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               )),
                           TextField(
                             controller: nominal_pengeluaran,
-                            decoration:
-                                InputDecoration(suffixIcon: Icon(Icons.edit)),
                           ),
                         ],
                       ),
@@ -153,8 +284,6 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               )),
                           TextField(
                             controller: kategori_pengeluaran,
-                            decoration:
-                                InputDecoration(suffixIcon: Icon(Icons.edit)),
                           ),
                         ],
                       ),
@@ -172,8 +301,6 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               )),
                           TextField(
                             controller: tanggal_pengeluaran,
-                            decoration:
-                                InputDecoration(suffixIcon: Icon(Icons.edit)),
                           ),
                         ],
                       ),
@@ -182,33 +309,83 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 ),
               ),
             ),
-            // BUTTON LIHAT STRUK
+            // BUTTONS
             Container(
               padding: EdgeInsets.symmetric(horizontal: 32),
               margin: EdgeInsets.only(bottom: 32),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, DetailImageStrukScreen.routeName,
-                        arguments: data.filePath);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(kPurple),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(kDefaultBorderRadius),
+              child: Center(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // LIHAT STRUK
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, DetailImageStrukScreen.routeName,
+                              arguments: data.filePath);
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(kPurple),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(kDefaultBorderRadius),
+                              ),
+                            ),
+                            padding:
+                                MaterialStateProperty.all(EdgeInsets.all(12))),
+                        child: SvgPicture.asset(
+                          'assets/images/receipt_btn.svg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12))
-                  ),
-                  child: Text(
-                    "Lihat Struk",
-                    style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
-                  ),
-                ),
+                      // EDIT DATA
+                      ElevatedButton(
+                        onPressed: () => updateData(data),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(kPurple),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(kDefaultBorderRadius),
+                              ),
+                            ),
+                            padding:
+                                MaterialStateProperty.all(EdgeInsets.all(12))),
+                        child: SvgPicture.asset(
+                          'assets/images/edit_btn.svg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // DELETE DATA
+                      ElevatedButton(
+                        onPressed: () => {
+                          PengeluaranService().delete(data.id).then((value) => 
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text("Pengeluaran berhasil dihapus"),
+                              backgroundColor: kSuccess,
+                            ))
+                          ),
+                          Navigator.pushNamedAndRemoveUntil(context,
+                            RiwayatScreen.routeName, (route) => false)
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(kPurple),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(kDefaultBorderRadius),
+                              ),
+                            ),
+                            padding:
+                                MaterialStateProperty.all(EdgeInsets.all(12))),
+                        child: SvgPicture.asset(
+                          'assets/images/delete_btn.svg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ]),
               ),
             ),
           ],

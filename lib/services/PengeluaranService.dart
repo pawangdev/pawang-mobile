@@ -21,6 +21,16 @@ class PengeluaranService {
     }
   }
 
+  // GET DATA BY ID
+  // Future<PengeluaranModel> getPengeluaran(int id) async {
+  //   final Database db = await initDB();
+  //   List<Map> result = await db.query('pengeluaran', whereArgs: [id]);
+  //   if (result.length > 0) {
+  //     return 
+  //   }
+  //   return null;
+  // }
+
   // CREATING THE DATABASE
   Future<void> create(PengeluaranModel pengeluaran) async {
     try {
@@ -46,6 +56,41 @@ class PengeluaranService {
             tanggal_pengeluaran: maps[index]['tanggal_pengeluaran'],
             filePath: maps[index]['file_path']);
       });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // UPDATING THE DATA
+  Future<int> update(PengeluaranModel pengeluaran) async {
+    try{
+      Database db = await initDB();
+      int id = pengeluaran.toMap()['id'];
+      return await db.update('pengeluaran', pengeluaran.toMap(), where: 'id = ?', whereArgs: [id]);
+    } catch (e) {
+      return throw Exception(e);
+    }
+  }
+
+  // GETTING DATA BY ID
+  Future<List<Map<String, dynamic>>> getData(id) async {
+    try{
+      Database db = await initDB();
+      return await db.query('pengeluaran', where: 'id = ?', whereArgs: [id]);
+    } catch (e) {
+      return throw Exception(e);
+    }
+  }
+
+  // DELETING DATA BY ID
+  Future<void> delete(int id) async {
+    try{
+      Database db = await initDB();
+      await db.delete(
+        'pengeluaran',
+        where: "id = ?",
+        whereArgs: [id],
+      );
     } catch (e) {
       print(e);
     }
