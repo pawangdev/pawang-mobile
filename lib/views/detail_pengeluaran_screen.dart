@@ -183,32 +183,30 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
               ),
             ),
             // BUTTON LIHAT STRUK
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 32),
-                margin: EdgeInsets.only(bottom: 32),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, DetailImageStrukScreen.routeName,
-                          arguments: data.filePath);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(kPurple),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
-                        ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              margin: EdgeInsets.only(bottom: 32),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, DetailImageStrukScreen.routeName,
+                        arguments: data.filePath);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(kPurple),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(kDefaultBorderRadius),
                       ),
                     ),
-                    child: Text(
-                      "Lihat Struk",
-                      style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
-                    ),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12))
+                  ),
+                  child: Text(
+                    "Lihat Struk",
+                    style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
                   ),
                 ),
               ),
