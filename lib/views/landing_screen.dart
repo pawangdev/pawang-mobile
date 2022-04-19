@@ -8,13 +8,18 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthApp = MediaQuery.of(context).size.width;
+    final heightApp = MediaQuery.of(context).size.height;
+    final paddingTop = MediaQuery.of(context).padding.top;
+    final bodyHeight = heightApp - paddingTop;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.69,
+              height: bodyHeight * 0.75,
               decoration: BoxDecoration(
                   color: kPurple,
                   borderRadius: BorderRadius.only(

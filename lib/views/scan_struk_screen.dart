@@ -18,8 +18,10 @@ class ScanStruk extends StatefulWidget {
 class _ScanStrukState extends State<ScanStruk> {
   XFile? _image;
   dynamic _pickImageError;
-  late final String filePath;
   final ImagePicker _picker = ImagePicker();
+
+  late String nominal;
+  late String imageFilePath;
 
   Future getImage(bool is_fromGal) async {
     final XFile? image;
@@ -30,6 +32,10 @@ class _ScanStrukState extends State<ScanStruk> {
         image = await _picker.pickImage(source: ImageSource.gallery);
         inputImage = InputImage.fromFilePath(image!.path);
 
+        setState(() {
+          _image = image;
+        });
+
         searchTotal(inputImage);
       } catch (e) {
         setState(() => _pickImageError = e);
@@ -38,6 +44,11 @@ class _ScanStrukState extends State<ScanStruk> {
       try {
         image = await _picker.pickImage(source: ImageSource.camera);
         inputImage = InputImage.fromFilePath(image!.path);
+
+        setState(() {
+          _image = image;
+        });
+
         searchTotal(inputImage);
       } catch (e) {
         setState(() => _pickImageError = e);
@@ -100,11 +111,18 @@ class _ScanStrukState extends State<ScanStruk> {
           temp = i;
         }
       }
-      Navigator.pushNamed(context, ValidasiScanScreen.routeName,
-          arguments: ArgumentsValidation(
-              filePath: image.filePath.toString(),
-              nominal: total_belanja.toString()));
+
+      setState(() {
+        nominal = total_belanja.toString();
+        imageFilePath = image.filePath.toString();
+      });
     } catch (e) {
+      setState(() {
+        nominal = '';
+        imageFilePath = '';
+        _image = null;
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Gambar tidak mengandung unsur total"),
         backgroundColor: kError,
@@ -171,7 +189,10 @@ class _ScanStrukState extends State<ScanStruk> {
             Expanded(
               child: Container(
                 child: _image != null
-                    ? Image.file(File(_image!.path))
+                    ? Image.file(
+                        File(_image!.path),
+                        fit: BoxFit.contain,
+                      )
                     : Center(
                         child: Text(
                           "Silahkan Inputkan Struk Terlebih Dahulu",
@@ -179,7 +200,6 @@ class _ScanStrukState extends State<ScanStruk> {
                               color: kGray, fontSize: 12, fontWeight: medium),
                         ),
                       ),
-                height: 440, //MediaQuery.of(context).size.height * 0.65,
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   border: Border.all(color: kGray, width: 0.5),
@@ -188,49 +208,123 @@ class _ScanStrukState extends State<ScanStruk> {
               ),
             ),
             const SizedBox(height: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                    child: SvgPicture.asset(
-                      'assets/images/scan_btn.svg',
-                      fit: BoxFit.cover,
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(kPurple),
-                        padding:
-                            MaterialStateProperty.all(const EdgeInsets.all(14)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)))),
-                    onPressed: () => getImage(false)),
-                Container(
-                  margin: EdgeInsets.only(top: 12),
-                  child: Text(
-                    "---------------------    Atau    ---------------------",
-                    style: kOpenSans.copyWith(
-                        color: kGray, fontSize: 14, fontWeight: light),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 12),
-                  child: SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                          child: Text(
-                            "Pilih dari Galeri",
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, fontWeight: bold, color: kPurple),
+            _image == null
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          child: SvgPicture.asset(
+                            'assets/images/scan_btn.svg',
+                            fit: BoxFit.cover,
                           ),
-                          onPressed: () => getImage(true),
-                          style: OutlinedButton.styleFrom(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(kPurple),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(14)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(12)))),
+                          onPressed: () => getImage(false)),
+                      Container(
+                        margin: EdgeInsets.only(top: 12),
+                        child: Text(
+                          "---------------------    Atau    ---------------------",
+                          style: kOpenSans.copyWith(
+                              color: kGray, fontSize: 14, fontWeight: light),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 12),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            child: Text(
+                              "Pilih dari Galeri",
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                  color: kPurple),
+                            ),
+                            onPressed: () => getImage(true),
+                            style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               side: const BorderSide(color: kPurple),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))))),
-                ),
-              ],
-            )
+                                  borderRadius: BorderRadius.circular(12)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(children: [
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 12),
+                        child: OutlinedButton(
+                          child: Text(
+                            "Ulangi",
+                            style: kOpenSans.copyWith(
+                                fontSize: 16, fontWeight: bold, color: kPurple),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              setState(() {
+                                _image = null;
+                              });
+                            });
+                          },
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            side: const BorderSide(color: kPurple),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    kDefaultBorderRadius)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 24,
+                    ),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: Container(
+                          margin: EdgeInsets.only(top: 12),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(vertical: 12),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all(kPurple),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, ValidasiScanScreen.routeName,
+                                    arguments: ArgumentsValidation(
+                                        filePath: imageFilePath,
+                                        nominal: nominal));
+                              },
+                              child: Text(
+                                "Lanjut",
+                                style: kOpenSans.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                ),
+                              ))),
+                    ),
+                  ]),
           ],
         ),
       ),

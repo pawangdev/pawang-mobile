@@ -35,7 +35,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
-      ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
+        ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
     nominal_pengeluaran.text = args.nominal;
     filePath = args.filePath;
 
@@ -51,23 +51,23 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kPurple),
-                      borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: kPurple),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/images/back_btn.svg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    child: SvgPicture.asset(
-                      'assets/images/back_btn.svg',
-                      fit: BoxFit.cover,
-                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
                   Text(
                     "Validasi Scan Struk",
                     style: kOpenSans.copyWith(
@@ -95,8 +95,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
                   inputController: nama_pengeluaran,
-                  errorText:
-                      _validated ? null : 'Nama Pengeluaran wajib diisi',
+                  errorText: _validated ? null : 'Nama Pengeluaran wajib diisi',
                 ),
               ),
               Container(
@@ -125,10 +124,10 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                   keyboardType: TextInputType.none,
                   onTap: () {
                     showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2099))
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2099))
                         .then((date) {
                       if (date != null) {
                         initializeDateFormatting('id_ID', null);
@@ -174,7 +173,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                 ? _validated = false
                                 : _validated = true;
                           });
-      
+
                           if (_validated == true) {
                             try {
                               PengeluaranModel data = PengeluaranModel(
@@ -191,7 +190,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                   content: Text("Sukses menyimpan data"),
                                   backgroundColor: kSuccess,
                                 ));
-      
+
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     RiwayatScreen.routeName, (route) => false);
                               });

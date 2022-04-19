@@ -54,10 +54,13 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                   if (snapshot.hasData) {
                     if (snapshot.data?.length != 0) {
                       return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
                             onTap: () {
                               Navigator.pushNamed(
                                   context, DetailPengeluaran.routeName,
