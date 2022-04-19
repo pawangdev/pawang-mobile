@@ -7,6 +7,8 @@ const Color kBlack = Color(0xFF001833);
 const Color kWarning = Color(0xFFFAD202);
 const Color kSuccess = Color(0xFF64BC26);
 const Color kGray = Color(0xFF8B8B8B);
+const Color kError = Color(0xFFEA1601);
+const Color kSecondary = Color(0xFFFD9900);
 
 // Padding
 const double kDefaultPadding = 16.0;

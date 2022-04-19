@@ -24,20 +24,25 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   String? filePath;
   bool _validation = false;
 
+  Future<void> simpanData(PengeluaranModel data) async {
+    try {
+      await PengeluaranService().create(data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)!.settings.arguments as ArgumentsValidasi;
+      ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
     nominal_pengeluaran.text = args.nominal;
     filePath = args.filePath;
 
-    Future<void> simpanData(PengeluaranModel data) async {
-      try {
-        await PengeluaranService().create(data);
-      } catch (e) {
-        print(e);
-      }
-    }
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Berhasil mendapatkan total belanja"),
+      backgroundColor: kSuccess
+    ));
 
     return Scaffold(
       body: SafeArea(
@@ -137,10 +142,10 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                   keyboardType: TextInputType.none,
                   onTap: () {
                     showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2099))
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2099))
                         .then((date) {
                       if (date != null) {
                         initializeDateFormatting('id_ID', null);
@@ -211,7 +216,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: Text(e.toString()),
-                                backgroundColor: Colors.redAccent,
+                                backgroundColor: kError,
                               ));
                             }
                           }
@@ -234,9 +239,9 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   }
 }
 
-class ArgumentsValidasi {
+class ArgumentsValidation {
   String nominal;
   String filePath;
 
-  ArgumentsValidasi({required this.filePath, required this.nominal});
+  ArgumentsValidation({required this.filePath, required this.nominal});
 }

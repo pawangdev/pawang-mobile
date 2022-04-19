@@ -101,13 +101,13 @@ class _ScanStrukState extends State<ScanStruk> {
         }
       }
       Navigator.pushNamed(context, ValidasiScanScreen.routeName,
-          arguments: ArgumentsValidasi(
+          arguments: ArgumentsValidation(
               filePath: image.filePath.toString(),
               nominal: total_belanja.toString()));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Gambar tidak mengandung unsur total"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: kError,
       ));
     }
   }

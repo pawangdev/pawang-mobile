@@ -39,7 +39,7 @@ class CardPengeluaran extends StatelessWidget {
                 Text(
                   "- Rp. ${data.nominal_pengeluaran.toString()}",
                   style: kOpenSans.copyWith(
-                      fontSize: 10, fontWeight: semibold, color: kWarning),
+                      fontSize: 10, fontWeight: semibold, color: kSecondary),
                 )
               ],
             ),
