@@ -20,12 +20,15 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   final TextEditingController nominal_pengeluaran = TextEditingController();
   final TextEditingController kategori_pengeluaran = TextEditingController();
   final TextEditingController tanggal_pengeluaran = TextEditingController();
+  String? filePath;
   bool _validation = false;
 
   @override
   Widget build(BuildContext context) {
-    final nominal = ModalRoute.of(context)!.settings.arguments as String;
-    nominal_pengeluaran.text = nominal;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as ArgumentsValidasi;
+    nominal_pengeluaran.text = args.nominal;
+    filePath = args.filePath;
 
     Future<void> simpanData(PengeluaranModel data) async {
       try {
@@ -174,8 +177,8 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                       double.parse(nominal_pengeluaran.text),
                                   kategori_pengeluaran:
                                       kategori_pengeluaran.text,
-                                  tanggal_pengeluaran:
-                                      tanggal_pengeluaran.text);
+                                  tanggal_pengeluaran: tanggal_pengeluaran.text,
+                                  filePath: filePath.toString());
                               simpanData(data).then((value) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -207,4 +210,11 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
       ),
     );
   }
+}
+
+class ArgumentsValidasi {
+  String nominal;
+  String filePath;
+
+  ArgumentsValidasi({required this.filePath, required this.nominal});
 }

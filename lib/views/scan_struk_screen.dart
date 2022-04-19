@@ -18,6 +18,7 @@ class ScanStruk extends StatefulWidget {
 class _ScanStrukState extends State<ScanStruk> {
   XFile? _image;
   dynamic _pickImageError;
+  late final String filePath;
   final ImagePicker _picker = ImagePicker();
 
   Future getImage(bool is_fromGal) async {
@@ -28,6 +29,7 @@ class _ScanStrukState extends State<ScanStruk> {
       try {
         image = await _picker.pickImage(source: ImageSource.gallery);
         inputImage = InputImage.fromFilePath(image!.path);
+
         searchTotal(inputImage);
       } catch (e) {
         setState(() => _pickImageError = e);
@@ -99,7 +101,9 @@ class _ScanStrukState extends State<ScanStruk> {
       }
     }
     Navigator.pushNamed(context, ValidasiScanScreen.routeName,
-        arguments: total_belanja.toString());
+        arguments: ArgumentsValidasi(
+            filePath: image.filePath.toString(),
+            nominal: total_belanja.toString()));
   }
 
   @override

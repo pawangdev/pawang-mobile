@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         '/riwayat': (context) => RiwayatScreen(),
         '/scan-struk': (context) => const ScanStruk(),
         '/validasi-scan': (context) => const ValidasiScanScreen(),
-        '/detail': (context) => const DetailPengeluaran()
+        '/detail': (context) => const DetailPengeluaran(),
+        '/lihat-struk': (context) => const DetailImageStrukScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
