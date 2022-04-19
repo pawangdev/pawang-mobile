@@ -55,55 +55,61 @@ class _ScanStrukState extends State<ScanStruk> {
     int counter = 0;
     bool found = false;
 
-    for (TextBlock block in recognisedText.blocks) {
-      for (TextLine line in block.lines) {
-        print('text : ${line.text} | corner : ${line.cornerPoints}');
-        if (line.text.contains(RegExp(r'[A-Z]')) ||
-            line.text.contains(RegExp(r'[a-z]')) ||
-            line.text.contains(RegExp(r'=')) &&
-                !line.text.contains(RegExp(r'Rp')) &&
-                !line.text.contains(RegExp(r'RP'))) {
-          counter++;
-          if (line.text.contains(RegExp(r'total')) ||
-              line.text.contains(RegExp(r'TOTAL')) &&
-                  line.text.compareTo('Subtotal') != 0 &&
-                  line.text.compareTo('SUBTOTAL') != 0) {
-            found = true;
-          }
-        } else {
-          if (found) {
-            String a = line.text.replaceAll(RegExp('[^A-Za-z0-9]'), '');
-            if (a.contains(' ')) {
-              a = a.replaceAll(RegExp(r' '), '');
+    try {
+      for (TextBlock block in recognisedText.blocks) {
+        for (TextLine line in block.lines) {
+          if (line.text.contains(RegExp(r'[A-Z]')) ||
+              line.text.contains(RegExp(r'[a-z]')) ||
+              line.text.contains(RegExp(r'=')) &&
+                  !line.text.contains(RegExp(r'Rp')) &&
+                  !line.text.contains(RegExp(r'RP'))) {
+            counter++;
+            if (line.text.contains(RegExp(r'total')) ||
+                line.text.contains(RegExp(r'TOTAL')) &&
+                    line.text.compareTo('Subtotal') != 0 &&
+                    line.text.compareTo('SUBTOTAL') != 0) {
+              found = true;
             }
-            if (a.contains('Rp') || a.contains('Rp.') || a.contains('Rp. ')) {
-              a = a.replaceAll(RegExp(r'Rp'), '');
-            } else if (a.contains('RP') ||
-                a.contains('RP.') ||
-                a.contains('RP. ')) {
-              a = a.replaceAll(RegExp(r'RP'), '');
-            }
-            if (a.compareTo('') != 0) {
-              findTotal.add(double.parse(a));
+          } else {
+            if (found) {
+              String a = line.text.replaceAll(RegExp('[^A-Za-z0-9]'), '');
+              if (a.contains(' ')) {
+                a = a.replaceAll(RegExp(r' '), '');
+              }
+              if (a.contains('Rp') || a.contains('Rp.') || a.contains('Rp. ')) {
+                a = a.replaceAll(RegExp(r'Rp'), '');
+              } else if (a.contains('RP') ||
+                  a.contains('RP.') ||
+                  a.contains('RP. ')) {
+                a = a.replaceAll(RegExp(r'RP'), '');
+              }
+              if (a.compareTo('') != 0) {
+                findTotal.add(double.parse(a));
+              }
             }
           }
         }
+        counter = 0;
       }
-      counter = 0;
-    }
 
-    temp = findTotal[0];
-    for (double i in findTotal) {
-      if (i >= temp) {
-        total_belanja = i;
-      } else {
-        temp = i;
+      temp = findTotal[0];
+      for (double i in findTotal) {
+        if (i >= temp) {
+          total_belanja = i;
+        } else {
+          temp = i;
+        }
       }
+      Navigator.pushNamed(context, ValidasiScanScreen.routeName,
+          arguments: ArgumentsValidasi(
+              filePath: image.filePath.toString(),
+              nominal: total_belanja.toString()));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Gambar tidak mengandung unsur total"),
+        backgroundColor: Colors.redAccent,
+      ));
     }
-    Navigator.pushNamed(context, ValidasiScanScreen.routeName,
-        arguments: ArgumentsValidasi(
-            filePath: image.filePath.toString(),
-            nominal: total_belanja.toString()));
   }
 
   @override

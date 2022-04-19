@@ -180,17 +180,21 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                   tanggal_pengeluaran: tanggal_pengeluaran.text,
                                   filePath: filePath.toString());
                               simpanData(data).then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("Sukses menyimpan data")));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text("Sukses menyimpan data"),
+                                  backgroundColor: kSuccess,
+                                ));
 
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     RiwayatScreen.routeName, (route) => false);
                               });
                             } catch (e) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(e.toString())));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(e.toString()),
+                                backgroundColor: Colors.redAccent,
+                              ));
                             }
                           }
                         },

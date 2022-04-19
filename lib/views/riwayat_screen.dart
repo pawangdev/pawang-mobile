@@ -5,6 +5,7 @@ import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
+import 'package:pawang_mobile/widgets/CardPengeluaran.dart';
 
 class RiwayatScreen extends StatefulWidget {
   static const String routeName = '/riwayat';
@@ -59,96 +60,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                                   context, DetailPengeluaran.routeName,
                                   arguments: snapshot.data[index]);
                             },
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 18),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 21),
-                              width: 296,
-                              height: 106,
-                              decoration: BoxDecoration(
-                                  color: kWhite,
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // NAMA PENGELUARAN
-                                  Expanded(
-                                    child: Text(
-                                      snapshot.data![index].nama_pengeluaran,
-                                      style: kOpenSans.copyWith(
-                                          fontSize: 12, fontWeight: bold),
-                                    ),
-                                  ),
-                                  // NOMINAL
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Nominal : ",
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: semibold),
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          "+ Rp. ${snapshot.data![index].nominal_pengeluaran.toString()}",
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 10,
-                                              fontWeight: semibold,
-                                              color: kWarning),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  // KATEGORI
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Kategori : ",
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: semibold),
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          snapshot.data![index]
-                                              .kategori_pengeluaran,
-                                          style:
-                                              kOpenSans.copyWith(fontSize: 10),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // TANGGAL/WAKTU
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Waktu : ",
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: semibold),
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(
-                                          snapshot
-                                              .data![index].tanggal_pengeluaran,
-                                          style:
-                                              kOpenSans.copyWith(fontSize: 10),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            child: CardPengeluaran(data: snapshot.data[index]),
                           );
                         },
                         itemCount: snapshot.data?.length,
