@@ -175,15 +175,26 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                         _pengeluaran.tanggal_pengeluaran =
                             _tanggal_pengeluaran.text;
 
-                        _isEdited = true;
                         try {
-                          PengeluaranService().update(_pengeluaran).then(
-                              (value) => ScaffoldMessenger.of(context)
+                          PengeluaranService()
+                              .update(_pengeluaran)
+                              .then((value) => ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
                                     content:
                                         Text("Perubahan berhasil disimpan"),
                                     backgroundColor: kSuccess,
-                                  )));
+                                  )))
+                              .then((value) {
+                            setState(() {
+                              nama_pengeluaran.text = _nama_pengeluaran.text;
+                              nominal_pengeluaran.text =
+                                  _nominal_pengeluaran.text;
+                              kategori_pengeluaran.text =
+                                  _kategori_pengeluaran.text;
+                              tanggal_pengeluaran.text =
+                                  _tanggal_pengeluaran.text;
+                            });
+                          });
                           Navigator.pop(context);
                         } catch (e) {
                           print(e);
@@ -210,18 +221,15 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
 
   @override
   Widget build(BuildContext context) {
-    var data = ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
+    PengeluaranModel data =
+        ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
     final int? _id = data.id;
 
-    if (_isEdited) {
-      data = PengeluaranService().getData(_id) as dynamic;
-    }
-    
     nama_pengeluaran.text = data.nama_pengeluaran;
     nominal_pengeluaran.text = data.nominal_pengeluaran.toString();
     kategori_pengeluaran.text = data.kategori_pengeluaran;
     tanggal_pengeluaran.text = data.tanggal_pengeluaran;
-    
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -424,22 +432,27 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                             barrierDismissible: false,
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text('Hapus Pengeluaran'),
-                              content: const Text('Apakah kamu yakin akan menghapus pengeluaran ini?'),
+                              content: const Text(
+                                  'Apakah kamu yakin akan menghapus pengeluaran ini?'),
                               actions: <Widget>[
                                 TextButton(
-                                  onPressed: () => Navigator.pop(context, 'Kembali'),
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Kembali'),
                                   child: const Text('Kembali'),
                                 ),
                                 TextButton(
                                   onPressed: () => {
-                                    PengeluaranService().delete(data.id!).then((value) =>
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content: Text("Pengeluaran berhasil dihapus"),
-                                        backgroundColor: kSuccess,
-                                      ))),
-                                    Navigator.pushNamedAndRemoveUntil(context,
-                                      RiwayatScreen.routeName, (route) => false)
+                                    PengeluaranService().delete(data.id!).then(
+                                        (value) => ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  "Pengeluaran berhasil dihapus"),
+                                              backgroundColor: kSuccess,
+                                            ))),
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        RiwayatScreen.routeName,
+                                        (route) => false)
                                   },
                                   child: const Text('Hapus'),
                                 ),

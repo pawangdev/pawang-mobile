@@ -26,7 +26,7 @@ class PengeluaranService {
   //   final Database db = await initDB();
   //   List<Map> result = await db.query('pengeluaran', whereArgs: [id]);
   //   if (result.length > 0) {
-  //     return 
+  //     return
   //   }
   //   return null;
   // }
@@ -64,10 +64,11 @@ class PengeluaranService {
 
   // UPDATING THE DATA
   Future<int> update(PengeluaranModel pengeluaran) async {
-    try{
+    try {
       Database db = await initDB();
       int id = pengeluaran.toMap()['id'];
-      return await db.update('pengeluaran', pengeluaran.toMap(), where: 'id = ?', whereArgs: [id]);
+      return await db.update('pengeluaran', pengeluaran.toMap(),
+          where: 'id = ?', whereArgs: [id]);
     } catch (e) {
       return throw Exception(e);
     }
@@ -77,17 +78,28 @@ class PengeluaranService {
   Future getData(id) async {
     final Database db = await initDB();
     try {
-      final List<Map<String, dynamic>> maps = await db.query('pengeluaran', where: 'id = ?', whereArgs: [id]);
+      final List<Map<String, dynamic>> maps =
+          await db.query('pengeluaran', where: 'id = ?', whereArgs: [id]);
 
-      return List.generate(maps.length, (index) {
+      for (var element in maps) {
         return PengeluaranModel(
-            id: maps[index]['id'],
-            nama_pengeluaran: maps[index]['nama_pengeluaran'],
-            nominal_pengeluaran: maps[index]['nominal_pengeluaran'],
-            kategori_pengeluaran: maps[index]['kategori_pengeluaran'],
-            tanggal_pengeluaran: maps[index]['tanggal_pengeluaran'],
-            filePath: maps[index]['file_path']);
-      });
+            id: element['id'],
+            nama_pengeluaran: element['nama_pengeluaran'],
+            tanggal_pengeluaran: element['nama_pengeluaran'],
+            filePath: element['nama_pengeluaran'],
+            kategori_pengeluaran: element['nama_pengeluaran'],
+            nominal_pengeluaran: element['nama_pengeluaran']);
+      }
+
+      // return List.generate(maps.length, (index) {
+      //   return PengeluaranModel(
+      //       id: maps[index]['id'],
+      //       nama_pengeluaran: maps[index]['nama_pengeluaran'],
+      //       nominal_pengeluaran: maps[index]['nominal_pengeluaran'],
+      //       kategori_pengeluaran: maps[index]['kategori_pengeluaran'],
+      //       tanggal_pengeluaran: maps[index]['tanggal_pengeluaran'],
+      //       filePath: maps[index]['file_path']);
+      // });
     } catch (e) {
       print(e);
     }
@@ -95,7 +107,7 @@ class PengeluaranService {
 
   // DELETING DATA BY ID
   Future<void> delete(int id) async {
-    try{
+    try {
       Database db = await initDB();
       await db.delete(
         'pengeluaran',
