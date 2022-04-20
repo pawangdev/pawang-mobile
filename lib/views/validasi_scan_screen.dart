@@ -174,7 +174,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                 : _validated = true;
                           });
 
-                          if (_validated == true) {
+                          if (_validated) {
                             try {
                               PengeluaranModel data = PengeluaranModel(
                                   nama_pengeluaran: nama_pengeluaran.text,
