@@ -50,6 +50,7 @@ class PengeluaranService {
 
       return List.generate(maps.length, (index) {
         return PengeluaranModel(
+            id: maps[index]['id'],
             nama_pengeluaran: maps[index]['nama_pengeluaran'],
             nominal_pengeluaran: maps[index]['nominal_pengeluaran'],
             kategori_pengeluaran: maps[index]['kategori_pengeluaran'],
@@ -73,12 +74,22 @@ class PengeluaranService {
   }
 
   // GETTING DATA BY ID
-  Future<List<Map<String, dynamic>>> getData(id) async {
-    try{
-      Database db = await initDB();
-      return await db.query('pengeluaran', where: 'id = ?', whereArgs: [id]);
+  Future getData(id) async {
+    final Database db = await initDB();
+    try {
+      final List<Map<String, dynamic>> maps = await db.query('pengeluaran', where: 'id = ?', whereArgs: [id]);
+
+      return List.generate(maps.length, (index) {
+        return PengeluaranModel(
+            id: maps[index]['id'],
+            nama_pengeluaran: maps[index]['nama_pengeluaran'],
+            nominal_pengeluaran: maps[index]['nominal_pengeluaran'],
+            kategori_pengeluaran: maps[index]['kategori_pengeluaran'],
+            tanggal_pengeluaran: maps[index]['tanggal_pengeluaran'],
+            filePath: maps[index]['file_path']);
+      });
     } catch (e) {
-      return throw Exception(e);
+      print(e);
     }
   }
 
