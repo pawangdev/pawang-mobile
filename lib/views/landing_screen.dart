@@ -19,7 +19,7 @@ class LandingScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: bodyHeight * 0.75,
+              height: bodyHeight * 0.70,
               decoration: BoxDecoration(
                   color: kPurple,
                   borderRadius: BorderRadius.only(
