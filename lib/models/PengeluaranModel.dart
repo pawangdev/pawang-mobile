@@ -1,17 +1,18 @@
 class PengeluaranModel {
-  late final int id;
-  late final String nama_pengeluaran;
-  late final double nominal_pengeluaran;
-  late final String kategori_pengeluaran;
-  late final String tanggal_pengeluaran;
-  late final String filePath;
+  late int? id;
+  late String nama_pengeluaran;
+  late double nominal_pengeluaran;
+  late String kategori_pengeluaran;
+  late String tanggal_pengeluaran;
+  late String filePath;
 
   PengeluaranModel(
       {required this.nama_pengeluaran,
       required this.nominal_pengeluaran,
       required this.kategori_pengeluaran,
       required this.tanggal_pengeluaran,
-      required this.filePath});
+      required this.filePath,
+      this.id});
 
   PengeluaranModel.fromMap(Map<String, dynamic> map) {
     id = map['id'];
