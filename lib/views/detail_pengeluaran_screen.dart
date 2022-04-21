@@ -434,11 +434,12 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               title: const Text('Hapus Pengeluaran'),
                               content: const Text(
                                   'Apakah kamu yakin akan menghapus pengeluaran ini?'),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(context, 'Kembali'),
-                                  child: const Text('Kembali'),
+                                  child: Text('Kembali', style: kOpenSans.copyWith(color: kPurple)),
                                 ),
                                 TextButton(
                                   onPressed: () => {
@@ -454,7 +455,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                         RiwayatScreen.routeName,
                                         (route) => false)
                                   },
-                                  child: const Text('Hapus'),
+                                  child: Text('Hapus', style: kOpenSans.copyWith(color: kPurple)),
                                 ),
                               ],
                             ),
