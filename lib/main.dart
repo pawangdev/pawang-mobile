@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/connection_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "OpenSans",
       ),
-      initialRoute: '/',
+      initialRoute: '/connection-check',
       routes: {
         '/': (context) => const LandingScreen(),
         '/riwayat': (context) => RiwayatScreen(),
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/validasi-scan': (context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran(),
         '/lihat-struk': (context) => const DetailImageStrukScreen(),
+        '/connection-check': ((context) => ConnectionScreen())
       },
       debugShowCheckedModeBanner: false,
     );
