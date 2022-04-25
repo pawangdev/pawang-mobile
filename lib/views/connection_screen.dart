@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 
 class ConnectionScreen extends StatefulWidget {
+  static const String routeName = "/connection-check";
   ConnectionScreen({Key? key}) : super(key: key);
 
   @override
@@ -17,69 +18,65 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
           padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
           child: Column(
             children: [
+              const SizedBox(
+                height: 150,
+              ),
               Center(
                 child: Text(
-                  "Riwayat",
+                  "Oops !!",
                   style: kOpenSans.copyWith(
-                      color: kBlack, fontWeight: bold, fontSize: 16),
+                      color: kBlack, fontWeight: bold, fontSize: 24),
                 ),
               ),
               const SizedBox(
                 height: 32,
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.800,
-                      height: MediaQuery.of(context).size.height * 0.150,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/no-connection.png'),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Container(
-                      child: Text(
-                        "Ooops, No Internet Connection",
-                        style: kOpenSans.copyWith(
-                            color: kBlack, fontSize: 20, fontWeight: bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Container(
-                      child: Text(
-                        "Kamu kehilangan koneksi internet. Silahkan coba beberapa saat lagi.",
-                        style: kOpenSans.copyWith(
-                            color: kGray, fontSize: 14, fontWeight: medium),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
+              Container(
+                width: MediaQuery.of(context).size.width * 0.800,
+                height: MediaQuery.of(context).size.height * 0.150,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/no_connection.png'),
+                  ),
                 ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Container(
+                child: Text(
+                  "No Internet Connection",
+                  style: kOpenSans.copyWith(
+                      color: kBlack, fontSize: 20, fontWeight: bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 28,
+              ),
+              Container(
+                child: Text(
+                  "Kamu kehilangan koneksi internet. Silahkan periksa kembali koneksi internet.",
+                  style: kOpenSans.copyWith(
+                      color: kGray, fontSize: 14, fontWeight: medium),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 32,
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 32),
-                width: double.infinity,
                 child: ElevatedButton(
                     child: Text(
-                      "Try Again",
+                      "Coba Lagi",
                       style: kOpenSans.copyWith(
                           fontSize: 16, fontWeight: bold, color: kWhite),
                     ),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(kPurple),
                         padding:
-                            MaterialStateProperty.all(const EdgeInsets.all(16)),
+                            MaterialStateProperty.all(const EdgeInsets.all(18)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)))),
                     onPressed: () {}),
