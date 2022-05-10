@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:flutter/services.dart';
 import 'package:pawang_mobile/views/connection_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
@@ -18,12 +18,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: 'Pawang',
       theme: ThemeData(
         fontFamily: "OpenSans",
       ),
-      initialRoute: '/connection-check',
+      initialRoute: '/',
       routes: {
         '/': (context) => const LandingScreen(),
         '/riwayat': (context) => RiwayatScreen(),
