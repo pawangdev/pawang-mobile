@@ -4,6 +4,7 @@ import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -86,7 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                      },
                       child: Text(
                         "Masuk",
                         style:
@@ -169,7 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               offset: Offset(1, 1))
                         ]),
                     child: SvgPicture.asset(
-                      'assets/images/google.svg',
+                      'assets/images/scan_btn.svg',
+                      color: kError,
                     ),
                   ),
                 ],

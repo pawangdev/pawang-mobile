@@ -69,51 +69,58 @@ class LandingScreen extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 200,
-                    height: 100,
+                    height: 130,
                     child: Container(
-                      child: Row(
+                      child: Column(
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, LoginScreen.routeName);
-                            },
-                            child: Text(
-                              "Masuk",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 16, fontWeight: bold),
-                            ),
-                            style: ButtonStyle(
-                              fixedSize:
-                                  MaterialStateProperty.all(Size(100, 50)),
-                              backgroundColor:
-                                  MaterialStateProperty.all(kPurple),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, LoginScreen.routeName);
+                              },
+                              child: Text(
+                                "Masuk",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16, fontWeight: bold),
+                              ),
+                              style: ButtonStyle(
+                                fixedSize:
+                                    MaterialStateProperty.all(Size(100, 50)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(kPurple),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, RegisterScreen.routeName);
-                            },
-                            child: Text(
-                              "Daftar",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 16, fontWeight: bold),
-                            ),
-                            style: ButtonStyle(
-                              fixedSize:
-                                  MaterialStateProperty.all(Size(100, 50)),
-                              backgroundColor:
-                                  MaterialStateProperty.all(kPurple2),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: OutlinedButton(
+                              child: Text(
+                                "Daftar",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kPurple),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, RegisterScreen.routeName);
+                              },
+                              style: OutlinedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                side: const BorderSide(color: kPurple),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
                               ),
                             ),
                           ),
