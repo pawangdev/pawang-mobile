@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/views/login_screen.dart';
+import 'package:pawang_mobile/views/register_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   static const String routeName = '/';
@@ -19,7 +20,7 @@ class LandingScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: bodyHeight * 0.70,
+              height: bodyHeight * 0.65,
               decoration: BoxDecoration(
                   color: kPurple,
                   borderRadius: BorderRadius.only(
@@ -67,31 +68,69 @@ class LandingScreen extends StatelessWidget {
                     height: 30,
                   ),
                   SizedBox(
-                    width: 116,
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, RiwayatScreen.routeName);
-                      },
-                      child: Text(
-                        "Masuk",
-                        style:
-                            kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
-                      ),
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(116, 40)),
-                        backgroundColor: MaterialStateProperty.all(kPurple),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    width: 200,
+                    height: 130,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, LoginScreen.routeName);
+                              },
+                              child: Text(
+                                "Masuk",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16, fontWeight: bold),
+                              ),
+                              style: ButtonStyle(
+                                fixedSize:
+                                    MaterialStateProperty.all(Size(100, 50)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(kPurple),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: OutlinedButton(
+                              child: Text(
+                                "Daftar",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kPurple),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, RegisterScreen.routeName);
+                              },
+                              style: OutlinedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                side: const BorderSide(color: kPurple),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
