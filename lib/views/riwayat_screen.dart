@@ -4,6 +4,7 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/CardPengeluaran.dart';
 
@@ -38,15 +39,73 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
           padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
           child: Column(
             children: [
-              Center(
-                child: Text(
-                  "Riwayat",
-                  style: kOpenSans.copyWith(
-                      color: kBlack, fontWeight: bold, fontSize: 16),
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: kPurple),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/images/back_btn.svg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, LandingScreen.routeName);
+                    },
+                  ),
+                  Text(
+                    "Riwayat",
+                    style: kOpenSans.copyWith(
+                        fontSize: 16, fontWeight: bold, color: kBlack),
+                  ),
+                  Container(
+                    width: 22,
+                    height: 32,
+                    padding: EdgeInsets.all(6),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 31,
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Saldo',
+                      style: kOpenSans.copyWith(
+                        color: kWhite,
+                        fontWeight: bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'Rp. XXXXXXXX',
+                      style: kOpenSans.copyWith(
+                        color: kWhite,
+                        fontWeight: bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    color: kPurple,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+              ),
+              SizedBox(
+                height: 30,
               ),
               FutureBuilder(
                 future: dataPengeluaran,
