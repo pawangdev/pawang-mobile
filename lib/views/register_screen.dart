@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -94,7 +96,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, DashboardScreen.routeName);
+                      },
                       child: Text(
                         "Daftar",
                         style:
