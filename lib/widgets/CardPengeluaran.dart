@@ -15,15 +15,32 @@ class CardPengeluaran extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 21),
       width: 296,
       height: 106,
-      decoration:
-          BoxDecoration(color: kWhite, borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: Offset(1, 2), // changes position of shadow
+          ),
+        ],
+      ),
       child: Row(
         // ICON
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            'assets/images/scan_btn.svg',
-            color: kSecondary,
+          Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(
+                color: kSecondary,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: SvgPicture.asset(
+              'assets/images/makan_kategori.svg',
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20),

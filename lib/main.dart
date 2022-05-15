@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pawang_mobile/views/connection_screen.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
         '/riwayat': (context) => RiwayatScreen(),
+        '/dashboard': (context) => DashboardScreen(),
         '/scan-struk': (context) => const ScanStruk(),
         '/validasi-scan': (context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran(),
