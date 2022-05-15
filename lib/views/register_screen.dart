@@ -20,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController Email = TextEditingController();
   final TextEditingController Password = TextEditingController();
   final TextEditingController rePassword = TextEditingController();
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext) {
@@ -77,28 +78,86 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Password",
-                      inputController: Password,
-                    ),
-                  ),
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Password',
+                            style: kOpenSans.copyWith(
+                                fontWeight: bold, color: kBlack),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                                fillColor: Color(0xFFF5F5F5),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                    borderSide: BorderSide.none),
+                                focusColor: kPurple,
+                                suffixIcon: IconButton(
+                                    color: kGray,
+                                    icon: Icon(_isObscure
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isObscure = !_isObscure;
+                                      });
+                                    })),
+                            autofocus: false,
+                            obscureText: _isObscure,
+                          ),
+                        ],
+                      )),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Konfirmasi Password",
-                      inputController: rePassword,
-                    ),
-                  ),
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Konfirmasi Password',
+                            style: kOpenSans.copyWith(
+                                fontWeight: bold, color: kBlack),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                                fillColor: Color(0xFFF5F5F5),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                    borderSide: BorderSide.none),
+                                focusColor: kPurple,
+                                suffixIcon: IconButton(
+                                    color: kGray,
+                                    icon: Icon(_isObscure
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isObscure = !_isObscure;
+                                      });
+                                    })),
+                            autofocus: false,
+                            obscureText: _isObscure,
+                          ),
+                        ],
+                      )),
                   SizedBox(
                     height: 30,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, DashboardScreen.routeName);
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Daftar",
                         style:

@@ -5,8 +5,10 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
+import 'package:pawang_mobile/widgets/IconBottom.dart';
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
@@ -135,200 +137,266 @@ class _ScanStrukState extends State<ScanStruk> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                InkWell(
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kPurple),
-                      borderRadius: BorderRadius.circular(8),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kPurple),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/images/back_btn.svg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    child: SvgPicture.asset(
-                      'assets/images/back_btn.svg',
-                      fit: BoxFit.cover,
+                    Text(
+                      "Scan Struk",
+                      style: kOpenSans.copyWith(
+                          fontSize: 16, fontWeight: bold, color: kBlack),
+                    ),
+                    Container(
+                      width: 22,
+                      height: 32,
+                      padding: EdgeInsets.all(6),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 33,
+                ),
+                Center(
+                  child: Text(
+                    "Mohon atur posisi struk agar dapat terdeteksi",
+                    style: kOpenSans.copyWith(color: kBlack),
+                  ),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                // ----- BOX IMAGE -----
+                Expanded(
+                  child: Container(
+                    child: _image != null
+                        ? Image.file(
+                            File(_image!.path),
+                            fit: BoxFit.contain,
+                          )
+                        : Center(
+                            child: Text(
+                              "Silahkan Inputkan Struk Terlebih Dahulu",
+                              style: kOpenSans.copyWith(
+                                  color: kGray,
+                                  fontSize: 12,
+                                  fontWeight: medium),
+                            ),
+                          ),
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kGray, width: 0.5),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onTap: () {
-                    Navigator.pushNamed(context, RiwayatScreen.routeName);
-                  },
                 ),
-                Text(
-                  "Scan Struk",
-                  style: kOpenSans.copyWith(
-                      fontSize: 16, fontWeight: bold, color: kBlack),
-                ),
-                Container(
-                  width: 22,
-                  height: 32,
-                  padding: EdgeInsets.all(6),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 33,
-            ),
-            Center(
-              child: Text(
-                "Mohon atur posisi struk agar dapat terdeteksi",
-                style: kOpenSans.copyWith(color: kBlack),
-              ),
-            ),
-            const SizedBox(
-              height: 28,
-            ),
-            // ----- BOX IMAGE -----
-            Expanded(
-              child: Container(
-                child: _image != null
-                    ? Image.file(
-                        File(_image!.path),
-                        fit: BoxFit.contain,
-                      )
-                    : Center(
-                        child: Text(
-                          "Silahkan Inputkan Struk Terlebih Dahulu",
-                          style: kOpenSans.copyWith(
-                              color: kGray, fontSize: 12, fontWeight: medium),
-                        ),
-                      ),
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  border: Border.all(color: kGray, width: 0.5),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            _image == null
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                          child: SvgPicture.asset(
-                            'assets/images/scan_btn.svg',
-                            fit: BoxFit.cover,
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(kPurple),
-                              padding: MaterialStateProperty.all(
-                                  const EdgeInsets.all(14)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(12)))),
-                          onPressed: () => getImage(false)),
-                      Container(
-                        margin: EdgeInsets.only(top: 12),
-                        child: Text(
-                          "---------------------    Atau    ---------------------",
-                          style: kOpenSans.copyWith(
-                              color: kGray, fontSize: 14, fontWeight: light),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 12),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: OutlinedButton(
-                            child: Text(
-                              "Pilih dari Galeri",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: bold,
-                                  color: kPurple),
-                            ),
-                            onPressed: () => getImage(true),
-                            style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              side: const BorderSide(color: kPurple),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : Row(children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 12),
-                        child: OutlinedButton(
-                          child: Text(
-                            "Ulangi",
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, fontWeight: bold, color: kPurple),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              setState(() {
-                                _image = null;
-                              });
-                            });
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: const BorderSide(color: kPurple),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    kDefaultBorderRadius)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 24,
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Container(
-                          margin: EdgeInsets.only(top: 12),
-                          child: ElevatedButton(
+                const SizedBox(height: 12),
+                _image == null
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                              child: SvgPicture.asset(
+                                'assets/images/scan_btn.svg',
+                                fit: BoxFit.cover,
+                              ),
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                  EdgeInsets.symmetric(vertical: 12),
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.all(kPurple),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(kPurple),
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(14)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12)))),
+                              onPressed: () => getImage(false)),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 20),
+                            width: 280,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Divider(
+                                    color: kBlack,
+                                    height: 1.5,
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    "OR",
+                                    style: TextStyle(
+                                      color: kGray,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: kBlack,
+                                    height: 1.5,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: OutlinedButton(
+                                child: Text(
+                                  "Pilih dari Galeri",
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: bold,
+                                      color: kPurple),
+                                ),
+                                onPressed: () => getImage(true),
+                                style: OutlinedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  side: const BorderSide(color: kPurple),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(children: [
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: OutlinedButton(
+                              child: Text(
+                                "Ulangi",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kPurple),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(
-                                    context, ValidasiScanScreen.routeName,
-                                    arguments: ArgumentsValidation(
-                                        filePath: imageFilePath,
-                                        nominal: nominal));
+                                setState(() {
+                                  setState(() {
+                                    _image = null;
+                                  });
+                                });
                               },
-                              child: Text(
-                                "Lanjut",
-                                style: kOpenSans.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: bold,
-                                ),
-                              ))),
-                    ),
-                  ]),
-          ],
+                              style: OutlinedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                side: const BorderSide(color: kPurple),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 24,
+                        ),
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Container(
+                              margin: EdgeInsets.only(top: 12),
+                              child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    padding: MaterialStateProperty.all(
+                                      EdgeInsets.symmetric(vertical: 12),
+                                    ),
+                                    backgroundColor:
+                                        MaterialStateProperty.all(kPurple),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            kDefaultBorderRadius),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, ValidasiScanScreen.routeName,
+                                        arguments: ArgumentsValidation(
+                                            filePath: imageFilePath,
+                                            nominal: nominal));
+                                  },
+                                  child: Text(
+                                    "Lanjut",
+                                    style: kOpenSans.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: bold,
+                                    ),
+                                  ))),
+                        ),
+                      ]),
+              ],
+            ),
+          ),
         ),
-      ),
-    ));
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.white,
+          child: SizedBox(
+            height: 64,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconBottomBar(
+                      text: "Beranda",
+                      icon: Icons.home,
+                      selected: false,
+                      onPressed: () {
+                        Navigator.pushNamed(context, DashboardScreen.routeName);
+                      }),
+                  IconBottomBar(
+                      text: "Scan Struk",
+                      icon: Icons.fullscreen,
+                      selected: true,
+                      onPressed: () {
+                        Navigator.pushNamed(context, ScanStruk.routeName);
+                      }),
+                  IconBottomBar(
+                      text: "Riwayat",
+                      icon: Icons.library_books_outlined,
+                      selected: false,
+                      onPressed: () {
+                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                      }),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

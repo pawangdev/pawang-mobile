@@ -17,8 +17,17 @@ class LayananCard extends StatelessWidget {
             height: 60,
             width: 60,
             decoration: BoxDecoration(
-                color: kPurple.withOpacity(0.1),
-                borderRadius: BorderRadius.all(Radius.circular(18))),
+              color: kWhite,
+              borderRadius: BorderRadius.all(Radius.circular(18)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 0.5,
+                  blurRadius: 0.5,
+                  offset: Offset(1, 3), // changes position of shadow
+                ),
+              ],
+            ),
             child: Center(
               child: Wrap(
                 children: [SvgPicture.asset(icon)],
@@ -33,7 +42,7 @@ class LayananCard extends StatelessWidget {
         Text(
           title,
           style: kOpenSans.copyWith(
-              fontSize: 12, fontWeight: medium, color: kBlack),
+              fontSize: 12, fontWeight: medium, color: kWhite),
         ),
       ],
     );
