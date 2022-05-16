@@ -3,13 +3,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
+import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/riwayat_screen.dart';
 
-class CardPengeluaran extends StatelessWidget {
+enum Menu { itemOne, itemTwo }
+
+class CardPengeluaran extends StatefulWidget {
   const CardPengeluaran({Key? key, required this.data}) : super(key: key);
   final PengeluaranModel data;
 
   @override
+  State<CardPengeluaran> createState() => _CardPengeluaranState();
+}
+
+class _CardPengeluaranState extends State<CardPengeluaran> {
+  String _selectedMenu = '';
+
+  @override
   Widget build(BuildContext context) {
+    // PengeluaranModel data =
+    //     ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
+    // final int? _id = data.id;
     return Container(
       margin: const EdgeInsets.only(bottom: 18),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 21),
@@ -28,95 +43,133 @@ class CardPengeluaran extends StatelessWidget {
         ],
       ),
       child: Row(
-        // ICON
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: 30,
-            width: 30,
-            decoration: BoxDecoration(
-                color: kSecondary,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            child: SvgPicture.asset(
-              'assets/images/makan_kategori.svg',
-              fit: BoxFit.cover,
-            ),
+          Row(
+            // ICON
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                    color: kSecondary,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: SvgPicture.asset(
+                  'assets/images/makan_kategori.svg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // NAMA PENGELUARAN
+                    Expanded(
+                      child: Text(
+                        widget.data.nama_pengeluaran,
+                        style:
+                            kOpenSans.copyWith(fontSize: 12, fontWeight: bold),
+                      ),
+                    ),
+                    // NOMINAL
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Nominal : ",
+                            style: kOpenSans.copyWith(
+                                fontSize: 11, fontWeight: semibold),
+                          ),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "- Rp. ${widget.data.nominal_pengeluaran.toString()}",
+                            style: kOpenSans.copyWith(
+                                fontSize: 11,
+                                fontWeight: semibold,
+                                color: kSecondary),
+                          )
+                        ],
+                      ),
+                    ),
+                    // KATEGORI
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Kategori : ",
+                            style: kOpenSans.copyWith(
+                                fontSize: 11, fontWeight: semibold),
+                          ),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            widget.data.kategori_pengeluaran,
+                            style: kOpenSans.copyWith(fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // TANGGAL/WAKTU
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Waktu : ",
+                            style: kOpenSans.copyWith(
+                                fontSize: 11, fontWeight: semibold),
+                          ),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            widget.data.tanggal_pengeluaran,
+                            style: kOpenSans.copyWith(fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // NAMA PENGELUARAN
-                Expanded(
-                  child: Text(
-                    data.nama_pengeluaran,
-                    style: kOpenSans.copyWith(fontSize: 12, fontWeight: bold),
-                  ),
-                ),
-                // NOMINAL
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Nominal : ",
-                        style: kOpenSans.copyWith(
-                            fontSize: 11, fontWeight: semibold),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        "- Rp. ${data.nominal_pengeluaran.toString()}",
-                        style: kOpenSans.copyWith(
-                            fontSize: 11,
-                            fontWeight: semibold,
-                            color: kSecondary),
-                      )
-                    ],
-                  ),
-                ),
-                // KATEGORI
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Kategori : ",
-                        style: kOpenSans.copyWith(
-                            fontSize: 11, fontWeight: semibold),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        data.kategori_pengeluaran,
-                        style: kOpenSans.copyWith(fontSize: 11),
-                      ),
-                    ],
-                  ),
-                ),
-                // TANGGAL/WAKTU
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Waktu : ",
-                        style: kOpenSans.copyWith(
-                            fontSize: 11, fontWeight: semibold),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        data.tanggal_pengeluaran,
-                        style: kOpenSans.copyWith(fontSize: 11),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          PopupMenuButton<Menu>(
+              // Callback that sets the selected popup menu item.
+              onSelected: (Menu item) {
+                switch (item) {
+                  case Menu.itemOne:
+                    //   var snapshot;
+                    //   Navigator.pushNamed(context, DetailPengeluaran.routeName,
+                    //       arguments: snapshot.data[index]);
+                    break;
+                  case Menu.itemTwo:
+                    // PengeluaranService().delete(data.id!).then((value) =>
+                    //     ScaffoldMessenger.of(context)
+                    //         .showSnackBar(const SnackBar(
+                    //       content: Text("Pengeluaran berhasil dihapus"),
+                    //       backgroundColor: kSuccess,
+                    //     )));
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //     context, RiwayatScreen.routeName, (route) => false);
+                    break;
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemOne,
+                      child: Text('Edit'),
+                    ),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemTwo,
+                      child: Text('Delete'),
+                    ),
+                  ])
         ],
       ),
     );
