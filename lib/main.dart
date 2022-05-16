@@ -10,7 +10,6 @@ import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,8 +36,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
-        '/riwayat': (context) => RiwayatScreen(),
         '/dashboard': (context) => DashboardScreen(),
+        '/riwayat': (context) => RiwayatScreen(),
         '/scan-struk': (context) => const ScanStruk(),
         '/validasi-scan': (context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran(),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:math' as math;
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
-import 'package:pawang_mobile/widgets/CardPengeluaran.dart';
 import 'package:pawang_mobile/widgets/CardPengeluaran2.dart';
 import 'package:pawang_mobile/widgets/IconBottom.dart';
 import 'package:pawang_mobile/widgets/LayananCard.dart';
@@ -76,27 +74,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                           ]),
                       InkWell(
-                        child: Transform.rotate(
-                          angle: 90 * math.pi / 180,
-                          child: Icon(
-                            Icons.file_upload_outlined,
-                            color: kWhite,
-                          ),
+                        child: const Icon(
+                          Icons.logout_rounded,
+                          color: kWhite,
                         ),
                         onTap: () {
                           showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
                                 return Container(
-                                  color: Color(0xFF737373),
+                                  color: const Color(0xFF737373),
                                   child: Container(
                                     height: 200,
                                     decoration: BoxDecoration(
                                         color: Theme.of(context).canvasColor,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: const Radius.circular(30),
-                                            topRight:
-                                                const Radius.circular(30))),
+                                        borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(30),
+                                            topRight: Radius.circular(30))),
                                     child: Center(
                                       child: Column(
                                         mainAxisAlignment:
@@ -110,7 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 fontWeight: bold,
                                                 fontSize: 16),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                           Text(
@@ -120,7 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 fontWeight: medium,
                                                 fontSize: 12),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                           Padding(
@@ -135,7 +129,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   style: ButtonStyle(
                                                     fixedSize:
                                                         MaterialStateProperty
-                                                            .all(Size(60, 30)),
+                                                            .all(const Size(
+                                                                60, 30)),
                                                     backgroundColor:
                                                         MaterialStateProperty
                                                             .all(kPurple),
@@ -199,10 +194,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 35),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 35),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -226,18 +222,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     decoration: BoxDecoration(
                       color: kWhite,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 0.5,
                           blurRadius: 0.5,
-                          offset: Offset(1, 3), // changes position of shadow
+                          offset:
+                              const Offset(1, 3), // changes position of shadow
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Column(
@@ -248,21 +245,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         style: kOpenSans.copyWith(
                             fontSize: 16, fontWeight: bold, color: kWhite),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          LayananCard(
+                          const LayananCard(
                             icon: 'assets/images/pemasukan.svg',
                             title: 'Pemasukan',
                           ),
-                          LayananCard(
+                          const LayananCard(
                             icon: 'assets/images/pengeluaran.svg',
                             title: 'Pengeluaran',
                           ),
-                          LayananCard(
+                          const LayananCard(
                             icon: 'assets/images/kategori.svg',
                             title: 'Kategori',
                           ),
@@ -270,7 +267,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
@@ -306,7 +303,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Expanded(
@@ -345,7 +342,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     return Expanded(
                                       child: Center(
                                           child: Text(
-                                        "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda.",
+                                        "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
                                         style: kOpenSans.copyWith(
                                             color: kGray,
                                             fontSize: 14,
@@ -358,7 +355,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   return Expanded(
                                     child: Center(
                                         child: Text(
-                                      "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda.",
+                                      "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
                                       style: kOpenSans.copyWith(
                                           color: kGray,
                                           fontSize: 14,
@@ -373,7 +370,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: kWhite,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(24),
