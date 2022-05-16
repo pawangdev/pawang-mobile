@@ -44,6 +44,7 @@ dependencies:
   path_provider: ^2.0.9
   intl: ^0.17.0
   dio: ^4.0.6
+  flutter_native_splash: ^2.1.6
 
 
 dev_dependencies:
@@ -66,6 +67,12 @@ flutter_icons:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_native_splash:
+  color: "#6C72CB"
+  image: assets/images/splash.png
+  android: true
+  ios: true
+
 # The following section is specific to Flutter.
 flutter:
 
@@ -76,6 +83,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/splash.png
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
