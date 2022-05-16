@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController Email = TextEditingController();
   final TextEditingController Password = TextEditingController();
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext) {
@@ -75,12 +78,42 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Your Password",
-                      inputController: Password,
-                    ),
-                  ),
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Your Password',
+                            style: kOpenSans.copyWith(
+                                fontWeight: bold, color: kBlack),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                                fillColor: Color(0xFFF5F5F5),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                    borderSide: BorderSide.none),
+                                focusColor: kPurple,
+                                suffixIcon: IconButton(
+                                    color: kGray,
+                                    icon: Icon(_isObscure
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isObscure = !_isObscure;
+                                      });
+                                    })),
+                            autofocus: false,
+                            obscureText: _isObscure,
+                          ),
+                        ],
+                      )),
                   SizedBox(
                     height: 30,
                   ),
@@ -88,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                        Navigator.pushNamed(context, DashboardScreen.routeName);
                       },
                       child: Text(
                         "Masuk",
@@ -159,22 +192,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    height: 20,
-                    width: 20,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                  InkWell(
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: kWhite,
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey.shade600,
-                              blurRadius: 20,
-                              spreadRadius: 1,
-                              offset: Offset(1, 1))
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 0.5,
+                            blurRadius: 1,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Wrap(children: [
+                          Image.asset('assets/images/google.png')
                         ]),
-                    child: SvgPicture.asset(
-                      'assets/images/scan_btn.svg',
-                      color: kError,
+                      ),
                     ),
+                    onTap: () {},
                   ),
                 ],
               ),
