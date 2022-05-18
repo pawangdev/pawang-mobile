@@ -98,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: <Widget>[
                                           Text(
-                                            'Keluar?',
+                                            'Keluar',
                                             style: kOpenSans.copyWith(
                                                 color: kBlack,
                                                 fontWeight: bold,
@@ -144,7 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    'Yes',
+                                                    'Ya',
                                                     style: kOpenSans.copyWith(
                                                         color: kWhite,
                                                         fontWeight: semibold,
@@ -158,7 +158,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 ),
                                                 OutlinedButton(
                                                   child: Text(
-                                                    "No",
+                                                    "Tidak",
                                                     style: kOpenSans.copyWith(
                                                         fontSize: 14,
                                                         fontWeight: bold,
@@ -284,23 +284,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       margin:
                           const EdgeInsets.only(left: 32, right: 32, top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Riwayat',
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, fontWeight: bold, color: kBlack),
-                          ),
-                          InkWell(
-                            child: Text('Lihat detail',
-                                style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: medium,
-                                    color: kPurple)),
-                            onTap: () {},
-                          ),
-                        ],
+                      child: Text(
+                        'Riwayat',
+                        style: kOpenSans.copyWith(
+                            fontSize: 16, fontWeight: bold, color: kBlack),
                       ),
                     ),
                     const SizedBox(

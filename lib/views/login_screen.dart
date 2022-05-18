@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: InputField(
-                      inputLabel: "Your Email",
+                      inputLabel: "Email",
                       inputController: Email,
                     ),
                   ),
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Your Password',
+                            'Password',
                             style: kOpenSans.copyWith(
                                 fontWeight: bold, color: kBlack),
                           ),

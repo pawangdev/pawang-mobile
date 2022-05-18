@@ -52,6 +52,22 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // OutlinedButton(
+                      //   child: Icon(
+                      //     Icons.arrow_back_ios_rounded,
+                      //     size: 12,
+                      //     color: kPurple,
+                      //   ),
+                      //   onPressed: () {
+                      //     Navigator.pop(context);
+                      //   },
+                      //   style: OutlinedButton.styleFrom(
+                      //     padding: EdgeInsets.all(6),
+                      //     side: const BorderSide(color: kPurple),
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(8)),
+                      //   ),
+                      // ),
                       InkWell(
                         child: Container(
                           width: 32,
@@ -381,52 +397,45 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
               margin: EdgeInsets.only(bottom: 32),
               child: Center(
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // LIHAT STRUK
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, DetailImageStrukScreen.routeName,
-                              arguments: data.filePath);
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
-                            ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/receipt_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // EDIT DATA
-                      ElevatedButton(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
                         onPressed: () => updateData(data),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.edit_rounded,
+                              size: 20,
                             ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/edit_btn.svg',
-                          fit: BoxFit.cover,
+                            SizedBox(width: 10),
+                            Text(
+                              "Ubah Data",
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, fontWeight: medium),
+                            ),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
                         ),
                       ),
-                      // DELETE DATA
-                      ElevatedButton(
-                        onPressed: () => {
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
                           showDialog<void>(
                             context: context,
                             barrierDismissible: false,
@@ -434,12 +443,15 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               title: const Text('Hapus Pengeluaran'),
                               content: const Text(
                                   'Apakah kamu yakin akan menghapus pengeluaran ini?'),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(context, 'Kembali'),
-                                  child: Text('Kembali', style: kOpenSans.copyWith(color: kPurple)),
+                                  child: Text('Kembali',
+                                      style:
+                                          kOpenSans.copyWith(color: kPurple)),
                                 ),
                                 TextButton(
                                   onPressed: () => {
@@ -455,28 +467,141 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                         RiwayatScreen.routeName,
                                         (route) => false)
                                   },
-                                  child: Text('Hapus', style: kOpenSans.copyWith(color: kPurple)),
+                                  child: Text('Hapus',
+                                      style:
+                                          kOpenSans.copyWith(color: kPurple)),
                                 ),
                               ],
                             ),
-                          ),
+                          );
                         },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.delete_rounded,
+                              size: 20,
                             ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/delete_btn.svg',
-                          fit: BoxFit.cover,
+                            SizedBox(width: 10),
+                            Text(
+                              "Hapus Data",
+                              style: kOpenSans.copyWith(
+                                  fontSize: 15, fontWeight: medium),
+                            ),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
                         ),
                       ),
-                    ]),
+                    ),
+                  ],
+                ),
+                // LIHAT STRUK
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Navigator.pushNamed(
+                //         context, DetailImageStrukScreen.routeName,
+                //         arguments: data.filePath);
+                //   },
+                //   style: ButtonStyle(
+                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       shape: MaterialStateProperty.all(
+                //         RoundedRectangleBorder(
+                //           borderRadius:
+                //               BorderRadius.circular(kDefaultBorderRadius),
+                //         ),
+                //       ),
+                //       padding:
+                //           MaterialStateProperty.all(EdgeInsets.all(12))),
+                //   child: SvgPicture.asset(
+                //     'assets/images/receipt_btn.svg',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
+                // // EDIT DATA
+                // ElevatedButton(
+                //   onPressed: () => updateData(data),
+                //   style: ButtonStyle(
+                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       shape: MaterialStateProperty.all(
+                //         RoundedRectangleBorder(
+                //           borderRadius:
+                //               BorderRadius.circular(kDefaultBorderRadius),
+                //         ),
+                //       ),
+                //       padding:
+                //           MaterialStateProperty.all(EdgeInsets.all(12))),
+                //   child: SvgPicture.asset(
+                //     'assets/images/edit_btn.svg',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
+                // // DELETE DATA
+                // ElevatedButton(
+                //   onPressed: () => {
+                //     showDialog<void>(
+                //       context: context,
+                //       barrierDismissible: false,
+                //       builder: (BuildContext context) => AlertDialog(
+                //         title: const Text('Hapus Pengeluaran'),
+                //         content: const Text(
+                //             'Apakah kamu yakin akan menghapus pengeluaran ini?'),
+                //         shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(8)),
+                //         actions: <Widget>[
+                //           TextButton(
+                //             onPressed: () =>
+                //                 Navigator.pop(context, 'Kembali'),
+                //             child: Text('Kembali',
+                //                 style:
+                //                     kOpenSans.copyWith(color: kPurple)),
+                //           ),
+                //           TextButton(
+                //             onPressed: () => {
+                //               PengeluaranService().delete(data.id!).then(
+                //                   (value) => ScaffoldMessenger.of(context)
+                //                           .showSnackBar(const SnackBar(
+                //                         content: Text(
+                //                             "Pengeluaran berhasil dihapus"),
+                //                         backgroundColor: kSuccess,
+                //                       ))),
+                //               Navigator.pushNamedAndRemoveUntil(
+                //                   context,
+                //                   RiwayatScreen.routeName,
+                //                   (route) => false)
+                //             },
+                //             child: Text('Hapus',
+                //                 style:
+                //                     kOpenSans.copyWith(color: kPurple)),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   },
+                //   style: ButtonStyle(
+                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       shape: MaterialStateProperty.all(
+                //         RoundedRectangleBorder(
+                //           borderRadius:
+                //               BorderRadius.circular(kDefaultBorderRadius),
+                //         ),
+                //       ),
+                //       padding:
+                //           MaterialStateProperty.all(EdgeInsets.all(12))),
+                //   child: SvgPicture.asset(
+                //     'assets/images/delete_btn.svg',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
+                // ]),
               ),
             ),
           ],
