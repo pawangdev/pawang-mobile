@@ -143,39 +143,12 @@ class _ScanStrukState extends State<ScanStruk> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: kPurple),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/images/back_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    Text(
-                      "Scan Struk",
-                      style: kOpenSans.copyWith(
-                          fontSize: 16, fontWeight: bold, color: kBlack),
-                    ),
-                    Container(
-                      width: 22,
-                      height: 32,
-                      padding: EdgeInsets.all(6),
-                    ),
-                  ],
+                Center(
+                  child: Text(
+                    "Scan Struk",
+                    style: kOpenSans.copyWith(
+                        fontSize: 16, fontWeight: bold, color: kBlack),
+                  ),
                 ),
                 const SizedBox(
                   height: 33,

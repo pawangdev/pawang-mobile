@@ -8,6 +8,7 @@ import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class DetailPengeluaran extends StatefulWidget {
   static const String routeName = "/detail";
@@ -52,40 +53,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // OutlinedButton(
-                      //   child: Icon(
-                      //     Icons.arrow_back_ios_rounded,
-                      //     size: 12,
-                      //     color: kPurple,
-                      //   ),
-                      //   onPressed: () {
-                      //     Navigator.pop(context);
-                      //   },
-                      //   style: OutlinedButton.styleFrom(
-                      //     padding: EdgeInsets.all(6),
-                      //     side: const BorderSide(color: kPurple),
-                      //     shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(8)),
-                      //   ),
-                      // ),
-                      InkWell(
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kPurple),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                      IconBack(PurpleMode: true),
                       Text(
                         "Edit Pengeluaran",
                         style: kOpenSans.copyWith(
@@ -269,26 +237,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: InkWell(
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            color: Colors.white,
-                            fit: BoxFit.cover,
-                          ),
-                          onTap: () => {
-                            Navigator.pushNamed(
-                                context, RiwayatScreen.routeName)
-                          },
-                        ),
-                      ),
+                      IconBack(PurpleMode: false),
                       Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
