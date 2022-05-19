@@ -4,6 +4,7 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/models/PengeluaranModel.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 
@@ -139,37 +140,6 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
               ),
             ],
           ),
-          PopupMenuButton<Menu>(
-              // Callback that sets the selected popup menu item.
-              onSelected: (Menu item) {
-                switch (item) {
-                  case Menu.itemOne:
-                    //   var snapshot;
-                    //   Navigator.pushNamed(context, DetailPengeluaran.routeName,
-                    //       arguments: snapshot.data[index]);
-                    break;
-                  case Menu.itemTwo:
-                    // PengeluaranService().delete(data.id!).then((value) =>
-                    //     ScaffoldMessenger.of(context)
-                    //         .showSnackBar(const SnackBar(
-                    //       content: Text("Pengeluaran berhasil dihapus"),
-                    //       backgroundColor: kSuccess,
-                    //     )));
-                    // Navigator.pushNamedAndRemoveUntil(
-                    //     context, RiwayatScreen.routeName, (route) => false);
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemOne,
-                      child: Text('Edit'),
-                    ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemTwo,
-                      child: Text('Delete'),
-                    ),
-                  ])
         ],
       ),
     );

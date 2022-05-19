@@ -79,82 +79,68 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                   height: 31,
                 ),
                 Row(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 170,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.add_rounded,
-                            color: kWhite,
-                            size: 14,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 6),
-                            child: Text(
-                              'Tambah Pemasukan',
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.add_rounded,
+                              size: 20,
+                            ),
+                            Text(
+                              "Tambah Pemasukan",
                               style: kOpenSans.copyWith(
-                                color: kWhite,
-                                fontWeight: semibold,
-                                fontSize: 11,
-                              ),
+                                  fontSize: 11, fontWeight: bold),
+                            ),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        color: kPurple,
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            spreadRadius: 0.5,
-                            blurRadius: 0.5,
-                            offset: Offset(0, 2), // changes position of shadow
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    Container(
-                      width: 170,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.add_rounded,
-                            color: kWhite,
-                            size: 14,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 6),
-                            child: Text(
-                              'Tambah Pengeluaran',
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.add_rounded,
+                              size: 20,
+                            ),
+                            Text(
+                              "Tambah Pengeluaran",
                               style: kOpenSans.copyWith(
-                                color: kWhite,
-                                fontWeight: semibold,
-                                fontSize: 11,
-                              ),
+                                  fontSize: 11, fontWeight: bold),
+                            ),
+                          ],
+                        ),
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        color: kPurple,
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            spreadRadius: 0.5,
-                            blurRadius: 0.5,
-                            offset: Offset(0, 2), // changes position of shadow
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],

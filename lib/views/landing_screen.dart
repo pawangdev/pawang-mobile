@@ -4,7 +4,7 @@ import 'package:pawang_mobile/views/login_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 
 class LandingScreen extends StatelessWidget {
-  static const String routeName = '/';
+  static const String routeName = '/landing';
   const LandingScreen({Key? key}) : super(key: key);
 
   @override
