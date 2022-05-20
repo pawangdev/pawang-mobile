@@ -7,6 +7,8 @@ import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
+import 'package:pawang_mobile/views/tambah_pemasukan.dart';
+import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/widgets/CardPengeluaran.dart';
 import 'package:pawang_mobile/widgets/IconBottom.dart';
 
@@ -57,7 +59,10 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, TambahPemasukanScreen.routeName);
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -89,7 +94,10 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, TambahPengeluaranScreen.routeName);
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

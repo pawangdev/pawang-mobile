@@ -7,12 +7,14 @@ class InputField extends StatelessWidget {
       required this.inputLabel,
       required this.inputController,
       this.enable = true,
+      this.readOnly = false,
       this.errorText,
       this.onTap,
       this.keyboardType})
       : super(key: key);
   final String inputLabel;
   final bool enable;
+  final bool readOnly;
   final TextEditingController inputController;
   final String? errorText;
   final Function()? onTap;
@@ -30,6 +32,7 @@ class InputField extends StatelessWidget {
           height: 10,
         ),
         TextField(
+          readOnly: readOnly,
           enabled: enable,
           keyboardType: keyboardType,
           onTap: onTap,
