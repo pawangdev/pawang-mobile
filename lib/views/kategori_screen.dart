@@ -66,7 +66,7 @@ class KategoriScreen extends StatelessWidget {
               height: 20,
             ),
             Container(
-              margin: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
+              margin: const EdgeInsets.all(30),
               height: 80,
               decoration: BoxDecoration(
                 color: kWhite,
@@ -88,12 +88,13 @@ class KategoriScreen extends StatelessWidget {
                     children: [
                       // ICON
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.only(left: 20.0, right: 12),
                         child: SvgPicture.asset(
                           'assets/images/makan_kategori.svg',
                           fit: BoxFit.cover,
                         ),
                       ),
+
                       Expanded(
                         child: Text(
                           "Nama Kategori",
