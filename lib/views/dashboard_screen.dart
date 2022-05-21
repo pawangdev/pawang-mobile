@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
@@ -251,17 +252,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const LayananCard(
+                          LayananCard(
                             icon: 'assets/images/pemasukan.svg',
                             title: 'Pemasukan',
+                            onTap: () {},
                           ),
-                          const LayananCard(
+                          LayananCard(
                             icon: 'assets/images/pengeluaran.svg',
                             title: 'Pengeluaran',
+                            onTap: () {},
                           ),
-                          const LayananCard(
+                          LayananCard(
                             icon: 'assets/images/kategori.svg',
                             title: 'Kategori',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, KategoriScreen.routeName);
+                            },
                           ),
                         ],
                       )

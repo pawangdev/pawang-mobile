@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 
 class LayananCard extends StatelessWidget {
-  const LayananCard({Key? key, required this.icon, required this.title})
+  const LayananCard(
+      {Key? key, required this.icon, required this.title, required this.onTap})
       : super(key: key);
   final String icon;
   final String title;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext) {
@@ -34,7 +36,7 @@ class LayananCard extends StatelessWidget {
               ),
             ),
           ),
-          onTap: () {},
+          onTap: onTap,
         ),
         SizedBox(
           height: 10,
