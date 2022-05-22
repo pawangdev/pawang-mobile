@@ -11,6 +11,8 @@ import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/splash_screen.dart';
+import 'package:pawang_mobile/views/tambah_pemasukan.dart';
+import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 
 void main() {
@@ -42,6 +44,8 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => DashboardScreen(),
         '/riwayat': (context) => RiwayatScreen(),
         '/kategori': (context) => KategoriScreen(),
+        '/tambah-pemasukan': (context) => TambahPemasukanScreen(),
+        '/tambah-pengeluaran': (context) => TambahPengeluaranScreen(),
         '/scan-struk': (context) => const ScanStruk(),
         '/validasi-scan': (context) => const ValidasiScanScreen(),
         '/detail': (context) => const DetailPengeluaran(),
