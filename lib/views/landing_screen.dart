@@ -22,10 +22,14 @@ class LandingScreen extends StatelessWidget {
               width: double.infinity,
               height: bodyHeight * 0.65,
               decoration: BoxDecoration(
-                  color: kPurple,
+                  color: kPrimary,
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(64),
-                      bottomLeft: Radius.circular(64))),
+                      bottomLeft: Radius.circular(64)),
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [kPrimary, Colors.blue.withOpacity(0.8)])),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -89,7 +93,7 @@ class LandingScreen extends StatelessWidget {
                                 fixedSize:
                                     MaterialStateProperty.all(Size(100, 50)),
                                 backgroundColor:
-                                    MaterialStateProperty.all(kPurple),
+                                    MaterialStateProperty.all(kPrimary),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -109,7 +113,7 @@ class LandingScreen extends StatelessWidget {
                                 style: kOpenSans.copyWith(
                                     fontSize: 16,
                                     fontWeight: bold,
-                                    color: kPurple),
+                                    color: kPrimary),
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -118,7 +122,7 @@ class LandingScreen extends StatelessWidget {
                               style: OutlinedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
-                                side: const BorderSide(color: kPurple),
+                                side: BorderSide(color: kPrimary),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),
                               ),

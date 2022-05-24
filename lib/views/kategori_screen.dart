@@ -18,8 +18,8 @@ class KategoriScreen extends StatelessWidget {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: const BoxDecoration(
-                    color: kPurple,
+                  decoration: BoxDecoration(
+                    color: kPrimary,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
@@ -118,10 +118,10 @@ class KategoriScreen extends StatelessWidget {
           backgroundColor: kWhite,
           onPressed: () {},
           tooltip: 'Tambah Kategori',
-          splashColor: kPurple,
-          child: const Icon(
+          splashColor: kPrimary,
+          child: Icon(
             Icons.add,
-            color: kPurple,
+            color: kPrimary,
           ),
         ),
       ),

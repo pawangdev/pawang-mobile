@@ -56,7 +56,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                       height: 32,
                       padding: EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        border: Border.all(color: kPurple),
+                        border: Border.all(color: kPrimary),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: SvgPicture.asset(
@@ -150,7 +150,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                           padding: MaterialStateProperty.all(
                             EdgeInsets.symmetric(vertical: 15),
                           ),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius:

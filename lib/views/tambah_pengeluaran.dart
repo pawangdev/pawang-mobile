@@ -113,7 +113,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                           padding: MaterialStateProperty.all(
                             EdgeInsets.symmetric(vertical: 15),
                           ),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius:

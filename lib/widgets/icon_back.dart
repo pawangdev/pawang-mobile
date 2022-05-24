@@ -18,13 +18,13 @@ class IconBack extends StatelessWidget {
               height: 32,
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                border: Border.all(color: kPurple),
+                border: Border.all(color: kPrimary),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 12,
-                color: kPurple,
+                color: kPrimary,
               ),
             ),
             onTap: () {

@@ -186,7 +186,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                       }
                     },
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(kPurple),
+                        backgroundColor: MaterialStateProperty.all(kPrimary),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius:
@@ -223,8 +223,8 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: const BoxDecoration(
-                    color: kPurple,
+                  decoration: BoxDecoration(
+                    color: kPrimary,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
@@ -370,7 +370,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                         style: ButtonStyle(
                           padding:
                               MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -400,7 +400,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                       Navigator.pop(context, 'Kembali'),
                                   child: Text('Kembali',
                                       style:
-                                          kOpenSans.copyWith(color: kPurple)),
+                                          kOpenSans.copyWith(color: kPrimary)),
                                 ),
                                 TextButton(
                                   onPressed: () => {
@@ -418,7 +418,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                   },
                                   child: Text('Hapus',
                                       style:
-                                          kOpenSans.copyWith(color: kPurple)),
+                                          kOpenSans.copyWith(color: kPrimary)),
                                 ),
                               ],
                             ),
@@ -442,7 +442,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                         style: ButtonStyle(
                           padding:
                               MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -461,7 +461,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 //         arguments: data.filePath);
                 //   },
                 //   style: ButtonStyle(
-                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       backgroundColor: MaterialStateProperty.all(kPrimary),
                 //       shape: MaterialStateProperty.all(
                 //         RoundedRectangleBorder(
                 //           borderRadius:
@@ -479,7 +479,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 // ElevatedButton(
                 //   onPressed: () => updateData(data),
                 //   style: ButtonStyle(
-                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       backgroundColor: MaterialStateProperty.all(kPrimary),
                 //       shape: MaterialStateProperty.all(
                 //         RoundedRectangleBorder(
                 //           borderRadius:
@@ -511,7 +511,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 //                 Navigator.pop(context, 'Kembali'),
                 //             child: Text('Kembali',
                 //                 style:
-                //                     kOpenSans.copyWith(color: kPurple)),
+                //                     kOpenSans.copyWith(color: kPrimary)),
                 //           ),
                 //           TextButton(
                 //             onPressed: () => {
@@ -529,14 +529,14 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 //             },
                 //             child: Text('Hapus',
                 //                 style:
-                //                     kOpenSans.copyWith(color: kPurple)),
+                //                     kOpenSans.copyWith(color: kPrimary)),
                 //           ),
                 //         ],
                 //       ),
                 //     ),
                 //   },
                 //   style: ButtonStyle(
-                //       backgroundColor: MaterialStateProperty.all(kPurple),
+                //       backgroundColor: MaterialStateProperty.all(kPrimary),
                 //       shape: MaterialStateProperty.all(
                 //         RoundedRectangleBorder(
                 //           borderRadius:

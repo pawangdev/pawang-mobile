@@ -199,7 +199,7 @@ class _ScanStrukState extends State<ScanStruk> {
                               ),
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all(kPurple),
+                                      MaterialStateProperty.all(kPrimary),
                                   padding: MaterialStateProperty.all(
                                       const EdgeInsets.all(14)),
                                   shape: MaterialStateProperty.all(
@@ -248,13 +248,13 @@ class _ScanStrukState extends State<ScanStruk> {
                                   style: kOpenSans.copyWith(
                                       fontSize: 16,
                                       fontWeight: bold,
-                                      color: kPurple),
+                                      color: kPrimary),
                                 ),
                                 onPressed: () => getImage(true),
                                 style: OutlinedButton.styleFrom(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
-                                  side: const BorderSide(color: kPurple),
+                                  side: BorderSide(color: kPrimary),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12)),
                                 ),
@@ -274,7 +274,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                 style: kOpenSans.copyWith(
                                     fontSize: 16,
                                     fontWeight: bold,
-                                    color: kPurple),
+                                    color: kPrimary),
                               ),
                               onPressed: () {
                                 setState(() {
@@ -286,7 +286,7 @@ class _ScanStrukState extends State<ScanStruk> {
                               style: OutlinedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
-                                side: const BorderSide(color: kPurple),
+                                side: BorderSide(color: kPrimary),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         kDefaultBorderRadius)),
@@ -307,7 +307,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                       EdgeInsets.symmetric(vertical: 12),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all(kPurple),
+                                        MaterialStateProperty.all(kPrimary),
                                     shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(

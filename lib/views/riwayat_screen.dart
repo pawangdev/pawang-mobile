@@ -80,7 +80,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         style: ButtonStyle(
                           padding:
                               MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -115,7 +115,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         style: ButtonStyle(
                           padding:
                               MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor: MaterialStateProperty.all(kPurple),
+                          backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

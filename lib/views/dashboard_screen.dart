@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
@@ -7,6 +8,8 @@ import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
+import 'package:pawang_mobile/views/tambah_pemasukan.dart';
+import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/widgets/CardPengeluaran2.dart';
 import 'package:pawang_mobile/widgets/IconBottom.dart';
 import 'package:pawang_mobile/widgets/LayananCard.dart';
@@ -38,15 +41,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<int> list = [1, 2, 3, 4, 5];
     return Scaffold(
-        backgroundColor: kPurple,
+        backgroundColor: kPrimary,
         body: Stack(children: <Widget>[
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
-              child: Column(
-                children: [
-                  Row(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -134,7 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                 60, 30)),
                                                     backgroundColor:
                                                         MaterialStateProperty
-                                                            .all(kPurple),
+                                                            .all(kPrimary),
                                                     shape: MaterialStateProperty
                                                         .all(
                                                       RoundedRectangleBorder(
@@ -163,7 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     style: kOpenSans.copyWith(
                                                         fontSize: 14,
                                                         fontWeight: bold,
-                                                        color: kPurple),
+                                                        color: kPrimary),
                                                   ),
                                                   onPressed: () {
                                                     Navigator.pop(context);
@@ -172,8 +176,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       OutlinedButton.styleFrom(
                                                     padding: const EdgeInsets
                                                         .symmetric(vertical: 4),
-                                                    side: const BorderSide(
-                                                        color: kPurple),
+                                                    side: BorderSide(
+                                                        color: kPrimary),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                             borderRadius:
@@ -195,50 +199,103 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 35),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Saldo',
-                          style: kOpenSans.copyWith(
-                            color: kBlack,
-                            fontWeight: medium,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          'Rp. XXXXXXXX',
-                          style: kOpenSans.copyWith(
-                            color: kBlack,
-                            fontWeight: bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: kWhite,
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 0.5,
-                          blurRadius: 0.5,
-                          offset:
-                              const Offset(1, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
+                ),
+                const SizedBox(height: 15),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    disableCenter: true,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
+                  items: list
+                      .map((item) => Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 40),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Saldo',
+                                    style: kOpenSans.copyWith(
+                                      color: kBlack,
+                                      fontWeight: medium,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp. XXX.XXX.XXX',
+                                    style: kOpenSans.copyWith(
+                                      color: kBlack,
+                                      fontWeight: bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: kWhite,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  spreadRadius: 0.5,
+                                  blurRadius: 0.5,
+                                  offset: const Offset(
+                                      1, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ))
+                      .toList(),
+                ),
+                // Container(
+                //   width: double.infinity,
+                //   padding: const EdgeInsets.symmetric(
+                //       horizontal: 24, vertical: 35),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Text(
+                //         'Saldo',
+                //         style: kOpenSans.copyWith(
+                //           color: kBlack,
+                //           fontWeight: medium,
+                //           fontSize: 16,
+                //         ),
+                //       ),
+                //       Text(
+                //         'Rp. XXXXXXXX',
+                //         style: kOpenSans.copyWith(
+                //           color: kBlack,
+                //           fontWeight: bold,
+                //           fontSize: 18,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: kWhite,
+                //     borderRadius: const BorderRadius.all(Radius.circular(12)),
+                //     boxShadow: [
+                //       BoxShadow(
+                //         color: Colors.black.withOpacity(0.3),
+                //         spreadRadius: 0.5,
+                //         blurRadius: 0.5,
+                //         offset:
+                //             const Offset(1, 3), // changes position of shadow
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 32, right: 32),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -255,12 +312,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           LayananCard(
                             icon: 'assets/images/pemasukan.svg',
                             title: 'Pemasukan',
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, TambahPemasukanScreen.routeName);
+                            },
                           ),
                           LayananCard(
                             icon: 'assets/images/pengeluaran.svg',
                             title: 'Pengeluaran',
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, TambahPengeluaranScreen.routeName);
+                            },
                           ),
                           LayananCard(
                             icon: 'assets/images/kategori.svg',
@@ -274,15 +337,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 30),
-                ],
-              ),
+                ),
+                const SizedBox(height: 30),
+              ],
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.45,
-            minChildSize: 0.45,
-            maxChildSize: 0.65,
+            initialChildSize: 0.35,
+            minChildSize: 0.35,
+            maxChildSize: 0.55,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 child: Column(

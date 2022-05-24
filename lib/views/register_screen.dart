@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 32,
                           padding: EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            border: Border.all(color: kPurple),
+                            border: Border.all(color: kPrimary),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: SvgPicture.asset(
@@ -99,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderRadius: BorderRadius.circular(
                                         kDefaultBorderRadius),
                                     borderSide: BorderSide.none),
-                                focusColor: kPurple,
+                                focusColor: kPrimary,
                                 suffixIcon: IconButton(
                                     color: kGray,
                                     icon: Icon(_isObscure
@@ -136,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderRadius: BorderRadius.circular(
                                         kDefaultBorderRadius),
                                     borderSide: BorderSide.none),
-                                focusColor: kPurple,
+                                focusColor: kPrimary,
                                 suffixIcon: IconButton(
                                     color: kGray,
                                     icon: Icon(_isObscure
@@ -166,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       style: ButtonStyle(
                         fixedSize: MaterialStateProperty.all(Size(100, 50)),
-                        backgroundColor: MaterialStateProperty.all(kPurple),
+                        backgroundColor: MaterialStateProperty.all(kPrimary),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -185,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextButton(
                           child: Text('Masuk',
                               style: kOpenSans.copyWith(
-                                  color: kPurple, fontWeight: bold)),
+                                  color: kPrimary, fontWeight: bold)),
                           onPressed: () {
                             Navigator.pushNamed(context, LoginScreen.routeName);
                           }),

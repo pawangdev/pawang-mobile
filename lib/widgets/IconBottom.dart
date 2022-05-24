@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 
 class IconBottomBar extends StatelessWidget {
-  const IconBottomBar(
+  IconBottomBar(
       {Key? key,
       required this.text,
       required this.icon,
@@ -15,7 +15,7 @@ class IconBottomBar extends StatelessWidget {
   final bool selected;
   final Function() onPressed;
 
-  final primaryColor = kPurple;
+  final primaryColor = kPrimary;
 
   @override
   Widget build(BuildContext context) {

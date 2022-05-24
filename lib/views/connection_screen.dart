@@ -74,7 +74,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                           fontSize: 16, fontWeight: bold, color: kWhite),
                     ),
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(kPurple),
+                        backgroundColor: MaterialStateProperty.all(kPrimary),
                         padding:
                             MaterialStateProperty.all(const EdgeInsets.all(18)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
