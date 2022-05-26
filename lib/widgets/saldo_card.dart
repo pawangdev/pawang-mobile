@@ -1,47 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 
-class SaldoCard extends StatelessWidget {
+class WalletCard extends StatelessWidget {
+  final String name;
+  final double balance;
+  final color;
+
+  const WalletCard(
+      {Key? key, required this.name, required this.balance, this.color})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Saldo',
-              style: kOpenSans.copyWith(
-                color: kBlack,
-                fontWeight: medium,
-                fontSize: 16,
-              ),
-            ),
-            Text(
-              'Rp. XXXXXXXX',
-              style: kOpenSans.copyWith(
-                color: kBlack,
-                fontWeight: bold,
-                fontSize: 18,
-              ),
-            ),
-          ],
+    return Container(
+      width: 300,
+      padding: EdgeInsets.all(25.0),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          name,
+          style: kOpenSans.copyWith(
+            color: kBlack,
+            fontWeight: medium,
+            fontSize: 16,
+          ),
         ),
-        decoration: BoxDecoration(
-          color: kWhite,
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              spreadRadius: 0.5,
-              blurRadius: 0.5,
-              offset: const Offset(1, 3), // changes position of shadow
-            ),
-          ],
+        Text(
+          'Rp. ' + balance.toString(),
+          style: kOpenSans.copyWith(
+            color: kBlack,
+            fontWeight: bold,
+            fontSize: 18,
+          ),
         ),
-      ),
+      ]),
     );
   }
 }

@@ -16,29 +16,39 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 10), () {
-      Navigator.pushNamed(context, LandingScreen.routeName);
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LandingScreen.routeName,
+        (route) => false,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kPrimary,
-        body: Center(
-          child: Container(
-              width: 170,
-              height: 170,
-              child: Image.asset('assets/images/splash.png')),
-        ),
-        bottomNavigationBar: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'v.1.0.0',
-              style: kOpenSans.copyWith(color: kWhite, fontWeight: semibold),
-            ),
-          ],
-        ));
+      backgroundColor: kPrimary,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+                width: 170,
+                height: 170,
+                child: Image.asset('assets/images/splash.png')),
+          ),
+          Stack(
+            alignment: AlignmentDirectional.centerEnd,
+            children: [
+              Text(
+                'v.1.0.0',
+                style: kOpenSans.copyWith(color: kWhite, fontWeight: semibold),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
