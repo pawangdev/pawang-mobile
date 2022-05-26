@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pawang_mobile/views/add_category.dart';
+import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/connection_screen.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
@@ -15,6 +17,7 @@ import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pawang_mobile/views/wallet_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => DashboardScreen(),
         '/riwayat': (context) => RiwayatScreen(),
         '/kategori': (context) => KategoriScreen(),
+        '/dompet': (context) => WalletScreen(),
+        '/tambah-kategori': (context) => AddCategoryScreen(),
+        '/tambah-dompet': (context) => AddWalletScreen(),
         '/tambah-pemasukan': (context) => TambahPemasukanScreen(),
         '/tambah-pengeluaran': (context) => TambahPengeluaranScreen(),
         '/scan-struk': (context) => const ScanStruk(),

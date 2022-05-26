@@ -3,19 +3,17 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
-class TambahPemasukanScreen extends StatefulWidget {
-  static const String routeName = '/tambah-pemasukan';
-  const TambahPemasukanScreen({Key? key}) : super(key: key);
+class AddWalletScreen extends StatefulWidget {
+  static const String routeName = '/tambah-dompet';
+  const AddWalletScreen({Key? key}) : super(key: key);
 
   @override
-  State<TambahPemasukanScreen> createState() => _TambahPemasukanScreenState();
+  State<AddWalletScreen> createState() => _AddWalletScreenState();
 }
 
-class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
-  final TextEditingController nama_pemasukan = TextEditingController();
-  final TextEditingController nominal_pemasukan = TextEditingController();
-  final TextEditingController kategori_pemasukan = TextEditingController();
-  final TextEditingController tanggal_pemasukan = TextEditingController();
+class _AddWalletScreenState extends State<AddWalletScreen> {
+  final TextEditingController nama_dompet = TextEditingController();
+  final TextEditingController icon_kategori = TextEditingController();
   bool _inputData = true;
 
   @override
@@ -33,7 +31,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                 children: [
                   IconBack(PurpleMode: true),
                   Text(
-                    "Tambah Pemasukan",
+                    "Tambah Dompet",
                     style: kOpenSans.copyWith(
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
@@ -50,44 +48,17 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 child: InputField(
-                  inputLabel: "Nama Pemasukan",
-                  inputController: nama_pemasukan,
-                  errorText: _inputData ? null : 'Nama Pemasukan wajib diisi',
+                  inputLabel: "Nama Dompet",
+                  inputController: nama_dompet,
+                  errorText: _inputData ? null : 'Nama Kategori wajib diisi',
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 child: InputField(
-                  inputLabel: "Nominal",
-                  inputController: nominal_pemasukan,
-                  errorText: _inputData ? null : 'Nominal wajib diisi',
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Kategori",
-                  inputController: kategori_pemasukan,
-                  errorText: _inputData ? null : 'Kategori wajib diisi',
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Tanggal",
-                  inputController: tanggal_pemasukan,
-                  errorText: _inputData ? null : 'Tanggal wajib diisi',
-                  enable: true,
-                  readOnly: true,
-                  keyboardType: TextInputType.none,
-                  onTap: () {
-                    showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2099))
-                        .then((date) {});
-                  },
+                  inputLabel: "Icon",
+                  inputController: icon_kategori,
+                  errorText: _inputData ? null : 'Icon wajib diisi',
                 ),
               ),
               Expanded(
@@ -110,7 +81,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                         ),
                         onPressed: () {},
                         child: Text(
-                          "Simpan Pemasukan",
+                          "Tambah Dompet",
                           style: kOpenSans.copyWith(
                             fontSize: 16,
                             fontWeight: bold,

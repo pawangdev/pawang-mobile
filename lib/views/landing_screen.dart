@@ -27,9 +27,9 @@ class LandingScreen extends StatelessWidget {
                       bottomRight: Radius.circular(64),
                       bottomLeft: Radius.circular(64)),
                   gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [kPrimary, Colors.blue.withOpacity(0.8)])),
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [kPrimary, kPurple])),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -72,13 +72,14 @@ class LandingScreen extends StatelessWidget {
                     height: 30,
                   ),
                   SizedBox(
-                    width: 200,
+                    width: 320,
                     height: 130,
                     child: Container(
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: double.infinity,
+                            width: 150,
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -106,7 +107,7 @@ class LandingScreen extends StatelessWidget {
                             height: 10,
                           ),
                           SizedBox(
-                            width: double.infinity,
+                            width: 150,
                             child: OutlinedButton(
                               child: Text(
                                 "Daftar",

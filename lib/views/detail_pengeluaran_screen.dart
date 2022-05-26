@@ -224,12 +224,14 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.11,
                   decoration: BoxDecoration(
-                    color: kPrimary,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                      ),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [kPrimary, kPurple])),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 28, left: 32),

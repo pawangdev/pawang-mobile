@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/views/add_category.dart';
+import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
-class KategoriScreen extends StatelessWidget {
-  static const String routeName = "/kategori";
-  const KategoriScreen({Key? key}) : super(key: key);
+class WalletScreen extends StatelessWidget {
+  static const String routeName = "/dompet";
+  const WalletScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class KategoriScreen extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            'Kategori',
+                            'Dompet',
                             style: kOpenSans.copyWith(
                                 fontSize: 16,
                                 fontWeight: semibold,
@@ -69,46 +70,43 @@ class KategoriScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(30),
-              height: 80,
-              decoration: BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1.5,
-                    blurRadius: 0.5,
-                    offset: Offset(0, 2), // changes position of shadow
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nama Dompet',
+                    style: kOpenSans.copyWith(
+                      color: kPrimary,
+                      fontWeight: semibold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Rp. XXXXXXXX',
+                    style: kOpenSans.copyWith(
+                      color: kBlack,
+                      fontWeight: medium,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 60,
-                  child: Row(
-                    children: [
-                      // ICON
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 12),
-                        child: SvgPicture.asset(
-                          'assets/images/makan_kategori.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-
-                      Expanded(
-                        child: Text(
-                          "Nama Kategori",
-                          style: kOpenSans.copyWith(
-                              fontSize: 14,
-                              fontWeight: semibold,
-                              color: kSecondary),
-                        ),
-                      ),
-                    ],
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 0.5,
+                    blurRadius: 0.5,
+                    offset: const Offset(1, 3), // changes position of shadow
                   ),
-                ),
+                ],
               ),
             ),
           ],
@@ -119,9 +117,9 @@ class KategoriScreen extends StatelessWidget {
         child: FloatingActionButton(
           backgroundColor: kWhite,
           onPressed: () {
-            Navigator.pushNamed(context, AddCategoryScreen.routeName);
+            Navigator.pushNamed(context, AddWalletScreen.routeName);
           },
-          tooltip: 'Tambah Kategori',
+          tooltip: 'Tambah Dompet',
           splashColor: kPrimary,
           child: Icon(
             Icons.add,
