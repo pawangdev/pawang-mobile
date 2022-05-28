@@ -243,6 +243,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     padding: const EdgeInsets.only(left: 32, right: 32),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Layanan',
@@ -354,7 +355,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       return Expanded(
                                         child: Center(
                                             child: Text(
-                                          "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
+                                          "Anda belum memiliki pengeluaran",
                                           style: kOpenSans.copyWith(
                                               color: kGray,
                                               fontSize: 14,
@@ -367,7 +368,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     return Expanded(
                                       child: Center(
                                           child: Text(
-                                        "Anda belum memiliki pengeluaran. Silahkan scan struk belanja Anda melalui tombol di bawah ini.",
+                                        "Anda belum memiliki pengeluaran",
                                         style: kOpenSans.copyWith(
                                             color: kGray,
                                             fontSize: 14,
@@ -398,7 +399,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             height: 64,
             width: MediaQuery.of(context).size.width,
             child: Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 42),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -406,7 +407,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       text: "Beranda",
                       icon: Icons.home,
                       selected: true,
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.pushNamed(context, DashboardScreen.routeName);
+                      }),
                   IconBottomBar(
                       text: "Scan Struk",
                       icon: Icons.fullscreen,
