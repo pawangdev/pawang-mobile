@@ -26,8 +26,8 @@ class WalletScreen extends StatelessWidget {
                         bottomRight: Radius.circular(30),
                       ),
                       gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                           colors: [kPrimary, kPurple])),
                 ),
                 Container(
@@ -40,7 +40,7 @@ class WalletScreen extends StatelessWidget {
                       Column(
                         children: [
                           SvgPicture.asset(
-                            'assets/images/kategori.svg',
+                            'assets/images/wallet.svg',
                             color: kWhite,
                           ),
                           SizedBox(

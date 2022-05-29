@@ -29,8 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
           Center(
             child: Container(
@@ -38,15 +37,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 170,
                 child: Image.asset('assets/images/splash.png')),
           ),
-          Stack(
-            alignment: AlignmentDirectional.centerEnd,
-            children: [
-              Text(
+          Positioned.fill(
+              child: Align(
+            alignment: AlignmentDirectional.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: Text(
                 'v.1.0.0',
-                style: kOpenSans.copyWith(color: kWhite, fontWeight: semibold),
+                style: kOpenSans.copyWith(
+                    color: kWhite.withOpacity(0.75),
+                    fontWeight: semibold,
+                    fontSize: 16),
               ),
-            ],
-          ),
+            ),
+          )),
         ],
       ),
     );

@@ -273,7 +273,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               },
                             ),
                             LayananCard(
-                              icon: 'assets/images/kategori.svg',
+                              icon: 'assets/images/wallet.svg',
                               title: 'Dompet',
                               onTap: () {
                                 Navigator.pushNamed(

@@ -25,8 +25,8 @@ class KategoriScreen extends StatelessWidget {
                         bottomRight: Radius.circular(30),
                       ),
                       gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                           colors: [kPrimary, kPurple])),
                 ),
                 Container(
