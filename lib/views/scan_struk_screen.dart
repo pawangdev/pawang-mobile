@@ -7,6 +7,7 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:pawang_mobile/widgets/IconBottom.dart';
 
@@ -360,11 +361,11 @@ class _ScanStrukState extends State<ScanStruk> {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
-                      text: "Riwayat",
-                      icon: Icons.library_books_outlined,
+                      text: "Pengaturan",
+                      icon: Icons.settings_outlined,
                       selected: false,
                       onPressed: () {
-                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                        Navigator.pushNamed(context, SettingsScreen.routeName);
                       }),
                 ],
               ),

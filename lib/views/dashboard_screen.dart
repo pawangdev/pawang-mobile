@@ -6,8 +6,8 @@ import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
+import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
@@ -418,11 +418,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
-                      text: "Riwayat",
-                      icon: Icons.library_books_outlined,
+                      text: "Pengaturan",
+                      icon: Icons.settings_outlined,
                       selected: false,
                       onPressed: () {
-                        Navigator.pushNamed(context, RiwayatScreen.routeName);
+                        Navigator.pushNamed(context, SettingsScreen.routeName);
                       }),
                 ],
               ),
