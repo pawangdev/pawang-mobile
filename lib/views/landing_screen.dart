@@ -74,63 +74,56 @@ class LandingScreen extends StatelessWidget {
                   SizedBox(
                     width: 320,
                     height: 130,
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 150,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, LoginScreen.routeName);
-                              },
-                              child: Text(
-                                "Masuk",
-                                style: kOpenSans.copyWith(
-                                    fontSize: 16, fontWeight: bold),
-                              ),
-                              style: ButtonStyle(
-                                fixedSize:
-                                    MaterialStateProperty.all(Size(100, 50)),
-                                backgroundColor:
-                                    MaterialStateProperty.all(kPrimary),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, LoginScreen.routeName);
+                            },
+                            child: Text(
+                              "Masuk",
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, fontWeight: bold),
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(vertical: 12)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(kPrimary),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: 150,
-                            child: OutlinedButton(
-                              child: Text(
-                                "Daftar",
-                                style: kOpenSans.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: bold,
-                                    color: kPrimary),
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, RegisterScreen.routeName);
-                              },
-                              style: OutlinedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                side: BorderSide(color: kPrimary),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                              ),
+                        ),
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "Daftar",
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                  color: kPrimary),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, RegisterScreen.routeName);
+                            },
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              side: BorderSide(color: kPrimary),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   )
                 ],
