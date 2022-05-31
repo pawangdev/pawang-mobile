@@ -21,7 +21,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

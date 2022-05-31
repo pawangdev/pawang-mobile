@@ -3,7 +3,7 @@ import 'package:pawang_mobile/config/theme_constants.dart';
 
 class WalletCard extends StatelessWidget {
   final String name;
-  final double balance;
+  final String balance;
   final color;
 
   const WalletCard(

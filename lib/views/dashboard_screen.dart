@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/config/theme_constants.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
@@ -24,6 +25,13 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
+List<Map<String, dynamic>> cards = [
+  {
+    'name': 'My Wallet',
+    'amount': 30000,
+  },
+];
+
 class _DashboardScreenState extends State<DashboardScreen> {
   late Future dataPengeluaran;
 
@@ -41,9 +49,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
   }
 
+  Widget plus() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, AddWalletScreen.routeName);
+        // cards.add({
+        //   'name': 'Tambah',
+        //   'amount': 2000,
+        // });
+        // setState(() {});
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: kWhite, borderRadius: BorderRadius.circular(20)),
+        child: Center(child: Icon(Icons.add_rounded)),
+      ),
+    );
+  }
+
+  List<Widget> cardWidgets() {
+    List<Widget> widgets = List<Widget>.generate(
+        cards.length,
+        (index) => WalletCard(
+            name: '${cards[index]['name']}',
+            balance: '${cards[index]['amount']}',
+            color: kWhite));
+
+    widgets.add(plus());
+
+    return widgets;
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<int> list = [1, 2, 3];
     return Scaffold(
         body: Container(
           decoration: BoxDecoration(
@@ -213,29 +251,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 15),
                   CarouselSlider(
-                      options: CarouselOptions(
-                        disableCenter: true,
-                        aspectRatio: 2.8,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: false,
-                      ),
-                      items: [
-                        WalletCard(
-                          name: 'Wallet 1',
-                          balance: 300000,
-                          color: kWhite,
-                        ),
-                        WalletCard(
-                          name: 'Wallet 2',
-                          balance: 200000,
-                          color: kWhite,
-                        ),
-                        WalletCard(
-                          name: 'Wallet 3',
-                          balance: 50000,
-                          color: kWhite,
-                        )
-                      ]),
+                    options: CarouselOptions(
+                      disableCenter: true,
+                      aspectRatio: 2.8,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
+                    ),
+                    items: cardWidgets(),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -300,7 +323,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             DraggableScrollableSheet(
               initialChildSize: 0.42,
               minChildSize: 0.42,
-              maxChildSize: 0.83,
+              maxChildSize: 0.94,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
