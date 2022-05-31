@@ -71,9 +71,8 @@ class LandingScreen extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  SizedBox(
-                    width: 320,
-                    height: 130,
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 64.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -90,7 +89,8 @@ class LandingScreen extends StatelessWidget {
                             ),
                             style: ButtonStyle(
                               padding: MaterialStateProperty.all(
-                                  EdgeInsets.symmetric(vertical: 12)),
+                                  EdgeInsets.symmetric(
+                                      vertical: 16, horizontal: 44)),
                               backgroundColor:
                                   MaterialStateProperty.all(kPrimary),
                               shape: MaterialStateProperty.all(
@@ -101,7 +101,9 @@ class LandingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Expanded(
                           child: OutlinedButton(
                             child: Text(
@@ -116,7 +118,8 @@ class LandingScreen extends StatelessWidget {
                                   context, RegisterScreen.routeName);
                             },
                             style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 44),
                               side: BorderSide(color: kPrimary),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),

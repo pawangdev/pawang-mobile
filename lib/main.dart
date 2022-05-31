@@ -17,7 +17,6 @@ import 'package:pawang_mobile/views/splash_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
 
 void main() {
