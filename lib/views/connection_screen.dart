@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 
 class ConnectionScreen extends StatefulWidget {
   static const String routeName = "/connection-check";

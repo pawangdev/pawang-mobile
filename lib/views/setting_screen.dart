@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 

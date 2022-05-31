@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 

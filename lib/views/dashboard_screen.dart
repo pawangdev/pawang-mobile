@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';

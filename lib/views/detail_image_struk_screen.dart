@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 
 class DetailImageStrukScreen extends StatelessWidget {
   static const String routeName = "/lihat-struk";
