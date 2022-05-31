@@ -93,110 +93,182 @@ class SettingsScreen extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Container(
-                              color: const Color(0xFF737373),
-                              child: Container(
-                                height: 200,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).canvasColor,
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30))),
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: <Widget>[
-                                      Text(
-                                        'Keluar',
-                                        style: kOpenSans.copyWith(
-                                            color: kBlack,
-                                            fontWeight: bold,
-                                            fontSize: 16),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'Apakah anda yakin ingin keluar?',
-                                        style: kOpenSans.copyWith(
-                                            color: kGray,
-                                            fontWeight: medium,
-                                            fontSize: 12),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 120, right: 120),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            ElevatedButton(
-                                              style: ButtonStyle(
-                                                fixedSize:
-                                                    MaterialStateProperty.all(
-                                                        const Size(60, 30)),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        kPrimary),
-                                                shape:
-                                                    MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'Ya',
-                                                style: kOpenSans.copyWith(
-                                                    color: kWhite,
-                                                    fontWeight: semibold,
-                                                    fontSize: 14),
-                                              ),
-                                              onPressed: () =>
-                                                  Navigator.pushNamed(context,
-                                                      LandingScreen.routeName),
-                                            ),
-                                            OutlinedButton(
-                                              child: Text(
-                                                "Tidak",
-                                                style: kOpenSans.copyWith(
-                                                    fontSize: 14,
-                                                    fontWeight: bold,
-                                                    color: kPrimary),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              style: OutlinedButton.styleFrom(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 4),
-                                                side:
-                                                    BorderSide(color: kPrimary),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8)),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(
+                            'Keluar',
+                            style: kOpenSans.copyWith(
+                                fontSize: 18, fontWeight: bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          content: Text(
+                            'Apakah anda yakin ingin keluar?',
+                            style: kOpenSans.copyWith(fontWeight: light),
+                            textAlign: TextAlign.center,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: OutlinedButton(
+                                    child: Text(
+                                      "Kembali",
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: medium,
+                                          color: kPrimary),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      side: BorderSide(color: kPrimary),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          });
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(kPrimary),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Keluar',
+                                      style: kOpenSans.copyWith(
+                                          color: kWhite,
+                                          fontWeight: medium,
+                                          fontSize: 14),
+                                    ),
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, LandingScreen.routeName),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                      // showModalBottomSheet(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return Container(
+                      //         color: const Color(0xFF737373),
+                      //         child: Container(
+                      //           height: 200,
+                      //           decoration: BoxDecoration(
+                      //               color: Theme.of(context).canvasColor,
+                      //               borderRadius: const BorderRadius.only(
+                      //                   topLeft: Radius.circular(30),
+                      //                   topRight: Radius.circular(30))),
+                      //           child: Center(
+                      //             child: Column(
+                      //               mainAxisAlignment: MainAxisAlignment.center,
+                      //               mainAxisSize: MainAxisSize.max,
+                      //               children: <Widget>[
+                      //                 Text(
+                      //                   'Keluar',
+                      //                   style: kOpenSans.copyWith(
+                      //                       color: kBlack,
+                      //                       fontWeight: bold,
+                      //                       fontSize: 16),
+                      //                 ),
+                      //                 const SizedBox(
+                      //                   height: 20,
+                      //                 ),
+                      //                 Text(
+                      //                   'Apakah anda yakin ingin keluar?',
+                      //                   style: kOpenSans.copyWith(
+                      //                       color: kGray,
+                      //                       fontWeight: medium,
+                      //                       fontSize: 12),
+                      //                 ),
+                      //                 const SizedBox(
+                      //                   height: 20,
+                      //                 ),
+                      //                 Padding(
+                      //                   padding: const EdgeInsets.only(
+                      //                       left: 120, right: 120),
+                      //                   child: Row(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.spaceBetween,
+                      //                     children: [
+                      //                       ElevatedButton(
+                      //                         style: ButtonStyle(
+                      //                           fixedSize:
+                      //                               MaterialStateProperty.all(
+                      //                                   const Size(60, 30)),
+                      //                           backgroundColor:
+                      //                               MaterialStateProperty.all(
+                      //                                   kPrimary),
+                      //                           shape:
+                      //                               MaterialStateProperty.all(
+                      //                             RoundedRectangleBorder(
+                      //                               borderRadius:
+                      //                                   BorderRadius.circular(
+                      //                                       8),
+                      //                             ),
+                      //                           ),
+                      //                         ),
+                      //                         child: Text(
+                      //                           'Ya',
+                      //                           style: kOpenSans.copyWith(
+                      //                               color: kWhite,
+                      //                               fontWeight: semibold,
+                      //                               fontSize: 14),
+                      //                         ),
+                      //                         onPressed: () =>
+                      //                             Navigator.pushNamed(context,
+                      //                                 LandingScreen.routeName),
+                      //                       ),
+                      //                       OutlinedButton(
+                      //                         child: Text(
+                      //                           "Tidak",
+                      //                           style: kOpenSans.copyWith(
+                      //                               fontSize: 14,
+                      //                               fontWeight: bold,
+                      //                               color: kPrimary),
+                      //                         ),
+                      //                         onPressed: () {
+                      //                           Navigator.pop(context);
+                      //                         },
+                      //                         style: OutlinedButton.styleFrom(
+                      //                           padding:
+                      //                               const EdgeInsets.symmetric(
+                      //                                   vertical: 4),
+                      //                           side:
+                      //                               BorderSide(color: kPrimary),
+                      //                           shape: RoundedRectangleBorder(
+                      //                               borderRadius:
+                      //                                   BorderRadius.circular(
+                      //                                       8)),
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 )
+                      //               ],
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       );
+                      // });
                     },
                   )
                 ],
