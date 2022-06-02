@@ -173,7 +173,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                 ? _validated = false
                                 : _validated = true;
                           });
-
+                      
                           if (_validated) {
                             try {
                               PengeluaranModel data = PengeluaranModel(
@@ -190,7 +190,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                   content: Text("Sukses menyimpan data"),
                                   backgroundColor: kSuccess,
                                 ));
-
+                      
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     RiwayatScreen.routeName, (route) => false);
                               });

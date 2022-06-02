@@ -1,10 +1,12 @@
 import 'dart:developer';
-import 'dart:io';
+import 'dart:io' as file;
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawang_mobile/services/ScanService.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
@@ -22,41 +24,60 @@ class ScanStruk extends StatefulWidget {
 class _ScanStrukState extends State<ScanStruk> {
   XFile? _image;
   dynamic _pickImageError;
+  late InputImage inputImage;
   final ImagePicker _picker = ImagePicker();
 
   late String nominal;
   late String imageFilePath;
 
   Future getImage(bool is_fromGal) async {
-    final XFile? image;
-    final inputImage;
+    late final XFile? image;
 
     if (is_fromGal) {
       try {
         image = await _picker.pickImage(source: ImageSource.gallery);
-        inputImage = InputImage.fromFilePath(image!.path);
-
-        setState(() {
-          _image = image;
-        });
-
-        searchTotal(inputImage);
       } catch (e) {
         setState(() => _pickImageError = e);
       }
     } else {
       try {
         image = await _picker.pickImage(source: ImageSource.camera);
-        inputImage = InputImage.fromFilePath(image!.path);
-
-        setState(() {
-          _image = image;
-        });
-
-        searchTotal(inputImage);
       } catch (e) {
         setState(() => _pickImageError = e);
       }
+    }
+    inputImage = InputImage.fromFilePath(image!.path);
+    setState(() {
+      _image = image;
+    });
+    cropImage(image);
+  }
+
+  Future cropImage(XFile? image) async {
+    file.File? temp_img = file.File(image!.path);
+
+    temp_img = await ImageCropper()
+        .cropImage(sourcePath: image.path, maxHeight: 1080, maxWidth: 1080);
+    if (temp_img != null) {
+      print("iso iki");
+      setState(() {
+        inputImage = InputImage.fromFile(temp_img!);
+      });
+      // searchTotal(inputImage);
+      dynamic temp = ScanService.uploadImage(inputImage);
+      if(temp == 1){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Berhasil upload gambar"),
+          backgroundColor: kSuccess,
+        ));
+      } else{
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Gagal upload gambar"),
+          backgroundColor: kError,
+        ));
+      }
+    } else {
+      print("error ngene lo");
     }
   }
 
@@ -73,6 +94,7 @@ class _ScanStrukState extends State<ScanStruk> {
     try {
       for (TextBlock block in recognisedText.blocks) {
         for (TextLine line in block.lines) {
+          print(line.text);
           if (line.text.contains(RegExp(r'[A-Z]')) ||
               line.text.contains(RegExp(r'[a-z]')) ||
               line.text.contains(RegExp(r'=')) &&
@@ -168,12 +190,12 @@ class _ScanStrukState extends State<ScanStruk> {
                   child: Container(
                     child: _image != null
                         ? Image.file(
-                            File(_image!.path),
+                            file.File(_image!.path),
                             fit: BoxFit.contain,
                           )
                         : Center(
                             child: Text(
-                              "Silahkan Inputkan Struk Terlebih Dahulu",
+                              "Silahkan Pilih Struk Terlebih Dahulu",
                               style: kOpenSans.copyWith(
                                   color: kGray,
                                   fontSize: 12,
