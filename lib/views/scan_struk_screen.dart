@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io' as file;
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -6,12 +5,11 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pawang_mobile/services/ScanService.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
-import 'package:pawang_mobile/widgets/IconBottom.dart';
+import 'package:pawang_mobile/widgets/icon_bottom.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
@@ -86,7 +84,7 @@ class _ScanStrukState extends State<ScanStruk> {
     final RecognisedText recognisedText =
         await textDetector.processImage(image);
     final findTotal = <double>[];
-    double total_belanja = 0;
+    double totalBelanja = 0;
     double temp;
     int counter = 0;
     bool found = false;
@@ -132,14 +130,14 @@ class _ScanStrukState extends State<ScanStruk> {
       temp = findTotal[0];
       for (double i in findTotal) {
         if (i >= temp) {
-          total_belanja = i;
+          totalBelanja = i;
         } else {
           temp = i;
         }
       }
 
       setState(() {
-        nominal = total_belanja.toString();
+        nominal = totalBelanja.toString();
         imageFilePath = image.filePath.toString();
       });
     } catch (e) {
@@ -149,7 +147,7 @@ class _ScanStrukState extends State<ScanStruk> {
         _image = null;
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Gambar tidak mengandung unsur total"),
         backgroundColor: kError,
       ));
@@ -170,20 +168,20 @@ class _ScanStrukState extends State<ScanStruk> {
                   child: Text(
                     "Scan Struk",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
                   ),
                 ),
-                const SizedBox(
-                  height: 33,
+                SizedBox(
+                  height: 3.8.h,
                 ),
                 Center(
                   child: Text(
                     "Mohon atur posisi struk agar dapat terdeteksi",
-                    style: kOpenSans.copyWith(color: kBlack),
+                    style: kOpenSans.copyWith(fontSize: 0.23.dp, color: kBlack),
                   ),
                 ),
-                const SizedBox(
-                  height: 28,
+                SizedBox(
+                  height: 3.2.h,
                 ),
                 // ----- BOX IMAGE -----
                 Expanded(
@@ -198,7 +196,7 @@ class _ScanStrukState extends State<ScanStruk> {
                               "Silahkan Pilih Struk Terlebih Dahulu",
                               style: kOpenSans.copyWith(
                                   color: kGray,
-                                  fontSize: 12,
+                                  fontSize: 0.22.dp,
                                   fontWeight: medium),
                             ),
                           ),
@@ -209,7 +207,7 @@ class _ScanStrukState extends State<ScanStruk> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 1.75.h),
                 _image == null
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,45 +229,46 @@ class _ScanStrukState extends State<ScanStruk> {
                                               BorderRadius.circular(12)))),
                               onPressed: () => getImage(false)),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 20),
-                            width: 280,
+                            margin: const EdgeInsets.symmetric(vertical: 20),
+                            width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: <Widget>[
                                 Expanded(
                                   child: Divider(
                                     color: kBlack,
-                                    height: 1.5,
+                                    height: 0.15.h,
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10),
                                   child: Text(
-                                    "OR",
+                                    "atau",
                                     style: TextStyle(
+                                      fontSize: 0.235.dp,
                                       color: kGray,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: semibold,
                                     ),
                                   ),
                                 ),
                                 Expanded(
                                   child: Divider(
                                     color: kBlack,
-                                    height: 1.5,
+                                    height: 0.15.h,
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 12),
+                            margin: const EdgeInsets.only(top: 12),
                             child: SizedBox(
-                              width: double.infinity,
+                              width: MediaQuery.of(context).size.width,
                               child: OutlinedButton(
                                 child: Text(
                                   "Pilih dari Galeri",
                                   style: kOpenSans.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 0.255.dp,
                                       fontWeight: bold,
                                       color: kPrimary),
                                 ),
@@ -277,7 +276,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                 style: OutlinedButton.styleFrom(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
-                                  side: BorderSide(color: kPrimary),
+                                  side: const BorderSide(color: kPrimary),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12)),
                                 ),
@@ -290,12 +289,12 @@ class _ScanStrukState extends State<ScanStruk> {
                         Flexible(
                           fit: FlexFit.tight,
                           child: Container(
-                            margin: EdgeInsets.only(top: 12),
+                            margin: const EdgeInsets.only(top: 12),
                             child: OutlinedButton(
                               child: Text(
                                 "Ulangi",
                                 style: kOpenSans.copyWith(
-                                    fontSize: 16,
+                                    fontSize: 0.235.dp,
                                     fontWeight: bold,
                                     color: kPrimary),
                               ),
@@ -309,7 +308,7 @@ class _ScanStrukState extends State<ScanStruk> {
                               style: OutlinedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
-                                side: BorderSide(color: kPrimary),
+                                side: const BorderSide(color: kPrimary),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         kDefaultBorderRadius)),
@@ -318,16 +317,16 @@ class _ScanStrukState extends State<ScanStruk> {
                           ),
                         ),
                         SizedBox(
-                          width: 24,
+                          width: 2.8.w,
                         ),
                         Flexible(
                           fit: FlexFit.tight,
                           child: Container(
-                              margin: EdgeInsets.only(top: 12),
+                              margin: const EdgeInsets.only(top: 12),
                               child: ElevatedButton(
                                   style: ButtonStyle(
                                     padding: MaterialStateProperty.all(
-                                      EdgeInsets.symmetric(vertical: 12),
+                                      const EdgeInsets.symmetric(vertical: 12),
                                     ),
                                     backgroundColor:
                                         MaterialStateProperty.all(kPrimary),
@@ -348,7 +347,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                   child: Text(
                                     "Lanjut",
                                     style: kOpenSans.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 0.235.dp,
                                       fontWeight: bold,
                                     ),
                                   ))),
@@ -361,7 +360,7 @@ class _ScanStrukState extends State<ScanStruk> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 64,
+            height: 8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

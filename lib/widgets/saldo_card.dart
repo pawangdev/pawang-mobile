@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletCard extends StatelessWidget {
   final String name;
@@ -14,7 +15,7 @@ class WalletCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      padding: EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(25.0),
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -23,7 +24,7 @@ class WalletCard extends StatelessWidget {
           style: kOpenSans.copyWith(
             color: kBlack,
             fontWeight: medium,
-            fontSize: 16,
+            fontSize: 0.253.dp,
           ),
         ),
         Text(
@@ -31,7 +32,7 @@ class WalletCard extends StatelessWidget {
           style: kOpenSans.copyWith(
             color: kBlack,
             fontWeight: bold,
-            fontSize: 18,
+            fontSize: 0.26.dp,
           ),
         ),
       ]),

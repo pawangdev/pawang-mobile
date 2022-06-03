@@ -1,18 +1,16 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
-import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
-import 'package:pawang_mobile/views/splash_screen.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = '/register';
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -28,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _isObscure = true;
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -40,20 +38,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kPrimary),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      IconBack(
+                        blueMode: true,
                         onTap: () {
                           Navigator.pushNamed(context, LandingScreen.routeName);
                         },
@@ -61,15 +47,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 2.5.h,
                   ),
                   Text(
                     "Buat Akun",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 0.29.dp),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 3.5.h),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Nama Lengkap",
                       inputController: NamaTextController,
@@ -185,10 +172,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 3.5.h,
                   ),
                   SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () {
                         var data = <String, dynamic>{
@@ -224,11 +211,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       child: Text(
                         "Daftar",
-                        style:
-                            kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
+                        style: kOpenSans.copyWith(
+                            fontSize: 0.25.dp, fontWeight: bold),
                       ),
                       style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(100, 50)),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12)),
                         backgroundColor: MaterialStateProperty.all(kPrimary),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
@@ -239,16 +227,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 3.4.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Sudah punya akun? "),
+                      Text("Sudah punya akun? ",
+                          style: kOpenSans.copyWith(
+                              fontSize: 0.235.dp,
+                              color: kBlack,
+                              fontWeight: light)),
                       TextButton(
                           child: Text('Masuk',
                               style: kOpenSans.copyWith(
-                                  color: kPrimary, fontWeight: bold)),
+                                  fontSize: 0.235.dp,
+                                  color: kPrimary,
+                                  fontWeight: bold)),
                           onPressed: () {
                             Navigator.pushNamed(context, LoginScreen.routeName);
                           }),

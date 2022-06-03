@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconBottomBar extends StatelessWidget {
-  IconBottomBar(
+  const IconBottomBar(
       {Key? key,
       required this.text,
       required this.icon,
@@ -30,7 +31,7 @@ class IconBottomBar extends StatelessWidget {
             color: selected ? primaryColor : Colors.black54,
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 1.4.h),
         Text(
           text,
           style: TextStyle(
@@ -38,7 +39,7 @@ class IconBottomBar extends StatelessWidget {
               height: .1,
               color: selected ? primaryColor : Colors.grey.withOpacity(.75)),
         ),
-        SizedBox(height: 5)
+        SizedBox(height: 1.h)
       ],
     );
   }

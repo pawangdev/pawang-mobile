@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
-import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/services/user_service.dart';
+import 'package:pawang_mobile/services/pengeluaran_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
@@ -13,15 +13,16 @@ import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
-import 'package:pawang_mobile/widgets/CardPengeluaran2.dart';
-import 'package:pawang_mobile/widgets/IconBottom.dart';
-import 'package:pawang_mobile/widgets/LayananCard.dart';
+import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
+import 'package:pawang_mobile/widgets/icon_bottom.dart';
+import 'package:pawang_mobile/widgets/layanan_card.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
 import 'package:skeleton_text/skeleton_text.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const String routeName = '/dashboard';
-  DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({Key? key}) : super(key: key);
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -73,16 +74,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, AddWalletScreen.routeName);
-        // cards.add({
-        //   'name': 'Tambah',
-        //   'amount': 2000,
-        // });
-        // setState(() {});
       },
       child: Container(
         decoration: BoxDecoration(
             color: kWhite, borderRadius: BorderRadius.circular(20)),
-        child: Center(child: Icon(Icons.add_rounded)),
+        child: const Center(child: Icon(Icons.add_rounded)),
       ),
     );
   }
@@ -104,7 +100,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -132,7 +128,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Text(
                                       "Hallo,",
                                       style: kOpenSans.copyWith(
-                                          fontSize: 12,
+                                          fontSize: 0.22.dp,
                                           fontWeight: bold,
                                           color: kWhite),
                                     ),
@@ -167,7 +163,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 2.h),
                   CarouselSlider(
                     options: CarouselOptions(
                       disableCenter: true,
@@ -177,8 +173,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     items: cardWidgets(),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 2.4.h,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 32, right: 32),
@@ -189,10 +185,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Text(
                           'Layanan',
                           style: kOpenSans.copyWith(
-                              fontSize: 16, fontWeight: bold, color: kWhite),
+                              fontSize: 0.25.dp,
+                              fontWeight: bold,
+                              color: kWhite),
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 2.4.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,7 +232,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 3.4.h),
                 ],
               ),
             ),
@@ -244,91 +242,108 @@ class _DashboardScreenState extends State<DashboardScreen> {
               maxChildSize: 0.94,
               builder:
                   (BuildContext context, ScrollController scrollController) {
-                return Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 32, right: 32, top: 30),
-                        child: Text(
-                          'Riwayat',
-                          style: kOpenSans.copyWith(
-                              fontSize: 16, fontWeight: bold, color: kBlack),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                            controller: scrollController,
-                            itemCount: 1,
-                            itemBuilder: (BuildContext context, index) {
-                              return FutureBuilder(
-                                future: dataPengeluaran,
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot) {
-                                  if (snapshot.hasData) {
-                                    if (snapshot.data?.length != 0) {
-                                      return ListView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return InkWell(
-                                            highlightColor: Colors.transparent,
-                                            splashColor: Colors.transparent,
-                                            onTap: () {
-                                              Navigator.pushNamed(context,
-                                                  DetailPengeluaran.routeName,
-                                                  arguments:
-                                                      snapshot.data[index]);
+                return SizedBox(
+                  child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: Container(
+                      child: ListView.builder(
+                          controller: scrollController,
+                          itemCount: 1,
+                          itemBuilder: (BuildContext context, index) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Container(
+                                      margin: const EdgeInsets.only(top: 5),
+                                      height: 0.7.h,
+                                      width: 24.w,
+                                      decoration: BoxDecoration(
+                                          color: kGray,
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                                Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 32, top: 20),
+                                  child: Text(
+                                    'Riwayat',
+                                    textAlign: TextAlign.start,
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 0.25.dp,
+                                        fontWeight: bold,
+                                        color: kBlack),
+                                  ),
+                                ),
+                                Container(
+                                  constraints: BoxConstraints(minHeight: 30.h),
+                                  child: FutureBuilder(
+                                    future: dataPengeluaran,
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      if (snapshot.hasData) {
+                                        if (snapshot.data?.length != 0) {
+                                          return ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return InkWell(
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                splashColor: Colors.transparent,
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context,
+                                                      DetailPengeluaran
+                                                          .routeName,
+                                                      arguments:
+                                                          snapshot.data[index]);
+                                                },
+                                                child: CardPengeluaran(
+                                                    data: snapshot.data[index]),
+                                              );
                                             },
-                                            child: CardPengeluaran2(
-                                                data: snapshot.data[index]),
+                                            itemCount: snapshot.data?.length,
                                           );
-                                        },
-                                        itemCount: snapshot.data?.length,
-                                      );
-                                    } else {
-                                      return Expanded(
-                                        child: Center(
+                                        } else {
+                                          return Center(
+                                              child: Text(
+                                            "Anda belum memiliki pengeluaran",
+                                            style: kOpenSans.copyWith(
+                                                color: kGray,
+                                                fontSize: 0.23.dp,
+                                                fontWeight: medium),
+                                            textAlign: TextAlign.center,
+                                          ));
+                                        }
+                                      } else {
+                                        return Center(
                                             child: Text(
                                           "Anda belum memiliki pengeluaran",
                                           style: kOpenSans.copyWith(
                                               color: kGray,
-                                              fontSize: 14,
+                                              fontSize: 0.23.dp,
                                               fontWeight: medium),
                                           textAlign: TextAlign.center,
-                                        )),
-                                      );
-                                    }
-                                  } else {
-                                    return Expanded(
-                                      child: Center(
-                                          child: Text(
-                                        "Anda belum memiliki pengeluaran",
-                                        style: kOpenSans.copyWith(
-                                            color: kGray,
-                                            fontSize: 14,
-                                            fontWeight: medium),
-                                        textAlign: TextAlign.center,
-                                      )),
-                                    );
-                                  }
-                                },
-                              );
-                            }),
-                      ),
-                    ],
+                                        ));
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          }),
+                      decoration: const BoxDecoration(
+                          color: kWhite,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24))),
+                    ),
                   ),
-                  decoration: const BoxDecoration(
-                      color: kWhite,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(24),
-                          topRight: Radius.circular(24))),
                 );
               },
             ),
@@ -337,7 +352,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 64,
+            height: 8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

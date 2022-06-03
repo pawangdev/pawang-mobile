@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pawang_mobile/models/PengeluaranModel.dart';
+import 'package:pawang_mobile/models/pengeluaran_model.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CardPengeluaran2 extends StatelessWidget {
   const CardPengeluaran2({Key? key, required this.data}) : super(key: key);
@@ -12,7 +12,7 @@ class CardPengeluaran2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
-      height: 80,
+      height: 8.4.h,
       decoration: BoxDecoration(
         color: kWhite,
         borderRadius: BorderRadius.circular(12),
@@ -21,14 +21,14 @@ class CardPengeluaran2 extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 1.5,
             blurRadius: 0.5,
-            offset: Offset(0, 2), // changes position of shadow
+            offset: const Offset(0, 2), // changes position of shadow
           ),
         ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          height: 60,
+          height: 6.4.h,
           child: Row(
             children: [
               // ICON
@@ -42,17 +42,20 @@ class CardPengeluaran2 extends StatelessWidget {
               //KATEGORI
               Expanded(
                 child: Text(
-                  data.kategori_pengeluaran,
-                  style: kOpenSans.copyWith(fontSize: 14, fontWeight: semibold),
+                  data.kategoriPengeluaran,
+                  style: kOpenSans.copyWith(
+                      fontSize: 0.245.dp, fontWeight: semibold),
                 ),
               ),
               //NOMINAL
 
               Expanded(
                 child: Text(
-                  "- Rp. ${data.nominal_pengeluaran.toString()}",
+                  "- Rp. ${data.nominalPengeluaran.toString()}",
                   style: kOpenSans.copyWith(
-                      fontSize: 14, fontWeight: semibold, color: kSecondary),
+                      fontSize: 0.245.dp,
+                      fontWeight: semibold,
+                      color: kSecondary),
                 ),
               ),
             ],

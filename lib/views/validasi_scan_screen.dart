@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/PengeluaranModel.dart';
-import 'package:pawang_mobile/services/PengeluaranService.dart';
 import 'package:pawang_mobile/views/riwayat_screen.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
+import 'package:pawang_mobile/models/pengeluaran_model.dart';
+import 'package:pawang_mobile/services/pengeluaran_service.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ValidasiScanScreen extends StatefulWidget {
   static const String routeName = '/validasi-scan';
@@ -17,10 +19,10 @@ class ValidasiScanScreen extends StatefulWidget {
 }
 
 class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
-  final TextEditingController nama_pengeluaran = TextEditingController();
-  final TextEditingController nominal_pengeluaran = TextEditingController();
-  final TextEditingController kategori_pengeluaran = TextEditingController();
-  final TextEditingController tanggal_pengeluaran = TextEditingController();
+  final TextEditingController namaPengeluaran = TextEditingController();
+  final TextEditingController nominalPengeluaran = TextEditingController();
+  final TextEditingController kategoriPengeluaran = TextEditingController();
+  final TextEditingController tanggalPengeluaran = TextEditingController();
   String? filePath;
   bool _validated = false;
 
@@ -36,7 +38,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
-    nominal_pengeluaran.text = args.nominal;
+    nominalPengeluaran.text = args.nominal;
     filePath = args.filePath;
 
     return Scaffold(
@@ -50,76 +52,61 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kPrimary),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/images/back_btn.svg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                  IconBack(
+                      blueMode: true,
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
                   Text(
                     "Validasi Scan Struk",
                     style: kOpenSans.copyWith(
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
+                    width: 7.2.w,
                   ),
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 2.h,
               ),
               Text(
                 "Mohon Lakukan Validasi untuk Menghindari Kesalahan",
-                style: kOpenSans.copyWith(fontSize: 12),
+                style: kOpenSans.copyWith(fontSize: 0.2.dp),
               ),
               SizedBox(
-                height: 30,
+                height: 3.4.h,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
-                  inputController: nama_pengeluaran,
+                  inputController: namaPengeluaran,
                   errorText: _validated ? null : 'Nama Pengeluaran wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10),
                 child: InputField(
                   inputLabel: "Nominal",
-                  inputController: nominal_pengeluaran,
+                  inputController: nominalPengeluaran,
                   errorText: _validated ? null : 'Nominal wajib diisi',
                   enable: false,
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Kategori",
-                  inputController: kategori_pengeluaran,
+                  inputController: kategoriPengeluaran,
                   errorText: _validated ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Tanggal",
-                  inputController: tanggal_pengeluaran,
+                  inputController: tanggalPengeluaran,
                   errorText: _validated ? null : 'Tanggal wajib diisi',
                   keyboardType: TextInputType.none,
                   onTap: () {
@@ -133,7 +120,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                         initializeDateFormatting('id_ID', null);
                         String format = DateFormat.yMMMMd('id_ID').format(date);
                         setState(() {
-                          tanggal_pengeluaran.text = format;
+                          tanggalPengeluaran.text = format;
                         });
                       }
                     });
@@ -144,11 +131,11 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 15),
+                            const EdgeInsets.symmetric(vertical: 15),
                           ),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
@@ -160,29 +147,28 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            nama_pengeluaran.text.isEmpty
+                            namaPengeluaran.text.isEmpty
                                 ? _validated = false
                                 : _validated = true;
-                            nominal_pengeluaran.text.isEmpty
+                            nominalPengeluaran.text.isEmpty
                                 ? _validated = false
                                 : _validated = true;
-                            kategori_pengeluaran.text.isEmpty
+                            kategoriPengeluaran.text.isEmpty
                                 ? _validated = false
                                 : _validated = true;
-                            tanggal_pengeluaran.text.isEmpty
+                            tanggalPengeluaran.text.isEmpty
                                 ? _validated = false
                                 : _validated = true;
                           });
-                      
+
                           if (_validated) {
                             try {
                               PengeluaranModel data = PengeluaranModel(
-                                  nama_pengeluaran: nama_pengeluaran.text,
-                                  nominal_pengeluaran:
-                                      double.parse(nominal_pengeluaran.text),
-                                  kategori_pengeluaran:
-                                      kategori_pengeluaran.text,
-                                  tanggal_pengeluaran: tanggal_pengeluaran.text,
+                                  namaPengeluaran: namaPengeluaran.text,
+                                  nominalPengeluaran:
+                                      double.parse(nominalPengeluaran.text),
+                                  kategoriPengeluaran: kategoriPengeluaran.text,
+                                  tanggalPengeluaran: tanggalPengeluaran.text,
                                   filePath: filePath.toString());
                               simpanData(data).then((value) {
                                 ScaffoldMessenger.of(context)
@@ -190,7 +176,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                   content: Text("Sukses menyimpan data"),
                                   backgroundColor: kSuccess,
                                 ));
-                      
+
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     RiwayatScreen.routeName, (route) => false);
                               });
@@ -206,7 +192,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                         child: Text(
                           "Simpan Pengeluaran",
                           style: kOpenSans.copyWith(
-                            fontSize: 16,
+                            fontSize: 0.253.dp,
                             fontWeight: bold,
                           ),
                         )),

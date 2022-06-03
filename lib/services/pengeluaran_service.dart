@@ -1,4 +1,4 @@
-import 'package:pawang_mobile/models/PengeluaranModel.dart';
+import 'package:pawang_mobile/models/pengeluaran_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -51,10 +51,10 @@ class PengeluaranService {
       return List.generate(maps.length, (index) {
         return PengeluaranModel(
             id: maps[index]['id'],
-            nama_pengeluaran: maps[index]['nama_pengeluaran'],
-            nominal_pengeluaran: maps[index]['nominal_pengeluaran'],
-            kategori_pengeluaran: maps[index]['kategori_pengeluaran'],
-            tanggal_pengeluaran: maps[index]['tanggal_pengeluaran'],
+            namaPengeluaran: maps[index]['nama_pengeluaran'],
+            nominalPengeluaran: maps[index]['nominal_pengeluaran'],
+            kategoriPengeluaran: maps[index]['kategori_pengeluaran'],
+            tanggalPengeluaran: maps[index]['tanggal_pengeluaran'],
             filePath: maps[index]['file_path']);
       });
     } catch (e) {
@@ -84,11 +84,11 @@ class PengeluaranService {
       for (var element in maps) {
         return PengeluaranModel(
             id: element['id'],
-            nama_pengeluaran: element['nama_pengeluaran'],
-            tanggal_pengeluaran: element['nama_pengeluaran'],
+            namaPengeluaran: element['nama_pengeluaran'],
+            tanggalPengeluaran: element['nama_pengeluaran'],
             filePath: element['nama_pengeluaran'],
-            kategori_pengeluaran: element['nama_pengeluaran'],
-            nominal_pengeluaran: element['nama_pengeluaran']);
+            kategoriPengeluaran: element['nama_pengeluaran'],
+            nominalPengeluaran: element['nama_pengeluaran']);
       }
 
       // return List.generate(maps.length, (index) {

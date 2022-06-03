@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/views/add_category.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletScreen extends StatelessWidget {
   static const String routeName = "/dompet";
@@ -20,7 +20,7 @@ class WalletScreen extends StatelessWidget {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30),
@@ -31,12 +31,17 @@ class WalletScreen extends StatelessWidget {
                           colors: [kPrimary, kPurple])),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 28, left: 32, right: 32),
+                  padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconBack(PurpleMode: false),
+                      IconBack(
+                        blueMode: false,
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                       Column(
                         children: [
                           SvgPicture.asset(
@@ -44,21 +49,19 @@ class WalletScreen extends StatelessWidget {
                             color: kWhite,
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 1.h,
                           ),
                           Text(
                             'Dompet',
                             style: kOpenSans.copyWith(
-                                fontSize: 16,
+                                fontSize: 0.253.dp,
                                 fontWeight: semibold,
                                 color: kWhite),
                           ),
                         ],
                       ),
                       Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
+                        width: 7.2.w,
                       ),
                     ],
                   ),
@@ -66,11 +69,11 @@ class WalletScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 2.4.h,
             ),
             Container(
               margin: const EdgeInsets.all(30),
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,18 +83,18 @@ class WalletScreen extends StatelessWidget {
                     style: kOpenSans.copyWith(
                       color: kPrimary,
                       fontWeight: semibold,
-                      fontSize: 18,
+                      fontSize: 0.26.dp,
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 1.4.h,
                   ),
                   Text(
                     'Rp. XXXXXXXX',
                     style: kOpenSans.copyWith(
                       color: kBlack,
                       fontWeight: medium,
-                      fontSize: 14,
+                      fontSize: 0.245.dp,
                     ),
                   ),
                 ],
@@ -121,7 +124,7 @@ class WalletScreen extends StatelessWidget {
           },
           tooltip: 'Tambah Dompet',
           splashColor: kPrimary,
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: kPrimary,
           ),

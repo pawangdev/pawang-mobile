@@ -11,7 +11,8 @@ class DetailImageStrukScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-      appBar: AppBar(title: Text("Lihat Struk"), backgroundColor: kPrimary),
+      appBar:
+          AppBar(title: const Text("Lihat Struk"), backgroundColor: kPrimary),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
