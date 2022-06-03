@@ -36,14 +36,13 @@ dependencies:
   flutter_svg: ^1.0.3
   image_picker: ^0.8.4+11
   image_cropper: ^1.4.1
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   google_ml_kit: ^0.7.3
   sqflite: ^2.0.0+4
   path: ^1.8.0
   path_provider: ^2.0.9
   intl: ^0.17.0
-  dio: ^4.0.6
-  http: 
+  http: ^0.13.4
   carousel_slider: ^4.1.1
   another_flushbar: ^1.10.29
 

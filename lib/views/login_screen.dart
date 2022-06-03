@@ -1,6 +1,10 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/login_model.dart';
+import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
@@ -17,8 +21,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController Email = TextEditingController();
-  final TextEditingController Password = TextEditingController();
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
   bool _isObscure = true;
 
   @override
@@ -74,7 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
-                      inputController: Email,
+                      inputController: emailTextController,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   Container(
@@ -91,6 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           TextField(
+                            keyboardType: TextInputType.visiblePassword,
+                            controller: passwordTextController,
                             decoration: InputDecoration(
                                 fillColor: Color(0xFFF5F5F5),
                                 filled: true,
@@ -121,7 +128,50 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, DashboardScreen.routeName);
+                        var data = <String, dynamic>{
+                          'email': emailTextController.text,
+                          'password': passwordTextController.text,
+                        };
+
+                        try {
+                          UserService().userLogin(data).then((response) {
+                            if (response.success == true) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                DashboardScreen.routeName,
+                                (route) => false,
+                              );
+
+                              Flushbar(
+                                message: "Berhasil Login !",
+                                icon: Icon(
+                                  Icons.check,
+                                  size: 28.0,
+                                  color: Colors.white,
+                                ),
+                                margin: EdgeInsets.all(8),
+                                borderRadius: BorderRadius.circular(8),
+                                backgroundColor: kSuccess,
+                                duration: Duration(seconds: 3),
+                              ).show(context);
+                            } else {
+                              Flushbar(
+                                message: response.message,
+                                icon: Icon(
+                                  Icons.clear_rounded,
+                                  size: 28.0,
+                                  color: Colors.white,
+                                ),
+                                margin: EdgeInsets.all(8),
+                                borderRadius: BorderRadius.circular(8),
+                                backgroundColor: kError,
+                                duration: Duration(seconds: 3),
+                              ).show(context);
+                            }
+                          });
+                        } catch (e) {
+                          print(e);
+                        }
                       },
                       child: Text(
                         "Masuk",

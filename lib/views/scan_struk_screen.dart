@@ -64,18 +64,18 @@ class _ScanStrukState extends State<ScanStruk> {
         inputImage = InputImage.fromFile(temp_img!);
       });
       // searchTotal(inputImage);
-      dynamic temp = ScanService.uploadImage(inputImage);
-      if(temp == 1){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Berhasil upload gambar"),
-          backgroundColor: kSuccess,
-        ));
-      } else{
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Gagal upload gambar"),
-          backgroundColor: kError,
-        ));
-      }
+      // dynamic temp = ScanService.uploadImage(inputImage);
+      // if(temp == 1){
+      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text("Berhasil upload gambar"),
+      //     backgroundColor: kSuccess,
+      //   ));
+      // } else{
+      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text("Gagal upload gambar"),
+      //     backgroundColor: kError,
+      //   ));
+      // }
     } else {
       print("error ngene lo");
     }
