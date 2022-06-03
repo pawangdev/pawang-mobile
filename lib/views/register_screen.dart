@@ -98,6 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 10,
                           ),
                           TextField(
+                            controller: PasswordTextController,
                             decoration: InputDecoration(
                                 fillColor: Color(0xFFF5F5F5),
                                 filled: true,
