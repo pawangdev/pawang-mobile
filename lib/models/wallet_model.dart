@@ -2,7 +2,6 @@
 //
 //     final walletModel = walletModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 WalletsModel walletModelFromJson(String str) =>

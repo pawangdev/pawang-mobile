@@ -2,7 +2,6 @@
 //
 //     final profileUserModel = profileUserModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ProfileModelUserModel profileUserModelFromJson(String str) =>

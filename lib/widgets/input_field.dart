@@ -11,7 +11,8 @@ class InputField extends StatelessWidget {
       this.readOnly = false,
       this.errorText,
       this.onTap,
-      this.keyboardType})
+      this.keyboardType,
+      this.capitalization = TextCapitalization.sentences})
       : super(key: key);
   final String inputLabel;
   final bool enable;
@@ -20,6 +21,7 @@ class InputField extends StatelessWidget {
   final String? errorText;
   final Function()? onTap;
   final TextInputType? keyboardType;
+  final TextCapitalization? capitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class InputField extends StatelessWidget {
         readOnly: readOnly,
         enabled: enable,
         keyboardType: keyboardType,
+        textCapitalization: capitalization!,
         onTap: onTap,
         controller: inputController,
         decoration: InputDecoration(

@@ -56,7 +56,7 @@ class UserService {
 
   Future<ProfileModel> userProfile() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = await prefs.getString("token");
+    final token = prefs.getString("token");
 
     var response = await http.get(Uri.parse(baseURLAPI + "profile"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
