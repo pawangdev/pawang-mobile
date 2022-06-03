@@ -43,8 +43,10 @@ dependencies:
   path_provider: ^2.0.9
   intl: ^0.17.0
   http: ^0.13.4
+  basic_utils: ^4.2.2
   carousel_slider: ^4.1.1
   another_flushbar: ^1.10.29
+  skeleton_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

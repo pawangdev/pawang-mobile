@@ -2,11 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/profile_user_model.dart';
 import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
-import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
@@ -16,7 +17,7 @@ import 'package:pawang_mobile/widgets/CardPengeluaran2.dart';
 import 'package:pawang_mobile/widgets/IconBottom.dart';
 import 'package:pawang_mobile/widgets/LayananCard.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const String routeName = '/dashboard';
@@ -38,15 +39,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   get margin => null;
 
-  Future getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('token'));
-  }
+  ProfileModel user = ProfileModel(
+      id: 0,
+      name: "",
+      email: "",
+      phone: "",
+      gender: "",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now());
 
   @override
   void initState() {
     super.initState();
     updateListView();
+    getUserProfile();
+  }
+
+  void getUserProfile() async {
+    var dataUser = await UserService().userProfile();
+
+    setState(() {
+      user = dataUser as ProfileModel;
+    });
   }
 
   void updateListView() {
@@ -58,7 +72,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget plus() {
     return GestureDetector(
       onTap: () {
-        getToken();
         Navigator.pushNamed(context, AddWalletScreen.routeName);
         // cards.add({
         //   'name': 'Tambah',
@@ -123,11 +136,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           fontWeight: bold,
                                           color: kWhite),
                                     ),
-                                    Text("Mu'adz Fathulloh",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 12,
-                                            fontWeight: medium,
-                                            color: kWhite))
+                                    user.name != ""
+                                        ? Text(user.name,
+                                            style: kOpenSans.copyWith(
+                                                fontSize: 12,
+                                                fontWeight: medium,
+                                                color: kWhite))
+                                        : SkeletonAnimation(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            shimmerColor: Colors.white54,
+                                            child: Container(
+                                              height: 12,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                              ),
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ),

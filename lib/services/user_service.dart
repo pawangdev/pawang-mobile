@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/login_model.dart';
+import 'package:pawang_mobile/models/profile_user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
@@ -50,6 +51,22 @@ class UserService {
       return LoginModel.fromJson(jsonDecode(response.body));
     } else {
       return LoginModel.fromJson(jsonDecode(response.body));
+    }
+  }
+
+  Future<ProfileModel> userProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = await prefs.getString("token");
+
+    var response = await http.get(Uri.parse(baseURLAPI + "profile"), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': "bearer $token",
+    });
+
+    if (response.statusCode == 200) {
+      return ProfileModel.fromJson(jsonDecode(response.body)['data']);
+    } else {
+      throw Exception(response);
     }
   }
 }

@@ -1,16 +1,13 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/login_model.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/widgets/InputField.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:basic_utils/basic_utils.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -156,7 +153,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ).show(context);
                             } else {
                               Flushbar(
-                                message: response.message,
+                                message: StringUtils.capitalize(
+                                        response.message!,
+                                        allWords: true)
+                                    .toString(),
                                 icon: Icon(
                                   Icons.clear_rounded,
                                   size: 28.0,
