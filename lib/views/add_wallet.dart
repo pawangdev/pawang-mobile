@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AddWalletScreen extends StatefulWidget {
   static const String routeName = '/tambah-dompet';
@@ -12,8 +13,7 @@ class AddWalletScreen extends StatefulWidget {
 }
 
 class _AddWalletScreenState extends State<AddWalletScreen> {
-  final TextEditingController nama_dompet = TextEditingController();
-  final TextEditingController icon_kategori = TextEditingController();
+  final TextEditingController namaDompet = TextEditingController();
   bool _inputData = true;
 
   @override
@@ -29,47 +29,42 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconBack(PurpleMode: true),
+                  IconBack(
+                    blueMode: true,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                   Text(
                     "Tambah Dompet",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
                   ),
                   Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
+                    width: 7.2.w,
                   ),
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 3.4.h,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nama Dompet",
-                  inputController: nama_dompet,
-                  errorText: _inputData ? null : 'Nama Kategori wajib diisi',
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Icon",
-                  inputController: icon_kategori,
-                  errorText: _inputData ? null : 'Icon wajib diisi',
+                  inputController: namaDompet,
+                  errorText: _inputData ? null : 'Nama Dompet wajib diisi',
                 ),
               ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 15),
+                            const EdgeInsets.symmetric(vertical: 15),
                           ),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
@@ -83,7 +78,7 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                         child: Text(
                           "Tambah Dompet",
                           style: kOpenSans.copyWith(
-                            fontSize: 16,
+                            fontSize: 0.253.dp,
                             fontWeight: bold,
                           ),
                         )),

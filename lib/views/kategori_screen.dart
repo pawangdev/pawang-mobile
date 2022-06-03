@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/views/add_category.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class KategoriScreen extends StatelessWidget {
   static const String routeName = "/kategori";
@@ -19,7 +20,7 @@ class KategoriScreen extends StatelessWidget {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30),
@@ -30,12 +31,17 @@ class KategoriScreen extends StatelessWidget {
                           colors: [kPrimary, kPurple])),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 28, left: 32, right: 32),
+                  padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconBack(PurpleMode: false),
+                      IconBack(
+                        blueMode: false,
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                       Column(
                         children: [
                           SvgPicture.asset(
@@ -43,21 +49,19 @@ class KategoriScreen extends StatelessWidget {
                             color: kWhite,
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 1.h,
                           ),
                           Text(
                             'Kategori',
                             style: kOpenSans.copyWith(
-                                fontSize: 16,
+                                fontSize: 0.253.dp,
                                 fontWeight: semibold,
                                 color: kWhite),
                           ),
                         ],
                       ),
                       Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
+                        width: 7.2.w,
                       ),
                     ],
                   ),
@@ -65,11 +69,11 @@ class KategoriScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 2.4.h,
             ),
             Container(
               margin: const EdgeInsets.all(30),
-              height: 80,
+              height: 8.4.h,
               decoration: BoxDecoration(
                 color: kWhite,
                 borderRadius: BorderRadius.circular(12),
@@ -78,14 +82,14 @@ class KategoriScreen extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1.5,
                     blurRadius: 0.5,
-                    offset: Offset(0, 2), // changes position of shadow
+                    offset: const Offset(0, 2), // changes position of shadow
                   ),
                 ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 60,
+                  height: 6.4.h,
                   child: Row(
                     children: [
                       // ICON
@@ -101,7 +105,7 @@ class KategoriScreen extends StatelessWidget {
                         child: Text(
                           "Nama Kategori",
                           style: kOpenSans.copyWith(
-                              fontSize: 14,
+                              fontSize: 0.245.dp,
                               fontWeight: semibold,
                               color: kSecondary),
                         ),
@@ -114,21 +118,21 @@ class KategoriScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: FloatingActionButton(
-          backgroundColor: kWhite,
-          onPressed: () {
-            Navigator.pushNamed(context, AddCategoryScreen.routeName);
-          },
-          tooltip: 'Tambah Kategori',
-          splashColor: kPrimary,
-          child: Icon(
-            Icons.add,
-            color: kPrimary,
-          ),
-        ),
-      ),
+      // floatingActionButton: Padding(
+      //   padding: const EdgeInsets.all(25.0),
+      //   child: FloatingActionButton(
+      //     backgroundColor: kWhite,
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, AddCategoryScreen.routeName);
+      //     },
+      //     tooltip: 'Tambah Kategori',
+      //     splashColor: kPrimary,
+      //     child: Icon(
+      //       Icons.add,
+      //       color: kPrimary,
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

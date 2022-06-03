@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LayananCard extends StatelessWidget {
   const LayananCard(
@@ -11,22 +12,22 @@ class LayananCard extends StatelessWidget {
   final Function()? onTap;
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         InkWell(
           child: Container(
-            height: 60,
-            width: 60,
+            height: 6.7.h,
+            width: 14.2.w,
             decoration: BoxDecoration(
               color: kWhite,
-              borderRadius: BorderRadius.all(Radius.circular(18)),
+              borderRadius: const BorderRadius.all(Radius.circular(18)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.3),
                   spreadRadius: 0.5,
                   blurRadius: 0.5,
-                  offset: Offset(1, 3), // changes position of shadow
+                  offset: const Offset(1, 3), // changes position of shadow
                 ),
               ],
             ),
@@ -39,12 +40,12 @@ class LayananCard extends StatelessWidget {
           onTap: onTap,
         ),
         SizedBox(
-          height: 10,
+          height: 1.4.h,
         ),
         Text(
           title,
           style: kOpenSans.copyWith(
-              fontSize: 12, fontWeight: medium, color: kWhite),
+              fontSize: 0.22.dp, fontWeight: medium, color: kWhite),
         ),
       ],
     );

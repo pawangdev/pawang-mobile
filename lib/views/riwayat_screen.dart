@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/PengeluaranModel.dart';
-import 'package:pawang_mobile/services/PengeluaranService.dart';
+import 'package:pawang_mobile/services/pengeluaran_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
-import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
-import 'package:pawang_mobile/widgets/CardPengeluaran.dart';
-import 'package:pawang_mobile/widgets/IconBottom.dart';
+import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
+import 'package:pawang_mobile/widgets/icon_bottom.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RiwayatScreen extends StatefulWidget {
   static const String routeName = '/riwayat';
-  RiwayatScreen({Key? key}) : super(key: key);
+  const RiwayatScreen({Key? key}) : super(key: key);
 
   @override
   State<RiwayatScreen> createState() => _RiwayatScreenState();
@@ -47,14 +46,13 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                   child: Text(
                     "Riwayat",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
                   ),
                 ),
-                const SizedBox(
-                  height: 31,
+                SizedBox(
+                  height: 3.5.h,
                 ),
                 Row(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
@@ -66,20 +64,20 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.add_rounded,
                               size: 20,
                             ),
                             Text(
                               "Tambah Pemasukan",
                               style: kOpenSans.copyWith(
-                                  fontSize: 11, fontWeight: bold),
+                                  fontSize: 0.21.dp, fontWeight: bold),
                             ),
                           ],
                         ),
                         style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10)),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
@@ -90,7 +88,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                       ),
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 1.w,
                     ),
                     Expanded(
                       child: ElevatedButton(
@@ -101,20 +99,20 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.add_rounded,
                               size: 20,
                             ),
                             Text(
                               "Tambah Pengeluaran",
                               style: kOpenSans.copyWith(
-                                  fontSize: 11, fontWeight: bold),
+                                  fontSize: 0.21.dp, fontWeight: bold),
                             ),
                           ],
                         ),
                         style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10)),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
@@ -127,7 +125,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 3.4.h,
                 ),
                 FutureBuilder(
                   future: dataPengeluaran,
@@ -135,7 +133,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                     if (snapshot.hasData) {
                       if (snapshot.data?.length != 0) {
                         return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
@@ -159,7 +157,9 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                               child: Text(
                             "Anda belum memiliki pengeluaran",
                             style: kOpenSans.copyWith(
-                                color: kGray, fontSize: 14, fontWeight: medium),
+                                color: kGray,
+                                fontSize: 0.245.dp,
+                                fontWeight: medium),
                             textAlign: TextAlign.center,
                           )),
                         );
@@ -170,7 +170,9 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                             child: Text(
                           "Anda belum memiliki pengeluaran",
                           style: kOpenSans.copyWith(
-                              color: kGray, fontSize: 14, fontWeight: medium),
+                              color: kGray,
+                              fontSize: 0.245.dp,
+                              fontWeight: medium),
                           textAlign: TextAlign.center,
                         )),
                       );
@@ -184,7 +186,7 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 64,
+            height: 6.8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

@@ -45,6 +45,7 @@ dependencies:
   http: ^0.13.4
   carousel_slider: ^4.1.1
   another_flushbar: ^1.10.29
+  responsive_sizer: ^3.0.8
 
 dev_dependencies:
   flutter_test:

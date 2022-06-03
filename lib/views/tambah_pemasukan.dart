@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TambahPemasukanScreen extends StatefulWidget {
   static const String routeName = '/tambah-pemasukan';
@@ -12,10 +13,10 @@ class TambahPemasukanScreen extends StatefulWidget {
 }
 
 class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
-  final TextEditingController nama_pemasukan = TextEditingController();
-  final TextEditingController nominal_pemasukan = TextEditingController();
-  final TextEditingController kategori_pemasukan = TextEditingController();
-  final TextEditingController tanggal_pemasukan = TextEditingController();
+  final TextEditingController namaPemasukan = TextEditingController();
+  final TextEditingController nominalPemasukan = TextEditingController();
+  final TextEditingController kategoriPemasukan = TextEditingController();
+  final TextEditingController tanggalPemasukan = TextEditingController();
   bool _inputData = true;
 
   @override
@@ -31,51 +32,54 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconBack(PurpleMode: true),
+                  IconBack(
+                    blueMode: true,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                   Text(
                     "Tambah Pemasukan",
                     style: kOpenSans.copyWith(
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
+                    width: 7.2.w,
                   ),
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 3.4.h,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nama Pemasukan",
-                  inputController: nama_pemasukan,
+                  inputController: namaPemasukan,
                   errorText: _inputData ? null : 'Nama Pemasukan wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nominal",
-                  inputController: nominal_pemasukan,
+                  inputController: nominalPemasukan,
                   errorText: _inputData ? null : 'Nominal wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Kategori",
-                  inputController: kategori_pemasukan,
+                  inputController: kategoriPemasukan,
                   errorText: _inputData ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Tanggal",
-                  inputController: tanggal_pemasukan,
+                  inputController: tanggalPemasukan,
                   errorText: _inputData ? null : 'Tanggal wajib diisi',
                   enable: true,
                   readOnly: true,
@@ -98,7 +102,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                     child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 15),
+                            const EdgeInsets.symmetric(vertical: 15),
                           ),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
@@ -112,7 +116,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                         child: Text(
                           "Simpan Pemasukan",
                           style: kOpenSans.copyWith(
-                            fontSize: 16,
+                            fontSize: 0.253.dp,
                             fontWeight: bold,
                           ),
                         )),

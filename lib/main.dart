@@ -10,7 +10,6 @@ import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/splash_screen.dart';
@@ -18,9 +17,10 @@ import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,33 +34,36 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MaterialApp(
-      title: 'Pawang',
-      theme: ThemeData(
-        fontFamily: "OpenSans",
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/landing': (context) => const LandingScreen(),
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
-        '/dashboard': (context) => DashboardScreen(),
-        '/settings': (context) => SettingsScreen(),
-        '/riwayat': (context) => RiwayatScreen(),
-        '/kategori': (context) => KategoriScreen(),
-        '/dompet': (context) => WalletScreen(),
-        '/tambah-kategori': (context) => AddCategoryScreen(),
-        '/tambah-dompet': (context) => AddWalletScreen(),
-        '/tambah-pemasukan': (context) => TambahPemasukanScreen(),
-        '/tambah-pengeluaran': (context) => TambahPengeluaranScreen(),
-        '/scan-struk': (context) => const ScanStruk(),
-        '/validasi-scan': (context) => const ValidasiScanScreen(),
-        '/detail': (context) => const DetailPengeluaran(),
-        '/lihat-struk': (context) => const DetailImageStrukScreen(),
-        '/connection-check': ((context) => ConnectionScreen())
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          title: 'Pawang',
+          theme: ThemeData(
+            fontFamily: "OpenSans",
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const SplashScreen(),
+            '/landing': (context) => const LandingScreen(),
+            '/login': (context) => const LoginScreen(),
+            '/register': (context) => const RegisterScreen(),
+            '/dashboard': (context) => const DashboardScreen(),
+            '/settings': (context) => const SettingsScreen(),
+            '/kategori': (context) => const KategoriScreen(),
+            '/dompet': (context) => const WalletScreen(),
+            '/tambah-kategori': (context) => const AddCategoryScreen(),
+            '/tambah-dompet': (context) => const AddWalletScreen(),
+            '/tambah-pemasukan': (context) => const TambahPemasukanScreen(),
+            '/tambah-pengeluaran': (context) => const TambahPengeluaranScreen(),
+            '/scan-struk': (context) => const ScanStruk(),
+            '/validasi-scan': (context) => const ValidasiScanScreen(),
+            '/detail': (context) => const DetailPengeluaran(),
+            '/lihat-struk': (context) => const DetailImageStrukScreen(),
+            '/connection-check': ((context) => const ConnectionScreen())
+          },
+          debugShowCheckedModeBanner: false,
+        );
       },
-      debugShowCheckedModeBanner: false,
     );
   }
 }

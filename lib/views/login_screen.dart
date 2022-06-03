@@ -7,14 +7,14 @@ import 'package:pawang_mobile/models/login_model.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -38,44 +38,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kPrimary),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      IconBack(
+                        blueMode: true,
                         onTap: () {
                           Navigator.pushNamed(context, LandingScreen.routeName);
                         },
-                      ),
+                      )
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 2.5.h,
                   ),
                   Text(
                     "Masuk dulu yuk!",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(fontWeight: bold, fontSize: 0.29.dp),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 1.h),
                   Text(
                     "Kami sudah lama menantimu",
-                    style:
-                        TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                    style: TextStyle(fontWeight: light, fontSize: 0.255.dp),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 3.5.h,
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
                       inputController: emailTextController,
@@ -83,23 +70,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Password',
                             style: kOpenSans.copyWith(
-                                fontWeight: bold, color: kBlack),
+                                fontSize: 0.24.dp,
+                                fontWeight: bold,
+                                color: kBlack),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 1.5.h,
                           ),
                           TextField(
                             keyboardType: TextInputType.visiblePassword,
                             controller: passwordTextController,
                             decoration: InputDecoration(
-                                fillColor: Color(0xFFF5F5F5),
+                                fillColor: const Color(0xFFF5F5F5),
                                 filled: true,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(
@@ -122,10 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       )),
                   SizedBox(
-                    height: 30,
+                    height: 3.5.h,
                   ),
                   SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () {
                         var data = <String, dynamic>{
@@ -175,11 +164,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         "Masuk",
-                        style:
-                            kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
+                        style: kOpenSans.copyWith(
+                            fontSize: 0.25.dp, fontWeight: bold),
                       ),
                       style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(100, 50)),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12)),
                         backgroundColor: MaterialStateProperty.all(kPrimary),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
@@ -190,49 +180,56 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 3.5.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Belum punya akun? "),
+                      Text("Belum punya akun? ",
+                          style: kOpenSans.copyWith(
+                              fontSize: 0.235.dp,
+                              color: kBlack,
+                              fontWeight: light)),
                       TextButton(
                           child: Text('Daftar',
                               style: kOpenSans.copyWith(
-                                  color: kPrimary, fontWeight: bold)),
+                                  fontSize: 0.235.dp,
+                                  color: kPrimary,
+                                  fontWeight: bold)),
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, RegisterScreen.routeName);
                           }),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 20),
                     width: 280,
                     child: Row(
                       children: <Widget>[
-                        Expanded(
+                        const Expanded(
                           child: Divider(
-                            color: kBlack,
+                            color: kGray,
                             height: 1.5,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            "OR",
+                            "atau",
                             style: TextStyle(
+                              fontSize: 0.24.dp,
                               color: kGray,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: medium,
                             ),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
-                            color: kBlack,
+                            color: kGray,
                             height: 1.5,
                           ),
                         )
@@ -240,29 +237,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 1.5.h,
                   ),
                   InkWell(
                     child: Container(
-                      height: 40,
-                      width: 40,
+                      height: 5.h,
+                      width: 11.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         color: kWhite,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 0.5,
                             blurRadius: 1,
-                            offset: Offset(0, 2), // changes position of shadow
+                            offset: const Offset(
+                                0, 2), // changes position of shadow
                           ),
                         ],
                       ),
                       child: Center(
-                        child: Wrap(children: [
-                          Image.asset('assets/images/google.png')
-                        ]),
-                      ),
+                          child: Image.asset('assets/images/google.png')),
                     ),
                     onTap: () {},
                   ),

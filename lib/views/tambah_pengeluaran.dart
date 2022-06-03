@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TambahPengeluaranScreen extends StatefulWidget {
   static const String routeName = '/tambah-pengeluaran';
@@ -17,10 +15,10 @@ class TambahPengeluaranScreen extends StatefulWidget {
 }
 
 class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
-  final TextEditingController nama_pengeluaran = TextEditingController();
-  final TextEditingController nominal_pengeluaran = TextEditingController();
-  final TextEditingController kategori_pengeluaran = TextEditingController();
-  final TextEditingController tanggal_pengeluaran = TextEditingController();
+  final TextEditingController namaPengeluaran = TextEditingController();
+  final TextEditingController nominalPengeluaran = TextEditingController();
+  final TextEditingController kategoriPengeluaran = TextEditingController();
+  final TextEditingController tanggalPengeluaran = TextEditingController();
   bool _inputData = true;
 
   @override
@@ -36,51 +34,52 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconBack(PurpleMode: true),
+                  IconBack(
+                    blueMode: true,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                   Text(
                     "Tambah Pengeluaran",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
                   ),
-                  Container(
-                    width: 32,
-                    height: 32,
-                    padding: EdgeInsets.all(6),
-                  ),
+                  Container(width: 7.2.w),
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 3.2.h,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
-                  inputController: nama_pengeluaran,
+                  inputController: namaPengeluaran,
                   errorText: _inputData ? null : 'Nama pengeluaran wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Nominal",
-                  inputController: nominal_pengeluaran,
+                  inputController: nominalPengeluaran,
                   errorText: _inputData ? null : 'Nominal wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                   inputLabel: "Kategori",
-                  inputController: kategori_pengeluaran,
+                  inputController: kategoriPengeluaran,
                   errorText: _inputData ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 child: InputField(
                     inputLabel: "Tanggal",
-                    inputController: tanggal_pengeluaran,
+                    inputController: tanggalPengeluaran,
                     errorText: _inputData ? null : 'Tanggal wajib diisi',
                     enable: true,
                     readOnly: false,
@@ -97,7 +96,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                           String format =
                               DateFormat.yMMMMd('id_ID').format(date);
                           setState(() {
-                            tanggal_pengeluaran.text = format;
+                            tanggalPengeluaran.text = format;
                           });
                         }
                       });
@@ -107,11 +106,11 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 15),
+                            const EdgeInsets.symmetric(vertical: 15),
                           ),
                           backgroundColor: MaterialStateProperty.all(kPrimary),
                           shape: MaterialStateProperty.all(
@@ -125,7 +124,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                         child: Text(
                           "Simpan Pengeluaran",
                           style: kOpenSans.copyWith(
-                            fontSize: 16,
+                            fontSize: 0.253.dp,
                             fontWeight: bold,
                           ),
                         )),
