@@ -17,10 +17,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController NamaTextController = TextEditingController();
-  final TextEditingController EmailTextController = TextEditingController();
-  final TextEditingController PasswordTextController = TextEditingController();
-  final TextEditingController PhoneTextController = TextEditingController();
+  final TextEditingController namaTextController = TextEditingController();
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController phoneTextController = TextEditingController();
   String? genderTextController;
 
   bool _isObscure = true;
@@ -59,20 +59,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Nama Lengkap",
-                      inputController: NamaTextController,
+                      inputController: namaTextController,
                       keyboardType: TextInputType.name,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
-                      inputController: EmailTextController,
+                      inputController: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -82,12 +82,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 fontWeight: bold, color: kBlack),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 1.4.h,
                           ),
                           TextField(
-                            controller: PasswordTextController,
+                            controller: passwordTextController,
                             decoration: InputDecoration(
-                                fillColor: Color(0xFFF5F5F5),
+                                fillColor: const Color(0xFFF5F5F5),
                                 filled: true,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(
@@ -110,15 +110,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       )),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Nomer Telepon",
-                      inputController: PhoneTextController,
+                      inputController: phoneTextController,
                       keyboardType: TextInputType.phone,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -179,10 +179,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         var data = <String, dynamic>{
-                          'name': NamaTextController.text,
-                          'email': EmailTextController.text,
-                          'password': PasswordTextController.text,
-                          'phone': PhoneTextController.text,
+                          'name': namaTextController.text,
+                          'email': emailTextController.text,
+                          'password': passwordTextController.text,
+                          'phone': phoneTextController.text,
                           'gender': genderTextController,
                         };
 
@@ -195,15 +195,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Flushbar(
                             message:
                                 "Berhasil Mendaftarkan Akun, Silahkan Login !",
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.check,
                               size: 28.0,
                               color: Colors.white,
                             ),
-                            margin: EdgeInsets.all(8),
+                            margin: const EdgeInsets.all(8),
                             borderRadius: BorderRadius.circular(8),
                             backgroundColor: kSuccess,
-                            duration: Duration(seconds: 3),
+                            duration: const Duration(seconds: 3),
                           ).show(context);
                         } catch (e) {
                           print(e);

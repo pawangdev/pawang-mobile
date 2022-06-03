@@ -131,15 +131,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               Flushbar(
                                 message: "Berhasil Login !",
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.check,
                                   size: 28.0,
                                   color: Colors.white,
                                 ),
-                                margin: EdgeInsets.all(8),
+                                margin: const EdgeInsets.all(8),
                                 borderRadius: BorderRadius.circular(8),
                                 backgroundColor: kSuccess,
-                                duration: Duration(seconds: 3),
+                                duration: const Duration(seconds: 3),
                               ).show(context);
                             } else {
                               Flushbar(
@@ -147,15 +147,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         response.message!,
                                         allWords: true)
                                     .toString(),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.clear_rounded,
                                   size: 28.0,
                                   color: Colors.white,
                                 ),
-                                margin: EdgeInsets.all(8),
+                                margin: const EdgeInsets.all(8),
                                 borderRadius: BorderRadius.circular(8),
                                 backgroundColor: kError,
-                                duration: Duration(seconds: 3),
+                                duration: const Duration(seconds: 3),
                               ).show(context);
                             }
                           });
