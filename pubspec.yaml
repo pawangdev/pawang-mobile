@@ -45,6 +45,7 @@ dependencies:
   dio: ^4.0.6
   http: 
   carousel_slider: ^4.1.1
+  another_flushbar: ^1.10.29
 
 dev_dependencies:
   flutter_test:

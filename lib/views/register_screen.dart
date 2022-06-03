@@ -1,6 +1,8 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
 import 'package:pawang_mobile/views/splash_screen.dart';
@@ -17,10 +19,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController Nama = TextEditingController();
-  final TextEditingController Email = TextEditingController();
-  final TextEditingController Password = TextEditingController();
-  final TextEditingController rePassword = TextEditingController();
+  final TextEditingController NamaTextController = TextEditingController();
+  final TextEditingController EmailTextController = TextEditingController();
+  final TextEditingController PasswordTextController = TextEditingController();
+  final TextEditingController PhoneTextController = TextEditingController();
+  String? genderTextController;
+
   bool _isObscure = true;
 
   @override
@@ -68,14 +72,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Nama Lengkap",
-                      inputController: Nama,
+                      inputController: NamaTextController,
+                      keyboardType: TextInputType.name,
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
-                      inputController: Email,
+                      inputController: EmailTextController,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   Container(
@@ -116,49 +122,105 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       )),
                   Container(
-                      margin: EdgeInsets.only(bottom: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Konfirmasi Password',
-                            style: kOpenSans.copyWith(
-                                fontWeight: bold, color: kBlack),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                fillColor: Color(0xFFF5F5F5),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius),
-                                    borderSide: BorderSide.none),
-                                focusColor: kPrimary,
-                                suffixIcon: IconButton(
-                                    color: kGray,
-                                    icon: Icon(_isObscure
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: InputField(
+                      inputLabel: "Nomer Telepon",
+                      inputController: PhoneTextController,
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Jenis Kelamin",
+                          style: kOpenSans.copyWith(
+                              fontWeight: bold, color: kBlack),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Radio(
+                                    value: "male",
+                                    groupValue: genderTextController,
+                                    onChanged: (value) {
                                       setState(() {
-                                        _isObscure = !_isObscure;
+                                        genderTextController = value as String;
                                       });
-                                    })),
-                            autofocus: false,
-                            obscureText: _isObscure,
-                          ),
-                        ],
-                      )),
+                                    }),
+                                Text(
+                                  "Laki-Laki",
+                                  style: kOpenSans.copyWith(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Row(
+                              children: [
+                                Radio(
+                                    value: "female",
+                                    groupValue: genderTextController,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        genderTextController = value as String;
+                                      });
+                                    }),
+                                Text(
+                                  "Perempuan",
+                                  style: kOpenSans.copyWith(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        var data = <String, dynamic>{
+                          'name': NamaTextController.text,
+                          'email': EmailTextController.text,
+                          'password': PasswordTextController.text,
+                          'phone': PhoneTextController.text,
+                          'gender': genderTextController,
+                        };
+
+                        try {
+                          UserService().userRegister(data);
+
+                          Navigator.pushReplacementNamed(
+                              context, LoginScreen.routeName);
+
+                          Flushbar(
+                            message:
+                                "Berhasil Mendaftarkan Akun, Silahkan Login !",
+                            icon: Icon(
+                              Icons.check,
+                              size: 28.0,
+                              color: Colors.white,
+                            ),
+                            margin: EdgeInsets.all(8),
+                            borderRadius: BorderRadius.circular(8),
+                            backgroundColor: kSuccess,
+                            duration: Duration(seconds: 3),
+                          ).show(context);
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
                       child: Text(
                         "Daftar",
                         style:
