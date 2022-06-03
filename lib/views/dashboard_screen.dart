@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
+import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/services/pengeluaran_service.dart';
+import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
@@ -37,6 +39,7 @@ List<Map<String, dynamic>> cards = [
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late Future dataPengeluaran;
+  late Future<WalletsModel> _wallets;
 
   get margin => null;
 
@@ -54,6 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     updateListView();
     getUserProfile();
+    _wallets = WalletService().getWallets();
   }
 
   void getUserProfile() async {
@@ -164,14 +168,57 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ),
                   SizedBox(height: 2.h),
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      disableCenter: true,
-                      aspectRatio: 2.8,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                    ),
-                    items: cardWidgets(),
+                  FutureBuilder(
+                    future: _wallets,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<WalletsModel> snapshot) {
+                      var state = snapshot.connectionState;
+                      if (state != ConnectionState.done) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (snapshot.hasData) {
+                          return CarouselSlider.builder(
+                            itemCount: snapshot.data!.data.length + 1,
+                            options: CarouselOptions(
+                              disableCenter: true,
+                              aspectRatio: 2.8,
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                            ),
+                            itemBuilder: (BuildContext context, int index,
+                                int realIndex) {
+                              if (index == snapshot.data!.data.length) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, AddWalletScreen.routeName);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: kWhite,
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: const Center(
+                                        child: Icon(Icons.add_rounded)),
+                                  ),
+                                );
+                              }
+                              var wallet = snapshot.data!.data[index];
+                              return WalletCard(
+                                  color: kWhite,
+                                  name: wallet.name,
+                                  balance: wallet.balance.toString());
+                            },
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text(snapshot.error.toString()));
+                        } else {
+                          return Text('');
+                        }
+                      }
+                    },
                   ),
                   SizedBox(
                     height: 2.4.h,
