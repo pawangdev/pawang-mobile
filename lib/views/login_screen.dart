@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text(
                     "Masuk dulu yuk!",
-                    style: TextStyle(fontWeight: bold, fontSize: 0.29.dp),
+                    style: TextStyle(fontWeight: bold, fontSize: 0.27.dp),
                   ),
                   SizedBox(height: 1.h),
                   Text(
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Password',
                             style: kOpenSans.copyWith(
-                                fontSize: 0.24.dp,
+                                fontSize: 0.21.dp,
                                 fontWeight: bold,
                                 color: kBlack),
                           ),

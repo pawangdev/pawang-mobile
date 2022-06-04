@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Text(
                     "Buat Akun",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 0.29.dp),
+                        fontWeight: FontWeight.bold, fontSize: 0.27.dp),
                   ),
                   SizedBox(height: 3.5.h),
                   Container(
@@ -79,7 +79,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Text(
                             'Password',
                             style: kOpenSans.copyWith(
-                                fontWeight: bold, color: kBlack),
+                                fontSize: 0.21.dp,
+                                fontWeight: bold,
+                                color: kBlack),
                           ),
                           SizedBox(
                             height: 1.4.h,
@@ -125,7 +127,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           "Jenis Kelamin",
                           style: kOpenSans.copyWith(
-                              fontWeight: bold, color: kBlack),
+                              fontSize: 0.21.dp,
+                              fontWeight: bold,
+                              color: kBlack),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,

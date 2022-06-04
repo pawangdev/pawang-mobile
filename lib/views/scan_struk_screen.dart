@@ -177,6 +177,7 @@ class _ScanStrukState extends State<ScanStruk> {
                 Center(
                   child: Text(
                     "Mohon atur posisi struk agar dapat terdeteksi",
+                    textAlign: TextAlign.center,
                     style: kOpenSans.copyWith(fontSize: 0.23.dp, color: kBlack),
                   ),
                 ),

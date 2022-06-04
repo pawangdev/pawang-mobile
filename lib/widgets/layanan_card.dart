@@ -45,7 +45,7 @@ class LayananCard extends StatelessWidget {
         Text(
           title,
           style: kOpenSans.copyWith(
-              fontSize: 0.22.dp, fontWeight: medium, color: kWhite),
+              fontSize: 0.18.dp, fontWeight: medium, color: kWhite),
         ),
       ],
     );

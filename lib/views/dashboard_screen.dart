@@ -132,15 +132,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Text(
                                       "Hallo,",
                                       style: kOpenSans.copyWith(
-                                          fontSize: 0.22.dp,
-                                          fontWeight: bold,
+                                          fontSize: 0.2.dp,
+                                          fontWeight: medium,
                                           color: kWhite),
                                     ),
                                     user.name != ""
                                         ? Text(user.name,
                                             style: kOpenSans.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: medium,
+                                                fontSize: 0.21.dp,
+                                                fontWeight: bold,
                                                 color: kWhite))
                                         : SkeletonAnimation(
                                             borderRadius:
@@ -232,7 +232,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Text(
                           'Layanan',
                           style: kOpenSans.copyWith(
-                              fontSize: 0.25.dp,
+                              fontSize: 0.24.dp,
                               fontWeight: bold,
                               color: kWhite),
                         ),
@@ -318,7 +318,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     'Riwayat',
                                     textAlign: TextAlign.start,
                                     style: kOpenSans.copyWith(
-                                        fontSize: 0.25.dp,
+                                        fontSize: 0.24.dp,
                                         fontWeight: bold,
                                         color: kBlack),
                                   ),

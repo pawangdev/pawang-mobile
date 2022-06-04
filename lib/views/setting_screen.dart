@@ -40,9 +40,7 @@ class SettingsScreen extends StatelessWidget {
                       Text(
                         "Mu'adz Fathulloh",
                         style: kOpenSans.copyWith(
-                            fontSize: 0.235.dp,
-                            fontWeight: bold,
-                            color: kBlack),
+                            fontSize: 0.22.dp, fontWeight: bold, color: kBlack),
                       )
                     ],
                   ),

@@ -29,7 +29,7 @@ class InputField extends StatelessWidget {
       Text(
         inputLabel,
         style: kOpenSans.copyWith(
-            fontSize: 0.24.dp, fontWeight: bold, color: kBlack),
+            fontSize: 0.21.dp, fontWeight: bold, color: kBlack),
       ),
       SizedBox(
         height: 1.4.h,
