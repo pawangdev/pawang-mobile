@@ -81,7 +81,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
                   inputController: namaPengeluaran,
-                  errorText: _validated ? null : 'Nama Pengeluaran wajib diisi',
+                  // errorText: _validated ? null : 'Nama Pengeluaran wajib diisi',
                 ),
               ),
               Container(
@@ -89,7 +89,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Nominal",
                   inputController: nominalPengeluaran,
-                  errorText: _validated ? null : 'Nominal wajib diisi',
+                  // errorText: _validated ? null : 'Nominal wajib diisi',
                   enable: false,
                 ),
               ),
@@ -98,7 +98,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Kategori",
                   inputController: kategoriPengeluaran,
-                  errorText: _validated ? null : 'Kategori wajib diisi',
+                  // errorText: _validated ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
@@ -106,7 +106,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 child: InputField(
                   inputLabel: "Tanggal",
                   inputController: tanggalPengeluaran,
-                  errorText: _validated ? null : 'Tanggal wajib diisi',
+                  // errorText: _validated ? null : 'Tanggal wajib diisi',
                   keyboardType: TextInputType.none,
                   onTap: () {
                     showDatePicker(

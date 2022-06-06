@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
@@ -18,7 +19,43 @@ class AddWalletScreen extends StatefulWidget {
 class _AddWalletScreenState extends State<AddWalletScreen> {
   final TextEditingController namaDompet = TextEditingController();
   final TextEditingController nominalDompet = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool _inputData = true;
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+      var data = <String, dynamic>{
+        'name': namaDompet.text,
+        'balance': int.parse(nominalDompet.text),
+      };
+
+      WalletService().createWallet(data).then((response) {
+        if (response == true) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            DashboardScreen.routeName,
+            (route) => false,
+          );
+
+          Flushbar(
+            message: "Berhasil Membuat Wallet !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kSuccess,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +89,31 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
               SizedBox(
                 height: 3.4.h,
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Nama Dompet",
-                  inputController: namaDompet,
-                  errorText: _inputData ? null : 'Nama Dompet wajib diisi',
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Saldo Awal",
-                  inputController: nominalDompet,
-                  keyboardType: TextInputType.number,
-                  errorText: _inputData ? null : 'Saldo Awal wajib diisi',
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: "Nama Dompet",
+                        inputController: namaDompet,
+                        errorText:
+                            _inputData ? null : 'Nama Dompet wajib diisi',
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: "Saldo Awal",
+                        inputController: nominalDompet,
+                        keyboardType: TextInputType.number,
+                        errorText: _inputData ? null : 'Saldo Awal wajib diisi',
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
@@ -87,35 +134,7 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          var data = <String, dynamic>{
-                            'name': namaDompet.text,
-                            'balance': int.parse(nominalDompet.text),
-                          };
-
-                          WalletService().createWallet(data).then((response) {
-                            if (response == true) {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                DashboardScreen.routeName,
-                                (route) => false,
-                              );
-
-                              Flushbar(
-                                message: "Berhasil Membuat Wallet !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kSuccess,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            }
-                          });
-                        },
+                        onPressed: _submit,
                         child: Text(
                           "Simpan Dompet",
                           style: kOpenSans.copyWith(

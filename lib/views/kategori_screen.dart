@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/category_model.dart';
+import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class KategoriScreen extends StatelessWidget {
+class KategoriScreen extends StatefulWidget {
   static const String routeName = "/kategori";
   const KategoriScreen({Key? key}) : super(key: key);
+
+  @override
+  State<KategoriScreen> createState() => _KategoriScreenState();
+}
+
+class _KategoriScreenState extends State<KategoriScreen> {
+  late Future<CategoriesModel> _categories;
+  @override
+  void initState() {
+    _categories = CategoryService.getCategories();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,49 +85,100 @@ class KategoriScreen extends StatelessWidget {
             SizedBox(
               height: 2.4.h,
             ),
-            Container(
-              margin: const EdgeInsets.all(30),
-              height: 8.4.h,
-              decoration: BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1.5,
-                    blurRadius: 0.5,
-                    offset: const Offset(0, 2), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 6.4.h,
-                  child: Row(
-                    children: [
-                      // ICON
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 12),
-                        child: SvgPicture.asset(
-                          'assets/images/makan_kategori.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Expanded(
+            Expanded(
+                child: FutureBuilder(
+              future: _categories,
+              builder: (context, AsyncSnapshot<CategoriesModel> snapshot) {
+                var state = snapshot.connectionState;
+
+                if (state != ConnectionState.done) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    if (snapshot.data?.data.length != 0) {
+                      return ListView.builder(
+                        itemCount: snapshot.data?.data.length,
+                        itemBuilder: (context, index) {
+                          var category = snapshot.data?.data[index];
+                          return Container(
+                            margin: const EdgeInsets.only(
+                                left: 30, right: 30, bottom: 16),
+                            height: 6.4.h,
+                            decoration: BoxDecoration(
+                              color: kWhite,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 1.5,
+                                  blurRadius: 0.5,
+                                  offset: const Offset(
+                                      0, 1), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 6.4.h,
+                                child: Row(
+                                  children: [
+                                    // ICON
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, right: 18),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(baseURLAPI +
+                                                    category!.iconUrl))),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        category.name,
+                                        style: kOpenSans.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: semibold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
                         child: Text(
-                          "Nama Kategori",
+                          "Belum Ada Kategori",
                           style: kOpenSans.copyWith(
-                              fontSize: 16,
-                              fontWeight: semibold,
-                              color: kSecondary),
+                              color: kGray,
+                              fontSize: 13, //0.23.dp,
+                              fontWeight: medium),
+                          textAlign: TextAlign.center,
                         ),
+                      );
+                    }
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        snapshot.error.toString(),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                    );
+                  } else {
+                    return Text("");
+                  }
+                }
+              },
+            ))
           ],
         ),
       ),

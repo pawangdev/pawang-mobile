@@ -79,8 +79,8 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   child: InputField(
                     inputLabel: "Nama Pengeluaran",
                     inputController: _namaPengeluaran,
-                    errorText:
-                        _validated ? null : 'Nama Pengeluaran wajib diisi',
+                    // errorText:
+                        // _validated ? null : 'Nama Pengeluaran wajib diisi',
                   ),
                 ),
                 // NOMINAL
@@ -89,7 +89,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   child: InputField(
                     inputLabel: "Nominal",
                     inputController: _nominalPengeluaran,
-                    errorText: _validated ? null : 'Nominal wajib diisi',
+                    // errorText: _validated ? null : 'Nominal wajib diisi',
                   ),
                 ),
                 // KATEGORI
@@ -98,7 +98,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   child: InputField(
                     inputLabel: "Kategori",
                     inputController: _kategoriPengeluaran,
-                    errorText: _validated ? null : 'Kategori wajib diisi',
+                    // errorText: _validated ? null : 'Kategori wajib diisi',
                   ),
                 ),
                 // TANGGAL
@@ -107,7 +107,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   child: InputField(
                     inputLabel: "Tanggal",
                     inputController: _tanggalPengeluaran,
-                    errorText: _validated ? null : 'Tanggal wajib diisi',
+                    // errorText: _validated ? null : 'Tanggal wajib diisi',
                     keyboardType: TextInputType.none,
                     onTap: () {
                       showDatePicker(

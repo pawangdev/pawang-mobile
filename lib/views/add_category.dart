@@ -55,7 +55,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 child: InputField(
                   inputLabel: "Nama Kategori",
                   inputController: namaKategori,
-                  errorText: _inputData ? null : 'Nama Kategori wajib diisi',
+                  // errorText: _inputData ? null : 'Nama Kategori wajib diisi',
                 ),
               ),
               Container(
@@ -63,7 +63,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 child: InputField(
                   inputLabel: "Icon",
                   inputController: iconKategori,
-                  errorText: _inputData ? null : 'Icon wajib diisi',
+                  // errorText: _inputData ? null : 'Icon wajib diisi',
                 ),
               ),
               Expanded(

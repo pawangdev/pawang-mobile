@@ -1,52 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/pengeluaran_model.dart';
+import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-enum Menu { itemOne, itemTwo }
 
 class CardPengeluaran extends StatefulWidget {
   const CardPengeluaran({Key? key, required this.data}) : super(key: key);
-  final PengeluaranModel data;
+  final TransactionModel data;
 
   @override
   State<CardPengeluaran> createState() => _CardPengeluaranState();
 }
 
 class _CardPengeluaranState extends State<CardPengeluaran> {
-  String _selectedMenu = '';
-
   @override
   Widget build(BuildContext context) {
-    // PengeluaranModel data =
-    //     ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
-    // final int? _id = data.id;
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
       child: Container(
         margin: const EdgeInsets.only(bottom: 18),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 21),
-        height: 11.5.h,
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         decoration: BoxDecoration(
-          color: kWhite,
-          borderRadius: BorderRadius.circular(6),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.3),
               spreadRadius: 1,
-              blurRadius: 3,
+              blurRadius: 1,
               offset: const Offset(1, 2), // changes position of shadow
             ),
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              // ICON
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   height: 3.4.h,
@@ -54,8 +45,8 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                   decoration: const BoxDecoration(
                       color: kSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: SvgPicture.asset(
-                    'assets/images/makan_kategori.svg',
+                  child: Image.network(
+                    baseURLAPI + widget.data.category.iconUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -65,81 +56,31 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // NAMA PENGELUARAN
-                      Expanded(
-                        child: Text(
-                          widget.data.namaPengeluaran,
-                          style: kOpenSans.copyWith(
-                              //0.22.dp
-                              fontSize: 12,
-                              fontWeight: bold),
-                        ),
-                      ),
-                      // NOMINAL
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Nominal  : ",
-                              style: kOpenSans.copyWith(
-                                  //0.20.dp
-                                  fontSize: 10,
-                                  fontWeight: semibold),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            Text(
-                              "- Rp. ${widget.data.nominalPengeluaran.toString()}",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: semibold,
-                                  color: kSecondary),
-                            )
-                          ],
-                        ),
-                      ),
-                      // KATEGORI
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Kategori  : ",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 10, fontWeight: semibold),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            Text(
-                              widget.data.kategoriPengeluaran,
-                              style: kOpenSans.copyWith(fontSize: 10),
-                            ),
-                          ],
-                        ),
+                      Text(
+                        widget.data.category.name,
+                        style: kOpenSans.copyWith(
+                            //0.22.dp
+                            fontSize: 16,
+                            fontWeight: bold),
                       ),
                       // TANGGAL/WAKTU
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Waktu      : ",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 10, fontWeight: semibold),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            Text(
-                              widget.data.tanggalPengeluaran,
-                              style: kOpenSans.copyWith(fontSize: 10),
-                            ),
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.data.date.toLocal().toString(),
+                            style: kOpenSans.copyWith(
+                                fontSize: 14, color: kGray.withOpacity(0.9)),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ],
+            ),
+            Container(
+              child: Text("${widget.data.amount.toString()} IDR",
+                  style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold)),
             ),
           ],
         ),

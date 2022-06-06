@@ -2,6 +2,7 @@
 //
 //     final transactionsModel = transactionsModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 TransactionsModel transactionsModelFromJson(String str) =>
@@ -42,26 +43,28 @@ class TransactionModel {
     required this.amount,
     required this.categoryId,
     required this.walletId,
-    required this.type,
     required this.description,
     required this.imageUrl,
+    required this.type,
     required this.date,
     required this.userId,
     required this.createdAt,
     required this.updatedAt,
+    required this.category,
   });
 
   int id;
   int amount;
   int categoryId;
   int walletId;
-  String type;
   String description;
   String imageUrl;
+  String type;
   DateTime date;
   int userId;
   DateTime createdAt;
   DateTime updatedAt;
+  CategoryTransactionModel category;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
@@ -69,13 +72,14 @@ class TransactionModel {
         amount: json["amount"],
         categoryId: json["category_id"],
         walletId: json["wallet_id"],
-        type: json["type"],
         description: json["description"],
         imageUrl: json["image_url"],
+        type: json["type"],
         date: DateTime.parse(json["date"]),
         userId: json["user_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        category: CategoryTransactionModel.fromJson(json["category"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -83,11 +87,53 @@ class TransactionModel {
         "amount": amount,
         "category_id": categoryId,
         "wallet_id": walletId,
-        "type": type,
         "description": description,
         "image_url": imageUrl,
+        "type": type,
         "date": date.toIso8601String(),
         "user_id": userId,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "category": category.toJson(),
+      };
+}
+
+class CategoryTransactionModel {
+  CategoryTransactionModel({
+    required this.id,
+    required this.name,
+    required this.iconUrl,
+    required this.userId,
+    required this.type,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  int id;
+  String name;
+  String iconUrl;
+  int userId;
+  String type;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory CategoryTransactionModel.fromJson(Map<String, dynamic> json) =>
+      CategoryTransactionModel(
+        id: json["id"],
+        name: json["name"],
+        iconUrl: json["icon_url"],
+        userId: json["user_id"],
+        type: json["type"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "icon_url": iconUrl,
+        "user_id": userId,
+        "type": type,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
