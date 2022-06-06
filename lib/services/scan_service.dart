@@ -38,7 +38,7 @@ class ScanService {
     temp_img = await ImageCropper().cropImage(
       sourcePath: image.path,
       androidUiSettings: const AndroidUiSettings(
-        toolbarTitle: "Potong Bagian Total",
+        toolbarTitle: "Potong Bagian Total Belanja Saja",
         toolbarColor: kPrimary,
         initAspectRatio: CropAspectRatioPreset.original,
         lockAspectRatio: false,
