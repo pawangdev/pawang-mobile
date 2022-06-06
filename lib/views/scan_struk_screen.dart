@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io' as file;
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -5,11 +6,13 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawang_mobile/services/scan_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:http/http.dart' as http;
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
@@ -21,138 +24,123 @@ class ScanStruk extends StatefulWidget {
 
 class _ScanStrukState extends State<ScanStruk> {
   XFile? _image;
-  dynamic _pickImageError;
-  late InputImage inputImage;
-  final ImagePicker _picker = ImagePicker();
+  // dynamic _pickImageError;
+  // late InputImage inputImage;
+  // final ImagePicker _picker = ImagePicker();
 
   late String nominal;
   late String imageFilePath;
 
-  Future getImage(bool is_fromGal) async {
-    late final XFile? image;
-
-    if (is_fromGal) {
-      try {
-        image = await _picker.pickImage(source: ImageSource.gallery);
-      } catch (e) {
-        setState(() => _pickImageError = e);
-      }
-    } else {
-      try {
-        image = await _picker.pickImage(source: ImageSource.camera);
-      } catch (e) {
-        setState(() => _pickImageError = e);
-      }
-    }
-    inputImage = InputImage.fromFilePath(image!.path);
-    setState(() {
-      _image = image;
-    });
-    cropImage(image);
-  }
-
-  Future cropImage(XFile? image) async {
-    file.File? temp_img = file.File(image!.path);
-
-    temp_img = await ImageCropper()
-        .cropImage(sourcePath: image.path, maxHeight: 1080, maxWidth: 1080);
-    if (temp_img != null) {
-      print("iso iki");
-      setState(() {
-        inputImage = InputImage.fromFile(temp_img!);
-      });
-      // searchTotal(inputImage);
-      // dynamic temp = ScanService.uploadImage(inputImage);
-      // if(temp == 1){
-      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //     content: Text("Berhasil upload gambar"),
-      //     backgroundColor: kSuccess,
-      //   ));
-      // } else{
-      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //     content: Text("Gagal upload gambar"),
-      //     backgroundColor: kError,
-      //   ));
-      // }
-    } else {
-      print("error ngene lo");
-    }
-  }
-
-  Future searchTotal(InputImage image) async {
-    final textDetector = GoogleMlKit.vision.textDetector();
-    final RecognisedText recognisedText =
-        await textDetector.processImage(image);
-    final findTotal = <double>[];
-    double totalBelanja = 0;
-    double temp;
-    int counter = 0;
-    bool found = false;
-
+  Future scanReceipt(bool is_fromGal) async {
+    // GET AND CROP THE IMAGE
     try {
-      for (TextBlock block in recognisedText.blocks) {
-        for (TextLine line in block.lines) {
-          print(line.text);
-          if (line.text.contains(RegExp(r'[A-Z]')) ||
-              line.text.contains(RegExp(r'[a-z]')) ||
-              line.text.contains(RegExp(r'=')) &&
-                  !line.text.contains(RegExp(r'Rp')) &&
-                  !line.text.contains(RegExp(r'RP'))) {
-            counter++;
-            if (line.text.contains(RegExp(r'total')) ||
-                line.text.contains(RegExp(r'TOTAL')) &&
-                    line.text.compareTo('Subtotal') != 0 &&
-                    line.text.compareTo('SUBTOTAL') != 0) {
-              found = true;
-            }
-          } else {
-            if (found) {
-              String a = line.text.replaceAll(RegExp('[^A-Za-z0-9]'), '');
-              if (a.contains(' ')) {
-                a = a.replaceAll(RegExp(r' '), '');
-              }
-              if (a.contains('Rp') || a.contains('Rp.') || a.contains('Rp. ')) {
-                a = a.replaceAll(RegExp(r'Rp'), '');
-              } else if (a.contains('RP') ||
-                  a.contains('RP.') ||
-                  a.contains('RP. ')) {
-                a = a.replaceAll(RegExp(r'RP'), '');
-              }
-              if (a.compareTo('') != 0) {
-                findTotal.add(double.parse(a));
-              }
-            }
-          }
-        }
-        counter = 0;
+      final image = ScanService().getImage(is_fromGal);
+      if (image != null) {
+        setState(() {
+          _image = XFile(image);
+          imageFilePath = _image!.path.toString();
+        });
+      } else {
+        setState(() {
+          _image = null;
+          imageFilePath = "";
+        });
       }
+    } catch (e) {}
 
-      temp = findTotal[0];
-      for (double i in findTotal) {
-        if (i >= temp) {
-          totalBelanja = i;
-        } else {
-          temp = i;
-        }
+    // GET THE AMOUNT
+    try{
+      final temp = ScanService().getAmount(ScanService().getResponse());
+
+      if(temp != ""){
+        setState(() {
+          nominal = temp;
+        });
+      } else{
+        setState(() {
+          nominal = "";
+        });
       }
-
+    } catch(e){
       setState(() {
-        nominal = totalBelanja.toString();
-        imageFilePath = image.filePath.toString();
+        nominal = "";
       });
-    } catch (e) {
-      setState(() {
-        nominal = '';
-        imageFilePath = '';
-        _image = null;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Gambar tidak mengandung unsur total"),
-        backgroundColor: kError,
-      ));
     }
   }
+  // Future searchTotal(InputImage image) async {
+  //   final textDetector = GoogleMlKit.vision.textDetector();
+  //   final RecognisedText recognisedText =
+  //       await textDetector.processImage(image);
+  //   final findTotal = <double>[];
+  //   double totalBelanja = 0;
+  //   double temp;
+  //   int counter = 0;
+  //   bool found = false;
+
+  //   try {
+  //     for (TextBlock block in recognisedText.blocks) {
+  //       for (TextLine line in block.lines) {
+  //         print(line.text);
+  //         if (line.text.contains(RegExp(r'[A-Z]')) ||
+  //             line.text.contains(RegExp(r'[a-z]')) ||
+  //             line.text.contains(RegExp(r'=')) &&
+  //                 !line.text.contains(RegExp(r'Rp')) &&
+  //                 !line.text.contains(RegExp(r'RP'))) {
+  //           counter++;
+  //           if (line.text.contains(RegExp(r'total')) ||
+  //               line.text.contains(RegExp(r'TOTAL')) &&
+  //                   line.text.compareTo('Subtotal') != 0 &&
+  //                   line.text.compareTo('SUBTOTAL') != 0) {
+  //             found = true;
+  //           }
+  //         } else {
+  //           if (found) {
+  //             String a = line.text.replaceAll(RegExp('[^A-Za-z0-9]'), '');
+  //             if (a.contains(' ')) {
+  //               a = a.replaceAll(RegExp(r' '), '');
+  //             }
+  //             if (a.contains('Rp') || a.contains('Rp.') || a.contains('Rp. ')) {
+  //               a = a.replaceAll(RegExp(r'Rp'), '');
+  //             } else if (a.contains('RP') ||
+  //                 a.contains('RP.') ||
+  //                 a.contains('RP. ')) {
+  //               a = a.replaceAll(RegExp(r'RP'), '');
+  //             }
+  //             if (a.compareTo('') != 0) {
+  //               findTotal.add(double.parse(a));
+  //             }
+  //           }
+  //         }
+  //       }
+  //       counter = 0;
+  //     }
+
+  //     temp = findTotal[0];
+  //     for (double i in findTotal) {
+  //       if (i >= temp) {
+  //         totalBelanja = i;
+  //       } else {
+  //         temp = i;
+  //       }
+  //     }
+
+  //     setState(() {
+  //       nominal = totalBelanja.toString();
+  //       imageFilePath = image.filePath.toString();
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       nominal = '';
+  //       imageFilePath = '';
+  //       _image = null;
+  //     });
+
+  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+  //       content: Text("Gambar tidak mengandung unsur total"),
+  //       backgroundColor: kError,
+  //     ));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +216,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12)))),
-                              onPressed: () => getImage(false)),
+                              onPressed: () => scanReceipt(false)),
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 20),
                             width: MediaQuery.of(context).size.width,
@@ -273,7 +261,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                       fontWeight: bold,
                                       color: kPrimary),
                                 ),
-                                onPressed: () => getImage(true),
+                                onPressed: () => scanReceipt(true),
                                 style: OutlinedButton.styleFrom(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),

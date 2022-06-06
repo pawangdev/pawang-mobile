@@ -1,46 +1,116 @@
-// import 'package:dio/dio.dart';
-// import 'package:flutter/services.dart';
-// import 'package:google_ml_kit/google_ml_kit.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'dart:io' as file;
+import 'package:pawang_mobile/constants/theme.dart';
 
-// class ScanService {
-//   // UPLOADING IMAGE
-//   static Future uploadImage(InputImage inputImage) async {
-//     Response response;
-//     try {
-//       FormData formData = new FormData.fromMap({
-//         "image": await MultipartFile.fromFile(inputImage.filePath!,
-//             filename: "struk-belanja")
-//       });
+class ScanService {
+  late InputImage inputImage;
+  late http.Response response;
+  // GETTING THE IMAGE FROM GALLERY AND CAMERA
+  getImage(bool is_fromGal) async {
+    late final XFile? image;
+    final ImagePicker _picker = ImagePicker();
 
-//       response =
-//           await Dio().put("http://127.0.0.1:8080/uploader", data: formData);
+    if (is_fromGal) {
+      try {
+        image = await _picker.pickImage(source: ImageSource.gallery);
+      } catch (e) {}
+    } else {
+      try {
+        image = await _picker.pickImage(source: ImageSource.camera);
+      } catch (e) {}
+    }
+    inputImage = InputImage.fromFilePath(image!.path);
+    cropImage(image);
 
-//       if (response.statusCode == 200) {
-//         return 1;
-//       } else {
-//         return 0;
-//       }
-//     } on DioError catch (e) {
-//       print(e.response);
-//     } catch (e) {}
-//   }
-// }
-//   // Future uploadImage(XFile image) async {
-//   //   var request = http.MultipartRequest(
-//   //       "POST", Uri.parse("http://127.0.0.1:8080/scan-struk"));
+    return image;
+  }
 
-//   //   request.headers['Authorization'] = "";
+  // CROPPING THE IMAGE
+  Future cropImage(XFile? image) async {
+    file.File? temp_img = file.File(image!.path);
 
-//   //   var picture = http.MultipartFile.fromBytes(
-//   //       'image', (await rootBundle.load(image.path)).buffer.asUint8List());
+    temp_img = await ImageCropper().cropImage(sourcePath: image.path);
+    try {
+      if (temp_img != null) {
+        //setState(() {
+        inputImage = InputImage.fromFile(temp_img);
+        //});
+        final response = uploadImage(inputImage);
+      }
+    } catch (e) {}
+  }
 
-//   //   request.files.add(picture);
+  // UPLOADING IMAGE
+  uploadImage(InputImage inputImage) async {
+    String message = "";
+    String temp_amount = "";
+    final request =
+        http.MultipartRequest("POST", Uri.parse("http://localhost/uploader"));
+    final headers = {"Content-type": "multipart/form-data"};
 
-//   //   var response = await request.send();
+    request.files.add(http.MultipartFile(
+        'file',
+        file.File(inputImage.filePath!).readAsBytes().asStream(),
+        file.File(inputImage.filePath!).lengthSync(),
+        filename: inputImage.filePath!.split("/").last));
 
-//   //   var responseData = await response.stream.toBytes();
+    request.headers.addAll(headers);
 
-//   //   // var result = String.fromCharCode(int.parse(responseData));
-//   // }
+    try {
+      final response = await request.send();
+      http.Response res = await http.Response.fromStream(response);
+      final resJson = jsonDecode(res.body);
+
+      return resJson;
+    } catch (e) {}
+  }
+
+  // GETTING THE RESPONSE
+  getResponse() {
+    try {
+      return response;
+    } catch (e) {}
+  }
+
+  // GETTING THE AMOUNT FROM THE RECEIPT
+  getAmount(dynamic response) {
+    try {
+      if (response['message'] == "1") {
+        String amount =
+            response['amounts'][0].replaceAll(RegExp('[^A-Za-z0-9]'), '');
+        return amount;
+        //setState(() {
+        //nominal = amount;
+        //imageFilePath = _image!.path.toString();
+        //});
+        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        //   content: Text("Berhasil mendapatkan total belanja"),
+        //   backgroundColor: kSuccess,
+        // ));
+      } else {
+        return "";
+        // setState(() {
+        //   nominal = '';
+        //   imageFilePath = '';
+        //   _image = null;
+        // });
+        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        //   content: Text("Pastikan gambar yang dicrop mengandung total"),
+        //   backgroundColor: kError,
+        // ));
+      }
+    } catch (e) {
+      // setState(() {
+      //   nominal = '';
+      //   imageFilePath = '';
+      //   _image = null;
+      // });
+    }
+  }
+}
