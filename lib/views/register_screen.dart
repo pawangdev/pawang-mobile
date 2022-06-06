@@ -68,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
+                      capitalization: TextCapitalization.none,
                       inputController: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                     ),

@@ -76,10 +76,7 @@ class LandingScreen extends StatelessWidget {
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
                   style: kOpenSans.copyWith(
-                      //0.22.dp
-                      fontSize: 12,
-                      fontWeight: medium,
-                      color: kGray),
+                      fontSize: 16, fontWeight: medium, color: kGray),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

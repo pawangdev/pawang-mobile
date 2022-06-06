@@ -94,8 +94,8 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                             'balance': int.parse(nominalDompet.text),
                           };
 
-                          WalletService().createWallet(data).then((value) {
-                            if (value == true) {
+                          WalletService().createWallet(data).then((response) {
+                            if (response == true) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 DashboardScreen.routeName,

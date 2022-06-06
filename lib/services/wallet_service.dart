@@ -35,7 +35,7 @@ class WalletService {
         body: jsonEncode(dataWallet),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "bearer $token",
+          'Authorization': "Bearer $token",
         });
 
     if (response.statusCode == 201) {

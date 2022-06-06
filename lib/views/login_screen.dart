@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
+                      capitalization: TextCapitalization.none,
                       inputController: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -151,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             } else {
                               Flushbar(
                                 message: StringUtils.capitalize(
-                                        response.message!,
+                                        response.message,
                                         allWords: true)
                                     .toString(),
                                 icon: const Icon(
