@@ -167,8 +167,9 @@ class _ScanStrukState extends State<ScanStruk> {
                 Center(
                   child: Text(
                     "Scan Struk",
+                    //0.253.dp
                     style: kOpenSans.copyWith(
-                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                 ),
                 SizedBox(
@@ -177,8 +178,9 @@ class _ScanStrukState extends State<ScanStruk> {
                 Center(
                   child: Text(
                     "Mohon atur posisi struk agar dapat terdeteksi",
+                    //0.23.dp
                     textAlign: TextAlign.center,
-                    style: kOpenSans.copyWith(fontSize: 0.23.dp, color: kBlack),
+                    style: kOpenSans.copyWith(fontSize: 12, color: kBlack),
                   ),
                 ),
                 SizedBox(
@@ -194,10 +196,11 @@ class _ScanStrukState extends State<ScanStruk> {
                           )
                         : Center(
                             child: Text(
-                              "Silahkan Pilih Struk Terlebih Dahulu",
+                              "Silahkan pilih struk terlebih dahulu",
+                              //0.22.dp
                               style: kOpenSans.copyWith(
                                   color: kGray,
-                                  fontSize: 0.22.dp,
+                                  fontSize: 10,
                                   fontWeight: medium),
                             ),
                           ),
@@ -245,10 +248,11 @@ class _ScanStrukState extends State<ScanStruk> {
                                       horizontal: 10),
                                   child: Text(
                                     "atau",
+                                    //0.235.dp
                                     style: TextStyle(
-                                      fontSize: 0.235.dp,
+                                      fontSize: 14,
                                       color: kGray,
-                                      fontWeight: semibold,
+                                      fontWeight: medium,
                                     ),
                                   ),
                                 ),
@@ -268,8 +272,9 @@ class _ScanStrukState extends State<ScanStruk> {
                               child: OutlinedButton(
                                 child: Text(
                                   "Pilih dari Galeri",
+                                  //0.255.dp
                                   style: kOpenSans.copyWith(
-                                      fontSize: 0.255.dp,
+                                      fontSize: 16,
                                       fontWeight: bold,
                                       color: kPrimary),
                                 ),
@@ -294,8 +299,9 @@ class _ScanStrukState extends State<ScanStruk> {
                             child: OutlinedButton(
                               child: Text(
                                 "Ulangi",
+                                //0.235.dp
                                 style: kOpenSans.copyWith(
-                                    fontSize: 0.235.dp,
+                                    fontSize: 14,
                                     fontWeight: bold,
                                     color: kPrimary),
                               ),
@@ -348,7 +354,7 @@ class _ScanStrukState extends State<ScanStruk> {
                                   child: Text(
                                     "Lanjut",
                                     style: kOpenSans.copyWith(
-                                      fontSize: 0.235.dp,
+                                      fontSize: 14,
                                       fontWeight: bold,
                                     ),
                                   ))),
@@ -361,7 +367,7 @@ class _ScanStrukState extends State<ScanStruk> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 8.h,
+            height: 7.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

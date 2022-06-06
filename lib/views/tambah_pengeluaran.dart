@@ -43,7 +43,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                   Text(
                     "Tambah Pengeluaran",
                     style: kOpenSans.copyWith(
-                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(width: 7.2.w),
                 ],
@@ -124,7 +124,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                         child: Text(
                           "Simpan Pengeluaran",
                           style: kOpenSans.copyWith(
-                            fontSize: 0.253.dp,
+                            fontSize: 16,
                             fontWeight: bold,
                           ),
                         )),

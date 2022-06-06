@@ -43,8 +43,7 @@ class CardPengeluaran2 extends StatelessWidget {
               Expanded(
                 child: Text(
                   data.kategoriPengeluaran,
-                  style: kOpenSans.copyWith(
-                      fontSize: 0.245.dp, fontWeight: semibold),
+                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semibold),
                 ),
               ),
               //NOMINAL
@@ -53,9 +52,7 @@ class CardPengeluaran2 extends StatelessWidget {
                 child: Text(
                   "- Rp. ${data.nominalPengeluaran.toString()}",
                   style: kOpenSans.copyWith(
-                      fontSize: 0.245.dp,
-                      fontWeight: semibold,
-                      color: kSecondary),
+                      fontSize: 12, fontWeight: semibold, color: kSecondary),
                 ),
               ),
             ],

@@ -98,7 +98,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -116,7 +116,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                         child: Text(
                           "Simpan Pemasukan",
                           style: kOpenSans.copyWith(
-                            fontSize: 0.253.dp,
+                            fontSize: 16,
                             fontWeight: bold,
                           ),
                         )),

@@ -70,8 +70,8 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                 height: 2.h,
               ),
               Text(
-                "Mohon Lakukan Validasi untuk Menghindari Kesalahan",
-                style: kOpenSans.copyWith(fontSize: 0.2.dp),
+                "Mohon Lakukan Validasi untuk Menghindari Kesalahan", //0.2.dp
+                style: kOpenSans.copyWith(fontSize: 12),
               ),
               SizedBox(
                 height: 3.4.h,
@@ -191,7 +191,7 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                         child: Text(
                           "Simpan Pengeluaran",
                           style: kOpenSans.copyWith(
-                            fontSize: 0.253.dp,
+                            fontSize: 16,
                             fontWeight: bold,
                           ),
                         )),

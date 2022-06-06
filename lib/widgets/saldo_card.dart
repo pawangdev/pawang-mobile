@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletCard extends StatelessWidget {
   final String name;
@@ -24,16 +23,15 @@ class WalletCard extends StatelessWidget {
           style: kOpenSans.copyWith(
             color: kBlack,
             fontWeight: medium,
-            fontSize: 0.253.dp,
+            fontSize: 14,
+            //0.253.dp,
           ),
         ),
         Text(
           'Rp. ' + balance.toString(),
           style: kOpenSans.copyWith(
-            color: kBlack,
-            fontWeight: bold,
-            fontSize: 0.26.dp,
-          ),
+              color: kBlack, fontWeight: bold, fontSize: 18 //0.26.dp,
+              ),
         ),
       ]),
     );

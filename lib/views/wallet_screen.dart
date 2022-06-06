@@ -34,7 +34,7 @@ class _WalletScreenState extends State<WalletScreen> {
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.11,
+                  height: 13.h,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
@@ -69,7 +69,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           Text(
                             'Dompet',
                             style: kOpenSans.copyWith(
-                                fontSize: 0.253.dp,
+                                fontSize: 16,
                                 fontWeight: semibold,
                                 color: kWhite),
                           ),
@@ -116,7 +116,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                       style: kOpenSans.copyWith(
                                         color: kPrimary,
                                         fontWeight: semibold,
-                                        fontSize: 0.26.dp,
+                                        fontSize: 16,
                                       ),
                                     ),
                                     SizedBox(
@@ -127,7 +127,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                       style: kOpenSans.copyWith(
                                         color: kBlack,
                                         fontWeight: medium,
-                                        fontSize: 0.245.dp,
+                                        fontSize: 15,
                                       ),
                                     ),
                                   ],

@@ -49,10 +49,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: 2.5.h,
                   ),
-                  Text(
+                  const Text(
                     "Buat Akun",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 0.27.dp),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20
+                        //0.27.dp
+                        ),
                   ),
                   SizedBox(height: 3.5.h),
                   Container(
@@ -79,7 +80,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Text(
                             'Password',
                             style: kOpenSans.copyWith(
-                                fontSize: 0.21.dp,
+                                fontSize: 12,
+                                // 0.21.dp,
                                 fontWeight: bold,
                                 color: kBlack),
                           ),
@@ -127,7 +129,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           "Jenis Kelamin",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.21.dp,
+                              fontSize: 12,
+                              // 0.21.dp,
                               fontWeight: bold,
                               color: kBlack),
                         ),
@@ -147,12 +150,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     }),
                                 Text(
                                   "Laki-Laki",
-                                  style: kOpenSans.copyWith(fontSize: 16),
+                                  style: kOpenSans.copyWith(fontSize: 12),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 15,
+                            SizedBox(
+                              width: 2.5.w,
                             ),
                             Row(
                               children: [
@@ -166,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     }),
                                 Text(
                                   "Perempuan",
-                                  style: kOpenSans.copyWith(fontSize: 16),
+                                  style: kOpenSans.copyWith(fontSize: 12),
                                 ),
                               ],
                             ),
@@ -216,7 +219,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text(
                         "Daftar",
                         style: kOpenSans.copyWith(
-                            fontSize: 0.25.dp, fontWeight: bold),
+                            fontSize: 16,
+                            //0.25.dp,
+                            fontWeight: bold),
                       ),
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
@@ -238,13 +243,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Text("Sudah punya akun? ",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.235.dp,
-                              color: kBlack,
-                              fontWeight: light)),
+                              fontSize: 12, color: kBlack, fontWeight: light)),
                       TextButton(
                           child: Text('Masuk',
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.235.dp,
+                                  fontSize: 12,
                                   color: kPrimary,
                                   fontWeight: bold)),
                           onPressed: () {
