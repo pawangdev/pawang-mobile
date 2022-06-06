@@ -1,14 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/profile_user_model.dart';
+import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
   const SettingsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  ProfileModel user = ProfileModel(
+      id: 0,
+      name: "",
+      email: "",
+      phone: "",
+      gender: "",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now());
+
+  @override
+  void initState() {
+    getUserProfile();
+    super.initState();
+  }
+
+  void getUserProfile() async {
+    var dataUser = await UserService().userProfile();
+
+    setState(() {
+      user = dataUser as ProfileModel;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +68,26 @@ class SettingsScreen extends StatelessWidget {
                           width: 28.w,
                           child: Image.asset('assets/images/profile_blue.png')),
                       SizedBox(height: 2.4.h),
-                      Text(
-                        "Mu'adz Fathulloh",
-                        style: kOpenSans.copyWith(
-                            fontSize: 14, fontWeight: bold, color: kBlack),
-                      )
+                      user.name != ""
+                          ? Text(
+                              user.name,
+                              style: kOpenSans.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: bold,
+                                  color: kBlack),
+                            )
+                          : SkeletonAnimation(
+                              borderRadius: BorderRadius.circular(8.0),
+                              shimmerColor: Colors.white70,
+                              child: Container(
+                                height: 12,
+                                width: MediaQuery.of(context).size.width * 0.40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: Colors.grey.withOpacity(0.5),
+                                ),
+                              ),
+                            ),
                     ],
                   ),
                   SizedBox(

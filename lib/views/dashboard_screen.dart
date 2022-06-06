@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
+import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
+import 'package:pawang_mobile/services/transaction_service.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/services/pengeluaran_service.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
@@ -39,6 +41,7 @@ List<Map<String, dynamic>> cards = [
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late Future dataPengeluaran;
+  late Future<TransactionsModel> _transactions;
   late Future<WalletsModel> _wallets;
 
   get margin => null;
@@ -58,6 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     updateListView();
     getUserProfile();
     _wallets = WalletService().getWallets();
+    _transactions = TransactionService.getTransactions();
   }
 
   void getUserProfile() async {
@@ -327,11 +331,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 Container(
                                   constraints: BoxConstraints(minHeight: 30.h),
                                   child: FutureBuilder(
-                                    future: dataPengeluaran,
+                                    future: _transactions,
                                     builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
+                                        AsyncSnapshot<TransactionsModel>
+                                            snapshot) {
                                       if (snapshot.hasData) {
-                                        if (snapshot.data?.length != 0) {
+                                        if (snapshot.data?.data.length != 0) {
                                           return ListView.builder(
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
@@ -348,14 +353,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       context,
                                                       DetailPengeluaran
                                                           .routeName,
-                                                      arguments:
-                                                          snapshot.data[index]);
+                                                      arguments: snapshot
+                                                          .data!.data[index]);
                                                 },
                                                 child: CardPengeluaran(
-                                                    data: snapshot.data[index]),
+                                                    data: snapshot
+                                                        .data!.data[index]),
                                               );
                                             },
-                                            itemCount: snapshot.data?.length,
+                                            itemCount:
+                                                snapshot.data?.data.length,
                                           );
                                         } else {
                                           return Center(
