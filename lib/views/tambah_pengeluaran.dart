@@ -56,7 +56,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 child: InputField(
                   inputLabel: "Nama Pengeluaran",
                   inputController: namaPengeluaran,
-                  errorText: _inputData ? null : 'Nama pengeluaran wajib diisi',
+                  // errorText: _inputData ? null : 'Nama pengeluaran wajib diisi',
                 ),
               ),
               Container(
@@ -64,7 +64,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 child: InputField(
                   inputLabel: "Nominal",
                   inputController: nominalPengeluaran,
-                  errorText: _inputData ? null : 'Nominal wajib diisi',
+                  // errorText: _inputData ? null : 'Nominal wajib diisi',
                 ),
               ),
               Container(
@@ -72,7 +72,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 child: InputField(
                   inputLabel: "Kategori",
                   inputController: kategoriPengeluaran,
-                  errorText: _inputData ? null : 'Kategori wajib diisi',
+                  // errorText: _inputData ? null : 'Kategori wajib diisi',
                 ),
               ),
               Container(
@@ -80,7 +80,7 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                 child: InputField(
                     inputLabel: "Tanggal",
                     inputController: tanggalPengeluaran,
-                    errorText: _inputData ? null : 'Tanggal wajib diisi',
+                    // errorText: _inputData ? null : 'Tanggal wajib diisi',
                     enable: true,
                     readOnly: false,
                     keyboardType: TextInputType.none,

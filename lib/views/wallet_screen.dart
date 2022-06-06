@@ -120,7 +120,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           } else {
                             return Center(
                               child: Text(
-                                "Belum ada dompet",
+                                "Anda belum memiliki dompet",
                                 style: kOpenSans.copyWith(
                                     color: kGray,
                                     fontSize: 13, //0.23.dp,
@@ -132,7 +132,7 @@ class _WalletScreenState extends State<WalletScreen> {
                         } else {
                           return Center(
                             child: Text(
-                              "Belum ada dompet",
+                              "Anda belum memiliki dompet",
                               style: kOpenSans.copyWith(
                                   color: kGray,
                                   fontSize: 13, //0.23.dp,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:form_validator/form_validator.dart';
 
 class InputField extends StatelessWidget {
   const InputField(
@@ -12,7 +13,8 @@ class InputField extends StatelessWidget {
       this.errorText,
       this.onTap,
       this.keyboardType,
-      this.capitalization = TextCapitalization.sentences})
+      this.capitalization = TextCapitalization.sentences,
+      this.validator})
       : super(key: key);
   final String inputLabel;
   final bool enable;
@@ -22,6 +24,7 @@ class InputField extends StatelessWidget {
   final Function()? onTap;
   final TextInputType? keyboardType;
   final TextCapitalization? capitalization;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,8 @@ class InputField extends StatelessWidget {
       SizedBox(
         height: 1.4.h,
       ),
-      TextField(
+      TextFormField(
+        validator: validator,
         readOnly: readOnly,
         enabled: enable,
         keyboardType: keyboardType,

@@ -48,6 +48,7 @@ dependencies:
   another_flushbar: ^1.10.29
   skeleton_text: ^3.0.0
   responsive_sizer: ^3.0.8
+  form_validator: ^1.0.2
 
 dev_dependencies:
   flutter_test:
