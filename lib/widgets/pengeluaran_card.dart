@@ -69,7 +69,9 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                         child: Text(
                           widget.data.namaPengeluaran,
                           style: kOpenSans.copyWith(
-                              fontSize: 0.22.dp, fontWeight: bold),
+                              //0.22.dp
+                              fontSize: 12,
+                              fontWeight: bold),
                         ),
                       ),
                       // NOMINAL
@@ -79,7 +81,9 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                             Text(
                               "Nominal  : ",
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.20.dp, fontWeight: semibold),
+                                  //0.20.dp
+                                  fontSize: 10,
+                                  fontWeight: semibold),
                             ),
                             SizedBox(
                               width: 1.w,
@@ -87,7 +91,7 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                             Text(
                               "- Rp. ${widget.data.nominalPengeluaran.toString()}",
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.20.dp,
+                                  fontSize: 10,
                                   fontWeight: semibold,
                                   color: kSecondary),
                             )
@@ -101,14 +105,14 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                             Text(
                               "Kategori  : ",
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.20.dp, fontWeight: semibold),
+                                  fontSize: 10, fontWeight: semibold),
                             ),
                             SizedBox(
                               width: 1.w,
                             ),
                             Text(
                               widget.data.kategoriPengeluaran,
-                              style: kOpenSans.copyWith(fontSize: 0.20.dp),
+                              style: kOpenSans.copyWith(fontSize: 10),
                             ),
                           ],
                         ),
@@ -120,14 +124,14 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                             Text(
                               "Waktu      : ",
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.20.dp, fontWeight: semibold),
+                                  fontSize: 10, fontWeight: semibold),
                             ),
                             SizedBox(
                               width: 1.w,
                             ),
                             Text(
                               widget.data.tanggalPengeluaran,
-                              style: kOpenSans.copyWith(fontSize: 0.20.dp),
+                              style: kOpenSans.copyWith(fontSize: 10),
                             ),
                           ],
                         ),

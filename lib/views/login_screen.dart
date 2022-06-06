@@ -49,12 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text(
                     "Masuk dulu yuk!",
-                    style: TextStyle(fontWeight: bold, fontSize: 0.27.dp),
+                    style: TextStyle(
+                        //0.27.dp
+                        fontWeight: bold,
+                        fontSize: 20),
                   ),
                   SizedBox(height: 1.h),
                   Text(
                     "Kami sudah lama menantimu",
-                    style: TextStyle(fontWeight: light, fontSize: 0.255.dp),
+                    style: TextStyle(
+                        //0.255.dp
+                        fontWeight: medium,
+                        fontSize: 16),
                   ),
                   SizedBox(
                     height: 3.5.h,
@@ -63,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: const EdgeInsets.only(bottom: 20),
                     child: InputField(
                       inputLabel: "Email",
+                      capitalization: TextCapitalization.none,
                       inputController: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -75,7 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Password',
                             style: kOpenSans.copyWith(
-                                fontSize: 0.21.dp,
+                                fontSize: 12,
+                                // 0.21.dp,
                                 fontWeight: bold,
                                 color: kBlack),
                           ),
@@ -144,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             } else {
                               Flushbar(
                                 message: StringUtils.capitalize(
-                                        response.message!,
+                                        response.message,
                                         allWords: true)
                                     .toString(),
                                 icon: const Icon(
@@ -166,7 +174,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "Masuk",
                         style: kOpenSans.copyWith(
-                            fontSize: 0.25.dp, fontWeight: bold),
+                            fontSize: 16,
+                            //0.25.dp,
+                            fontWeight: bold),
                       ),
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
@@ -186,15 +196,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Belum punya akun? ",
+                      Text("Belum punya akun?",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.235.dp,
+                              fontSize: 12,
+                              //0.235.dp,
                               color: kBlack,
                               fontWeight: light)),
                       TextButton(
                           child: Text('Daftar',
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.235.dp,
+                                  fontSize: 12,
                                   color: kPrimary,
                                   fontWeight: bold)),
                           onPressed: () {
@@ -222,7 +233,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             "atau",
                             style: TextStyle(
-                              fontSize: 0.24.dp,
+                              fontSize: 12,
+                              //0.24.dp,
                               color: kGray,
                               fontWeight: medium,
                             ),

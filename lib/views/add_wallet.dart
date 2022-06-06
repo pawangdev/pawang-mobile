@@ -43,7 +43,7 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                   Text(
                     "Tambah Dompet",
                     style: kOpenSans.copyWith(
-                        fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
                   Container(
                     width: 7.2.w,
@@ -94,8 +94,8 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                             'balance': int.parse(nominalDompet.text),
                           };
 
-                          WalletService().createWallet(data).then((value) {
-                            if (value == true) {
+                          WalletService().createWallet(data).then((response) {
+                            if (response == true) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 DashboardScreen.routeName,
@@ -118,9 +118,9 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                           });
                         },
                         child: Text(
-                          "Tambah Dompet",
+                          "Simpan Dompet",
                           style: kOpenSans.copyWith(
-                            fontSize: 0.253.dp,
+                            fontSize: 16,
                             fontWeight: bold,
                           ),
                         )),

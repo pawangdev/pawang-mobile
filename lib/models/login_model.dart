@@ -1,33 +1,51 @@
 // To parse this JSON data, do
 //
-//     final login = loginFromJson(jsonString);
+//     final loginModel = loginModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-LoginModel loginFromJson(String str) => LoginModel.fromJson(json.decode(str));
+LoginModel loginModelFromJson(String str) =>
+    LoginModel.fromJson(json.decode(str));
 
-String loginToJson(LoginModel data) => json.encode(data.toJson());
+String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   LoginModel({
-    this.success,
-    this.message,
-    this.data,
+    required this.success,
+    required this.message,
+    required this.data,
   });
 
-  bool? success;
-  String? message;
-  String? data;
+  bool success;
+  String message;
+  TokenModel data;
 
-  factory LoginModel.fromJson(Map<dynamic, dynamic> json) => LoginModel(
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         success: json["success"],
         message: json["message"],
-        data: json["data"],
+        data: TokenModel.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": data,
+        "data": data.toJson(),
+      };
+}
+
+class TokenModel {
+  TokenModel({
+    required this.token,
+  });
+
+  String token;
+
+  factory TokenModel.fromJson(Map<String, dynamic> json) => TokenModel(
+        token: json["token"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "token": token,
       };
 }

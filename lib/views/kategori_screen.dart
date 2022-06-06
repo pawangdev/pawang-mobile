@@ -18,7 +18,7 @@ class KategoriScreen extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.11,
+                  height: 13.h,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
@@ -53,7 +53,7 @@ class KategoriScreen extends StatelessWidget {
                           Text(
                             'Kategori',
                             style: kOpenSans.copyWith(
-                                fontSize: 0.253.dp,
+                                fontSize: 16,
                                 fontWeight: semibold,
                                 color: kWhite),
                           ),
@@ -99,12 +99,11 @@ class KategoriScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-
                       Expanded(
                         child: Text(
                           "Nama Kategori",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.245.dp,
+                              fontSize: 16,
                               fontWeight: semibold,
                               color: kSecondary),
                         ),

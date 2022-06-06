@@ -65,7 +65,10 @@ class LandingScreen extends StatelessWidget {
                 Text(
                   "Selamat Datang",
                   style: kOpenSans.copyWith(
-                      fontSize: 0.30.dp, fontWeight: bold, color: kBlack),
+                      //0.30.dp
+                      fontSize: 20,
+                      fontWeight: bold,
+                      color: kBlack),
                 ),
                 SizedBox(
                   height: 0.8.h,
@@ -73,7 +76,7 @@ class LandingScreen extends StatelessWidget {
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
                   style: kOpenSans.copyWith(
-                      fontSize: 0.22.dp, fontWeight: medium, color: kGray),
+                      fontSize: 16, fontWeight: medium, color: kGray),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -94,7 +97,9 @@ class LandingScreen extends StatelessWidget {
                         child: Text(
                           "Masuk",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.25.dp, fontWeight: bold),
+                              //0.25.dp
+                              fontSize: 14,
+                              fontWeight: semibold),
                         ),
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -114,8 +119,8 @@ class LandingScreen extends StatelessWidget {
                         child: Text(
                           "Daftar",
                           style: kOpenSans.copyWith(
-                              fontSize: 0.25.dp,
-                              fontWeight: bold,
+                              fontSize: 14,
+                              fontWeight: semibold,
                               color: kPrimary),
                         ),
                         onPressed: () {

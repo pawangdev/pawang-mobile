@@ -62,9 +62,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                       Text(
                         "Edit Pengeluaran",
                         style: kOpenSans.copyWith(
-                            fontSize: 0.253.dp,
-                            fontWeight: bold,
-                            color: kBlack),
+                            fontSize: 16, fontWeight: bold, color: kBlack),
                       ),
                       Container(
                         width: 7.2.w,
@@ -138,8 +136,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   child: ElevatedButton(
                     child: Text(
                       "Simpan Perubahan",
-                      style: kOpenSans.copyWith(
-                          fontSize: 0.253.dp, fontWeight: bold),
+                      style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
                     ),
                     onPressed: () async {
                       setState(() {

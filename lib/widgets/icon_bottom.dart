@@ -30,15 +30,15 @@ class IconBottomBar extends StatelessWidget {
             color: selected ? primaryColor : Colors.black54,
           ),
         ),
-        SizedBox(height: 1.4.h),
+        SizedBox(height: 0.5.h),
         Text(
           text,
           style: TextStyle(
-              fontSize: 12,
+              fontSize: 8,
               height: .1,
               color: selected ? primaryColor : Colors.grey.withOpacity(.75)),
         ),
-        SizedBox(height: 1.h)
+        SizedBox(height: 0.5.h)
       ],
     );
   }

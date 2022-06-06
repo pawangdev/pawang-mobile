@@ -26,7 +26,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 child: Text(
                   "Oops !!",
                   style: kOpenSans.copyWith(
-                      color: kBlack, fontWeight: bold, fontSize: 0.3),
+                      color: kBlack, fontWeight: bold, fontSize: 20),
                 ),
               ),
               SizedBox(
@@ -47,7 +47,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               Text(
                 "No Internet Connection",
                 style: kOpenSans.copyWith(
-                    color: kBlack, fontSize: 0.265.dp, fontWeight: bold),
+                    color: kBlack, fontSize: 16, fontWeight: bold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -56,7 +56,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               Text(
                 "Kamu kehilangan koneksi internet. Silahkan periksa kembali koneksi internet.",
                 style: kOpenSans.copyWith(
-                    color: kGray, fontSize: 0.245.dp, fontWeight: medium),
+                    color: kGray, fontSize: 12, fontWeight: medium),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -68,7 +68,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     child: Text(
                       "Coba Lagi",
                       style: kOpenSans.copyWith(
-                          fontSize: 0.253.dp, fontWeight: bold, color: kWhite),
+                          fontSize: 16, fontWeight: bold, color: kWhite),
                     ),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(kPrimary),

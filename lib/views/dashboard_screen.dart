@@ -132,14 +132,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Text(
                                       "Hallo,",
                                       style: kOpenSans.copyWith(
-                                          fontSize: 0.2.dp,
+                                          fontSize: 11,
+                                          //0.2.dp,
                                           fontWeight: medium,
                                           color: kWhite),
                                     ),
                                     user.name != ""
                                         ? Text(user.name,
                                             style: kOpenSans.copyWith(
-                                                fontSize: 0.21.dp,
+                                                fontSize: 12,
                                                 fontWeight: bold,
                                                 color: kWhite))
                                         : SkeletonAnimation(
@@ -174,7 +175,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         AsyncSnapshot<WalletsModel> snapshot) {
                       var state = snapshot.connectionState;
                       if (state != ConnectionState.done) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else {
@@ -232,7 +233,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Text(
                           'Layanan',
                           style: kOpenSans.copyWith(
-                              fontSize: 0.24.dp,
+                              fontSize: 14, //0.24.dp,
                               fontWeight: bold,
                               color: kWhite),
                         ),
@@ -284,8 +285,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             DraggableScrollableSheet(
-              initialChildSize: 0.42,
-              minChildSize: 0.42,
+              initialChildSize: 0.43,
+              minChildSize: 0.43,
               maxChildSize: 0.94,
               builder:
                   (BuildContext context, ScrollController scrollController) {
@@ -318,7 +319,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     'Riwayat',
                                     textAlign: TextAlign.start,
                                     style: kOpenSans.copyWith(
-                                        fontSize: 0.24.dp,
+                                        fontSize: 14,
                                         fontWeight: bold,
                                         color: kBlack),
                                   ),
@@ -362,7 +363,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             "Anda belum memiliki pengeluaran",
                                             style: kOpenSans.copyWith(
                                                 color: kGray,
-                                                fontSize: 0.23.dp,
+                                                fontSize: 13, //0.23.dp,
                                                 fontWeight: medium),
                                             textAlign: TextAlign.center,
                                           ));
@@ -373,7 +374,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           "Anda belum memiliki pengeluaran",
                                           style: kOpenSans.copyWith(
                                               color: kGray,
-                                              fontSize: 0.23.dp,
+                                              fontSize: 13,
                                               fontWeight: medium),
                                           textAlign: TextAlign.center,
                                         ));
@@ -399,7 +400,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 8.h,
+            height: 7.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

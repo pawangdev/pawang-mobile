@@ -23,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
                     child: Text(
                       "Pengaturan",
                       style: kOpenSans.copyWith(
-                          fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
+                          fontSize: 16, fontWeight: bold, color: kBlack),
                     ),
                   ),
                   SizedBox(
@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
                       Text(
                         "Mu'adz Fathulloh",
                         style: kOpenSans.copyWith(
-                            fontSize: 0.22.dp, fontWeight: bold, color: kBlack),
+                            fontSize: 14, fontWeight: bold, color: kBlack),
                       )
                     ],
                   ),
@@ -73,8 +73,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 Text('Keluar',
                                     style: kOpenSans.copyWith(
-                                        fontSize: 0.235.dp,
-                                        fontWeight: semibold))
+                                        fontSize: 14, fontWeight: semibold))
                               ],
                             ),
                             const Icon(
@@ -91,13 +90,13 @@ class SettingsScreen extends StatelessWidget {
                               title: Text(
                                 'Keluar',
                                 style: kOpenSans.copyWith(
-                                    fontSize: 0.26.dp, fontWeight: bold),
+                                    fontSize: 16, fontWeight: bold),
                                 textAlign: TextAlign.center,
                               ),
                               content: Text(
                                 'Apakah anda yakin ingin keluar?',
                                 style: kOpenSans.copyWith(
-                                    fontSize: 0.24.dp, fontWeight: light),
+                                    fontSize: 15, fontWeight: light),
                                 textAlign: TextAlign.center,
                               ),
                               shape: RoundedRectangleBorder(
@@ -112,7 +111,7 @@ class SettingsScreen extends StatelessWidget {
                                         child: Text(
                                           "Kembali",
                                           style: kOpenSans.copyWith(
-                                              fontSize: 0.23.dp,
+                                              fontSize: 14,
                                               fontWeight: medium,
                                               color: kPrimary),
                                         ),
@@ -149,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
                                           style: kOpenSans.copyWith(
                                               color: kWhite,
                                               fontWeight: medium,
-                                              fontSize: 0.23.dp),
+                                              fontSize: 14),
                                         ),
                                         onPressed: () => Navigator.pushNamed(
                                             context, LandingScreen.routeName),
@@ -172,7 +171,7 @@ class SettingsScreen extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 8.h,
+            height: 7.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),

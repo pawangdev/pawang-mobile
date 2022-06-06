@@ -47,7 +47,7 @@ class UserService {
 
     if (response.statusCode == 202) {
       Map<dynamic, dynamic> temp = jsonDecode(response.body);
-      await prefs.setString('token', temp['data']);
+      await prefs.setString('token', temp['data']['token']);
       return LoginModel.fromJson(jsonDecode(response.body));
     } else {
       return LoginModel.fromJson(jsonDecode(response.body));
