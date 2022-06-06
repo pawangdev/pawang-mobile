@@ -10,7 +10,6 @@ class InputField extends StatelessWidget {
       required this.inputController,
       this.enable = true,
       this.readOnly = false,
-      this.errorText,
       this.onTap,
       this.keyboardType,
       this.capitalization = TextCapitalization.sentences,
@@ -20,7 +19,6 @@ class InputField extends StatelessWidget {
   final bool enable;
   final bool readOnly;
   final TextEditingController inputController;
-  final String? errorText;
   final Function()? onTap;
   final TextInputType? keyboardType;
   final TextCapitalization? capitalization;
@@ -49,7 +47,6 @@ class InputField extends StatelessWidget {
         onTap: onTap,
         controller: inputController,
         decoration: InputDecoration(
-          errorText: errorText,
           fillColor: const Color(0xFFF5F5F5),
           filled: true,
           border: OutlineInputBorder(

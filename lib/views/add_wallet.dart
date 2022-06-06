@@ -100,8 +100,6 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                         validator: ValidationBuilder(localeName: 'id').build(),
                         inputLabel: "Nama Dompet",
                         inputController: namaDompet,
-                        errorText:
-                            _inputData ? null : 'Nama Dompet wajib diisi',
                       ),
                     ),
                     Container(
@@ -111,7 +109,6 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                         inputLabel: "Saldo Awal",
                         inputController: nominalDompet,
                         keyboardType: TextInputType.number,
-                        errorText: _inputData ? null : 'Saldo Awal wajib diisi',
                       ),
                     ),
                   ],
