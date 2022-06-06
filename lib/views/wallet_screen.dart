@@ -5,6 +5,7 @@ import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:pawang_mobile/widgets/wallet_card2.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -91,7 +92,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: FutureBuilder(
                     future: _wallets,
-                    builder: (context, AsyncSnapshot<WalletsModel> snapshot) {
+                    builder: (context, AsyncSnapshot snapshot) {
                       var state = snapshot.connectionState;
                       if (state != ConnectionState.done) {
                         return const Center(
@@ -99,64 +100,46 @@ class _WalletScreenState extends State<WalletScreen> {
                         );
                       } else {
                         if (snapshot.hasData) {
-                          return ListView.builder(
-                            itemCount: snapshot.data!.data.length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 16),
-                                width: MediaQuery.of(context).size.width,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 24, vertical: 35),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      snapshot.data!.data[index].name,
-                                      style: kOpenSans.copyWith(
-                                        color: kPrimary,
-                                        fontWeight: semibold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 1.4.h,
-                                    ),
-                                    Text(
-                                      'Rp. ${snapshot.data!.data[index].balance}',
-                                      style: kOpenSans.copyWith(
-                                        color: kBlack,
-                                        fontWeight: medium,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  color: kWhite,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 0.5,
-                                      blurRadius: 0.5,
-                                      offset: const Offset(
-                                          1, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        } else if (snapshot.hasError) {
+                          if (snapshot.data?.data.length != 0) {
+                            return ListView.builder(
+                              itemCount: snapshot.data!.data.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (BuildContext context, int index) {
+                                var wallet = snapshot.data!.data[index];
+                                return WalletCard2(
+                                    name: wallet.name,
+                                    balance: wallet.balance.toString());
+                              },
+                            );
+                          } else if (snapshot.hasError) {
+                            return Center(
+                              child: Text(
+                                snapshot.error.toString(),
+                              ),
+                            );
+                          } else {
+                            return Center(
+                              child: Text(
+                                "Belum ada dompet",
+                                style: kOpenSans.copyWith(
+                                    color: kGray,
+                                    fontSize: 13, //0.23.dp,
+                                    fontWeight: medium),
+                                textAlign: TextAlign.center,
+                              ),
+                            );
+                          }
+                        } else {
                           return Center(
                             child: Text(
-                              snapshot.error.toString(),
+                              "Belum ada dompet",
+                              style: kOpenSans.copyWith(
+                                  color: kGray,
+                                  fontSize: 13, //0.23.dp,
+                                  fontWeight: medium),
+                              textAlign: TextAlign.center,
                             ),
                           );
-                        } else {
-                          return const Text("");
                         }
                       }
                     },
