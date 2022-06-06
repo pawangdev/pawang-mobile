@@ -35,7 +35,15 @@ class ScanService {
   Future cropImage(XFile? image) async {
     file.File? temp_img = file.File(image!.path);
 
-    temp_img = await ImageCropper().cropImage(sourcePath: image.path);
+    temp_img = await ImageCropper().cropImage(
+      sourcePath: image.path,
+      androidUiSettings: const AndroidUiSettings(
+        toolbarTitle: "Potong Bagian Total",
+        toolbarColor: kPrimary,
+        initAspectRatio: CropAspectRatioPreset.original,
+        lockAspectRatio: false,
+      )
+    );
     try {
       if (temp_img != null) {
         //setState(() {
@@ -83,7 +91,7 @@ class ScanService {
     try {
       if (response['message'] == "1") {
         String amount =
-            response['amounts'][0].replaceAll(RegExp('[^A-Za-z0-9]'), '');
+            response['amounts'].take(1).replaceAll(RegExp('[^A-Za-z0-9]'), '');
         return amount;
         //setState(() {
         //nominal = amount;

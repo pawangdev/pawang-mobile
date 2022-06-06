@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'dart:io' as file;
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pawang_mobile/services/scan_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
@@ -12,7 +9,6 @@ import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:http/http.dart' as http;
 
 class ScanStruk extends StatefulWidget {
   static const String routeName = "/scan-struk";
