@@ -107,18 +107,15 @@ class _KategoriScreenState extends State<KategoriScreen> {
                                 left: 30, right: 30, bottom: 16),
                             height: 6.4.h,
                             decoration: BoxDecoration(
-                              color: kWhite,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 1.5,
-                                  blurRadius: 0.5,
-                                  offset: const Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                            ),
+                                color: kWhite,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: kBlack.withOpacity(0.07),
+                                    spreadRadius: 2,
+                                    blurRadius: 10,
+                                  )
+                                ]),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
@@ -130,8 +127,8 @@ class _KategoriScreenState extends State<KategoriScreen> {
                                       padding: const EdgeInsets.only(
                                           left: 20.0, right: 18),
                                       child: Container(
-                                        width: 40,
-                                        height: 40,
+                                        width: 25,
+                                        height: 25,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
@@ -143,8 +140,8 @@ class _KategoriScreenState extends State<KategoriScreen> {
                                       child: Text(
                                         category.name,
                                         style: kOpenSans.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: semibold,
+                                          fontSize: 14,
+                                          fontWeight: medium,
                                         ),
                                       ),
                                     ),

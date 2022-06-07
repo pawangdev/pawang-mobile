@@ -8,7 +8,11 @@ class WalletCard extends StatelessWidget {
   final String balance;
   //final color;
 
-  const WalletCard({Key? key, required this.namaWallet, required this.balance, required this.name})
+  const WalletCard(
+      {Key? key,
+      required this.namaWallet,
+      required this.balance,
+      required this.name})
       : super(key: key);
 
   @override
@@ -17,6 +21,13 @@ class WalletCard extends StatelessWidget {
       width: 300,
       padding: const EdgeInsets.all(25.0),
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: kBlack.withOpacity(0.05),
+              spreadRadius: 2,
+              blurRadius: 10,
+            )
+          ],
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -58,11 +69,11 @@ class WalletCard extends StatelessWidget {
                         fontWeight: semibold,
                         fontSize: 14)),
                 Text(
-                  'Rp. ' + balance.toString() + ',-',
+                  balance.toString(),
                   style: kOpenSans.copyWith(
                       color: kWhite.withOpacity(0.9),
                       fontWeight: bold,
-                      fontSize: 16 //0.26.dp,
+                      fontSize: 19 //0.26.dp,
                       ),
                 ),
               ],

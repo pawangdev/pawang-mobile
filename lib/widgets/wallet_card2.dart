@@ -31,7 +31,7 @@ class WalletCard2 extends StatelessWidget {
             height: 1.4.h,
           ),
           Text(
-            'Rp. '+ balance.toString(),
+            'Rp. ' + balance.toString(),
             //${snapshot.data!.data[index].balance}',
             style: kOpenSans.copyWith(
               color: kBlack,
@@ -42,17 +42,15 @@ class WalletCard2 extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: kWhite,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 0.5,
-            blurRadius: 0.5,
-            offset: const Offset(1, 3), // changes position of shadow
-          ),
-        ],
-      ),
+          color: kWhite,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          boxShadow: [
+            BoxShadow(
+              color: kBlack.withOpacity(0.07),
+              spreadRadius: 2,
+              blurRadius: 10,
+            )
+          ]),
     );
   }
 }

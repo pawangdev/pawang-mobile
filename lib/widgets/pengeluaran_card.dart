@@ -22,17 +22,15 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
         margin: const EdgeInsets.only(bottom: 18),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(1, 2), // changes position of shadow
-            ),
-          ],
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: kBlack.withOpacity(0.07),
+                spreadRadius: 2,
+                blurRadius: 10,
+              )
+            ]),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

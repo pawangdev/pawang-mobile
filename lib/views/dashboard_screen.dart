@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
@@ -225,7 +226,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               return WalletCard(
                                   name: user.name,
                                   namaWallet: wallet.name,
-                                  balance: wallet.balance.toString());
+                                  balance: CurrencyFormat.convertToIdr(
+                                          wallet.balance, 2)
+                                      .toString());
                             },
                           );
                         } else if (snapshot.hasError) {
@@ -323,7 +326,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       height: 0.7.h,
                                       width: 24.w,
                                       decoration: BoxDecoration(
-                                          color: kGray,
+                                          color: kGray.withOpacity(0.7),
                                           borderRadius:
                                               BorderRadius.circular(10))),
                                 ),
@@ -451,5 +454,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
         ));
+  }
+}
+
+class CurrencyFormat {
+  static String convertToIdr(dynamic number, int decimalDigit) {
+    NumberFormat currencyFormatter = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp ',
+      decimalDigits: decimalDigit,
+    );
+    return currencyFormatter.format(number);
   }
 }
