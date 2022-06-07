@@ -19,7 +19,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
   late Future<CategoriesModel> _categories;
   @override
   void initState() {
-    _categories = CategoryService.getCategories();
+    _categories = CategoryService.getCategories(type: "");
     super.initState();
   }
 

@@ -7,6 +7,7 @@ import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -238,8 +239,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                               fontWeight: medium,
                                               fontSize: 14),
                                         ),
-                                        onPressed: () => Navigator.pushNamed(
-                                            context, LandingScreen.routeName),
+                                        onPressed: () async {
+                                          final prefs = await SharedPreferences
+                                              .getInstance();
+                                          prefs.remove("token");
+                                          Navigator.pushNamed(
+                                              context, LandingScreen.routeName);
+                                        },
                                       ),
                                     ),
                                   ],
