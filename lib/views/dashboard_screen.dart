@@ -96,7 +96,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         cards.length,
         (index) => WalletCard(
               name: '${cards[index]['name']}',
-              balance: '${cards[index]['amount']}',
+              namaWallet: '${cards[index]['namaWallet']}',
+              balance: '${cards[index]['balance']}',
             ));
 
     widgets.add(plus());
@@ -222,7 +223,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               }
                               var wallet = snapshot.data!.data[index];
                               return WalletCard(
-                                  name: wallet.name,
+                                  name: user.name,
+                                  namaWallet: wallet.name,
                                   balance: wallet.balance.toString());
                             },
                           );

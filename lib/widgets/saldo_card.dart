@@ -4,10 +4,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletCard extends StatelessWidget {
   final String name;
+  final String namaWallet;
   final String balance;
   //final color;
 
-  const WalletCard({Key? key, required this.name, required this.balance})
+  const WalletCard({Key? key, required this.namaWallet, required this.balance, required this.name})
       : super(key: key);
 
   @override
@@ -34,9 +35,9 @@ class WalletCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Mua'dz Fathulloh",
+                  name,
                   style: kOpenSans.copyWith(
-                    color: kWhite.withOpacity(0.65),
+                    color: kWhite.withOpacity(0.8),
                     fontWeight: medium,
                     fontSize: 12,
                     //0.253.dp,
@@ -51,9 +52,9 @@ class WalletCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,
+                Text(namaWallet,
                     style: kOpenSans.copyWith(
-                        color: kWhite.withOpacity(0.75),
+                        color: kWhite.withOpacity(0.8),
                         fontWeight: semibold,
                         fontSize: 14)),
                 Text(
