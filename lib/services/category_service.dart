@@ -6,12 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryService {
-  static Future<CategoriesModel> getCategories() async {
+  static Future<CategoriesModel> getCategories({String? type}) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
 
-    var response =
-        await http.get(Uri.parse(baseURLAPI + "categories"), headers: {
+    var response = await http
+        .get(Uri.parse(baseURLAPI + "categories?type=$type"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });

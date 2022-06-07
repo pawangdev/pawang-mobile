@@ -27,22 +27,27 @@ class TransactionService {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
 
-    var dataTransaction = <String, dynamic>{
-      'amount': data['amount'],
-      'category_id': data['category_id'],
-      'wallet_id': data['wallet_id'],
-      'type': data['type'],
-      'description': data['description'],
-      'date': data['date'],
-    };
+    var request = http.MultipartRequest(
+        "POST", Uri.parse(baseURLAPI + "transactions/create"));
+    request.headers.addAll({
+      'Authorization': "Bearer $token",
+    });
+    request.fields['amount'] = data['amount'].toString();
+    request.fields['category_id'] = data['category_id'].toString();
+    request.fields['wallet_id'] = data['wallet_id'].toString();
+    request.fields['type'] = data['type'];
+    request.fields['description'] = data['description'];
+    request.fields['date'] = data['date'];
 
-    var response = await http.post(
-        Uri.parse(baseURLAPI + "transactions/create"),
-        body: jsonEncode(dataTransaction),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token",
-        });
+    var response = await request.send();
+
+    // var response = await http.post(
+    //     Uri.parse(baseURLAPI + "transactions/create"),
+    //     body: jsonEncode(dataTransaction),
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //       'Authorization': "Bearer $token",
+    //     });
 
     if (response.statusCode == 201) {
       return true;

@@ -80,7 +80,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     inputLabel: "Nama Pengeluaran",
                     inputController: _namaPengeluaran,
                     // errorText:
-                        // _validated ? null : 'Nama Pengeluaran wajib diisi',
+                    // _validated ? null : 'Nama Pengeluaran wajib diisi',
                   ),
                 ),
                 // NOMINAL

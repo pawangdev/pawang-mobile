@@ -17,9 +17,9 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+      padding: const EdgeInsets.only(top: 8, left: 32, right: 32),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 18),
+        margin: EdgeInsets.only(top: 8),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         decoration: BoxDecoration(
             color: Colors.white,
