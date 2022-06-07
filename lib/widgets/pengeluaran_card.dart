@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
+import 'package:pawang_mobile/widgets/currency_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CardPengeluaran extends StatefulWidget {
@@ -39,7 +41,7 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
               children: [
                 Container(
                   height: 3.4.h,
-                  width: 7.6.w,
+                  width: 7.2.w,
                   decoration: const BoxDecoration(
                       color: kSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -56,30 +58,34 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                       // NAMA PENGELUARAN
                       Text(
                         widget.data.category.name,
+                        overflow: TextOverflow.ellipsis,
                         style: kOpenSans.copyWith(
-                            //0.22.dp
-                            fontSize: 16,
-                            fontWeight: bold),
+                          //0.22.dp
+                          fontSize: 16,
+                          fontWeight: semibold,
+                        ),
                       ),
-                      // TANGGAL/WAKTU
-                      Row(
-                        children: [
-                          Text(
-                            widget.data.date.toLocal().toString(),
-                            style: kOpenSans.copyWith(
-                                fontSize: 14, color: kGray.withOpacity(0.9)),
-                          ),
-                        ],
+                      // TANGGAL
+                      Text(
+                        DateFormat("dd/MM/yyyy")
+                            .format(widget.data.date.toLocal())
+                            .toString(),
+                        overflow: TextOverflow.ellipsis,
+                        style: kOpenSans.copyWith(
+                          fontSize: 14,
+                          color: kGray.withOpacity(0.9),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            Container(
-              child: Text("${widget.data.amount.toString()} IDR",
-                  style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold)),
-            ),
+            Text(CurrencyFormat.convertToIdr(widget.data.amount, 2).toString(),
+                style: kOpenSans.copyWith(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    overflow: TextOverflow.ellipsis)),
           ],
         ),
       ),
