@@ -95,9 +95,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     List<Widget> widgets = List<Widget>.generate(
         cards.length,
         (index) => WalletCard(
-            name: '${cards[index]['name']}',
-            balance: '${cards[index]['amount']}',
-            color: kWhite));
+              name: '${cards[index]['name']}',
+              balance: '${cards[index]['amount']}',
+            ));
 
     widgets.add(plus());
 
@@ -202,17 +202,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: kWhite,
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              kWhite.withOpacity(0.5),
+                                              kWhite.withOpacity(0.3),
+                                              kWhite.withOpacity(0.5)
+                                            ]),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    child: const Center(
-                                        child: Icon(Icons.add_rounded)),
+                                    child: Center(
+                                        child: Icon(
+                                      Icons.add_rounded,
+                                      color: kWhite.withOpacity(0.8),
+                                    )),
                                   ),
                                 );
                               }
                               var wallet = snapshot.data!.data[index];
                               return WalletCard(
-                                  color: kWhite,
                                   name: wallet.name,
                                   balance: wallet.balance.toString());
                             },
