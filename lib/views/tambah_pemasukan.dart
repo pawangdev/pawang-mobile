@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
@@ -28,9 +29,57 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
   final TextEditingController _nominalTextController = TextEditingController();
   final TextEditingController _noteTextController = TextEditingController();
   final TextEditingController _dateTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   late String _dateRFC3399;
   int? _walletID, _categoryID;
   bool _inputData = true;
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+      var data = <String, dynamic>{
+        'amount': int.parse(_nominalTextController.text),
+        'category_id': _categoryID,
+        'wallet_id': _walletID,
+        'type': 'income',
+        'description': _noteTextController.text,
+        'date': _dateRFC3399,
+      };
+
+      TransactionService.createTransaction(data).then((response) {
+        if (response == true) {
+          Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+          Flushbar(
+            message: "Berhasil Menambah Pemasukan !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kSuccess,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        } else {
+          Flushbar(
+            message: "Terjadi Kesalahan !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kError,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        }
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -72,165 +121,177 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 3.4.h,
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Nominal",
-                  inputController: _nominalTextController,
-                  keyboardType: TextInputType.number,
-                  // errorText: _inputData ? null : 'Nominal wajib diisi',
-                ),
-              ),
-              FutureBuilder(
-                future: _categories,
-                builder: (context, AsyncSnapshot<CategoriesModel> snapshot) {
-                  var state = snapshot.connectionState;
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 3.4.h,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: "Nominal",
+                        inputController: _nominalTextController,
+                        keyboardType: TextInputType.number,
+                        // errorText: _inputData ? null : 'Nominal wajib diisi',
+                      ),
+                    ),
+                    FutureBuilder(
+                      future: _categories,
+                      builder:
+                          (context, AsyncSnapshot<CategoriesModel> snapshot) {
+                        var state = snapshot.connectionState;
 
-                  if (state != ConnectionState.done) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Kategori",
-                          style: kOpenSans.copyWith(
-                              fontSize: 12,
-                              //0.21.dp,
-                              fontWeight: bold,
-                              color: kBlack),
-                        ),
-                        SizedBox(
-                          height: 1.4.h,
-                        ),
-                        SkeletonAnimation(
-                          borderRadius: BorderRadius.circular(8.0),
-                          shimmerColor: Colors.white70,
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 20),
-                            padding: const EdgeInsets.all(10.0),
-                            height: 4.8.h,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    if (snapshot.hasData) {
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        child: DropdownField(
-                            value: _categoryID,
-                            inputLabel: "Kategori",
-                            hint: "Pilih Kategori",
-                            data: snapshot.data!.data,
-                            onChange: (value) {
-                              setState(() {
-                                _categoryID = int.parse(value.toString());
-                              });
-                            }),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("");
-                    } else {
-                      return Text("");
-                    }
-                  }
-                },
-              ),
-              FutureBuilder(
-                future: _wallets,
-                builder: (context, AsyncSnapshot<WalletsModel> snapshot) {
-                  var state = snapshot.connectionState;
+                        if (state != ConnectionState.done) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kategori",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    //0.21.dp,
+                                    fontWeight: bold,
+                                    color: kBlack),
+                              ),
+                              SizedBox(
+                                height: 1.4.h,
+                              ),
+                              SkeletonAnimation(
+                                borderRadius: BorderRadius.circular(8.0),
+                                shimmerColor: Colors.white70,
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  padding: const EdgeInsets.all(10.0),
+                                  height: 4.8.h,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          if (snapshot.hasData) {
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: DropdownField(
+                                  value: _categoryID,
+                                  inputLabel: "Kategori",
+                                  hint: "Pilih Kategori",
+                                  data: snapshot.data!.data,
+                                  onChange: (value) {
+                                    setState(() {
+                                      _categoryID = int.parse(value.toString());
+                                    });
+                                  }),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("");
+                          } else {
+                            return Text("");
+                          }
+                        }
+                      },
+                    ),
+                    FutureBuilder(
+                      future: _wallets,
+                      builder: (context, AsyncSnapshot<WalletsModel> snapshot) {
+                        var state = snapshot.connectionState;
 
-                  if (state != ConnectionState.done) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Wallets",
-                          style: kOpenSans.copyWith(
-                              fontSize: 12,
-                              //0.21.dp,
-                              fontWeight: bold,
-                              color: kBlack),
-                        ),
-                        SizedBox(
-                          height: 1.4.h,
-                        ),
-                        SkeletonAnimation(
-                          borderRadius: BorderRadius.circular(8.0),
-                          shimmerColor: Colors.white70,
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 20),
-                            padding: const EdgeInsets.all(10.0),
-                            height: 4.8.h,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    if (snapshot.hasData) {
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        child: DropdownField(
-                            value: _walletID,
-                            inputLabel: "Wallets",
-                            hint: "Pilih Wallets",
-                            data: snapshot.data!.data,
-                            onChange: (value) {
-                              _walletID = int.parse(value.toString());
-                            }),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("");
-                    } else {
-                      return Text("");
-                    }
-                  }
-                },
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Catatan",
-                  inputController: _noteTextController,
-                  // errorText: _inputData ? null : 'Kategori wajib diisi',
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: InputField(
-                  inputLabel: "Tanggal",
-                  inputController: _dateTextController,
-                  // errorText: _inputData ? null : 'Tanggal wajib diisi',
-                  enable: true,
-                  readOnly: true,
-                  keyboardType: TextInputType.none,
-                  onTap: () {
-                    showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2099))
-                        .then((date) {
-                      setState(() {
-                        _dateTextController.text =
-                            DateFormat("dd/MM/yyyy").format(date!).toString();
-                        _dateRFC3399 = date.toUtc().toIso8601String();
-                      });
-                    });
-                  },
+                        if (state != ConnectionState.done) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Wallets",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    //0.21.dp,
+                                    fontWeight: bold,
+                                    color: kBlack),
+                              ),
+                              SizedBox(
+                                height: 1.4.h,
+                              ),
+                              SkeletonAnimation(
+                                borderRadius: BorderRadius.circular(8.0),
+                                shimmerColor: Colors.white70,
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  padding: const EdgeInsets.all(10.0),
+                                  height: 4.8.h,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          if (snapshot.hasData) {
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: DropdownField(
+                                  value: _walletID,
+                                  inputLabel: "Wallets",
+                                  hint: "Pilih Wallets",
+                                  data: snapshot.data!.data,
+                                  onChange: (value) {
+                                    _walletID = int.parse(value.toString());
+                                  }),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("");
+                          } else {
+                            return Text("");
+                          }
+                        }
+                      },
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: InputField(
+                        inputLabel: "Catatan",
+                        inputController: _noteTextController,
+                        // errorText: _inputData ? null : 'Kategori wajib diisi',
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: "Tanggal",
+                        inputController: _dateTextController,
+                        // errorText: _inputData ? null : 'Tanggal wajib diisi',
+                        enable: true,
+                        readOnly: true,
+                        keyboardType: TextInputType.none,
+                        onTap: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2099))
+                              .then((date) {
+                            setState(() {
+                              _dateTextController.text =
+                                  DateFormat("dd/MM/yyyy")
+                                      .format(date!)
+                                      .toString();
+                              _dateRFC3399 = date.toUtc().toIso8601String();
+                            });
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
@@ -251,49 +312,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          var data = <String, dynamic>{
-                            'amount': int.parse(_nominalTextController.text),
-                            'category_id': _categoryID,
-                            'wallet_id': _walletID,
-                            'type': 'income',
-                            'description': _noteTextController.text,
-                            'date': _dateRFC3399,
-                          };
-
-                          TransactionService.createTransaction(data)
-                              .then((response) {
-                            if (response == true) {
-                              Navigator.pushReplacementNamed(
-                                  context, DashboardScreen.routeName);
-                              Flushbar(
-                                message: "Berhasil Menambah Pemasukan !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kSuccess,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            } else {
-                              Flushbar(
-                                message: "Terjadi Kesalahan !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kError,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            }
-                          });
-                        },
+                        onPressed: _submit,
                         child: Text(
                           "Simpan Pemasukan",
                           style: kOpenSans.copyWith(

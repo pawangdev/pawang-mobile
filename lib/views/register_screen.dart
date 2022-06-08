@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
@@ -21,9 +22,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   final TextEditingController phoneTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   String? genderTextController;
 
   bool _isObscure = true;
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+
+      var data = <String, dynamic>{
+        'name': namaTextController.text,
+        'email': emailTextController.text,
+        'password': passwordTextController.text,
+        'phone': phoneTextController.text,
+        'gender': genderTextController,
+      };
+
+      try {
+        UserService().userRegister(data);
+
+        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+
+        Flushbar(
+          message: "Berhasil Mendaftarkan Akun, Silahkan Login !",
+          icon: const Icon(
+            Icons.check,
+            size: 28.0,
+            color: Colors.white,
+          ),
+          margin: const EdgeInsets.all(8),
+          borderRadius: BorderRadius.circular(8),
+          backgroundColor: kSuccess,
+          duration: const Duration(seconds: 3),
+        ).show(context);
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,126 +94,145 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         //0.27.dp
                         ),
                   ),
-                  SizedBox(height: 3.5.h),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Nama Lengkap",
-                      inputController: namaTextController,
-                      keyboardType: TextInputType.name,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Email",
-                      capitalization: TextCapitalization.none,
-                      inputController: emailTextController,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Password',
-                            style: kOpenSans.copyWith(
-                                fontSize: 12,
-                                // 0.21.dp,
-                                fontWeight: bold,
-                                color: kBlack),
-                          ),
-                          SizedBox(
-                            height: 1.4.h,
-                          ),
-                          TextField(
-                            controller: passwordTextController,
-                            decoration: InputDecoration(
-                                fillColor: const Color(0xFFF5F5F5),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius),
-                                    borderSide: BorderSide.none),
-                                focusColor: kPrimary,
-                                suffixIcon: IconButton(
-                                    color: kGray,
-                                    icon: Icon(_isObscure
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        _isObscure = !_isObscure;
-                                      });
-                                    })),
-                            autofocus: false,
-                            obscureText: _isObscure,
-                          ),
-                        ],
-                      )),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Nomer Telepon",
-                      inputController: phoneTextController,
-                      keyboardType: TextInputType.phone,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
+                  Form(
+                    key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Jenis Kelamin",
-                          style: kOpenSans.copyWith(
-                              fontSize: 12,
-                              // 0.21.dp,
-                              fontWeight: bold,
-                              color: kBlack),
+                        SizedBox(height: 3.5.h),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: InputField(
+                            validator:
+                                ValidationBuilder(localeName: 'id').build(),
+                            inputLabel: "Nama Lengkap",
+                            inputController: namaTextController,
+                            keyboardType: TextInputType.name,
+                          ),
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: InputField(
+                            validator: ValidationBuilder(localeName: 'id')
+                                .email('Isi dengan format email')
+                                .build(),
+                            inputLabel: "Email",
+                            capitalization: TextCapitalization.none,
+                            inputController: emailTextController,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Radio(
-                                    value: "male",
-                                    groupValue: genderTextController,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        genderTextController = value as String;
-                                      });
-                                    }),
                                 Text(
-                                  "Laki-Laki",
-                                  style: kOpenSans.copyWith(fontSize: 12),
+                                  'Password',
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 12,
+                                      // 0.21.dp,
+                                      fontWeight: bold,
+                                      color: kBlack),
+                                ),
+                                SizedBox(
+                                  height: 1.4.h,
+                                ),
+                                TextFormField(
+                                  validator: ValidationBuilder(localeName: 'id')
+                                      .build(),
+                                  controller: passwordTextController,
+                                  decoration: InputDecoration(
+                                      fillColor: const Color(0xFFF5F5F5),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              kDefaultBorderRadius),
+                                          borderSide: BorderSide.none),
+                                      focusColor: kPrimary,
+                                      suffixIcon: IconButton(
+                                          color: kGray,
+                                          icon: Icon(_isObscure
+                                              ? Icons.visibility
+                                              : Icons.visibility_off),
+                                          onPressed: () {
+                                            setState(() {
+                                              _isObscure = !_isObscure;
+                                            });
+                                          })),
+                                  autofocus: false,
+                                  obscureText: _isObscure,
                                 ),
                               ],
-                            ),
-                            SizedBox(
-                              width: 2.5.w,
-                            ),
-                            Row(
-                              children: [
-                                Radio(
-                                    value: "female",
-                                    groupValue: genderTextController,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        genderTextController = value as String;
-                                      });
-                                    }),
-                                Text(
-                                  "Perempuan",
-                                  style: kOpenSans.copyWith(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ],
+                            )),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: InputField(
+                            validator: ValidationBuilder(localeName: 'id')
+                                .phone('Isi dengan format nomer telepon')
+                                .build(),
+                            inputLabel: "Nomer Telepon",
+                            inputController: phoneTextController,
+                            keyboardType: TextInputType.phone,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Jenis Kelamin",
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    // 0.21.dp,
+                                    fontWeight: bold,
+                                    color: kBlack),
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Radio(
+                                          value: "male",
+                                          groupValue: genderTextController,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              genderTextController =
+                                                  value as String;
+                                            });
+                                          }),
+                                      Text(
+                                        "Laki-Laki",
+                                        style: kOpenSans.copyWith(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 2.5.w,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                          value: "female",
+                                          groupValue: genderTextController,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              genderTextController =
+                                                  value as String;
+                                            });
+                                          }),
+                                      Text(
+                                        "Perempuan",
+                                        style: kOpenSans.copyWith(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -185,38 +243,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
-                      onPressed: () {
-                        var data = <String, dynamic>{
-                          'name': namaTextController.text,
-                          'email': emailTextController.text,
-                          'password': passwordTextController.text,
-                          'phone': phoneTextController.text,
-                          'gender': genderTextController,
-                        };
-
-                        try {
-                          UserService().userRegister(data);
-
-                          Navigator.pushReplacementNamed(
-                              context, LoginScreen.routeName);
-
-                          Flushbar(
-                            message:
-                                "Berhasil Mendaftarkan Akun, Silahkan Login !",
-                            icon: const Icon(
-                              Icons.check,
-                              size: 28.0,
-                              color: Colors.white,
-                            ),
-                            margin: const EdgeInsets.all(8),
-                            borderRadius: BorderRadius.circular(8),
-                            backgroundColor: kSuccess,
-                            duration: const Duration(seconds: 3),
-                          ).show(context);
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
+                      onPressed: _submit,
                       child: Text(
                         "Daftar",
                         style: kOpenSans.copyWith(

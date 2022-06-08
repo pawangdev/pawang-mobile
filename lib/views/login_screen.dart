@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
@@ -21,7 +22,62 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool _isObscure = true;
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+
+      var data = <String, dynamic>{
+        'email': emailTextController.text,
+        'password': passwordTextController.text,
+      };
+
+      try {
+        UserService().userLogin(data).then((response) {
+          if (response.success == true) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              DashboardScreen.routeName,
+              (route) => false,
+            );
+
+            Flushbar(
+              message: "Berhasil Login !",
+              icon: const Icon(
+                Icons.check,
+                size: 28.0,
+                color: Colors.white,
+              ),
+              margin: const EdgeInsets.all(8),
+              borderRadius: BorderRadius.circular(8),
+              backgroundColor: kSuccess,
+              duration: const Duration(seconds: 3),
+            ).show(context);
+          } else {
+            Flushbar(
+              message: StringUtils.capitalize(response.message, allWords: true)
+                  .toString(),
+              icon: const Icon(
+                Icons.clear_rounded,
+                size: 28.0,
+                color: Colors.white,
+              ),
+              margin: const EdgeInsets.all(8),
+              borderRadius: BorderRadius.circular(8),
+              backgroundColor: kError,
+              duration: const Duration(seconds: 3),
+            ).show(context);
+          }
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,115 +118,79 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: medium,
                         fontSize: 16),
                   ),
-                  SizedBox(
-                    height: 3.5.h,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: InputField(
-                      inputLabel: "Email",
-                      capitalization: TextCapitalization.none,
-                      inputController: emailTextController,
-                      keyboardType: TextInputType.emailAddress,
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 3.5.h,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: InputField(
+                            validator: ValidationBuilder(localeName: 'id')
+                                .email('Isi dengan format email')
+                                .build(),
+                            inputLabel: "Email",
+                            capitalization: TextCapitalization.none,
+                            inputController: emailTextController,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Password',
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 12,
+                                      // 0.21.dp,
+                                      fontWeight: bold,
+                                      color: kBlack),
+                                ),
+                                SizedBox(
+                                  height: 1.5.h,
+                                ),
+                                TextFormField(
+                                  validator: ValidationBuilder(localeName: 'id')
+                                      .build(),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  controller: passwordTextController,
+                                  decoration: InputDecoration(
+                                      fillColor: const Color(0xFFF5F5F5),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              kDefaultBorderRadius),
+                                          borderSide: BorderSide.none),
+                                      focusColor: kPrimary,
+                                      suffixIcon: IconButton(
+                                          color: kGray,
+                                          icon: Icon(_isObscure
+                                              ? Icons.visibility
+                                              : Icons.visibility_off),
+                                          onPressed: () {
+                                            setState(() {
+                                              _isObscure = !_isObscure;
+                                            });
+                                          })),
+                                  autofocus: false,
+                                  obscureText: _isObscure,
+                                ),
+                              ],
+                            )),
+                      ],
                     ),
                   ),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Password',
-                            style: kOpenSans.copyWith(
-                                fontSize: 12,
-                                // 0.21.dp,
-                                fontWeight: bold,
-                                color: kBlack),
-                          ),
-                          SizedBox(
-                            height: 1.5.h,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.visiblePassword,
-                            controller: passwordTextController,
-                            decoration: InputDecoration(
-                                fillColor: const Color(0xFFF5F5F5),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius),
-                                    borderSide: BorderSide.none),
-                                focusColor: kPrimary,
-                                suffixIcon: IconButton(
-                                    color: kGray,
-                                    icon: Icon(_isObscure
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        _isObscure = !_isObscure;
-                                      });
-                                    })),
-                            autofocus: false,
-                            obscureText: _isObscure,
-                          ),
-                        ],
-                      )),
                   SizedBox(
                     height: 3.5.h,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
-                      onPressed: () {
-                        var data = <String, dynamic>{
-                          'email': emailTextController.text,
-                          'password': passwordTextController.text,
-                        };
-
-                        try {
-                          UserService().userLogin(data).then((response) {
-                            if (response.success == true) {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                DashboardScreen.routeName,
-                                (route) => false,
-                              );
-
-                              Flushbar(
-                                message: "Berhasil Login !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kSuccess,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            } else {
-                              Flushbar(
-                                message: StringUtils.capitalize(
-                                        response.message,
-                                        allWords: true)
-                                    .toString(),
-                                icon: const Icon(
-                                  Icons.clear_rounded,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kError,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            }
-                          });
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
+                      onPressed: _submit,
                       child: Text(
                         "Masuk",
                         style: kOpenSans.copyWith(

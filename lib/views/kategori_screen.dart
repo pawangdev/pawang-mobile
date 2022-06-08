@@ -4,6 +4,7 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
 import 'package:pawang_mobile/services/category_service.dart';
+import 'package:pawang_mobile/views/add_category.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -98,14 +99,22 @@ class _KategoriScreenState extends State<KategoriScreen> {
                 } else {
                   if (snapshot.hasData) {
                     if (snapshot.data?.data.length != 0) {
-                      return GridView.count(crossAxisCount: 2, children: [
-                        ListView.builder(
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: GridView.builder(
+                          clipBehavior: Clip.none,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 2,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 1,
+                                  mainAxisSpacing: 1),
                           itemCount: snapshot.data?.data.length,
                           itemBuilder: (context, index) {
                             var category = snapshot.data?.data[index];
                             return Container(
                               margin: const EdgeInsets.only(
-                                  left: 30, right: 30, bottom: 16),
+                                  left: 5, right: 5, bottom: 16),
                               height: 6.4.h,
                               decoration: BoxDecoration(
                                   color: kWhite,
@@ -142,7 +151,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                                         child: Text(
                                           category.name,
                                           style: kOpenSans.copyWith(
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             fontWeight: medium,
                                           ),
                                         ),
@@ -154,7 +163,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                             );
                           },
                         ),
-                      ]);
+                      );
                     } else {
                       return Center(
                         child: Text(
