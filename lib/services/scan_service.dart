@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'dart:io' as file;
 import 'package:pawang_mobile/constants/theme.dart';
 
@@ -19,14 +18,23 @@ class ScanService {
     if (is_fromGal) {
       try {
         image = await _picker.pickImage(source: ImageSource.gallery);
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+      }
     } else {
       try {
         image = await _picker.pickImage(source: ImageSource.camera);
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+      }
     }
-    inputImage = InputImage.fromFilePath(image!.path);
-    cropImage(image);
+
+    try {
+      inputImage = InputImage.fromFilePath(image!.path);
+      cropImage(image);
+    } catch (e) {
+      print(e);
+    }
 
     return image;
   }
@@ -36,14 +44,13 @@ class ScanService {
     file.File? temp_img = file.File(image!.path);
 
     temp_img = await ImageCropper().cropImage(
-      sourcePath: image.path,
-      androidUiSettings: const AndroidUiSettings(
-        toolbarTitle: "Potong Bagian Total Belanja Saja",
-        toolbarColor: kPrimary,
-        initAspectRatio: CropAspectRatioPreset.original,
-        lockAspectRatio: false,
-      )
-    );
+        sourcePath: image.path,
+        androidUiSettings: const AndroidUiSettings(
+          toolbarTitle: "Potong Bagian Total Belanja Saja",
+          toolbarColor: kPrimary,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ));
     try {
       if (temp_img != null) {
         //setState(() {
@@ -51,15 +58,16 @@ class ScanService {
         //});
         final response = uploadImage(inputImage);
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   // UPLOADING IMAGE
   uploadImage(InputImage inputImage) async {
     String message = "";
     String temp_amount = "";
-    final request =
-        http.MultipartRequest("POST", Uri.parse("http://localhost/uploader"));
+    final request = http.MultipartRequest("POST", Uri.parse(baseURLOCR));
     final headers = {"Content-type": "multipart/form-data"};
 
     request.files.add(http.MultipartFile(
@@ -76,14 +84,18 @@ class ScanService {
       final resJson = jsonDecode(res.body);
 
       return resJson;
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   // GETTING THE RESPONSE
   getResponse() {
     try {
       return response;
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   // GETTING THE AMOUNT FROM THE RECEIPT
