@@ -19,9 +19,8 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8, left: 32, right: 32),
+      padding: const EdgeInsets.only(bottom: 8, left: 32, right: 32),
       child: Container(
-        margin: EdgeInsets.only(top: 8),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -50,33 +49,37 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // NAMA PENGELUARAN
-                      Text(
-                        widget.data.category.name,
-                        overflow: TextOverflow.ellipsis,
-                        style: kOpenSans.copyWith(
-                          //0.22.dp
-                          fontSize: 16,
-                          fontWeight: semibold,
+                SizedBox(
+                  width: 30.w,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // NAMA PENGELUARAN
+                        Text(
+                          widget.data.category.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: kOpenSans.copyWith(
+                            //0.22.dp
+                            fontSize: 16,
+                            fontWeight: semibold,
+                          ),
                         ),
-                      ),
-                      // TANGGAL
-                      Text(
-                        DateFormat("dd/MM/yyyy")
-                            .format(widget.data.date.toLocal())
-                            .toString(),
-                        overflow: TextOverflow.ellipsis,
-                        style: kOpenSans.copyWith(
-                          fontSize: 14,
-                          color: kGray.withOpacity(0.9),
+                        // TANGGAL
+                        Text(
+                          DateFormat("dd/MM/yyyy")
+                              .format(widget.data.date.toLocal())
+                              .toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: kOpenSans.copyWith(
+                            fontSize: 14,
+                            color: kGray.withOpacity(0.9),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

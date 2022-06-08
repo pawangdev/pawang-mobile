@@ -98,60 +98,63 @@ class _KategoriScreenState extends State<KategoriScreen> {
                 } else {
                   if (snapshot.hasData) {
                     if (snapshot.data?.data.length != 0) {
-                      return ListView.builder(
-                        itemCount: snapshot.data?.data.length,
-                        itemBuilder: (context, index) {
-                          var category = snapshot.data?.data[index];
-                          return Container(
-                            margin: const EdgeInsets.only(
-                                left: 30, right: 30, bottom: 16),
-                            height: 6.4.h,
-                            decoration: BoxDecoration(
-                                color: kWhite,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: kBlack.withOpacity(0.07),
-                                    spreadRadius: 2,
-                                    blurRadius: 10,
-                                  )
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                height: 6.4.h,
-                                child: Row(
-                                  children: [
-                                    // ICON
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20.0, right: 18),
-                                      child: Container(
-                                        width: 25,
-                                        height: 25,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(baseURLAPI +
-                                                    category!.iconUrl))),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        category.name,
-                                        style: kOpenSans.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: medium,
+                      return GridView.count(crossAxisCount: 2, children: [
+                        ListView.builder(
+                          itemCount: snapshot.data?.data.length,
+                          itemBuilder: (context, index) {
+                            var category = snapshot.data?.data[index];
+                            return Container(
+                              margin: const EdgeInsets.only(
+                                  left: 30, right: 30, bottom: 16),
+                              height: 6.4.h,
+                              decoration: BoxDecoration(
+                                  color: kWhite,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: kBlack.withOpacity(0.07),
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                    )
+                                  ]),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: 6.4.h,
+                                  child: Row(
+                                    children: [
+                                      // ICON
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20.0, right: 18),
+                                        child: Container(
+                                          width: 25,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      baseURLAPI +
+                                                          category!.iconUrl))),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        child: Text(
+                                          category.name,
+                                          style: kOpenSans.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: medium,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
+                            );
+                          },
+                        ),
+                      ]);
                     } else {
                       return Center(
                         child: Text(

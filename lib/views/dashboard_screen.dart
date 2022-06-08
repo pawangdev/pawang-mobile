@@ -332,8 +332,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               BorderRadius.circular(10))),
                                 ),
                                 Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 32, top: 20),
+                                  margin: const EdgeInsets.only(
+                                      left: 32, top: 20, bottom: 16),
                                   child: Text(
                                     'Riwayat',
                                     textAlign: TextAlign.start,
