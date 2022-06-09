@@ -1,14 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 import 'package:pawang_mobile/services/user_service.dart';
-import 'package:pawang_mobile/services/pengeluaran_service.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
@@ -34,13 +32,6 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-List<Map<String, dynamic>> cards = [
-  {
-    'name': 'My Wallet',
-    'amount': 30000,
-  },
-];
-
 class _DashboardScreenState extends State<DashboardScreen> {
   late Future dataPengeluaran;
   late Future<TransactionsModel> _transactions;
@@ -60,7 +51,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    updateListView();
     getUserProfile();
     _wallets = WalletService().getWallets();
     _transactions = TransactionService.getTransactions();
@@ -71,12 +61,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     setState(() {
       user = dataUser as ProfileModel;
-    });
-  }
-
-  void updateListView() {
-    setState(() {
-      dataPengeluaran = PengeluaranService().read();
     });
   }
 
@@ -91,20 +75,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: const Center(child: Icon(Icons.add_rounded)),
       ),
     );
-  }
-
-  List<Widget> cardWidgets() {
-    List<Widget> widgets = List<Widget>.generate(
-        cards.length,
-        (index) => WalletCard(
-              name: '${cards[index]['name']}',
-              namaWallet: '${cards[index]['namaWallet']}',
-              balance: '${cards[index]['balance']}',
-            ));
-
-    widgets.add(plus());
-
-    return widgets;
   }
 
   @override

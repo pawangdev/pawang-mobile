@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/services/pengeluaran_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
@@ -24,13 +23,6 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
   @override
   void initState() {
     super.initState();
-    updateListView();
-  }
-
-  void updateListView() {
-    setState(() {
-      dataPengeluaran = PengeluaranService().read();
-    });
   }
 
   @override

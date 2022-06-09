@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,7 +8,6 @@ import 'package:pawang_mobile/constants/theme.dart';
 
 class ScanService {
   XFile? _image;
-  InputImage? inputImage;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -20,7 +18,6 @@ class ScanService {
     if (is_fromGal) {
       try {
         image = await _picker.pickImage(source: ImageSource.gallery);
-        inputImage = InputImage.fromFilePath(image!.path);
         _image = image;
       } catch (e) {
         print(e);
@@ -28,7 +25,6 @@ class ScanService {
     } else {
       try {
         image = await _picker.pickImage(source: ImageSource.camera);
-        inputImage = InputImage.fromFilePath(image!.path);
         _image = image;
       } catch (e) {
         print(e);
@@ -39,7 +35,7 @@ class ScanService {
   }
 
   // CROPPING THE IMAGE
-  Future<InputImage?> cropImage(XFile? image) async {
+  Future<file.File?> cropImage(XFile? image) async {
     file.File? temp_img = file.File(image!.path);
 
     temp_img = await ImageCropper().cropImage(
@@ -53,7 +49,7 @@ class ScanService {
     try {
       if (temp_img != null) {
         //setState(() {
-        inputImage = InputImage.fromFile(temp_img);
+        _image = _image;
         //});
         // final response = uploadImage(inputImage);
         // print(response);
@@ -62,18 +58,18 @@ class ScanService {
       throw Exception(e);
     }
 
-    return inputImage;
+    return temp_img;
   }
 
   // UPLOADING IMAGE
-  uploadImage(InputImage inputImage) async {
+  uploadImage(file.File inputImage) async {
     var request = http.MultipartRequest("POST", Uri.parse(baseURLOCR));
 
     request.files.add(http.MultipartFile(
         'file',
-        file.File(inputImage.filePath!).readAsBytes().asStream(),
-        file.File(inputImage.filePath!).lengthSync(),
-        filename: inputImage.filePath!.split("/").last));
+        file.File(inputImage.path).readAsBytes().asStream(),
+        file.File(inputImage.path).lengthSync(),
+        filename: inputImage.path.split("/").last));
 
     try {
       final response = await request.send();
