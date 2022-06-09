@@ -29,9 +29,9 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
   final TextEditingController _nominalTextController = TextEditingController();
   final TextEditingController _noteTextController = TextEditingController();
   final TextEditingController _dateTextController = TextEditingController();
+  int? _walletID, _categoryID;
   final formKey = GlobalKey<FormState>();
   late String _dateRFC3399;
-  int? _walletID, _categoryID;
   bool _inputData = true;
 
   void _submit() {

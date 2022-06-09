@@ -1,4 +1,5 @@
 import 'dart:io' as file;
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -323,7 +324,19 @@ class _ScanStrukState extends State<ScanStruk> {
                                               filePath: imageFilePath =
                                                   _image!.path));
                                     } catch (e) {
-                                      print(e);
+                                      Flushbar(
+                                        message:
+                                            "Tidak Dapat Menemukan Total !",
+                                        icon: const Icon(
+                                          Icons.check,
+                                          size: 28.0,
+                                          color: Colors.white,
+                                        ),
+                                        margin: const EdgeInsets.all(8),
+                                        borderRadius: BorderRadius.circular(8),
+                                        backgroundColor: kError,
+                                        duration: const Duration(seconds: 3),
+                                      ).show(context);
                                     }
                                   },
                                   child: Text(

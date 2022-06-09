@@ -44,6 +44,16 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
     }
   }
 
+  Future<void> getDataFromScanScreen() async {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
+
+    setState(() {
+      _nominalTextController.text = int.parse(args.nominal).toString();
+      filePath = args.filePath;
+    });
+  }
+
   @override
   void initState() {
     _dateTextController.text =
@@ -52,16 +62,18 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
 
     _categories = CategoryService.getCategories(type: "outcome");
     _wallets = WalletService().getWallets();
+
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as ArgumentsValidation;
-    _nominalTextController.text = int.parse(args.nominal).toString();
-    filePath = args.filePath;
+  void didChangeDependencies() {
+    getDataFromScanScreen();
+    super.didChangeDependencies();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -290,7 +302,6 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                           TransactionService.createTransaction(data)
                               .then((response) {
                             if (response == true) {
-                              print(response);
                               Navigator.pushReplacementNamed(
                                   context, DashboardScreen.routeName);
                               Flushbar(
@@ -306,8 +317,6 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                                 duration: const Duration(seconds: 3),
                               ).show(context);
                             } else {
-                              print(response);
-
                               Flushbar(
                                 message: "Terjadi Kesalahan !",
                                 icon: const Icon(
