@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
+import 'package:pawang_mobile/views/image_dialog.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -84,9 +85,42 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 2.h,
+              ),
+              // CircleAvatar(
+              //     child: GestureDetector(
+              //       onTap: () async {
+              //         await showDialog(
+              //           context: context,
+              //           builder: (_) => ImageDialog()
+              //         );
+              //       },
+              //     ),
+              //     radius: 50.0,
+              //     backgroundImage: AssetImage('assets/images/google.png')),
+              Center(
+                  child: GestureDetector(
+                onTap: () async {
+                  await showDialog(
+                      context: context, builder: (_) => const ImageDialog());
+                },
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage('assets/images/girl_boy_landing.png'),
+                        fit: BoxFit.cover),
+                    border: Border.all(color: kGray, width: 0.5),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              )),
               Container(
-                margin: const EdgeInsets.only(top: 50, bottom: 60),
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                //margin: const EdgeInsets.(top: 20, bottom: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -246,7 +280,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                             style: ButtonStyle(
                                               backgroundColor:
                                                   MaterialStateProperty.all(
-                                                      kPrimary),
+                                                      kError),
                                               shape: MaterialStateProperty.all(
                                                 RoundedRectangleBorder(
                                                   borderRadius:
@@ -287,8 +321,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(
                                 const EdgeInsets.all(10)),
-                            backgroundColor:
-                                MaterialStateProperty.all(kPrimary),
+                            backgroundColor: MaterialStateProperty.all(kError),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
