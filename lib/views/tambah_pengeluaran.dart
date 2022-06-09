@@ -244,7 +244,9 @@ class _TambahPengeluaranScreenState extends State<TambahPengeluaranScreen> {
                                   hint: "Pilih Wallets",
                                   data: snapshot.data!.data,
                                   onChange: (value) {
-                                    _walletID = int.parse(value.toString());
+                                    setState(() {
+                                      _walletID = int.parse(value.toString());
+                                    });
                                   }),
                             );
                           } else if (snapshot.hasError) {

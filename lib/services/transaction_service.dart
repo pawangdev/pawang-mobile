@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io' as file;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionService {
@@ -32,22 +33,29 @@ class TransactionService {
     request.headers.addAll({
       'Authorization': "Bearer $token",
     });
-    request.fields['amount'] = data['amount'].toString();
-    request.fields['category_id'] = data['category_id'].toString();
-    request.fields['wallet_id'] = data['wallet_id'].toString();
-    request.fields['type'] = data['type'];
-    request.fields['description'] = data['description'];
-    request.fields['date'] = data['date'];
+
+    if (data['image'] == null) {
+      request.fields['amount'] = data['amount'].toString();
+      request.fields['category_id'] = data['category_id'].toString();
+      request.fields['wallet_id'] = data['wallet_id'].toString();
+      request.fields['type'] = data['type'];
+      request.fields['description'] = data['description'];
+      request.fields['date'] = data['date'];
+    } else {
+      request.fields['amount'] = data['amount'].toString();
+      request.fields['category_id'] = data['category_id'].toString();
+      request.fields['wallet_id'] = data['wallet_id'].toString();
+      request.fields['type'] = data['type'];
+      request.fields['description'] = data['description'];
+      request.fields['date'] = data['date'];
+      request.files.add(http.MultipartFile(
+          'image',
+          file.File(data['image']).readAsBytes().asStream(),
+          file.File(data['image']).lengthSync(),
+          filename: data['image'].split("/").last));
+    }
 
     var response = await request.send();
-
-    // var response = await http.post(
-    //     Uri.parse(baseURLAPI + "transactions/create"),
-    //     body: jsonEncode(dataTransaction),
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //       'Authorization': "Bearer $token",
-    //     });
 
     if (response.statusCode == 201) {
       return true;

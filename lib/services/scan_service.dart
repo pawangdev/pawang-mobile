@@ -8,39 +8,38 @@ import 'dart:io' as file;
 import 'package:pawang_mobile/constants/theme.dart';
 
 class ScanService {
-  late InputImage inputImage;
-  late http.Response response;
+  XFile? _image;
+  InputImage? inputImage;
+
+  final ImagePicker _picker = ImagePicker();
+
   // GETTING THE IMAGE FROM GALLERY AND CAMERA
   getImage(bool is_fromGal) async {
-    late final XFile? image;
-    final ImagePicker _picker = ImagePicker();
+    XFile? image;
 
     if (is_fromGal) {
       try {
         image = await _picker.pickImage(source: ImageSource.gallery);
+        inputImage = InputImage.fromFilePath(image!.path);
+        _image = image;
       } catch (e) {
         print(e);
       }
     } else {
       try {
         image = await _picker.pickImage(source: ImageSource.camera);
+        inputImage = InputImage.fromFilePath(image!.path);
+        _image = image;
       } catch (e) {
         print(e);
       }
     }
 
-    try {
-      inputImage = InputImage.fromFilePath(image!.path);
-      cropImage(image);
-    } catch (e) {
-      print(e);
-    }
-
-    return image;
+    return _image;
   }
 
   // CROPPING THE IMAGE
-  Future cropImage(XFile? image) async {
+  Future<InputImage?> cropImage(XFile? image) async {
     file.File? temp_img = file.File(image!.path);
 
     temp_img = await ImageCropper().cropImage(
@@ -56,19 +55,19 @@ class ScanService {
         //setState(() {
         inputImage = InputImage.fromFile(temp_img);
         //});
-        final response = uploadImage(inputImage);
+        // final response = uploadImage(inputImage);
+        // print(response);
       }
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
+
+    return inputImage;
   }
 
   // UPLOADING IMAGE
   uploadImage(InputImage inputImage) async {
-    String message = "";
-    String temp_amount = "";
-    final request = http.MultipartRequest("POST", Uri.parse(baseURLOCR));
-    final headers = {"Content-type": "multipart/form-data"};
+    var request = http.MultipartRequest("POST", Uri.parse(baseURLOCR));
 
     request.files.add(http.MultipartFile(
         'file',
@@ -76,23 +75,12 @@ class ScanService {
         file.File(inputImage.filePath!).lengthSync(),
         filename: inputImage.filePath!.split("/").last));
 
-    request.headers.addAll(headers);
-
     try {
       final response = await request.send();
-      http.Response res = await http.Response.fromStream(response);
-      final resJson = jsonDecode(res.body);
+      final responsed = await http.Response.fromStream(response);
+      final resJson = jsonDecode(responsed.body);
 
-      return resJson;
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // GETTING THE RESPONSE
-  getResponse() {
-    try {
-      return response;
+      return getAmount(resJson);
     } catch (e) {
       print(e);
     }
@@ -101,36 +89,13 @@ class ScanService {
   // GETTING THE AMOUNT FROM THE RECEIPT
   getAmount(dynamic response) {
     try {
-      if (response['message'] == "1") {
-        String amount =
-            response['amounts'].take(1).replaceAll(RegExp('[^A-Za-z0-9]'), '');
-        return amount;
-        //setState(() {
-        //nominal = amount;
-        //imageFilePath = _image!.path.toString();
-        //});
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        //   content: Text("Berhasil mendapatkan total belanja"),
-        //   backgroundColor: kSuccess,
-        // ));
+      if (response['amounts'].runtimeType == String) {
+        return response['amounts'].replaceAll(RegExp('[^A-Za-z0-9]'), '');
       } else {
-        return "";
-        // setState(() {
-        //   nominal = '';
-        //   imageFilePath = '';
-        //   _image = null;
-        // });
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        //   content: Text("Pastikan gambar yang dicrop mengandung total"),
-        //   backgroundColor: kError,
-        // ));
+        return response['amounts'][0].replaceAll(RegExp('[^A-Za-z0-9]'), '');
       }
     } catch (e) {
-      // setState(() {
-      //   nominal = '';
-      //   imageFilePath = '';
-      //   _image = null;
-      // });
+      print(e);
     }
   }
 }

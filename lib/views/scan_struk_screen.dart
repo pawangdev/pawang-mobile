@@ -27,40 +27,18 @@ class _ScanStrukState extends State<ScanStruk> {
   late String nominal;
   late String imageFilePath;
 
-  Future scanReceipt(bool is_fromGal) async {
+  scanReceipt(bool is_fromGal) async {
     // GET AND CROP THE IMAGE
     try {
-      final image = ScanService().getImage(is_fromGal);
+      final image = await ScanService().getImage(is_fromGal);
       if (image != null) {
         setState(() {
-          _image = XFile(image);
+          _image = image;
           imageFilePath = _image!.path.toString();
         });
-      } else {
-        setState(() {
-          _image = null;
-          imageFilePath = "";
-        });
       }
-    } catch (e) {}
-
-    // GET THE AMOUNT
-    try{
-      final temp = ScanService().getAmount(ScanService().getResponse());
-
-      if(temp != ""){
-        setState(() {
-          nominal = temp;
-        });
-      } else{
-        setState(() {
-          nominal = "";
-        });
-      }
-    } catch(e){
-      setState(() {
-        nominal = "";
-      });
+    } catch (e) {
+      print(e);
     }
   }
   // Future searchTotal(InputImage image) async {
@@ -291,9 +269,7 @@ class _ScanStrukState extends State<ScanStruk> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  setState(() {
-                                    _image = null;
-                                  });
+                                  _image = null;
                                 });
                               },
                               style: OutlinedButton.styleFrom(
@@ -328,12 +304,27 @@ class _ScanStrukState extends State<ScanStruk> {
                                       ),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, ValidasiScanScreen.routeName,
-                                        arguments: ArgumentsValidation(
-                                            filePath: imageFilePath,
-                                            nominal: nominal));
+                                  onPressed: () async {
+                                    try {
+                                      await ScanService()
+                                          .cropImage(_image)
+                                          .then((imageCropped) async {
+                                        var response = await ScanService()
+                                            .uploadImage(imageCropped!);
+                                        print(response);
+                                        setState(() {
+                                          nominal = response;
+                                        });
+                                      });
+                                      Navigator.pushNamed(
+                                          context, ValidasiScanScreen.routeName,
+                                          arguments: ArgumentsValidation(
+                                              nominal: nominal,
+                                              filePath: imageFilePath =
+                                                  _image!.path));
+                                    } catch (e) {
+                                      print(e);
+                                    }
                                   },
                                   child: Text(
                                     "Lanjut",

@@ -18,7 +18,7 @@ import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
-import 'package:pawang_mobile/widgets/currency_format.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
