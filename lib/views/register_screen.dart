@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 1.4.h,
                                 ),
                                 TextFormField(
-                                  validator: ValidationBuilder(localeName: 'id')
+                                  validator: ValidationBuilder(localeName: 'id').minLength(8, 'Minimal 8 huruf')
                                       .build(),
                                   controller: passwordTextController,
                                   decoration: InputDecoration(

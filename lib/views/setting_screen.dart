@@ -3,6 +3,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/profile_user_model.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/edit_profile.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
@@ -97,40 +98,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Column(
                     children: [
                       InkWell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: 3.9.h,
-                                    width: 8.3.w,
-                                    decoration: BoxDecoration(
-                                      color: Colors.orange,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: const Icon(
-                                      Icons.edit_rounded,
-                                      color: kWhite,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      height: 3.9.h,
+                                      width: 8.3.w,
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit_rounded,
+                                        color: kWhite,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Text('Edit profil',
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 14, fontWeight: semibold))
-                              ],
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 16,
-                            )
-                          ],
-                        ),
-                        onTap: () {},
-                      ),
+                                  Text('Edit profil',
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 14, fontWeight: semibold))
+                                ],
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 16,
+                              )
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, EditProfileScreen.routeName);
+                          }),
                       SizedBox(
                         child: Divider(
                           color: kGray,

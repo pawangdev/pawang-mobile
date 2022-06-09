@@ -155,6 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 TextFormField(
                                   validator: ValidationBuilder(localeName: 'id')
+                                      .minLength(8, 'Minimal 8 huruf')
                                       .build(),
                                   keyboardType: TextInputType.visiblePassword,
                                   controller: passwordTextController,

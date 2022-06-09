@@ -5,6 +5,7 @@ import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/connection_screen.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
+import 'package:pawang_mobile/views/edit_profile.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
             '/register': (context) => const RegisterScreen(),
             '/dashboard': (context) => const DashboardScreen(),
             '/settings': (context) => const SettingsScreen(),
+            '/edit-profile': (context) => const EditProfileScreen(),
             '/kategori': (context) => const KategoriScreen(),
             '/dompet': (context) => const WalletScreen(),
             '/tambah-kategori': (context) => const AddCategoryScreen(),
