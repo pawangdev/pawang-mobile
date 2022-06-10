@@ -14,23 +14,23 @@ class LoginModel {
   LoginModel({
     required this.success,
     required this.message,
-    required this.data,
+    this.data,
   });
 
   bool success;
   String message;
-  TokenModel data;
+  TokenModel? data;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         success: json["success"],
         message: json["message"],
-        data: TokenModel.fromJson(json["data"]),
+        data: json["data"] == null ? null : TokenModel.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": data.toJson(),
+        "data": data == null ? null : data!.toJson(),
       };
 }
 

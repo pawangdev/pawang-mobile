@@ -11,6 +11,7 @@ import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/kategori_screen.dart';
+import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
@@ -21,6 +22,7 @@ import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -57,11 +59,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   void getUserProfile() async {
-    var dataUser = await UserService().userProfile();
+    try {
+      var dataUser = await UserService().userProfile();
 
-    setState(() {
-      user = dataUser as ProfileModel;
-    });
+      setState(() {
+        user = dataUser as ProfileModel;
+      });
+    } catch (e) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove("token");
+      Navigator.pushNamedAndRemoveUntil(
+          context, LandingScreen.routeName, (route) => false);
+    }
   }
 
   Widget plus() {

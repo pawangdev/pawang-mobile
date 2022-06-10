@@ -66,7 +66,7 @@ class UserService {
     if (response.statusCode == 200) {
       return ProfileModel.fromJson(jsonDecode(response.body)['data']);
     } else {
-      throw Exception(response);
+      throw Exception(false);
     }
   }
 }
