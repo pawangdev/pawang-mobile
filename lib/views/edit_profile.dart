@@ -1,5 +1,8 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/services/user_service.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -102,7 +105,46 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              var data = <String, dynamic>{
+                                "name": nameTextController.text,
+                              };
+
+                              UserService()
+                                  .userUpdateProfile(data)
+                                  .then((response) {
+                                if (response == true) {
+                                  Navigator.pushReplacementNamed(
+                                      context, DashboardScreen.routeName);
+
+                                  Flushbar(
+                                    message: "Berhasil Update Profile !",
+                                    icon: const Icon(
+                                      Icons.check,
+                                      size: 28.0,
+                                      color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(8),
+                                    borderRadius: BorderRadius.circular(8),
+                                    backgroundColor: kSuccess,
+                                    duration: const Duration(seconds: 3),
+                                  ).show(context);
+                                } else {
+                                  Flushbar(
+                                    message: "Terdapat Kesalahan !",
+                                    icon: const Icon(
+                                      Icons.check,
+                                      size: 28.0,
+                                      color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(8),
+                                    borderRadius: BorderRadius.circular(8),
+                                    backgroundColor: kError,
+                                    duration: const Duration(seconds: 3),
+                                  ).show(context);
+                                }
+                              });
+                            },
                             child: Text(
                               "Simpan Perubahan",
                               style: kOpenSans.copyWith(

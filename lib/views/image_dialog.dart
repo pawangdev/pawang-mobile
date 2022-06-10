@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ImageDialog extends StatelessWidget {
-  const ImageDialog({Key? key}) : super(key: key);
+  final String imageUrl;
+  const ImageDialog({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        width: 200,
-        height: 200,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: ExactAssetImage('assets/images/girl_boy_landing.png'),
-            fit: BoxFit.cover
-          )
-        ),
+        height: 80.h,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(imageUrl), fit: BoxFit.contain)),
       ),
     );
   }

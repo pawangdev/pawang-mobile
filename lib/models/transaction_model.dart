@@ -51,6 +51,7 @@ class TransactionModel {
     required this.createdAt,
     required this.updatedAt,
     required this.category,
+    required this.wallet,
   });
 
   int id;
@@ -64,7 +65,8 @@ class TransactionModel {
   int userId;
   DateTime createdAt;
   DateTime updatedAt;
-  CategoryTransactionModel category;
+  CategoryWalletModel category;
+  TransactionWalletModel wallet;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
@@ -79,7 +81,8 @@ class TransactionModel {
         userId: json["user_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        category: CategoryTransactionModel.fromJson(json["category"]),
+        category: CategoryWalletModel.fromJson(json["category"]),
+        wallet: TransactionWalletModel.fromJson(json["wallet"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -95,11 +98,12 @@ class TransactionModel {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "category": category.toJson(),
+        "wallet": wallet.toJson(),
       };
 }
 
-class CategoryTransactionModel {
-  CategoryTransactionModel({
+class CategoryWalletModel {
+  CategoryWalletModel({
     required this.id,
     required this.name,
     required this.iconUrl,
@@ -117,8 +121,8 @@ class CategoryTransactionModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory CategoryTransactionModel.fromJson(Map<String, dynamic> json) =>
-      CategoryTransactionModel(
+  factory CategoryWalletModel.fromJson(Map<String, dynamic> json) =>
+      CategoryWalletModel(
         id: json["id"],
         name: json["name"],
         iconUrl: json["icon_url"],
@@ -134,6 +138,43 @@ class CategoryTransactionModel {
         "icon_url": iconUrl,
         "user_id": userId,
         "type": type,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class TransactionWalletModel {
+  TransactionWalletModel({
+    required this.id,
+    required this.name,
+    required this.userId,
+    required this.balance,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  int id;
+  String name;
+  int userId;
+  int balance;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory TransactionWalletModel.fromJson(Map<String, dynamic> json) =>
+      TransactionWalletModel(
+        id: json["id"],
+        name: json["name"],
+        userId: json["user_id"],
+        balance: json["balance"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "user_id": userId,
+        "balance": balance,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

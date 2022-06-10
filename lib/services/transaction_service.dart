@@ -48,7 +48,7 @@ class TransactionService {
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
       request.fields['date'] = data['date'];
-      request.files.add(http.MultipartFile(
+      request.files.add(await http.MultipartFile(
           'image',
           file.File(data['image']).readAsBytes().asStream(),
           file.File(data['image']).lengthSync(),
@@ -58,6 +58,23 @@ class TransactionService {
     var response = await request.send();
 
     if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> destroyTransaction(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    var response = await http
+        .delete(Uri.parse(baseURLAPI + "transactions/$id/delete"), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': "Bearer $token",
+    });
+
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;

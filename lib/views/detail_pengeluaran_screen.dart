@@ -1,6 +1,12 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
+import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/image_dialog.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
@@ -25,13 +31,17 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
   Widget build(BuildContext context) {
     TransactionModel data =
         ModalRoute.of(context)!.settings.arguments as TransactionModel;
-    final int? _id = data.id;
+    late final int transaction_id = data.id;
+    final String? transaction_image_url =
+        data.imageUrl == "" ? "" : data.imageUrl;
 
-    _nominalTextController.text = data.amount.toString();
+    _nominalTextController.text =
+        CurrencyFormat.convertToIdr(data.amount, 2).toString();
     _noteTextController.text = data.description;
-    _dateTextController.text = data.date.toString();
+    _dateTextController.text =
+        DateFormat("dd/MM/yyyy").format(data.date.toLocal()).toString();
     _categoryTextController.text = data.category.name;
-    _walletTextController.text = data.walletId.toString();
+    _walletTextController.text = data.wallet.name;
 
     return Scaffold(
       body: SafeArea(
@@ -71,7 +81,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                             Text(
                               "Detail Pengeluaran",
                               style: kOpenSans.copyWith(
-                                  fontSize: 0.253.dp,
+                                  fontSize: 16,
                                   fontWeight: bold,
                                   color: Colors.white),
                             ),
@@ -99,24 +109,29 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
               //     ),
               //     radius: 50.0,
               //     backgroundImage: AssetImage('assets/images/google.png')),
-              Center(
-                  child: GestureDetector(
-                onTap: () async {
-                  await showDialog(
-                      context: context, builder: (_) => const ImageDialog());
-                },
-                child: Container(
-                  height: 70,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage('assets/images/girl_boy_landing.png'),
-                        fit: BoxFit.cover),
-                    border: Border.all(color: kGray, width: 0.5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              )),
+              transaction_image_url == ""
+                  ? SizedBox()
+                  : Center(
+                      child: GestureDetector(
+                      onTap: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (_) => ImageDialog(
+                                  imageUrl: baseURLAPI + data.imageUrl,
+                                ));
+                      },
+                      child: Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(baseURLAPI + data.imageUrl),
+                              fit: BoxFit.cover),
+                          border: Border.all(color: kGray, width: 0.5),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    )),
               Container(
                 //margin: const EdgeInsets.(top: 20, bottom: 20),
                 padding:
@@ -205,7 +220,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               Text(
                                 "Ubah Data",
                                 style: kOpenSans.copyWith(
-                                    fontSize: 0.253.dp, fontWeight: medium),
+                                    fontSize: 16, fontWeight: medium),
                               ),
                             ],
                           ),
@@ -235,13 +250,13 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                 title: Text(
                                   'Hapus Pengeluaran',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 0.26.dp, fontWeight: bold),
+                                      fontSize: 18, fontWeight: bold),
                                   textAlign: TextAlign.center,
                                 ),
                                 content: Text(
                                   'Apakah kamu yakin akan menghapus pengeluaran ini?',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 0.24.dp, fontWeight: light),
+                                      fontSize: 16, fontWeight: light),
                                   textAlign: TextAlign.center,
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -256,7 +271,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                           child: Text(
                                             "Kembali",
                                             style: kOpenSans.copyWith(
-                                                fontSize: 0.23.dp,
+                                                fontSize: 16,
                                                 fontWeight: medium,
                                                 color: kPrimary),
                                           ),
@@ -293,9 +308,57 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                               style: kOpenSans.copyWith(
                                                   color: kWhite,
                                                   fontWeight: medium,
-                                                  fontSize: 0.23.dp),
+                                                  fontSize: 16),
                                             ),
-                                            onPressed: () => {}),
+                                            onPressed: () {
+                                              TransactionService
+                                                      .destroyTransaction(
+                                                          transaction_id)
+                                                  .then((response) {
+                                                if (response == true) {
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context,
+                                                          DashboardScreen
+                                                              .routeName);
+                                                  Flushbar(
+                                                    message:
+                                                        "Berhasil Menghapus Transaksi !",
+                                                    icon: const Icon(
+                                                      Icons.check,
+                                                      size: 28.0,
+                                                      color: Colors.white,
+                                                    ),
+                                                    margin:
+                                                        const EdgeInsets.all(8),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    backgroundColor: kSuccess,
+                                                    duration: const Duration(
+                                                        seconds: 3),
+                                                  ).show(context);
+                                                } else {
+                                                  Flushbar(
+                                                    message:
+                                                        "Terjadi Kesalahan !",
+                                                    icon: const Icon(
+                                                      Icons.check,
+                                                      size: 28.0,
+                                                      color: Colors.white,
+                                                    ),
+                                                    margin:
+                                                        const EdgeInsets.all(8),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    backgroundColor: kError,
+                                                    duration: const Duration(
+                                                        seconds: 3),
+                                                  ).show(context);
+                                                }
+                                              });
+                                            }),
                                       ),
                                     ],
                                   ),
@@ -314,7 +377,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                               Text(
                                 "Hapus Data",
                                 style: kOpenSans.copyWith(
-                                    fontSize: 0.245.dp, fontWeight: medium),
+                                    fontSize: 16, fontWeight: medium),
                               ),
                             ],
                           ),

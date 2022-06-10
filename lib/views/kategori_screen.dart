@@ -4,7 +4,6 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
 import 'package:pawang_mobile/services/category_service.dart';
-import 'package:pawang_mobile/views/add_category.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,6 +17,7 @@ class KategoriScreen extends StatefulWidget {
 
 class _KategoriScreenState extends State<KategoriScreen> {
   late Future<CategoriesModel> _categories;
+
   @override
   void initState() {
     _categories = CategoryService.getCategories(type: "");

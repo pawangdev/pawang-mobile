@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:io' as file;
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/login_model.dart';
@@ -51,6 +51,37 @@ class UserService {
       return LoginModel.fromJson(jsonDecode(response.body));
     } else {
       return LoginModel.fromJson(jsonDecode(response.body));
+    }
+  }
+
+  Future<bool> userUpdateProfile(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    var request = http.MultipartRequest(
+        "POST", Uri.parse(baseURLAPI + "profile/change-profile"));
+    request.headers.addAll({
+      'Authorization': "Bearer $token",
+    });
+
+    if (data['image'] == null) {
+      request.fields['name'] = data['name'];
+    } else {
+      request.fields['name'] = data['name'];
+      request.files.add(http.MultipartFile(
+        "image",
+        file.File(data['image']).readAsBytes().asStream(),
+        file.File(data['image']).lengthSync(),
+        filename: data['image'].toString().split("/").last,
+      ));
+    }
+
+    var response = await request.send();
+
+    if (response.reasonPhrase == "OK") {
+      return true;
+    } else {
+      return false;
     }
   }
 
