@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pawang_mobile/views/add_category.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
+import 'package:pawang_mobile/views/change_password_screen.dart';
 import 'package:pawang_mobile/views/connection_screen.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
             '/validasi-scan': (context) => const ValidasiScanScreen(),
             '/detail': (context) => const DetailPengeluaran(),
             '/lihat-struk': (context) => const DetailImageStrukScreen(),
-            '/connection-check': ((context) => const ConnectionScreen())
+            '/connection-check': ((context) => const ConnectionScreen()),
+            '/change-password': ((context) => const ChangePasswordScreen()),
           },
           debugShowCheckedModeBanner: false,
         );

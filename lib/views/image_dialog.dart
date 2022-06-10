@@ -9,7 +9,7 @@ class ImageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: 80.h,
+        height: 50.h,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(imageUrl), fit: BoxFit.contain)),

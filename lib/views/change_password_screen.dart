@@ -2,22 +2,26 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
-import 'package:pawang_mobile/views/change_password_screen.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  static const String routeName = '/edit-profile';
-  const EditProfileScreen({Key? key}) : super(key: key);
+class ChangePasswordScreen extends StatefulWidget {
+  static const String routeName = '/change-password';
+  const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController nameTextController = TextEditingController();
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  final TextEditingController passwordNowTextController =
+      TextEditingController();
+  final TextEditingController passwordNewTextController =
+      TextEditingController();
+  final TextEditingController passwordNewConfirmationTextController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         Navigator.pop(context);
                       }),
                   Text(
-                    "Edit Profile",
+                    "Ganti Password",
                     style: kOpenSans.copyWith(
                         fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
@@ -48,51 +52,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               SizedBox(
                 height: 4.4.h,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      height: 13.8.h,
-                      width: 28.w,
-                      child: Image.asset('assets/images/profile_blue.png')),
-                  SizedBox(height: 2.4.h),
-                ],
-              ),
-              SizedBox(
-                height: 4.4.h,
-              ),
               InputField(
-                  inputLabel: 'Nama Lengkap',
-                  inputController: nameTextController),
+                  inputLabel: 'Password Lama',
+                  isPassword: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  inputController: passwordNowTextController),
+              InputField(
+                  inputLabel: 'Password Baru',
+                  isPassword: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  inputController: passwordNewTextController),
+              InputField(
+                  inputLabel: 'Password Baru Konfirmasi',
+                  isPassword: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  inputController: passwordNewConfirmationTextController),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: OutlinedButton(
-                          child: Text(
-                            "Ganti Password",
-                            style: kOpenSans.copyWith(
-                                fontSize: 16,
-                                fontWeight: bold,
-                                color: kPrimary),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, ChangePasswordScreen.routeName);
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            side: const BorderSide(color: kPrimary),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 2.h),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
@@ -111,18 +91,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             onPressed: () {
                               var data = <String, dynamic>{
-                                "name": nameTextController.text,
+                                "password_now": passwordNowTextController.text,
+                                "password_new": passwordNewTextController.text,
+                                "password_new_confirmation":
+                                    passwordNewConfirmationTextController.text,
                               };
 
                               UserService()
-                                  .userUpdateProfile(data)
+                                  .userChangePassword(data)
                                   .then((response) {
-                                if (response == true) {
+                                if (response.success) {
                                   Navigator.pushReplacementNamed(
                                       context, DashboardScreen.routeName);
 
                                   Flushbar(
-                                    message: "Berhasil Update Profile !",
+                                    message: "Berhasil Ganti Password !",
                                     icon: const Icon(
                                       Icons.check,
                                       size: 28.0,
@@ -135,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ).show(context);
                                 } else {
                                   Flushbar(
-                                    message: "Terdapat Kesalahan !",
+                                    message: response.message,
                                     icon: const Icon(
                                       Icons.check,
                                       size: 28.0,
@@ -150,7 +133,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               });
                             },
                             child: Text(
-                              "Simpan Perubahan",
+                              "Ganti Password",
                               style: kOpenSans.copyWith(
                                 fontSize: 16,
                                 fontWeight: bold,

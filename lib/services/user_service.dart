@@ -100,4 +100,29 @@ class UserService {
       throw Exception(false);
     }
   }
+
+  Future<LoginModel> userChangePassword(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    var dataPassword = <String, dynamic>{
+      'password_now': data['password_now'],
+      'password_new': data['password_new'],
+      'password_new_confirmation': data['password_new_confirmation'],
+    };
+
+    var response = await http.post(
+        Uri.parse(baseURLAPI + "profile/change-password"),
+        body: jsonEncode(dataPassword),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "bearer $token",
+        });
+
+    if (response.statusCode == 200) {
+      return LoginModel.fromJson(jsonDecode(response.body));
+    } else {
+      return LoginModel.fromJson(jsonDecode(response.body));
+    }
+  }
 }
