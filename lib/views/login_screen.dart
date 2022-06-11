@@ -190,23 +190,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      onPressed: _submit,
-                      child: Text(
-                        "Masuk",
-                        style: kOpenSans.copyWith(
-                            fontSize: 16,
-                            //0.25.dp,
-                            fontWeight: bold),
-                      ),
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12)),
-                        backgroundColor: MaterialStateProperty.all(kPrimary),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(kDefaultBorderRadius),
+                          gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [kPrimary, kPurple])),
+                      child: TextButton(
+                        onPressed: _submit,
+                        child: Text(
+                          "Masuk",
+                          style: kOpenSans.copyWith(
+                              color: kWhite,
+                              fontSize: 16,
+                              //0.25.dp,
+                              fontWeight: bold),
                         ),
                       ),
                     ),
@@ -234,67 +234,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, RegisterScreen.routeName);
                           }),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    width: 280,
-                    child: Row(
-                      children: <Widget>[
-                        const Expanded(
-                          child: Divider(
-                            color: kGray,
-                            height: 1.5,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            "atau",
-                            style: TextStyle(
-                              fontSize: 12,
-                              //0.24.dp,
-                              color: kGray,
-                              fontWeight: medium,
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                          child: Divider(
-                            color: kGray,
-                            height: 1.5,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 1.5.h,
-                  ),
-                  InkWell(
-                    child: Container(
-                      height: 5.h,
-                      width: 11.w,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        color: kWhite,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 1,
-                            offset: const Offset(
-                                0, 2), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                          child: Image.asset('assets/images/google.png')),
-                    ),
-                    onTap: () {},
                   ),
                 ],
               ),

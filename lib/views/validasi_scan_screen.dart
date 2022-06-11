@@ -264,70 +264,73 @@ class _ValidasiScanScreenState extends State<ValidasiScanScreen> {
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          backgroundColor: MaterialStateProperty.all(kPrimary),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(kDefaultBorderRadius),
+                          gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [kPrimary, kPurple])),
+                      child: TextButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(vertical: 15),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          var data = <String, dynamic>{
-                            'amount': int.parse(_nominalTextController.text),
-                            'category_id': _categoryID,
-                            'wallet_id': _walletID,
-                            'type': 'outcome',
-                            'description': _noteTextController.text,
-                            'date': _dateRFC3399,
-                            'image': filePath,
-                          };
+                          onPressed: () {
+                            var data = <String, dynamic>{
+                              'amount': int.parse(_nominalTextController.text),
+                              'category_id': _categoryID,
+                              'wallet_id': _walletID,
+                              'type': 'outcome',
+                              'description': _noteTextController.text,
+                              'date': _dateRFC3399,
+                              'image': filePath,
+                            };
 
-                          TransactionService.createTransaction(data)
-                              .then((response) {
-                            if (response == true) {
-                              Navigator.pushReplacementNamed(
-                                  context, DashboardScreen.routeName);
-                              Flushbar(
-                                message: "Berhasil Menambah Pengeluaran !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kSuccess,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            } else {
-                              Flushbar(
-                                message: "Terjadi Kesalahan !",
-                                icon: const Icon(
-                                  Icons.check,
-                                  size: 28.0,
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.all(8),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor: kError,
-                                duration: const Duration(seconds: 3),
-                              ).show(context);
-                            }
-                          });
-                        },
-                        child: Text(
-                          "Simpan Pengeluaran",
-                          style: kOpenSans.copyWith(
-                            fontSize: 16,
-                            fontWeight: bold,
-                          ),
-                        )),
+                            TransactionService.createTransaction(data)
+                                .then((response) {
+                              if (response == true) {
+                                Navigator.pushReplacementNamed(
+                                    context, DashboardScreen.routeName);
+                                Flushbar(
+                                  message: "Berhasil Menambah Pengeluaran !",
+                                  icon: const Icon(
+                                    Icons.check,
+                                    size: 28.0,
+                                    color: Colors.white,
+                                  ),
+                                  margin: const EdgeInsets.all(8),
+                                  borderRadius: BorderRadius.circular(8),
+                                  backgroundColor: kSuccess,
+                                  duration: const Duration(seconds: 3),
+                                ).show(context);
+                              } else {
+                                Flushbar(
+                                  message: "Terjadi Kesalahan !",
+                                  icon: const Icon(
+                                    Icons.check,
+                                    size: 28.0,
+                                    color: Colors.white,
+                                  ),
+                                  margin: const EdgeInsets.all(8),
+                                  borderRadius: BorderRadius.circular(8),
+                                  backgroundColor: kError,
+                                  duration: const Duration(seconds: 3),
+                                ).show(context);
+                              }
+                            });
+                          },
+                          child: Text(
+                            "Simpan Pengeluaran",
+                            style: kOpenSans.copyWith(
+                              color: kWhite,
+                              fontSize: 16,
+                              fontWeight: bold,
+                            ),
+                          )),
+                    ),
                   ),
                 ),
               )

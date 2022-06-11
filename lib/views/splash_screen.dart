@@ -44,31 +44,38 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kPrimary,
-      body: Stack(
-        children: [
-          Center(
-            child: SizedBox(
-                width: 35.w,
-                height: 35.w,
-                child: Image.asset('assets/images/splash.png')),
-          ),
-          Positioned.fill(
-              child: Align(
-            alignment: AlignmentDirectional.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Text(
-                'Pawang version v.1.0.0',
-                style: kOpenSans.copyWith(
-                  color: kWhite.withOpacity(0.75),
-                  fontWeight: semibold,
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [kPrimary, kPurple])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Center(
+              child: SizedBox(
+                  width: 35.w,
+                  height: 35.w,
+                  child: Image.asset('assets/images/splash.png')),
+            ),
+            Positioned.fill(
+                child: Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Pawang version v.1.0.0',
+                  style: kOpenSans.copyWith(
+                    color: kWhite.withOpacity(0.75),
+                    fontWeight: semibold,
+                  ),
                 ),
               ),
-            ),
-          )),
-        ],
+            )),
+          ],
+        ),
       ),
     );
   }

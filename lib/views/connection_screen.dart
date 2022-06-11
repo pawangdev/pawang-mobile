@@ -63,19 +63,24 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 height: 3.6.h,
               ),
               Container(
-                margin: const EdgeInsets.only(bottom: 32),
-                child: ElevatedButton(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                    gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [kPrimary, kPurple])),
+                child: TextButton(
                     child: Text(
                       "Coba Lagi",
                       style: kOpenSans.copyWith(
                           fontSize: 16, fontWeight: bold, color: kWhite),
                     ),
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(kPrimary),
                         padding:
-                            MaterialStateProperty.all(const EdgeInsets.all(18)),
+                            MaterialStateProperty.all(const EdgeInsets.all(16)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)))),
+                            borderRadius:
+                                BorderRadius.circular(kDefaultBorderRadius)))),
                     onPressed: () {}),
               ),
             ],

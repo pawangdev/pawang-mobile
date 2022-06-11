@@ -242,7 +242,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             LayananCard(
-                              icon: 'assets/images/pemasukan.svg',
+                              icon: 'assets/images/pemasukan.png',
                               title: 'Pemasukan',
                               onTap: () {
                                 Navigator.pushNamed(
@@ -250,7 +250,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               },
                             ),
                             LayananCard(
-                              icon: 'assets/images/pengeluaran.svg',
+                              icon: 'assets/images/pengeluaran.png',
                               title: 'Pengeluaran',
                               onTap: () {
                                 Navigator.pushNamed(
@@ -258,7 +258,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               },
                             ),
                             LayananCard(
-                              icon: 'assets/images/wallet.svg',
+                              icon: 'assets/images/wallet.png',
                               title: 'Dompet',
                               onTap: () {
                                 Navigator.pushNamed(
@@ -266,7 +266,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               },
                             ),
                             LayananCard(
-                              icon: 'assets/images/kategori.svg',
+                              icon: 'assets/images/kategori.png',
                               title: 'Kategori',
                               onTap: () {
                                 Navigator.pushNamed(
@@ -283,8 +283,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             DraggableScrollableSheet(
-              initialChildSize: 0.43,
-              minChildSize: 0.43,
+              initialChildSize: 0.36,
+              minChildSize: 0.36,
               maxChildSize: 0.94,
               builder:
                   (BuildContext context, ScrollController scrollController) {
@@ -401,7 +401,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 7.h,
+            height: 8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),
@@ -410,21 +410,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 children: [
                   IconBottomBar(
                       text: "Beranda",
-                      icon: Icons.home,
+                      iconEnable: "assets/images/home1.png",
+                      iconDisable: "assets/images/home2.png",
                       selected: true,
                       onPressed: () {
                         Navigator.pushNamed(context, DashboardScreen.routeName);
                       }),
                   IconBottomBar(
                       text: "Scan Struk",
-                      icon: Icons.fullscreen,
+                      iconEnable: "assets/images/scan1.png",
+                      iconDisable: "assets/images/scan2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
                       text: "Pengaturan",
-                      icon: Icons.settings_outlined,
+                      iconEnable: "assets/images/setting1.png",
+                      iconDisable: "assets/images/setting2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, SettingsScreen.routeName);

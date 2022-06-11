@@ -79,7 +79,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Detail Pengeluaran",
+                              "Detail Riwayat",
                               style: kOpenSans.copyWith(
                                   fontSize: 16,
                                   fontWeight: bold,
@@ -208,7 +208,120 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () {
+                            showModalBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  height: 85.h,
+                                  color: kWhite,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        // Nominal
+                                        Text(
+                                          'Ubah Data',
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 18, fontWeight: bold),
+                                        ),
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: InputField(
+                                            inputLabel: "Nominal",
+                                            inputController:
+                                                _nominalTextController,
+                                            keyboardType: TextInputType.number,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ),
+                                        // Kategori
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: InputField(
+                                            inputLabel: "Kategori",
+                                            inputController:
+                                                _categoryTextController,
+                                            keyboardType: TextInputType.number,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ),
+                                        // Wallets
+                                        // Kategori
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: InputField(
+                                            inputLabel: "Wallets",
+                                            inputController:
+                                                _walletTextController,
+                                            keyboardType: TextInputType.number,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ),
+                                        // Catatan
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: InputField(
+                                            inputLabel: "Catatan",
+                                            inputController:
+                                                _noteTextController,
+                                            keyboardType: TextInputType.number,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ),
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: InputField(
+                                            inputLabel: "Tanggal",
+                                            inputController:
+                                                _dateTextController,
+                                            keyboardType: TextInputType.number,
+                                            enable: false,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                            style: ButtonStyle(
+                                              padding:
+                                                  MaterialStateProperty.all(
+                                                      const EdgeInsets.all(10)),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      kPrimary),
+                                              shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Simpan Perubahan',
+                                              style: kOpenSans.copyWith(
+                                                  color: kWhite,
+                                                  fontWeight: medium,
+                                                  fontSize: 16),
+                                            ),
+                                            onPressed: () {}),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              isScrollControlled: true,
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -241,7 +354,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                         width: 1.w,
                       ),
                       Expanded(
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           onPressed: () {
                             showDialog<void>(
                               context: context,
@@ -291,22 +404,21 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                       ),
                                       SizedBox(width: 1.w),
                                       Expanded(
-                                        child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      kError),
-                                              shape: MaterialStateProperty.all(
-                                                RoundedRectangleBorder(
+                                        child: OutlinedButton(
+                                            style: OutlinedButton.styleFrom(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4),
+                                              side: const BorderSide(
+                                                  color: kError),
+                                              shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                              ),
+                                                      BorderRadius.circular(8)),
                                             ),
                                             child: Text(
                                               'Hapus',
                                               style: kOpenSans.copyWith(
-                                                  color: kWhite,
+                                                  color: kError,
                                                   fontWeight: medium,
                                                   fontSize: 16),
                                             ),
@@ -371,25 +483,24 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                             children: [
                               const Icon(
                                 Icons.delete_rounded,
+                                color: kError,
                                 size: 20,
                               ),
                               SizedBox(width: 3.w),
                               Text(
                                 "Hapus Data",
                                 style: kOpenSans.copyWith(
-                                    fontSize: 16, fontWeight: medium),
+                                    color: kError,
+                                    fontSize: 16,
+                                    fontWeight: medium),
                               ),
                             ],
                           ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(10)),
-                            backgroundColor: MaterialStateProperty.all(kError),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.all(10),
+                            side: const BorderSide(color: kError),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
                           ),
                         ),
                       ),

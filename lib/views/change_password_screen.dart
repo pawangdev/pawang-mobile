@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
@@ -22,6 +23,52 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       TextEditingController();
   final TextEditingController passwordNewConfirmationTextController =
       TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+      var data = <String, dynamic>{
+        "password_now": passwordNowTextController.text,
+        "password_new": passwordNewTextController.text,
+        "password_new_confirmation": passwordNewConfirmationTextController.text,
+      };
+
+      UserService().userChangePassword(data).then((response) {
+        if (response.success) {
+          Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+
+          Flushbar(
+            message: "Berhasil Ganti Password !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kSuccess,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        } else {
+          Flushbar(
+            message: response.message,
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kError,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +99,31 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               SizedBox(
                 height: 4.4.h,
               ),
-              InputField(
-                  inputLabel: 'Password Lama',
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  inputController: passwordNowTextController),
-              InputField(
-                  inputLabel: 'Password Baru',
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  inputController: passwordNewTextController),
-              InputField(
-                  inputLabel: 'Password Baru Konfirmasi',
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  inputController: passwordNewConfirmationTextController),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Lama',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: passwordNowTextController),
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Baru',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: passwordNewTextController),
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Baru Konfirmasi',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: passwordNewConfirmationTextController),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -75,70 +132,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(vertical: 15),
-                              ),
-                              backgroundColor:
-                                  MaterialStateProperty.all(kPrimary),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      kDefaultBorderRadius),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultBorderRadius),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [kPrimary, kPurple])),
+                          child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(vertical: 15),
                                 ),
                               ),
-                            ),
-                            onPressed: () {
-                              var data = <String, dynamic>{
-                                "password_now": passwordNowTextController.text,
-                                "password_new": passwordNewTextController.text,
-                                "password_new_confirmation":
-                                    passwordNewConfirmationTextController.text,
-                              };
-
-                              UserService()
-                                  .userChangePassword(data)
-                                  .then((response) {
-                                if (response.success) {
-                                  Navigator.pushReplacementNamed(
-                                      context, DashboardScreen.routeName);
-
-                                  Flushbar(
-                                    message: "Berhasil Ganti Password !",
-                                    icon: const Icon(
-                                      Icons.check,
-                                      size: 28.0,
-                                      color: Colors.white,
-                                    ),
-                                    margin: const EdgeInsets.all(8),
-                                    borderRadius: BorderRadius.circular(8),
-                                    backgroundColor: kSuccess,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                } else {
-                                  Flushbar(
-                                    message: response.message,
-                                    icon: const Icon(
-                                      Icons.check,
-                                      size: 28.0,
-                                      color: Colors.white,
-                                    ),
-                                    margin: const EdgeInsets.all(8),
-                                    borderRadius: BorderRadius.circular(8),
-                                    backgroundColor: kError,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
-                              });
-                            },
-                            child: Text(
-                              "Ganti Password",
-                              style: kOpenSans.copyWith(
-                                fontSize: 16,
-                                fontWeight: bold,
-                              ),
-                            )),
+                              onPressed: _submit,
+                              child: Text(
+                                "Simpan Perubahan",
+                                style: kOpenSans.copyWith(
+                                  color: kWhite,
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                ),
+                              )),
+                        ),
                       ),
                     ],
                   ),

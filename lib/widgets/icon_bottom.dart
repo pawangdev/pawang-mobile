@@ -6,12 +6,14 @@ class IconBottomBar extends StatelessWidget {
   const IconBottomBar(
       {Key? key,
       required this.text,
-      required this.icon,
       required this.selected,
-      required this.onPressed})
+      required this.onPressed,
+      required this.iconEnable,
+      required this.iconDisable})
       : super(key: key);
   final String text;
-  final IconData icon;
+  final String iconEnable;
+  final String iconDisable;
   final bool selected;
   final Function() onPressed;
 
@@ -19,27 +21,35 @@ class IconBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          icon: Icon(
-            icon,
-            size: 30,
-            color: selected ? primaryColor : Colors.black54,
-          ),
+    return Container(
+      width: 70,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: onPressed,
+              child: selected
+                  ? Image.asset(
+                      iconEnable,
+                      width: 28,
+                    )
+                  : Image.asset(
+                      iconDisable,
+                      width: 25,
+                    ),
+            ),
+            selected
+                ? Text(
+                    text,
+                    style:
+                        TextStyle(fontSize: 8, height: 1, color: primaryColor),
+                  )
+                : SizedBox()
+          ],
         ),
-        SizedBox(height: 0.5.h),
-        Text(
-          text,
-          style: TextStyle(
-              fontSize: 8,
-              height: .1,
-              color: selected ? primaryColor : Colors.grey.withOpacity(.75)),
-        ),
-        SizedBox(height: 0.5.h)
-      ],
+      ),
     );
   }
 }

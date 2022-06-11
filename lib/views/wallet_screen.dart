@@ -148,19 +148,22 @@ class _WalletScreenState extends State<WalletScreen> {
           ],
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: FloatingActionButton(
-          backgroundColor: kWhite,
-          onPressed: () {
-            Navigator.pushNamed(context, AddWalletScreen.routeName);
-          },
-          tooltip: 'Tambah Dompet',
-          splashColor: kPrimary,
-          child: const Icon(
-            Icons.add,
-            color: kPrimary,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AddWalletScreen.routeName);
+        },
+        tooltip: 'Tambah Dompet',
+        splashColor: kPrimary,
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [kPrimary, kPurple])),
+          child: const Icon(Icons.add),
         ),
       ),
     );

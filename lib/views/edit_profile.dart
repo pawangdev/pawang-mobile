@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/change_password_screen.dart';
@@ -18,6 +19,50 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController nameTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (form!.validate()) {
+      form.save();
+      var data = <String, dynamic>{
+        "name": nameTextController.text,
+      };
+
+      UserService().userUpdateProfile(data).then((response) {
+        if (response == true) {
+          Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+
+          Flushbar(
+            message: "Berhasil Update Profile !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kSuccess,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        } else {
+          Flushbar(
+            message: "Terdapat Kesalahan !",
+            icon: const Icon(
+              Icons.check,
+              size: 28.0,
+              color: Colors.white,
+            ),
+            margin: const EdgeInsets.all(8),
+            borderRadius: BorderRadius.circular(8),
+            backgroundColor: kError,
+            duration: const Duration(seconds: 3),
+          ).show(context);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +106,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               SizedBox(
                 height: 4.4.h,
               ),
-              InputField(
-                  inputLabel: 'Nama Lengkap',
-                  inputController: nameTextController),
+              Form(
+                key: formKey,
+                child: InputField(
+                    validator: ValidationBuilder(localeName: 'id').build(),
+                    inputLabel: 'Nama Lengkap',
+                    inputController: nameTextController),
+              ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -95,67 +144,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       SizedBox(height: 2.h),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(vertical: 15),
-                              ),
-                              backgroundColor:
-                                  MaterialStateProperty.all(kPrimary),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      kDefaultBorderRadius),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultBorderRadius),
+                              gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [kPrimary, kPurple])),
+                          child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(vertical: 15),
                                 ),
                               ),
-                            ),
-                            onPressed: () {
-                              var data = <String, dynamic>{
-                                "name": nameTextController.text,
-                              };
-
-                              UserService()
-                                  .userUpdateProfile(data)
-                                  .then((response) {
-                                if (response == true) {
-                                  Navigator.pushReplacementNamed(
-                                      context, DashboardScreen.routeName);
-
-                                  Flushbar(
-                                    message: "Berhasil Update Profile !",
-                                    icon: const Icon(
-                                      Icons.check,
-                                      size: 28.0,
-                                      color: Colors.white,
-                                    ),
-                                    margin: const EdgeInsets.all(8),
-                                    borderRadius: BorderRadius.circular(8),
-                                    backgroundColor: kSuccess,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                } else {
-                                  Flushbar(
-                                    message: "Terdapat Kesalahan !",
-                                    icon: const Icon(
-                                      Icons.check,
-                                      size: 28.0,
-                                      color: Colors.white,
-                                    ),
-                                    margin: const EdgeInsets.all(8),
-                                    borderRadius: BorderRadius.circular(8),
-                                    backgroundColor: kError,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
-                              });
-                            },
-                            child: Text(
-                              "Simpan Perubahan",
-                              style: kOpenSans.copyWith(
-                                fontSize: 16,
-                                fontWeight: bold,
-                              ),
-                            )),
+                              onPressed: _submit,
+                              child: Text(
+                                "Simpan Perubahan",
+                                style: kOpenSans.copyWith(
+                                  color: kWhite,
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                ),
+                              )),
+                        ),
                       ),
                     ],
                   ),

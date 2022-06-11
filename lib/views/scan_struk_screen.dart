@@ -106,21 +106,29 @@ class _ScanStrukState extends State<ScanStruk> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ElevatedButton(
-                              child: SvgPicture.asset(
-                                'assets/images/scan_btn.svg',
-                                fit: BoxFit.cover,
-                              ),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(kPrimary),
-                                  padding: MaterialStateProperty.all(
-                                      const EdgeInsets.all(14)),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12)))),
-                              onPressed: () => scanReceipt(false)),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(kDefaultBorderRadius),
+                                gradient: LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [kPrimary, kPurple])),
+                            child: TextButton(
+                                child: Image.asset(
+                                  'assets/images/scan3.png',
+                                  width: 32,
+                                  fit: BoxFit.cover,
+                                ),
+                                style: ButtonStyle(
+                                    padding: MaterialStateProperty.all(
+                                        const EdgeInsets.all(14)),
+                                    shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12)))),
+                                onPressed: () => scanReceipt(false)),
+                          ),
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 20),
                             width: MediaQuery.of(context).size.width,
@@ -281,7 +289,7 @@ class _ScanStrukState extends State<ScanStruk> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 7.h,
+            height: 8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),
@@ -290,21 +298,24 @@ class _ScanStrukState extends State<ScanStruk> {
                 children: [
                   IconBottomBar(
                       text: "Beranda",
-                      icon: Icons.home,
+                      iconEnable: "assets/images/home1.png",
+                      iconDisable: "assets/images/home2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, DashboardScreen.routeName);
                       }),
                   IconBottomBar(
                       text: "Scan Struk",
-                      icon: Icons.fullscreen,
+                      iconEnable: "assets/images/scan1.png",
+                      iconDisable: "assets/images/scan2.png",
                       selected: true,
                       onPressed: () {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
                       text: "Pengaturan",
-                      icon: Icons.settings_outlined,
+                      iconEnable: "assets/images/setting1.png",
+                      iconDisable: "assets/images/setting2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, SettingsScreen.routeName);

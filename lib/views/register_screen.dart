@@ -138,7 +138,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   height: 1.4.h,
                                 ),
                                 TextFormField(
-                                  validator: ValidationBuilder(localeName: 'id').minLength(8, 'Minimal 8 huruf')
+                                  validator: ValidationBuilder(localeName: 'id')
+                                      .minLength(8, 'Minimal 8 huruf')
                                       .build(),
                                   controller: passwordTextController,
                                   decoration: InputDecoration(
@@ -242,23 +243,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      onPressed: _submit,
-                      child: Text(
-                        "Daftar",
-                        style: kOpenSans.copyWith(
-                            fontSize: 16,
-                            //0.25.dp,
-                            fontWeight: bold),
-                      ),
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12)),
-                        backgroundColor: MaterialStateProperty.all(kPrimary),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(kDefaultBorderRadius),
+                          gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [kPrimary, kPurple])),
+                      child: TextButton(
+                        onPressed: _submit,
+                        child: Text(
+                          "Daftar",
+                          style: kOpenSans.copyWith(
+                              color: kWhite,
+                              fontSize: 16,
+                              //0.25.dp,
+                              fontWeight: bold),
                         ),
                       ),
                     ),

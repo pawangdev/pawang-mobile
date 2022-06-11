@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 const Color kWhite = Color(0xFFFBFBFB);
 const Color kPurple = Color(0xFF18ACDA);
 const Color kPrimary = Color(0xFF2685D9);
-const Color kPurple3 = Color(0xFF4964C3);
-const Color kPurple2 = Color(0xFF9B51E0);
 const Color kBlack = Color(0xFF001833);
 const Color kWarning = Color(0xFFFAD202);
 const Color kSuccess = Color(0xFF64BC26);

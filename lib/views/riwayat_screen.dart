@@ -3,6 +3,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
+import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
 import 'package:pawang_mobile/views/tambah_pengeluaran.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
@@ -186,23 +187,28 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                 children: [
                   IconBottomBar(
                       text: "Beranda",
-                      icon: Icons.home,
-                      selected: false,
+                      iconEnable: "assets/images/google.png",
+                      iconDisable: "assets/images/google.png",
+                      selected: true,
                       onPressed: () {
                         Navigator.pushNamed(context, DashboardScreen.routeName);
                       }),
                   IconBottomBar(
                       text: "Scan Struk",
-                      icon: Icons.fullscreen,
+                      iconEnable: "assets/images/google.png",
+                      iconDisable: "assets/images/google.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
-                      text: "Riwayat",
-                      icon: Icons.library_books_outlined,
-                      selected: true,
-                      onPressed: () {}),
+                      text: "Pengaturan",
+                      iconEnable: "assets/images/google.png",
+                      iconDisable: "assets/images/google.png",
+                      selected: false,
+                      onPressed: () {
+                        Navigator.pushNamed(context, SettingsScreen.routeName);
+                      }),
                 ],
               ),
             ),

@@ -116,6 +116,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       child: const Icon(
                                         Icons.edit_rounded,
                                         color: kWhite,
+                                        size: 20,
                                       ),
                                     ),
                                   ),
@@ -151,15 +152,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   padding: const EdgeInsets.only(right: 20),
                                   child: Container(
                                     padding: const EdgeInsets.all(5),
-                                    height: 3.9.h,
+                                    height: 4.h,
                                     width: 8.3.w,
                                     decoration: BoxDecoration(
-                                      color: kPurple3,
+                                      color: kPurple,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Icon(
                                       Icons.logout_rounded,
                                       color: kWhite,
+                                      size: 20,
                                     ),
                                   ),
                                 ),
@@ -275,7 +277,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: SizedBox(
-            height: 7.h,
+            height: 8.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42),
@@ -284,21 +286,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   IconBottomBar(
                       text: "Beranda",
-                      icon: Icons.home,
+                      iconEnable: "assets/images/home1.png",
+                      iconDisable: "assets/images/home2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, DashboardScreen.routeName);
                       }),
                   IconBottomBar(
                       text: "Scan Struk",
-                      icon: Icons.fullscreen,
+                      iconEnable: "assets/images/scan1.png",
+                      iconDisable: "assets/images/scan2.png",
                       selected: false,
                       onPressed: () {
                         Navigator.pushNamed(context, ScanStruk.routeName);
                       }),
                   IconBottomBar(
                       text: "Pengaturan",
-                      icon: Icons.settings_outlined,
+                      iconEnable: "assets/images/setting1.png",
+                      iconDisable: "assets/images/setting2.png",
                       selected: true,
                       onPressed: () {
                         Navigator.pushNamed(context, SettingsScreen.routeName);

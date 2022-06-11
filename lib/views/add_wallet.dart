@@ -118,27 +118,30 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          backgroundColor: MaterialStateProperty.all(kPrimary),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(kDefaultBorderRadius),
+                          gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [kPrimary, kPurple])),
+                      child: TextButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(vertical: 15),
                             ),
                           ),
-                        ),
-                        onPressed: _submit,
-                        child: Text(
-                          "Simpan Dompet",
-                          style: kOpenSans.copyWith(
-                            fontSize: 16,
-                            fontWeight: bold,
-                          ),
-                        )),
+                          onPressed: _submit,
+                          child: Text(
+                            "Simpan Dompet",
+                            style: kOpenSans.copyWith(
+                              color: kWhite,
+                              fontSize: 16,
+                              fontWeight: bold,
+                            ),
+                          )),
+                    ),
                   ),
                 ),
               )

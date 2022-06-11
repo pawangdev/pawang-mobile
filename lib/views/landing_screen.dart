@@ -28,7 +28,7 @@ class LandingScreen extends StatelessWidget {
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [kPrimary, kPurple])),
+                        colors: [kPrimary, kPurple, kPrimary])),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -90,25 +90,23 @@ class LandingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, LoginScreen.routeName);
-                        },
-                        child: Text(
-                          "Masuk",
-                          style: kOpenSans.copyWith(
-                              //0.25.dp
-                              fontSize: 14,
-                              fontWeight: semibold),
-                        ),
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.symmetric(vertical: 12)),
-                          backgroundColor: MaterialStateProperty.all(kPrimary),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [kPrimary, kPurple])),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, LoginScreen.routeName);
+                          },
+                          child: Text(
+                            "Masuk",
+                            style: kOpenSans.copyWith(
+                                color: kWhite,
+                                fontSize: 14,
+                                fontWeight: semibold),
                           ),
                         ),
                       ),
@@ -128,7 +126,7 @@ class LandingScreen extends StatelessWidget {
                               context, RegisterScreen.routeName);
                         },
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
                           side: const BorderSide(color: kPrimary),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),
