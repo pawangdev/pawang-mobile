@@ -32,7 +32,6 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
   int? _walletID, _categoryID;
   final formKey = GlobalKey<FormState>();
   late String _dateRFC3399;
-  bool _inputData = true;
 
   void _submit() {
     final form = formKey.currentState;

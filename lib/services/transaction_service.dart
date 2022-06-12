@@ -64,6 +64,47 @@ class TransactionService {
     }
   }
 
+  static Future<bool> updateTransaction(
+      Map<String, dynamic> data, int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    var request = http.MultipartRequest(
+        "PUT", Uri.parse(baseURLAPI + "transactions/$id/update"));
+    request.headers.addAll({
+      'Authorization': "Bearer $token",
+    });
+
+    if (data['image'] == null) {
+      request.fields['amount'] = data['amount'].toString();
+      request.fields['category_id'] = data['category_id'].toString();
+      request.fields['wallet_id'] = data['wallet_id'].toString();
+      request.fields['type'] = data['type'];
+      request.fields['description'] = data['description'];
+      request.fields['date'] = data['date'];
+    } else {
+      request.fields['amount'] = data['amount'].toString();
+      request.fields['category_id'] = data['category_id'].toString();
+      request.fields['wallet_id'] = data['wallet_id'].toString();
+      request.fields['type'] = data['type'];
+      request.fields['description'] = data['description'];
+      request.fields['date'] = data['date'];
+      request.files.add(await http.MultipartFile(
+          'image',
+          file.File(data['image']).readAsBytes().asStream(),
+          file.File(data['image']).lengthSync(),
+          filename: data['image'].split("/").last));
+    }
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<bool> destroyTransaction(int id) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");

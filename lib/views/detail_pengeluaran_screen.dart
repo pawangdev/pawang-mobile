@@ -1,16 +1,22 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/category_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
+import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/image_dialog.dart';
+import 'package:pawang_mobile/widgets/dropdown_field.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 class DetailPengeluaran extends StatefulWidget {
   static const String routeName = "/detail";
@@ -26,6 +32,30 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
   final TextEditingController _dateTextController = TextEditingController();
   final TextEditingController _categoryTextController = TextEditingController();
   final TextEditingController _walletTextController = TextEditingController();
+  final TextEditingController _typeTextController = TextEditingController();
+  final TextEditingController _nominalEditTextController =
+      TextEditingController();
+  final TextEditingController _noteEditTextController = TextEditingController();
+  final TextEditingController _dateEditTextController = TextEditingController();
+  final TextEditingController _walletEditTextController =
+      TextEditingController();
+
+  late String _dateRFC3399;
+  int? _walletID, _categoryID;
+
+  @override
+  void initState() {
+    if (_dateTextController.text.isEmpty) {
+      _dateTextController.text = DateTime.now().toString();
+    }
+    _dateEditTextController.text = DateFormat("dd/MM/yyyy")
+        .format(DateTime.parse(_dateTextController.text))
+        .toString();
+    _dateRFC3399 =
+        (DateTime.parse(_dateTextController.text)).toUtc().toIso8601String();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +65,20 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
     final String? transaction_image_url =
         data.imageUrl == "" ? "" : data.imageUrl;
 
-    _nominalTextController.text =
-        CurrencyFormat.convertToIdr(data.amount, 2).toString();
-    _noteTextController.text = data.description;
-    _dateTextController.text =
-        DateFormat("dd/MM/yyyy").format(data.date.toLocal()).toString();
-    _categoryTextController.text = data.category.name;
-    _walletTextController.text = data.wallet.name;
+    if (_nominalTextController.text.isEmpty) {
+      setState(() {
+        _nominalTextController.text =
+            CurrencyFormat.convertToIdr(data.amount, 2).toString();
+        _noteTextController.text = data.description;
+        _dateTextController.text =
+            DateFormat("dd/MM/yyyy").format(data.date.toLocal()).toString();
+        _categoryTextController.text = data.category.name;
+        _walletTextController.text = data.wallet.name;
+        _typeTextController.text = data.type;
+        _walletID = data.walletId;
+        _categoryID = data.categoryId;
+      });
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -209,6 +246,16 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
+                            _nominalEditTextController.text =
+                                data.amount.toString();
+                            _noteEditTextController.text = data.description;
+                            _dateEditTextController.text =
+                                DateFormat("dd/MM/yyyy")
+                                    .format(data.date.toLocal())
+                                    .toString();
+                            _categoryID = data.category.id;
+                            _walletID = data.wallet.id;
+                            _walletEditTextController.text = data.wallet.name;
                             showModalBottomSheet<void>(
                               context: context,
                               builder: (BuildContext context) {
@@ -233,7 +280,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                           child: InputField(
                                             inputLabel: "Nominal",
                                             inputController:
-                                                _nominalTextController,
+                                                _nominalEditTextController,
                                             keyboardType: TextInputType.number,
                                             enable: true,
                                             // errorText: _inputData ? null : 'Nominal wajib diisi',
@@ -247,8 +294,8 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                             inputLabel: "Kategori",
                                             inputController:
                                                 _categoryTextController,
-                                            keyboardType: TextInputType.number,
-                                            enable: true,
+                                            keyboardType: TextInputType.text,
+                                            enable: false,
                                             // errorText: _inputData ? null : 'Nominal wajib diisi',
                                           ),
                                         ),
@@ -260,9 +307,8 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                           child: InputField(
                                             inputLabel: "Wallets",
                                             inputController:
-                                                _walletTextController,
-                                            keyboardType: TextInputType.number,
-                                            enable: true,
+                                                _walletEditTextController,
+                                            enable: false,
                                             // errorText: _inputData ? null : 'Nominal wajib diisi',
                                           ),
                                         ),
@@ -273,8 +319,7 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                           child: InputField(
                                             inputLabel: "Catatan",
                                             inputController:
-                                                _noteTextController,
-                                            keyboardType: TextInputType.number,
+                                                _noteEditTextController,
                                             enable: true,
                                             // errorText: _inputData ? null : 'Nominal wajib diisi',
                                           ),
@@ -283,37 +328,157 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                                           margin:
                                               const EdgeInsets.only(bottom: 20),
                                           child: InputField(
+                                            validator: ValidationBuilder(
+                                                    localeName: 'id')
+                                                .build(),
                                             inputLabel: "Tanggal",
                                             inputController:
-                                                _dateTextController,
-                                            keyboardType: TextInputType.number,
-                                            enable: false,
-                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                                _dateEditTextController,
+                                            // errorText: _inputData ? null : 'Tanggal wajib diisi',
+                                            enable: true,
+                                            readOnly: true,
+                                            keyboardType: TextInputType.none,
+                                            onTap: () {
+                                              showDatePicker(
+                                                      context: context,
+                                                      initialDate:
+                                                          DateTime.now(),
+                                                      firstDate: DateTime(2000),
+                                                      lastDate: DateTime(2099))
+                                                  .then((date) {
+                                                setState(() {
+                                                  _dateEditTextController.text =
+                                                      DateFormat("dd/MM/yyyy")
+                                                          .format(date!)
+                                                          .toString();
+                                                  _dateRFC3399 = date
+                                                      .toUtc()
+                                                      .toIso8601String();
+                                                });
+                                              });
+                                            },
                                           ),
                                         ),
-                                        ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding:
-                                                  MaterialStateProperty.all(
-                                                      const EdgeInsets.all(10)),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      kPrimary),
-                                              shape: MaterialStateProperty.all(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                              ),
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    padding:
+                                                        MaterialStateProperty
+                                                            .all(
+                                                                const EdgeInsets
+                                                                    .all(10)),
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(kPrimary),
+                                                    shape: MaterialStateProperty
+                                                        .all(
+                                                      RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    'Simpan Perubahan',
+                                                    style: kOpenSans.copyWith(
+                                                        color: kWhite,
+                                                        fontWeight: medium,
+                                                        fontSize: 16),
+                                                  ),
+                                                  onPressed: () {
+                                                    var data =
+                                                        <String, dynamic>{
+                                                      'amount': int.parse(
+                                                          _nominalEditTextController
+                                                              .text),
+                                                      'category_id':
+                                                          _categoryID,
+                                                      'wallet_id': _walletID,
+                                                      'type':
+                                                          _typeTextController
+                                                              .text,
+                                                      'description':
+                                                          _noteEditTextController
+                                                              .text,
+                                                      'date': _dateRFC3399,
+                                                    };
+
+                                                    print(data);
+
+                                                    try {
+                                                      TransactionService
+                                                              .updateTransaction(
+                                                                  data,
+                                                                  transaction_id)
+                                                          .then((response) {
+                                                        if (response == true) {
+                                                          Navigator
+                                                              .pushReplacementNamed(
+                                                                  context,
+                                                                  DashboardScreen
+                                                                      .routeName);
+
+                                                          Flushbar(
+                                                            message:
+                                                                "Berhasil Mengubah Data !",
+                                                            icon: const Icon(
+                                                              Icons.check,
+                                                              size: 28.0,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(8),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            backgroundColor:
+                                                                kSuccess,
+                                                            duration:
+                                                                const Duration(
+                                                                    seconds: 3),
+                                                          ).show(context);
+                                                        } else {
+                                                          Flushbar(
+                                                            message:
+                                                                "Terdapat Kesalahan !",
+                                                            icon: const Icon(
+                                                              Icons.check,
+                                                              size: 28.0,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(8),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            backgroundColor:
+                                                                kError,
+                                                            duration:
+                                                                const Duration(
+                                                                    seconds: 3),
+                                                          ).show(context);
+                                                        }
+                                                      });
+                                                    } catch (e) {
+                                                      print(e);
+                                                    }
+                                                  }),
                                             ),
-                                            child: Text(
-                                              'Simpan Perubahan',
-                                              style: kOpenSans.copyWith(
-                                                  color: kWhite,
-                                                  fontWeight: medium,
-                                                  fontSize: 16),
-                                            ),
-                                            onPressed: () {}),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
