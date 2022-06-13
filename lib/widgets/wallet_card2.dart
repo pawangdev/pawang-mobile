@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -14,7 +15,7 @@ class WalletCard2 extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,6 +39,46 @@ class WalletCard2 extends StatelessWidget {
               fontWeight: medium,
               fontSize: 15,
             ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      side: const BorderSide(color: kPrimary),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Text(
+                      'Edit Dompet',
+                      style: kOpenSans.copyWith(
+                          color: kPrimary, fontWeight: medium, fontSize: 16),
+                    ),
+                    onPressed: () {}),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      side: const BorderSide(color: kError),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Text(
+                      'Hapus Dompet',
+                      style: kOpenSans.copyWith(
+                          color: kError, fontWeight: medium, fontSize: 16),
+                    ),
+                    onPressed: () {}),
+              ),
+            ],
           ),
         ],
       ),

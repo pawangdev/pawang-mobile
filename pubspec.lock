@@ -165,13 +165,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_toastr:
-    dependency: transitive
-    description:
-      name: flutter_toastr
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -247,13 +240,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.4"
-  internet_connection_checker:
-    dependency: transitive
-    description:
-      name: internet_connection_checker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1+4"
   intl:
     dependency: "direct main"
     description:
@@ -310,13 +296,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  no_internet_check:
-    dependency: "direct main"
-    description:
-      name: no_internet_check
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: "direct main"
     description:
@@ -582,5 +561,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
+  dart: ">=2.17.0-0 <3.0.0"
   flutter: ">=2.8.0"
