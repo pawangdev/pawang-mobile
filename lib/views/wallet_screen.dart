@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/views/add_wallet.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/wallet_card2.dart';
@@ -108,7 +109,9 @@ class _WalletScreenState extends State<WalletScreen> {
                                 var wallet = snapshot.data!.data[index];
                                 return WalletCard2(
                                     name: wallet.name,
-                                    balance: wallet.balance.toString());
+                                    balance: CurrencyFormat.convertToIdr(
+                                            wallet.balance, 2)
+                                        .toString());
                               },
                             );
                           } else if (snapshot.hasError) {

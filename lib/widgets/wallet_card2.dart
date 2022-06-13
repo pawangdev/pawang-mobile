@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -39,7 +40,7 @@ class _WalletCard2State extends State<WalletCard2> {
             height: 1.4.h,
           ),
           Text(
-            'Rp. ' + widget.balance.toString(),
+            widget.balance.toString(),
             //${snapshot.data!.data[index].balance}',
             style: kOpenSans.copyWith(
               color: kBlack,
@@ -159,7 +160,77 @@ class _WalletCard2State extends State<WalletCard2> {
                       style: kOpenSans.copyWith(
                           color: kError, fontWeight: medium, fontSize: 16),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(
+                            'Hapus Dompet',
+                            style: kOpenSans.copyWith(
+                                fontSize: 18, fontWeight: bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          content: Text(
+                            'Apakah kamu yakin akan menghapus dompet ini?',
+                            style: kOpenSans.copyWith(
+                                fontSize: 16, fontWeight: light),
+                            textAlign: TextAlign.center,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: OutlinedButton(
+                                    child: Text(
+                                      "Kembali",
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: medium,
+                                          color: kPrimary),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context, 'Kembali');
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      side: const BorderSide(color: kPrimary),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 1.w),
+                                Expanded(
+                                  child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4),
+                                        side: const BorderSide(color: kError),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                      ),
+                                      child: Text(
+                                        'Hapus',
+                                        style: kOpenSans.copyWith(
+                                            color: kError,
+                                            fontWeight: medium,
+                                            fontSize: 16),
+                                      ),
+                                      onPressed: () {}),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ),
             ],
           ),
