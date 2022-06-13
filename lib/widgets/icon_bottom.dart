@@ -34,10 +34,12 @@ class IconBottomBar extends StatelessWidget {
                   ? Image.asset(
                       iconEnable,
                       width: 28,
+                      height: 28,
                     )
                   : Image.asset(
                       iconDisable,
                       width: 25,
+                      height: 25,
                     ),
             ),
             selected

@@ -244,273 +244,281 @@ class _DetailPengeluaranState extends State<DetailPengeluaran> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _nominalEditTextController.text =
-                                data.amount.toString();
-                            _noteEditTextController.text = data.description;
-                            _dateEditTextController.text =
-                                DateFormat("dd/MM/yyyy")
-                                    .format(data.date.toLocal())
-                                    .toString();
-                            _categoryID = data.category.id;
-                            _walletID = data.wallet.id;
-                            _walletEditTextController.text = data.wallet.name;
-                            showModalBottomSheet<void>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  height: 85.h,
-                                  color: kWhite,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        // Nominal
-                                        Text(
-                                          'Ubah Data',
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 18, fontWeight: bold),
-                                        ),
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: InputField(
-                                            inputLabel: "Nominal",
-                                            inputController:
-                                                _nominalEditTextController,
-                                            keyboardType: TextInputType.number,
-                                            enable: true,
-                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultBorderRadius),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [kPrimary, kPurple])),
+                          child: TextButton(
+                            onPressed: () {
+                              _nominalEditTextController.text =
+                                  data.amount.toString();
+                              _noteEditTextController.text = data.description;
+                              _dateEditTextController.text =
+                                  DateFormat("dd/MM/yyyy")
+                                      .format(data.date.toLocal())
+                                      .toString();
+                              _categoryID = data.category.id;
+                              _walletID = data.wallet.id;
+                              _walletEditTextController.text = data.wallet.name;
+                              showModalBottomSheet<void>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: 85.h,
+                                    color: kWhite,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          // Nominal
+                                          Text(
+                                            'Ubah Data',
+                                            style: kOpenSans.copyWith(
+                                                fontSize: 18, fontWeight: bold),
                                           ),
-                                        ),
-                                        // Kategori
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: InputField(
-                                            inputLabel: "Kategori",
-                                            inputController:
-                                                _categoryTextController,
-                                            keyboardType: TextInputType.text,
-                                            enable: false,
-                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
-                                          ),
-                                        ),
-                                        // Wallets
-                                        // Kategori
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: InputField(
-                                            inputLabel: "Wallets",
-                                            inputController:
-                                                _walletEditTextController,
-                                            enable: false,
-                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
-                                          ),
-                                        ),
-                                        // Catatan
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: InputField(
-                                            inputLabel: "Catatan",
-                                            inputController:
-                                                _noteEditTextController,
-                                            enable: true,
-                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
-                                          ),
-                                        ),
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: InputField(
-                                            validator: ValidationBuilder(
-                                                    localeName: 'id')
-                                                .build(),
-                                            inputLabel: "Tanggal",
-                                            inputController:
-                                                _dateEditTextController,
-                                            // errorText: _inputData ? null : 'Tanggal wajib diisi',
-                                            enable: true,
-                                            readOnly: true,
-                                            keyboardType: TextInputType.none,
-                                            onTap: () {
-                                              showDatePicker(
-                                                      context: context,
-                                                      initialDate:
-                                                          DateTime.now(),
-                                                      firstDate: DateTime(2000),
-                                                      lastDate: DateTime(2099))
-                                                  .then((date) {
-                                                setState(() {
-                                                  _dateEditTextController.text =
-                                                      DateFormat("dd/MM/yyyy")
-                                                          .format(date!)
-                                                          .toString();
-                                                  _dateRFC3399 = date
-                                                      .toUtc()
-                                                      .toIso8601String();
-                                                });
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    padding:
-                                                        MaterialStateProperty
-                                                            .all(
-                                                                const EdgeInsets
-                                                                    .all(10)),
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(kPrimary),
-                                                    shape: MaterialStateProperty
-                                                        .all(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    'Simpan Perubahan',
-                                                    style: kOpenSans.copyWith(
-                                                        color: kWhite,
-                                                        fontWeight: medium,
-                                                        fontSize: 16),
-                                                  ),
-                                                  onPressed: () {
-                                                    var data =
-                                                        <String, dynamic>{
-                                                      'amount': int.parse(
-                                                          _nominalEditTextController
-                                                              .text),
-                                                      'category_id':
-                                                          _categoryID,
-                                                      'wallet_id': _walletID,
-                                                      'type':
-                                                          _typeTextController
-                                                              .text,
-                                                      'description':
-                                                          _noteEditTextController
-                                                              .text,
-                                                      'date': _dateRFC3399,
-                                                    };
-
-                                                    print(data);
-
-                                                    try {
-                                                      TransactionService
-                                                              .updateTransaction(
-                                                                  data,
-                                                                  transaction_id)
-                                                          .then((response) {
-                                                        if (response == true) {
-                                                          Navigator
-                                                              .pushReplacementNamed(
-                                                                  context,
-                                                                  DashboardScreen
-                                                                      .routeName);
-
-                                                          Flushbar(
-                                                            message:
-                                                                "Berhasil Mengubah Data !",
-                                                            icon: const Icon(
-                                                              Icons.check,
-                                                              size: 28.0,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            margin:
-                                                                const EdgeInsets
-                                                                    .all(8),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            backgroundColor:
-                                                                kSuccess,
-                                                            duration:
-                                                                const Duration(
-                                                                    seconds: 3),
-                                                          ).show(context);
-                                                        } else {
-                                                          Flushbar(
-                                                            message:
-                                                                "Terdapat Kesalahan !",
-                                                            icon: const Icon(
-                                                              Icons.check,
-                                                              size: 28.0,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            margin:
-                                                                const EdgeInsets
-                                                                    .all(8),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            backgroundColor:
-                                                                kError,
-                                                            duration:
-                                                                const Duration(
-                                                                    seconds: 3),
-                                                          ).show(context);
-                                                        }
-                                                      });
-                                                    } catch (e) {
-                                                      print(e);
-                                                    }
-                                                  }),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 20),
+                                            child: InputField(
+                                              inputLabel: "Nominal",
+                                              inputController:
+                                                  _nominalEditTextController,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              enable: true,
+                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          // Kategori
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 20),
+                                            child: InputField(
+                                              inputLabel: "Kategori",
+                                              inputController:
+                                                  _categoryTextController,
+                                              keyboardType: TextInputType.text,
+                                              enable: false,
+                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                            ),
+                                          ),
+                                          // Wallets
+                                          // Kategori
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 20),
+                                            child: InputField(
+                                              inputLabel: "Wallets",
+                                              inputController:
+                                                  _walletEditTextController,
+                                              enable: false,
+                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                            ),
+                                          ),
+                                          // Catatan
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 20),
+                                            child: InputField(
+                                              inputLabel: "Catatan",
+                                              inputController:
+                                                  _noteEditTextController,
+                                              enable: true,
+                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 20),
+                                            child: InputField(
+                                              validator: ValidationBuilder(
+                                                      localeName: 'id')
+                                                  .build(),
+                                              inputLabel: "Tanggal",
+                                              inputController:
+                                                  _dateEditTextController,
+                                              // errorText: _inputData ? null : 'Tanggal wajib diisi',
+                                              enable: true,
+                                              readOnly: true,
+                                              keyboardType: TextInputType.none,
+                                              onTap: () {
+                                                showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                            DateTime.now(),
+                                                        firstDate:
+                                                            DateTime(2000),
+                                                        lastDate:
+                                                            DateTime(2099))
+                                                    .then((date) {
+                                                  setState(() {
+                                                    _dateEditTextController
+                                                            .text =
+                                                        DateFormat("dd/MM/yyyy")
+                                                            .format(date!)
+                                                            .toString();
+                                                    _dateRFC3399 = date
+                                                        .toUtc()
+                                                        .toIso8601String();
+                                                  });
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.bottomCenter,
+                                              child: SizedBox(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      padding:
+                                                          MaterialStateProperty
+                                                              .all(
+                                                                  const EdgeInsets
+                                                                      .all(10)),
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(kPrimary),
+                                                      shape:
+                                                          MaterialStateProperty
+                                                              .all(
+                                                        RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      'Simpan Perubahan',
+                                                      style: kOpenSans.copyWith(
+                                                          color: kWhite,
+                                                          fontWeight: medium,
+                                                          fontSize: 16),
+                                                    ),
+                                                    onPressed: () {
+                                                      var data =
+                                                          <String, dynamic>{
+                                                        'amount': int.parse(
+                                                            _nominalEditTextController
+                                                                .text),
+                                                        'category_id':
+                                                            _categoryID,
+                                                        'wallet_id': _walletID,
+                                                        'type':
+                                                            _typeTextController
+                                                                .text,
+                                                        'description':
+                                                            _noteEditTextController
+                                                                .text,
+                                                        'date': _dateRFC3399,
+                                                      };
+
+                                                      print(data);
+
+                                                      try {
+                                                        TransactionService
+                                                                .updateTransaction(
+                                                                    data,
+                                                                    transaction_id)
+                                                            .then((response) {
+                                                          if (response ==
+                                                              true) {
+                                                            Navigator.pushReplacementNamed(
+                                                                context,
+                                                                DashboardScreen
+                                                                    .routeName);
+
+                                                            Flushbar(
+                                                              message:
+                                                                  "Berhasil Mengubah Data !",
+                                                              icon: const Icon(
+                                                                Icons.check,
+                                                                size: 28.0,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                      .all(8),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              backgroundColor:
+                                                                  kSuccess,
+                                                              duration:
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          3),
+                                                            ).show(context);
+                                                          } else {
+                                                            Flushbar(
+                                                              message:
+                                                                  "Terdapat Kesalahan !",
+                                                              icon: const Icon(
+                                                                Icons.check,
+                                                                size: 28.0,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                      .all(8),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              backgroundColor:
+                                                                  kError,
+                                                              duration:
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          3),
+                                                            ).show(context);
+                                                          }
+                                                        });
+                                                      } catch (e) {
+                                                        print(e);
+                                                      }
+                                                    }),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              isScrollControlled: true,
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.edit_rounded,
-                                size: 20,
-                              ),
-                              SizedBox(width: 3.w),
-                              Text(
-                                "Ubah Data",
-                                style: kOpenSans.copyWith(
-                                    fontSize: 16, fontWeight: medium),
-                              ),
-                            ],
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(10)),
-                            backgroundColor:
-                                MaterialStateProperty.all(kPrimary),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
+                                  );
+                                },
+                                isScrollControlled: true,
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.edit_rounded,
+                                  color: kWhite,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 3.w),
+                                Text(
+                                  "Ubah Data",
+                                  style: kOpenSans.copyWith(
+                                      color: kWhite,
+                                      fontSize: 16,
+                                      fontWeight: medium),
+                                ),
+                              ],
                             ),
                           ),
                         ),

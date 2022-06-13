@@ -118,7 +118,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Text(
                                       "Hallo,",
                                       style: kOpenSans.copyWith(
-                                          fontSize: 11,
+                                          fontSize: 10,
                                           //0.2.dp,
                                           fontWeight: medium,
                                           color: kWhite),
@@ -126,7 +126,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     user.name != ""
                                         ? Text(user.name,
                                             style: kOpenSans.copyWith(
-                                                fontSize: 12,
+                                                fontSize: 13,
                                                 fontWeight: bold,
                                                 color: kWhite))
                                         : SkeletonAnimation(
@@ -134,7 +134,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                 BorderRadius.circular(8.0),
                                             shimmerColor: Colors.white54,
                                             child: Container(
-                                              height: 12,
+                                              height: 15,
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
