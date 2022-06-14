@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/loading.dart';
@@ -47,7 +48,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             setState(() {
               _isLoading = false;
             });
-            Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+            Navigator.pushReplacementNamed(context, NavigationScreen.routeName);
 
             Flushbar(
               message: "Berhasil Ganti Password !",

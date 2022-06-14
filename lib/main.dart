@@ -11,6 +11,7 @@ import 'package:pawang_mobile/views/kategori_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
 import 'package:pawang_mobile/views/login_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => const SplashScreen(),
+            '/navigation-screen': (context) => const NavigationScreen(),
             '/landing': (context) => const LandingScreen(),
             '/login': (context) => const LoginScreen(),
             '/register': (context) => const RegisterScreen(),

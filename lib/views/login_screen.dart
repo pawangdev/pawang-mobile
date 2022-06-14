@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
@@ -50,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             Navigator.pushNamedAndRemoveUntil(
               context,
-              DashboardScreen.routeName,
+              NavigationScreen.routeName,
               (route) => false,
             );
 

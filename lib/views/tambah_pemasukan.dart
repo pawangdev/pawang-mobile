@@ -9,6 +9,7 @@ import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/widgets/dropdown_field.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
@@ -58,7 +59,7 @@ class _TambahPemasukanScreenState extends State<TambahPemasukanScreen> {
             setState(() {
               _isLoading = false;
             });
-            Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+            Navigator.pushReplacementNamed(context, NavigationScreen.routeName);
             Flushbar(
               message: "Berhasil Menambah Pemasukan !",
               icon: const Icon(

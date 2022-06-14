@@ -57,11 +57,13 @@ class TransactionService {
 
     var response = await request.send();
 
-    if (response.statusCode == 201) {
-      return true;
-    } else {
-      return false;
-    }
+    return http.Response.fromStream(response).then((res) {
+      if (res.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   static Future<bool> updateTransaction(

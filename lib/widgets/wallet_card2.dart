@@ -4,6 +4,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -329,7 +330,7 @@ class _WalletCard2State extends State<WalletCard2> {
                                             if (response == true) {
                                               Navigator.pushReplacementNamed(
                                                   context,
-                                                  DashboardScreen.routeName);
+                                                  NavigationScreen.routeName);
 
                                               Flushbar(
                                                 message:

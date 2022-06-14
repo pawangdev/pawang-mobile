@@ -89,367 +89,323 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [kPrimary, kPurple])),
-          child: Stack(children: <Widget>[
-            SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, left: 32, right: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  color: kWhite,
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  image: DecorationImage(
-                                    image: AssetImage(user.gender == "male"
-                                        ? "assets/images/man.png"
-                                        : user.gender == "female"
-                                            ? "assets/images/woman.png"
-                                            : "assets/images/white.jpg"),
-                                    fit: BoxFit.cover,
-                                  ),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [kPrimary, kPurple])),
+        child: Stack(children: <Widget>[
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                color: kWhite,
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                  image: AssetImage(user.gender == "male"
+                                      ? "assets/images/man.png"
+                                      : user.gender == "female"
+                                          ? "assets/images/woman.png"
+                                          : "assets/images/white.jpg"),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Hallo,",
-                                      style: kOpenSans.copyWith(
-                                          fontSize: 10,
-                                          //0.2.dp,
-                                          fontWeight: medium,
-                                          color: kWhite),
-                                    ),
-                                    user.name != ""
-                                        ? Text(user.name,
-                                            style: kOpenSans.copyWith(
-                                                fontSize: 13,
-                                                fontWeight: bold,
-                                                color: kWhite))
-                                        : SkeletonAnimation(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            shimmerColor: Colors.white54,
-                                            child: Container(
-                                              height: 15,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.white
-                                                    .withOpacity(0.5),
-                                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Hallo,",
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 10,
+                                        //0.2.dp,
+                                        fontWeight: medium,
+                                        color: kWhite),
+                                  ),
+                                  user.name != ""
+                                      ? Text(user.name,
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 13,
+                                              fontWeight: bold,
+                                              color: kWhite))
+                                      : SkeletonAnimation(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          shimmerColor: Colors.white54,
+                                          child: Container(
+                                            height: 15,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.25,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
                                             ),
                                           ),
-                                  ],
+                                        ),
+                                ],
+                              ),
+                            ),
+                          ]),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 2.h),
+                FutureBuilder(
+                  future: _wallets,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<WalletsModel> snapshot) {
+                    var state = snapshot.connectionState;
+                    if (state != ConnectionState.done) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      if (snapshot.hasData) {
+                        return CarouselSlider.builder(
+                          itemCount: snapshot.data!.data.length + 1,
+                          options: CarouselOptions(
+                            disableCenter: true,
+                            aspectRatio: 2.8,
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: false,
+                          ),
+                          itemBuilder:
+                              (BuildContext context, int index, int realIndex) {
+                            if (index == snapshot.data!.data.length) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, AddWalletScreen.routeName);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            kWhite.withOpacity(0.5),
+                                            kWhite.withOpacity(0.3),
+                                            kWhite.withOpacity(0.5)
+                                          ]),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.add_rounded,
+                                    color: kWhite.withOpacity(0.8),
+                                  )),
+                                ),
+                              );
+                            }
+                            var wallet = snapshot.data!.data[index];
+                            return WalletCard(
+                                name: user.name,
+                                namaWallet: wallet.name,
+                                balance: CurrencyFormat.convertToIdr(
+                                        wallet.balance, 2)
+                                    .toString());
+                          },
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text(snapshot.error.toString()));
+                      } else {
+                        return Text('');
+                      }
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 2.4.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 32, right: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Layanan',
+                        style: kOpenSans.copyWith(
+                            fontSize: 14, //0.24.dp,
+                            fontWeight: bold,
+                            color: kWhite),
+                      ),
+                      SizedBox(
+                        height: 2.4.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          LayananCard(
+                            icon: 'assets/images/pemasukan.png',
+                            title: 'Pemasukan',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, TambahPemasukanScreen.routeName);
+                            },
+                          ),
+                          LayananCard(
+                            icon: 'assets/images/pengeluaran.png',
+                            title: 'Pengeluaran',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, TambahPengeluaranScreen.routeName);
+                            },
+                          ),
+                          LayananCard(
+                            icon: 'assets/images/wallet.png',
+                            title: 'Dompet',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, WalletScreen.routeName);
+                            },
+                          ),
+                          LayananCard(
+                            icon: 'assets/images/kategori.png',
+                            title: 'Kategori',
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, KategoriScreen.routeName);
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 3.4.h),
+              ],
+            ),
+          ),
+          DraggableScrollableSheet(
+            initialChildSize: 0.36,
+            minChildSize: 0.36,
+            maxChildSize: 0.94,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return SizedBox(
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: Container(
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: 1,
+                        itemBuilder: (BuildContext context, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Container(
+                                    margin: const EdgeInsets.only(top: 5),
+                                    height: 0.7.h,
+                                    width: 24.w,
+                                    decoration: BoxDecoration(
+                                        color: kGray.withOpacity(0.7),
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    left: 32, top: 20, bottom: 16),
+                                child: Text(
+                                  'Riwayat',
+                                  textAlign: TextAlign.start,
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: bold,
+                                      color: kBlack),
                                 ),
                               ),
-                            ]),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 2.h),
-                  FutureBuilder(
-                    future: _wallets,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<WalletsModel> snapshot) {
-                      var state = snapshot.connectionState;
-                      if (state != ConnectionState.done) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        if (snapshot.hasData) {
-                          return CarouselSlider.builder(
-                            itemCount: snapshot.data!.data.length + 1,
-                            options: CarouselOptions(
-                              disableCenter: true,
-                              aspectRatio: 2.8,
-                              enlargeCenterPage: true,
-                              enableInfiniteScroll: false,
-                            ),
-                            itemBuilder: (BuildContext context, int index,
-                                int realIndex) {
-                              if (index == snapshot.data!.data.length) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, AddWalletScreen.routeName);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              kWhite.withOpacity(0.5),
-                                              kWhite.withOpacity(0.3),
-                                              kWhite.withOpacity(0.5)
-                                            ]),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Center(
-                                        child: Icon(
-                                      Icons.add_rounded,
-                                      color: kWhite.withOpacity(0.8),
-                                    )),
-                                  ),
-                                );
-                              }
-                              var wallet = snapshot.data!.data[index];
-                              return WalletCard(
-                                  name: user.name,
-                                  namaWallet: wallet.name,
-                                  balance: CurrencyFormat.convertToIdr(
-                                          wallet.balance, 2)
-                                      .toString());
-                            },
-                          );
-                        } else if (snapshot.hasError) {
-                          return Center(child: Text(snapshot.error.toString()));
-                        } else {
-                          return Text('');
-                        }
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 2.4.h,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 32, right: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Layanan',
-                          style: kOpenSans.copyWith(
-                              fontSize: 14, //0.24.dp,
-                              fontWeight: bold,
-                              color: kWhite),
-                        ),
-                        SizedBox(
-                          height: 2.4.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            LayananCard(
-                              icon: 'assets/images/pemasukan.png',
-                              title: 'Pemasukan',
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, TambahPemasukanScreen.routeName);
-                              },
-                            ),
-                            LayananCard(
-                              icon: 'assets/images/pengeluaran.png',
-                              title: 'Pengeluaran',
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, TambahPengeluaranScreen.routeName);
-                              },
-                            ),
-                            LayananCard(
-                              icon: 'assets/images/wallet.png',
-                              title: 'Dompet',
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, WalletScreen.routeName);
-                              },
-                            ),
-                            LayananCard(
-                              icon: 'assets/images/kategori.png',
-                              title: 'Kategori',
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, KategoriScreen.routeName);
-                              },
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 3.4.h),
-                ],
-              ),
-            ),
-            DraggableScrollableSheet(
-              initialChildSize: 0.36,
-              minChildSize: 0.36,
-              maxChildSize: 0.94,
-              builder:
-                  (BuildContext context, ScrollController scrollController) {
-                return SizedBox(
-                  child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: Container(
-                      child: ListView.builder(
-                          controller: scrollController,
-                          itemCount: 1,
-                          itemBuilder: (BuildContext context, index) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Container(
-                                      margin: const EdgeInsets.only(top: 5),
-                                      height: 0.7.h,
-                                      width: 24.w,
-                                      decoration: BoxDecoration(
-                                          color: kGray.withOpacity(0.7),
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 32, top: 20, bottom: 16),
-                                  child: Text(
-                                    'Riwayat',
-                                    textAlign: TextAlign.start,
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: bold,
-                                        color: kBlack),
-                                  ),
-                                ),
-                                Container(
-                                  constraints: BoxConstraints(minHeight: 30.h),
-                                  child: FutureBuilder(
-                                    future: _transactions,
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<TransactionsModel>
-                                            snapshot) {
-                                      if (snapshot.hasData) {
-                                        if (snapshot.data?.data.length != 0) {
-                                          return ListView.builder(
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            scrollDirection: Axis.vertical,
-                                            shrinkWrap: true,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return InkWell(
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                splashColor: Colors.transparent,
-                                                onTap: () {
-                                                  Navigator.pushNamed(
-                                                      context,
-                                                      DetailPengeluaran
-                                                          .routeName,
-                                                      arguments: snapshot
-                                                          .data!.data[index]);
-                                                },
-                                                child: CardPengeluaran(
-                                                    data: snapshot
-                                                        .data!.data[index]),
-                                              );
-                                            },
-                                            itemCount:
-                                                snapshot.data?.data.length,
-                                          );
-                                        } else {
-                                          return Center(
-                                              child: Text(
-                                            "Anda belum memiliki pengeluaran",
-                                            style: kOpenSans.copyWith(
-                                                color: kGray,
-                                                fontSize: 13, //0.23.dp,
-                                                fontWeight: medium),
-                                            textAlign: TextAlign.center,
-                                          ));
-                                        }
+                              Container(
+                                constraints: BoxConstraints(minHeight: 30.h),
+                                child: FutureBuilder(
+                                  future: _transactions,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<TransactionsModel>
+                                          snapshot) {
+                                    if (snapshot.hasData) {
+                                      if (snapshot.data?.data.length != 0) {
+                                        return ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return InkWell(
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              splashColor: Colors.transparent,
+                                              onTap: () {
+                                                Navigator.pushNamed(context,
+                                                    DetailPengeluaran.routeName,
+                                                    arguments: snapshot
+                                                        .data!.data[index]);
+                                              },
+                                              child: CardPengeluaran(
+                                                  data: snapshot
+                                                      .data!.data[index]),
+                                            );
+                                          },
+                                          itemCount: snapshot.data?.data.length,
+                                        );
                                       } else {
                                         return Center(
                                             child: Text(
                                           "Anda belum memiliki pengeluaran",
                                           style: kOpenSans.copyWith(
                                               color: kGray,
-                                              fontSize: 13,
+                                              fontSize: 13, //0.23.dp,
                                               fontWeight: medium),
                                           textAlign: TextAlign.center,
                                         ));
                                       }
-                                    },
-                                  ),
+                                    } else {
+                                      return Center(
+                                          child: Text(
+                                        "Anda belum memiliki pengeluaran",
+                                        style: kOpenSans.copyWith(
+                                            color: kGray,
+                                            fontSize: 13,
+                                            fontWeight: medium),
+                                        textAlign: TextAlign.center,
+                                      ));
+                                    }
+                                  },
                                 ),
-                              ],
-                            );
-                          }),
-                      decoration: const BoxDecoration(
-                          color: kWhite,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(24),
-                              topRight: Radius.circular(24))),
-                    ),
+                              ),
+                            ],
+                          );
+                        }),
+                    decoration: const BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24))),
                   ),
-                );
-              },
-            ),
-          ]),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: SizedBox(
-            height: 8.h,
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 42),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconBottomBar(
-                      text: "Beranda",
-                      iconEnable: "assets/images/home1.png",
-                      iconDisable: "assets/images/home2.png",
-                      selected: true,
-                      onPressed: () {
-                        Navigator.pushNamed(context, DashboardScreen.routeName);
-                      }),
-                  IconBottomBar(
-                      text: "Scan Struk",
-                      iconEnable: "assets/images/scan1.png",
-                      iconDisable: "assets/images/scan2.png",
-                      selected: false,
-                      onPressed: () {
-                        Navigator.pushNamed(context, ScanStruk.routeName);
-                      }),
-                  IconBottomBar(
-                      text: "Pengaturan",
-                      iconEnable: "assets/images/setting1.png",
-                      iconDisable: "assets/images/setting2.png",
-                      selected: false,
-                      onPressed: () {
-                        Navigator.pushNamed(context, SettingsScreen.routeName);
-                      }),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           ),
-        ));
+        ]),
+      ),
+    );
   }
 }

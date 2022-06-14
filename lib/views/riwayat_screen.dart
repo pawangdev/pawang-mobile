@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/detail_pengeluaran_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:pawang_mobile/views/scan_struk_screen.dart';
 import 'package:pawang_mobile/views/setting_screen.dart';
 import 'package:pawang_mobile/views/tambah_pemasukan.dart';
@@ -191,7 +192,8 @@ class _RiwayatScreenState extends State<RiwayatScreen> {
                       iconDisable: "assets/images/google.png",
                       selected: true,
                       onPressed: () {
-                        Navigator.pushNamed(context, DashboardScreen.routeName);
+                        Navigator.pushNamed(
+                            context, NavigationScreen.routeName);
                       }),
                   IconBottomBar(
                       text: "Scan Struk",

@@ -46,108 +46,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      "Pengaturan",
-                      style: kOpenSans.copyWith(
-                          fontSize: 16, fontWeight: bold, color: kBlack),
-                    ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    "Pengaturan",
+                    style: kOpenSans.copyWith(
+                        fontSize: 16, fontWeight: bold, color: kBlack),
                   ),
-                  SizedBox(
-                    height: 4.4.h,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: 13.8.h,
-                          width: 28.w,
-                          child: Image.asset(user.gender == "male"
-                              ? "assets/images/man.png"
-                              : user.gender == "female"
-                                  ? "assets/images/woman.png"
-                                  : "assets/images/white.jpg")),
-                      SizedBox(height: 2.4.h),
-                      user.name != ""
-                          ? Text(
-                              user.name,
-                              style: kOpenSans.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: bold,
-                                  color: kBlack),
-                            )
-                          : SkeletonAnimation(
-                              borderRadius: BorderRadius.circular(8.0),
-                              shimmerColor: Colors.white70,
-                              child: Container(
-                                height: 12,
-                                width: MediaQuery.of(context).size.width * 0.40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: Colors.grey.withOpacity(0.5),
-                                ),
+                ),
+                SizedBox(
+                  height: 4.4.h,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height: 13.8.h,
+                        width: 28.w,
+                        child: Image.asset(user.gender == "male"
+                            ? "assets/images/man.png"
+                            : user.gender == "female"
+                                ? "assets/images/woman.png"
+                                : "assets/images/white.jpg")),
+                    SizedBox(height: 2.4.h),
+                    user.name != ""
+                        ? Text(
+                            user.name,
+                            style: kOpenSans.copyWith(
+                                fontSize: 14, fontWeight: bold, color: kBlack),
+                          )
+                        : SkeletonAnimation(
+                            borderRadius: BorderRadius.circular(8.0),
+                            shimmerColor: Colors.white70,
+                            child: Container(
+                              height: 12,
+                              width: MediaQuery.of(context).size.width * 0.40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: Colors.grey.withOpacity(0.5),
                               ),
                             ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.4.h,
-                  ),
-                  Column(
-                    children: [
-                      InkWell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 20),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(5),
-                                      height: 3.9.h,
-                                      width: 8.3.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.orange,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: const Icon(
-                                        Icons.edit_rounded,
-                                        color: kWhite,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text('Edit Profil',
-                                      style: kOpenSans.copyWith(
-                                          fontSize: 14, fontWeight: semibold))
-                                ],
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 16,
-                              )
-                            ],
                           ),
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, EditProfileScreen.routeName,
-                                arguments: user.name);
-                          }),
-                      SizedBox(
-                        child: Divider(
-                          color: kGray,
-                          height: 0.05.h,
-                        ),
-                        height: 2.8.h,
-                      ),
-                      InkWell(
+                  ],
+                ),
+                SizedBox(
+                  height: 4.4.h,
+                ),
+                Column(
+                  children: [
+                    InkWell(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -157,20 +109,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   padding: const EdgeInsets.only(right: 20),
                                   child: Container(
                                     padding: const EdgeInsets.all(5),
-                                    height: 4.h,
+                                    height: 3.9.h,
                                     width: 8.3.w,
                                     decoration: BoxDecoration(
-                                      color: kPurple,
+                                      color: Colors.orange,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Icon(
-                                      Icons.logout_rounded,
+                                      Icons.edit_rounded,
                                       color: kWhite,
                                       size: 20,
                                     ),
                                   ),
                                 ),
-                                Text('Keluar',
+                                Text('Edit Profil',
                                     style: kOpenSans.copyWith(
                                         fontSize: 14, fontWeight: semibold))
                               ],
@@ -182,141 +134,147 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ],
                         ),
                         onTap: () {
-                          showDialog<void>(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: Text(
-                                'Keluar',
-                                style: kOpenSans.copyWith(
-                                    fontSize: 16, fontWeight: bold),
-                                textAlign: TextAlign.center,
+                          Navigator.pushNamed(
+                              context, EditProfileScreen.routeName,
+                              arguments: user.name);
+                        }),
+                    SizedBox(
+                      child: Divider(
+                        color: kGray,
+                        height: 0.05.h,
+                      ),
+                      height: 2.8.h,
+                    ),
+                    InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  height: 4.h,
+                                  width: 8.3.w,
+                                  decoration: BoxDecoration(
+                                    color: kPurple,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Icon(
+                                    Icons.logout_rounded,
+                                    color: kWhite,
+                                    size: 20,
+                                  ),
+                                ),
                               ),
-                              content: Text(
-                                'Apakah anda yakin ingin keluar?',
-                                style: kOpenSans.copyWith(
-                                    fontSize: 15, fontWeight: light),
-                                textAlign: TextAlign.center,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              actions: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: OutlinedButton(
-                                        child: Text(
-                                          "Kembali",
-                                          style: kOpenSans.copyWith(
-                                              fontSize: 14,
-                                              fontWeight: medium,
-                                              color: kPrimary),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        style: OutlinedButton.styleFrom(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4),
-                                          side:
-                                              const BorderSide(color: kPrimary),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                        ),
+                              Text('Keluar',
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 14, fontWeight: semibold))
+                            ],
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 16,
+                          )
+                        ],
+                      ),
+                      onTap: () {
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text(
+                              'Keluar',
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, fontWeight: bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Text(
+                              'Apakah anda yakin ingin keluar?',
+                              style: kOpenSans.copyWith(
+                                  fontSize: 15, fontWeight: light),
+                              textAlign: TextAlign.center,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      child: Text(
+                                        "Kembali",
+                                        style: kOpenSans.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: medium,
+                                            color: kPrimary),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4),
+                                        side: const BorderSide(color: kPrimary),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                       ),
                                     ),
-                                    SizedBox(width: 1.w),
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  kPrimary),
-                                          shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
+                                  ),
+                                  SizedBox(width: 1.w),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(kPrimary),
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
-                                        child: Text(
-                                          'Keluar',
-                                          style: kOpenSans.copyWith(
-                                              color: kWhite,
-                                              fontWeight: medium,
-                                              fontSize: 14),
-                                        ),
-                                        onPressed: () async {
-                                          final prefs = await SharedPreferences
-                                              .getInstance();
-                                          prefs.remove("token");
-                                          Navigator.pushNamed(
-                                              context, LandingScreen.routeName);
-                                        },
                                       ),
+                                      child: Text(
+                                        'Keluar',
+                                        style: kOpenSans.copyWith(
+                                            color: kWhite,
+                                            fontWeight: medium,
+                                            fontSize: 14),
+                                      ),
+                                      onPressed: () async {
+                                        final prefs = await SharedPreferences
+                                            .getInstance();
+                                        prefs.remove("token");
+                                        Navigator.pushNamed(
+                                            context, LandingScreen.routeName);
+                                      },
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      child: Divider(
+                        color: kGray,
+                        height: 0.05.h,
                       ),
-                      SizedBox(
-                        child: Divider(
-                          color: kGray,
-                          height: 0.05.h,
-                        ),
-                        height: 2.8.h,
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                      height: 2.8.h,
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: SizedBox(
-            height: 8.h,
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 42),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconBottomBar(
-                      text: "Beranda",
-                      iconEnable: "assets/images/home1.png",
-                      iconDisable: "assets/images/home2.png",
-                      selected: false,
-                      onPressed: () {
-                        Navigator.pushNamed(context, DashboardScreen.routeName);
-                      }),
-                  IconBottomBar(
-                      text: "Scan Struk",
-                      iconEnable: "assets/images/scan1.png",
-                      iconDisable: "assets/images/scan2.png",
-                      selected: false,
-                      onPressed: () {
-                        Navigator.pushNamed(context, ScanStruk.routeName);
-                      }),
-                  IconBottomBar(
-                      text: "Pengaturan",
-                      iconEnable: "assets/images/setting1.png",
-                      iconDisable: "assets/images/setting2.png",
-                      selected: true,
-                      onPressed: () {
-                        Navigator.pushNamed(context, SettingsScreen.routeName);
-                      }),
-                ],
-              ),
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }

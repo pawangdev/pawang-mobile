@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/views/landing_screen.dart';
+import 'package:pawang_mobile/views/navigation_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null) {
       Navigator.pushNamedAndRemoveUntil(
         context,
-        DashboardScreen.routeName,
+        NavigationScreen.routeName,
         (route) => false,
       );
     } else {
