@@ -136,7 +136,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onTap: () {
                           Navigator.pushNamed(
                               context, EditProfileScreen.routeName,
-                              arguments: user.name);
+                              arguments: ArgsEditProfile(
+                                  name: user.name, gender: user.gender));
                         }),
                     SizedBox(
                       child: Divider(

@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:162442434412:android:b9932fe8d030fae8b78549",
+        "mobilesdk_app_id": "1:162442434412:android:44db662bab9dff9cb78549",
         "android_client_info": {
-          "package_name": "com.pawangdev.pawang.pawang_mobile"
+          "package_name": "com.pawang.pawang_mobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "162442434412-3cvtpvcul475r60rg5fcchuqnkfjmtpt.apps.googleusercontent.com",
+          "client_id": "162442434412-kkokiiv9sdac8pp6knjru7kdlcpoh967.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pawangdev.pawang.pawang_mobile",
-            "certificate_hash": "79e0acef691d6c5dd4694e0eefe930953f7db476"
+            "package_name": "com.pawang.pawang_mobile",
+            "certificate_hash": "a9ebfc4b21ecbedf9ea8ae746d83f8965c9f42ee"
           }
         },
         {

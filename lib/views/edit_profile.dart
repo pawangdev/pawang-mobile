@@ -21,6 +21,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController nameTextController = TextEditingController();
+  late String gender;
   final formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   bool _init = true;
@@ -85,10 +86,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as String;
+    final args = ModalRoute.of(context)!.settings.arguments as ArgsEditProfile;
 
     if (_init) {
-      nameTextController.text = args;
+      nameTextController.text = args.name;
+      gender = args.gender;
 
       setState(() {
         _init = false;
@@ -130,8 +132,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         SizedBox(
                             height: 13.8.h,
                             width: 28.w,
-                            child:
-                                Image.asset('assets/images/profile_blue.png')),
+                            child: Image.asset(gender == "male"
+                                ? "assets/images/man.png"
+                                : gender == "female"
+                                    ? "assets/images/woman.png"
+                                    : "assets/images/white.jpg")),
                         SizedBox(height: 2.4.h),
                       ],
                     ),
@@ -214,4 +219,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
+}
+
+class ArgsEditProfile {
+  String name;
+  String gender;
+
+  ArgsEditProfile({required this.name, required this.gender});
 }

@@ -215,12 +215,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               );
                             }
                             var wallet = snapshot.data!.data[index];
-                            return WalletCard(
-                                name: user.name,
-                                namaWallet: wallet.name,
-                                balance: CurrencyFormat.convertToIdr(
-                                        wallet.balance, 2)
-                                    .toString());
+                            return GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, WalletScreen.routeName),
+                              child: WalletCard(
+                                  name: user.name,
+                                  namaWallet: wallet.name,
+                                  balance: CurrencyFormat.convertToIdr(
+                                          wallet.balance, 2)
+                                      .toString()),
+                            );
                           },
                         );
                       } else if (snapshot.hasError) {
