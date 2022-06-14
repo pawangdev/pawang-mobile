@@ -166,7 +166,7 @@ class _WalletCard2State extends State<WalletCard2> {
                                                       Navigator
                                                           .pushReplacementNamed(
                                                               context,
-                                                              DashboardScreen
+                                                              NavigationScreen
                                                                   .routeName);
 
                                                       Flushbar(
