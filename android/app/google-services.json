@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "162442434412",
+    "project_id": "pawang",
+    "storage_bucket": "pawang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162442434412:android:b9932fe8d030fae8b78549",
+        "android_client_info": {
+          "package_name": "com.pawangdev.pawang.pawang_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162442434412-3cvtpvcul475r60rg5fcchuqnkfjmtpt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pawangdev.pawang.pawang_mobile",
+            "certificate_hash": "79e0acef691d6c5dd4694e0eefe930953f7db476"
+          }
+        },
+        {
+          "client_id": "162442434412-abfrelhqabbvo5fghlliuttoeq0ensef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhDZZMJVp1gWNpWVRkzxiGqiq0aU-tDPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162442434412-abfrelhqabbvo5fghlliuttoeq0ensef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

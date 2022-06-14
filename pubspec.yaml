@@ -48,6 +48,8 @@ dependencies:
   responsive_sizer: ^3.0.8
   form_validator: ^1.0.2
   flutter_spinkit: ^5.1.0
+  firebase_analytics: ^9.1.9
+  firebase_core: ^1.17.1
 
 dev_dependencies:
   flutter_test:

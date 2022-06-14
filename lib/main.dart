@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pawang_mobile/views/add_category.dart';
@@ -22,7 +23,10 @@ import 'package:pawang_mobile/views/validasi_scan_screen.dart';
 import 'package:pawang_mobile/views/wallet_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
