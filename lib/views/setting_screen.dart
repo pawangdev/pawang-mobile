@@ -68,7 +68,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       SizedBox(
                           height: 13.8.h,
                           width: 28.w,
-                          child: Image.asset('assets/images/profile_blue.png')),
+                          child: Image.asset(user.gender == "male"
+                              ? "assets/images/man.png"
+                              : user.gender == "female"
+                                  ? "assets/images/woman.png"
+                                  : "assets/images/white.jpg")),
                       SizedBox(height: 2.4.h),
                       user.name != ""
                           ? Text(
@@ -120,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       ),
                                     ),
                                   ),
-                                  Text('Edit profil',
+                                  Text('Edit Profil',
                                       style: kOpenSans.copyWith(
                                           fontSize: 14, fontWeight: semibold))
                                 ],
@@ -133,7 +137,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           onTap: () {
                             Navigator.pushNamed(
-                                context, EditProfileScreen.routeName);
+                                context, EditProfileScreen.routeName,
+                                arguments: user.name);
                           }),
                       SizedBox(
                         child: Divider(

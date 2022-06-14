@@ -108,8 +108,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SvgPicture.asset(
-                                  'assets/images/profile_white.svg'),
+                              Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  color: kWhite,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  image: DecorationImage(
+                                    image: AssetImage(user.gender == "male"
+                                        ? "assets/images/man.png"
+                                        : user.gender == "female"
+                                            ? "assets/images/woman.png"
+                                            : "assets/images/white.jpg"),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(

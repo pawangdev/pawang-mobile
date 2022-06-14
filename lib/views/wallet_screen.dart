@@ -93,7 +93,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: FutureBuilder(
                     future: _wallets,
-                    builder: (context, AsyncSnapshot snapshot) {
+                    builder: (context, AsyncSnapshot<WalletsModel> snapshot) {
                       var state = snapshot.connectionState;
                       if (state != ConnectionState.done) {
                         return const Center(
@@ -108,10 +108,13 @@ class _WalletScreenState extends State<WalletScreen> {
                               itemBuilder: (BuildContext context, int index) {
                                 var wallet = snapshot.data!.data[index];
                                 return WalletCard2(
-                                    name: wallet.name,
-                                    balance: CurrencyFormat.convertToIdr(
-                                            wallet.balance, 2)
-                                        .toString());
+                                  idWallet: wallet.id,
+                                  name: wallet.name,
+                                  balance: wallet.balance.toString(),
+                                  balanceFormat: CurrencyFormat.convertToIdr(
+                                          wallet.balance, 2)
+                                      .toString(),
+                                );
                               },
                             );
                           } else if (snapshot.hasError) {

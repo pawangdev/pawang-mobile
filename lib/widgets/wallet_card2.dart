@@ -1,15 +1,25 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/services/wallet_service.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/wallet_screen.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletCard2 extends StatefulWidget {
+  final int idWallet;
   final String name;
   final String balance;
+  final String balanceFormat;
 
-  const WalletCard2({Key? key, required this.name, required this.balance})
+  const WalletCard2(
+      {Key? key,
+      required this.name,
+      required this.balance,
+      required this.idWallet,
+      required this.balanceFormat})
       : super(key: key);
 
   @override
@@ -17,9 +27,19 @@ class WalletCard2 extends StatefulWidget {
 }
 
 class _WalletCard2State extends State<WalletCard2> {
+  bool init = true;
   final TextEditingController _walletTextController = TextEditingController();
+  final TextEditingController _balanceTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    if (init) {
+      _walletTextController.text = widget.name;
+      _balanceTextController.text = widget.balance;
+
+      init = false;
+    }
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       width: MediaQuery.of(context).size.width,
@@ -40,7 +60,7 @@ class _WalletCard2State extends State<WalletCard2> {
             height: 1.4.h,
           ),
           Text(
-            widget.balance.toString(),
+            widget.balanceFormat,
             //${snapshot.data!.data[index].balance}',
             style: kOpenSans.copyWith(
               color: kBlack,
@@ -55,7 +75,6 @@ class _WalletCard2State extends State<WalletCard2> {
             children: [
               Expanded(
                 child: Container(
-                  height: 4.95.h,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       gradient: const LinearGradient(
@@ -93,9 +112,9 @@ class _WalletCard2State extends State<WalletCard2> {
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 20),
                                       child: InputField(
-                                        inputLabel: "Nominal",
+                                        inputLabel: "Nama Dompet",
                                         inputController: _walletTextController,
-                                        keyboardType: TextInputType.number,
+                                        keyboardType: TextInputType.text,
                                         enable: true,
                                         // errorText: _inputData ? null : 'Nominal wajib diisi',
                                       ),
@@ -107,31 +126,110 @@ class _WalletCard2State extends State<WalletCard2> {
                                           width:
                                               MediaQuery.of(context).size.width,
                                           child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                padding:
-                                                    MaterialStateProperty.all(
-                                                        const EdgeInsets.all(
-                                                            10)),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        kPrimary),
-                                                shape:
-                                                    MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
+                                            style: ButtonStyle(
+                                              padding:
+                                                  MaterialStateProperty.all(
+                                                      const EdgeInsets.all(10)),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      kPrimary),
+                                              shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
                                                 ),
                                               ),
-                                              child: Text(
-                                                'Simpan Perubahan',
-                                                style: kOpenSans.copyWith(
-                                                    color: kWhite,
-                                                    fontWeight: medium,
-                                                    fontSize: 16),
-                                              ),
-                                              onPressed: () {}),
+                                            ),
+                                            child: Text(
+                                              'Simpan Perubahan',
+                                              style: kOpenSans.copyWith(
+                                                  color: kWhite,
+                                                  fontWeight: medium,
+                                                  fontSize: 16),
+                                            ),
+                                            onPressed: () {
+                                              var data = <String, dynamic>{
+                                                'name':
+                                                    _walletTextController.text,
+                                                'balance': int.parse(
+                                                    _balanceTextController.text)
+                                              };
+
+                                              try {
+                                                WalletService()
+                                                    .updateWallet(
+                                                        data, widget.idWallet)
+                                                    .then(
+                                                  (response) {
+                                                    if (response == true) {
+                                                      Navigator
+                                                          .pushReplacementNamed(
+                                                              context,
+                                                              DashboardScreen
+                                                                  .routeName);
+
+                                                      Flushbar(
+                                                        message:
+                                                            "Berhasil Merubah Dompet !",
+                                                        icon: const Icon(
+                                                          Icons.check,
+                                                          size: 28.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                        margin: const EdgeInsets
+                                                            .all(8),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        backgroundColor:
+                                                            kSuccess,
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 3),
+                                                      ).show(context);
+                                                    } else {
+                                                      Flushbar(
+                                                        message:
+                                                            "Terdapat Kesalahan !",
+                                                        icon: const Icon(
+                                                          Icons.check,
+                                                          size: 28.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                        margin: const EdgeInsets
+                                                            .all(8),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        backgroundColor:
+                                                            kSuccess,
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 3),
+                                                      ).show(context);
+                                                    }
+                                                  },
+                                                );
+                                              } catch (e) {
+                                                Flushbar(
+                                                  message:
+                                                      "Terdapat Kesalahan !",
+                                                  icon: const Icon(
+                                                    Icons.check,
+                                                    size: 28.0,
+                                                    color: Colors.white,
+                                                  ),
+                                                  margin:
+                                                      const EdgeInsets.all(8),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  backgroundColor: kSuccess,
+                                                  duration: const Duration(
+                                                      seconds: 3),
+                                                ).show(context);
+                                              }
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -150,7 +248,7 @@ class _WalletCard2State extends State<WalletCard2> {
               Expanded(
                 child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      padding: const EdgeInsets.symmetric(vertical: 13),
                       side: const BorderSide(color: kError),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
@@ -223,7 +321,65 @@ class _WalletCard2State extends State<WalletCard2> {
                                             fontWeight: medium,
                                             fontSize: 16),
                                       ),
-                                      onPressed: () {}),
+                                      onPressed: () {
+                                        try {
+                                          WalletService()
+                                              .deleteWallet(widget.idWallet)
+                                              .then((response) {
+                                            if (response == true) {
+                                              Navigator.pushReplacementNamed(
+                                                  context,
+                                                  DashboardScreen.routeName);
+
+                                              Flushbar(
+                                                message:
+                                                    "Berhasil Menghapus Dompet !",
+                                                icon: const Icon(
+                                                  Icons.check,
+                                                  size: 28.0,
+                                                  color: Colors.white,
+                                                ),
+                                                margin: const EdgeInsets.all(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                backgroundColor: kSuccess,
+                                                duration:
+                                                    const Duration(seconds: 3),
+                                              ).show(context);
+                                            } else {
+                                              Flushbar(
+                                                message: "Terdapat Kesalahan !",
+                                                icon: const Icon(
+                                                  Icons.check,
+                                                  size: 28.0,
+                                                  color: Colors.white,
+                                                ),
+                                                margin: const EdgeInsets.all(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                backgroundColor: kError,
+                                                duration:
+                                                    const Duration(seconds: 3),
+                                              ).show(context);
+                                            }
+                                          });
+                                        } catch (e) {
+                                          Flushbar(
+                                            message: "Terdapat Kesalahan !",
+                                            icon: const Icon(
+                                              Icons.check,
+                                              size: 28.0,
+                                              color: Colors.white,
+                                            ),
+                                            margin: const EdgeInsets.all(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            backgroundColor: kError,
+                                            duration:
+                                                const Duration(seconds: 3),
+                                          ).show(context);
+                                        }
+                                      }),
                                 ),
                               ],
                             ),

@@ -6,6 +6,7 @@ import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/views/dashboard_screen.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
+import 'package:pawang_mobile/widgets/loading.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController passwordNewConfirmationTextController =
       TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   void _submit() {
     final form = formKey.currentState;
@@ -36,37 +38,52 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         "password_new_confirmation": passwordNewConfirmationTextController.text,
       };
 
-      UserService().userChangePassword(data).then((response) {
-        if (response.success) {
-          Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        UserService().userChangePassword(data).then((response) {
+          if (response.success) {
+            setState(() {
+              _isLoading = false;
+            });
+            Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
 
-          Flushbar(
-            message: "Berhasil Ganti Password !",
-            icon: const Icon(
-              Icons.check,
-              size: 28.0,
-              color: Colors.white,
-            ),
-            margin: const EdgeInsets.all(8),
-            borderRadius: BorderRadius.circular(8),
-            backgroundColor: kSuccess,
-            duration: const Duration(seconds: 3),
-          ).show(context);
-        } else {
-          Flushbar(
-            message: response.message,
-            icon: const Icon(
-              Icons.check,
-              size: 28.0,
-              color: Colors.white,
-            ),
-            margin: const EdgeInsets.all(8),
-            borderRadius: BorderRadius.circular(8),
-            backgroundColor: kError,
-            duration: const Duration(seconds: 3),
-          ).show(context);
-        }
-      });
+            Flushbar(
+              message: "Berhasil Ganti Password !",
+              icon: const Icon(
+                Icons.check,
+                size: 28.0,
+                color: Colors.white,
+              ),
+              margin: const EdgeInsets.all(8),
+              borderRadius: BorderRadius.circular(8),
+              backgroundColor: kSuccess,
+              duration: const Duration(seconds: 3),
+            ).show(context);
+          } else {
+            setState(() {
+              _isLoading = false;
+            });
+            Flushbar(
+              message: response.message,
+              icon: const Icon(
+                Icons.check,
+                size: 28.0,
+                color: Colors.white,
+              ),
+              margin: const EdgeInsets.all(8),
+              borderRadius: BorderRadius.circular(8),
+              backgroundColor: kError,
+              duration: const Duration(seconds: 3),
+            ).show(context);
+          }
+        });
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -74,96 +91,104 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconBack(
-                      blueMode: true,
-                      onTap: () {
-                        Navigator.pop(context);
-                      }),
-                  Text(
-                    "Ganti Password",
-                    style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
-                  ),
-                  SizedBox(
-                    width: 7.2.w,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 4.4.h,
-              ),
-              Form(
-                key: formKey,
+        child: _isLoading
+            ? const Loading()
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
                 child: Column(
                   children: [
-                    InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
-                        inputLabel: 'Password Lama',
-                        isPassword: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        inputController: passwordNowTextController),
-                    InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
-                        inputLabel: 'Password Baru',
-                        isPassword: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        inputController: passwordNewTextController),
-                    InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
-                        inputLabel: 'Password Baru Konfirmasi',
-                        isPassword: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        inputController: passwordNewConfirmationTextController),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconBack(
+                            blueMode: true,
+                            onTap: () {
+                              Navigator.pop(context);
+                            }),
+                        Text(
+                          "Ganti Password",
+                          style: kOpenSans.copyWith(
+                              fontSize: 16, fontWeight: bold, color: kBlack),
+                        ),
+                        SizedBox(
+                          width: 7.2.w,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4.4.h,
+                    ),
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          InputField(
+                              validator:
+                                  ValidationBuilder(localeName: 'id').build(),
+                              inputLabel: 'Password Lama',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              inputController: passwordNowTextController),
+                          InputField(
+                              validator:
+                                  ValidationBuilder(localeName: 'id').build(),
+                              inputLabel: 'Password Baru',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              inputController: passwordNewTextController),
+                          InputField(
+                              validator:
+                                  ValidationBuilder(localeName: 'id').build(),
+                              inputLabel: 'Password Baru Konfirmasi',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              inputController:
+                                  passwordNewConfirmationTextController),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                    gradient: const LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [kPrimary, kPurple])),
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                            vertical: 15),
+                                      ),
+                                    ),
+                                    onPressed: _submit,
+                                    child: Text(
+                                      "Simpan Perubahan",
+                                      style: kOpenSans.copyWith(
+                                        color: kWhite,
+                                        fontSize: 16,
+                                        fontWeight: bold,
+                                      ),
+                                    )),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
-                              gradient: const LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [kPrimary, kPurple])),
-                          child: TextButton(
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                  const EdgeInsets.symmetric(vertical: 15),
-                                ),
-                              ),
-                              onPressed: _submit,
-                              child: Text(
-                                "Simpan Perubahan",
-                                style: kOpenSans.copyWith(
-                                  color: kWhite,
-                                  fontSize: 16,
-                                  fontWeight: bold,
-                                ),
-                              )),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }
