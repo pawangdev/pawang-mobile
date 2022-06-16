@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Text(
-                  'Pawang version v.2.0.0',
+                  'Pawang version v.2.0.1',
                   style: kOpenSans.copyWith(
                     fontSize: 14,
                     color: kWhite.withOpacity(0.75),

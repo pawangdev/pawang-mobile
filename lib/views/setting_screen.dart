@@ -250,8 +250,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         final prefs = await SharedPreferences
                                             .getInstance();
                                         prefs.remove("token");
-                                        Navigator.pushNamed(
-                                            context, LandingScreen.routeName);
+                                        Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          LandingScreen.routeName,
+                                          (route) => false,
+                                        );
                                       },
                                     ),
                                   ),
