@@ -1,38 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
+import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/views/login_screen.dart';
+import 'package:pawang_mobile/views/register_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LandingScreen extends StatelessWidget {
-  static const String routeName = '/';
+  static const String routeName = '/landing';
   const LandingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final widthApp = MediaQuery.of(context).size.width;
-    final heightApp = MediaQuery.of(context).size.height;
-    final paddingTop = MediaQuery.of(context).padding.top;
-    final bodyHeight = heightApp - paddingTop;
-
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: bodyHeight * 0.70,
-              decoration: BoxDecoration(
-                  color: kPurple,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(64),
-                      bottomLeft: Radius.circular(64))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 40),
-                      width: MediaQuery.of(context).size.width * 300 / 375,
-                      height: 300,
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 60.h,
+                decoration: const BoxDecoration(
+                    color: kPrimary,
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(64),
+                        bottomLeft: Radius.circular(64)),
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [kPrimary, kPurple, kPrimary])),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 2.5.h),
+                    Container(
+                      margin: EdgeInsets.only(top: 4.h),
+                      child: Image.asset(
+                        'assets/images/logo_pawang.png',
+                        color: kWhite.withOpacity(0.6),
+                        width: 40.w,
+                        height: 10.h,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.8.h,
+                    ),
+                    Container(
+                      width: 80.w,
+                      height: 35.h,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image:
@@ -40,59 +55,89 @@ class LandingScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Container(
-              child: Column(
-                children: [
-                  Text(
-                    "Selamat Datang",
-                    style: kOpenSans.copyWith(
-                        fontSize: 28, fontWeight: bold, color: kBlack),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
-                    style: kOpenSans.copyWith(fontSize: 16, color: kBlack),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  SizedBox(
-                    width: 116,
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, RiwayatScreen.routeName);
-                      },
-                      child: Text(
-                        "Masuk",
-                        style:
-                            kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
-                      ),
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(116, 40)),
-                        backgroundColor: MaterialStateProperty.all(kPurple),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+              SizedBox(
+                height: 0.25.h,
+              ),
+              Column(children: [
+                Text(
+                  "Selamat Datang",
+                  style: kOpenSans.copyWith(
+                      //0.30.dp
+                      fontSize: 20,
+                      fontWeight: bold,
+                      color: kBlack),
+                ),
+                SizedBox(
+                  height: 0.8.h,
+                ),
+                Text(
+                  "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
+                  style: kOpenSans.copyWith(
+                      fontSize: 16, fontWeight: medium, color: kGray),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 3.4.h,
+                ),
+              ]),
+              SizedBox(
+                width: 75.w,
+                height: 12.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [kPrimary, kPurple])),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, LoginScreen.routeName);
+                          },
+                          child: Text(
+                            "Masuk",
+                            style: kOpenSans.copyWith(
+                                color: kWhite,
+                                fontSize: 14,
+                                fontWeight: semibold),
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            )
-          ],
+                    SizedBox(width: 2.w),
+                    Expanded(
+                      child: OutlinedButton(
+                        child: Text(
+                          "Daftar",
+                          style: kOpenSans.copyWith(
+                              fontSize: 14,
+                              fontWeight: semibold,
+                              color: kPrimary),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RegisterScreen.routeName);
+                        },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          side: const BorderSide(color: kPrimary),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

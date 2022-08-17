@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 
 class DetailImageStrukScreen extends StatelessWidget {
   static const String routeName = "/lihat-struk";
@@ -11,7 +11,8 @@ class DetailImageStrukScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-      appBar: AppBar(title: Text("Lihat Struk"), backgroundColor: kPurple),
+      appBar:
+          AppBar(title: const Text("Lihat Struk"), backgroundColor: kPrimary),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

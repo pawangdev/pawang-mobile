@@ -1,13 +1,18 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pawang_mobile/config/theme_constants.dart';
-import 'package:pawang_mobile/models/PengeluaranModel.dart';
-import 'package:pawang_mobile/services/PengeluaranService.dart';
-import 'package:pawang_mobile/views/detail_image_struk_screen.dart';
-import 'package:pawang_mobile/views/riwayat_screen.dart';
-import 'package:pawang_mobile/widgets/InputField.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:intl/intl.dart';
+import 'package:pawang_mobile/constants/strings.dart';
+import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/transaction_model.dart';
+import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/views/dashboard_screen.dart';
+import 'package:pawang_mobile/views/image_dialog.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:pawang_mobile/widgets/loading.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DetailPengeluaran extends StatefulWidget {
   static const String routeName = "/detail";
@@ -18,469 +23,736 @@ class DetailPengeluaran extends StatefulWidget {
 }
 
 class _DetailPengeluaranState extends State<DetailPengeluaran> {
-  TextEditingController nama_pengeluaran = TextEditingController();
-  TextEditingController nominal_pengeluaran = TextEditingController();
-  TextEditingController kategori_pengeluaran = TextEditingController();
-  TextEditingController tanggal_pengeluaran = TextEditingController();
-  bool _validated = true;
-  bool _isEdited = false;
+  final TextEditingController _nominalTextController = TextEditingController();
+  final TextEditingController _noteTextController = TextEditingController();
+  final TextEditingController _dateTextController = TextEditingController();
+  final TextEditingController _categoryTextController = TextEditingController();
+  final TextEditingController _walletTextController = TextEditingController();
+  final TextEditingController _typeTextController = TextEditingController();
+  final TextEditingController _nominalEditTextController =
+      TextEditingController();
+  final TextEditingController _noteEditTextController = TextEditingController();
+  final TextEditingController _dateEditTextController = TextEditingController();
+  final TextEditingController _walletEditTextController =
+      TextEditingController();
 
-  // UPDATING DATA
-  Future<void> updateData(PengeluaranModel _pengeluaran) async {
-    TextEditingController _nama_pengeluaran = TextEditingController();
-    TextEditingController _nominal_pengeluaran = TextEditingController();
-    TextEditingController _kategori_pengeluaran = TextEditingController();
-    TextEditingController _tanggal_pengeluaran = TextEditingController();
-    if (_pengeluaran != null) {
-      _nama_pengeluaran.text = _pengeluaran.nama_pengeluaran;
-      _nominal_pengeluaran.text = _pengeluaran.nominal_pengeluaran.toString();
-      _kategori_pengeluaran.text = _pengeluaran.kategori_pengeluaran;
-      _tanggal_pengeluaran.text = _pengeluaran.tanggal_pengeluaran;
+  late String _dateRFC3399;
+  int? _walletID, _categoryID;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    if (_dateTextController.text.isEmpty) {
+      _dateTextController.text = DateTime.now().toString();
     }
+    _dateEditTextController.text = DateFormat("dd/MM/yyyy")
+        .format(DateTime.parse(_dateTextController.text))
+        .toString();
+    _dateRFC3399 =
+        (DateTime.parse(_dateTextController.text)).toUtc().toIso8601String();
 
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext ctx) {
-          return SafeArea(
-            child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 33, bottom: 24),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kPurple),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      Text(
-                        "Edit Pengeluaran",
-                        style: kOpenSans.copyWith(
-                            fontSize: 16, fontWeight: bold, color: kBlack),
-                      ),
-                      Container(
-                        width: 22,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                // NAMA PENGELUARAN
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: InputField(
-                    inputLabel: "Nama Pengeluaran",
-                    inputController: _nama_pengeluaran,
-                    errorText:
-                        _validated ? null : 'Nama Pengeluaran wajib diisi',
-                  ),
-                ),
-                // NOMINAL
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: InputField(
-                    inputLabel: "Nominal",
-                    inputController: _nominal_pengeluaran,
-                    errorText: _validated ? null : 'Nominal wajib diisi',
-                  ),
-                ),
-                // KATEGORI
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: InputField(
-                    inputLabel: "Kategori",
-                    inputController: _kategori_pengeluaran,
-                    errorText: _validated ? null : 'Kategori wajib diisi',
-                  ),
-                ),
-                // TANGGAL
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: InputField(
-                    inputLabel: "Tanggal",
-                    inputController: _tanggal_pengeluaran,
-                    errorText: _validated ? null : 'Tanggal wajib diisi',
-                    keyboardType: TextInputType.none,
-                    onTap: () {
-                      showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(2099))
-                          .then((date) {
-                        if (date != null) {
-                          initializeDateFormatting('id_ID', null);
-                          String format =
-                              DateFormat.yMMMMd('id_ID').format(date);
-                          setState(() {
-                            _tanggal_pengeluaran.text = format;
-                          });
-                        }
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text(
-                      "Simpan Perubahan",
-                      style: kOpenSans.copyWith(fontSize: 16, fontWeight: bold),
-                    ),
-                    onPressed: () async {
-                      setState(() {
-                        _nama_pengeluaran.text.isEmpty
-                            ? _validated = false
-                            : _validated = true;
-                        _nominal_pengeluaran.text.isEmpty
-                            ? _validated = false
-                            : _validated = true;
-                        _kategori_pengeluaran.text.isEmpty
-                            ? _validated = false
-                            : _validated = true;
-                        _tanggal_pengeluaran.text.isEmpty
-                            ? _validated = false
-                            : _validated = true;
-                      });
-                      if (_validated) {
-                        _pengeluaran.nama_pengeluaran = _nama_pengeluaran.text;
-                        _pengeluaran.nominal_pengeluaran =
-                            double.parse(_nominal_pengeluaran.text);
-                        _pengeluaran.kategori_pengeluaran =
-                            _kategori_pengeluaran.text;
-                        _pengeluaran.tanggal_pengeluaran =
-                            _tanggal_pengeluaran.text;
-
-                        try {
-                          PengeluaranService()
-                              .update(_pengeluaran)
-                              .then((value) => ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content:
-                                        Text("Perubahan berhasil disimpan"),
-                                    backgroundColor: kSuccess,
-                                  )))
-                              .then((value) {
-                            setState(() {
-                              nama_pengeluaran.text = _nama_pengeluaran.text;
-                              nominal_pengeluaran.text =
-                                  _nominal_pengeluaran.text;
-                              kategori_pengeluaran.text =
-                                  _kategori_pengeluaran.text;
-                              tanggal_pengeluaran.text =
-                                  _tanggal_pengeluaran.text;
-                            });
-                          });
-                          Navigator.pop(context);
-                        } catch (e) {
-                          print(e);
-                        }
-                      }
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(kPurple),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(kDefaultBorderRadius),
-                          ),
-                        ),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 12))),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    PengeluaranModel data =
-        ModalRoute.of(context)!.settings.arguments as PengeluaranModel;
-    final int? _id = data.id;
+    TransactionModel data =
+        ModalRoute.of(context)!.settings.arguments as TransactionModel;
+    late final int transaction_id = data.id;
+    final String? transaction_image_url =
+        data.imageUrl == "" ? "" : data.imageUrl;
 
-    nama_pengeluaran.text = data.nama_pengeluaran;
-    nominal_pengeluaran.text = data.nominal_pengeluaran.toString();
-    kategori_pengeluaran.text = data.kategori_pengeluaran;
-    tanggal_pengeluaran.text = data.tanggal_pengeluaran;
+    if (_nominalTextController.text.isEmpty) {
+      setState(() {
+        _nominalTextController.text =
+            CurrencyFormat.convertToIdr(data.amount, 2).toString();
+        _noteTextController.text = data.description;
+        _dateTextController.text =
+            DateFormat("dd/MM/yyyy").format(data.date.toLocal()).toString();
+        _categoryTextController.text = data.category.name;
+        _walletTextController.text = data.wallet.name;
+        _typeTextController.text = data.type;
+        _walletID = data.walletId;
+        _categoryID = data.categoryId;
+      });
+    }
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: const BoxDecoration(
-                    color: kPurple,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 28, left: 32),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
+        child: _isLoading
+            ? const Loading()
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.11,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
+                              ),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [kPrimary, kPurple])),
                         ),
-                        child: InkWell(
-                          child: SvgPicture.asset(
-                            'assets/images/back_btn.svg',
-                            color: Colors.white,
-                            fit: BoxFit.cover,
+                        Container(
+                          padding: const EdgeInsets.only(top: 28, left: 32),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconBack(
+                                blueMode: false,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Detail Riwayat",
+                                    style: kOpenSans.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: bold,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                width: 7.2.w,
+                              ),
+                            ],
                           ),
-                          onTap: () => {
-                            Navigator.pushNamed(
-                                context, RiwayatScreen.routeName)
-                          },
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    // CircleAvatar(
+                    //     child: GestureDetector(
+                    //       onTap: () async {
+                    //         await showDialog(
+                    //           context: context,
+                    //           builder: (_) => ImageDialog()
+                    //         );
+                    //       },
+                    //     ),
+                    //     radius: 50.0,
+                    //     backgroundImage: AssetImage('assets/images/google.png')),
+                    transaction_image_url == ""
+                        ? SizedBox()
+                        : Center(
+                            child: GestureDetector(
+                            onTap: () async {
+                              await showDialog(
+                                  context: context,
+                                  builder: (_) => ImageDialog(
+                                        imageUrl: baseURLAPI + data.imageUrl,
+                                      ));
+                            },
+                            child: Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        baseURLAPI + data.imageUrl),
+                                    fit: BoxFit.cover),
+                                border: Border.all(color: kGray, width: 0.5),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          )),
+                    Container(
+                      //margin: const EdgeInsets.(top: 20, bottom: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Nominal
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: InputField(
+                              inputLabel: "Nominal",
+                              inputController: _nominalTextController,
+                              keyboardType: TextInputType.number,
+                              enable: false,
+                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                            ),
+                          ),
+                          // Kategori
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: InputField(
+                              inputLabel: "Kategori",
+                              inputController: _categoryTextController,
+                              keyboardType: TextInputType.number,
+                              enable: false,
+                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                            ),
+                          ),
+                          // Wallets
+                          // Kategori
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: InputField(
+                              inputLabel: "Wallets",
+                              inputController: _walletTextController,
+                              keyboardType: TextInputType.number,
+                              enable: false,
+                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                            ),
+                          ),
+                          // Catatan
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: InputField(
+                              inputLabel: "Catatan",
+                              inputController: _noteTextController,
+                              keyboardType: TextInputType.number,
+                              enable: false,
+                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: InputField(
+                              inputLabel: "Tanggal",
+                              inputController: _dateTextController,
+                              keyboardType: TextInputType.number,
+                              enable: false,
+                              // errorText: _inputData ? null : 'Nominal wajib diisi',
+                            ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    // BUTTONS
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      margin: const EdgeInsets.only(bottom: 32),
+                      child: Center(
+                        child: Row(
+                          //crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Detail Pengeluaran",
-                              style: kOpenSans.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: bold,
-                                  color: Colors.white),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        kDefaultBorderRadius),
+                                    gradient: const LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [kPrimary, kPurple])),
+                                child: TextButton(
+                                  onPressed: () {
+                                    _nominalEditTextController.text =
+                                        data.amount.toString();
+                                    _noteEditTextController.text =
+                                        data.description;
+                                    _dateEditTextController.text =
+                                        DateFormat("dd/MM/yyyy")
+                                            .format(data.date.toLocal())
+                                            .toString();
+                                    _categoryID = data.category.id;
+                                    _walletID = data.wallet.id;
+                                    _walletEditTextController.text =
+                                        data.wallet.name;
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          height: 85.h,
+                                          color: kWhite,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                // Nominal
+                                                Text(
+                                                  'Ubah Data',
+                                                  style: kOpenSans.copyWith(
+                                                      fontSize: 18,
+                                                      fontWeight: bold),
+                                                ),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 20),
+                                                  child: InputField(
+                                                    inputLabel: "Nominal",
+                                                    inputController:
+                                                        _nominalEditTextController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    enable: true,
+                                                    // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                                  ),
+                                                ),
+                                                // Kategori
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 20),
+                                                  child: InputField(
+                                                    inputLabel: "Kategori",
+                                                    inputController:
+                                                        _categoryTextController,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    enable: false,
+                                                    // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                                  ),
+                                                ),
+                                                // Wallets
+                                                // Kategori
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 20),
+                                                  child: InputField(
+                                                    inputLabel: "Wallets",
+                                                    inputController:
+                                                        _walletEditTextController,
+                                                    enable: false,
+                                                    // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                                  ),
+                                                ),
+                                                // Catatan
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 20),
+                                                  child: InputField(
+                                                    inputLabel: "Catatan",
+                                                    inputController:
+                                                        _noteEditTextController,
+                                                    enable: true,
+                                                    // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 20),
+                                                  child: InputField(
+                                                    validator:
+                                                        ValidationBuilder(
+                                                                localeName:
+                                                                    'id')
+                                                            .build(),
+                                                    inputLabel: "Tanggal",
+                                                    inputController:
+                                                        _dateEditTextController,
+                                                    // errorText: _inputData ? null : 'Tanggal wajib diisi',
+                                                    enable: true,
+                                                    readOnly: true,
+                                                    keyboardType:
+                                                        TextInputType.none,
+                                                    onTap: () {
+                                                      showDatePicker(
+                                                              context: context,
+                                                              initialDate:
+                                                                  DateTime
+                                                                      .now(),
+                                                              firstDate:
+                                                                  DateTime(
+                                                                      2000),
+                                                              lastDate:
+                                                                  DateTime(
+                                                                      2099))
+                                                          .then((date) {
+                                                        setState(() {
+                                                          _dateEditTextController
+                                                              .text = DateFormat(
+                                                                  "dd/MM/yyyy")
+                                                              .format(date!)
+                                                              .toString();
+                                                          _dateRFC3399 = date
+                                                              .toUtc()
+                                                              .toIso8601String();
+                                                        });
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                            padding: MaterialStateProperty.all(
+                                                                const EdgeInsets
+                                                                    .all(10)),
+                                                            backgroundColor:
+                                                                MaterialStateProperty
+                                                                    .all(
+                                                                        kPrimary),
+                                                            shape:
+                                                                MaterialStateProperty
+                                                                    .all(
+                                                              RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            'Simpan Perubahan',
+                                                            style: kOpenSans
+                                                                .copyWith(
+                                                                    color:
+                                                                        kWhite,
+                                                                    fontWeight:
+                                                                        medium,
+                                                                    fontSize:
+                                                                        16),
+                                                          ),
+                                                          onPressed: () {
+                                                            var data = <String,
+                                                                dynamic>{
+                                                              'amount': int.parse(
+                                                                  _nominalEditTextController
+                                                                      .text),
+                                                              'category_id':
+                                                                  _categoryID,
+                                                              'wallet_id':
+                                                                  _walletID,
+                                                              'type':
+                                                                  _typeTextController
+                                                                      .text,
+                                                              'description':
+                                                                  _noteEditTextController
+                                                                      .text,
+                                                              'date':
+                                                                  _dateRFC3399,
+                                                            };
+
+                                                            print(data);
+
+                                                            try {
+                                                              setState(() {
+                                                                _isLoading =
+                                                                    true;
+                                                              });
+                                                              TransactionService
+                                                                      .updateTransaction(
+                                                                          data,
+                                                                          transaction_id)
+                                                                  .then(
+                                                                      (response) {
+                                                                if (response ==
+                                                                    true) {
+                                                                  setState(() {
+                                                                    _isLoading =
+                                                                        false;
+                                                                  });
+                                                                  Navigator.pushReplacementNamed(
+                                                                      context,
+                                                                      DashboardScreen
+                                                                          .routeName);
+
+                                                                  Flushbar(
+                                                                    message:
+                                                                        "Berhasil Mengubah Data !",
+                                                                    icon:
+                                                                        const Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      size:
+                                                                          28.0,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    margin: const EdgeInsets
+                                                                        .all(8),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    backgroundColor:
+                                                                        kSuccess,
+                                                                    duration: const Duration(
+                                                                        seconds:
+                                                                            3),
+                                                                  ).show(
+                                                                      context);
+                                                                } else {
+                                                                  setState(() {
+                                                                    _isLoading =
+                                                                        false;
+                                                                  });
+                                                                  Flushbar(
+                                                                    message:
+                                                                        "Terdapat Kesalahan !",
+                                                                    icon:
+                                                                        const Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      size:
+                                                                          28.0,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    margin: const EdgeInsets
+                                                                        .all(8),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    backgroundColor:
+                                                                        kError,
+                                                                    duration: const Duration(
+                                                                        seconds:
+                                                                            3),
+                                                                  ).show(
+                                                                      context);
+                                                                }
+                                                              });
+                                                            } catch (e) {
+                                                              setState(() {
+                                                                _isLoading =
+                                                                    false;
+                                                              });
+                                                              print(e);
+                                                            }
+                                                          }),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      isScrollControlled: true,
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.edit_rounded,
+                                        color: kWhite,
+                                        size: 20,
+                                      ),
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        "Ubah Data",
+                                        style: kOpenSans.copyWith(
+                                            color: kWhite,
+                                            fontSize: 16,
+                                            fontWeight: medium),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 1.w,
+                            ),
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  showDialog<void>(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: Text(
+                                        'Hapus Pengeluaran',
+                                        style: kOpenSans.copyWith(
+                                            fontSize: 18, fontWeight: bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      content: Text(
+                                        'Apakah kamu yakin akan menghapus pengeluaran ini?',
+                                        style: kOpenSans.copyWith(
+                                            fontSize: 16, fontWeight: light),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      actions: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: OutlinedButton(
+                                                child: Text(
+                                                  "Kembali",
+                                                  style: kOpenSans.copyWith(
+                                                      fontSize: 16,
+                                                      fontWeight: medium,
+                                                      color: kPrimary),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pop(
+                                                      context, 'Kembali');
+                                                },
+                                                style: OutlinedButton.styleFrom(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 4),
+                                                  side: const BorderSide(
+                                                      color: kPrimary),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 1.w),
+                                            Expanded(
+                                              child: OutlinedButton(
+                                                  style:
+                                                      OutlinedButton.styleFrom(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(vertical: 4),
+                                                    side: const BorderSide(
+                                                        color: kError),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                  ),
+                                                  child: Text(
+                                                    'Hapus',
+                                                    style: kOpenSans.copyWith(
+                                                        color: kError,
+                                                        fontWeight: medium,
+                                                        fontSize: 16),
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _isLoading = true;
+                                                    });
+                                                    try {
+                                                      TransactionService
+                                                              .destroyTransaction(
+                                                                  transaction_id)
+                                                          .then((response) {
+                                                        if (response == true) {
+                                                          setState(() {
+                                                            _isLoading = false;
+                                                          });
+                                                          Navigator
+                                                              .pushReplacementNamed(
+                                                                  context,
+                                                                  DashboardScreen
+                                                                      .routeName);
+                                                          Flushbar(
+                                                            message:
+                                                                "Berhasil Menghapus Transaksi !",
+                                                            icon: const Icon(
+                                                              Icons.check,
+                                                              size: 28.0,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(8),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            backgroundColor:
+                                                                kSuccess,
+                                                            duration:
+                                                                const Duration(
+                                                                    seconds: 3),
+                                                          ).show(context);
+                                                        } else {
+                                                          setState(() {
+                                                            _isLoading = false;
+                                                          });
+                                                          Flushbar(
+                                                            message:
+                                                                "Terjadi Kesalahan !",
+                                                            icon: const Icon(
+                                                              Icons.check,
+                                                              size: 28.0,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(8),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            backgroundColor:
+                                                                kError,
+                                                            duration:
+                                                                const Duration(
+                                                                    seconds: 3),
+                                                          ).show(context);
+                                                        }
+                                                      });
+                                                    } catch (e) {
+                                                      setState(() {
+                                                        _isLoading = false;
+                                                      });
+                                                    }
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.delete_rounded,
+                                      color: kError,
+                                      size: 20,
+                                    ),
+                                    SizedBox(width: 3.w),
+                                    Text(
+                                      "Hapus Data",
+                                      style: kOpenSans.copyWith(
+                                          color: kError,
+                                          fontSize: 16,
+                                          fontWeight: medium),
+                                    ),
+                                  ],
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.all(13),
+                                  side: const BorderSide(color: kError),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        width: 32,
-                        height: 32,
-                        padding: EdgeInsets.all(6),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 50, bottom: 60),
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // NAMA PENGELUARAN
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Nama Pengeluaran',
-                            style: kOpenSans.copyWith(
-                              fontWeight: bold,
-                              color: kBlack,
-                            )),
-                        TextField(
-                          controller: nama_pengeluaran,
-                          enabled: false,
-                        ),
-                      ],
-                    ),
-                  ),
-                  // NOMINAL
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Nominal',
-                            style: kOpenSans.copyWith(
-                              fontWeight: bold,
-                              color: kBlack,
-                            )),
-                        TextField(
-                          controller: nominal_pengeluaran,
-                        ),
-                      ],
-                    ),
-                  ),
-                  // KATEGORI PENGELUARAN
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Kategori',
-                            style: kOpenSans.copyWith(
-                              fontWeight: bold,
-                              color: kBlack,
-                            )),
-                        TextField(
-                          controller: kategori_pengeluaran,
-                        ),
-                      ],
-                    ),
-                  ),
-                  // TANGGAL PENGELUARAN
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Tanggal',
-                            style: kOpenSans.copyWith(
-                              fontWeight: bold,
-                              color: kBlack,
-                            )),
-                        TextField(
-                          controller: tanggal_pengeluaran,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
               ),
-            ),
-            // BUTTONS
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              margin: EdgeInsets.only(bottom: 32),
-              child: Center(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // LIHAT STRUK
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, DetailImageStrukScreen.routeName,
-                              arguments: data.filePath);
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
-                            ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/receipt_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // EDIT DATA
-                      ElevatedButton(
-                        onPressed: () => updateData(data),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
-                            ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/edit_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // DELETE DATA
-                      ElevatedButton(
-                        onPressed: () => {
-                          showDialog<void>(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Hapus Pengeluaran'),
-                              content: const Text(
-                                  'Apakah kamu yakin akan menghapus pengeluaran ini?'),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Kembali'),
-                                  child: Text('Kembali', style: kOpenSans.copyWith(color: kPurple)),
-                                ),
-                                TextButton(
-                                  onPressed: () => {
-                                    PengeluaranService().delete(data.id!).then(
-                                        (value) => ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                              content: Text(
-                                                  "Pengeluaran berhasil dihapus"),
-                                              backgroundColor: kSuccess,
-                                            ))),
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        RiwayatScreen.routeName,
-                                        (route) => false)
-                                  },
-                                  child: Text('Hapus', style: kOpenSans.copyWith(color: kPurple)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(kPurple),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(kDefaultBorderRadius),
-                              ),
-                            ),
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(12))),
-                        child: SvgPicture.asset(
-                          'assets/images/delete_btn.svg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ]),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
