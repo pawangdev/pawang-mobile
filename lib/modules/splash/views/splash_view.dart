@@ -1,47 +1,31 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/views/dashboard_screen.dart';
-import 'package:pawang_mobile/views/landing_screen.dart';
-import 'package:pawang_mobile/views/navigation_screen.dart';
+import 'package:pawang_mobile/modules/splash/controllers/splash_controller.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatefulWidget {
-  static const String routeName = "/";
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashView extends StatelessWidget {
+  SplashView({Key? key}) : super(key: key);
+  final controller = Get.find<SplashController>();
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
+  // checkToken() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final token = prefs.getString("token");
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
-      checkToken();
-    });
-  }
-
-  checkToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
-
-    if (token != null) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        NavigationScreen.routeName,
-        (route) => false,
-      );
-    } else {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        LandingScreen.routeName,
-        (route) => false,
-      );
-    }
-  }
+  //   if (token != null) {
+  //     Navigator.pushNamedAndRemoveUntil(
+  //       context,
+  //       NavigationScreen.routeName,
+  //       (route) => false,
+  //     );
+  //   } else {
+  //     Navigator.pushNamedAndRemoveUntil(
+  //       context,
+  //       LandingScreen.routeName,
+  //       (route) => false,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

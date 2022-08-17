@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/views/login_screen.dart';
-import 'package:pawang_mobile/views/register_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LandingScreen extends StatelessWidget {
-  static const String routeName = '/landing';
-  const LandingScreen({Key? key}) : super(key: key);
-
+class LandingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,9 +93,7 @@ class LandingScreen extends StatelessWidget {
                                 end: Alignment.centerRight,
                                 colors: [kPrimary, kPurple])),
                         child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, LoginScreen.routeName);
-                          },
+                          onPressed: () {},
                           child: Text(
                             "Masuk",
                             style: kOpenSans.copyWith(
@@ -121,10 +114,7 @@ class LandingScreen extends StatelessWidget {
                               fontWeight: semibold,
                               color: kPrimary),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, RegisterScreen.routeName);
-                        },
+                        onPressed: () {},
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           side: const BorderSide(color: kPrimary),
