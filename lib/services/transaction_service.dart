@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pawang_mobile/utils/storage.dart';
 import 'dart:io' as file;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionService {
-  static Future<TransactionsModel> getTransactions() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<List<TransactionDataModel>?> getTransactions() async {
+    final token = Storage.getValue(storageToken);
 
     var response =
         await http.get(Uri.parse(baseURLAPI + "transactions"), headers: {
@@ -18,9 +18,10 @@ class TransactionService {
     });
 
     if (response.statusCode == 200) {
-      return TransactionsModel.fromJson(jsonDecode(response.body));
+      List jsonResponse = jsonDecode(response.body)['data'];
+      return jsonResponse.map((e) => TransactionDataModel.fromJson(e)).toList();
     } else {
-      throw Exception("Error Get Data");
+      throw jsonDecode(response.body)['message'];
     }
   }
 

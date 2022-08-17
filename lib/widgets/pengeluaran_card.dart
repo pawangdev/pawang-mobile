@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -6,15 +7,10 @@ import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class CardPengeluaran extends StatefulWidget {
+class CardPengeluaran extends StatelessWidget {
   const CardPengeluaran({Key? key, required this.data}) : super(key: key);
-  final TransactionModel data;
+  final TransactionDataModel data;
 
-  @override
-  State<CardPengeluaran> createState() => _CardPengeluaranState();
-}
-
-class _CardPengeluaranState extends State<CardPengeluaran> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,8 +39,8 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                   decoration: const BoxDecoration(
                       color: kSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Image.network(
-                    baseURLAPI + widget.data.category.iconUrl,
+                  child: SvgPicture.network(
+                    baseHOSTAPI + data.category.icon,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -57,7 +53,7 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                       children: [
                         // NAMA PENGELUARAN
                         Text(
-                          widget.data.category.name,
+                          data.category.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
@@ -69,7 +65,7 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                         // TANGGAL
                         Text(
                           DateFormat("dd/MM/yyyy")
-                              .format(widget.data.date.toLocal())
+                              .format(data.date.toLocal())
                               .toString(),
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
@@ -83,7 +79,7 @@ class _CardPengeluaranState extends State<CardPengeluaran> {
                 ),
               ],
             ),
-            Text(CurrencyFormat.convertToIdr(widget.data.amount, 2).toString(),
+            Text(CurrencyFormat.convertToIdr(data.amount, 2).toString(),
                 style: kOpenSans.copyWith(
                     fontSize: 16,
                     fontWeight: bold,

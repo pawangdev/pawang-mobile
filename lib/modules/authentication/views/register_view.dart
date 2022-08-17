@@ -5,6 +5,7 @@ import 'package:pawang_mobile/modules/authentication/controllers/register_contro
 import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:pawang_mobile/widgets/loading.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
@@ -208,7 +209,7 @@ class RegisterView extends StatelessWidget {
                               end: Alignment.centerRight,
                               colors: [kPrimary, kPurple])),
                       child: TextButton(
-                        onPressed: () => {},
+                        onPressed: () => controller.register(),
                         child: Text(
                           "Daftar",
                           style: kOpenSans.copyWith(

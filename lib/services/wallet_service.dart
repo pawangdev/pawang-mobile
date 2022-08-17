@@ -1,24 +1,29 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pawang_mobile/utils/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletService {
-  Future<WalletsModel> getWallets() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<List<WalletsDataModel>?> getWallets() async {
+    final token = Storage.getValue(storageToken);
 
     var response = await http.get(Uri.parse(baseURLAPI + "wallets"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "bearer $token",
-    });
+    }).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () => throw TimeoutException("Connection Time Out"),
+    );
 
     if (response.statusCode == 200) {
-      return WalletsModel.fromJson(jsonDecode(response.body));
+      List jsonResponse = jsonDecode(response.body)['data'];
+      return jsonResponse.map((e) => WalletsDataModel.fromJson(e)).toList();
     } else {
-      throw Exception(false);
+      throw jsonDecode(response.body)['message'];
     }
   }
 

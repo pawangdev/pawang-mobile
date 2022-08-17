@@ -2,15 +2,16 @@
 //
 //     final walletModel = walletModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-WalletsModel walletModelFromJson(String str) =>
-    WalletsModel.fromJson(json.decode(str));
+WalletModel walletModelFromJson(String str) =>
+    WalletModel.fromJson(json.decode(str));
 
-String walletModelToJson(WalletsModel data) => json.encode(data.toJson());
+String walletModelToJson(WalletModel data) => json.encode(data.toJson());
 
-class WalletsModel {
-  WalletsModel({
+class WalletModel {
+  WalletModel({
     required this.success,
     required this.message,
     required this.data,
@@ -18,13 +19,12 @@ class WalletsModel {
 
   bool success;
   String message;
-  List<WalletModel> data;
+  List<WalletsDataModel> data;
 
-  factory WalletsModel.fromJson(Map<String, dynamic> json) => WalletsModel(
+  factory WalletModel.fromJson(Map<String, dynamic> json) => WalletModel(
         success: json["success"],
         message: json["message"],
-        data: List<WalletModel>.from(
-            json["data"].map((x) => WalletModel.fromJson(x))),
+        data: List<WalletsDataModel>.from(json["data"].map((x) => WalletsDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,12 +34,13 @@ class WalletsModel {
       };
 }
 
-class WalletModel {
-  WalletModel({
+class WalletsDataModel {
+  WalletsDataModel({
     required this.id,
     required this.name,
     required this.userId,
     required this.balance,
+    required this.transactions,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -48,14 +49,16 @@ class WalletModel {
   String name;
   int userId;
   int balance;
+  dynamic transactions;
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory WalletModel.fromJson(Map<String, dynamic> json) => WalletModel(
+  factory WalletsDataModel.fromJson(Map<String, dynamic> json) => WalletsDataModel(
         id: json["id"],
         name: json["name"],
         userId: json["user_id"],
         balance: json["balance"],
+        transactions: json["transactions"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -65,6 +68,7 @@ class WalletModel {
         "name": name,
         "user_id": userId,
         "balance": balance,
+        "transactions": transactions,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

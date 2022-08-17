@@ -136,7 +136,7 @@ class LoginView extends StatelessWidget {
                               end: Alignment.centerRight,
                               colors: [kPrimary, kPurple])),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.login(),
                         child: Text(
                           "Masuk",
                           style: kOpenSans.copyWith(

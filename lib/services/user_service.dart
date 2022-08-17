@@ -1,62 +1,67 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as file;
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/constants/strings.dart';
+import 'package:pawang_mobile/models/error_model.dart';
 import 'package:pawang_mobile/models/login_model.dart';
-import 'package:pawang_mobile/models/profile_user_model.dart';
+import 'package:pawang_mobile/models/user_profile_model.dart';
+import 'package:pawang_mobile/utils/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
-  Future<bool> userRegister(Map<String, dynamic> data) async {
-    var dataRegister = <String, dynamic>{
-      'name': data['name'],
-      'email': data['email'],
-      'password': data['password'],
-      'phone': data['phone'],
-      'gender': data['gender'],
-    };
+  static Future<http.Response> userRegister(Map<String, dynamic> data) async {
+    try {
+      var dataRegister = <String, dynamic>{
+        'name': data['name'],
+        'email': data['email'],
+        'password': data['password'],
+        'phone': data['phone'],
+        'gender': data['gender'],
+      };
 
-    var response = await http.post(Uri.parse(baseURLAPI + "register"),
-        body: jsonEncode(dataRegister),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        });
+      var response = await http.post(Uri.parse(baseURLAPI + "users/register"),
+          body: jsonEncode(dataRegister),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          });
 
-    if (response.statusCode == 201) {
-      return true;
-    } else {
-      return false;
+      return response;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 
-  Future<LoginModel> userLogin(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
+  static Future<LoginDataModel?> userLogin(Map<String, dynamic> data) async {
+    try {
+      var dataLogin = <String, dynamic>{
+        'email': data['email'],
+        'password': data['password'],
+      };
 
-    var dataLogin = <String, dynamic>{
-      'email': data['email'],
-      'password': data['password'],
-    };
+      var response = await http.post(Uri.parse(baseURLAPI + "users/login"),
+          body: jsonEncode(dataLogin),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () => throw TimeoutException("Connection Time Out"),
+      );
 
-    var response = await http.post(Uri.parse(baseURLAPI + "login"),
-        body: jsonEncode(dataLogin),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        });
-
-    if (response.statusCode == 202) {
-      Map<dynamic, dynamic> temp = jsonDecode(response.body);
-      await prefs.setString('token', temp['data']['token']);
-      return LoginModel.fromJson(jsonDecode(response.body));
-    } else {
-      return LoginModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        return LoginDataModel.fromJson(jsonDecode(response.body)['data']);
+      } else {
+        throw jsonDecode(response.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 
   Future<bool> userUpdateProfile(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+    final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
         "POST", Uri.parse(baseURLAPI + "profile/change-profile"));
@@ -85,17 +90,17 @@ class UserService {
     }
   }
 
-  Future<ProfileModel> userProfile() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<http.Response> userProfile() async {
+    final token = Storage.getValue(storageToken);
 
-    var response = await http.get(Uri.parse(baseURLAPI + "profile"), headers: {
+    var response =
+        await http.get(Uri.parse(baseURLAPI + "users/profile"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "bearer $token",
     });
 
     if (response.statusCode == 200) {
-      return ProfileModel.fromJson(jsonDecode(response.body)['data']);
+      return response;
     } else {
       throw Exception(false);
     }
