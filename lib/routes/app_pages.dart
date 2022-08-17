@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/authentication/authentication.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/landing/landing.dart';
+import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
 
 part './app_routes.dart';
@@ -31,5 +32,9 @@ class AppPages {
         name: RoutesName.dashboard,
         page: () => DashboardView(),
         binding: DashboardBinding()),
+    GetPage(
+        name: RoutesName.navigation,
+        page: () => NavigationView(),
+        binding: NavigationBinding()),
   ];
 }

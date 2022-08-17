@@ -62,7 +62,7 @@ class RegisterController extends GetxController {
             Icons.check,
             color: Colors.white,
           ));
-      Get.offAllNamed(RoutesName.dashboard);
+      Get.offAllNamed(RoutesName.navigation);
     } else {
       isLoading = false;
       Map<String, dynamic> error = jsonDecode(register_response.body);

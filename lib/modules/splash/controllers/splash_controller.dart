@@ -15,7 +15,7 @@ class SplashController extends GetxController {
       () {},
     );
     Storage.hasData('token')
-        ? Get.offAllNamed(RoutesName.dashboard)
+        ? Get.offAllNamed(RoutesName.navigation)
         : Get.offAllNamed(RoutesName.landing);
   }
 }
