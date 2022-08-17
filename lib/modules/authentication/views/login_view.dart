@@ -3,6 +3,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -27,8 +28,7 @@ class LoginView extends StatelessWidget {
                       IconBack(
                         blueMode: true,
                         onTap: () {
-                          // Navigator.pushNamed(
-                          //     context, LandingScreen.routeName);
+                          Get.back();
                         },
                       )
                     ],
@@ -167,8 +167,7 @@ class LoginView extends StatelessWidget {
                                   color: kPrimary,
                                   fontWeight: bold)),
                           onPressed: () {
-                            // Navigator.pushReplacementNamed(
-                            //     context, RegisterScreen.routeName);
+                            Get.toNamed(RoutesName.register);
                           }),
                     ],
                   ),

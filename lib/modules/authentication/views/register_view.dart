@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/register_controller.dart';
+import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -27,7 +28,7 @@ class RegisterView extends StatelessWidget {
                       IconBack(
                         blueMode: true,
                         onTap: () {
-                          // Navigator.pushNamed(context, LandingScreen.routeName);
+                          Get.back();
                         },
                       ),
                     ],
@@ -140,52 +141,52 @@ class RegisterView extends StatelessWidget {
                                     fontWeight: bold,
                                     color: kBlack),
                               ),
-                              Obx(
-                                () => Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Radio(
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Obx(
+                                        () => Radio(
                                           value: "male",
-                                          groupValue:
-                                              controller.genderTextController,
+                                          groupValue: controller
+                                              .genderTextController.value,
                                           onChanged: (value) {
                                             controller.genderTextController
                                                 .value = value as String;
                                           },
                                         ),
-                                        Text(
-                                          "Laki-Laki",
-                                          style:
-                                              kOpenSans.copyWith(fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 2.5.w,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Radio(
+                                      ),
+                                      Text(
+                                        "Laki-Laki",
+                                        style: kOpenSans.copyWith(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 2.5.w,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Obx(
+                                        () => Radio(
                                           value: "female",
-                                          groupValue:
-                                              controller.genderTextController,
+                                          groupValue: controller
+                                              .genderTextController.value,
                                           onChanged: (value) {
                                             controller.genderTextController
                                                 .value = value as String;
                                           },
                                         ),
-                                        Text(
-                                          "Perempuan",
-                                          style:
-                                              kOpenSans.copyWith(fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      Text(
+                                        "Perempuan",
+                                        style: kOpenSans.copyWith(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -229,15 +230,15 @@ class RegisterView extends StatelessWidget {
                           style: kOpenSans.copyWith(
                               fontSize: 12, color: kBlack, fontWeight: light)),
                       TextButton(
-                          child: Text('Masuk',
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  color: kPrimary,
-                                  fontWeight: bold)),
-                          onPressed: () {
-                            // Navigator.pushReplacementNamed(
-                            //     context, LoginScreen.routeName);
-                          }),
+                        child: Text('Masuk',
+                            style: kOpenSans.copyWith(
+                                fontSize: 12,
+                                color: kPrimary,
+                                fontWeight: bold)),
+                        onPressed: () {
+                          Get.toNamed(RoutesName.login);
+                        },
+                      ),
                     ],
                   ),
                 ],

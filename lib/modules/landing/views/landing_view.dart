@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LandingView extends StatelessWidget {
@@ -93,7 +95,9 @@ class LandingView extends StatelessWidget {
                                 end: Alignment.centerRight,
                                 colors: [kPrimary, kPurple])),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(RoutesName.login);
+                          },
                           child: Text(
                             "Masuk",
                             style: kOpenSans.copyWith(
@@ -114,7 +118,9 @@ class LandingView extends StatelessWidget {
                               fontWeight: semibold,
                               color: kPrimary),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(RoutesName.register);
+                        },
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           side: const BorderSide(color: kPrimary),
