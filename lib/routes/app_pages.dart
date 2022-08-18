@@ -4,7 +4,9 @@ import 'package:pawang_mobile/modules/authentication/authentication.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/landing/landing.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
+import 'package:pawang_mobile/modules/profile/profile.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
+import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
 
 part './app_routes.dart';
@@ -45,5 +47,17 @@ class AppPages {
         name: RoutesName.validationscan,
         page: () => ValidationScanView(),
         binding: ValidationScanBinding()),
+    GetPage(
+        name: RoutesName.settings,
+        page: () => SettingsView(),
+        binding: SettingsBinding()),
+    GetPage(
+        name: RoutesName.editprofile,
+        page: () => EditProfileView(),
+        binding: EditProfileBinding()),
+    GetPage(
+        name: RoutesName.changepassword,
+        page: () => ChangePasswordView(),
+        binding: ChangePasswordBinding()),
   ];
 }

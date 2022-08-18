@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/controllers/navigation_controller.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
+import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -15,7 +16,7 @@ class NavigationView extends StatelessWidget {
         builder: (c) {
           return IndexedStack(
             index: c.tabIndex,
-            children: [DashboardView(), ScanReceipeView()],
+            children: [DashboardView(), ScanReceipeView(), SettingsView()],
           );
         },
       ),
