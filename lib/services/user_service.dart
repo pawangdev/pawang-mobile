@@ -60,33 +60,36 @@ class UserService {
     }
   }
 
-  Future<bool> userUpdateProfile(Map<String, dynamic> data) async {
-    final token = Storage.getValue(storageToken);
+  static Future<UserProfileDataModel?> userUpdateProfile(
+      Map<String, dynamic> input) async {
+    try {
+      final token = Storage.getValue(storageToken);
 
-    var request = http.MultipartRequest(
-        "POST", Uri.parse(baseURLAPI + "profile/change-profile"));
-    request.headers.addAll({
-      'Authorization': "Bearer $token",
-    });
+      var data = <String, dynamic>{
+        'name': input['name'],
+        'phone': input['phone'],
+        'gender': input['gender'],
+      };
 
-    if (data['image'] == null) {
-      request.fields['name'] = data['name'];
-    } else {
-      request.fields['name'] = data['name'];
-      request.files.add(http.MultipartFile(
-        "image",
-        file.File(data['image']).readAsBytes().asStream(),
-        file.File(data['image']).lengthSync(),
-        filename: data['image'].toString().split("/").last,
-      ));
-    }
+      var response = await http
+          .put(Uri.parse(baseURLAPI + "users/change-profile"),
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': "bearer $token",
+              },
+              body: jsonEncode(data))
+          .timeout(
+            const Duration(seconds: 10),
+            onTimeout: () => throw TimeoutException("Connection Time Out"),
+          );
 
-    var response = await request.send();
-
-    if (response.reasonPhrase == "OK") {
-      return true;
-    } else {
-      return false;
+      if (response.statusCode == 200) {
+        return UserProfileDataModel.fromJson(jsonDecode(response.body)['data']);
+      } else {
+        throw jsonDecode(response.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 

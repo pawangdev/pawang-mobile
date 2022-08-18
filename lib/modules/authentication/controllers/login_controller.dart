@@ -48,7 +48,7 @@ class LoginController extends GetxController {
           icon: const Icon(
             Icons.cancel,
             color: Colors.white,
-          ));
+          ),);
       print(e);
     }
   }

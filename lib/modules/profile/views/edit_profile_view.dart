@@ -119,7 +119,8 @@ class EditProfileView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    Obx(
+                      () => SizedBox(
                         height: 13.8.h,
                         width: 28.w,
                         child: Image.asset(dashboardController
@@ -128,7 +129,9 @@ class EditProfileView extends StatelessWidget {
                             ? "assets/images/man.png"
                             : dashboardController.user.value.gender == "female"
                                 ? "assets/images/woman.png"
-                                : "assets/images/white.jpg")),
+                                : "assets/images/white.jpg"),
+                      ),
+                    ),
                     SizedBox(height: 2.4.h),
                   ],
                 ),
@@ -137,10 +140,85 @@ class EditProfileView extends StatelessWidget {
                 ),
                 Form(
                   key: controller.formKey,
-                  child: InputField(
-                      validator: ValidationBuilder(localeName: 'id').build(),
-                      inputLabel: 'Nama Lengkap',
-                      inputController: controller.nameTextController),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InputField(
+                          validator:
+                              ValidationBuilder(localeName: 'id').build(),
+                          inputLabel: 'Nama Lengkap',
+                          inputController: controller.nameTextController),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      InputField(
+                          validator:
+                              ValidationBuilder(localeName: 'id').build(),
+                          inputLabel: 'Nomer Telepon',
+                          inputController: controller.phoneTextController),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Jenis Kelamin",
+                        style: kOpenSans.copyWith(
+                            fontSize: 12,
+                            // 0.21.dp,
+                            fontWeight: bold,
+                            color: kBlack),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Obx(
+                                () => Radio(
+                                  value: "male",
+                                  groupValue:
+                                      controller.genderTextController.value,
+                                  onChanged: (value) {
+                                    controller.genderTextController.value =
+                                        value as String;
+                                  },
+                                ),
+                              ),
+                              Text(
+                                "Laki-Laki",
+                                style: kOpenSans.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 2.5.w,
+                          ),
+                          Row(
+                            children: [
+                              Obx(
+                                () => Radio(
+                                  value: "female",
+                                  groupValue:
+                                      controller.genderTextController.value,
+                                  onChanged: (value) {
+                                    controller.genderTextController.value =
+                                        value as String;
+                                  },
+                                ),
+                              ),
+                              Text(
+                                "Perempuan",
+                                style: kOpenSans.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -186,7 +264,7 @@ class EditProfileView extends StatelessWidget {
                                   const EdgeInsets.symmetric(vertical: 15),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () => controller.updateProfile(),
                               child: Text(
                                 "Simpan Perubahan",
                                 style: kOpenSans.copyWith(

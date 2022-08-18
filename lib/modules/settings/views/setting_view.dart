@@ -243,6 +243,16 @@ class SettingsView extends StatelessWidget {
                                             fontSize: 14),
                                       ),
                                       onPressed: () async {
+                                        Get.snackbar(
+                                          'Sukses !',
+                                          "Berhasil Keluar",
+                                          backgroundColor: Colors.green,
+                                          colorText: Colors.white,
+                                          icon: const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          ),
+                                        );
                                         Storage.removeValue("token").then(
                                             (value) => Get.offAllNamed(
                                                 RoutesName.landing));
