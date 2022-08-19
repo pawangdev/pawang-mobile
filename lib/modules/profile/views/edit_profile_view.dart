@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/profile/controllers/edit_profile_controller.dart';
+import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
@@ -139,7 +140,7 @@ class EditProfileView extends StatelessWidget {
                   height: 4.4.h,
                 ),
                 Form(
-                  key: controller.formKey,
+                  key: Key('edit-profile'),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -236,8 +237,7 @@ class EditProfileView extends StatelessWidget {
                                 color: kPrimary),
                           ),
                           onPressed: () {
-                            // Navigator.pushNamed(
-                            //     context, ChangePasswordScreen.routeName);
+                            Get.toNamed(RoutesName.changepassword);
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 15),

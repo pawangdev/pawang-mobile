@@ -1,22 +1,14 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/services/user_service.dart';
+import 'package:pawang_mobile/modules/profile/controllers/change_password_controller.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
-import 'package:pawang_mobile/widgets/loading.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ChangePasswordView extends StatelessWidget {
-  final TextEditingController passwordNowTextController =
-      TextEditingController();
-  final TextEditingController passwordNewTextController =
-      TextEditingController();
-  final TextEditingController passwordNewConfirmationTextController =
-      TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  final ChangePasswordController controller = Get.find();
 
   // void _submit() {
   //   final form = formKey.currentState;
@@ -82,104 +74,104 @@ class ChangePasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _isLoading
-            ? const Loading()
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconBack(
+                      blueMode: true,
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
+                  Text(
+                    "Ganti Password",
+                    style: kOpenSans.copyWith(
+                        fontSize: 16, fontWeight: bold, color: kBlack),
+                  ),
+                  SizedBox(
+                    width: 7.2.w,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 4.4.h,
+              ),
+              Form(
+                key: Key('change-password'),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconBack(
-                            blueMode: true,
-                            onTap: () {
-                              Navigator.pop(context);
-                            }),
-                        Text(
-                          "Ganti Password",
-                          style: kOpenSans.copyWith(
-                              fontSize: 16, fontWeight: bold, color: kBlack),
-                        ),
-                        SizedBox(
-                          width: 7.2.w,
-                        )
-                      ],
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Lama',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: controller.passwordNowTextController),
+                    const SizedBox(
+                      height: 5,
                     ),
-                    SizedBox(
-                      height: 4.4.h,
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Baru',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: controller.passwordNewTextController),
+                    const SizedBox(
+                      height: 5,
                     ),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          InputField(
-                              validator:
-                                  ValidationBuilder(localeName: 'id').build(),
-                              inputLabel: 'Password Lama',
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              inputController: passwordNowTextController),
-                          InputField(
-                              validator:
-                                  ValidationBuilder(localeName: 'id').build(),
-                              inputLabel: 'Password Baru',
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              inputController: passwordNewTextController),
-                          InputField(
-                              validator:
-                                  ValidationBuilder(localeName: 'id').build(),
-                              inputLabel: 'Password Baru Konfirmasi',
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              inputController:
-                                  passwordNewConfirmationTextController),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius),
-                                    gradient: const LinearGradient(
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        colors: [kPrimary, kPurple])),
-                                child: TextButton(
-                                    style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(
-                                        const EdgeInsets.symmetric(
-                                            vertical: 15),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Simpan Perubahan",
-                                      style: kOpenSans.copyWith(
-                                        color: kWhite,
-                                        fontSize: 16,
-                                        fontWeight: bold,
-                                      ),
-                                    )),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        inputLabel: 'Password Baru Konfirmasi',
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController:
+                            controller.passwordNewConfirmationTextController),
                   ],
                 ),
               ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultBorderRadius),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [kPrimary, kPurple])),
+                          child: TextButton(
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(vertical: 15),
+                              ),
+                            ),
+                            onPressed: () => controller.updatePassword(),
+                            child: Text(
+                              "Simpan Perubahan",
+                              style: kOpenSans.copyWith(
+                                color: kWhite,
+                                fontSize: 16,
+                                fontWeight: bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

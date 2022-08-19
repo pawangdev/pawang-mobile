@@ -5,7 +5,6 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 
 class EditProfileController extends GetxController {
-  final formKey = GlobalKey<FormState>();
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController phoneTextController = TextEditingController();
   var genderTextController = ''.obs;
@@ -18,13 +17,6 @@ class EditProfileController extends GetxController {
     phoneTextController.text = dashboardController.user.value.phone;
     genderTextController.value = dashboardController.user.value.gender;
     super.onInit();
-  }
-
-  @override
-  void onClose() {
-    nameTextController.dispose();
-    phoneTextController.dispose();
-    super.onClose();
   }
 
   Future<void> updateProfile() async {
