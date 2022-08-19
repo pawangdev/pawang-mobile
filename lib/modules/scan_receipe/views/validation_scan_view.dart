@@ -11,7 +11,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class ValidationScanView extends StatelessWidget {
-  late Future<CategoriesModel> _categories;
+  // late Future<CategoriesModel> _categories;
   // late Future<WalletsModel> _wallets;
   final TextEditingController _nominalTextController = TextEditingController();
   final TextEditingController _noteTextController = TextEditingController();
@@ -127,66 +127,66 @@ class ValidationScanView extends StatelessWidget {
                         // errorText: _inputData ? null : 'Nominal wajib diisi',
                       ),
                     ),
-                    FutureBuilder(
-                      future: _categories,
-                      builder:
-                          (context, AsyncSnapshot<CategoriesModel> snapshot) {
-                        var state = snapshot.connectionState;
+                    // FutureBuilder(
+                    //   future: _categories,
+                    //   builder:
+                    //       (context, AsyncSnapshot<CategoriesModel> snapshot) {
+                    //     var state = snapshot.connectionState;
 
-                        if (state != ConnectionState.done) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kategori",
-                                style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    //0.21.dp,
-                                    fontWeight: bold,
-                                    color: kBlack),
-                              ),
-                              SizedBox(
-                                height: 1.4.h,
-                              ),
-                              SkeletonAnimation(
-                                borderRadius: BorderRadius.circular(8.0),
-                                shimmerColor: Colors.white70,
-                                child: Container(
-                                  margin: const EdgeInsets.only(bottom: 20),
-                                  padding: const EdgeInsets.all(10.0),
-                                  height: 4.8.h,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    color: Colors.grey.withOpacity(0.5),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          if (snapshot.hasData) {
-                            return Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              child: DropdownField(
-                                  value: _categoryID,
-                                  inputLabel: "Kategori",
-                                  hint: "Pilih Kategori",
-                                  data: snapshot.data!.data,
-                                  onChange: (value) {
-                                    // setState(() {
-                                    //   _categoryID = int.parse(value.toString());
-                                    // });
-                                  }),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("");
-                          } else {
-                            return Text("");
-                          }
-                        }
-                      },
-                    ),
+                    //     if (state != ConnectionState.done) {
+                    //       return Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             "Kategori",
+                    //             style: kOpenSans.copyWith(
+                    //                 fontSize: 12,
+                    //                 //0.21.dp,
+                    //                 fontWeight: bold,
+                    //                 color: kBlack),
+                    //           ),
+                    //           SizedBox(
+                    //             height: 1.4.h,
+                    //           ),
+                    //           SkeletonAnimation(
+                    //             borderRadius: BorderRadius.circular(8.0),
+                    //             shimmerColor: Colors.white70,
+                    //             child: Container(
+                    //               margin: const EdgeInsets.only(bottom: 20),
+                    //               padding: const EdgeInsets.all(10.0),
+                    //               height: 4.8.h,
+                    //               width: MediaQuery.of(context).size.width,
+                    //               decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(8.0),
+                    //                 color: Colors.grey.withOpacity(0.5),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       );
+                    //     } else {
+                    //       if (snapshot.hasData) {
+                    //         return Container(
+                    //           margin: const EdgeInsets.only(bottom: 20),
+                    //           child: DropdownField(
+                    //               value: _categoryID,
+                    //               inputLabel: "Kategori",
+                    //               hint: "Pilih Kategori",
+                    //               data: snapshot.data!.data,
+                    //               onChange: (value) {
+                    //                 // setState(() {
+                    //                 //   _categoryID = int.parse(value.toString());
+                    //                 // });
+                    //               }),
+                    //         );
+                    //       } else if (snapshot.hasError) {
+                    //         return Text("");
+                    //       } else {
+                    //         return Text("");
+                    //       }
+                    //     }
+                    //   },
+                    // ),
                     // FutureBuilder(
                     //   future: _wallets,
                     //   builder: (context, AsyncSnapshot<WalletsModel> snapshot) {

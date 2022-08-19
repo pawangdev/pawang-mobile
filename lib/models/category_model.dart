@@ -1,18 +1,17 @@
 // To parse this JSON data, do
 //
-//     final categoriesModel = categoriesModelFromJson(jsonString);
+//     final categoryModel = categoryModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-CategoriesModel categoriesModelFromJson(String str) =>
-    CategoriesModel.fromJson(json.decode(str));
+CategoryModel categoryModelFromJson(String str) =>
+    CategoryModel.fromJson(json.decode(str));
 
-String categoriesModelToJson(CategoriesModel data) =>
-    json.encode(data.toJson());
+String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
-class CategoriesModel {
-  CategoriesModel({
+class CategoryModel {
+  CategoryModel({
     required this.success,
     required this.message,
     required this.data,
@@ -20,14 +19,13 @@ class CategoriesModel {
 
   bool success;
   String message;
-  List<CategoryModel> data;
+  List<CategoryDataModel> data;
 
-  factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
-      CategoriesModel(
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         success: json["success"],
         message: json["message"],
-        data: List<CategoryModel>.from(
-            json["data"].map((x) => CategoryModel.fromJson(x))),
+        data: List<CategoryDataModel>.from(
+            json["data"].map((x) => CategoryDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,31 +35,32 @@ class CategoriesModel {
       };
 }
 
-class CategoryModel {
-  CategoryModel({
+class CategoryDataModel {
+  CategoryDataModel({
     required this.id,
     required this.name,
-    required this.iconUrl,
-    required this.userId,
+    required this.icon,
     required this.type,
+    required this.subCategories,
     required this.createdAt,
     required this.updatedAt,
   });
 
   int id;
   String name;
-  String iconUrl;
-  int userId;
+  String icon;
   String type;
+  dynamic subCategories;
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+  factory CategoryDataModel.fromJson(Map<String, dynamic> json) =>
+      CategoryDataModel(
         id: json["id"],
         name: json["name"],
-        iconUrl: json["icon_url"],
-        userId: json["user_id"],
+        icon: json["icon"],
         type: json["type"],
+        subCategories: json["sub_categories"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -69,9 +68,9 @@ class CategoryModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "icon_url": iconUrl,
-        "user_id": userId,
+        "icon": icon,
         "type": type,
+        "sub_categories": subCategories,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

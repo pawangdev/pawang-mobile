@@ -53,8 +53,6 @@ class DashboardController extends GetxController {
   }
 
   Future<void> getTransactions() async {
-    print(transactions.length);
-
     try {
       var transactionsResponse = await TransactionService.getTransactions();
       if (transactionsResponse != null) {

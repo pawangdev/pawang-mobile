@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 import 'package:pawang_mobile/modules/authentication/authentication.dart';
+import 'package:pawang_mobile/modules/category/bindings/category_binding.dart';
+import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/landing/landing.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
@@ -8,6 +10,10 @@ import 'package:pawang_mobile/modules/profile/profile.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
+import 'package:pawang_mobile/modules/transaction/bindings/transaction_binding.dart';
+import 'package:pawang_mobile/modules/transaction/views/add_income_view.dart';
+import 'package:pawang_mobile/modules/wallet/views/add_wallet_view.dart';
+import 'package:pawang_mobile/modules/wallet/wallet.dart';
 
 part './app_routes.dart';
 
@@ -59,5 +65,25 @@ class AppPages {
         name: RoutesName.changepassword,
         page: () => ChangePasswordView(),
         binding: ChangePasswordBinding()),
+    GetPage(
+        name: RoutesName.addincome,
+        page: () => AddIncomeView(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.addoutcome,
+        page: () => AddIncomeView(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.wallet,
+        page: () => WalletView(),
+        binding: WalletBinding()),
+    GetPage(
+        name: RoutesName.addwallet,
+        page: () => AddWalletView(),
+        binding: WalletBinding()),
+    GetPage(
+        name: RoutesName.category,
+        page: () => CategoryView(),
+        binding: CategoryBinding()),
   ];
 }

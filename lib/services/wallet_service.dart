@@ -27,9 +27,8 @@ class WalletService {
     }
   }
 
-  Future<bool> createWallet(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<bool> createWallet(Map<String, dynamic> data) async {
+    final token = Storage.getValue(storageToken);
 
     var dataWallet = <String, dynamic>{
       'name': data['name'],
@@ -46,13 +45,13 @@ class WalletService {
     if (response.statusCode == 201) {
       return true;
     } else {
-      throw Exception(false);
+      throw jsonDecode(response.body)['message'];
     }
   }
 
-  Future<bool> updateWallet(Map<String, dynamic> data, int idWallet) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<bool> updateWallet(
+      Map<String, dynamic> data, int idWallet) async {
+    final token = Storage.getValue(storageToken);
 
     var dataWallet = <String, dynamic>{
       'name': data['name'],
@@ -60,7 +59,7 @@ class WalletService {
     };
 
     var response = await http.put(
-        Uri.parse(baseURLAPI + "wallets/$idWallet/update"),
+        Uri.parse(baseURLAPI + "wallets/update/$idWallet"),
         body: jsonEncode(dataWallet),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -70,16 +69,15 @@ class WalletService {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw Exception(false);
+      throw jsonDecode(response.body)['message'];
     }
   }
 
-  Future<bool> deleteWallet(int idWallet) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+  static Future<bool> deleteWallet(int idWallet) async {
+    final token = Storage.getValue(storageToken);
 
     var response = await http
-        .delete(Uri.parse(baseURLAPI + "wallets/$idWallet/delete"), headers: {
+        .delete(Uri.parse(baseURLAPI + "wallets/delete/$idWallet"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });
@@ -87,7 +85,7 @@ class WalletService {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw Exception(false);
+      throw jsonDecode(response.body)['message'];
     }
   }
 }

@@ -6,10 +6,11 @@ import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
-import 'package:pawang_mobile/modules/category/views/kategori_screen.dart';
+import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
@@ -232,8 +233,7 @@ class DashboardView extends StatelessWidget {
                             icon: 'assets/images/pemasukan.png',
                             title: 'Pemasukan',
                             onTap: () {
-                              // Navigator.pushNamed(
-                              //     context, TambahPemasukanScreen.routeName);
+                              Get.toNamed(RoutesName.addincome);
                             },
                           ),
                           LayananCard(
@@ -248,16 +248,14 @@ class DashboardView extends StatelessWidget {
                             icon: 'assets/images/wallet.png',
                             title: 'Dompet',
                             onTap: () {
-                              // Navigator.pushNamed(
-                              //     context, WalletScreen.routeName);
+                              Get.toNamed(RoutesName.wallet);
                             },
                           ),
                           LayananCard(
                             icon: 'assets/images/kategori.png',
                             title: 'Kategori',
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, KategoriScreen.routeName);
+                              Get.toNamed(RoutesName.category);
                             },
                           ),
                         ],

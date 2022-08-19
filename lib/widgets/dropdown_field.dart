@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -37,19 +38,21 @@ class DropdownField extends StatelessWidget {
             borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: DropdownButton(
-              value: value,
-              hint: Text(hint.toString()),
-              underline: Container(),
-              isExpanded: true,
-              dropdownColor: const Color(0xFFF5F5F5),
-              items: data
-                  .map((e) => DropdownMenuItem(
-                        child: Text(e.name),
-                        value: e.id,
-                      ))
-                  .toList(),
-              onChanged: onChange),
+          child: Obx(
+            () => DropdownButton(
+                value: value,
+                hint: Text(hint.toString()),
+                underline: Container(),
+                isExpanded: true,
+                dropdownColor: const Color(0xFFF5F5F5),
+                items: data
+                    .map((e) => DropdownMenuItem(
+                          child: Text(e.name),
+                          value: e.id,
+                        ))
+                    .toList(),
+                onChanged: onChange),
+          ),
         ),
       ),
     ]);
