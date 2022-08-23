@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -33,7 +32,7 @@ class LayananCard extends StatelessWidget {
                 //0.18.dp
                 fontSize: 10,
                 fontWeight: bold,
-                color: kWhite),
+                color: defaultWhite),
           ),
         ],
       ),

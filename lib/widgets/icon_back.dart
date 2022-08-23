@@ -18,13 +18,13 @@ class IconBack extends StatelessWidget {
               height: 3.6.h,
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                border: Border.all(color: kPrimary),
+                border: Border.all(color: defaultPrimary),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 12,
-                color: kPrimary,
+                color: defaultPrimary,
               ),
             ),
             onTap: onTap,
@@ -35,13 +35,13 @@ class IconBack extends StatelessWidget {
               height: 3.6.h,
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                border: Border.all(color: kWhite),
+                border: Border.all(color: defaultWhite),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 12,
-                color: kWhite,
+                color: defaultWhite,
               ),
             ),
             onTap: onTap,

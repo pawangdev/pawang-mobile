@@ -48,7 +48,7 @@ class SettingsView extends StatelessWidget {
                   child: Text(
                     "Pengaturan",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                 ),
                 SizedBox(
@@ -76,7 +76,7 @@ class SettingsView extends StatelessWidget {
                               style: kOpenSans.copyWith(
                                   fontSize: 14,
                                   fontWeight: bold,
-                                  color: kBlack),
+                                  color: defaultBlack),
                             )
                           : SkeletonAnimation(
                               borderRadius: BorderRadius.circular(8.0),
@@ -116,14 +116,14 @@ class SettingsView extends StatelessWidget {
                                     ),
                                     child: const Icon(
                                       Icons.edit_rounded,
-                                      color: kWhite,
+                                      color: defaultWhite,
                                       size: 20,
                                     ),
                                   ),
                                 ),
                                 Text('Edit Profil',
                                     style: kOpenSans.copyWith(
-                                        fontSize: 14, fontWeight: semibold))
+                                        fontSize: 14, fontWeight: semiBold))
                               ],
                             ),
                             const Icon(
@@ -137,7 +137,7 @@ class SettingsView extends StatelessWidget {
                         }),
                     SizedBox(
                       child: Divider(
-                        color: kGray,
+                        color: defaultGray,
                         height: 0.05.h,
                       ),
                       height: 2.8.h,
@@ -155,19 +155,19 @@ class SettingsView extends StatelessWidget {
                                   height: 4.h,
                                   width: 8.3.w,
                                   decoration: BoxDecoration(
-                                    color: kPurple,
+                                    color: defaultPurple,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: const Icon(
                                     Icons.logout_rounded,
-                                    color: kWhite,
+                                    color: defaultWhite,
                                     size: 20,
                                   ),
                                 ),
                               ),
                               Text('Keluar',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 14, fontWeight: semibold))
+                                      fontSize: 14, fontWeight: semiBold))
                             ],
                           ),
                           const Icon(
@@ -207,7 +207,7 @@ class SettingsView extends StatelessWidget {
                                         style: kOpenSans.copyWith(
                                             fontSize: 14,
                                             fontWeight: medium,
-                                            color: kPrimary),
+                                            color: defaultPrimary),
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -215,7 +215,8 @@ class SettingsView extends StatelessWidget {
                                       style: OutlinedButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4),
-                                        side: const BorderSide(color: kPrimary),
+                                        side: const BorderSide(
+                                            color: defaultPrimary),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8)),
@@ -227,7 +228,8 @@ class SettingsView extends StatelessWidget {
                                     child: ElevatedButton(
                                       style: ButtonStyle(
                                         backgroundColor:
-                                            MaterialStateProperty.all(kPrimary),
+                                            MaterialStateProperty.all(
+                                                defaultPrimary),
                                         shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                             borderRadius:
@@ -238,7 +240,7 @@ class SettingsView extends StatelessWidget {
                                       child: Text(
                                         'Keluar',
                                         style: kOpenSans.copyWith(
-                                            color: kWhite,
+                                            color: defaultWhite,
                                             fontWeight: medium,
                                             fontSize: 14),
                                       ),
@@ -273,7 +275,7 @@ class SettingsView extends StatelessWidget {
                     ),
                     SizedBox(
                       child: Divider(
-                        color: kGray,
+                        color: defaultGray,
                         height: 0.05.h,
                       ),
                       height: 2.8.h,

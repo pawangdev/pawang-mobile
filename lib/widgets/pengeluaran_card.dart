@@ -22,7 +22,7 @@ class CardPengeluaran extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: kBlack.withOpacity(0.07),
+                color: defaultBlack.withOpacity(0.07),
                 spreadRadius: 2,
                 blurRadius: 10,
               )
@@ -37,7 +37,7 @@ class CardPengeluaran extends StatelessWidget {
                   height: 3.4.h,
                   width: 7.2.w,
                   decoration: const BoxDecoration(
-                      color: kSecondary,
+                      color: defaultSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: SvgPicture.network(
                     baseHOSTAPI + data.category.icon,
@@ -59,7 +59,7 @@ class CardPengeluaran extends StatelessWidget {
                           style: kOpenSans.copyWith(
                             //0.22.dp
                             fontSize: 16,
-                            fontWeight: semibold,
+                            fontWeight: semiBold,
                           ),
                         ),
                         // TANGGAL
@@ -70,7 +70,7 @@ class CardPengeluaran extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
                             fontSize: 14,
-                            color: kGray.withOpacity(0.9),
+                            color: defaultGray.withOpacity(0.9),
                           ),
                         ),
                       ],

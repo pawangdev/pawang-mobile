@@ -39,7 +39,7 @@ class WalletView extends StatelessWidget {
                       gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [kPrimary, kPurple])),
+                          colors: [defaultPrimary, defaultPurple])),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
@@ -57,7 +57,7 @@ class WalletView extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/images/wallet.svg',
-                            color: kWhite,
+                            color: defaultWhite,
                           ),
                           SizedBox(
                             height: 1.h,
@@ -66,8 +66,8 @@ class WalletView extends StatelessWidget {
                             'Dompet',
                             style: kOpenSans.copyWith(
                                 fontSize: 16,
-                                fontWeight: semibold,
-                                color: kWhite),
+                                fontWeight: semiBold,
+                                color: defaultWhite),
                           ),
                         ],
                       ),
@@ -107,7 +107,7 @@ class WalletView extends StatelessWidget {
           Get.toNamed(RoutesName.addwallet);
         },
         tooltip: 'Tambah Dompet',
-        splashColor: kPrimary,
+        splashColor: defaultPrimary,
         child: Container(
           height: 60,
           width: 60,
@@ -116,7 +116,7 @@ class WalletView extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [kPrimary, kPurple])),
+                  colors: [defaultPrimary, defaultPurple])),
           child: const Icon(Icons.add),
         ),
       ),

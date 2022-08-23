@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:pawang_mobile/modules/authentication/authentication.dart';
 import 'package:pawang_mobile/modules/category/bindings/category_binding.dart';
 import 'package:pawang_mobile/modules/category/views/category_view.dart';

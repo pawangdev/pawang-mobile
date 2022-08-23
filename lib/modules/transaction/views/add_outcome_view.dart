@@ -71,7 +71,7 @@
 //               ),
 //               margin: const EdgeInsets.all(8),
 //               borderRadius: BorderRadius.circular(8),
-//               backgroundColor: kSuccess,
+//               backgroundColor: defaultSuccess,
 //               duration: const Duration(seconds: 3),
 //             ).show(context);
 //           } else {
@@ -87,7 +87,7 @@
 //               ),
 //               margin: const EdgeInsets.all(8),
 //               borderRadius: BorderRadius.circular(8),
-//               backgroundColor: kError,
+//               backgroundColor: defaultError,
 //               duration: const Duration(seconds: 3),
 //             ).show(context);
 //           }
@@ -136,7 +136,7 @@
 //                         Text(
 //                           "Tambah Pengeluaran",
 //                           style: kOpenSans.copyWith(
-//                               fontSize: 16, fontWeight: bold, color: kBlack),
+//                               fontSize: 16, fontWeight: bold, color: defaultBlack),
 //                         ),
 //                         Container(width: 7.2.w),
 //                       ],
@@ -175,7 +175,7 @@
 //                                           fontSize: 12,
 //                                           //0.21.dp,
 //                                           fontWeight: bold,
-//                                           color: kBlack),
+//                                           color: defaultBlack),
 //                                     ),
 //                                     SizedBox(
 //                                       height: 1.4.h,
@@ -239,7 +239,7 @@
 //                                           fontSize: 12,
 //                                           //0.21.dp,
 //                                           fontWeight: bold,
-//                                           color: kBlack),
+//                                           color: defaultBlack),
 //                                     ),
 //                                     SizedBox(
 //                                       height: 1.4.h,
@@ -335,11 +335,11 @@
 //                           child: Container(
 //                             decoration: BoxDecoration(
 //                                 borderRadius:
-//                                     BorderRadius.circular(kDefaultBorderRadius),
+//                                     BorderRadius.circular(defaultBorderRadius),
 //                                 gradient: const LinearGradient(
 //                                     begin: Alignment.centerLeft,
 //                                     end: Alignment.centerRight,
-//                                     colors: [kPrimary, kPurple])),
+//                                     colors: [defaultPrimary, defaultPurple])),
 //                             child: TextButton(
 //                                 style: ButtonStyle(
 //                                   padding: MaterialStateProperty.all(
@@ -350,7 +350,7 @@
 //                                 child: Text(
 //                                   "Simpan Pengeluaran",
 //                                   style: kOpenSans.copyWith(
-//                                     color: kWhite,
+//                                     color: defaultWhite,
 //                                     fontSize: 16,
 //                                     fontWeight: bold,
 //                                   ),

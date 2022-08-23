@@ -23,7 +23,7 @@ class ScanReceipeView extends StatelessWidget {
                   "Scan Struk",
                   //0.253.dp
                   style: kOpenSans.copyWith(
-                      fontSize: 16, fontWeight: bold, color: kBlack),
+                      fontSize: 16, fontWeight: bold, color: defaultBlack),
                 ),
               ),
               SizedBox(
@@ -34,7 +34,7 @@ class ScanReceipeView extends StatelessWidget {
                   "Mohon atur posisi struk agar dapat terdeteksi",
                   //0.23.dp
                   textAlign: TextAlign.center,
-                  style: kOpenSans.copyWith(fontSize: 12, color: kBlack),
+                  style: kOpenSans.copyWith(fontSize: 12, color: defaultBlack),
                 ),
               ),
               SizedBox(
@@ -54,7 +54,7 @@ class ScanReceipeView extends StatelessWidget {
                               "Silahkan pilih struk terlebih dahulu",
                               //0.22.dp
                               style: kOpenSans.copyWith(
-                                  color: kGray,
+                                  color: defaultGray,
                                   fontSize: 10,
                                   fontWeight: medium),
                             ),
@@ -62,7 +62,7 @@ class ScanReceipeView extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    border: Border.all(color: kGray, width: 0.5),
+                    border: Border.all(color: defaultGray, width: 0.5),
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
@@ -78,11 +78,11 @@ class ScanReceipeView extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
-                                      kDefaultBorderRadius),
+                                      defaultBorderRadius),
                                   gradient: LinearGradient(
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
-                                      colors: [kPrimary, kPurple])),
+                                      colors: [defaultPrimary, defaultPurple])),
                               child: TextButton(
                                   child: Image.asset(
                                     'assets/images/scan3.png',
@@ -107,7 +107,7 @@ class ScanReceipeView extends StatelessWidget {
                                 children: <Widget>[
                                   Expanded(
                                     child: Divider(
-                                      color: kBlack,
+                                      color: defaultBlack,
                                       height: 0.15.h,
                                     ),
                                   ),
@@ -119,14 +119,14 @@ class ScanReceipeView extends StatelessWidget {
                                       //0.235.dp
                                       style: TextStyle(
                                         fontSize: 14,
-                                        color: kGray,
+                                        color: defaultGray,
                                         fontWeight: medium,
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: Divider(
-                                      color: kBlack,
+                                      color: defaultBlack,
                                       height: 0.15.h,
                                     ),
                                   )
@@ -144,7 +144,7 @@ class ScanReceipeView extends StatelessWidget {
                                     style: kOpenSans.copyWith(
                                         fontSize: 16,
                                         fontWeight: bold,
-                                        color: kPrimary),
+                                        color: defaultPrimary),
                                   ),
                                   onPressed: () {
                                     controller.scanReceipt(true);
@@ -152,7 +152,8 @@ class ScanReceipeView extends StatelessWidget {
                                   style: OutlinedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12),
-                                    side: const BorderSide(color: kPrimary),
+                                    side:
+                                        const BorderSide(color: defaultPrimary),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(12)),
@@ -175,7 +176,7 @@ class ScanReceipeView extends StatelessWidget {
                                     style: kOpenSans.copyWith(
                                         fontSize: 14,
                                         fontWeight: bold,
-                                        color: kPrimary),
+                                        color: defaultPrimary),
                                   ),
                                   onPressed: () {
                                     controller.resetScan();
@@ -183,10 +184,11 @@ class ScanReceipeView extends StatelessWidget {
                                   style: OutlinedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12),
-                                    side: const BorderSide(color: kPrimary),
+                                    side:
+                                        const BorderSide(color: defaultPrimary),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
-                                            kDefaultBorderRadius)),
+                                            defaultBorderRadius)),
                                   ),
                                 ),
                               ),
@@ -203,12 +205,12 @@ class ScanReceipeView extends StatelessWidget {
                                     padding: MaterialStateProperty.all(
                                       const EdgeInsets.symmetric(vertical: 12),
                                     ),
-                                    backgroundColor:
-                                        MaterialStateProperty.all(kPrimary),
+                                    backgroundColor: MaterialStateProperty.all(
+                                        defaultPrimary),
                                     shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
-                                            kDefaultBorderRadius),
+                                            defaultBorderRadius),
                                       ),
                                     ),
                                   ),
@@ -261,7 +263,7 @@ class ScanReceipeView extends StatelessWidget {
                                         ),
                                         margin: const EdgeInsets.all(8),
                                         borderRadius: BorderRadius.circular(8),
-                                        backgroundColor: kError,
+                                        backgroundColor: defaultError,
                                         duration: const Duration(seconds: 3),
                                       ).show(context);
                                     }

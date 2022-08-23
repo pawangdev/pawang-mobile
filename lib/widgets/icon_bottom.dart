@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconBottomBar extends StatelessWidget {
   const IconBottomBar(
@@ -17,7 +16,7 @@ class IconBottomBar extends StatelessWidget {
   final bool selected;
   final Function() onPressed;
 
-  final primaryColor = kPrimary;
+  final primaryColor = defaultPrimary;
 
   @override
   Widget build(BuildContext context) {

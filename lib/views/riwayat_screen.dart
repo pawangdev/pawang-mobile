@@ -39,7 +39,7 @@
 //                   child: Text(
 //                     "Riwayat",
 //                     style: kOpenSans.copyWith(
-//                         fontSize: 0.253.dp, fontWeight: bold, color: kBlack),
+//                         fontSize: 0.253.dp, fontWeight: bold, color: defaultBlack),
 //                   ),
 //                 ),
 //                 SizedBox(
@@ -71,7 +71,7 @@
 //                         style: ButtonStyle(
 //                           padding: MaterialStateProperty.all(
 //                               const EdgeInsets.all(10)),
-//                           backgroundColor: MaterialStateProperty.all(kPrimary),
+//                           backgroundColor: MaterialStateProperty.all(defaultPrimary),
 //                           shape: MaterialStateProperty.all(
 //                             RoundedRectangleBorder(
 //                               borderRadius: BorderRadius.circular(8),
@@ -106,7 +106,7 @@
 //                         style: ButtonStyle(
 //                           padding: MaterialStateProperty.all(
 //                               const EdgeInsets.all(10)),
-//                           backgroundColor: MaterialStateProperty.all(kPrimary),
+//                           backgroundColor: MaterialStateProperty.all(defaultPrimary),
 //                           shape: MaterialStateProperty.all(
 //                             RoundedRectangleBorder(
 //                               borderRadius: BorderRadius.circular(8),
@@ -150,7 +150,7 @@
 //                               child: Text(
 //                             "Anda belum memiliki pengeluaran",
 //                             style: kOpenSans.copyWith(
-//                                 color: kGray,
+//                                 color: defaultGray,
 //                                 fontSize: 0.245.dp,
 //                                 fontWeight: medium),
 //                             textAlign: TextAlign.center,
@@ -163,7 +163,7 @@
 //                             child: Text(
 //                           "Anda belum memiliki pengeluaran",
 //                           style: kOpenSans.copyWith(
-//                               color: kGray,
+//                               color: defaultGray,
 //                               fontSize: 0.245.dp,
 //                               fontWeight: medium),
 //                           textAlign: TextAlign.center,

@@ -97,11 +97,11 @@ flutter:
           weight: 400
         - asset: assets/fonts/OpenSans/OpenSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/OpenSans/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/OpenSans/OpenSans-semiBold.ttf
           weight: 600
         - asset: assets/fonts/OpenSans/OpenSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/OpenSans/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/OpenSans/OpenSans-semiBold.ttf
           weight: 800
   #   - family: Trajan Pro
   #     fonts:

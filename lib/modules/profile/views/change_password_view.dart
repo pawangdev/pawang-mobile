@@ -41,7 +41,7 @@ class ChangePasswordView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kSuccess,
+  //             backgroundColor: defaultSuccess,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         } else {
@@ -57,7 +57,7 @@ class ChangePasswordView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kError,
+  //             backgroundColor: defaultError,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         }
@@ -89,7 +89,7 @@ class ChangePasswordView extends StatelessWidget {
                   Text(
                     "Ganti Password",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(
                     width: 7.2.w,
@@ -142,11 +142,11 @@ class ChangePasswordView extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
+                                  BorderRadius.circular(defaultBorderRadius),
                               gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
-                                  colors: [kPrimary, kPurple])),
+                                  colors: [defaultPrimary, defaultPurple])),
                           child: TextButton(
                             style: ButtonStyle(
                               padding: MaterialStateProperty.all(
@@ -157,7 +157,7 @@ class ChangePasswordView extends StatelessWidget {
                             child: Text(
                               "Simpan Perubahan",
                               style: kOpenSans.copyWith(
-                                color: kWhite,
+                                color: defaultWhite,
                                 fontSize: 16,
                                 fontWeight: bold,
                               ),

@@ -14,7 +14,7 @@ class CardPengeluaran2 extends StatelessWidget {
       margin: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
       height: 8.4.h,
       decoration: BoxDecoration(
-        color: kWhite,
+        color: defaultWhite,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -43,7 +43,7 @@ class CardPengeluaran2 extends StatelessWidget {
               Expanded(
                 child: Text(
                   data.kategoriPengeluaran,
-                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semibold),
+                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semiBold),
                 ),
               ),
               //NOMINAL
@@ -52,7 +52,9 @@ class CardPengeluaran2 extends StatelessWidget {
                 child: Text(
                   "- Rp. ${data.nominalPengeluaran.toString()}",
                   style: kOpenSans.copyWith(
-                      fontSize: 12, fontWeight: semibold, color: kSecondary),
+                      fontSize: 12,
+                      fontWeight: semiBold,
+                      color: defaultSecondary),
                 ),
               ),
             ],

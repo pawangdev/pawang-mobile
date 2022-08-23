@@ -34,7 +34,7 @@ class SplashView extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [kPrimary, kPurple])),
+              colors: [defaultPrimary, defaultPurple])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -54,8 +54,8 @@ class SplashView extends StatelessWidget {
                   'Pawang version v.2.0.1',
                   style: kOpenSans.copyWith(
                     fontSize: 14,
-                    color: kWhite.withOpacity(0.75),
-                    fontWeight: semibold,
+                    color: defaultWhite.withOpacity(0.75),
+                    fontWeight: semiBold,
                   ),
                 ),
               ),

@@ -6,9 +6,9 @@ import 'package:pawang_mobile/services/wallet_service.dart';
 
 class WalletController extends GetxController {
   int idWallet = 0;
+
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController balanceTextController = TextEditingController();
-
   final DashboardController dashboardController = Get.find();
 
   @override

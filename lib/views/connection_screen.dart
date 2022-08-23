@@ -26,7 +26,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 child: Text(
                   "Oops !!",
                   style: kOpenSans.copyWith(
-                      color: kBlack, fontWeight: bold, fontSize: 20),
+                      color: defaultBlack, fontWeight: bold, fontSize: 20),
                 ),
               ),
               SizedBox(
@@ -47,7 +47,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               Text(
                 "No Internet Connection",
                 style: kOpenSans.copyWith(
-                    color: kBlack, fontSize: 16, fontWeight: bold),
+                    color: defaultBlack, fontSize: 16, fontWeight: bold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -56,7 +56,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               Text(
                 "Kamu kehilangan koneksi internet. Silahkan periksa kembali koneksi internet.",
                 style: kOpenSans.copyWith(
-                    color: kGray, fontSize: 12, fontWeight: medium),
+                    color: defaultGray, fontSize: 12, fontWeight: medium),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -64,23 +64,23 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
                     gradient: const LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [kPrimary, kPurple])),
+                        colors: [defaultPrimary, defaultPurple])),
                 child: TextButton(
                     child: Text(
                       "Coba Lagi",
                       style: kOpenSans.copyWith(
-                          fontSize: 16, fontWeight: bold, color: kWhite),
+                          fontSize: 16, fontWeight: bold, color: defaultWhite),
                     ),
                     style: ButtonStyle(
                         padding:
                             MaterialStateProperty.all(const EdgeInsets.all(16)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.circular(kDefaultBorderRadius)))),
+                                BorderRadius.circular(defaultBorderRadius)))),
                     onPressed: () {}),
               ),
             ],

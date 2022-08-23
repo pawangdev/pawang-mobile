@@ -29,7 +29,7 @@ class CategoryView extends StatelessWidget {
                       gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [kPrimary, kPurple])),
+                          colors: [defaultPrimary, defaultPurple])),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
@@ -47,7 +47,7 @@ class CategoryView extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/images/kategori.svg',
-                            color: kWhite,
+                            color: defaultWhite,
                           ),
                           SizedBox(
                             height: 1.h,
@@ -56,8 +56,8 @@ class CategoryView extends StatelessWidget {
                             'Kategori',
                             style: kOpenSans.copyWith(
                                 fontSize: 16,
-                                fontWeight: semibold,
-                                color: kWhite),
+                                fontWeight: semiBold,
+                                color: defaultWhite),
                           ),
                         ],
                       ),
@@ -92,11 +92,11 @@ class CategoryView extends StatelessWidget {
                             left: 5, right: 5, bottom: 16),
                         height: 6.4.h,
                         decoration: BoxDecoration(
-                            color: kWhite,
+                            color: defaultWhite,
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color: kBlack.withOpacity(0.07),
+                                color: defaultBlack.withOpacity(0.07),
                                 spreadRadius: 2,
                                 blurRadius: 10,
                               )
@@ -143,15 +143,15 @@ class CategoryView extends StatelessWidget {
       // floatingActionButton: Padding(
       //   padding: const EdgeInsets.all(25.0),
       //   child: FloatingActionButton(
-      //     backgroundColor: kWhite,
+      //     backgroundColor: defaultWhite,
       //     onPressed: () {
       //       Navigator.pushNamed(context, AddCategoryScreen.routeName);
       //     },
       //     tooltip: 'Tambah Kategori',
-      //     splashColor: kPrimary,
+      //     splashColor: defaultPrimary,
       //     child: Icon(
       //       Icons.add,
-      //       color: kPrimary,
+      //       color: defaultPrimary,
       //     ),
       //   ),
       // ),

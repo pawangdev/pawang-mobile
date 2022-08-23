@@ -39,7 +39,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                   Text(
                     "Tambah Kategori",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   Container(
                     width: 7.2.w,
@@ -76,11 +76,12 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                           padding: MaterialStateProperty.all(
                             const EdgeInsets.symmetric(vertical: 15),
                           ),
-                          backgroundColor: MaterialStateProperty.all(kPrimary),
+                          backgroundColor:
+                              MaterialStateProperty.all(defaultPrimary),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
+                                  BorderRadius.circular(defaultBorderRadius),
                             ),
                           ),
                         ),

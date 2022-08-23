@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/models/category_model.dart';
-import 'package:pawang_mobile/modules/category/controllers/category_controller.dart';
 import 'package:pawang_mobile/services/category_service.dart';
 
 class TransactionController extends GetxController {

@@ -27,7 +27,7 @@ class DropdownField extends StatelessWidget {
             fontSize: 12,
             //0.21.dp,
             fontWeight: bold,
-            color: kBlack),
+            color: defaultBlack),
       ),
       SizedBox(
         height: 1.4.h,
@@ -35,7 +35,7 @@ class DropdownField extends StatelessWidget {
       DecoratedBox(
         decoration: BoxDecoration(
             color: const Color(0xFFF5F5F5),
-            borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
+            borderRadius: BorderRadius.circular(defaultBorderRadius)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Obx(

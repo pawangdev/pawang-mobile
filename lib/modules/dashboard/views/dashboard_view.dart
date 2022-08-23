@@ -68,7 +68,7 @@ class DashboardView extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: kWhite, borderRadius: BorderRadius.circular(20)),
+            color: defaultWhite, borderRadius: BorderRadius.circular(20)),
         child: const Center(child: Icon(Icons.add_rounded)),
       ),
     );
@@ -82,7 +82,7 @@ class DashboardView extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [kPrimary, kPurple])),
+                colors: [defaultPrimary, defaultPurple])),
         child: Stack(children: <Widget>[
           SafeArea(
             child: Column(
@@ -100,7 +100,7 @@ class DashboardView extends StatelessWidget {
                               width: 35,
                               height: 35,
                               decoration: BoxDecoration(
-                                color: kWhite,
+                                color: defaultWhite,
                                 borderRadius: BorderRadius.circular(50.0),
                                 image: DecorationImage(
                                   image: AssetImage(controller
@@ -125,14 +125,14 @@ class DashboardView extends StatelessWidget {
                                         fontSize: 10,
                                         //0.2.dp,
                                         fontWeight: medium,
-                                        color: kWhite),
+                                        color: defaultWhite),
                                   ),
                                   controller.user.value.name != ""
                                       ? Text(controller.user.value.name,
                                           style: kOpenSans.copyWith(
                                               fontSize: 13,
                                               fontWeight: bold,
-                                              color: kWhite))
+                                              color: defaultWhite))
                                       : SkeletonAnimation(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
@@ -181,15 +181,15 @@ class DashboardView extends StatelessWidget {
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
                                     colors: [
-                                      kWhite.withOpacity(0.5),
-                                      kWhite.withOpacity(0.3),
-                                      kWhite.withOpacity(0.5)
+                                      defaultWhite.withOpacity(0.5),
+                                      defaultWhite.withOpacity(0.3),
+                                      defaultWhite.withOpacity(0.5)
                                     ]),
                                 borderRadius: BorderRadius.circular(20)),
                             child: Center(
                                 child: Icon(
                               Icons.add_rounded,
-                              color: kWhite.withOpacity(0.8),
+                              color: defaultWhite.withOpacity(0.8),
                             )),
                           ),
                         );
@@ -221,7 +221,7 @@ class DashboardView extends StatelessWidget {
                         style: kOpenSans.copyWith(
                             fontSize: 14, //0.24.dp,
                             fontWeight: bold,
-                            color: kWhite),
+                            color: defaultWhite),
                       ),
                       SizedBox(
                         height: 2.4.h,
@@ -290,7 +290,7 @@ class DashboardView extends StatelessWidget {
                                     height: 0.7.h,
                                     width: 24.w,
                                     decoration: BoxDecoration(
-                                        color: kGray.withOpacity(0.7),
+                                        color: defaultGray.withOpacity(0.7),
                                         borderRadius:
                                             BorderRadius.circular(10))),
                               ),
@@ -303,7 +303,7 @@ class DashboardView extends StatelessWidget {
                                   style: kOpenSans.copyWith(
                                       fontSize: 14,
                                       fontWeight: bold,
-                                      color: kBlack),
+                                      color: defaultBlack),
                                 ),
                               ),
                               Container(
@@ -339,7 +339,7 @@ class DashboardView extends StatelessWidget {
                                           child: Text(
                                             "Anda belum memiliki pengeluaran",
                                             style: kOpenSans.copyWith(
-                                                color: kGray,
+                                                color: defaultGray,
                                                 fontSize: 13,
                                                 fontWeight: medium),
                                             textAlign: TextAlign.center,
@@ -351,7 +351,7 @@ class DashboardView extends StatelessWidget {
                           );
                         }),
                     decoration: const BoxDecoration(
-                        color: kWhite,
+                        color: defaultWhite,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(24),
                             topRight: Radius.circular(24))),

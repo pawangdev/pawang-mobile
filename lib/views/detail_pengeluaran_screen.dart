@@ -97,7 +97,7 @@
 //                               gradient: LinearGradient(
 //                                   begin: Alignment.topCenter,
 //                                   end: Alignment.bottomCenter,
-//                                   colors: [kPrimary, kPurple])),
+//                                   colors: [defaultPrimary, defaultPurple])),
 //                         ),
 //                         Container(
 //                           padding: const EdgeInsets.only(top: 28, left: 32),
@@ -164,7 +164,7 @@
 //                                     image: NetworkImage(
 //                                         baseURLAPI + data.imageUrl),
 //                                     fit: BoxFit.cover),
-//                                 border: Border.all(color: kGray, width: 0.5),
+//                                 border: Border.all(color: defaultGray, width: 0.5),
 //                                 borderRadius: BorderRadius.circular(12),
 //                               ),
 //                             ),
@@ -247,11 +247,11 @@
 //                               child: Container(
 //                                 decoration: BoxDecoration(
 //                                     borderRadius: BorderRadius.circular(
-//                                         kDefaultBorderRadius),
+//                                         defaultBorderRadius),
 //                                     gradient: const LinearGradient(
 //                                         begin: Alignment.centerLeft,
 //                                         end: Alignment.centerRight,
-//                                         colors: [kPrimary, kPurple])),
+//                                         colors: [defaultPrimary, defaultPurple])),
 //                                 child: TextButton(
 //                                   onPressed: () {
 //                                     _nominalEditTextController.text =
@@ -271,7 +271,7 @@
 //                                       builder: (BuildContext context) {
 //                                         return Container(
 //                                           height: 85.h,
-//                                           color: kWhite,
+//                                           color: defaultWhite,
 //                                           child: Padding(
 //                                             padding: const EdgeInsets.all(20.0),
 //                                             child: Column(
@@ -398,7 +398,7 @@
 //                                                             backgroundColor:
 //                                                                 MaterialStateProperty
 //                                                                     .all(
-//                                                                         kPrimary),
+//                                                                         defaultPrimary),
 //                                                             shape:
 //                                                                 MaterialStateProperty
 //                                                                     .all(
@@ -415,7 +415,7 @@
 //                                                             style: kOpenSans
 //                                                                 .copyWith(
 //                                                                     color:
-//                                                                         kWhite,
+//                                                                         defaultWhite,
 //                                                                     fontWeight:
 //                                                                         medium,
 //                                                                     fontSize:
@@ -483,7 +483,7 @@
 //                                                                         BorderRadius
 //                                                                             .circular(8),
 //                                                                     backgroundColor:
-//                                                                         kSuccess,
+//                                                                         defaultSuccess,
 //                                                                     duration: const Duration(
 //                                                                         seconds:
 //                                                                             3),
@@ -512,7 +512,7 @@
 //                                                                         BorderRadius
 //                                                                             .circular(8),
 //                                                                     backgroundColor:
-//                                                                         kError,
+//                                                                         defaultError,
 //                                                                     duration: const Duration(
 //                                                                         seconds:
 //                                                                             3),
@@ -544,14 +544,14 @@
 //                                     children: [
 //                                       const Icon(
 //                                         Icons.edit_rounded,
-//                                         color: kWhite,
+//                                         color: defaultWhite,
 //                                         size: 20,
 //                                       ),
 //                                       SizedBox(width: 3.w),
 //                                       Text(
 //                                         "Ubah Data",
 //                                         style: kOpenSans.copyWith(
-//                                             color: kWhite,
+//                                             color: defaultWhite,
 //                                             fontSize: 16,
 //                                             fontWeight: medium),
 //                                       ),
@@ -598,7 +598,7 @@
 //                                                   style: kOpenSans.copyWith(
 //                                                       fontSize: 16,
 //                                                       fontWeight: medium,
-//                                                       color: kPrimary),
+//                                                       color: defaultPrimary),
 //                                                 ),
 //                                                 onPressed: () {
 //                                                   Navigator.pop(
@@ -608,7 +608,7 @@
 //                                                   padding: const EdgeInsets
 //                                                       .symmetric(vertical: 4),
 //                                                   side: const BorderSide(
-//                                                       color: kPrimary),
+//                                                       color: defaultPrimary),
 //                                                   shape: RoundedRectangleBorder(
 //                                                       borderRadius:
 //                                                           BorderRadius.circular(
@@ -624,7 +624,7 @@
 //                                                     padding: const EdgeInsets
 //                                                         .symmetric(vertical: 4),
 //                                                     side: const BorderSide(
-//                                                         color: kError),
+//                                                         color: defaultError),
 //                                                     shape:
 //                                                         RoundedRectangleBorder(
 //                                                             borderRadius:
@@ -635,7 +635,7 @@
 //                                                   child: Text(
 //                                                     'Hapus',
 //                                                     style: kOpenSans.copyWith(
-//                                                         color: kError,
+//                                                         color: defaultError,
 //                                                         fontWeight: medium,
 //                                                         fontSize: 16),
 //                                                   ),
@@ -674,7 +674,7 @@
 //                                                                     .circular(
 //                                                                         8),
 //                                                             backgroundColor:
-//                                                                 kSuccess,
+//                                                                 defaultSuccess,
 //                                                             duration:
 //                                                                 const Duration(
 //                                                                     seconds: 3),
@@ -700,7 +700,7 @@
 //                                                                     .circular(
 //                                                                         8),
 //                                                             backgroundColor:
-//                                                                 kError,
+//                                                                 defaultError,
 //                                                             duration:
 //                                                                 const Duration(
 //                                                                     seconds: 3),
@@ -725,14 +725,14 @@
 //                                   children: [
 //                                     const Icon(
 //                                       Icons.delete_rounded,
-//                                       color: kError,
+//                                       color: defaultError,
 //                                       size: 20,
 //                                     ),
 //                                     SizedBox(width: 3.w),
 //                                     Text(
 //                                       "Hapus Data",
 //                                       style: kOpenSans.copyWith(
-//                                           color: kError,
+//                                           color: defaultError,
 //                                           fontSize: 16,
 //                                           fontWeight: medium),
 //                                     ),
@@ -740,7 +740,7 @@
 //                                 ),
 //                                 style: OutlinedButton.styleFrom(
 //                                   padding: const EdgeInsets.all(13),
-//                                   side: const BorderSide(color: kError),
+//                                   side: const BorderSide(color: defaultError),
 //                                   shape: RoundedRectangleBorder(
 //                                       borderRadius: BorderRadius.circular(8)),
 //                                 ),

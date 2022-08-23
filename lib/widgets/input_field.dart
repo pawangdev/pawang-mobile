@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:form_validator/form_validator.dart';
 
 class InputField extends StatelessWidget {
   const InputField(
@@ -35,7 +34,7 @@ class InputField extends StatelessWidget {
             fontSize: 12,
             //0.21.dp,
             fontWeight: bold,
-            color: kBlack),
+            color: defaultBlack),
       ),
       SizedBox(
         height: 1.4.h,
@@ -53,9 +52,9 @@ class InputField extends StatelessWidget {
           fillColor: const Color(0xFFF5F5F5),
           filled: true,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+              borderRadius: BorderRadius.circular(defaultBorderRadius),
               borderSide: BorderSide.none),
-          focusColor: kPrimary,
+          focusColor: defaultPrimary,
         ),
       ),
     ]);

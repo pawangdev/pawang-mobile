@@ -33,7 +33,7 @@ class AddWalletView extends StatelessWidget {
                   Text(
                     "Tambah Dompet",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   Container(
                     width: 7.2.w,
@@ -75,11 +75,11 @@ class AddWalletView extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
+                              BorderRadius.circular(defaultBorderRadius),
                           gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [kPrimary, kPurple])),
+                              colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(
@@ -90,7 +90,7 @@ class AddWalletView extends StatelessWidget {
                           child: Text(
                             "Simpan Dompet",
                             style: kOpenSans.copyWith(
-                              color: kWhite,
+                              color: defaultWhite,
                               fontSize: 16,
                               fontWeight: bold,
                             ),

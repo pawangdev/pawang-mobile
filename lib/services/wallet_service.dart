@@ -5,7 +5,6 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/utils/storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletService {
   static Future<List<WalletsDataModel>?> getWallets() async {

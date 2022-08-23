@@ -13,10 +13,10 @@ class RegisterController extends GetxController {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final phoneTextController = TextEditingController();
-  var genderTextController = ''.obs;
   final formKey = GlobalKey<FormState>();
-
   final isObsecure = true.obs;
+
+  var genderTextController = ''.obs;
   var isLoading = false;
 
   @override

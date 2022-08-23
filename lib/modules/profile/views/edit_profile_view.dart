@@ -48,7 +48,7 @@ class EditProfileView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kSuccess,
+  //             backgroundColor: defaultSuccess,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         } else {
@@ -64,7 +64,7 @@ class EditProfileView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kError,
+  //             backgroundColor: defaultError,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         }
@@ -107,7 +107,7 @@ class EditProfileView extends StatelessWidget {
                     Text(
                       "Edit Profile",
                       style: kOpenSans.copyWith(
-                          fontSize: 16, fontWeight: bold, color: kBlack),
+                          fontSize: 16, fontWeight: bold, color: defaultBlack),
                     ),
                     SizedBox(
                       width: 7.2.w,
@@ -166,7 +166,7 @@ class EditProfileView extends StatelessWidget {
                             fontSize: 12,
                             // 0.21.dp,
                             fontWeight: bold,
-                            color: kBlack),
+                            color: defaultBlack),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -234,14 +234,14 @@ class EditProfileView extends StatelessWidget {
                             style: kOpenSans.copyWith(
                                 fontSize: 16,
                                 fontWeight: bold,
-                                color: kPrimary),
+                                color: defaultPrimary),
                           ),
                           onPressed: () {
                             Get.toNamed(RoutesName.changepassword);
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 15),
-                            side: const BorderSide(color: kPrimary),
+                            side: const BorderSide(color: defaultPrimary),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)),
                           ),
@@ -253,11 +253,11 @@ class EditProfileView extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.circular(kDefaultBorderRadius),
+                                  BorderRadius.circular(defaultBorderRadius),
                               gradient: LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
-                                  colors: [kPrimary, kPurple])),
+                                  colors: [defaultPrimary, defaultPurple])),
                           child: TextButton(
                               style: ButtonStyle(
                                 padding: MaterialStateProperty.all(
@@ -268,7 +268,7 @@ class EditProfileView extends StatelessWidget {
                               child: Text(
                                 "Simpan Perubahan",
                                 style: kOpenSans.copyWith(
-                                  color: kWhite,
+                                  color: defaultWhite,
                                   fontSize: 16,
                                   fontWeight: bold,
                                 ),

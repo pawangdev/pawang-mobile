@@ -81,7 +81,7 @@ class LoginView extends StatelessWidget {
                                     fontSize: 12,
                                     // 0.21.dp,
                                     fontWeight: bold,
-                                    color: kBlack),
+                                    color: defaultBlack),
                               ),
                               SizedBox(
                                 height: 1.5.h,
@@ -98,11 +98,11 @@ class LoginView extends StatelessWidget {
                                     filled: true,
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                            kDefaultBorderRadius),
+                                            defaultBorderRadius),
                                         borderSide: BorderSide.none),
-                                    focusColor: kPrimary,
+                                    focusColor: defaultPrimary,
                                     suffixIcon: IconButton(
-                                      color: kGray,
+                                      color: defaultGray,
                                       icon: Icon(controller.isObsecure.value
                                           ? Icons.visibility
                                           : Icons.visibility_off),
@@ -130,17 +130,17 @@ class LoginView extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
+                              BorderRadius.circular(defaultBorderRadius),
                           gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [kPrimary, kPurple])),
+                              colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
                         onPressed: () => controller.login(),
                         child: Text(
                           "Masuk",
                           style: kOpenSans.copyWith(
-                              color: kWhite,
+                              color: defaultWhite,
                               fontSize: 16,
                               //0.25.dp,
                               fontWeight: bold),
@@ -158,13 +158,13 @@ class LoginView extends StatelessWidget {
                           style: kOpenSans.copyWith(
                               fontSize: 12,
                               //0.235.dp,
-                              color: kBlack,
+                              color: defaultBlack,
                               fontWeight: light)),
                       TextButton(
                           child: Text('Daftar',
                               style: kOpenSans.copyWith(
                                   fontSize: 12,
-                                  color: kPrimary,
+                                  color: defaultPrimary,
                                   fontWeight: bold)),
                           onPressed: () {
                             Get.toNamed(RoutesName.register);

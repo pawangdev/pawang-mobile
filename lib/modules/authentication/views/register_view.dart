@@ -81,7 +81,7 @@ class RegisterView extends StatelessWidget {
                                     fontSize: 12,
                                     // 0.21.dp,
                                     fontWeight: bold,
-                                    color: kBlack),
+                                    color: defaultBlack),
                               ),
                               SizedBox(
                                 height: 1.4.h,
@@ -97,11 +97,11 @@ class RegisterView extends StatelessWidget {
                                     filled: true,
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                            kDefaultBorderRadius),
+                                            defaultBorderRadius),
                                         borderSide: BorderSide.none),
-                                    focusColor: kPrimary,
+                                    focusColor: defaultPrimary,
                                     suffixIcon: IconButton(
-                                      color: kGray,
+                                      color: defaultGray,
                                       icon: Icon(controller.isObsecure.value
                                           ? Icons.visibility
                                           : Icons.visibility_off),
@@ -140,7 +140,7 @@ class RegisterView extends StatelessWidget {
                                     fontSize: 12,
                                     // 0.21.dp,
                                     fontWeight: bold,
-                                    color: kBlack),
+                                    color: defaultBlack),
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,17 +203,17 @@ class RegisterView extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
+                              BorderRadius.circular(defaultBorderRadius),
                           gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [kPrimary, kPurple])),
+                              colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
                         onPressed: () => controller.register(),
                         child: Text(
                           "Daftar",
                           style: kOpenSans.copyWith(
-                              color: kWhite,
+                              color: defaultWhite,
                               fontSize: 16,
                               //0.25.dp,
                               fontWeight: bold),
@@ -229,12 +229,14 @@ class RegisterView extends StatelessWidget {
                     children: [
                       Text("Sudah punya akun? ",
                           style: kOpenSans.copyWith(
-                              fontSize: 12, color: kBlack, fontWeight: light)),
+                              fontSize: 12,
+                              color: defaultBlack,
+                              fontWeight: light)),
                       TextButton(
                         child: Text('Masuk',
                             style: kOpenSans.copyWith(
                                 fontSize: 12,
-                                color: kPrimary,
+                                color: defaultPrimary,
                                 fontWeight: bold)),
                         onPressed: () {
                           Get.toNamed(RoutesName.login);

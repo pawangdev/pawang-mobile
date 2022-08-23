@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
@@ -5,7 +6,6 @@ import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:get/get.dart';
 
 class WalletCard2 extends StatelessWidget {
   final WalletsDataModel wallet;
@@ -26,8 +26,8 @@ class WalletCard2 extends StatelessWidget {
           Text(
             wallet.name,
             style: kOpenSans.copyWith(
-              color: kPrimary,
-              fontWeight: semibold,
+              color: defaultPrimary,
+              fontWeight: semiBold,
               fontSize: 16,
             ),
           ),
@@ -37,7 +37,7 @@ class WalletCard2 extends StatelessWidget {
           Text(
             CurrencyFormat.convertToIdr(wallet.balance, 2),
             style: kOpenSans.copyWith(
-              color: kBlack,
+              color: defaultBlack,
               fontWeight: medium,
               fontSize: 15,
             ),
@@ -54,7 +54,7 @@ class WalletCard2 extends StatelessWidget {
                       gradient: const LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [kPrimary, kPurple])),
+                          colors: [defaultPrimary, defaultPurple])),
                   child: TextButton(
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
@@ -63,7 +63,9 @@ class WalletCard2 extends StatelessWidget {
                       child: Text(
                         'Edit Dompet',
                         style: kOpenSans.copyWith(
-                            color: kWhite, fontWeight: medium, fontSize: 16),
+                            color: defaultWhite,
+                            fontWeight: medium,
+                            fontSize: 16),
                       ),
                       onPressed: () {
                         controller.idWallet = wallet.id;
@@ -79,7 +81,7 @@ class WalletCard2 extends StatelessWidget {
                               padding: MediaQuery.of(context).viewInsets,
                               child: Container(
                                 height: 40.h,
-                                color: kWhite,
+                                color: defaultWhite,
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Column(
@@ -134,7 +136,7 @@ class WalletCard2 extends StatelessWidget {
                                                             10)),
                                                 backgroundColor:
                                                     MaterialStateProperty.all(
-                                                        kPrimary),
+                                                        defaultPrimary),
                                                 shape:
                                                     MaterialStateProperty.all(
                                                   RoundedRectangleBorder(
@@ -147,7 +149,7 @@ class WalletCard2 extends StatelessWidget {
                                               child: Text(
                                                 'Simpan Perubahan',
                                                 style: kOpenSans.copyWith(
-                                                    color: kWhite,
+                                                    color: defaultWhite,
                                                     fontWeight: medium,
                                                     fontSize: 16),
                                               ),
@@ -174,14 +176,16 @@ class WalletCard2 extends StatelessWidget {
                 child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 13),
-                      side: const BorderSide(color: kError),
+                      side: const BorderSide(color: defaultError),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                     ),
                     child: Text(
                       'Hapus Dompet',
                       style: kOpenSans.copyWith(
-                          color: kError, fontWeight: medium, fontSize: 16),
+                          color: defaultError,
+                          fontWeight: medium,
+                          fontSize: 16),
                     ),
                     onPressed: () {
                       controller.idWallet = wallet.id;
@@ -214,7 +218,7 @@ class WalletCard2 extends StatelessWidget {
                                       style: kOpenSans.copyWith(
                                           fontSize: 16,
                                           fontWeight: medium,
-                                          color: kPrimary),
+                                          color: defaultPrimary),
                                     ),
                                     onPressed: () {
                                       Navigator.pop(context, 'Kembali');
@@ -222,7 +226,8 @@ class WalletCard2 extends StatelessWidget {
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
-                                      side: const BorderSide(color: kPrimary),
+                                      side: const BorderSide(
+                                          color: defaultPrimary),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8)),
@@ -235,7 +240,8 @@ class WalletCard2 extends StatelessWidget {
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
-                                      side: const BorderSide(color: kError),
+                                      side:
+                                          const BorderSide(color: defaultError),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8)),
@@ -243,7 +249,7 @@ class WalletCard2 extends StatelessWidget {
                                     child: Text(
                                       'Hapus',
                                       style: kOpenSans.copyWith(
-                                          color: kError,
+                                          color: defaultError,
                                           fontWeight: medium,
                                           fontSize: 16),
                                     ),
@@ -264,11 +270,11 @@ class WalletCard2 extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-          color: kWhite,
+          color: defaultWhite,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           boxShadow: [
             BoxShadow(
-              color: kBlack.withOpacity(0.07),
+              color: defaultBlack.withOpacity(0.07),
               spreadRadius: 2,
               blurRadius: 10,
             )

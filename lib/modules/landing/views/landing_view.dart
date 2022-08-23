@@ -18,14 +18,18 @@ class LandingView extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 60.h,
                 decoration: const BoxDecoration(
-                    color: kPrimary,
+                    color: defaultPrimary,
                     borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(64),
                         bottomLeft: Radius.circular(64)),
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [kPrimary, kPurple, kPrimary])),
+                        colors: [
+                          defaultPrimary,
+                          defaultPurple,
+                          defaultPrimary
+                        ])),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -34,7 +38,7 @@ class LandingView extends StatelessWidget {
                       margin: EdgeInsets.only(top: 4.h),
                       child: Image.asset(
                         'assets/images/logo_pawang.png',
-                        color: kWhite.withOpacity(0.6),
+                        color: defaultWhite.withOpacity(0.6),
                         width: 40.w,
                         height: 10.h,
                       ),
@@ -65,7 +69,7 @@ class LandingView extends StatelessWidget {
                       //0.30.dp
                       fontSize: 20,
                       fontWeight: bold,
-                      color: kBlack),
+                      color: defaultBlack),
                 ),
                 SizedBox(
                   height: 0.8.h,
@@ -73,7 +77,7 @@ class LandingView extends StatelessWidget {
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
                   style: kOpenSans.copyWith(
-                      fontSize: 16, fontWeight: medium, color: kGray),
+                      fontSize: 16, fontWeight: medium, color: defaultGray),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -93,7 +97,7 @@ class LandingView extends StatelessWidget {
                             gradient: const LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
-                                colors: [kPrimary, kPurple])),
+                                colors: [defaultPrimary, defaultPurple])),
                         child: TextButton(
                           onPressed: () {
                             Get.toNamed(RoutesName.login);
@@ -101,9 +105,9 @@ class LandingView extends StatelessWidget {
                           child: Text(
                             "Masuk",
                             style: kOpenSans.copyWith(
-                                color: kWhite,
+                                color: defaultWhite,
                                 fontSize: 14,
-                                fontWeight: semibold),
+                                fontWeight: semiBold),
                           ),
                         ),
                       ),
@@ -115,15 +119,15 @@ class LandingView extends StatelessWidget {
                           "Daftar",
                           style: kOpenSans.copyWith(
                               fontSize: 14,
-                              fontWeight: semibold,
-                              color: kPrimary),
+                              fontWeight: semiBold,
+                              color: defaultPrimary),
                         ),
                         onPressed: () {
                           Get.toNamed(RoutesName.register);
                         },
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: const BorderSide(color: kPrimary),
+                          side: const BorderSide(color: defaultPrimary),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),
                         ),

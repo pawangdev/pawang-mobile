@@ -2,7 +2,6 @@
 //
 //     final walletModel = walletModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 WalletModel walletModelFromJson(String str) =>
@@ -24,7 +23,8 @@ class WalletModel {
   factory WalletModel.fromJson(Map<String, dynamic> json) => WalletModel(
         success: json["success"],
         message: json["message"],
-        data: List<WalletsDataModel>.from(json["data"].map((x) => WalletsDataModel.fromJson(x))),
+        data: List<WalletsDataModel>.from(
+            json["data"].map((x) => WalletsDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,7 +53,8 @@ class WalletsDataModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory WalletsDataModel.fromJson(Map<String, dynamic> json) => WalletsDataModel(
+  factory WalletsDataModel.fromJson(Map<String, dynamic> json) =>
+      WalletsDataModel(
         id: json["id"],
         name: json["name"],
         userId: json["user_id"],

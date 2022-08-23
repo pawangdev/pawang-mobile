@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io' as file;
+
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/constants/strings.dart';
-import 'package:pawang_mobile/models/error_model.dart';
 import 'package:pawang_mobile/models/login_model.dart';
 import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/utils/storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   static Future<http.Response> userRegister(Map<String, dynamic> data) async {

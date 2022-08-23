@@ -46,7 +46,7 @@ class AddIncomeView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kSuccess,
+  //             backgroundColor: defaultSuccess,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         } else {
@@ -62,7 +62,7 @@ class AddIncomeView extends StatelessWidget {
   //             ),
   //             margin: const EdgeInsets.all(8),
   //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: kError,
+  //             backgroundColor: defaultError,
   //             duration: const Duration(seconds: 3),
   //           ).show(context);
   //         }
@@ -108,7 +108,7 @@ class AddIncomeView extends StatelessWidget {
                   Text(
                     "Tambah Pemasukan",
                     style: kOpenSans.copyWith(
-                        fontSize: 16, fontWeight: bold, color: kBlack),
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   Container(
                     width: 7.2.w,
@@ -203,11 +203,11 @@ class AddIncomeView extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
+                              BorderRadius.circular(defaultBorderRadius),
                           gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [kPrimary, kPurple])),
+                              colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(
@@ -218,7 +218,7 @@ class AddIncomeView extends StatelessWidget {
                           child: Text(
                             "Simpan Pemasukan",
                             style: kOpenSans.copyWith(
-                              color: kWhite,
+                              color: defaultWhite,
                               fontSize: 16,
                               fontWeight: bold,
                             ),
