@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/widgets/dropdown_field.dart';
@@ -116,7 +117,7 @@ class AddIncomeView extends StatelessWidget {
                 ],
               ),
               Form(
-                key: Key('add-income'),
+                key: const Key('add-income'),
                 child: Column(
                   children: [
                     SizedBox(
@@ -134,27 +135,37 @@ class AddIncomeView extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 20),
-                      child: DropdownField(
-                          value: controller.category_id.value,
+                      child: Obx(
+                        () => DropdownField(
+                          value: controller.categoryId.value == 0
+                              ? null
+                              : controller.categoryId.value,
                           inputLabel: "Kategori",
                           hint: "Pilih Kategori",
                           data: controller.categoriesIncome,
                           onChange: (value) {
-                            controller.category_id.value =
+                            controller.categoryId.value =
                                 int.parse(value.toString());
-                          }),
+                          },
+                        ),
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 20),
-                      child: DropdownField(
-                          value: controller.wallet_id.value,
+                      child: Obx(
+                        () => DropdownField(
+                          value: controller.walletId.value == 0
+                              ? null
+                              : controller.walletId.value,
                           inputLabel: "Wallets",
                           hint: "Pilih Wallets",
                           data: dashboardController.wallets,
                           onChange: (value) {
-                            controller.wallet_id.value =
+                            controller.walletId.value =
                                 int.parse(value.toString());
-                          }),
+                          },
+                        ),
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 20),
@@ -181,13 +192,12 @@ class AddIncomeView extends StatelessWidget {
                                   firstDate: DateTime(2000),
                                   lastDate: DateTime(2099))
                               .then((date) {
-                            // setState(() {
-                            //   _dateTextController.text =
-                            //       DateFormat("dd/MM/yyyy")
-                            //           .format(date!)
-                            //           .toString();
-                            //   _dateRFC3399 = date.toUtc().toIso8601String();
-                            // });
+                            controller.dateTextController.text =
+                                DateFormat("dd/MM/yyyy")
+                                    .format(date!)
+                                    .toString();
+                            controller.dateRFC3399.value =
+                                date.toUtc().toIso8601String();
                           });
                         },
                       ),
@@ -214,7 +224,8 @@ class AddIncomeView extends StatelessWidget {
                               const EdgeInsets.symmetric(vertical: 15),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () =>
+                              controller.createTransaction("income"),
                           child: Text(
                             "Simpan Pemasukan",
                             style: kOpenSans.copyWith(

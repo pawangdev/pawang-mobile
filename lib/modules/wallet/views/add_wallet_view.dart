@@ -27,7 +27,7 @@ class AddWalletView extends StatelessWidget {
                   IconBack(
                     blueMode: true,
                     onTap: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                   ),
                   Text(
@@ -44,7 +44,7 @@ class AddWalletView extends StatelessWidget {
                 height: 3.4.h,
               ),
               Form(
-                key: Key('add-wallet'),
+                key: const Key('add-wallet'),
                 child: Column(
                   children: [
                     Container(

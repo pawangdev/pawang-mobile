@@ -26,8 +26,7 @@ class TransactionService {
   }
 
   static Future<bool> createTransaction(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+    final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
         "POST", Uri.parse(baseURLAPI + "transactions/create"));
@@ -36,20 +35,24 @@ class TransactionService {
     });
 
     if (data['image'] == null) {
+      print("tidak ada image");
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
+      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
       request.fields['date'] = data['date'];
     } else {
+      print("ada image");
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
+      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
       request.fields['date'] = data['date'];
-      request.files.add(await http.MultipartFile(
+      request.files.add(http.MultipartFile(
           'image',
           file.File(data['image']).readAsBytes().asStream(),
           file.File(data['image']).lengthSync(),
@@ -62,7 +65,7 @@ class TransactionService {
       if (res.statusCode == 201) {
         return true;
       } else {
-        return false;
+        throw jsonDecode(res.body)['message'];
       }
     });
   }

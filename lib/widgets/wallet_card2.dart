@@ -56,117 +56,112 @@ class WalletCard2 extends StatelessWidget {
                           end: Alignment.centerRight,
                           colors: [defaultPrimary, defaultPurple])),
                   child: TextButton(
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 1)),
-                      ),
-                      child: Text(
-                        'Edit Dompet',
-                        style: kOpenSans.copyWith(
-                            color: defaultWhite,
-                            fontWeight: medium,
-                            fontSize: 16),
-                      ),
-                      onPressed: () {
-                        controller.idWallet = wallet.id;
-                        controller.nameTextController.text = wallet.name;
-                        controller.balanceTextController.text =
-                            wallet.balance.toString();
-                        showModalBottomSheet<void>(
-                          isScrollControlled: true,
-                          enableDrag: true,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: Container(
-                                height: 40.h,
-                                color: defaultWhite,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      // Nominal
-                                      Text(
-                                        'Ubah Data',
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 18, fontWeight: bold),
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: 1)),
+                    ),
+                    child: Text(
+                      'Edit Dompet',
+                      style: kOpenSans.copyWith(
+                          color: defaultWhite,
+                          fontWeight: medium,
+                          fontSize: 16),
+                    ),
+                    onPressed: () {
+                      controller.idWallet = wallet.id;
+                      controller.nameTextController.text = wallet.name;
+                      controller.balanceTextController.text =
+                          wallet.balance.toString();
+                      showModalBottomSheet<void>(
+                        isScrollControlled: true,
+                        enableDrag: true,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: Container(
+                              height: 40.h,
+                              color: defaultWhite,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    // Nominal
+                                    Text(
+                                      'Ubah Data',
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 18, fontWeight: bold),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      child: Column(
+                                        children: [
+                                          InputField(
+                                            inputLabel: "Nama Dompet",
+                                            inputController:
+                                                controller.nameTextController,
+                                            keyboardType: TextInputType.text,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          InputField(
+                                            inputLabel: "Saldo",
+                                            inputController: controller
+                                                .balanceTextController,
+                                            keyboardType: TextInputType.text,
+                                            enable: true,
+                                            // errorText: _inputData ? null : 'Nominal wajib diisi',
+                                          ),
+                                        ],
                                       ),
-                                      Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 20),
-                                        child: Column(
-                                          children: [
-                                            InputField(
-                                              inputLabel: "Nama Dompet",
-                                              inputController:
-                                                  controller.nameTextController,
-                                              keyboardType: TextInputType.text,
-                                              enable: true,
-                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            InputField(
-                                              inputLabel: "Saldo",
-                                              inputController: controller
-                                                  .balanceTextController,
-                                              keyboardType: TextInputType.text,
-                                              enable: true,
-                                              // errorText: _inputData ? null : 'Nominal wajib diisi',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                padding:
-                                                    MaterialStateProperty.all(
-                                                        const EdgeInsets.all(
-                                                            10)),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        defaultPrimary),
-                                                shape:
-                                                    MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              padding:
+                                                  MaterialStateProperty.all(
+                                                      const EdgeInsets.all(10)),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      defaultPrimary),
+                                              shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
                                                 ),
                                               ),
-                                              child: Text(
-                                                'Simpan Perubahan',
-                                                style: kOpenSans.copyWith(
-                                                    color: defaultWhite,
-                                                    fontWeight: medium,
-                                                    fontSize: 16),
-                                              ),
-                                              onPressed: () =>
-                                                  controller.updateWallet(),
                                             ),
+                                            child: Text(
+                                              'Simpan Perubahan',
+                                              style: kOpenSans.copyWith(
+                                                  color: defaultWhite,
+                                                  fontWeight: medium,
+                                                  fontSize: 16),
+                                            ),
+                                            onPressed: () =>
+                                                controller.updateWallet(),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            );
-                          },
-                        );
-                      }),
+                            ),
+                          );
+                        },
+                      ).then((value) => controller.resetAllInput());
+                    },
+                  ),
                 ),
               ),
               SizedBox(

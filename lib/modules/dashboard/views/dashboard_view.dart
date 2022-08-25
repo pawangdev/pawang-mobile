@@ -2,77 +2,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/user_profile_model.dart';
-import 'package:pawang_mobile/models/transaction_model.dart';
-import 'package:pawang_mobile/models/wallet_model.dart';
-import 'package:pawang_mobile/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/services/transaction_service.dart';
-import 'package:pawang_mobile/services/user_service.dart';
-import 'package:pawang_mobile/services/wallet_service.dart';
-import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
   final DashboardController controller = Get.find();
-
-  // late Future dataPengeluaran;
-  // late Future<TransactionsModel> _transactions;
-  // late Future<WalletsModel> _wallets;
-
-  // get margin => null;
-
-  // ProfileModel user = ProfileModel(
-  //     id: 0,
-  //     name: "",
-  //     email: "",
-  //     phone: "",
-  //     gender: "",
-  //     createdAt: DateTime.now(),
-  //     updatedAt: DateTime.now());
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getUserProfile();
-  //   _wallets = WalletService().getWallets();
-  //   _transactions = TransactionService.getTransactions();
-  // }
-
-  // void getUserProfile() async {
-  //   try {
-  //     var dataUser = await UserService().userProfile();
-
-  //     setState(() {
-  //       user = dataUser as ProfileModel;
-  //     });
-  //   } catch (e) {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     prefs.remove("token");
-  //     Navigator.pushNamedAndRemoveUntil(
-  //         context, LandingScreen.routeName, (route) => false);
-  //   }
-  // }
-
-  Widget plus() {
-    return GestureDetector(
-      onTap: () {
-        // Navigator.pushNamed(context, AddWalletScreen.routeName);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: defaultWhite, borderRadius: BorderRadius.circular(20)),
-        child: const Center(child: Icon(Icons.add_rounded)),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +115,7 @@ class DashboardView extends StatelessWidget {
                         (BuildContext context, int index, int realIndex) {
                       if (index == controller.wallets.length) {
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () => Get.toNamed(RoutesName.addwallet),
                           child: Container(
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -196,7 +137,7 @@ class DashboardView extends StatelessWidget {
                       }
                       var wallet = controller.wallets[index];
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () => Get.toNamed(RoutesName.wallet),
                         child: WalletCard(
                             name: controller.user.value.name,
                             namaWallet: wallet.name,
@@ -240,8 +181,7 @@ class DashboardView extends StatelessWidget {
                             icon: 'assets/images/pengeluaran.png',
                             title: 'Pengeluaran',
                             onTap: () {
-                              // Navigator.pushNamed(
-                              //     context, TambahPengeluaranScreen.routeName);
+                              Get.toNamed(RoutesName.addoutcome);
                             },
                           ),
                           LayananCard(

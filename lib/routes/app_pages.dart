@@ -10,6 +10,7 @@ import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
 import 'package:pawang_mobile/modules/transaction/bindings/transaction_binding.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/modules/transaction/views/add_income_view.dart';
 import 'package:pawang_mobile/modules/wallet/views/add_wallet_view.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
@@ -70,7 +71,7 @@ class AppPages {
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.addoutcome,
-        page: () => AddIncomeView(),
+        page: () => AddOutcomeView(),
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.wallet,

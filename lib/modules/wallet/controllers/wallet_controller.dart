@@ -12,6 +12,12 @@ class WalletController extends GetxController {
   final DashboardController dashboardController = Get.find();
 
   @override
+  void onReady() {
+    balanceTextController.text = "0";
+    super.onReady();
+  }
+
+  @override
   void onClose() {
     nameTextController.dispose();
     balanceTextController.dispose();
@@ -38,8 +44,8 @@ class WalletController extends GetxController {
           ),
         );
 
-        await dashboardController.getWallets();
-        await dashboardController.getTransactions();
+        dashboardController.getWallets();
+        dashboardController.getTransactions();
 
         nameTextController.clear();
         balanceTextController.clear();
@@ -81,8 +87,8 @@ class WalletController extends GetxController {
           ),
         );
 
-        await dashboardController.getWallets();
-        await dashboardController.getTransactions();
+        dashboardController.getWallets();
+        dashboardController.getTransactions();
 
         idWallet = 0;
         nameTextController.clear();
@@ -120,8 +126,8 @@ class WalletController extends GetxController {
           ),
         );
 
-        await dashboardController.getWallets();
-        await dashboardController.getTransactions();
+        dashboardController.getWallets();
+        dashboardController.getTransactions();
 
         idWallet = 0;
 
@@ -139,5 +145,10 @@ class WalletController extends GetxController {
         ),
       );
     }
+  }
+
+  Future<void> resetAllInput() async {
+    nameTextController.text = "";
+    balanceTextController.text = "";
   }
 }
