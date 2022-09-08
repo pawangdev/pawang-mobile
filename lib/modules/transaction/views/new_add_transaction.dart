@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
-import 'package:pawang_mobile/views/add_transaction_controller.dart';
 import 'package:pawang_mobile/widgets/numpad.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 
 class NewAddTransaction extends StatelessWidget {
-  final AddTransactionController controller =
-      Get.put(AddTransactionController());
+  final TransactionController controller = Get.find<TransactionController>();
+  final DashboardController dashboardController =
+      Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class NewAddTransaction extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => Get.back(),
                       icon: const Icon(
                         TablerIcons.chevron_left,
                         size: 22,
@@ -55,7 +60,7 @@ class NewAddTransaction extends StatelessWidget {
                   child: Obx(
                     () => Text(
                       CurrencyFormat.convertToIdr(
-                          int.parse(controller.amountController.value), 0),
+                          int.parse(controller.amountTextController.value), 0),
                       style: kOpenSans.copyWith(fontSize: 24, fontWeight: bold),
                     ),
                   ),
@@ -103,12 +108,29 @@ class NewAddTransaction extends StatelessWidget {
                                       DateTimePicker(
                                         type: DateTimePickerType.dateTime,
                                         initialDate: DateTime.now(),
-                                        initialValue: '',
+                                        dateMask: 'd MMMM yyyy - HH:mm',
+                                        initialValue:
+                                            controller.dateTextController.text,
                                         firstDate: DateTime(2000),
                                         lastDate: DateTime(2100),
                                         use24HourFormat: true,
                                         onChanged: (value) {
-                                          print(value);
+                                          controller.dateTextController.text =
+                                              value;
+
+                                          controller.displayDate.value =
+                                              DateFormat("d MMMM yyyy - HH:mm")
+                                                  .format(DateFormat(
+                                                          "yyyy-mm-dd HH:mm")
+                                                      .parse(value))
+                                                  .toString();
+
+                                          controller.dateRFC3399.value =
+                                              DateFormat("d MMMM yyyy - HH:mm")
+                                                  .parse(controller
+                                                      .displayDate.value)
+                                                  .toUtc()
+                                                  .toString();
                                         },
                                         decoration: const InputDecoration(
                                           suffixIcon:
@@ -123,7 +145,8 @@ class NewAddTransaction extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: const Text("Today at 10.09"),
+                            child:
+                                Obx(() => Text(controller.displayDate.value)),
                           ),
                           TextButton(
                             onPressed: () {
@@ -139,40 +162,39 @@ class NewAddTransaction extends StatelessWidget {
                                       topRight: Radius.circular(24),
                                     ),
                                   ),
-                                  child: Expanded(
-                                    child: Column(
-                                      children: [
-                                        Center(
-                                          child: Text(
-                                            "Deskripsi",
-                                            style: kOpenSans.copyWith(
-                                                fontSize: 16,
-                                                color:
-                                                    defaultGray.withOpacity(1),
-                                                fontWeight: semiBold),
-                                          ),
+                                  child: Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          "Deskripsi",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 16,
+                                              color: defaultGray.withOpacity(1),
+                                              fontWeight: semiBold),
                                         ),
-                                        const SizedBox(
-                                          height: 12,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              const TextField(
-                                                decoration: InputDecoration(
-                                                  fillColor: Color(0xFFF5F5F5),
-                                                  filled: true,
-                                                  border: OutlineInputBorder(),
-                                                ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            TextField(
+                                              controller: controller
+                                                  .descriptionTextController,
+                                              decoration: const InputDecoration(
+                                                fillColor: Color(0xFFF5F5F5),
+                                                filled: true,
+                                                border: OutlineInputBorder(),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );
@@ -217,8 +239,14 @@ class NewAddTransaction extends StatelessWidget {
                                         ),
                                         Expanded(
                                           child: ListView.builder(
-                                            itemCount: 5,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: dashboardController
+                                                .wallets.length,
                                             itemBuilder: (context, index) {
+                                              var wallet = dashboardController
+                                                  .wallets[index];
                                               return Container(
                                                 padding:
                                                     const EdgeInsets.symmetric(
@@ -233,10 +261,20 @@ class NewAddTransaction extends StatelessWidget {
                                                 margin: const EdgeInsets.only(
                                                     bottom: 14),
                                                 child: Center(
-                                                  child: Text(
-                                                    "Wallet ${index + 1}",
-                                                    style: kOpenSans.copyWith(
-                                                        fontWeight: semiBold),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      controller.walletId
+                                                          .value = wallet.id;
+                                                      controller
+                                                          .displayWalletName
+                                                          .value = wallet.name;
+                                                      Get.back();
+                                                    },
+                                                    child: Text(
+                                                      wallet.name,
+                                                      style: kOpenSans.copyWith(
+                                                          fontWeight: semiBold),
+                                                    ),
                                                   ),
                                                 ),
                                               );
@@ -249,8 +287,8 @@ class NewAddTransaction extends StatelessWidget {
                                   backgroundColor: Colors.white,
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
-                                      topLeft: const Radius.circular(24),
-                                      topRight: const Radius.circular(24),
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
                                     ),
                                   ),
                                 );
@@ -258,15 +296,14 @@ class NewAddTransaction extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  const Icon(TablerIcons.wallet, size: 22),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "Wallet",
-                                    style: kOpenSans.copyWith(
-                                        fontWeight: semiBold),
-                                  ),
+                                  Obx(() => Text(
+                                        controller.displayWalletName.value != ""
+                                            ? controller.displayWalletName.value
+                                            : "Wallets",
+                                        style: kOpenSans.copyWith(
+                                            fontWeight: semiBold,
+                                            overflow: TextOverflow.ellipsis),
+                                      )),
                                 ],
                               ),
                             ),
@@ -295,98 +332,54 @@ class NewAddTransaction extends StatelessWidget {
                                           height: 12,
                                         ),
                                         Expanded(
-                                          child: GridView.count(
-                                            crossAxisCount: 4,
-                                            children: [
-                                              Container(
+                                          child: GridView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                .categoriesIncome.length,
+                                            itemBuilder: (context, index) {
+                                              var category = controller
+                                                  .categoriesIncome[index];
+                                              return Container(
                                                 padding:
                                                     const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller.categoryId
+                                                        .value = category.id;
+                                                    controller
+                                                        .displayCategoryName
+                                                        .value = category.name;
+                                                    Get.back();
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      const Icon(TablerIcons
+                                                          .shopping_cart),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          category.name,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
-                                                    const Text("Belanja")
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                              );
+                                            },
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              crossAxisSpacing: 4,
+                                              mainAxisSpacing: 4,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -396,7 +389,7 @@ class NewAddTransaction extends StatelessWidget {
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(24),
-                                      topRight: const Radius.circular(24),
+                                      topRight: Radius.circular(24),
                                     ),
                                   ),
                                 );
@@ -404,23 +397,27 @@ class NewAddTransaction extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(TablerIcons.shopping_cart,
-                                      size: 22),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "Belanja",
-                                    style: kOpenSans.copyWith(
-                                        fontWeight: semiBold,
-                                        color: defaultBlack),
+                                  Expanded(
+                                    child: Obx(() => Text(
+                                          controller.displayCategoryName
+                                                      .value !=
+                                                  ""
+                                              ? controller
+                                                  .displayCategoryName.value
+                                              : "Kategori",
+                                          style: kOpenSans.copyWith(
+                                              fontWeight: semiBold,
+                                              color: defaultBlack,
+                                              overflow: TextOverflow.ellipsis),
+                                        )),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                controller.createTransaction("income"),
                             child: const Text("Simpan"),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all(

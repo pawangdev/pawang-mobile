@@ -5,7 +5,6 @@ import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/utils/storage.dart';
 import 'dart:io' as file;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionService {
   static Future<List<TransactionDataModel>?> getTransactions() async {
@@ -72,8 +71,7 @@ class TransactionService {
 
   static Future<bool> updateTransaction(
       Map<String, dynamic> data, int id) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+    final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
         "PUT", Uri.parse(baseURLAPI + "transactions/$id/update"));
@@ -112,8 +110,7 @@ class TransactionService {
   }
 
   static Future<bool> destroyTransaction(int id) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
+    final token = Storage.getValue(storageToken);
 
     var response = await http
         .delete(Uri.parse(baseURLAPI + "transactions/$id/delete"), headers: {

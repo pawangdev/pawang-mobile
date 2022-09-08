@@ -67,11 +67,11 @@ class AppPages {
         binding: ChangePasswordBinding()),
     GetPage(
         name: RoutesName.addincome,
-        page: () => AddIncomeView(),
+        page: () => NewAddTransaction(),
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.addoutcome,
-        page: () => AddOutcomeView(),
+        page: () => NewAddTransaction(),
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.wallet,

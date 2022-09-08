@@ -48,9 +48,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "OpenSans",
           ),
-          // initialRoute: AppPages.INITIAL,
-          // getPages: AppPages.pages,
-          home: NewAddTransaction(),
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.pages,
           debugShowCheckedModeBanner: false,
         );
       },

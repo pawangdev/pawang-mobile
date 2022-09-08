@@ -18,8 +18,9 @@ class TransactionController extends GetxController {
     getCategoryByType("income", categoriesIncome);
     getCategoryByType("outcome", categoriesOutcome);
     dateTextController.text =
-        DateFormat("dd/MM/yyyy").format(DateTime.now()).toString();
+        DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
+    displayDate.value = dateTextController.text;
     super.onInit();
   }
 
@@ -36,25 +37,68 @@ class TransactionController extends GetxController {
     }
   }
 
-  final TextEditingController amountTextController = TextEditingController();
+  var amountTextController = "0".obs;
   final TextEditingController descriptionTextController =
       TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
+  var displayDate = "".obs;
+  var displayWalletName = "".obs;
+  var displayCategoryName = "".obs;
   var dateRFC3399 = "".obs;
   var walletId = 0.obs;
   var categoryId = 0.obs;
 
   @override
   void onClose() {
-    amountTextController.dispose();
+    amountTextController.value = "0";
     descriptionTextController.dispose();
     dateTextController.dispose();
     super.onClose();
   }
 
   Future<void> createTransaction(String type) async {
+    if (walletId.value == 0) {
+      Get.snackbar(
+        'Gagal Menambahkan Transaksi !',
+        'Pilih Salah Satu Wallet Terlebih Dahulu',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    }
+
+    if (categoryId.value == 0) {
+      Get.snackbar(
+        'Gagal Menambahkan Transaksi !',
+        'Pilih Salah Satu Kategori Terlebih Dahulu',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    }
+
+    // ignore: unrelated_type_equality_checks
+    if (amountTextController.value == "0") {
+      Get.snackbar(
+        'Gagal Menambahkan Transaksi !',
+        'Masukkan Nominal Transaksi',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    }
+
     var data = <String, dynamic>{
-      'amount': amountTextController.text,
+      'amount': amountTextController,
       'category_id': categoryId.value,
       'sub_category_id': "",
       'wallet_id': walletId.value,

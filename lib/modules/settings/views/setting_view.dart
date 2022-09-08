@@ -5,7 +5,6 @@ import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
