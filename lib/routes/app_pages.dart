@@ -14,6 +14,8 @@ import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/modules/transaction/views/add_income_view.dart';
 import 'package:pawang_mobile/modules/wallet/views/add_wallet_view.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
+import 'package:pawang_mobile/views/reminder_view.dart';
+import 'package:pawang_mobile/views/reminder_binding.dart';
 
 part './app_routes.dart';
 
@@ -85,5 +87,9 @@ class AppPages {
         name: RoutesName.category,
         page: () => CategoryView(),
         binding: CategoryBinding()),
+    GetPage(
+        name: RoutesName.reminder,
+        page: () => ReminderView(),
+        binding: ReminderBinding()),
   ];
 }

@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "OpenSans",
           ),
+          // home: ReminderView(),
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.pages,
           debugShowCheckedModeBanner: false,
