@@ -1,247 +1,452 @@
-// import 'package:flutter/material.dart';
-// import 'package:form_validator/form_validator.dart';
-// import 'package:get/get.dart';
-// import 'package:intl/intl.dart';
-// import 'package:pawang_mobile/constants/theme.dart';
-// import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
-// import 'package:pawang_mobile/widgets/dropdown_field.dart';
-// import 'package:pawang_mobile/widgets/input_field.dart';
-// import 'package:pawang_mobile/widgets/icon_back.dart';
-// import 'package:responsive_sizer/responsive_sizer.dart';
-// import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:pawang_mobile/constants/strings.dart';
+import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/widgets/numpad.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 
-// class AddIncomeView extends StatelessWidget {
-//   final TransactionController controller = Get.find();
-//   final DashboardController dashboardController = Get.find();
+class AddIncomeView extends StatelessWidget {
+  final TransactionController controller = Get.find<TransactionController>();
+  final DashboardController dashboardController =
+      Get.find<DashboardController>();
 
-//   // void _submit() {
-//   //   final form = formKey.currentState;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xF9F9F9F9),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () => Get.back(),
+                      icon: const Icon(
+                        TablerIcons.chevron_left,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Income",
+                      style: kOpenSans.copyWith(
+                          fontWeight: semiBold, fontSize: 18),
+                    ),
+                  ),
+                ),
+                const Expanded(child: SizedBox()),
+              ],
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 16),
+                width: double.infinity,
+                child: Center(
+                  child: Obx(
+                    () => Text(
+                      CurrencyFormat.convertToIdr(
+                          int.parse(controller.amountTextController.value), 0),
+                      style: kOpenSans.copyWith(fontSize: 24, fontWeight: bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Get.bottomSheet(
+                                Container(
+                                  height: 250,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18, vertical: 12),
+                                  decoration: const BoxDecoration(
+                                    color: defaultWhite,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          "Tanggal & Waktu",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 16,
+                                              color: defaultGray.withOpacity(1),
+                                              fontWeight: semiBold),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      DateTimePicker(
+                                        type: DateTimePickerType.dateTime,
+                                        initialDate: DateTime.now(),
+                                        dateMask: 'd MMMM yyyy - HH:mm',
+                                        initialValue:
+                                            controller.dateTextController.text,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100),
+                                        use24HourFormat: true,
+                                        onChanged: (value) {
+                                          controller.dateTextController.text =
+                                              value;
 
-//   //   if (form!.validate()) {
-//   //     form.save();
-//   //     var data = <String, dynamic>{
-//   //       'amount': int.parse(_nominalTextController.text),
-//   //       'category_id': _categoryID,
-//   //       'wallet_id': _walletID,
-//   //       'type': 'income',
-//   //       'description': _noteTextController.text,
-//   //       'date': _dateRFC3399,
-//   //     };
+                                          controller.displayDate.value =
+                                              DateFormat("d MMMM yyyy - HH:mm")
+                                                  .format(DateFormat(
+                                                          "yyyy-mm-dd HH:mm")
+                                                      .parse(value))
+                                                  .toString();
 
-//   //     try {
-//   //       setState(() {
-//   //         _isLoading = true;
-//   //       });
-//   //       TransactionService.createTransaction(data).then((response) {
-//   //         if (response == true) {
-//   //           setState(() {
-//   //             _isLoading = false;
-//   //           });
-//   //           Navigator.pushReplacementNamed(context, NavigationScreen.routeName);
-//   //           Flushbar(
-//   //             message: "Berhasil Menambah Pemasukan !",
-//   //             icon: const Icon(
-//   //               Icons.check,
-//   //               size: 28.0,
-//   //               color: Colors.white,
-//   //             ),
-//   //             margin: const EdgeInsets.all(8),
-//   //             borderRadius: BorderRadius.circular(8),
-//   //             backgroundColor: defaultSuccess,
-//   //             duration: const Duration(seconds: 3),
-//   //           ).show(context);
-//   //         } else {
-//   //           setState(() {
-//   //             _isLoading = false;
-//   //           });
-//   //           Flushbar(
-//   //             message: "Terjadi Kesalahan !",
-//   //             icon: const Icon(
-//   //               Icons.check,
-//   //               size: 28.0,
-//   //               color: Colors.white,
-//   //             ),
-//   //             margin: const EdgeInsets.all(8),
-//   //             borderRadius: BorderRadius.circular(8),
-//   //             backgroundColor: defaultError,
-//   //             duration: const Duration(seconds: 3),
-//   //           ).show(context);
-//   //         }
-//   //       });
-//   //     } catch (e) {
-//   //       setState(() {
-//   //         _isLoading = false;
-//   //       });
-//   //     }
-//   //   }
-//   // }
-
-//   // @override
-//   // void initState() {
-//   //   _dateTextController.text =
-//   //       DateFormat("dd/MM/yyyy").format(DateTime.now()).toString();
-//   //   _dateRFC3399 = DateTime.now().toUtc().toIso8601String();
-
-//   //   _categories = CategoryService.getCategories(type: "income");
-//   //   _wallets = WalletService().getWallets();
-//   //   super.initState();
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       resizeToAvoidBottomInset: false,
-//       body: SafeArea(
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
-//           child: Column(
-//             children: [
-//               Row(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   IconBack(
-//                     blueMode: true,
-//                     onTap: () {
-//                       Navigator.pop(context);
-//                     },
-//                   ),
-//                   Text(
-//                     "Tambah Pemasukan",
-//                     style: kOpenSans.copyWith(
-//                         fontSize: 16, fontWeight: bold, color: defaultBlack),
-//                   ),
-//                   Container(
-//                     width: 7.2.w,
-//                   ),
-//                 ],
-//               ),
-//               Form(
-//                 key: const Key('add-income'),
-//                 child: Column(
-//                   children: [
-//                     SizedBox(
-//                       height: 3.4.h,
-//                     ),
-//                     Container(
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       child: InputField(
-//                         validator: ValidationBuilder(localeName: 'id').build(),
-//                         inputLabel: "Nominal",
-//                         inputController: controller.amountTextController,
-//                         keyboardType: TextInputType.number,
-//                         // errorText: _inputData ? null : 'Nominal wajib diisi',
-//                       ),
-//                     ),
-//                     Container(
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       child: Obx(
-//                         () => DropdownField(
-//                           value: controller.categoryId.value == 0
-//                               ? null
-//                               : controller.categoryId.value,
-//                           inputLabel: "Kategori",
-//                           hint: "Pilih Kategori",
-//                           data: controller.categoriesIncome,
-//                           onChange: (value) {
-//                             controller.categoryId.value =
-//                                 int.parse(value.toString());
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                     Container(
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       child: Obx(
-//                         () => DropdownField(
-//                           value: controller.walletId.value == 0
-//                               ? null
-//                               : controller.walletId.value,
-//                           inputLabel: "Wallets",
-//                           hint: "Pilih Wallets",
-//                           data: dashboardController.wallets,
-//                           onChange: (value) {
-//                             controller.walletId.value =
-//                                 int.parse(value.toString());
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                     Container(
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       child: InputField(
-//                         inputLabel: "Catatan",
-//                         inputController: controller.descriptionTextController,
-//                         // errorText: _inputData ? null : 'Kategori wajib diisi',
-//                       ),
-//                     ),
-//                     Container(
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       child: InputField(
-//                         validator: ValidationBuilder(localeName: 'id').build(),
-//                         inputLabel: "Tanggal",
-//                         inputController: controller.dateTextController,
-//                         // errorText: _inputData ? null : 'Tanggal wajib diisi',
-//                         enable: true,
-//                         readOnly: true,
-//                         keyboardType: TextInputType.none,
-//                         onTap: () {
-//                           showDatePicker(
-//                                   context: context,
-//                                   initialDate: DateTime.now(),
-//                                   firstDate: DateTime(2000),
-//                                   lastDate: DateTime(2099))
-//                               .then((date) {
-//                             controller.dateTextController.text =
-//                                 DateFormat("dd/MM/yyyy")
-//                                     .format(date!)
-//                                     .toString();
-//                             controller.dateRFC3399.value =
-//                                 date.toUtc().toIso8601String();
-//                           });
-//                         },
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Align(
-//                   alignment: Alignment.bottomCenter,
-//                   child: SizedBox(
-//                     width: MediaQuery.of(context).size.width,
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                           borderRadius:
-//                               BorderRadius.circular(defaultBorderRadius),
-//                           gradient: const LinearGradient(
-//                               begin: Alignment.centerLeft,
-//                               end: Alignment.centerRight,
-//                               colors: [defaultPrimary, defaultPurple])),
-//                       child: TextButton(
-//                           style: ButtonStyle(
-//                             padding: MaterialStateProperty.all(
-//                               const EdgeInsets.symmetric(vertical: 15),
-//                             ),
-//                           ),
-//                           onPressed: () =>
-//                               controller.createTransaction("income"),
-//                           child: Text(
-//                             "Simpan Pemasukan",
-//                             style: kOpenSans.copyWith(
-//                               color: defaultWhite,
-//                               fontSize: 16,
-//                               fontWeight: bold,
-//                             ),
-//                           )),
-//                     ),
-//                   ),
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+                                          controller.dateRFC3399.value =
+                                              DateFormat("d MMMM yyyy - HH:mm")
+                                                  .parse(controller
+                                                      .displayDate.value)
+                                                  .toUtc()
+                                                  .toString();
+                                        },
+                                        decoration: const InputDecoration(
+                                          suffixIcon:
+                                              Icon(TablerIcons.calendar_time),
+                                          fillColor: Color(0xFFF5F5F5),
+                                          filled: true,
+                                          border: OutlineInputBorder(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child:
+                                Obx(() => Text(controller.displayDate.value)),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.bottomSheet(
+                                Container(
+                                  height: 250,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18, vertical: 12),
+                                  decoration: const BoxDecoration(
+                                    color: defaultWhite,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          "Deskripsi",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 16,
+                                              color: defaultGray.withOpacity(1),
+                                              fontWeight: semiBold),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            TextField(
+                                              controller: controller
+                                                  .descriptionTextController,
+                                              decoration: const InputDecoration(
+                                                fillColor: Color(0xFFF5F5F5),
+                                                filled: true,
+                                                border: OutlineInputBorder(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text("Tambahkan Catatan"),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        border: Border.symmetric(
+                            vertical: BorderSide.none,
+                            horizontal: BorderSide(
+                                color: defaultGray.withOpacity(0.3), width: 1)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.bottomSheet(
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 18, vertical: 12),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Wallets",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 16,
+                                              color: defaultGray.withOpacity(1),
+                                              fontWeight: semiBold),
+                                        ),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
+                                        Expanded(
+                                          child: ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: dashboardController
+                                                .wallets.length,
+                                            itemBuilder: (context, index) {
+                                              var wallet = dashboardController
+                                                  .wallets[index];
+                                              return Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 12),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: defaultGray
+                                                          .withOpacity(0.3)),
+                                                ),
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 14),
+                                                child: Center(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      controller.walletId
+                                                          .value = wallet.id;
+                                                      controller
+                                                          .displayWalletName
+                                                          .value = wallet.name;
+                                                      Get.back();
+                                                    },
+                                                    child: Text(
+                                                      wallet.name,
+                                                      style: kOpenSans.copyWith(
+                                                          fontWeight: semiBold),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Obx(() => Text(
+                                        controller.displayWalletName.value != ""
+                                            ? controller.displayWalletName.value
+                                            : "Wallets",
+                                        style: kOpenSans.copyWith(
+                                            fontWeight: semiBold,
+                                            overflow: TextOverflow.ellipsis),
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Expanded(
+                            child: Icon(TablerIcons.arrow_right, size: 22),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.bottomSheet(
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 18, vertical: 12),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Income Category",
+                                          style: kOpenSans.copyWith(
+                                              fontSize: 16,
+                                              color: defaultGray.withOpacity(1),
+                                              fontWeight: semiBold),
+                                        ),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
+                                        Expanded(
+                                          child: GridView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                .categoriesIncome.length,
+                                            itemBuilder: (context, index) {
+                                              var category = controller
+                                                  .categoriesIncome[index];
+                                              return Container(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller.categoryId
+                                                        .value = category.id;
+                                                    controller
+                                                        .displayCategoryName
+                                                        .value = category.name;
+                                                    Get.back();
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      SvgPicture.network(
+                                                          baseHOSTAPI +
+                                                              category.icon,
+                                                          fit: BoxFit.cover),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          category.name,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              crossAxisSpacing: 4,
+                                              mainAxisSpacing: 4,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Obx(() => Text(
+                                          controller.displayCategoryName
+                                                      .value !=
+                                                  ""
+                                              ? controller
+                                                  .displayCategoryName.value
+                                              : "Kategori",
+                                          style: kOpenSans.copyWith(
+                                              fontWeight: semiBold,
+                                              color: defaultBlack,
+                                              overflow: TextOverflow.ellipsis),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () =>
+                                controller.createTransaction("income"),
+                            child: const Text("Simpan"),
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all(defaultBlack),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(24)))),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+              child: NumpadWidget(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

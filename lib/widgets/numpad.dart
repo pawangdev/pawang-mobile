@@ -35,7 +35,7 @@ class NumpadWidget extends StatelessWidget {
         Row(
           children: [
             NumberButton(number: "000"),
-            NumberButton(number: "00"),
+            NumberButton(number: "0"),
             Expanded(
               child: IconButton(
                   onPressed: () {
