@@ -17,7 +17,6 @@ class RegisterController extends GetxController {
   final isObsecure = true.obs;
 
   var genderTextController = ''.obs;
-  var isLoading = false;
 
   @override
   void onInit() {
@@ -44,14 +43,8 @@ class RegisterController extends GetxController {
     };
 
     var register_response = await UserService.userRegister(input);
-    isLoading = true;
-
-    if (isLoading) {
-      Get.dialog(const Loading());
-    }
 
     if (register_response.statusCode == 201) {
-      isLoading = false;
       Map<String, dynamic> token = jsonDecode(register_response.body);
       Storage.saveValue('token', token['data']['token']);
       Get.snackbar(
@@ -64,7 +57,6 @@ class RegisterController extends GetxController {
           ));
       Get.offAllNamed(RoutesName.navigation);
     } else {
-      isLoading = false;
       Map<String, dynamic> error = jsonDecode(register_response.body);
       Get.snackbar('Gagal Mendaftar !', '${error['data']}',
           backgroundColor: Colors.red,
@@ -73,10 +65,6 @@ class RegisterController extends GetxController {
             Icons.cancel,
             color: Colors.white,
           ));
-    }
-
-    if (!isLoading) {
-      Get.close(1);
     }
   }
 }

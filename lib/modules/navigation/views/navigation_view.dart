@@ -8,11 +8,12 @@ import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class NavigationView extends StatelessWidget {
-  final NavigationController controller = Get.find();
+  final NavigationController controller = Get.find<NavigationController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<NavigationController>(
+        init: NavigationController(),
         builder: (c) {
           return IndexedStack(
             index: c.tabIndex,
@@ -28,6 +29,7 @@ class NavigationView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 42),
             child: GetBuilder<NavigationController>(
+              init: NavigationController(),
               builder: (controller) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
