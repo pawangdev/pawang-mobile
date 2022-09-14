@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/views/new_add_transaction.dart';
+import 'package:pawang_mobile/views/pin_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -48,9 +49,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "OpenSans",
           ),
-          // home: ReminderView(),
-          initialRoute: AppPages.INITIAL,
-          getPages: AppPages.pages,
+          home: PinView(),
+          // initialRoute: AppPages.INITIAL,
+          // getPages: AppPages.pages,
           debugShowCheckedModeBanner: false,
         );
       },
