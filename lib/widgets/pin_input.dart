@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PinInput extends StatelessWidget {
-  const PinInput({Key? key}) : super(key: key);
+  final int selectedIndex;
+  final int index;
+
+  const PinInput({Key? key, required this.selectedIndex, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +20,9 @@ class PinInput extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              // color: _selectedIndex
-              //     ? Colors.lightBlue
-              //     : Colors.transparent,
-              color: Colors.transparent,
+              color: index == selectedIndex
+                  ? Colors.lightBlue
+                  : Colors.transparent,
               offset: Offset(0, 0),
               spreadRadius: 1.5,
               blurRadius: 2,

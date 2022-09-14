@@ -12,6 +12,7 @@ class PinView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool _isLoading = false;
+    var selectedindex = 1;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -56,12 +57,22 @@ class PinView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        PinInput(),
-                        PinInput(),
-                        PinInput(),
-                        PinInput(),
-                        PinInput(),
-                        PinInput(),
+                        PinInput(
+                          index: 0,
+                          selectedIndex: selectedindex,
+                        ),
+                        PinInput(
+                          index: 1,
+                          selectedIndex: selectedindex,
+                        ),
+                        PinInput(
+                          index: 2,
+                          selectedIndex: selectedindex,
+                        ),
+                        PinInput(
+                          index: 3,
+                          selectedIndex: selectedindex,
+                        ),
                       ],
                     ),
                   ],
