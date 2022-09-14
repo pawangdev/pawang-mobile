@@ -4,3 +4,6 @@ export './controllers/login_controller.dart';
 export './controllers/register_controller.dart';
 export './views/login_view.dart';
 export './views/register_view.dart';
+export 'views/reset_password_confirmation.dart';
+export './views/reset_password_request_email_view.dart';
+export './views/reset_password_token_view.dart';

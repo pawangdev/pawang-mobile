@@ -116,6 +116,29 @@ class LoginView extends StatelessWidget {
                                   obscureText: controller.isObsecure.value,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () => Get.toNamed(
+                                        RoutesName.resetpasswordemail),
+                                    style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: const Size(50, 30),
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                        alignment: Alignment.center),
+                                    child: Text(
+                                      "Lupa Password",
+                                      style: kOpenSans,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -154,21 +177,26 @@ class LoginView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Belum punya akun?",
+                      Text(
+                        "Belum punya akun?",
+                        style: kOpenSans.copyWith(
+                            fontSize: 12,
+                            //0.235.dp,
+                            color: defaultBlack,
+                            fontWeight: light),
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Daftar',
                           style: kOpenSans.copyWith(
                               fontSize: 12,
-                              //0.235.dp,
-                              color: defaultBlack,
-                              fontWeight: light)),
-                      TextButton(
-                          child: Text('Daftar',
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  color: defaultPrimary,
-                                  fontWeight: bold)),
-                          onPressed: () {
-                            Get.toNamed(RoutesName.register);
-                          }),
+                              color: defaultPrimary,
+                              fontWeight: bold),
+                        ),
+                        onPressed: () {
+                          Get.toNamed(RoutesName.register);
+                        },
+                      ),
                     ],
                   ),
                 ],

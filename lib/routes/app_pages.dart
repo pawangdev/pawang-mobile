@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/authentication/authentication.dart';
+import 'package:pawang_mobile/modules/authentication/bindings/reset_password_binding.dart';
 import 'package:pawang_mobile/modules/category/bindings/category_binding.dart';
 import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
@@ -90,5 +91,17 @@ class AppPages {
         name: RoutesName.reminder,
         page: () => ReminderView(),
         binding: ReminderBinding()),
+    GetPage(
+        name: RoutesName.resetpasswordemail,
+        page: () => ResetPasswordRequestEmailView(),
+        binding: ResetPasswordBinding()),
+    GetPage(
+        name: RoutesName.resetpasswordtoken,
+        page: () => ResetPasswordTokenView(),
+        binding: ResetPasswordBinding()),
+    GetPage(
+        name: RoutesName.resetpasswordconfirmation,
+        page: () => ResetPasswordConfirmationView(),
+        binding: ResetPasswordBinding()),
   ];
 }

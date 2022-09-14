@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
@@ -20,16 +21,19 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     try {
+      final status = await OneSignal.shared.getDeviceState();
+      final String? osUserID = status?.userId;
+
       var input = <String, dynamic>{
         'email': emailTextController.text,
         'password': passwordTextController.text,
+        'onesignal_id': osUserID,
       };
       isLoading = true;
-      var login_response = await UserService.userLogin(input);
-      if (login_response != null) {
-        Storage.saveValue('token', login_response.token);
-        Get.snackbar(
-            'Berhasil Masuk !', 'Selamat Datang ${login_response.name}',
+      var loginResponse = await UserService.userLogin(input);
+      if (loginResponse != null) {
+        Storage.saveValue('token', loginResponse.token);
+        Get.snackbar('Berhasil Masuk !', 'Selamat Datang ${loginResponse.name}',
             backgroundColor: Colors.green,
             colorText: Colors.white,
             icon: const Icon(

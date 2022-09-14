@@ -6,7 +6,6 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
-import 'package:pawang_mobile/widgets/loading.dart';
 
 class RegisterController extends GetxController {
   final nameTextController = TextEditingController();
@@ -42,10 +41,10 @@ class RegisterController extends GetxController {
       'gender': genderTextController.value,
     };
 
-    var register_response = await UserService.userRegister(input);
+    var registerResponse = await UserService.userRegister(input);
 
-    if (register_response.statusCode == 201) {
-      Map<String, dynamic> token = jsonDecode(register_response.body);
+    if (registerResponse.statusCode == 201) {
+      Map<String, dynamic> token = jsonDecode(registerResponse.body);
       Storage.saveValue('token', token['data']['token']);
       Get.snackbar(
           'Berhasil Mendaftar !', 'Selamat Datang ${token['data']['name']}',
@@ -57,14 +56,17 @@ class RegisterController extends GetxController {
           ));
       Get.offAllNamed(RoutesName.navigation);
     } else {
-      Map<String, dynamic> error = jsonDecode(register_response.body);
-      Get.snackbar('Gagal Mendaftar !', '${error['data']}',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.cancel,
-            color: Colors.white,
-          ));
+      Map<String, dynamic> error = jsonDecode(registerResponse.body);
+      Get.snackbar(
+        'Gagal Mendaftar !',
+        '${error['data']}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
     }
   }
 }

@@ -36,6 +36,7 @@ class UserService {
       var dataLogin = <String, dynamic>{
         'email': data['email'],
         'password': data['password'],
+        'onesignal_id': data['onesignal_id'],
       };
 
       var response = await http.post(Uri.parse(baseURLAPI + "users/login"),
@@ -131,6 +132,70 @@ class UserService {
       }
     } catch (e) {
       rethrow;
+    }
+  }
+
+  static Future<http.Response> forgotPasswordRequestToken(
+      Map<String, dynamic> data) async {
+    try {
+      var dataEmail = <String, dynamic>{'email': data['email']};
+
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "users/reset-password"),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(dataEmail),
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<http.Response> fogotPasswordVerifyToken(
+      Map<String, dynamic> data) async {
+    try {
+      var dataToken = <String, dynamic>{"token": data['token']};
+
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "users/reset-password/token"),
+        body: jsonEncode(dataToken),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<http.Response> forgotPasswordConfirmation(
+      Map<String, dynamic> data) async {
+    try {
+      var dataPassword = <String, dynamic>{
+        'token': data['token'],
+        'password': data['password'],
+        'password_confirmation': data['password_confirmation'],
+      };
+
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "users/reset-password/password-confirmation"),
+        body: jsonEncode(dataPassword),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

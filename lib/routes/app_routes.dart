@@ -22,4 +22,7 @@ abstract class RoutesName {
   static const viewreceipe = '/view-receipe';
   static const connectioncheck = '/connection-check';
   static const changepassword = '/change-password';
+  static const resetpasswordemail = '/reset-password-email';
+  static const resetpasswordtoken = '/reset-password-token';
+  static const resetpasswordconfirmation = '/reset-password-confirmation';
 }

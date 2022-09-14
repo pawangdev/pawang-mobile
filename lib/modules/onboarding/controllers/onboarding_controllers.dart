@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pawang_mobile/routes/app_pages.dart';
 
 class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;
@@ -10,8 +9,9 @@ class OnboardingController extends GetxController {
   forwardAction() {
     if (isLastPage) {
       // Get.toNamed(RoutesName.splash);
-    } else
+    } else {
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+    }
   }
 
   List<OnboardingInfo> onboardingPages = [
