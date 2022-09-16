@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pawang_mobile/constants/strings.dart';
+import 'package:pawang_mobile/views/detail_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
