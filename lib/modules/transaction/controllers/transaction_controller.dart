@@ -3,15 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/models/category_model.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/navigation/navigation.dart';
+import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 
 class TransactionController extends GetxController {
   final DashboardController dashboardController = Get.find();
+  final NavigationController navigationController = Get.find();
 
   var categoriesIncome = <CategoryDataModel>[].obs;
   var categoriesOutcome = <CategoryDataModel>[].obs;
+  var amountTextController = "0".obs;
+  final TextEditingController descriptionTextController =
+      TextEditingController();
+  final TextEditingController dateTextController = TextEditingController();
+  var displayDate = "".obs;
+  var displayWalletName = "".obs;
+  var displayCategoryName = "".obs;
+  var dateRFC3399 = "".obs;
+  var walletId = 0.obs;
+  var categoryId = 0.obs;
 
   @override
   void onInit() {
@@ -22,6 +35,14 @@ class TransactionController extends GetxController {
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
     displayDate.value = dateTextController.text;
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    clearInput();
+    descriptionTextController.dispose();
+    dateTextController.dispose();
+    super.onClose();
   }
 
   Future<void> getCategoryByType(
@@ -35,25 +56,6 @@ class TransactionController extends GetxController {
     } catch (e) {
       print(e);
     }
-  }
-
-  var amountTextController = "0".obs;
-  final TextEditingController descriptionTextController =
-      TextEditingController();
-  final TextEditingController dateTextController = TextEditingController();
-  var displayDate = "".obs;
-  var displayWalletName = "".obs;
-  var displayCategoryName = "".obs;
-  var dateRFC3399 = "".obs;
-  var walletId = 0.obs;
-  var categoryId = 0.obs;
-
-  @override
-  void onClose() {
-    amountTextController.value = "0";
-    descriptionTextController.dispose();
-    dateTextController.dispose();
-    super.onClose();
   }
 
   Future<void> createTransaction(String type) async {
@@ -109,6 +111,7 @@ class TransactionController extends GetxController {
     };
 
     try {
+      navigationController.tabIndex = 0;
       var transactionResponse =
           await TransactionService.createTransaction(data);
 
@@ -127,7 +130,9 @@ class TransactionController extends GetxController {
         await dashboardController.getWallets();
         await dashboardController.getTransactions();
 
-        Get.offNamed(RoutesName.navigation);
+        clearInput();
+
+        Get.toNamed(RoutesName.navigation);
       }
     } catch (e) {
       Get.snackbar(
@@ -141,5 +146,14 @@ class TransactionController extends GetxController {
         ),
       );
     }
+  }
+
+  Future<void> clearInput() async {
+    amountTextController.value = "0";
+    walletId.value = 0;
+    categoryId.value = 0;
+    displayWalletName.value = "";
+    displayCategoryName.value = "";
+    Get.delete<ScanReceipeController>();
   }
 }

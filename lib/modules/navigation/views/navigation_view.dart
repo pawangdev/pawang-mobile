@@ -16,7 +16,7 @@ class NavigationView extends StatelessWidget {
         init: NavigationController(),
         builder: (c) {
           return IndexedStack(
-            index: c.tabIndex,
+            index: controller.tabIndex,
             children: [DashboardView(), ScanReceipeView(), SettingsView()],
           );
         },

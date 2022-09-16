@@ -216,6 +216,7 @@ class ScanReceipeView extends StatelessWidget {
                                   ),
                                   onPressed: () async {
                                     try {
+                                      controller.uploadReceipt();
                                       // setState(() {
                                       //   _isLoading = true;
                                       // });

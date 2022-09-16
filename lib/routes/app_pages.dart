@@ -52,10 +52,6 @@ class AppPages {
         page: () => ScanReceipeView(),
         binding: ScanReceipeBinding()),
     GetPage(
-        name: RoutesName.validationscan,
-        page: () => ValidationScanView(),
-        binding: ValidationScanBinding()),
-    GetPage(
         name: RoutesName.settings,
         page: () => SettingsView(),
         binding: SettingsBinding()),

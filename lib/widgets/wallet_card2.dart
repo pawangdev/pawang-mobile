@@ -80,7 +80,7 @@ class WalletCard2 extends StatelessWidget {
                           return Padding(
                             padding: MediaQuery.of(context).viewInsets,
                             child: Container(
-                              height: 40.h,
+                              height: 45.h,
                               color: defaultWhite,
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
@@ -112,7 +112,7 @@ class WalletCard2 extends StatelessWidget {
                                             inputLabel: "Saldo",
                                             inputController: controller
                                                 .balanceTextController,
-                                            keyboardType: TextInputType.text,
+                                            keyboardType: TextInputType.number,
                                             enable: true,
                                             // errorText: _inputData ? null : 'Nominal wajib diisi',
                                           ),
@@ -121,10 +121,9 @@ class WalletCard2 extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Align(
-                                        alignment: Alignment.bottomCenter,
+                                        alignment: Alignment.center,
                                         child: SizedBox(
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                          width: Get.width,
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                               padding:

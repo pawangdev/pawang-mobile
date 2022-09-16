@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/scan_service.dart';
 
 class ScanReceipeController extends GetxController {
+  final TransactionController transactionController =
+      Get.find<TransactionController>();
   XFile? imageFilePath;
 
   Future<void> scanReceipt(bool isFromGal) async {
@@ -21,5 +28,42 @@ class ScanReceipeController extends GetxController {
   Future<void> resetScan() async {
     imageFilePath = null;
     update();
+  }
+
+  Future<void> uploadReceipt() async {
+    try {
+      final fileImage = File(imageFilePath!.path);
+      await ScanService.uploadReceipt(fileImage).then((value) async {
+        if (value['status'] == "true") {
+          String tempAmounts = value['amounts'];
+          transactionController.amountTextController.value =
+              tempAmounts.replaceAll(',', '');
+          Get.toNamed(RoutesName.addoutcome);
+          Get.snackbar(
+            'Berhasil Memindai Struk !',
+            'Struk akan disimpan',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          );
+        }
+      });
+    } catch (e) {
+      if (!Get.isSnackbarOpen) {
+        Get.snackbar(
+          'Gagal Memindai Struk !',
+          'Total Tidak Dapat Ditemukan',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
+    }
   }
 }

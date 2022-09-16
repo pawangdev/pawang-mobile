@@ -309,7 +309,7 @@ class AddIncomeView extends StatelessWidget {
                             ),
                           ),
                           const Expanded(
-                            child: Icon(TablerIcons.arrow_right, size: 22),
+                            child: Icon(TablerIcons.arrow_left, size: 22),
                           ),
                           Expanded(
                             child: GestureDetector(
