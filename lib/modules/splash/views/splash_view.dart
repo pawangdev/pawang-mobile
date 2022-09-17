@@ -46,20 +46,21 @@ class SplashView extends StatelessWidget {
                   child: Image.asset('assets/images/splash.png')),
             ),
             Positioned.fill(
-                child: Align(
-              alignment: AlignmentDirectional.bottomCenter,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  'Pawang version v.2.0.1',
-                  style: kOpenSans.copyWith(
-                    fontSize: 14,
-                    color: defaultWhite.withOpacity(0.75),
-                    fontWeight: semiBold,
+              child: Align(
+                alignment: AlignmentDirectional.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'Pawang version ${controller.version}',
+                    style: kOpenSans.copyWith(
+                      fontSize: 14,
+                      color: defaultWhite.withOpacity(0.75),
+                      fontWeight: semiBold,
+                    ),
                   ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),

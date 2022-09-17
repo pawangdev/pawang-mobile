@@ -3,6 +3,8 @@ import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class SplashController extends GetxController {
+  final version = '3.0.0';
+
   @override
   void onInit() {
     checkToken();
