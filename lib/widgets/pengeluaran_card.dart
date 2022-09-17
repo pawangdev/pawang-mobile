@@ -81,6 +81,8 @@ class CardPengeluaran extends StatelessWidget {
             ),
             Text(CurrencyFormat.convertToIdr(data.amount, 2).toString(),
                 style: kOpenSans.copyWith(
+                    color:
+                        data.type == "income" ? defaultSuccess : defaultError,
                     fontSize: 16,
                     fontWeight: bold,
                     overflow: TextOverflow.ellipsis)),

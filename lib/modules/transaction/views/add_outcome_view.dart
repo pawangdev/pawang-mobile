@@ -12,10 +12,10 @@ import 'package:pawang_mobile/widgets/numpad.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 
 class AddOutcomeView extends StatelessWidget {
+  bool? isUpdate = Get.arguments == null ? false : Get.arguments['isUpdate'];
   final TransactionController controller = Get.find<TransactionController>();
   final DashboardController dashboardController =
       Get.find<DashboardController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -417,22 +417,42 @@ class AddOutcomeView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () =>
-                                controller.createTransaction("outcome"),
-                            child: const Text("Simpan"),
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                  const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
+                          isUpdate == true
+                              ? ElevatedButton(
+                                  onPressed: () => controller.updateTransaction(
+                                      controller.transactionId!,
+                                      controller.transactionType!),
+                                  child: const Text("Simpan"),
+                                  style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                      ),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              defaultBlack),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24)))),
+                                )
+                              : ElevatedButton(
+                                  onPressed: () =>
+                                      controller.createTransaction("outcome"),
+                                  child: const Text("Simpan"),
+                                  style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                      ),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              defaultBlack),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24)))),
                                 ),
-                                backgroundColor:
-                                    MaterialStateProperty.all(defaultBlack),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(24)))),
-                          )
                         ],
                       ),
                     ),

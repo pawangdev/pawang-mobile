@@ -8,5 +8,6 @@ class TransactionBinding implements Bindings {
   void dependencies() {
     Get.put<TransactionController>(TransactionController());
     Get.lazyPut<DashboardController>(() => DashboardController());
+    Get.lazyPut<ScanReceipeController>(() => ScanReceipeController());
   }
 }

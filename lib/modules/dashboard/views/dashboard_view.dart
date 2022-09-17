@@ -261,12 +261,10 @@ class DashboardView extends StatelessWidget {
                                               highlightColor:
                                                   Colors.transparent,
                                               splashColor: Colors.transparent,
-                                              onTap: () {
-                                                // Navigator.pushNamed(context,
-                                                //     DetailPengeluaran.routeName,
-                                                //     arguments:
-                                                //         snapshot.data!.data[index]);
-                                              },
+                                              onTap: () => Get.toNamed(
+                                                  RoutesName.detailtransaction,
+                                                  arguments: controller
+                                                      .transactions[index]),
                                               child: CardPengeluaran(
                                                   data: controller
                                                       .transactions[index]),
@@ -277,7 +275,7 @@ class DashboardView extends StatelessWidget {
                                         )
                                       : Center(
                                           child: Text(
-                                            "Anda belum memiliki pengeluaran",
+                                            "Anda belum memiliki transaksi",
                                             style: kOpenSans.copyWith(
                                                 color: defaultGray,
                                                 fontSize: 13,

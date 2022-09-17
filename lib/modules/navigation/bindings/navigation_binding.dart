@@ -9,9 +9,11 @@ class NavigationBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<NavigationController>(NavigationController());
-    Get.lazyPut<DashboardController>(() => DashboardController());
-    Get.lazyPut<ScanReceipeController>(() => ScanReceipeController());
-    Get.lazyPut<SettingsController>(() => SettingsController());
-    Get.lazyPut<TransactionController>(() => TransactionController());
+    Get.lazyPut<DashboardController>(() => DashboardController(), fenix: true);
+    Get.lazyPut<ScanReceipeController>(() => ScanReceipeController(),
+        fenix: true);
+    Get.lazyPut<SettingsController>(() => SettingsController(), fenix: true);
+    Get.lazyPut<TransactionController>(() => TransactionController(),
+        fenix: true);
   }
 }

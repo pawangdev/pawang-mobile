@@ -6,6 +6,6 @@ class WalletBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<WalletController>(WalletController());
-    Get.lazyPut<DashboardController>(() => DashboardController());
+    Get.lazyPut<DashboardController>(() => DashboardController(), fenix: true);
   }
 }

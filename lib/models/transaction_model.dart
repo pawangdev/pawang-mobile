@@ -2,6 +2,7 @@
 //
 //     final transactionModel = transactionModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 TransactionModel transactionModelFromJson(String str) =>
@@ -32,9 +33,7 @@ class TransactionModel {
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": data == null
-            ? null
-            : List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
@@ -51,7 +50,7 @@ class TransactionDataModel {
     required this.date,
     required this.userId,
     required this.category,
-    required this.subTransactionCategoryDataModel,
+    required this.subCategory,
     required this.wallet,
     required this.createdAt,
     required this.updatedAt,
@@ -67,9 +66,9 @@ class TransactionDataModel {
   String imageUrl;
   DateTime date;
   int userId;
-  TransactionCategoryDataModel category;
-  dynamic subTransactionCategoryDataModel;
-  TransactionWalletDataModel wallet;
+  Category category;
+  dynamic subCategory;
+  Wallet wallet;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -85,9 +84,9 @@ class TransactionDataModel {
         imageUrl: json["image_url"],
         date: DateTime.parse(json["date"]),
         userId: json["user_id"],
-        category: TransactionCategoryDataModel.fromJson(json["category"]),
-        subTransactionCategoryDataModel: json["sub_category"],
-        wallet: TransactionWalletDataModel.fromJson(json["wallet"]),
+        category: Category.fromJson(json["category"]),
+        subCategory: json["sub_category"],
+        wallet: Wallet.fromJson(json["wallet"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -104,15 +103,15 @@ class TransactionDataModel {
         "date": date.toIso8601String(),
         "user_id": userId,
         "category": category.toJson(),
-        "sub_category": subTransactionCategoryDataModel,
+        "sub_category": subCategory,
         "wallet": wallet.toJson(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
 }
 
-class TransactionCategoryDataModel {
-  TransactionCategoryDataModel({
+class Category {
+  Category({
     required this.id,
     required this.name,
     required this.icon,
@@ -128,8 +127,7 @@ class TransactionCategoryDataModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory TransactionCategoryDataModel.fromJson(Map<String, dynamic> json) =>
-      TransactionCategoryDataModel(
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         name: json["name"],
         icon: json["icon"],
@@ -148,8 +146,8 @@ class TransactionCategoryDataModel {
       };
 }
 
-class TransactionWalletDataModel {
-  TransactionWalletDataModel({
+class Wallet {
+  Wallet({
     required this.id,
     required this.name,
     required this.userId,
@@ -165,8 +163,7 @@ class TransactionWalletDataModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory TransactionWalletDataModel.fromJson(Map<String, dynamic> json) =>
-      TransactionWalletDataModel(
+  factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
         id: json["id"],
         name: json["name"],
         userId: json["user_id"],

@@ -34,7 +34,6 @@ class TransactionService {
     });
 
     if (data['image'] == null) {
-      print("tidak ada image");
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
       request.fields['sub_category_id'] = data['sub_category_id'].toString();
@@ -43,7 +42,6 @@ class TransactionService {
       request.fields['description'] = data['description'];
       request.fields['date'] = data['date'];
     } else {
-      print("ada image");
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
       request.fields['sub_category_id'] = data['sub_category_id'].toString();
@@ -74,7 +72,7 @@ class TransactionService {
     final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
-        "PUT", Uri.parse(baseURLAPI + "transactions/$id/update"));
+        "PUT", Uri.parse(baseURLAPI + "transactions/update/$id"));
     request.headers.addAll({
       'Authorization': "Bearer $token",
     });
@@ -82,6 +80,7 @@ class TransactionService {
     if (data['image'] == null) {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
+      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
@@ -89,11 +88,12 @@ class TransactionService {
     } else {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
+      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
       request.fields['date'] = data['date'];
-      request.files.add(await http.MultipartFile(
+      request.files.add(http.MultipartFile(
           'image',
           file.File(data['image']).readAsBytes().asStream(),
           file.File(data['image']).lengthSync(),
@@ -102,18 +102,20 @@ class TransactionService {
 
     var response = await request.send();
 
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return http.Response.fromStream(response).then((res) {
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        throw jsonDecode(res.body)['message'];
+      }
+    });
   }
 
   static Future<bool> destroyTransaction(int id) async {
     final token = Storage.getValue(storageToken);
 
     var response = await http
-        .delete(Uri.parse(baseURLAPI + "transactions/$id/delete"), headers: {
+        .delete(Uri.parse(baseURLAPI + "transactions/delete/$id"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });
@@ -121,7 +123,7 @@ class TransactionService {
     if (response.statusCode == 200) {
       return true;
     } else {
-      return false;
+      throw jsonDecode(response.body)['message'];
     }
   }
 }

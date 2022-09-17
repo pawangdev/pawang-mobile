@@ -12,6 +12,7 @@ import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
 import 'package:pawang_mobile/modules/transaction/bindings/transaction_binding.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:pawang_mobile/modules/transaction/views/transaction_detail_view.dart';
 import 'package:pawang_mobile/modules/wallet/views/add_wallet_view.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/views/reminder_view.dart';
@@ -70,6 +71,10 @@ class AppPages {
     GetPage(
         name: RoutesName.addoutcome,
         page: () => AddOutcomeView(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.detailtransaction,
+        page: () => TransactionDetailView(),
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.wallet,

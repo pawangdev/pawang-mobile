@@ -18,7 +18,7 @@ abstract class RoutesName {
   static const addoutcome = '/add-outcome';
   static const scanreceipe = '/scan-receipe';
   static const validationscan = '/validation-scan';
-  static const detail = '/detail';
+  static const detailtransaction = '/detail-transaction';
   static const viewreceipe = '/view-receipe';
   static const connectioncheck = '/connection-check';
   static const changepassword = '/change-password';

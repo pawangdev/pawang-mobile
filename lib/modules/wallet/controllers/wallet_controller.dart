@@ -19,6 +19,7 @@ class WalletController extends GetxController {
 
   @override
   void onClose() {
+    balanceTextController.text = "0";
     nameTextController.dispose();
     balanceTextController.dispose();
     super.onClose();
@@ -33,6 +34,11 @@ class WalletController extends GetxController {
     try {
       var walletUpdateResponse = await WalletService.createWallet(input);
       if (walletUpdateResponse) {
+        await dashboardController.getWallets();
+        await dashboardController.getTransactions();
+
+        resetAllInput();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Membuat Wallet",
@@ -43,9 +49,6 @@ class WalletController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        dashboardController.getWallets();
-        dashboardController.getTransactions();
 
         nameTextController.clear();
         balanceTextController.clear();
@@ -76,6 +79,11 @@ class WalletController extends GetxController {
       var walletUpdateResponse =
           await WalletService.updateWallet(input, idWallet);
       if (walletUpdateResponse) {
+        await dashboardController.getWallets();
+        await dashboardController.getTransactions();
+
+        resetAllInput();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Memperbarui Wallet",
@@ -86,9 +94,6 @@ class WalletController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        dashboardController.getWallets();
-        dashboardController.getTransactions();
 
         idWallet = 0;
         nameTextController.clear();
@@ -115,6 +120,11 @@ class WalletController extends GetxController {
       var walletDeleteResponse = await WalletService.deleteWallet(idWallet);
 
       if (walletDeleteResponse) {
+        await dashboardController.getWallets();
+        await dashboardController.getTransactions();
+
+        resetAllInput();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Menghapus Wallet",
@@ -126,12 +136,9 @@ class WalletController extends GetxController {
           ),
         );
 
-        dashboardController.getWallets();
-        dashboardController.getTransactions();
-
         idWallet = 0;
 
-        Get.close(1);
+        Get.toNamed(RoutesName.navigation);
       }
     } catch (e) {
       Get.snackbar(
@@ -149,6 +156,6 @@ class WalletController extends GetxController {
 
   Future<void> resetAllInput() async {
     nameTextController.text = "";
-    balanceTextController.text = "";
+    balanceTextController.text = "0";
   }
 }
