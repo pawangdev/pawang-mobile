@@ -11,7 +11,7 @@ class CategoryService {
     final token = Storage.getValue(storageToken);
 
     var response = await http
-        .get(Uri.parse(baseURLAPI + "categories?type=$type"), headers: {
+        .get(Uri.parse(baseURLAPI + "/categories?type=$type"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });
