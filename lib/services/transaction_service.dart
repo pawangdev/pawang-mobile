@@ -11,7 +11,7 @@ class TransactionService {
     final token = Storage.getValue(storageToken);
 
     var response =
-        await http.get(Uri.parse(baseURLAPI + "transactions"), headers: {
+        await http.get(Uri.parse(baseURLAPI + "/transactions"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });
@@ -28,7 +28,7 @@ class TransactionService {
     final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
-        "POST", Uri.parse(baseURLAPI + "transactions/create"));
+        "POST", Uri.parse(baseURLAPI + "/transactions/create"));
     request.headers.addAll({
       'Authorization': "Bearer $token",
     });
@@ -36,7 +36,6 @@ class TransactionService {
     if (data['image'] == null) {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
-      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
@@ -44,7 +43,6 @@ class TransactionService {
     } else {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
-      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
@@ -59,7 +57,7 @@ class TransactionService {
     var response = await request.send();
 
     return http.Response.fromStream(response).then((res) {
-      if (res.statusCode == 201) {
+      if (res.statusCode == 200) {
         return true;
       } else {
         throw jsonDecode(res.body)['message'];
@@ -72,7 +70,7 @@ class TransactionService {
     final token = Storage.getValue(storageToken);
 
     var request = http.MultipartRequest(
-        "PUT", Uri.parse(baseURLAPI + "transactions/update/$id"));
+        "PUT", Uri.parse(baseURLAPI + "/transactions/update/$id"));
     request.headers.addAll({
       'Authorization': "Bearer $token",
     });
@@ -80,7 +78,6 @@ class TransactionService {
     if (data['image'] == null) {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
-      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
@@ -88,7 +85,6 @@ class TransactionService {
     } else {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
-      request.fields['sub_category_id'] = data['sub_category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
       request.fields['type'] = data['type'];
       request.fields['description'] = data['description'];
@@ -115,7 +111,7 @@ class TransactionService {
     final token = Storage.getValue(storageToken);
 
     var response = await http
-        .delete(Uri.parse(baseURLAPI + "transactions/delete/$id"), headers: {
+        .delete(Uri.parse(baseURLAPI + "/transactions/delete/$id"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });

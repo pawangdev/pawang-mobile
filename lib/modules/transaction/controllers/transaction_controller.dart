@@ -104,7 +104,6 @@ class TransactionController extends GetxController {
     var data = <String, dynamic>{
       'amount': amountTextController,
       'category_id': categoryId.value,
-      'sub_category_id': "",
       'wallet_id': walletId.value,
       'type': type,
       'description': descriptionTextController.text,
@@ -200,7 +199,7 @@ class TransactionController extends GetxController {
     amountTextController.value = data.amount.toString();
     categoryId.value = data.categoryId;
     walletId.value = data.walletId;
-    descriptionTextController.text = data.description;
+    descriptionTextController.text = data.description ?? "";
     displayWalletName.value = data.wallet.name;
     displayCategoryName.value = data.category.name;
     // dateRFC3399.value = DateFormat("d MMMM yyyy - HH:mm")

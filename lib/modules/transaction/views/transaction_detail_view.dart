@@ -117,9 +117,9 @@ class TransactionDetailView extends StatelessWidget {
                         size: 25,
                       ),
                       Text(
-                        transaction.description.isEmpty
+                        transaction.description!.isEmpty
                             ? "-"
-                            : transaction.description,
+                            : transaction.description.toString(),
                         style: kOpenSans.copyWith(
                           fontSize: 16,
                         ),
