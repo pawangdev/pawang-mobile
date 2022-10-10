@@ -10,7 +10,7 @@ class WalletService {
   static Future<List<WalletsDataModel>?> getWallets() async {
     final token = Storage.getValue(storageToken);
 
-    var response = await http.get(Uri.parse(baseURLAPI + "wallets"), headers: {
+    var response = await http.get(Uri.parse(baseURLAPI + "/wallets"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "bearer $token",
     }).timeout(
@@ -34,7 +34,7 @@ class WalletService {
       'balance': data['balance'],
     };
 
-    var response = await http.post(Uri.parse(baseURLAPI + "wallets/create"),
+    var response = await http.post(Uri.parse(baseURLAPI + "/wallets/create"),
         body: jsonEncode(dataWallet),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -58,7 +58,7 @@ class WalletService {
     };
 
     var response = await http.put(
-        Uri.parse(baseURLAPI + "wallets/update/$idWallet"),
+        Uri.parse(baseURLAPI + "/wallets/update/$idWallet"),
         body: jsonEncode(dataWallet),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -76,7 +76,7 @@ class WalletService {
     final token = Storage.getValue(storageToken);
 
     var response = await http
-        .delete(Uri.parse(baseURLAPI + "wallets/delete/$idWallet"), headers: {
+        .delete(Uri.parse(baseURLAPI + "/wallets/delete/$idWallet"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "Bearer $token",
     });
