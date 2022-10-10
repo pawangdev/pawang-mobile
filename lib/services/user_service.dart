@@ -78,6 +78,37 @@ class UserService {
     }
   }
 
+  static Future<UserLoginRegisterDataModel?> userLoginWithGoogle(
+      Map<String, dynamic> data) async {
+    try {
+      var dataLogin = <String, dynamic>{
+        'email': data['email'],
+        'google_id': data['google_id'],
+        'name': data['name'],
+        'image_profile': data['image_profile'],
+      };
+
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "/auth/login/google"),
+        body: jsonEncode(dataLogin),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return UserLoginRegisterDataModel.fromJson(
+            jsonDecode(response.body)['data']);
+      } else {
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static Future<UserProfileDataModel?> userUpdateProfile(
       Map<String, dynamic> input) async {
     try {

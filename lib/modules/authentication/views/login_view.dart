@@ -179,7 +179,7 @@ class LoginView extends StatelessWidget {
                   SizedBox(
                     width: Get.width,
                     child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () => controller.signInGoogle(),
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(

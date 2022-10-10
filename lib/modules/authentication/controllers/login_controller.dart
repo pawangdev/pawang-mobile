@@ -30,8 +30,36 @@ class LoginController extends GetxController {
       GoogleSignIn googleSignIn = GoogleSignIn();
 
       _googleUser = await googleSignIn.signIn();
+
+      var input = <String, dynamic>{
+        'email': _googleUser!.email,
+        'google_id': _googleUser!.id,
+        'name': _googleUser!.displayName,
+        'image_profile': _googleUser!.photoUrl,
+      };
+
+      final loginResponse = await UserService.userLoginWithGoogle(input);
+      Storage.saveValue(storageToken, loginResponse!.accessToken);
+      Get.snackbar(
+          'Berhasil Masuk !', 'Selamat Datang ${loginResponse.user.name}',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ));
+      Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
-      debugPrint(e.toString());
+      Get.snackbar(
+        'Gagal Masuk !',
+        e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
     }
   }
 
