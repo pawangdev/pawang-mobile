@@ -53,8 +53,8 @@ class User {
     required this.id,
     required this.name,
     required this.email,
-    required this.phone,
-    required this.gender,
+    this.phone,
+    this.gender,
     required this.imageProfile,
     required this.googleId,
     required this.onesignalId,
@@ -65,8 +65,8 @@ class User {
   int id;
   String name;
   String email;
-  String phone;
-  String gender;
+  String? phone;
+  String? gender;
   dynamic imageProfile;
   dynamic googleId;
   dynamic onesignalId;

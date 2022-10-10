@@ -40,8 +40,8 @@ class DashboardController extends GetxController {
         user!.id = data['id'];
         user.name = data['name'];
         user.email = data['email'];
-        user.phone = data['phone'];
-        user.gender = data['gender'];
+        user.phone = data['phone'] ?? "";
+        user.gender = data['gender'] ?? "";
       });
     }
   }
