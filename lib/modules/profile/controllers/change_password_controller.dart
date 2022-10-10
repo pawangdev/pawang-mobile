@@ -30,6 +30,7 @@ class ChangePasswordController extends GetxController {
       var input = <String, dynamic>{
         'old_password': passwordNowTextController.text,
         'new_password': passwordNewTextController.text,
+        'new_password_confirm': passwordNewConfirmationTextController.text,
       };
       var changePasswordResponse = await UserService.userChangePassword(input);
 

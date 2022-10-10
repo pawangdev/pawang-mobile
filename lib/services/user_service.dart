@@ -120,14 +120,16 @@ class UserService {
         'gender': input['gender'],
       };
 
-      var response = await http.put(Uri.parse(baseURLAPI + "/auth/profile"),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': "bearer $token",
-          },
-          body: jsonEncode(data));
+      var response =
+          await http.post(Uri.parse(baseURLAPI + "/auth/change-profile"),
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': "bearer $token",
+              },
+              body: jsonEncode(data));
       if (response.statusCode == 200) {
-        return UserProfileDataModel.fromJson(jsonDecode(response.body)['data']);
+        return UserProfileDataModel.fromJson(
+            jsonDecode(response.body)['data']['updateUser']);
       } else {
         throw jsonDecode(response.body)['message'];
       }
@@ -159,10 +161,11 @@ class UserService {
       var dataPassword = <String, dynamic>{
         'old_password': data['old_password'],
         'new_password': data['new_password'],
+        'new_password_confirm': data['new_password_confirm'],
       };
 
-      var response = await http.put(
-          Uri.parse(baseURLAPI + "users/change-password"),
+      var response = await http.post(
+          Uri.parse(baseURLAPI + "/auth/change-password"),
           body: jsonEncode(dataPassword),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
