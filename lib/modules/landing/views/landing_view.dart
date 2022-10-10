@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/modules/landing/controllers/landing_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LandingView extends StatelessWidget {
+  final LandingController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

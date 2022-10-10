@@ -356,10 +356,12 @@ class AddIncomeView extends StatelessWidget {
                                                   },
                                                   child: Column(
                                                     children: [
-                                                      SvgPicture.network(
-                                                          baseHOSTAPI +
-                                                              category.icon,
-                                                          fit: BoxFit.cover),
+                                                      // SvgPicture.network(
+                                                      //     baseHOSTAPI +
+                                                      //         category.icon,
+                                                      //     fit: BoxFit.cover),
+                                                      Icon(TablerIcons
+                                                          .shopping_cart),
                                                       const SizedBox(
                                                         height: 5,
                                                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
@@ -111,9 +112,10 @@ class CategoryView extends StatelessWidget {
                                 child: Container(
                                   width: 25,
                                   height: 25,
-                                  child: SvgPicture.network(
-                                      baseHOSTAPI + category.icon,
-                                      fit: BoxFit.cover),
+                                  // child: SvgPicture.network(
+                                  //     baseHOSTAPI + category.icon,
+                                  //     fit: BoxFit.cover),
+                                  child: Icon(TablerIcons.shopping_cart),
                                 ),
                               ),
                               Expanded(

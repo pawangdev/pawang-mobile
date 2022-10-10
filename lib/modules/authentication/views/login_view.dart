@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -170,6 +172,38 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  SizedBox(
+                    width: Get.width,
+                    child: OutlinedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(defaultBorderRadius),
+                            ),
+                          ),
+                          padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 12.0),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              TablerIcons.brand_google,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 5),
+                            Text('Masuk dengan Google', style: kOpenSans)
+                          ],
+                        )),
                   ),
                   SizedBox(
                     height: 3.5.h,

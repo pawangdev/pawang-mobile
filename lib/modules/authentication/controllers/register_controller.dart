@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/strings.dart';
@@ -19,7 +17,6 @@ class RegisterController extends GetxController {
 
   @override
   void onInit() {
-    print(Storage.getValue(storageToken));
     super.onInit();
   }
 
@@ -41,13 +38,12 @@ class RegisterController extends GetxController {
       'gender': genderTextController.value,
     };
 
-    var registerResponse = await UserService.userRegister(input);
+    try {
+      var registerResponse = await UserService.userRegister(input);
 
-    if (registerResponse.statusCode == 201) {
-      Map<String, dynamic> token = jsonDecode(registerResponse.body);
-      Storage.saveValue('token', token['data']['token']);
-      Get.snackbar(
-          'Berhasil Mendaftar !', 'Selamat Datang ${token['data']['name']}',
+      Storage.saveValue(storageToken, registerResponse?.accessToken);
+      Get.snackbar('Berhasil Mendaftar !',
+          'Selamat Datang ${registerResponse?.user.name}',
           backgroundColor: Colors.green,
           colorText: Colors.white,
           icon: const Icon(
@@ -55,11 +51,10 @@ class RegisterController extends GetxController {
             color: Colors.white,
           ));
       Get.offAllNamed(RoutesName.navigation);
-    } else {
-      Map<String, dynamic> error = jsonDecode(registerResponse.body);
+    } catch (e) {
       Get.snackbar(
         'Gagal Mendaftar !',
-        '${error['data']}',
+        e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(

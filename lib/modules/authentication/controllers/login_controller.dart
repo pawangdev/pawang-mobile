@@ -1,11 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class LoginController extends GetxController {
+  GoogleSignInAccount? _googleUser;
+
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   final isObsecure = true.obs;
@@ -19,33 +25,41 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  Future<void> signInGoogle() async {
+    try {
+      GoogleSignIn googleSignIn = GoogleSignIn();
+
+      _googleUser = await googleSignIn.signIn();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   Future<void> login() async {
     try {
-      final status = await OneSignal.shared.getDeviceState();
-      final String? osUserID = status?.userId;
+      // final status = await OneSignal.shared.getDeviceState();
+      // final String? osUserID = status?.userId;
 
       var input = <String, dynamic>{
         'email': emailTextController.text,
         'password': passwordTextController.text,
-        'onesignal_id': osUserID,
       };
-      isLoading = true;
-      var loginResponse = await UserService.userLogin(input);
-      if (loginResponse != null) {
-        Storage.saveValue('token', loginResponse.token);
-        Get.snackbar('Berhasil Masuk !', 'Selamat Datang ${loginResponse.name}',
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            icon: const Icon(
-              Icons.check,
-              color: Colors.white,
-            ));
-        Get.offAllNamed(RoutesName.navigation);
-      }
+
+      final loginResponse = await UserService.userLogin(input);
+      Storage.saveValue(storageToken, loginResponse!.accessToken);
+      Get.snackbar(
+          'Berhasil Masuk !', 'Selamat Datang ${loginResponse.user.name}',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ));
+      Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
       Get.snackbar(
         'Gagal Masuk !',
-        '$e',
+        e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -53,7 +67,6 @@ class LoginController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 }

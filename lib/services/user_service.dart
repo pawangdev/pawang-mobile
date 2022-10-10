@@ -1,14 +1,14 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pawang_mobile/constants/strings.dart';
-import 'package:pawang_mobile/models/login_model.dart';
+import 'package:pawang_mobile/models/login_register_model.dart';
 import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class UserService {
-  static Future<http.Response> userRegister(Map<String, dynamic> data) async {
+  static Future<UserLoginRegisterDataModel?> userRegister(
+      Map<String, dynamic> data) async {
     try {
       var dataRegister = <String, dynamic>{
         'name': data['name'],
@@ -18,44 +18,63 @@ class UserService {
         'gender': data['gender'],
       };
 
-      var response = await http.post(Uri.parse(baseURLAPI + "users/register"),
-          body: jsonEncode(dataRegister),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          });
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "/auth/register"),
+        body: jsonEncode(dataRegister),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      );
 
-      return response;
+      if (response.statusCode == 201) {
+        return UserLoginRegisterDataModel.fromJson(
+            jsonDecode(response.body)['data']);
+      } else {
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
+      }
     } catch (e) {
-      throw Exception(e);
+      if (e.toString() == "Email telah terdaftar") {
+        throw ("Email Telah Terdaftar!");
+      } else {
+        throw e;
+      }
     }
   }
 
-  static Future<LoginDataModel?> userLogin(Map<String, dynamic> data) async {
+  static Future<UserLoginRegisterDataModel?> userLogin(
+      Map<String, dynamic> data) async {
     try {
       var dataLogin = <String, dynamic>{
         'email': data['email'],
         'password': data['password'],
-        'onesignal_id': data['onesignal_id'],
       };
 
-      var response = await http.post(Uri.parse(baseURLAPI + "users/login"),
-          body: jsonEncode(dataLogin),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () => throw TimeoutException("Connection Time Out"),
+      var response = await http.post(
+        Uri.parse(baseURLAPI + "/auth/login"),
+        body: jsonEncode(dataLogin),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
       );
 
       if (response.statusCode == 200) {
-        return LoginDataModel.fromJson(jsonDecode(response.body)['data']);
+        return UserLoginRegisterDataModel.fromJson(
+            jsonDecode(response.body)['data']);
       } else {
-        throw jsonDecode(response.body)['message'];
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
       }
     } catch (e) {
-      rethrow;
+      if (e.toString() == "Email not found") {
+        throw ("Email Tidak Ditemukan!");
+      } else if (e.toString() == "Password invalid!") {
+        throw ("Password Salah!");
+      } else {
+        throw e;
+      }
     }
   }
 
@@ -70,18 +89,12 @@ class UserService {
         'gender': input['gender'],
       };
 
-      var response = await http
-          .put(Uri.parse(baseURLAPI + "users/change-profile"),
-              headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'Authorization': "bearer $token",
-              },
-              body: jsonEncode(data))
-          .timeout(
-            const Duration(seconds: 10),
-            onTimeout: () => throw TimeoutException("Connection Time Out"),
-          );
-
+      var response = await http.put(Uri.parse(baseURLAPI + "/auth/profile"),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': "bearer $token",
+          },
+          body: jsonEncode(data));
       if (response.statusCode == 200) {
         return UserProfileDataModel.fromJson(jsonDecode(response.body)['data']);
       } else {
