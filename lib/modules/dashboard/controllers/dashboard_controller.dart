@@ -12,12 +12,17 @@ class DashboardController extends GetxController {
   var wallets = <WalletsDataModel>[].obs;
   var transactions = <TransactionDataModel>[].obs;
   var user = UserProfileDataModel(
-    id: 0,
-    name: "",
-    email: "",
-    phone: "",
-    gender: "",
-  ).obs;
+          id: 0,
+          name: "",
+          email: "",
+          phone: "",
+          gender: "",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          googleId: "",
+          imageProfile: "",
+          onesignalId: "")
+      .obs;
 
   @override
   void onInit() {
@@ -30,7 +35,7 @@ class DashboardController extends GetxController {
   Future<void> getUserProfile() async {
     var userProfileResponse = await UserService.userProfile();
     if (userProfileResponse.statusCode == 200) {
-      var data = jsonDecode(userProfileResponse.body)['data'];
+      var data = jsonDecode(userProfileResponse.body)['data']['user'];
       user.update((user) {
         user!.id = data['id'];
         user.name = data['name'];

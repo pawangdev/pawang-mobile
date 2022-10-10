@@ -1,37 +1,49 @@
 // To parse this JSON data, do
 //
-//     final userProfileModel = userProfileModelFromJson(jsonString);
+//     final welcome = welcomeFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-UserProfileModel userProfileModelFromJson(String str) =>
+UserProfileModel welcomeFromJson(String str) =>
     UserProfileModel.fromJson(json.decode(str));
 
-String userProfileModelToJson(UserProfileModel data) =>
-    json.encode(data.toJson());
+String welcomeToJson(UserProfileModel data) => json.encode(data.toJson());
 
 class UserProfileModel {
   UserProfileModel({
-    required this.success,
     required this.message,
     required this.data,
   });
 
-  bool success;
   String message;
-  UserProfileDataModel data;
+  Data data;
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       UserProfileModel(
-        success: json["success"],
         message: json["message"],
-        data: UserProfileDataModel.fromJson(json["data"]),
+        data: Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "success": success,
         "message": message,
         "data": data.toJson(),
+      };
+}
+
+class Data {
+  Data({
+    required this.user,
+  });
+
+  UserProfileDataModel user;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        user: UserProfileDataModel.fromJson(json["user"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user": user.toJson(),
       };
 }
 
@@ -42,6 +54,11 @@ class UserProfileDataModel {
     required this.email,
     required this.phone,
     required this.gender,
+    required this.imageProfile,
+    required this.googleId,
+    required this.onesignalId,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   int id;
@@ -49,6 +66,11 @@ class UserProfileDataModel {
   String email;
   String phone;
   String gender;
+  dynamic imageProfile;
+  dynamic googleId;
+  dynamic onesignalId;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   factory UserProfileDataModel.fromJson(Map<String, dynamic> json) =>
       UserProfileDataModel(
@@ -57,6 +79,11 @@ class UserProfileDataModel {
         email: json["email"],
         phone: json["phone"],
         gender: json["gender"],
+        imageProfile: json["image_profile"],
+        googleId: json["google_id"],
+        onesignalId: json["onesignal_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,5 +92,10 @@ class UserProfileDataModel {
         "email": email,
         "phone": phone,
         "gender": gender,
+        "image_profile": imageProfile,
+        "google_id": googleId,
+        "onesignal_id": onesignalId,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }

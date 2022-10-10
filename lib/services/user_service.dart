@@ -140,7 +140,7 @@ class UserService {
     final token = Storage.getValue(storageToken);
 
     var response =
-        await http.get(Uri.parse(baseURLAPI + "users/profile"), headers: {
+        await http.get(Uri.parse(baseURLAPI + "/auth/profile"), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': "bearer $token",
     });
