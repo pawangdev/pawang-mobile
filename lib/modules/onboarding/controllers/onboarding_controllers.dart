@@ -10,17 +10,17 @@ class OnboardingController extends GetxController {
     if (isLastPage) {
       // Get.toNamed(RoutesName.splash);
     } else {
-      pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+      pageController.nextPage(duration: 1.5.seconds, curve: Curves.ease);
     }
   }
 
   List<OnboardingInfo> onboardingPages = [
-    OnboardingInfo('assets/images/girl_boy_landing.png', 'Onboard 1',
-        'Bintang Bintang Bintang BintangBintang BintangBintang .'),
-    OnboardingInfo('assets/images/girl_boy_landing.png', 'Onboard 2',
-        'Bintang Bintang Bintang BintangBintang BintangBintang .'),
-    OnboardingInfo('assets/images/girl_boy_landing.png', 'Onboard 3',
-        'Bintang Bintang Bintang BintangBintang BintangBintang ')
+    OnboardingInfo('assets/images/OB-Scan.png', 'Scan Struk',
+        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!'),
+    OnboardingInfo('assets/images/OB-Dompetku.png', 'DompetKu',
+        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!'),
+    OnboardingInfo('assets/images/OB-Transaksi.png', 'Transaksi',
+        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!')
   ];
 }
 
