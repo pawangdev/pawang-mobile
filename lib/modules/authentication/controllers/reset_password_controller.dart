@@ -92,23 +92,25 @@ class ResetPasswordController extends GetxController {
       'password_confirmation': passwordConfirmationTextController.text
     };
 
-    if (passwordTextController.text !=
-        passwordConfirmationTextController.text) {
-      if (!Get.isSnackbarOpen) {
-        Get.snackbar(
-          'Gagal Membuat Password !',
-          'Password Konfirmasi Tidak Sesuai',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.cancel,
-            color: Colors.white,
-          ),
-        );
-      }
-    }
-
     try {
+      if (passwordTextController.text !=
+          passwordConfirmationTextController.text) {
+        if (!Get.isSnackbarOpen) {
+          Get.snackbar(
+            'Gagal Membuat Password !',
+            'Password Konfirmasi Tidak Sesuai',
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.cancel,
+              color: Colors.white,
+            ),
+          );
+        }
+
+        throw ("Password Konfirmasi Tidak Sesuai");
+      }
+
       await UserService.forgotPasswordConfirmation(input);
 
       Get.snackbar(
@@ -123,7 +125,18 @@ class ResetPasswordController extends GetxController {
       );
       Get.offAllNamed(RoutesName.landing);
     } catch (e) {
-      throw e;
+      if (!Get.isSnackbarOpen) {
+        Get.snackbar(
+          'Gagal Membuat Password !',
+          e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 }
