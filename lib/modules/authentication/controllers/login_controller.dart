@@ -27,6 +27,9 @@ class LoginController extends GetxController {
 
   Future<void> signInGoogle() async {
     try {
+      final status = await OneSignal.shared.getDeviceState();
+      final String? osUserID = status?.userId;
+
       GoogleSignIn googleSignIn = GoogleSignIn();
 
       _googleUser = await googleSignIn.signIn();
@@ -36,6 +39,7 @@ class LoginController extends GetxController {
         'google_id': _googleUser!.id,
         'name': _googleUser!.displayName,
         'image_profile': _googleUser!.photoUrl,
+        'onesignal_id': osUserID
       };
 
       final loginResponse = await UserService.userLoginWithGoogle(input);
@@ -51,7 +55,7 @@ class LoginController extends GetxController {
       Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Masuk !',
+        'Tedapat Kesalahan !',
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -65,12 +69,13 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     try {
-      // final status = await OneSignal.shared.getDeviceState();
-      // final String? osUserID = status?.userId;
+      final status = await OneSignal.shared.getDeviceState();
+      final String? osUserID = status?.userId;
 
       var input = <String, dynamic>{
         'email': emailTextController.text,
         'password': passwordTextController.text,
+        'onesignal_id': osUserID
       };
 
       final loginResponse = await UserService.userLogin(input);

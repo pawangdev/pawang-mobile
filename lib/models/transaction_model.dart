@@ -13,25 +13,21 @@ String transactionModelToJson(TransactionModel data) =>
 
 class TransactionModel {
   TransactionModel({
-    required this.success,
     required this.message,
     required this.data,
   });
 
-  bool success;
   String message;
   List<TransactionDataModel> data;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
-        success: json["success"],
         message: json["message"],
         data: List<TransactionDataModel>.from(
             json["data"].map((x) => TransactionDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "success": success,
         "message": message,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
@@ -42,71 +38,73 @@ class TransactionDataModel {
     required this.id,
     required this.amount,
     required this.categoryId,
-    required this.subcategoryId,
     required this.walletId,
+    required this.subcategoryId,
     required this.type,
     required this.description,
     required this.imageUrl,
     required this.date,
     required this.userId,
-    required this.category,
-    required this.subCategory,
-    required this.wallet,
     required this.createdAt,
     required this.updatedAt,
+    required this.wallet,
+    required this.category,
+    required this.subcategory,
   });
 
   int id;
   int amount;
   int categoryId;
-  int subcategoryId;
   int walletId;
+  int? subcategoryId;
   String type;
-  String description;
-  String imageUrl;
+  String? description;
+  String? imageUrl;
   DateTime date;
   int userId;
-  Category category;
-  dynamic subCategory;
-  Wallet wallet;
   DateTime createdAt;
   DateTime updatedAt;
+  Wallet wallet;
+  Category category;
+  Subcategory? subcategory;
 
   factory TransactionDataModel.fromJson(Map<String, dynamic> json) =>
       TransactionDataModel(
         id: json["id"],
         amount: json["amount"],
         categoryId: json["category_id"],
-        subcategoryId: json["subcategory_id"],
         walletId: json["wallet_id"],
+        subcategoryId: json["subcategory_id"],
         type: json["type"],
-        description: json["description"],
+        description: json["description"] ?? "",
         imageUrl: json["image_url"],
         date: DateTime.parse(json["date"]),
         userId: json["user_id"],
-        category: Category.fromJson(json["category"]),
-        subCategory: json["sub_category"],
-        wallet: Wallet.fromJson(json["wallet"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        wallet: Wallet.fromJson(json["wallet"]),
+        category: Category.fromJson(json["category"]),
+        subcategory: json["subcategory"] == null
+            ? null
+            : Subcategory.fromJson(json["subcategory"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "amount": amount,
         "category_id": categoryId,
-        "subcategory_id": subcategoryId,
         "wallet_id": walletId,
+        "subcategory_id": subcategoryId,
         "type": type,
         "description": description,
         "image_url": imageUrl,
         "date": date.toIso8601String(),
         "user_id": userId,
-        "category": category.toJson(),
-        "sub_category": subCategory,
-        "wallet": wallet.toJson(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "wallet": wallet.toJson(),
+        "category": category.toJson(),
+        "subcategory": subcategory == null ? null : subcategory!.toJson(),
       };
 }
 
@@ -143,6 +141,38 @@ class Category {
         "type": type,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Subcategory {
+  Subcategory({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.userId,
+    required this.categoryId,
+  });
+
+  int id;
+  String name;
+  String type;
+  int userId;
+  int categoryId;
+
+  factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
+        id: json["id"],
+        name: json["name"],
+        type: json["type"],
+        userId: json["user_id"],
+        categoryId: json["category_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "type": type,
+        "user_id": userId,
+        "category_id": categoryId,
       };
 }
 

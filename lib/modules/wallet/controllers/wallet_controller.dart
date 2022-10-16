@@ -19,7 +19,6 @@ class WalletController extends GetxController {
 
   @override
   void onClose() {
-    balanceTextController.text = "0";
     nameTextController.dispose();
     balanceTextController.dispose();
     super.onClose();

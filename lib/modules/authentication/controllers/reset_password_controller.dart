@@ -22,13 +22,12 @@ class ResetPasswordController extends GetxController {
   Future<void> sendRequestToken() async {
     final input = <String, dynamic>{"email": emailTextController.text};
 
-    var forgotPasswordResponse =
-        await UserService.forgotPasswordRequestToken(input);
-    if (forgotPasswordResponse.statusCode == 200 ||
-        forgotPasswordResponse.statusCode == 201) {
+    try {
+      await UserService.forgotPasswordRequestToken(input);
+
       Get.snackbar(
         'Berhasil Mengirim Token !',
-        'Silahkan Cek Pesan Pada Email Anda',
+        'Silahkan Cek Token Pada Email Anda',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -37,16 +36,29 @@ class ResetPasswordController extends GetxController {
         ),
       );
       Get.toNamed(RoutesName.resetpasswordtoken);
+    } catch (e) {
+      Get.snackbar(
+        'Tedapat Kesalahan !',
+        e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
     }
   }
 
   Future<void> sendVerifyToken() async {
-    final input = <String, dynamic>{'token': tokenTextController.text};
+    final input = <String, dynamic>{
+      'token': tokenTextController.text,
+      'email': emailTextController.text
+    };
 
-    var verifyTokenResponse = await UserService.fogotPasswordVerifyToken(input);
+    try {
+      await UserService.fogotPasswordVerifyToken(input);
 
-    if (verifyTokenResponse.statusCode == 200 ||
-        verifyTokenResponse.statusCode == 201) {
       Get.snackbar(
         'Token Valid !',
         'Silahkan Buat Password Baru Anda',
@@ -58,11 +70,23 @@ class ResetPasswordController extends GetxController {
         ),
       );
       Get.toNamed(RoutesName.resetpasswordconfirmation);
+    } catch (e) {
+      Get.snackbar(
+        'Tedapat Kesalahan !',
+        e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
     }
   }
 
   Future<void> createNewPassword() async {
     final input = <String, dynamic>{
+      'email': emailTextController.text,
       'token': tokenTextController.text,
       'password': passwordTextController.text,
       'password_confirmation': passwordConfirmationTextController.text
@@ -84,14 +108,12 @@ class ResetPasswordController extends GetxController {
       }
     }
 
-    var passwordConfirmationResponse =
-        await UserService.forgotPasswordConfirmation(input);
+    try {
+      await UserService.forgotPasswordConfirmation(input);
 
-    if (passwordConfirmationResponse.statusCode == 200 ||
-        passwordConfirmationResponse.statusCode == 201) {
       Get.snackbar(
-        'Token Valid !',
-        'Silahkan Buat Password Baru Anda',
+        'Sukses Mereset Password !',
+        'Silahkan Login Kembali !',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -100,6 +122,8 @@ class ResetPasswordController extends GetxController {
         ),
       );
       Get.offAllNamed(RoutesName.landing);
+    } catch (e) {
+      throw e;
     }
   }
 }

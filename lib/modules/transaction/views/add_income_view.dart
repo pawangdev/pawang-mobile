@@ -32,7 +32,10 @@ class AddIncomeView extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () {
+                        Get.back();
+                        Get.delete<TransactionController>();
+                      },
                       icon: const Icon(
                         TablerIcons.chevron_left,
                         size: 22,
@@ -356,12 +359,10 @@ class AddIncomeView extends StatelessWidget {
                                                   },
                                                   child: Column(
                                                     children: [
-                                                      // SvgPicture.network(
-                                                      //     baseHOSTAPI +
-                                                      //         category.icon,
-                                                      //     fit: BoxFit.cover),
-                                                      Icon(TablerIcons
-                                                          .shopping_cart),
+                                                      SvgPicture.network(
+                                                          baseHOSTAPI +
+                                                              category.icon,
+                                                          fit: BoxFit.cover),
                                                       const SizedBox(
                                                         height: 5,
                                                       ),

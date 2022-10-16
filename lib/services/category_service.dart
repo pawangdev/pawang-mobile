@@ -8,19 +8,23 @@ import 'package:http/http.dart' as http;
 class CategoryService {
   static Future<List<CategoryDataModel>?> getCategories(
       {String? type = ""}) async {
-    final token = Storage.getValue(storageToken);
+    try {
+      final token = Storage.getValue(storageToken);
 
-    var response = await http
-        .get(Uri.parse(baseURLAPI + "categories?type=$type"), headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': "Bearer $token",
-    });
+      var response = await http
+          .get(Uri.parse(baseURLAPI + "/categories?type=$type"), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': "Bearer $token",
+      });
 
-    if (response.statusCode == 200) {
-      List jsonResponse = jsonDecode(response.body)['data'];
-      return jsonResponse.map((e) => CategoryDataModel.fromJson(e)).toList();
-    } else {
-      throw Exception("Error Get Data");
+      if (response.statusCode == 200) {
+        List jsonResponse = jsonDecode(response.body)['data'];
+        return jsonResponse.map((e) => CategoryDataModel.fromJson(e)).toList();
+      } else {
+        throw (jsonDecode(response.body));
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

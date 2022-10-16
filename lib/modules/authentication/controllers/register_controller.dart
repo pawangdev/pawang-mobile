@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
@@ -30,12 +31,16 @@ class RegisterController extends GetxController {
   }
 
   Future<void> register() async {
+    final status = await OneSignal.shared.getDeviceState();
+    final String? osUserID = status?.userId;
+
     final input = <String, dynamic>{
       'name': nameTextController.text,
       'email': emailTextController.text,
       'password': passwordTextController.text,
       'phone': phoneTextController.text,
       'gender': genderTextController.value,
+      'onesignal_id': osUserID,
     };
 
     try {
@@ -53,7 +58,7 @@ class RegisterController extends GetxController {
       Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Mendaftar !',
+        'Tedapat Kesalahan !',
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
