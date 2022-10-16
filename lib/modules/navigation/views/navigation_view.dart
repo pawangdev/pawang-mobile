@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/controllers/navigation_controller.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
@@ -22,6 +23,8 @@ class NavigationView extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 3,
         color: Colors.white,
         child: SizedBox(
           height: 8.h,
@@ -42,14 +45,14 @@ class NavigationView extends StatelessWidget {
                         onPressed: () {
                           controller.changeTabIndex(0);
                         }),
-                    IconBottomBar(
-                        text: "Scan Struk",
-                        iconEnable: "assets/images/scan1.png",
-                        iconDisable: "assets/images/scan2.png",
-                        selected: controller.tabIndex == 1 ? true : false,
-                        onPressed: () {
-                          controller.changeTabIndex(1);
-                        }),
+                    // IconBottomBar(
+                    //     text: "Scan Struk",
+                    //     iconEnable: "assets/images/scan1.png",
+                    //     iconDisable: "assets/images/scan2.png",
+                    //     selected: controller.tabIndex == 1 ? true : false,
+                    //     onPressed: () {
+                    //       controller.changeTabIndex(1);
+                    //     }),
                     IconBottomBar(
                       text: "Pengaturan",
                       iconEnable: "assets/images/setting1.png",
@@ -66,6 +69,40 @@ class NavigationView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: GetBuilder<NavigationController>(
+        init: NavigationController(),
+        builder: (controller) {
+          return FloatingActionButton(
+            child: Container(
+              height: 60,
+              width: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset(
+                  'assets/images/scan3.png',
+                ),
+              ),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: defaultPurple.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                    )
+                  ],
+                  gradient: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [defaultPrimary, defaultPurple])),
+            ),
+            onPressed: () {
+              controller.changeTabIndex(1);
+            },
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
