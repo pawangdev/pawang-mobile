@@ -85,11 +85,8 @@ class CategoryView extends StatelessWidget {
                         header: Row(
                           children: [
                             // Text(category.icon),
-                            Icon(
-                              TablerIcons.shopping_cart,
-                              color: defaultPrimary,
-                            ),
-                            SizedBox(
+                            SvgPicture.network(baseHOSTAPI + category.icon),
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -106,21 +103,268 @@ class CategoryView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Sub kategori',
+                                'Sub Kategori',
                                 style: kOpenSans.copyWith(
                                     fontWeight: light, fontSize: 12),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              // controller.subcategories.map((e) {
-                              //   return Container(
-                              //     child: Text(""),
-                              //   );
-                              // }).toList(),\
-                              Text(
-                                'Belom ada sub kategori',
-                                style: kOpenSans.copyWith(fontWeight: medium),
+                              category.subcategories.isEmpty
+                                  ? const Text("Belum Ada Sub Kategori")
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: category.subcategories
+                                          .map(
+                                            (e) => Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 8),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    e.name,
+                                                    style: kOpenSans.copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight: medium),
+                                                  ),
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          controller
+                                                              .nameTextController
+                                                              .text = e.name;
+
+                                                          Get.defaultDialog(
+                                                            onWillPop:
+                                                                () async {
+                                                              controller
+                                                                  .nameTextController
+                                                                  .text = "";
+
+                                                              return true;
+                                                            },
+                                                            title:
+                                                                'Memperbarui Sub Kategori',
+                                                            titleStyle: kOpenSans
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        bold),
+                                                            textConfirm:
+                                                                'Simpan',
+                                                            confirmTextColor:
+                                                                defaultWhite,
+                                                            buttonColor:
+                                                                defaultPrimary,
+                                                            onConfirm: () => controller
+                                                                .updateSubCategory(
+                                                                    categoryId:
+                                                                        category
+                                                                            .id,
+                                                                    subCategoryId:
+                                                                        e.id),
+                                                            // cancel: ,
+                                                            content: Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                      horizontal:
+                                                                          20),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SvgPicture.network(
+                                                                          baseHOSTAPI +
+                                                                              category.icon),
+                                                                      const SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      Text(
+                                                                        category
+                                                                            .name,
+                                                                        style: kOpenSans.copyWith(
+                                                                            fontWeight:
+                                                                                semiBold,
+                                                                            fontSize:
+                                                                                12),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 20),
+                                                                TextFormField(
+                                                                  controller:
+                                                                      controller
+                                                                          .nameTextController,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    contentPadding: const EdgeInsets
+                                                                            .symmetric(
+                                                                        vertical:
+                                                                            0,
+                                                                        horizontal:
+                                                                            10),
+                                                                    hintText:
+                                                                        'Isi Sub Kategori',
+                                                                    hintStyle: kOpenSans.copyWith(
+                                                                        fontSize:
+                                                                            12),
+                                                                    fillColor:
+                                                                        defaultPrimary,
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      gapPadding:
+                                                                          2,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              16),
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                        icon: const Icon(
+                                                            TablerIcons.pencil,
+                                                            color:
+                                                                defaultPrimary),
+                                                      ),
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          showDialog<void>(
+                                                            context: context,
+                                                            barrierDismissible:
+                                                                false,
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                AlertDialog(
+                                                              title: Text(
+                                                                'Hapus Sub Kategori',
+                                                                style: kOpenSans
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            18,
+                                                                        fontWeight:
+                                                                            bold),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                              content: Text(
+                                                                'Apakah kamu yakin akan menghapus sub kategori ini?',
+                                                                style: kOpenSans
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            light),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8)),
+                                                              actions: [
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          OutlinedButton(
+                                                                        child:
+                                                                            Text(
+                                                                          "Kembali",
+                                                                          style: kOpenSans.copyWith(
+                                                                              fontSize: 16,
+                                                                              fontWeight: medium,
+                                                                              color: defaultPrimary),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.pop(
+                                                                              context,
+                                                                              'Kembali');
+                                                                        },
+                                                                        style: OutlinedButton
+                                                                            .styleFrom(
+                                                                          padding:
+                                                                              const EdgeInsets.symmetric(vertical: 4),
+                                                                          side:
+                                                                              const BorderSide(color: defaultPrimary),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                        width: 1
+                                                                            .w),
+                                                                    Expanded(
+                                                                      child:
+                                                                          OutlinedButton(
+                                                                        style: OutlinedButton
+                                                                            .styleFrom(
+                                                                          padding:
+                                                                              const EdgeInsets.symmetric(vertical: 4),
+                                                                          side:
+                                                                              const BorderSide(color: defaultError),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          'Hapus',
+                                                                          style: kOpenSans.copyWith(
+                                                                              color: defaultError,
+                                                                              fontWeight: medium,
+                                                                              fontSize: 16),
+                                                                        ),
+                                                                        onPressed: () => controller.deleteSubCategory(
+                                                                            categoryId:
+                                                                                category.id,
+                                                                            subCategoryId: e.id),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                        icon: const Icon(
+                                                          TablerIcons.trash,
+                                                          color: defaultError,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                              const SizedBox(
+                                height: 10,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -131,9 +375,11 @@ class CategoryView extends StatelessWidget {
                                         title: 'Tambah Sub Kategori',
                                         titleStyle: kOpenSans.copyWith(
                                             fontSize: 14, fontWeight: bold),
-                                        textConfirm: 'Save',
+                                        textConfirm: 'Simpan',
                                         confirmTextColor: defaultWhite,
                                         buttonColor: defaultPrimary,
+                                        onConfirm: () => controller
+                                            .addSubCategory(category.id),
                                         // cancel: ,
                                         content: Column(
                                           children: [
@@ -143,12 +389,10 @@ class CategoryView extends StatelessWidget {
                                                       horizontal: 20),
                                               child: Row(
                                                 children: [
-                                                  Icon(
-                                                    TablerIcons.shopping_cart,
-                                                    color: defaultPrimary,
-                                                    size: 14,
-                                                  ),
-                                                  SizedBox(
+                                                  SvgPicture.network(
+                                                      baseHOSTAPI +
+                                                          category.icon),
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
                                                   Text(
@@ -160,24 +404,23 @@ class CategoryView extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(height: 20),
+                                            const SizedBox(height: 20),
                                             TextFormField(
+                                              controller:
+                                                  controller.nameTextController,
                                               decoration: InputDecoration(
                                                 contentPadding:
-                                                    EdgeInsets.symmetric(
+                                                    const EdgeInsets.symmetric(
                                                         vertical: 0,
                                                         horizontal: 10),
                                                 hintText: 'Isi Sub Kategori',
                                                 hintStyle: kOpenSans.copyWith(
                                                     fontSize: 12),
                                                 fillColor: defaultPrimary,
-                                                // filled: true,
                                                 border: OutlineInputBorder(
                                                   gapPadding: 2,
                                                   borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  // borderSide:
-                                                  //     BorderSide.none
+                                                      BorderRadius.circular(16),
                                                 ),
                                               ),
                                             )
@@ -214,132 +457,10 @@ class CategoryView extends StatelessWidget {
                       );
                     }),
               ),
-              // GetBuilder<CategoryController>(
-              //   init: CategoryController(),
-              //   builder: (controller) {
-              //     return ListView(
-              //       children: [
-              //         ExpansionPanelList(
-              //           // expandedHeaderPadding: EdgeInsets.all(5),
-              //           expansionCallback: (int index, bool isExpanded) {
-              //             // setState(() {
-              //             //   _data[index].isExpanded = !isExpanded;
-              //             // });
-              //             controller.categories[index];
-              //             // controller.categories[index].isExpanded = !isExpanded;
-              //           },
-              //           children:
-              //               controller.categories.map<ExpansionPanel>((data) {
-              //             return ExpansionPanel(
-              //               canTapOnHeader: true,
-              //               headerBuilder:
-              //                   (BuildContext context, bool isExpanded) {
-              //                 return ListTile(
-              //                   title: Row(
-              //                     children: [
-              //                       Icon(
-              //                         Icons.car_crash,
-              //                         color: defaultPrimary,
-              //                       ),
-              //                       SizedBox(width: 10),
-              //                       Text(data.name),
-              //                     ],
-              //                   ),
-              //                 );
-              //               },
-              //               // isExpanded: data.isExpanded,
-              //               body: ListTile(
-              //                   title: Text(data.icon),
-              //                   subtitle: const Text(
-              //                       'To delete this panel, tap the trash can icon'),
-              //                   trailing: const Icon(Icons.delete),
-              //                   onTap: () {}),
-              //             );
-              //           }).toList(),
-              //         ),
-              //       ],
-              //     );
-              //   },
-              // ),
-              // child: Obx(
-              //   () => GridView.builder(
-              //     clipBehavior: Clip.none,
-              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //         childAspectRatio: 2,
-              //         crossAxisCount: 2,
-              //         crossAxisSpacing: 1,
-              //         mainAxisSpacing: 1),
-              //     itemCount: controller.categories.length,
-              //     itemBuilder: (context, index) {
-              //       var category = controller.categories[index];
-              //       return Container(
-              //         margin:
-              //             const EdgeInsets.only(left: 5, right: 5, bottom: 16),
-              //         height: 6.4.h,
-              //         decoration: BoxDecoration(
-              //             color: defaultWhite,
-              //             borderRadius: BorderRadius.circular(12),
-              //             boxShadow: [
-              //               BoxShadow(
-              //                 color: defaultBlack.withOpacity(0.07),
-              //                 spreadRadius: 2,
-              //                 blurRadius: 10,
-              //               )
-              //             ]),
-              //         child: Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: SizedBox(
-              //             height: 6.4.h,
-              //             child: Row(
-              //               children: [
-              //                 Padding(
-              //                   padding: const EdgeInsets.only(
-              //                       left: 20.0, right: 18),
-              //                   child: Container(
-              //                     width: 25,
-              //                     height: 25,
-              //                     // child: SvgPicture.network(
-              //                     //     baseHOSTAPI + category.icon,
-              //                     //     fit: BoxFit.cover),
-              //                     child: Icon(TablerIcons.shopping_cart),
-              //                   ),
-              //                 ),
-              //                 Expanded(
-              //                   child: Text(
-              //                     category.name,
-              //                     style: kOpenSans.copyWith(
-              //                       fontSize: 12,
-              //                       fontWeight: medium,
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
             ),
           ),
         ],
       ),
-      // floatingActionButton: Padding(
-      //   padding: const EdgeInsets.all(25.0),
-      //   child: FloatingActionButton(
-      //     backgroundColor: defaultWhite,
-      //     onPressed: () {
-      //       Navigator.pushNamed(context, AddCategoryScreen.routeName);
-      //     },
-      //     tooltip: 'Tambah Kategori',
-      //     splashColor: defaultPrimary,
-      //     child: Icon(
-      //       Icons.add,
-      //       color: defaultPrimary,
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

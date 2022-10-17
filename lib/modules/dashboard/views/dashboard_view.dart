@@ -50,7 +50,7 @@ class DashboardView extends StatelessWidget {
                                       ? "assets/images/man.png"
                                       : controller.user.value.gender == "female"
                                           ? "assets/images/woman.png"
-                                          : "assets/images/white.jpg"),
+                                          : "assets/images/user.png"),
                                   fit: BoxFit.cover,
                                 ),
                               ),

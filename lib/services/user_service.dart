@@ -39,7 +39,7 @@ class UserService {
       if (e.toString() == "Email telah terdaftar") {
         throw ("Email Telah Terdaftar!");
       } else {
-        throw e;
+        rethrow;
       }
     }
   }
@@ -75,7 +75,7 @@ class UserService {
       } else if (e.toString() == "Password invalid!") {
         throw ("Password Salah!");
       } else {
-        throw e;
+        rethrow;
       }
     }
   }
@@ -108,7 +108,7 @@ class UserService {
             jsonDecode(response.body)['message']);
       }
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -209,7 +209,7 @@ class UserService {
       if (e.toString() == "Email tidak terdaftar") {
         throw ("Ups, Email Tidak Terdaftar !");
       } else {
-        throw e;
+        rethrow;
       }
     }
   }
@@ -244,19 +244,19 @@ class UserService {
           "token tidak valid, silahkan request token kembali") {
         throw ("Maaf, token sudah tidak valid silahkan request ulang !");
       } else {
-        throw e;
+        rethrow;
       }
     }
   }
 
-  static Future<http.Response> forgotPasswordConfirmation(
+  static Future<bool> forgotPasswordConfirmation(
       Map<String, dynamic> data) async {
     try {
       var dataPassword = <String, dynamic>{
         'email': data['email'],
         'token': data['token'],
         'password': data['password'],
-        'password_confirmation': data['password_confirmation'],
+        'password_confirm': data['password_confirm'],
       };
 
       var response = await http.post(
@@ -268,9 +268,21 @@ class UserService {
         },
       );
 
-      return response;
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
+      }
     } catch (e) {
-      throw Exception(e);
+      if (e.toString() == "token tidak valid") {
+        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      } else if (e.toString() ==
+          "token tidak valid, silahkan request token kembali") {
+        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      } else {
+        rethrow;
+      }
     }
   }
 }

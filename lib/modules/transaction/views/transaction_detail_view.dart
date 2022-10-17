@@ -16,8 +16,8 @@ class TransactionDetailView extends StatelessWidget {
   final TransactionController controller = Get.find();
   final TransactionDataModel transaction = Get.arguments;
 
+  @override
   Widget build(BuildContext context) {
-    print(transaction.id);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,8 +317,9 @@ class TransactionDetailView extends StatelessWidget {
                         padding: const EdgeInsets.all(13),
                         side: const BorderSide(color: defaultError),
                         shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius)),
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
+                        ),
                       ),
                     ),
                   ),

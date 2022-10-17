@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.pages,
           debugShowCheckedModeBanner: false,
+          defaultTransition: Transition.fade,
         );
       },
     );

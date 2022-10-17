@@ -89,7 +89,7 @@ class ResetPasswordController extends GetxController {
       'email': emailTextController.text,
       'token': tokenTextController.text,
       'password': passwordTextController.text,
-      'password_confirmation': passwordConfirmationTextController.text
+      'password_confirm': passwordConfirmationTextController.text
     };
 
     try {

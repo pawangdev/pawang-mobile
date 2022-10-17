@@ -11,28 +11,6 @@ import 'package:skeleton_text/skeleton_text.dart';
 class SettingsView extends StatelessWidget {
   final SettingsController controller = Get.find();
   final DashboardController dashboardController = Get.find();
-  // ProfileModel user = ProfileModel(
-  //     id: 0,
-  //     name: "",
-  //     email: "",
-  //     phone: "",
-  //     gender: "",
-  //     createdAt: DateTime.now(),
-  //     updatedAt: DateTime.now());
-
-  // @override
-  // void initState() {
-  //   getUserProfile();
-  //   super.initState();
-  // }
-
-  // void getUserProfile() async {
-  //   var dataUser = await UserService().userProfile();
-
-  //   setState(() {
-  //     user = dataUser as ProfileModel;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +44,7 @@ class SettingsView extends StatelessWidget {
                             ? "assets/images/man.png"
                             : dashboardController.user.value.gender == "female"
                                 ? "assets/images/woman.png"
-                                : "assets/images/white.jpg"),
+                                : "assets/images/user.png"),
                       ),
                       SizedBox(height: 2.4.h),
                       dashboardController.user.value.name != ""
