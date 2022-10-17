@@ -3,7 +3,7 @@ import 'package:pawang_mobile/models/category_model.dart';
 import 'package:pawang_mobile/services/category_service.dart';
 
 class CategoryController extends GetxController {
-  var categories = <CategoryDataModel>[].obs;
+  final categories = <CategoryDataModel>[].obs;
 
   @override
   void onInit() {

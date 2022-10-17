@@ -246,7 +246,7 @@ class SettingsView extends StatelessWidget {
                                       onPressed: () async {
                                         Get.snackbar(
                                           'Sukses !',
-                                          "Berhasil Keluar",
+                                          "Berhasil Keluar !",
                                           backgroundColor: Colors.green,
                                           colorText: Colors.white,
                                           icon: const Icon(

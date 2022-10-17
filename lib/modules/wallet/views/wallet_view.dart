@@ -12,13 +12,6 @@ import 'package:get/get.dart';
 class WalletView extends StatelessWidget {
   final WalletController controller = Get.find();
   final DashboardController dashboardController = Get.find();
-  // late Future<WalletsModel> _wallets;
-
-  // @override
-  // void initState() {
-  //   _wallets = WalletService().getWallets();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +34,8 @@ class WalletView extends StatelessWidget {
                         colors: [defaultPrimary, defaultPurple])),
               ),
               Container(
-                padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
+                padding: EdgeInsets.only(
+                    top: Get.statusBarHeight * 0.6, left: 32, right: 32),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

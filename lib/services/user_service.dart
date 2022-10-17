@@ -16,6 +16,7 @@ class UserService {
         'password': data['password'],
         'phone': data['phone'],
         'gender': data['gender'],
+        'onesignal_id': data['onesignal_id']
       };
 
       var response = await http.post(
@@ -49,6 +50,7 @@ class UserService {
       var dataLogin = <String, dynamic>{
         'email': data['email'],
         'password': data['password'],
+        'onesignal_id': data['onesignal_id']
       };
 
       var response = await http.post(
@@ -86,6 +88,7 @@ class UserService {
         'google_id': data['google_id'],
         'name': data['name'],
         'image_profile': data['image_profile'],
+        'onesignal_id': data['onesignal_id'],
       };
 
       var response = await http.post(
@@ -182,13 +185,13 @@ class UserService {
     }
   }
 
-  static Future<http.Response> forgotPasswordRequestToken(
+  static Future<bool> forgotPasswordRequestToken(
       Map<String, dynamic> data) async {
     try {
       var dataEmail = <String, dynamic>{'email': data['email']};
 
       var response = await http.post(
-        Uri.parse(baseURLAPI + "users/reset-password"),
+        Uri.parse(baseURLAPI + "/auth/reset-password/request"),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -196,19 +199,31 @@ class UserService {
         body: jsonEncode(dataEmail),
       );
 
-      return response;
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
+      }
     } catch (e) {
-      throw Exception(e);
+      if (e.toString() == "Email tidak terdaftar") {
+        throw ("Ups, Email Tidak Terdaftar !");
+      } else {
+        throw e;
+      }
     }
   }
 
-  static Future<http.Response> fogotPasswordVerifyToken(
+  static Future<bool> fogotPasswordVerifyToken(
       Map<String, dynamic> data) async {
     try {
-      var dataToken = <String, dynamic>{"token": data['token']};
+      var dataToken = <String, dynamic>{
+        "token": data['token'],
+        "email": data['email'],
+      };
 
       var response = await http.post(
-        Uri.parse(baseURLAPI + "users/reset-password/token"),
+        Uri.parse(baseURLAPI + "/auth/reset-password/verify"),
         body: jsonEncode(dataToken),
         headers: {
           'Accept': 'application/json',
@@ -216,9 +231,21 @@ class UserService {
         },
       );
 
-      return response;
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (jsonDecode(response.body)['data'] ??
+            jsonDecode(response.body)['message']);
+      }
     } catch (e) {
-      throw Exception(e);
+      if (e.toString() == "token tidak valid") {
+        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      } else if (e.toString() ==
+          "token tidak valid, silahkan request token kembali") {
+        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      } else {
+        throw e;
+      }
     }
   }
 
@@ -226,13 +253,14 @@ class UserService {
       Map<String, dynamic> data) async {
     try {
       var dataPassword = <String, dynamic>{
+        'email': data['email'],
         'token': data['token'],
         'password': data['password'],
         'password_confirmation': data['password_confirmation'],
       };
 
       var response = await http.post(
-        Uri.parse(baseURLAPI + "users/reset-password/password-confirmation"),
+        Uri.parse(baseURLAPI + "/auth/reset-password"),
         body: jsonEncode(dataPassword),
         headers: {
           'Accept': 'application/json',

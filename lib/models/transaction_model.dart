@@ -76,7 +76,7 @@ class TransactionDataModel {
         walletId: json["wallet_id"],
         subcategoryId: json["subcategory_id"],
         type: json["type"],
-        description: json["description"],
+        description: json["description"] ?? "",
         imageUrl: json["image_url"],
         date: DateTime.parse(json["date"]),
         userId: json["user_id"],
@@ -139,6 +139,38 @@ class Category {
         "type": type,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Subcategory {
+  Subcategory({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.userId,
+    required this.categoryId,
+  });
+
+  int id;
+  String name;
+  String type;
+  int userId;
+  int categoryId;
+
+  factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
+        id: json["id"],
+        name: json["name"],
+        type: json["type"],
+        userId: json["user_id"],
+        categoryId: json["category_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "type": type,
+        "user_id": userId,
+        "category_id": categoryId,
       };
 }
 

@@ -77,6 +77,7 @@ class TransactionController extends GetxController {
           color: Colors.white,
         ),
       );
+      throw ("Masukkan Nominal Transaksi");
     } else if (walletId.value == 0) {
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
@@ -88,6 +89,7 @@ class TransactionController extends GetxController {
           color: Colors.white,
         ),
       );
+      throw ("Pilih Salah Satu Wallet Terlebih Dahulu");
     } else if (categoryId.value == 0) {
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
@@ -99,6 +101,7 @@ class TransactionController extends GetxController {
           color: Colors.white,
         ),
       );
+      throw ("Pilih Salah Satu Kategori Terlebih Dahulu");
     }
 
     var data = <String, dynamic>{
@@ -112,28 +115,31 @@ class TransactionController extends GetxController {
     };
 
     try {
-      navigationController.tabIndex = 0;
-      var transactionResponse =
-          await TransactionService.createTransaction(data);
+      // ignore: unrelated_type_equality_checks
+      if (amountTextController != 0) {
+        navigationController.tabIndex = 0;
+        var transactionResponse =
+            await TransactionService.createTransaction(data);
 
-      if (transactionResponse) {
-        Get.delete<TransactionController>();
-        Get.delete<DashboardController>();
+        if (transactionResponse) {
+          Get.delete<TransactionController>();
+          Get.delete<DashboardController>();
 
-        Get.snackbar(
-          'Sukses !',
-          "Berhasil Menambahkan Transaksi",
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ),
-        );
+          Get.snackbar(
+            'Sukses !',
+            "Berhasil Menambahkan Transaksi",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          );
 
-        clearInput();
+          clearInput();
 
-        Get.toNamed(RoutesName.navigation);
+          Get.toNamed(RoutesName.navigation);
+        }
       }
     } catch (e) {
       Get.snackbar(

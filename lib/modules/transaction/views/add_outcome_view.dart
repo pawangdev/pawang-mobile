@@ -31,7 +31,10 @@ class AddOutcomeView extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () {
+                        Get.back();
+                        Get.delete<TransactionController>();
+                      },
                       icon: const Icon(
                         TablerIcons.chevron_left,
                         size: 22,
@@ -260,16 +263,15 @@ class AddOutcomeView extends StatelessWidget {
                                                 ),
                                                 margin: const EdgeInsets.only(
                                                     bottom: 14),
-                                                child: Center(
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      controller.walletId
-                                                          .value = wallet.id;
-                                                      controller
-                                                          .displayWalletName
-                                                          .value = wallet.name;
-                                                      Get.back();
-                                                    },
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller.walletId.value =
+                                                        wallet.id;
+                                                    controller.displayWalletName
+                                                        .value = wallet.name;
+                                                    Get.back();
+                                                  },
+                                                  child: Center(
                                                     child: Text(
                                                       wallet.name,
                                                       style: kOpenSans.copyWith(
@@ -355,12 +357,10 @@ class AddOutcomeView extends StatelessWidget {
                                                   },
                                                   child: Column(
                                                     children: [
-                                                      // SvgPicture.network(
-                                                      //     baseHOSTAPI +
-                                                      //         category.icon,
-                                                      //     fit: BoxFit.cover),
-                                                      Icon(TablerIcons
-                                                          .shopping_cart),
+                                                      SvgPicture.network(
+                                                          baseHOSTAPI +
+                                                              category.icon,
+                                                          fit: BoxFit.cover),
                                                       const SizedBox(
                                                         height: 5,
                                                       ),
