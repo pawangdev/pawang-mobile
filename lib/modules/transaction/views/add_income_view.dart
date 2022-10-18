@@ -445,17 +445,18 @@ class AddIncomeView extends StatelessWidget {
                                       controller.createTransaction("income"),
                                   child: const Text("Simpan"),
                                   style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(
-                                        const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 8),
+                                    padding: MaterialStateProperty.all(
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                    ),
+                                    backgroundColor:
+                                        MaterialStateProperty.all(defaultBlack),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(24),
                                       ),
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              defaultBlack),
-                                      shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(24)))),
+                                    ),
+                                  ),
                                 ),
                         ],
                       ),

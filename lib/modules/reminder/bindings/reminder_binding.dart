@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pawang_mobile/views/reminder_controller.dart';
+import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 
 class ReminderBinding implements Bindings {
   @override

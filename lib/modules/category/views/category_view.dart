@@ -21,12 +21,8 @@ class CategoryView extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 13.h,
+                height: 15.h,
                 decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
@@ -34,7 +30,7 @@ class CategoryView extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(
-                    top: Get.statusBarHeight * 0.6, left: 32, right: 32),
+                    top: Get.statusBarHeight * 0.9, left: 32, right: 32),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

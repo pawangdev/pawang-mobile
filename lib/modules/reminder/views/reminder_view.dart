@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
-import 'package:pawang_mobile/modules/wallet/wallet.dart';
+import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:pawang_mobile/widgets/wallet_card2.dart';
+import 'package:pawang_mobile/widgets/reminder_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
-class WalletView extends StatelessWidget {
-  final WalletController controller = Get.find();
-  final DashboardController dashboardController = Get.find();
+class ReminderView extends StatelessWidget {
+  final ReminderController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +38,20 @@ class WalletView extends StatelessWidget {
                     IconBack(
                       blueMode: false,
                       onTap: () {
-                        Get.toNamed(RoutesName.navigation);
+                        Navigator.pop(context);
                       },
                     ),
                     Column(
                       children: [
                         SvgPicture.asset(
-                          'assets/images/wallet.svg',
+                          'assets/images/reminder.svg',
                           color: defaultWhite,
                         ),
                         SizedBox(
                           height: 1.h,
                         ),
                         Text(
-                          'Dompet',
+                          'Pengingat',
                           style: kOpenSans.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
@@ -69,45 +68,16 @@ class WalletView extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 0.5.h,
+            height: 2.h,
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Obx(
-                () => ListView.builder(
-                  itemCount: dashboardController.wallets.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (BuildContext context, int index) {
-                    var wallet = dashboardController.wallets[index];
-                    return WalletCard2(
-                      wallet: wallet,
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
+          ReminderCard(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(RoutesName.addwallet);
-        },
-        tooltip: 'Tambah Dompet',
-        splashColor: defaultPrimary,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [defaultPrimary, defaultPurple])),
-          child: const Icon(Icons.add),
-        ),
+        onPressed: () => Get.toNamed(RoutesName.addreminder),
+        child: const Icon(TablerIcons.plus),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

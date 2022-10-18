@@ -35,17 +35,22 @@ class ReminderCard extends StatelessWidget {
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.wifi),
+                    const Icon(Icons.wifi),
                     SizedBox(width: 5.w),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Bayar Wifi',
-                          style: kOpenSans.copyWith(fontWeight: semiBold),
+                          style: kOpenSans.copyWith(
+                              fontWeight: semiBold, fontSize: 16),
+                        ),
+                        const SizedBox(
+                          height: 5,
                         ),
                         Text(
                           '24 Agustus',
-                          style: kOpenSans.copyWith(fontSize: 12),
+                          style: kOpenSans.copyWith(fontSize: 14),
                         ),
                       ],
                     ),

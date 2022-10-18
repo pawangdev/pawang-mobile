@@ -15,80 +15,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class EditProfileView extends StatelessWidget {
   final EditProfileController controller = Get.find();
   final DashboardController dashboardController = Get.find();
-  // late String gender;
-  // bool _isLoading = false;
-  // bool _init = true;
-
-  // void _submit() {
-  //   final form = formKey.currentState;
-
-  //   if (form!.validate()) {
-  //     form.save();
-  //     var data = <String, dynamic>{
-  //       "name": nameTextController.text,
-  //     };
-
-  //     try {
-  //       setState(() {
-  //         _isLoading = true;
-  //       });
-  //       UserService().userUpdateProfile(data).then((response) {
-  //         if (response == true) {
-  //           setState(() {
-  //             _isLoading = false;
-  //           });
-  //           Navigator.pushReplacementNamed(context, NavigationScreen.routeName);
-
-  //           Flushbar(
-  //             message: "Berhasil Update Profile !",
-  //             icon: const Icon(
-  //               Icons.check,
-  //               size: 28.0,
-  //               color: Colors.white,
-  //             ),
-  //             margin: const EdgeInsets.all(8),
-  //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: defaultSuccess,
-  //             duration: const Duration(seconds: 3),
-  //           ).show(context);
-  //         } else {
-  //           setState(() {
-  //             _isLoading = false;
-  //           });
-  //           Flushbar(
-  //             message: "Terdapat Kesalahan !",
-  //             icon: const Icon(
-  //               Icons.check,
-  //               size: 28.0,
-  //               color: Colors.white,
-  //             ),
-  //             margin: const EdgeInsets.all(8),
-  //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: defaultError,
-  //             duration: const Duration(seconds: 3),
-  //           ).show(context);
-  //         }
-  //       });
-  //     } catch (e) {
-  //       setState(() {
-  //         _isLoading = false;
-  //       });
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context)!.settings.arguments as ArgsEditProfile;
-
-    // if (_init) {
-    //   nameTextController.text = args.name;
-    //   gender = args.gender;
-
-    //   setState(() {
-    //     _init = false;
-    //   });
-    // }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -130,7 +59,7 @@ class EditProfileView extends StatelessWidget {
                             ? "assets/images/man.png"
                             : dashboardController.user.value.gender == "female"
                                 ? "assets/images/woman.png"
-                                : "assets/images/white.jpg"),
+                                : "assets/images/user.png"),
                       ),
                     ),
                     SizedBox(height: 2.4.h),

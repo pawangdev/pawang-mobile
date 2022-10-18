@@ -11,6 +11,7 @@ abstract class RoutesName {
   static const editprofile = '/edit-profile';
   static const category = '/category';
   static const reminder = '/reminder';
+  static const addreminder = '/add-reminder';
   static const wallet = '/wallet';
   static const addcategory = '/add-category';
   static const addwallet = '/add-wallet';
