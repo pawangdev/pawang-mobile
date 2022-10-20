@@ -167,33 +167,6 @@ class TransactionHistoryView extends StatelessWidget {
           ],
         )
       ]),
-      floatingActionButton: FloatingActionButton(
-        child: Container(
-          height: 60,
-          width: 60,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Icon(
-              Icons.add_rounded,
-              size: 30,
-            ),
-          ),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: defaultPurple.withOpacity(0.4),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                )
-              ],
-              gradient: const LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [defaultPrimary, defaultPurple])),
-        ),
-        onPressed: () {},
-      ),
     );
   }
 }
