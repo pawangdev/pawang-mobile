@@ -13,28 +13,42 @@ class LayananCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 17.w,
-      child: Column(
-        children: [
-          GestureDetector(
-            child: Center(
-              child: Image.asset(icon),
-            ),
-            onTap: onTap,
-          ),
-          SizedBox(
-            height: 1.4.h,
-          ),
-          Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            style: kOpenSans.copyWith(
-                //0.18.dp
-                fontSize: 10,
-                fontWeight: bold,
-                color: defaultWhite),
-          ),
+      width: 23.w,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: defaultBlack.withOpacity(0.12),
+            spreadRadius: 2,
+            blurRadius: 10,
+          )
         ],
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: defaultWhite,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            GestureDetector(
+              child: Center(
+                child: Image.asset(icon),
+              ),
+              onTap: onTap,
+            ),
+            SizedBox(
+              height: 1.4.h,
+            ),
+            Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: kOpenSans.copyWith(
+                  //0.18.dp
+                  fontSize: 10,
+                  fontWeight: bold,
+                  color: defaultBlack),
+            ),
+          ],
+        ),
       ),
     );
   }

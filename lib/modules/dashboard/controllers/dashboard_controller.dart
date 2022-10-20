@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
+import 'package:pawang_mobile/services/reminder_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/services/wallet_service.dart';
@@ -11,6 +13,7 @@ import 'package:pawang_mobile/services/wallet_service.dart';
 class DashboardController extends GetxController {
   var wallets = <WalletsDataModel>[].obs;
   var transactions = <TransactionDataModel>[].obs;
+  var reminders = <ReminderDataModel>[].obs;
   var user = UserProfileDataModel(
           id: 0,
           name: "",
@@ -29,6 +32,7 @@ class DashboardController extends GetxController {
     getUserProfile();
     getWallets();
     getTransactions();
+    getReminders();
     super.onInit();
   }
 
@@ -62,6 +66,17 @@ class DashboardController extends GetxController {
       var transactionsResponse = await TransactionService.getTransactions();
       if (transactionsResponse != null) {
         transactions.assignAll(transactionsResponse);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getReminders() async {
+    try {
+      var remindersResponse = await ReminderService.getReminders();
+      if (remindersResponse != null) {
+        reminders.assignAll(remindersResponse);
       }
     } catch (e) {
       print(e);

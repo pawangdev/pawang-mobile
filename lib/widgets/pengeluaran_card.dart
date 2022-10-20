@@ -13,21 +13,9 @@ class CardPengeluaran extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8, left: 32, right: 32),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: defaultBlack.withOpacity(0.07),
-                spreadRadius: 2,
-                blurRadius: 10,
-              )
-            ]),
-        child: Row(
+    return Column(
+      children: [
+        Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,7 +46,7 @@ class CardPengeluaran extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
                             //0.22.dp
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: semiBold,
                           ),
                         ),
@@ -69,7 +57,7 @@ class CardPengeluaran extends StatelessWidget {
                               .toString(),
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
-                            fontSize: 14,
+                            fontSize: 12,
                             color: defaultGray.withOpacity(0.9),
                           ),
                         ),
@@ -79,16 +67,24 @@ class CardPengeluaran extends StatelessWidget {
                 ),
               ],
             ),
-            Text(CurrencyFormat.convertToIdr(data.amount, 2).toString(),
+            Text(
+                data.type == "income"
+                    ? '+ ' +
+                        CurrencyFormat.convertToIdr(data.amount, 2).toString()
+                    : '- ' +
+                        CurrencyFormat.convertToIdr(data.amount, 2).toString(),
                 style: kOpenSans.copyWith(
                     color:
                         data.type == "income" ? defaultSuccess : defaultError,
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 10,
+                    fontWeight: semiBold,
                     overflow: TextOverflow.ellipsis)),
           ],
         ),
-      ),
+        Divider(
+          thickness: 1,
+        )
+      ],
     );
   }
 }
