@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:pawang_mobile/routes/routes.dart';
@@ -55,25 +54,25 @@ class ReminderController extends GetxController {
         final input = <String, dynamic>{
           'name': nameTextController.text,
           'type': type.value,
-          'date': DateTime.parse(dateTextController.text).toLocal().toString(),
+          'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
 
         final response = await ReminderService.createReminder(input);
 
         if (response) {
-          Get.rawSnackbar(
-            title: "Sukses",
-            message: "Berhasil Membuat Pengingat",
-            backgroundColor: defaultSuccess,
-          );
-
-          getRemindersData();
+          await getRemindersData();
 
           nameTextController.text = "";
           dateTextController.text = "";
 
           Get.back();
+
+          Get.rawSnackbar(
+            title: "Sukses",
+            message: "Berhasil Membuat Pengingat",
+            backgroundColor: defaultSuccess,
+          );
         }
       } catch (e) {
         log(e.toString());
@@ -93,7 +92,7 @@ class ReminderController extends GetxController {
         final input = <String, dynamic>{
           'name': nameTextController.text,
           'type': type.value,
-          'date': DateTime.parse(dateTextController.text).toLocal().toString(),
+          'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
 

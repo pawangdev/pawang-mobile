@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
@@ -64,7 +62,7 @@ class ReminderView extends StatelessWidget {
                       onTap: () {
                         Get.toNamed(RoutesName.addreminder);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.add_rounded,
                         color: defaultWhite,
                       ),
