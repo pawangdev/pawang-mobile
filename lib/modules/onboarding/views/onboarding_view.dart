@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/onboarding/controllers/onboarding_controllers.dart';
+import 'package:pawang_mobile/routes/routes.dart';
+import 'package:pawang_mobile/utils/storage.dart';
 
 class OnboardingView extends StatelessWidget {
   OnboardingView({Key? key}) : super(key: key);
@@ -70,7 +72,15 @@ class OnboardingView extends StatelessWidget {
           bottom: 20,
           child: FloatingActionButton(
             backgroundColor: defaultPrimary,
-            onPressed: _controller.forwardAction,
+            onPressed: () {
+              if (_controller.isLastPage) {
+                Storage.saveValue('is_first_open', true);
+                Get.toNamed(RoutesName.landing);
+              } else {
+                _controller.pageController
+                    .nextPage(duration: 1.5.seconds, curve: Curves.ease);
+              }
+            },
             child: Obx(() {
               return Text(_controller.isLastPage ? 'Start' : 'Next');
             }),

@@ -198,13 +198,13 @@ class DashboardView extends StatelessWidget {
                               Get.toNamed(RoutesName.category);
                             },
                           ),
-                          LayananCard(
-                            icon: 'assets/images/reminder.png',
-                            title: 'Reminder',
-                            onTap: () {
-                              Get.toNamed(RoutesName.reminder);
-                            },
-                          ),
+                          // LayananCard(
+                          //   icon: 'assets/images/reminder.png',
+                          //   title: 'Reminder',
+                          //   onTap: () {
+                          //     Get.toNamed(RoutesName.reminder);
+                          //   },
+                          // ),
                         ],
                       )
                     ],

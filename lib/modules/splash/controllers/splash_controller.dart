@@ -16,8 +16,13 @@ class SplashController extends GetxController {
       const Duration(seconds: 3),
       () {},
     );
-    Storage.hasData('token')
-        ? Get.offAllNamed(RoutesName.navigation)
-        : Get.offAllNamed(RoutesName.landing);
+    if (Storage.getValue("is_first_open") == true) {
+      Storage.hasData('token')
+          ? Get.offAllNamed(RoutesName.navigation)
+          : Get.offAllNamed(RoutesName.landing);
+    } else {
+      print(Storage.getValue("is_first_open"));
+      Get.offAllNamed(RoutesName.onboarding);
+    }
   }
 }

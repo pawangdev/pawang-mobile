@@ -6,14 +6,6 @@ class OnboardingController extends GetxController {
   bool get isLastPage => selectedPageIndex.value == onboardingPages.length - 1;
   var pageController = PageController();
 
-  forwardAction() {
-    if (isLastPage) {
-      // Get.toNamed(RoutesName.splash);
-    } else {
-      pageController.nextPage(duration: 1.5.seconds, curve: Curves.ease);
-    }
-  }
-
   List<OnboardingInfo> onboardingPages = [
     OnboardingInfo('assets/images/OB-Scan.png', 'Scan Struk',
         'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!'),

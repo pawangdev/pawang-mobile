@@ -2,6 +2,7 @@ part of './app_pages.dart';
 
 abstract class RoutesName {
   static const splash = '/splash';
+  static const onboarding = '/onboarding';
   static const navigation = '/navigation';
   static const landing = '/landing';
   static const login = '/login';

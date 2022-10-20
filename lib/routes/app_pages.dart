@@ -6,6 +6,7 @@ import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/landing/landing.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
+import 'package:pawang_mobile/modules/onboarding/onboarding.dart';
 import 'package:pawang_mobile/modules/profile/profile.dart';
 import 'package:pawang_mobile/modules/reminder/reminder.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
@@ -26,6 +27,10 @@ class AppPages {
         name: RoutesName.splash,
         page: () => SplashView(),
         binding: SplashBinding()),
+    GetPage(
+        name: RoutesName.onboarding,
+        page: () => OnboardingView(),
+        binding: OnboardingBinding()),
     GetPage(
         name: RoutesName.register,
         page: () => RegisterView(),

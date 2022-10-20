@@ -1,10 +1,8 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/reminder.dart';
-import 'package:pawang_mobile/widgets/dropdown_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -12,38 +10,46 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class AddReminderView extends StatelessWidget {
   AddReminderView({Key? key}) : super(key: key);
   final ReminderController controller = Get.find();
+  final reminderUpdate = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconBack(
-                        blueMode: true,
-                        onTap: () {
-                          Navigator.pop(context);
-                        }),
-                    Text(
-                      "Tambah Reminder",
-                      style: kOpenSans.copyWith(
-                          fontSize: 16, fontWeight: bold, color: defaultBlack),
-                    ),
-                    SizedBox(
-                      width: 7.2.w,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 4.4.h,
-                ),
-                Form(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconBack(
+                      blueMode: true,
+                      onTap: () {
+                        Get.back();
+                        if (reminderUpdate != null) {
+                          controller.nameTextController.text = "";
+                          controller.dateTextController.text = "";
+                        }
+                      }),
+                  Text(
+                    reminderUpdate == null
+                        ? "Tambah Pengingat"
+                        : "Edit Pengingat",
+                    style: kOpenSans.copyWith(
+                        fontSize: 16, fontWeight: bold, color: defaultBlack),
+                  ),
+                  SizedBox(
+                    width: 7.2.w,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 4.4.h,
+              ),
+              Expanded(
+                child: Form(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -55,7 +61,7 @@ class AddReminderView extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        "Tanggal",
+                        "Tanggal & Waktu",
                         style: kOpenSans.copyWith(
                             fontSize: 12,
                             //0.21.dp,
@@ -67,12 +73,15 @@ class AddReminderView extends StatelessWidget {
                       ),
                       DateTimePicker(
                         type: DateTimePickerType.dateTime,
-                        initialDate: DateTime.now(),
+                        initialDate: DateTime.now().toLocal(),
                         dateMask: 'd MMMM yyyy - HH:mm',
-                        initialValue: controller.dateTextController.text,
+                        initialValue: reminderUpdate == null
+                            ? controller.dateTextController.text
+                            : DateTime.parse(controller.dateTextController.text)
+                                .toLocal()
+                                .toString(),
                         firstDate: DateTime(2000),
                         lastDate: DateTime(2100),
-                        use24HourFormat: true,
                         onChanged: (value) {
                           controller.dateTextController.text = value;
                         },
@@ -80,31 +89,46 @@ class AddReminderView extends StatelessWidget {
                           fillColor: const Color(0xFFF5F5F5),
                           filled: true,
                           border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                              borderSide: BorderSide.none),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
+                            borderSide: BorderSide.none,
+                          ),
                           focusColor: defaultPrimary,
                         ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      DropdownField(
-                        value: controller.type.value,
-                        inputLabel: "Tipe Perulangan",
-                        data: controller.typeData,
-                        onChange: (value) {
-                          controller.type.value = value.toString();
-                        },
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
                     ],
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  child: Text(
+                    reminderUpdate == null
+                        ? "Tambah Pengingat"
+                        : "Edit Pengingat",
+                    style: kOpenSans.copyWith(
+                        fontSize: 14,
+                        fontWeight: semiBold,
+                        color: defaultPrimary),
+                  ),
+                  onPressed: () => reminderUpdate != null
+                      ? controller.onSubmit(
+                          isAdding: false, id: reminderUpdate['id'])
+                      : controller.onSubmit(),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: const BorderSide(color: defaultPrimary),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
