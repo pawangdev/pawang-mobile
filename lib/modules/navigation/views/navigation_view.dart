@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/controllers/navigation_controller.dart';
+import 'package:pawang_mobile/modules/reminder/reminder.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,7 +20,13 @@ class NavigationView extends StatelessWidget {
         builder: (c) {
           return IndexedStack(
             index: controller.tabIndex,
-            children: [DashboardView(), ScanReceipeView(), SettingsView()],
+            children: [
+              DashboardView(),
+              TransactionHistoryView(),
+              ScanReceipeView(),
+              ReminderView(),
+              SettingsView()
+            ],
           );
         },
       ),
@@ -30,37 +38,57 @@ class NavigationView extends StatelessWidget {
           height: 8.h,
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 42),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: GetBuilder<NavigationController>(
               init: NavigationController(),
               builder: (controller) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconBottomBar(
-                        text: "Beranda",
-                        iconEnable: "assets/images/home1.png",
-                        iconDisable: "assets/images/home2.png",
-                        selected: controller.tabIndex == 0 ? true : false,
-                        onPressed: () {
-                          controller.changeTabIndex(0);
-                        }),
-                    // IconBottomBar(
-                    //     text: "Scan Struk",
-                    //     iconEnable: "assets/images/scan1.png",
-                    //     iconDisable: "assets/images/scan2.png",
-                    //     selected: controller.tabIndex == 1 ? true : false,
-                    //     onPressed: () {
-                    //       controller.changeTabIndex(1);
-                    //     }),
-                    IconBottomBar(
-                      text: "Pengaturan",
-                      iconEnable: "assets/images/setting1.png",
-                      iconDisable: "assets/images/setting2.png",
-                      selected: controller.tabIndex == 2 ? true : false,
-                      onPressed: () {
-                        controller.changeTabIndex(2);
-                      },
+                    Row(
+                      children: [
+                        IconBottomBar(
+                          text: "Beranda",
+                          iconEnable: "assets/images/home1.png",
+                          iconDisable: "assets/images/home2.png",
+                          selected: controller.tabIndex == 0 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(0);
+                          },
+                        ),
+                        IconBottomBar(
+                          text: "Transaksi",
+                          iconEnable: "assets/images/transaksi1.png",
+                          iconDisable: "assets/images/transaksi2.png",
+                          selected: controller.tabIndex == 1 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(1);
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(),
+                    Row(
+                      children: [
+                        IconBottomBar(
+                          text: "Pengingat",
+                          iconEnable: "assets/images/remin1.png",
+                          iconDisable: "assets/images/remin2.png",
+                          selected: controller.tabIndex == 3 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(3);
+                          },
+                        ),
+                        IconBottomBar(
+                          text: "Pengaturan",
+                          iconEnable: "assets/images/setting1.png",
+                          iconDisable: "assets/images/setting2.png",
+                          selected: controller.tabIndex == 4 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(4);
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 );
@@ -97,7 +125,7 @@ class NavigationView extends StatelessWidget {
                       colors: [defaultPrimary, defaultPurple])),
             ),
             onPressed: () {
-              controller.changeTabIndex(1);
+              controller.changeTabIndex(2);
             },
           );
         },

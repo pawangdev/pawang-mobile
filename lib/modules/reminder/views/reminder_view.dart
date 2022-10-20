@@ -22,7 +22,7 @@ class ReminderView extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 14.h,
+                height: 20.h,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -60,9 +60,15 @@ class ReminderView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      width: 7.2.w,
-                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RoutesName.addreminder);
+                      },
+                      child: Icon(
+                        Icons.add_rounded,
+                        color: defaultWhite,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -90,10 +96,6 @@ class ReminderView extends StatelessWidget {
                 )),
           )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(RoutesName.addreminder),
-        child: const Icon(TablerIcons.plus),
       ),
     );
   }

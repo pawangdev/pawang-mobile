@@ -10,13 +10,21 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
 
-class TransactionController extends GetxController {
+class TransactionController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final DashboardController dashboardController = Get.find();
   final NavigationController navigationController = Get.find();
 
   // On Update
   late int? transactionId;
   late String? transactionType;
+  // late AnimationController tabController;
+  final List<Tab> myTabs = <Tab>[
+    Tab(text: 'Pemasukan'),
+    Tab(text: 'Pengeluaran'),
+  ];
+
+  late TabController tabController;
 
   // On Create
   var categoriesIncome = <CategoryDataModel>[].obs;
@@ -40,6 +48,8 @@ class TransactionController extends GetxController {
         DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
     displayDate.value = dateTextController.text;
+
+    tabController = TabController(vsync: this, length: myTabs.length);
     super.onInit();
   }
 
@@ -48,6 +58,7 @@ class TransactionController extends GetxController {
     clearInput();
     descriptionTextController.dispose();
     dateTextController.dispose();
+    tabController.dispose();
     super.onClose();
   }
 

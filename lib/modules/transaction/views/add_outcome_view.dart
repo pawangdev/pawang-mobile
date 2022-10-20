@@ -24,37 +24,6 @@ class AddOutcomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                        Get.delete<TransactionController>();
-                      },
-                      icon: const Icon(
-                        TablerIcons.chevron_left,
-                        size: 22,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Outcome",
-                      style: kOpenSans.copyWith(
-                          fontWeight: semiBold, fontSize: 18),
-                    ),
-                  ),
-                ),
-                const Expanded(child: SizedBox()),
-              ],
-            ),
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(top: 16),

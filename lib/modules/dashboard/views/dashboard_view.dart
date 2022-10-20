@@ -172,16 +172,9 @@ class DashboardView extends StatelessWidget {
                         children: [
                           LayananCard(
                             icon: 'assets/images/pemasukan.png',
-                            title: 'Pemasukan',
+                            title: 'Transaksi',
                             onTap: () {
-                              Get.toNamed(RoutesName.addincome);
-                            },
-                          ),
-                          LayananCard(
-                            icon: 'assets/images/pengeluaran.png',
-                            title: 'Pengeluaran',
-                            onTap: () {
-                              Get.toNamed(RoutesName.addoutcome);
+                              Get.toNamed(RoutesName.tabbar);
                             },
                           ),
                           LayananCard(

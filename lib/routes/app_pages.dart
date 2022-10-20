@@ -13,7 +13,9 @@ import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/splash/splash.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:pawang_mobile/modules/transaction/views/tab_bar_view.dart';
 import 'package:pawang_mobile/modules/transaction/views/transaction_detail_view.dart';
+import 'package:pawang_mobile/modules/transaction/views/add_transaction.dart';
 import 'package:pawang_mobile/modules/wallet/views/add_wallet_view.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 
@@ -70,6 +72,18 @@ class AppPages {
     GetPage(
         name: RoutesName.addincome,
         page: () => AddIncomeView(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.addtransaction,
+        page: () => AddTransaction(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.tabbar,
+        page: () => TabBarScreen(),
+        binding: TransactionBinding()),
+    GetPage(
+        name: RoutesName.transactionhistory,
+        page: () => TransactionHistoryView(),
         binding: TransactionBinding()),
     GetPage(
         name: RoutesName.addoutcome,
