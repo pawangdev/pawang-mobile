@@ -39,7 +39,7 @@ class ReminderView extends StatelessWidget {
                     IconBack(
                       blueMode: false,
                       onTap: () {
-                        Get.toNamed(RoutesName.settings);
+                        Get.back();
                       },
                     ),
                     Column(
