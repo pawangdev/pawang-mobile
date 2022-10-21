@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
@@ -15,6 +16,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
   final DashboardController controller = Get.find();
+  final NavigationController controllerNavigation = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class DashboardView extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Container(
-                    height: Get.height * 0.4,
+                    height: Get.height * 0.42,
                     decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.vertical(bottom: Radius.circular(60)),
@@ -37,7 +39,7 @@ class DashboardView extends StatelessWidget {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 30, left: 32, right: 32),
+                          const EdgeInsets.only(top: 50, left: 32, right: 32),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -89,10 +91,7 @@ class DashboardView extends StatelessWidget {
                                               shimmerColor: Colors.white54,
                                               child: Container(
                                                 height: 15,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.25,
+                                                width: Get.width * 0.25,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -111,7 +110,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: Get.height * 0.025),
                     Obx(
                       () => CarouselSlider.builder(
                         itemCount: controller.wallets.length + 1,
@@ -159,10 +158,10 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 2.4.h,
+                      height: Get.height * 0.035,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 32, right: 32),
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -190,7 +189,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 3.4.h),
+                    SizedBox(height: Get.height * 0.034),
                   ],
                 ),
               ],
@@ -199,7 +198,6 @@ class DashboardView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Container(
                 width: Get.width,
-                // height: 200.h,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -226,12 +224,17 @@ class DashboardView extends StatelessWidget {
                                 fontWeight: bold,
                                 color: defaultBlack),
                           ),
-                          Text(
-                            'Lihat semua',
-                            style: kOpenSans.copyWith(
-                                fontSize: 10,
-                                fontWeight: medium,
-                                color: Colors.blue),
+                          InkWell(
+                            onTap: () {
+                              controllerNavigation.changeTabIndex(1);
+                            },
+                            child: Text(
+                              'Lihat semua',
+                              style: kOpenSans.copyWith(
+                                  fontSize: 10,
+                                  fontWeight: medium,
+                                  color: Colors.blue),
+                            ),
                           )
                         ],
                       ),
@@ -308,12 +311,17 @@ class DashboardView extends StatelessWidget {
                                 fontWeight: bold,
                                 color: defaultBlack),
                           ),
-                          Text(
-                            'Lihat semua',
-                            style: kOpenSans.copyWith(
-                                fontSize: 10,
-                                fontWeight: medium,
-                                color: Colors.blue),
+                          InkWell(
+                            onTap: () {
+                              controllerNavigation.changeTabIndex(3);
+                            },
+                            child: Text(
+                              'Lihat semua',
+                              style: kOpenSans.copyWith(
+                                  fontSize: 10,
+                                  fontWeight: medium,
+                                  color: Colors.blue),
+                            ),
                           )
                         ],
                       ),
@@ -325,7 +333,6 @@ class DashboardView extends StatelessWidget {
                             ? CarouselSlider.builder(
                                 itemCount: controller.reminders.length,
                                 options: CarouselOptions(
-                                  // height: Get.height * 0.3,
                                   height: Get.height * 0.155,
                                   disableCenter: true,
                                   aspectRatio: 2,

@@ -48,7 +48,6 @@ class TransactionController extends GetxController
         DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
     displayDate.value = dateTextController.text;
-
     tabController = TabController(vsync: this, length: myTabs.length);
     super.onInit();
   }

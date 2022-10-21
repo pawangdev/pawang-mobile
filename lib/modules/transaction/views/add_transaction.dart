@@ -25,7 +25,7 @@ class AddTransaction extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 20,
+                  height: Get.height * 0.02,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.number,
@@ -36,7 +36,7 @@ class AddTransaction extends StatelessWidget {
                   onSaved: (String? value) {},
                 ),
                 SizedBox(
-                  height: 25,
+                  height: Get.height * 0.025,
                 ),
                 // DropdownField(
                 //     inputLabel: 'Kategori',
@@ -55,7 +55,7 @@ class AddTransaction extends StatelessWidget {
                 //   onSaved: (String? value) {},
                 // ),
                 // SizedBox(
-                //   height: 25,
+                //   height: Get.height * 0.025,
                 // ),
                 TextFormField(
                   decoration: const InputDecoration(
@@ -65,7 +65,7 @@ class AddTransaction extends StatelessWidget {
                   onSaved: (String? value) {},
                 ),
                 SizedBox(
-                  height: 25,
+                  height: Get.height * 0.025,
                 ),
                 TextFormField(
                   controller: controller.dateTextController,
@@ -76,7 +76,7 @@ class AddTransaction extends StatelessWidget {
                   onTap: () {},
                 ),
                 SizedBox(
-                  height: 25,
+                  height: Get.height * 0.025,
                 ),
                 TextFormField(
                   controller: controller.descriptionTextController,
@@ -87,7 +87,7 @@ class AddTransaction extends StatelessWidget {
                   onSaved: (String? value) {},
                 ),
                 SizedBox(
-                  height: 35,
+                  height: Get.height * 0.035,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -124,7 +124,7 @@ class AddTransaction extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 10,
+                      width: Get.width * 0.01,
                     ),
                     Expanded(
                       child: OutlinedButton(
@@ -149,7 +149,7 @@ class AddTransaction extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 34,
+                  height: Get.height * 0.034,
                 ),
               ],
             ),

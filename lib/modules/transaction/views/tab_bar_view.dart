@@ -49,7 +49,7 @@ class TabBarScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: Get.height * 0.02,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

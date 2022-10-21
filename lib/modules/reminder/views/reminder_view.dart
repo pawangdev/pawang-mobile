@@ -3,9 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/reminder_card.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class ReminderView extends StatelessWidget {
@@ -20,7 +18,7 @@ class ReminderView extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 20.h,
+                height: Get.height * 0.18,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -34,11 +32,8 @@ class ReminderView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconBack(
-                      blueMode: false,
-                      onTap: () {
-                        Get.back();
-                      },
+                    SizedBox(
+                      width: Get.width * 0.025,
                     ),
                     Column(
                       children: [
@@ -47,7 +42,7 @@ class ReminderView extends StatelessWidget {
                           color: defaultWhite,
                         ),
                         SizedBox(
-                          height: 1.h,
+                          height: Get.height * 0.01,
                         ),
                         Text(
                           'Pengingat',

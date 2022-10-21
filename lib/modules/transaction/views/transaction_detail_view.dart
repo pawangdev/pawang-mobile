@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,6 @@ import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TransactionDetailView extends StatelessWidget {
   final TransactionController controller = Get.find();
@@ -36,18 +33,18 @@ class TransactionDetailView extends StatelessWidget {
                     },
                   ),
                   const Text(
-                    "Tambah Transaksi",
+                    "Detail Transaksi",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16
                         //0.27.dp
                         ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 32,
                   ),
                 ],
               ),
               SizedBox(
-                height: 5.h,
+                height: Get.height * 0.05,
               ),
               Container(
                 //margin: const EdgeInsets.(top: 20, bottom: 20),
@@ -62,16 +59,16 @@ class TransactionDetailView extends StatelessWidget {
                             fit: BoxFit.cover,
                             width: 80,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: Get.height * 0.012,
                           ),
                           Text(
                             transaction.category.name,
                             style: kOpenSans.copyWith(
                                 fontSize: 20, fontWeight: semiBold),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: Get.height * 0.012,
                           ),
                           Text(
                             transaction.type == "income"
@@ -116,7 +113,7 @@ class TransactionDetailView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.4,
                       color: defaultGray,
                     ),
@@ -142,7 +139,7 @@ class TransactionDetailView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.4,
                       color: defaultGray,
                     ),
@@ -167,7 +164,7 @@ class TransactionDetailView extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: Get.height * 0.01,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,7 +189,7 @@ class TransactionDetailView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.4,
                       color: defaultGray,
                     ),
@@ -215,7 +212,7 @@ class TransactionDetailView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.4,
                       color: defaultGray,
                     ),
@@ -240,15 +237,15 @@ class TransactionDetailView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.4,
                       color: defaultGray,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: Get.height * 0.04,
               ),
               Expanded(
                 child: Padding(
@@ -277,7 +274,7 @@ class TransactionDetailView extends StatelessWidget {
                                   color: defaultWhite,
                                   size: 20,
                                 ),
-                                SizedBox(width: 3.w),
+                                SizedBox(width: Get.width * 0.03),
                                 Text(
                                   'Ubah Data',
                                   style: kOpenSans.copyWith(
@@ -291,7 +288,7 @@ class TransactionDetailView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 1.w,
+                        width: Get.width * 0.01,
                       ),
                       Expanded(
                         child: OutlinedButton(
@@ -342,7 +339,7 @@ class TransactionDetailView extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 1.w),
+                                      SizedBox(width: Get.width * 0.01),
                                       Expanded(
                                         child: OutlinedButton(
                                             style: OutlinedButton.styleFrom(
@@ -380,7 +377,7 @@ class TransactionDetailView extends StatelessWidget {
                                 color: defaultError,
                                 size: 20,
                               ),
-                              SizedBox(width: 3.w),
+                              SizedBox(width: Get.width * 0.03),
                               Text(
                                 "Hapus Data",
                                 style: kOpenSans.copyWith(
