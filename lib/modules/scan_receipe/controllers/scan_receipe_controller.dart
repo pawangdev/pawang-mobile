@@ -9,7 +9,7 @@ import 'package:pawang_mobile/services/scan_service.dart';
 
 class ScanReceipeController extends GetxController {
   final TransactionController transactionController =
-      Get.find<TransactionController>();
+      Get.put<TransactionController>(TransactionController());
   XFile? imageFilePath;
 
   Future<void> scanReceipt(bool isFromGal) async {
@@ -49,7 +49,8 @@ class ScanReceipeController extends GetxController {
             ),
           );
 
-          await transactionController.formUploadReceiptTransaction(tempAmounts);
+          await transactionController.formUploadReceiptTransaction(
+              tempAmounts, fileImage);
 
           resetScan();
         }

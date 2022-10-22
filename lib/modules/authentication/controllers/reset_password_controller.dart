@@ -5,6 +5,9 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 
 class ResetPasswordController extends GetxController {
+  // Services
+  final userService = Get.put(UserService());
+
   final formKey = GlobalKey<FormState>();
 
   Future<void> formValdidate() async {
@@ -22,7 +25,8 @@ class ResetPasswordController extends GetxController {
     final input = <String, dynamic>{"email": emailTextController.text};
 
     try {
-      await UserService.forgotPasswordRequestToken(input)
+      await userService
+          .forgotPasswordRequestToken(input)
           .then((value) => EasyLoading.dismiss());
 
       Get.snackbar(
@@ -60,7 +64,8 @@ class ResetPasswordController extends GetxController {
     };
 
     try {
-      await UserService.fogotPasswordVerifyToken(input)
+      await userService
+          .fogotPasswordVerifyToken(input)
           .then((value) => EasyLoading.dismiss());
 
       Get.snackbar(
@@ -121,7 +126,8 @@ class ResetPasswordController extends GetxController {
         throw ("Password Konfirmasi Tidak Sesuai");
       }
 
-      await UserService.forgotPasswordConfirmation(input)
+      await userService
+          .forgotPasswordConfirmation(input)
           .then((value) => EasyLoading.dismiss());
 
       Get.snackbar(

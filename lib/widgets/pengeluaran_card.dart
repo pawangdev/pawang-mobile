@@ -30,10 +30,13 @@ class CardPengeluaran extends StatelessWidget {
                     imageUrl: baseHOSTAPI + data.category.icon,
                     fit: BoxFit.cover,
                     progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                        (context, url, downloadProgress) => Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
                 SizedBox(

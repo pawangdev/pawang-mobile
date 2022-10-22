@@ -90,12 +90,6 @@ class ReminderCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                    child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Switch(
-                            value: item.isActive!,
-                            onChanged: (bool value) {}))),
               ],
             ),
           ),

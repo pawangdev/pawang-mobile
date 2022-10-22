@@ -5,12 +5,18 @@ import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
-import 'package:pawang_mobile/services/reminder_service.dart';
-import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/modules/reminder/services/reminder_service.dart';
+import 'package:pawang_mobile/modules/transaction/services/transaction_service.dart';
 import 'package:pawang_mobile/services/user_service.dart';
-import 'package:pawang_mobile/services/wallet_service.dart';
+import 'package:pawang_mobile/modules/wallet/services/wallet_service.dart';
 
 class DashboardController extends GetxController {
+  // Services
+  final walletService = Get.put(WalletService());
+  final reminderService = Get.put(ReminderService());
+  final transactionService = Get.put(TransactionService());
+  final userService = Get.put(UserService());
+
   var wallets = <WalletsDataModel>[].obs;
   var transactions = <TransactionDataModel>[].obs;
   var reminders = <ReminderDataModel>[].obs;
@@ -37,22 +43,24 @@ class DashboardController extends GetxController {
   }
 
   Future<void> getUserProfile() async {
-    var userProfileResponse = await UserService.userProfile();
-    if (userProfileResponse.statusCode == 200) {
-      var data = jsonDecode(userProfileResponse.body)['data']['user'];
+    var userProfileResponse = await userService.userProfile();
+    if (userProfileResponse != null) {
       user.update((user) {
-        user!.id = data['id'];
-        user.name = data['name'];
-        user.email = data['email'];
-        user.phone = data['phone'] ?? "";
-        user.gender = data['gender'] ?? "";
+        user!.id = userProfileResponse.id;
+        user.name = userProfileResponse.name;
+        user.email = userProfileResponse.email;
+        user.phone = userProfileResponse.phone;
+        user.gender = userProfileResponse.gender;
       });
     }
   }
 
   Future<void> getWallets() async {
     try {
-      WalletService.getWallets().then((value) => wallets.assignAll(value!));
+      final response = await walletService.getWallets();
+      if (response != null) {
+        wallets.assignAll(response);
+      }
     } catch (e) {
       print(e);
     }
@@ -60,8 +68,10 @@ class DashboardController extends GetxController {
 
   Future<void> getTransactions() async {
     try {
-      await TransactionService.getTransactions()
-          .then((value) => transactions.assignAll(value!));
+      final response = await transactionService.getTransactions();
+      if (response != null) {
+        transactions.assignAll(response);
+      }
     } catch (e) {
       print(e);
     }
@@ -69,8 +79,10 @@ class DashboardController extends GetxController {
 
   Future<void> getReminders() async {
     try {
-      await ReminderService.getReminders()
-          .then((value) => reminders.assignAll(value!));
+      final response = await reminderService.getReminders();
+      if (response != null) {
+        reminders.assignAll(response);
+      }
     } catch (e) {
       print(e);
     }

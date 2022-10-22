@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +10,13 @@ import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/modules/transaction/services/transaction_service.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 
 class TransactionController extends GetxController {
+  // Services
+  final transactionService = Get.put(TransactionService());
+
   final formKey = GlobalKey<FormState>();
 
   Future<void> formValdidate() async {
@@ -43,6 +48,7 @@ class TransactionController extends GetxController {
   var categoryId = 0.obs;
   var subCategoryId = 0.obs;
   var type = "".obs;
+  late File fileImageReceipt;
 
   var transactionDetailData = TransactionDetailDataModel(
           totalIncome: 0, totalOutcome: 0, totalBalance: 0)
@@ -68,16 +74,16 @@ class TransactionController extends GetxController {
 
   Future<void> getTransactionsDetail() async {
     try {
-      final response = await TransactionService.getTransactionDetails();
+      final response = await transactionService.getTransactionDetails();
 
       transactionDetailData.update((transactionDetail) {
-        transactionDetail!.totalBalance = response.totalBalance;
-        transactionDetail.totalIncome = response.totalIncome;
-        transactionDetail.totalOutcome = response.totalOutcome;
+        transactionDetail?.totalBalance = response.totalBalance;
+        transactionDetail?.totalIncome = response.totalIncome;
+        transactionDetail?.totalOutcome = response.totalOutcome;
       });
     } catch (e) {
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
+        'Gagal Mengambil Transaksi !',
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -148,7 +154,7 @@ class TransactionController extends GetxController {
       if (amountTextController != 0) {
         navigationController.tabIndex = 0;
         var transactionResponse =
-            await TransactionService.createTransaction(data);
+            await transactionService.createTransaction(data);
 
         if (transactionResponse) {
           await getTransactionsDetail();
@@ -200,7 +206,7 @@ class TransactionController extends GetxController {
       navigationController.tabIndex = 0;
 
       final response =
-          await TransactionService.destroyTransaction(transactionId);
+          await transactionService.destroyTransaction(transactionId);
       if (response) {
         await getTransactionsDetail();
         await dashboardController.getTransactions();
@@ -238,10 +244,11 @@ class TransactionController extends GetxController {
     }
   }
 
-  Future<void> formUploadReceiptTransaction(String amount) async {
+  Future<void> formUploadReceiptTransaction(String amount, File image) async {
     isScanReceipt = true;
     amountTextController.value = amount;
     displayAmount.text = CurrencyFormat.convertToIdr(int.parse(amount), 2);
+    fileImageReceipt = image;
 
     Get.toNamed(RoutesName.addtransaction);
   }
@@ -262,6 +269,7 @@ class TransactionController extends GetxController {
     descriptionTextController.text = data.description ?? "";
     displayWalletName.text = data.wallet.name;
     displayCategoryName.text = data.category.name;
+    descriptionTextController.text = data.description ?? "";
 
     if (data.subcategoryId != null) {
       subCategoryId.value = data.subcategoryId!;
@@ -329,7 +337,7 @@ class TransactionController extends GetxController {
     try {
       navigationController.tabIndex = 0;
       var transactionResponse =
-          await TransactionService.updateTransaction(data, transactionId!);
+          await transactionService.updateTransaction(data, transactionId!);
 
       if (transactionResponse) {
         await getTransactionsDetail();
@@ -380,6 +388,7 @@ class TransactionController extends GetxController {
     displayAmount.text = "Rp 0";
     displayWalletName.text = "";
     displayCategoryName.text = "";
+    descriptionTextController.text = "";
     Get.delete<ScanReceipeController>();
   }
 }

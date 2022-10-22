@@ -1,12 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
-import 'package:pawang_mobile/services/category_service.dart';
+import 'package:pawang_mobile/modules/category/services/category_service.dart';
 
 class CategoryController extends GetxController {
   final TextEditingController nameTextController = TextEditingController();
+  final categoryService = Get.put(CategoryService());
   final categories = <CategoryDataModel>[].obs;
 
   @override
@@ -19,7 +22,7 @@ class CategoryController extends GetxController {
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
 
-      var categoryResponse = await CategoryService.getCategories();
+      var categoryResponse = await categoryService.getCategories();
       if (categoryResponse != null) {
         EasyLoading.dismiss();
 
@@ -41,7 +44,7 @@ class CategoryController extends GetxController {
       };
 
       final subCategoryResponse =
-          await CategoryService.addSubCategory(id, data);
+          await categoryService.addSubCategory(id, data);
 
       if (subCategoryResponse) {
         EasyLoading.dismiss();
@@ -77,7 +80,7 @@ class CategoryController extends GetxController {
         'name': nameTextController.text,
       };
 
-      final subCategoryResponse = await CategoryService.updateSubCategory(
+      final subCategoryResponse = await categoryService.updateSubCategory(
           data: data, idCategory: categoryId, idSubCategory: subCategoryId);
 
       if (subCategoryResponse) {
@@ -106,11 +109,12 @@ class CategoryController extends GetxController {
     }
   }
 
-  Future<void> deleteSubCategory({categoryId, subCategoryId}) async {
+  Future<void> deleteSubCategory(
+      {required int categoryId, required int subCategoryId}) async {
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
 
-      final response = await CategoryService.deleteSubCategory(
+      final response = await categoryService.deleteSubCategory(
           idCategory: categoryId, idSubCategory: subCategoryId);
       if (response) {
         EasyLoading.dismiss();

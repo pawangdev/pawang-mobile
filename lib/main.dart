@@ -7,15 +7,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/services/base_service.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'routes/routes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
 
   OneSignal.shared.setAppId(oneSignalAPPID);
   OneSignal.shared.getDeviceState();

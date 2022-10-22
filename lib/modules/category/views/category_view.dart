@@ -105,7 +105,7 @@ class CategoryView extends StatelessWidget {
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.all(16.0),
                                             child: CircularProgressIndicator(
                                                 value:
                                                     downloadProgress.progress),
@@ -134,7 +134,7 @@ class CategoryView extends StatelessWidget {
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
                                                 Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(16.0),
                                           child: CircularProgressIndicator(
                                               value: downloadProgress.progress),
                                         ),
@@ -285,8 +285,16 @@ class CategoryView extends StatelessWidget {
                                                                         child:
                                                                             Row(
                                                                           children: [
-                                                                            Image.network(baseHOSTAPI +
-                                                                                category.icon),
+                                                                            CachedNetworkImage(
+                                                                              width: 30,
+                                                                              imageUrl: baseHOSTAPI + category.icon,
+                                                                              fit: BoxFit.cover,
+                                                                              progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
+                                                                                padding: const EdgeInsets.all(16.0),
+                                                                                child: CircularProgressIndicator(value: downloadProgress.progress),
+                                                                              ),
+                                                                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                                                                            ),
                                                                             const SizedBox(
                                                                               width: 5,
                                                                             ),
@@ -457,9 +465,28 @@ class CategoryView extends StatelessWidget {
                                                         horizontal: 20),
                                                     child: Row(
                                                       children: [
-                                                        Image.network(
-                                                            baseHOSTAPI +
-                                                                category.icon),
+                                                        CachedNetworkImage(
+                                                          width: 30,
+                                                          imageUrl:
+                                                              baseHOSTAPI +
+                                                                  category.icon,
+                                                          fit: BoxFit.cover,
+                                                          progressIndicatorBuilder:
+                                                              (context, url,
+                                                                      downloadProgress) =>
+                                                                  Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(16.0),
+                                                            child: CircularProgressIndicator(
+                                                                value: downloadProgress
+                                                                    .progress),
+                                                          ),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              const Icon(
+                                                                  Icons.error),
+                                                        ),
                                                         const SizedBox(
                                                           width: 5,
                                                         ),

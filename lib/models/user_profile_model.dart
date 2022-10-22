@@ -64,8 +64,8 @@ class UserProfileDataModel {
   int id;
   String name;
   String email;
-  String phone;
-  String gender;
+  String? phone;
+  String? gender;
   dynamic imageProfile;
   dynamic googleId;
   dynamic onesignalId;
@@ -77,8 +77,8 @@ class UserProfileDataModel {
         id: json["id"],
         name: json["name"],
         email: json["email"],
-        phone: json["phone"],
-        gender: json["gender"],
+        phone: json["phone"] ?? "",
+        gender: json["gender"] ?? "",
         imageProfile: json["image_profile"],
         googleId: json["google_id"],
         onesignalId: json["onesignal_id"],

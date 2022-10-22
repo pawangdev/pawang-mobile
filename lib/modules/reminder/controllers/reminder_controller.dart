@@ -1,15 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/reminder/services/reminder_service.dart';
 import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/services/reminder_service.dart';
 
 class ReminderController extends GetxController {
   final DashboardController dashboardController = Get.find();
+  final reminderService = Get.put(ReminderService());
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
@@ -35,17 +34,14 @@ class ReminderController extends GetxController {
           'is_active': true
         };
 
-        final response = await ReminderService.createReminder(input);
+        final response = await reminderService.createReminder(input);
 
         if (response) {
-          await dashboardController
-              .getReminders()
-              .then((value) => EasyLoading.dismiss());
+          await dashboardController.getReminders().then(
+              (value) => EasyLoading.dismiss().then((value) => Get.back()));
 
           nameTextController.text = "";
           dateTextController.text = "";
-
-          Get.back();
 
           Get.rawSnackbar(
             title: "Sukses",
@@ -76,12 +72,11 @@ class ReminderController extends GetxController {
           'is_active': true
         };
 
-        final response = await ReminderService.updateReminder(id!, input);
+        final response = await reminderService.updateReminder(id!, input);
 
         if (response) {
-          await dashboardController
-              .getReminders()
-              .then((value) => EasyLoading.dismiss());
+          await dashboardController.getReminders().then(
+              (value) => EasyLoading.dismiss().then((value) => Get.back()));
 
           Get.rawSnackbar(
             title: "Sukses",
@@ -91,8 +86,6 @@ class ReminderController extends GetxController {
 
           nameTextController.text = "";
           dateTextController.text = "";
-
-          Get.offNamed(RoutesName.reminder);
         }
       } catch (e) {
         EasyLoading.dismiss();
@@ -115,7 +108,7 @@ class ReminderController extends GetxController {
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
 
-      final response = await ReminderService.deleteReminder(id);
+      final response = await reminderService.deleteReminder(id);
       if (response) {
         await dashboardController
             .getReminders()

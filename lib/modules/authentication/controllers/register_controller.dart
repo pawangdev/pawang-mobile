@@ -8,6 +8,9 @@ import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class RegisterController extends GetxController {
+  // Services
+  final userService = Get.put(UserService());
+
   final formKey = GlobalKey<FormState>();
 
   Future<void> formValdidate() async {
@@ -51,7 +54,7 @@ class RegisterController extends GetxController {
     };
 
     try {
-      var registerResponse = await UserService.userRegister(input);
+      var registerResponse = await userService.userRegister(input);
 
       Storage.saveValue(storageToken, registerResponse?.accessToken)
           .then((value) => EasyLoading.dismiss());

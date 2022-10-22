@@ -2,11 +2,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
-import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/services/wallet_service.dart';
+import 'package:pawang_mobile/modules/wallet/services/wallet_service.dart';
 
 class WalletController extends GetxController {
   int idWallet = 0;
+  final walletService = Get.put(WalletService());
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController balanceTextController = TextEditingController();
@@ -36,7 +36,7 @@ class WalletController extends GetxController {
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
 
-      var walletUpdateResponse = await WalletService.createWallet(input);
+      var walletUpdateResponse = await walletService.createWallet(input);
       if (walletUpdateResponse) {
         await dashboardController.getWallets();
         await dashboardController.getTransactions();
@@ -85,7 +85,7 @@ class WalletController extends GetxController {
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
       var walletUpdateResponse =
-          await WalletService.updateWallet(input, idWallet);
+          await walletService.updateWallet(input, idWallet);
       if (walletUpdateResponse) {
         await dashboardController.getWallets();
         await dashboardController.getTransactions();
@@ -127,7 +127,7 @@ class WalletController extends GetxController {
     Get.closeAllSnackbars();
     try {
       EasyLoading.show(status: 'Mohon Tunggu');
-      var walletDeleteResponse = await WalletService.deleteWallet(idWallet);
+      var walletDeleteResponse = await walletService.deleteWallet(idWallet);
 
       if (walletDeleteResponse) {
         await dashboardController.getWallets();

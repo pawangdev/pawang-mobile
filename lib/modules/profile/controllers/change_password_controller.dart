@@ -5,6 +5,9 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 
 class ChangePasswordController extends GetxController {
+  // Services
+  final userService = Get.put(UserService());
+
   final TextEditingController passwordNowTextController =
       TextEditingController();
   final TextEditingController passwordNewTextController =
@@ -36,10 +39,12 @@ class ChangePasswordController extends GetxController {
         'new_password': passwordNewTextController.text,
         'new_password_confirm': passwordNewConfirmationTextController.text,
       };
-      var changePasswordResponse = await UserService.userChangePassword(input);
+      var changePasswordResponse = await userService.userChangePassword(input);
 
       if (changePasswordResponse) {
-        EasyLoading.dismiss();
+        await EasyLoading.dismiss();
+
+        Get.back();
 
         Get.snackbar(
           'Sukses !',
@@ -51,8 +56,6 @@ class ChangePasswordController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
       EasyLoading.dismiss();

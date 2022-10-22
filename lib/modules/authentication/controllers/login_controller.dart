@@ -11,6 +11,9 @@ import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class LoginController extends GetxController {
+  // Services
+  final userService = Get.put(UserService());
+
   final formKey = GlobalKey<FormState>();
 
   Future<void> formValdidate() async {
@@ -50,7 +53,7 @@ class LoginController extends GetxController {
         'onesignal_id': osUserID
       };
 
-      final loginResponse = await UserService.userLoginWithGoogle(input);
+      final loginResponse = await userService.userLoginWithGoogle(input);
       Storage.saveValue(storageToken, loginResponse!.accessToken)
           .then((value) => EasyLoading.dismiss());
       Get.snackbar(
@@ -90,7 +93,8 @@ class LoginController extends GetxController {
         'onesignal_id': osUserID
       };
 
-      final loginResponse = await UserService.userLogin(input);
+      final loginResponse = await userService.userLogin(input);
+
       Storage.saveValue(storageToken, loginResponse!.accessToken)
           .then((value) => EasyLoading.dismiss());
       Get.snackbar(

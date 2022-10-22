@@ -6,6 +6,9 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/user_service.dart';
 
 class EditProfileController extends GetxController {
+  // Services
+  final userService = Get.put(UserService());
+
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController phoneTextController = TextEditingController();
   var genderTextController = ''.obs;
@@ -15,8 +18,8 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     nameTextController.text = dashboardController.user.value.name;
-    phoneTextController.text = dashboardController.user.value.phone;
-    genderTextController.value = dashboardController.user.value.gender;
+    phoneTextController.text = dashboardController.user.value.phone ?? "";
+    genderTextController.value = dashboardController.user.value.gender ?? "";
     super.onInit();
   }
 
@@ -25,12 +28,18 @@ class EditProfileController extends GetxController {
 
     var input = <String, dynamic>{
       'name': nameTextController.text,
-      'phone': phoneTextController.text,
-      'gender': genderTextController.value,
     };
 
+    if (genderTextController.value.isNotEmpty) {
+      input['gender'] = genderTextController.value;
+    }
+
+    if (phoneTextController.text.isNotEmpty) {
+      input['phone'] = phoneTextController.text;
+    }
+
     try {
-      var editProfileResponse = await UserService.userUpdateProfile(input);
+      var editProfileResponse = await userService.userUpdateProfile(input);
       if (editProfileResponse != null) {
         dashboardController.user.update((user) {
           user?.name = editProfileResponse.name;
@@ -38,7 +47,9 @@ class EditProfileController extends GetxController {
           user?.phone = editProfileResponse.phone;
         });
 
-        EasyLoading.dismiss();
+        await EasyLoading.dismiss();
+
+        Get.back();
 
         Get.snackbar(
           'Sukses !',
@@ -50,8 +61,6 @@ class EditProfileController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
       EasyLoading.dismiss();
