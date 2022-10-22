@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
@@ -12,6 +13,8 @@ import 'package:get/get.dart';
 class WalletView extends StatelessWidget {
   final WalletController controller = Get.find();
   final DashboardController dashboardController = Get.find();
+  final TransactionController transactionController = Get.find();
+  final args = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class WalletView extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 15.h,
+                height: Get.height * 0.18,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -31,17 +34,12 @@ class WalletView extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(
-                    top: Get.statusBarHeight * 0.9, left: 32, right: 32),
+                    top: Get.height * 0.07, left: 32, right: 32),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconBack(
-                      blueMode: false,
-                      onTap: () {
-                        Get.toNamed(RoutesName.navigation);
-                      },
-                    ),
+                    IconBack(blueMode: false, onTap: (() => Get.back())),
                     Column(
                       children: [
                         SvgPicture.asset(
@@ -49,10 +47,10 @@ class WalletView extends StatelessWidget {
                           color: defaultWhite,
                         ),
                         SizedBox(
-                          height: 1.h,
+                          height: Get.height * 0.01,
                         ),
                         Text(
-                          'Dompet',
+                          'Wallet',
                           style: kOpenSans.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
@@ -60,9 +58,21 @@ class WalletView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      width: 7.2.w,
-                    ),
+                    if (args == null)
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RoutesName.addwallet);
+                        },
+                        child: const Icon(
+                          Icons.add_rounded,
+                          color: defaultWhite,
+                        ),
+                      )
+                    else
+                      SizedBox(
+                        width: 7.2.w,
+                        height: 3.6.h,
+                      ),
                   ],
                 ),
               ),
@@ -75,38 +85,45 @@ class WalletView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Obx(
-                () => ListView.builder(
-                  itemCount: dashboardController.wallets.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (BuildContext context, int index) {
-                    var wallet = dashboardController.wallets[index];
-                    return WalletCard2(
-                      wallet: wallet,
-                    );
-                  },
-                ),
+                () => dashboardController.wallets.isEmpty
+                    ? Center(
+                        child: Text(
+                          "Wallet Masih Kosong",
+                          style: textMuted.copyWith(
+                              fontSize: 18, fontWeight: semiBold),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: dashboardController.wallets.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          var wallet = dashboardController.wallets[index];
+                          if (args == null) {
+                            return WalletCard2(
+                              wallet: wallet,
+                              isChoose: false,
+                            );
+                          } else {
+                            return GestureDetector(
+                              onTap: () {
+                                transactionController.walletId.value =
+                                    wallet.id;
+                                transactionController.displayWalletName.text =
+                                    wallet.name;
+                                Get.back();
+                              },
+                              child: WalletCard2(
+                                wallet: wallet,
+                                isChoose: true,
+                              ),
+                            );
+                          }
+                        },
+                      ),
               ),
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(RoutesName.addwallet);
-        },
-        tooltip: 'Tambah Dompet',
-        splashColor: defaultPrimary,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [defaultPrimary, defaultPurple])),
-          child: const Icon(Icons.add),
-        ),
       ),
     );
   }

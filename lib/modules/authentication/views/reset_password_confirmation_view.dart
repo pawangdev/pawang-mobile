@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class ResetPasswordConfirmationView extends StatelessWidget {
   final ResetPasswordController controller = Get.find();
@@ -22,10 +22,8 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          onPressed: () => Get.back(),
-                          icon: const Icon(TablerIcons.chevron_left),
-                        ),
+                        child:
+                            IconBack(blueMode: true, onTap: () => Get.back()),
                       ),
                     ),
                     Expanded(

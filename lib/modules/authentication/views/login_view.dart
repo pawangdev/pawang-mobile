@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -54,7 +53,7 @@ class LoginView extends StatelessWidget {
                         fontSize: 16),
                   ),
                   Form(
-                    // key: formKey,
+                    key: controller.formKey,
                     child: Column(
                       children: [
                         SizedBox(
@@ -64,7 +63,8 @@ class LoginView extends StatelessWidget {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: InputField(
                             validator: ValidationBuilder(localeName: 'id')
-                                .email('Isi dengan format email')
+                                .required()
+                                .email()
                                 .build(),
                             inputLabel: "Email",
                             capitalization: TextCapitalization.none,
@@ -91,7 +91,8 @@ class LoginView extends StatelessWidget {
                               Obx(
                                 () => TextFormField(
                                   validator: ValidationBuilder(localeName: 'id')
-                                      .minLength(8, 'Minimal 8 huruf')
+                                      .required()
+                                      .minLength(8)
                                       .build(),
                                   keyboardType: TextInputType.visiblePassword,
                                   controller: controller.passwordTextController,
@@ -161,7 +162,10 @@ class LoginView extends StatelessWidget {
                               end: Alignment.centerRight,
                               colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
-                        onPressed: () => controller.login(),
+                        onPressed: () {
+                          controller.formValdidate();
+                          controller.login();
+                        },
                         child: Text(
                           "Masuk",
                           style: kOpenSans.copyWith(
@@ -196,11 +200,11 @@ class LoginView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(
-                              TablerIcons.brand_google,
-                              size: 18,
+                            SvgPicture.asset(
+                              'assets/images/google.svg',
+                              width: 24,
                             ),
-                            const SizedBox(width: 5),
+                            const SizedBox(width: 10),
                             Text('Masuk dengan Google', style: kOpenSans)
                           ],
                         )),

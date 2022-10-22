@@ -1,16 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/category/controllers/category_controller.dart';
+import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class CategoryView extends StatelessWidget {
   final CategoryController controller = Get.find();
+  final TransactionController transactionController = Get.find();
+  final args = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class CategoryView extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 15.h,
+                height: Get.height * 0.18,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -30,17 +33,12 @@ class CategoryView extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(
-                    top: Get.statusBarHeight * 0.9, left: 32, right: 32),
+                    top: Get.height * 0.07, left: 32, right: 32),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconBack(
-                      blueMode: false,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
+                    IconBack(blueMode: false, onTap: (() => Get.back())),
                     Column(
                       children: [
                         SvgPicture.asset(
@@ -48,7 +46,7 @@ class CategoryView extends StatelessWidget {
                           color: defaultWhite,
                         ),
                         SizedBox(
-                          height: 1.h,
+                          height: Get.height * 0.01,
                         ),
                         Text(
                           'Kategori',
@@ -59,8 +57,9 @@ class CategoryView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       width: 7.2.w,
+                      height: 3.6.h,
                     ),
                   ],
                 ),
@@ -80,16 +79,78 @@ class CategoryView extends StatelessWidget {
                       return ExpandablePanel(
                         header: Row(
                           children: [
-                            // Text(category.icon),
-                            SvgPicture.network(baseHOSTAPI + category.icon),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              category.name,
-                              style: kOpenSans.copyWith(
-                                  fontWeight: semiBold, fontSize: 16),
-                            ),
+                            args != null
+                                ? GestureDetector(
+                                    onTap: () {
+                                      // Category ID
+                                      transactionController.categoryId.value =
+                                          category.id;
+
+                                      // Subcategory ID
+                                      transactionController
+                                          .subCategoryId.value = 0;
+
+                                      // Set Category & Sub Category Display Name
+
+                                      transactionController.displayCategoryName
+                                          .text = category.name;
+                                      Get.back();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        CachedNetworkImage(
+                                          width: 30,
+                                          imageUrl: baseHOSTAPI + category.icon,
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          category.name,
+                                          style: kOpenSans.copyWith(
+                                              fontWeight: semiBold,
+                                              fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Row(
+                                    children: [
+                                      CachedNetworkImage(
+                                        width: 30,
+                                        imageUrl: baseHOSTAPI + category.icon,
+                                        fit: BoxFit.cover,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        category.name,
+                                        style: kOpenSans.copyWith(
+                                            fontWeight: semiBold, fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
                           ],
                         ),
                         collapsed: const SizedBox(height: 20),
@@ -100,8 +161,7 @@ class CategoryView extends StatelessWidget {
                             children: [
                               Text(
                                 'Sub Kategori',
-                                style: kOpenSans.copyWith(
-                                    fontWeight: light, fontSize: 12),
+                                style: textMuted,
                               ),
                               const SizedBox(
                                 height: 10,
@@ -123,236 +183,246 @@ class CategoryView extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    e.name,
-                                                    style: kOpenSans.copyWith(
-                                                        fontSize: 16,
-                                                        fontWeight: medium),
-                                                  ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          controller
-                                                              .nameTextController
-                                                              .text = e.name;
+                                                  args == null
+                                                      ? Text(
+                                                          e.name,
+                                                          style: kOpenSans
+                                                              .copyWith(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      medium),
+                                                        )
+                                                      : TextButton(
+                                                          onPressed: () {
+                                                            // Category ID
+                                                            transactionController
+                                                                    .categoryId
+                                                                    .value =
+                                                                e.categoryId;
 
-                                                          Get.defaultDialog(
-                                                            onWillPop:
-                                                                () async {
-                                                              controller
-                                                                  .nameTextController
-                                                                  .text = "";
+                                                            // Subcategory ID
+                                                            transactionController
+                                                                .subCategoryId
+                                                                .value = e.id;
 
-                                                              return true;
-                                                            },
-                                                            title:
-                                                                'Memperbarui Sub Kategori',
-                                                            titleStyle: kOpenSans
+                                                            // Set Category & Sub Category Display Name
+
+                                                            transactionController
+                                                                    .displayCategoryName
+                                                                    .text =
+                                                                "${category.name} - ${e.name}";
+                                                            Get.back();
+                                                          },
+                                                          style: TextButton.styleFrom(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              minimumSize:
+                                                                  Size(50, 30),
+                                                              tapTargetSize:
+                                                                  MaterialTapTargetSize
+                                                                      .shrinkWrap,
+                                                              alignment: Alignment
+                                                                  .centerLeft),
+                                                          child: Text(
+                                                            e.name,
+                                                            style: kOpenSans
                                                                 .copyWith(
                                                                     fontSize:
-                                                                        14,
+                                                                        16,
                                                                     fontWeight:
-                                                                        bold),
-                                                            textConfirm:
-                                                                'Simpan',
-                                                            confirmTextColor:
-                                                                defaultWhite,
-                                                            buttonColor:
-                                                                defaultPrimary,
-                                                            onConfirm: () => controller
-                                                                .updateSubCategory(
-                                                                    categoryId:
-                                                                        category
-                                                                            .id,
-                                                                    subCategoryId:
-                                                                        e.id),
-                                                            // cancel: ,
-                                                            content: Column(
-                                                              children: [
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .symmetric(
-                                                                      horizontal:
-                                                                          20),
-                                                                  child: Row(
+                                                                        medium,
+                                                                    color:
+                                                                        defaultBlack),
+                                                          )),
+                                                  args == null
+                                                      ? Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            IconButton(
+                                                              onPressed: () {
+                                                                controller
+                                                                    .nameTextController
+                                                                    .text = e.name;
+
+                                                                Get.defaultDialog(
+                                                                  onWillPop:
+                                                                      () async {
+                                                                    controller
+                                                                        .nameTextController
+                                                                        .text = "";
+
+                                                                    return true;
+                                                                  },
+                                                                  title:
+                                                                      'Memperbarui Sub Kategori',
+                                                                  titleStyle: kOpenSans.copyWith(
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          bold),
+                                                                  textConfirm:
+                                                                      'Simpan',
+                                                                  confirmTextColor:
+                                                                      defaultWhite,
+                                                                  buttonColor:
+                                                                      defaultPrimary,
+                                                                  onConfirm: () => controller.updateSubCategory(
+                                                                      categoryId:
+                                                                          category
+                                                                              .id,
+                                                                      subCategoryId:
+                                                                          e.id),
+                                                                  // cancel: ,
+                                                                  content:
+                                                                      Column(
                                                                     children: [
-                                                                      SvgPicture.network(
-                                                                          baseHOSTAPI +
-                                                                              category.icon),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            5,
+                                                                      Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.symmetric(horizontal: 20),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Image.network(baseHOSTAPI +
+                                                                                category.icon),
+                                                                            const SizedBox(
+                                                                              width: 5,
+                                                                            ),
+                                                                            Text(
+                                                                              category.name,
+                                                                              style: kOpenSans.copyWith(fontWeight: semiBold, fontSize: 12),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
-                                                                      Text(
-                                                                        category
-                                                                            .name,
-                                                                        style: kOpenSans.copyWith(
-                                                                            fontWeight:
-                                                                                semiBold,
-                                                                            fontSize:
-                                                                                12),
+                                                                      const SizedBox(
+                                                                          height:
+                                                                              20),
+                                                                      TextFormField(
+                                                                        controller:
+                                                                            controller.nameTextController,
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          contentPadding: const EdgeInsets.symmetric(
+                                                                              vertical: 0,
+                                                                              horizontal: 10),
+                                                                          hintText:
+                                                                              'Isi Sub Kategori',
+                                                                          hintStyle:
+                                                                              kOpenSans.copyWith(fontSize: 12),
+                                                                          fillColor:
+                                                                              defaultPrimary,
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            gapPadding:
+                                                                                2,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(16),
+                                                                          ),
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                              icon: const Icon(
+                                                                  Icons.edit,
+                                                                  color:
+                                                                      defaultPrimary),
+                                                            ),
+                                                            IconButton(
+                                                              onPressed: () {
+                                                                showDialog<
+                                                                    void>(
+                                                                  context:
+                                                                      context,
+                                                                  barrierDismissible:
+                                                                      false,
+                                                                  builder: (BuildContext
+                                                                          context) =>
+                                                                      AlertDialog(
+                                                                    title: Text(
+                                                                      'Hapus Sub Kategori',
+                                                                      style: kOpenSans.copyWith(
+                                                                          fontSize:
+                                                                              18,
+                                                                          fontWeight:
+                                                                              bold),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                    ),
+                                                                    content:
+                                                                        Text(
+                                                                      'Apakah kamu yakin akan menghapus sub kategori ini?',
+                                                                      style: kOpenSans.copyWith(
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              light),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                    ),
+                                                                    shape: RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(8)),
+                                                                    actions: [
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Expanded(
+                                                                            child:
+                                                                                OutlinedButton(
+                                                                              child: Text(
+                                                                                "Kembali",
+                                                                                style: kOpenSans.copyWith(fontSize: 16, fontWeight: medium, color: defaultPrimary),
+                                                                              ),
+                                                                              onPressed: () {
+                                                                                Navigator.pop(context, 'Kembali');
+                                                                              },
+                                                                              style: OutlinedButton.styleFrom(
+                                                                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                                                                side: const BorderSide(color: defaultPrimary),
+                                                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                              width: 1.w),
+                                                                          Expanded(
+                                                                            child:
+                                                                                OutlinedButton(
+                                                                              style: OutlinedButton.styleFrom(
+                                                                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                                                                side: const BorderSide(color: defaultError),
+                                                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                                                              ),
+                                                                              child: Text(
+                                                                                'Hapus',
+                                                                                style: kOpenSans.copyWith(color: defaultError, fontWeight: medium, fontSize: 16),
+                                                                              ),
+                                                                              onPressed: () => controller.deleteSubCategory(categoryId: category.id, subCategoryId: e.id),
+                                                                            ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 20),
-                                                                TextFormField(
-                                                                  controller:
-                                                                      controller
-                                                                          .nameTextController,
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    contentPadding: const EdgeInsets
-                                                                            .symmetric(
-                                                                        vertical:
-                                                                            0,
-                                                                        horizontal:
-                                                                            10),
-                                                                    hintText:
-                                                                        'Isi Sub Kategori',
-                                                                    hintStyle: kOpenSans.copyWith(
-                                                                        fontSize:
-                                                                            12),
-                                                                    fillColor:
-                                                                        defaultPrimary,
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      gapPadding:
-                                                                          2,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              16),
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: const Icon(
-                                                            TablerIcons.pencil,
-                                                            color:
-                                                                defaultPrimary),
-                                                      ),
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          showDialog<void>(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false,
-                                                            builder: (BuildContext
-                                                                    context) =>
-                                                                AlertDialog(
-                                                              title: Text(
-                                                                'Hapus Sub Kategori',
-                                                                style: kOpenSans
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            18,
-                                                                        fontWeight:
-                                                                            bold),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
+                                                                );
+                                                              },
+                                                              icon: const Icon(
+                                                                Icons.delete,
+                                                                color:
+                                                                    defaultError,
                                                               ),
-                                                              content: Text(
-                                                                'Apakah kamu yakin akan menghapus sub kategori ini?',
-                                                                style: kOpenSans
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            light),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                              ),
-                                                              shape: RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8)),
-                                                              actions: [
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          OutlinedButton(
-                                                                        child:
-                                                                            Text(
-                                                                          "Kembali",
-                                                                          style: kOpenSans.copyWith(
-                                                                              fontSize: 16,
-                                                                              fontWeight: medium,
-                                                                              color: defaultPrimary),
-                                                                        ),
-                                                                        onPressed:
-                                                                            () {
-                                                                          Navigator.pop(
-                                                                              context,
-                                                                              'Kembali');
-                                                                        },
-                                                                        style: OutlinedButton
-                                                                            .styleFrom(
-                                                                          padding:
-                                                                              const EdgeInsets.symmetric(vertical: 4),
-                                                                          side:
-                                                                              const BorderSide(color: defaultPrimary),
-                                                                          shape:
-                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width: 1
-                                                                            .w),
-                                                                    Expanded(
-                                                                      child:
-                                                                          OutlinedButton(
-                                                                        style: OutlinedButton
-                                                                            .styleFrom(
-                                                                          padding:
-                                                                              const EdgeInsets.symmetric(vertical: 4),
-                                                                          side:
-                                                                              const BorderSide(color: defaultError),
-                                                                          shape:
-                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                                                        ),
-                                                                        child:
-                                                                            Text(
-                                                                          'Hapus',
-                                                                          style: kOpenSans.copyWith(
-                                                                              color: defaultError,
-                                                                              fontWeight: medium,
-                                                                              fontSize: 16),
-                                                                        ),
-                                                                        onPressed: () => controller.deleteSubCategory(
-                                                                            categoryId:
-                                                                                category.id,
-                                                                            subCategoryId: e.id),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
                                                             ),
-                                                          );
-                                                        },
-                                                        icon: const Icon(
-                                                          TablerIcons.trash,
-                                                          color: defaultError,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                          ],
+                                                        )
+                                                      : const SizedBox()
                                                 ],
                                               ),
                                             ),
@@ -362,84 +432,94 @@ class CategoryView extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.defaultDialog(
-                                        title: 'Tambah Sub Kategori',
-                                        titleStyle: kOpenSans.copyWith(
-                                            fontSize: 14, fontWeight: bold),
-                                        textConfirm: 'Simpan',
-                                        confirmTextColor: defaultWhite,
-                                        buttonColor: defaultPrimary,
-                                        onConfirm: () => controller
-                                            .addSubCategory(category.id),
-                                        // cancel: ,
-                                        content: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                              child: Row(
+                              args == null
+                                  ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.defaultDialog(
+                                              title: 'Tambah Sub Kategori',
+                                              titleStyle: kOpenSans.copyWith(
+                                                  fontSize: 14,
+                                                  fontWeight: bold),
+                                              textConfirm: 'Simpan',
+                                              confirmTextColor: defaultWhite,
+                                              buttonColor: defaultPrimary,
+                                              onConfirm: () => controller
+                                                  .addSubCategory(category.id),
+                                              // cancel: ,
+                                              content: Column(
                                                 children: [
-                                                  SvgPicture.network(
-                                                      baseHOSTAPI +
-                                                          category.icon),
-                                                  const SizedBox(
-                                                    width: 5,
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 20),
+                                                    child: Row(
+                                                      children: [
+                                                        Image.network(
+                                                            baseHOSTAPI +
+                                                                category.icon),
+                                                        const SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          category.name,
+                                                          style: kOpenSans
+                                                              .copyWith(
+                                                                  fontWeight:
+                                                                      semiBold,
+                                                                  fontSize: 12),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    category.name,
-                                                    style: kOpenSans.copyWith(
-                                                        fontWeight: semiBold,
-                                                        fontSize: 12),
-                                                  ),
+                                                  const SizedBox(height: 20),
+                                                  TextFormField(
+                                                    controller: controller
+                                                        .nameTextController,
+                                                    decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .symmetric(
+                                                              vertical: 0,
+                                                              horizontal: 10),
+                                                      hintText:
+                                                          'Isi Sub Kategori',
+                                                      hintStyle:
+                                                          kOpenSans.copyWith(
+                                                              fontSize: 12),
+                                                      fillColor: defaultPrimary,
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        gapPadding: 2,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
+                                                      ),
+                                                    ),
+                                                  )
                                                 ],
                                               ),
+                                            );
+                                          },
+                                          child: Container(
+                                            height: 25,
+                                            width: 25,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: defaultPrimary,
                                             ),
-                                            const SizedBox(height: 20),
-                                            TextFormField(
-                                              controller:
-                                                  controller.nameTextController,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 0,
-                                                        horizontal: 10),
-                                                hintText: 'Isi Sub Kategori',
-                                                hintStyle: kOpenSans.copyWith(
-                                                    fontSize: 12),
-                                                fillColor: defaultPrimary,
-                                                border: OutlineInputBorder(
-                                                  gapPadding: 2,
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                      width: 25,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: defaultPrimary,
-                                      ),
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: defaultWhite,
-                                        size: 16,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: defaultWhite,
+                                              size: 16,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : const SizedBox()
                             ],
                           ),
                         ),

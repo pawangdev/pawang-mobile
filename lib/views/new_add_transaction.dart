@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
@@ -28,7 +27,7 @@ class NewAddTransaction extends StatelessWidget {
                     child: IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        TablerIcons.chevron_left,
+                        Icons.chevron_left,
                         size: 22,
                       ),
                     ),
@@ -112,7 +111,7 @@ class NewAddTransaction extends StatelessWidget {
                                         },
                                         decoration: const InputDecoration(
                                           suffixIcon:
-                                              Icon(TablerIcons.calendar_time),
+                                              Icon(Icons.calendar_month),
                                           fillColor: Color(0xFFF5F5F5),
                                           filled: true,
                                           border: OutlineInputBorder(),
@@ -258,7 +257,7 @@ class NewAddTransaction extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  const Icon(TablerIcons.wallet, size: 22),
+                                  const Icon(Icons.wallet, size: 22),
                                   const SizedBox(
                                     width: 5,
                                   ),
@@ -272,7 +271,7 @@ class NewAddTransaction extends StatelessWidget {
                             ),
                           ),
                           const Expanded(
-                            child: Icon(TablerIcons.arrow_right, size: 22),
+                            child: Icon(Icons.arrow_right, size: 22),
                           ),
                           Expanded(
                             child: GestureDetector(
@@ -303,8 +302,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -314,8 +313,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -325,8 +324,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -336,8 +335,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -347,8 +346,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -358,8 +357,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -369,8 +368,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -380,8 +379,8 @@ class NewAddTransaction extends StatelessWidget {
                                                     const EdgeInsets.all(8),
                                                 child: Column(
                                                   children: [
-                                                    const Icon(TablerIcons
-                                                        .shopping_cart),
+                                                    const Icon(
+                                                        Icons.shopping_cart),
                                                     const Text("Belanja")
                                                   ],
                                                 ),
@@ -404,8 +403,7 @@ class NewAddTransaction extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(TablerIcons.shopping_cart,
-                                      size: 22),
+                                  const Icon(Icons.shopping_cart, size: 22),
                                   const SizedBox(
                                     width: 5,
                                   ),

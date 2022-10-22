@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
-import 'package:pawang_mobile/modules/authentication/views/reset_password_confirmation.dart';
-import 'package:pawang_mobile/routes/routes.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class ResetPasswordTokenView extends StatelessWidget {
   final ResetPasswordController controller = Get.find();
@@ -24,10 +23,8 @@ class ResetPasswordTokenView extends StatelessWidget {
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          onPressed: () => Get.back(),
-                          icon: const Icon(TablerIcons.chevron_left),
-                        ),
+                        child:
+                            IconBack(blueMode: true, onTap: () => Get.back()),
                       ),
                     ),
                     Expanded(
@@ -82,10 +79,19 @@ class ResetPasswordTokenView extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                TextField(
-                  controller: controller.tokenTextController,
-                  maxLength: 8,
-                  decoration: const InputDecoration(label: Text("Token Kode")),
+                Form(
+                  // key: controller.formKey,
+                  child: TextFormField(
+                    controller: controller.tokenTextController,
+                    validator: ValidationBuilder(localeName: 'id')
+                        .required()
+                        .minLength(6)
+                        .maxLength(6)
+                        .build(),
+                    maxLength: 6,
+                    decoration:
+                        const InputDecoration(label: Text("Token Kode")),
+                  ),
                 ),
                 const SizedBox(
                   height: 32,
@@ -93,7 +99,10 @@ class ResetPasswordTokenView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => controller.sendVerifyToken(),
+                    onPressed: () {
+                      // controller.formValdidate();
+                      controller.sendVerifyToken();
+                    },
                     child: Text(
                       "Verifikasi Token",
                       style: kOpenSans.copyWith(fontWeight: semiBold),

@@ -1,54 +1,63 @@
+import 'dart:io';
+
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pawang_mobile/models/category_model.dart';
+import 'package:pawang_mobile/models/transaction_detail_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/routes/routes.dart';
-import 'package:pawang_mobile/services/category_service.dart';
 import 'package:pawang_mobile/services/transaction_service.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
 
-class TransactionController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class TransactionController extends GetxController {
+  final formKey = GlobalKey<FormState>();
+
+  Future<void> formValdidate() async {
+    formKey.currentState?.validate();
+  }
+
   final DashboardController dashboardController = Get.find();
   final NavigationController navigationController = Get.find();
+
+  // Check If Scan Struk Page
+  bool isScanReceipt = false;
 
   // On Update
   late int? transactionId;
   late String? transactionType;
-  // late AnimationController tabController;
-  final List<Tab> myTabs = <Tab>[
-    Tab(text: 'Pemasukan'),
-    Tab(text: 'Pengeluaran'),
-  ];
 
-  late TabController tabController;
-
-  // On Create
-  var categoriesIncome = <CategoryDataModel>[].obs;
-  var categoriesOutcome = <CategoryDataModel>[].obs;
   var amountTextController = "0".obs;
+
   final TextEditingController descriptionTextController =
       TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
   var displayDate = "".obs;
-  var displayWalletName = "".obs;
-  var displayCategoryName = "".obs;
+  final TextEditingController displayWalletName = TextEditingController();
+  final TextEditingController displayAmount =
+      TextEditingController(text: "Rp 0");
+  final TextEditingController displayCategoryName = TextEditingController();
   var dateRFC3399 = "".obs;
   var walletId = 0.obs;
   var categoryId = 0.obs;
+  var subCategoryId = 0.obs;
+  var type = "".obs;
+  late File transactionReceiptImage;
+
+  var transactionDetailData = TransactionDetailDataModel(
+          totalIncome: 0, totalOutcome: 0, totalBalance: 0)
+      .obs;
 
   @override
   void onInit() {
-    getCategoryByType("income", categoriesIncome);
-    getCategoryByType("outcome", categoriesOutcome);
     dateTextController.text =
         DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
     displayDate.value = dateTextController.text;
-    tabController = TabController(vsync: this, length: myTabs.length);
+    getTransactionsDetail();
     super.onInit();
   }
 
@@ -57,26 +66,38 @@ class TransactionController extends GetxController
     clearInput();
     descriptionTextController.dispose();
     dateTextController.dispose();
-    tabController.dispose();
     super.onClose();
   }
 
-  Future<void> getCategoryByType(
-      String typeCategory, RxList<CategoryDataModel> data) async {
+  Future<void> getTransactionsDetail() async {
     try {
-      var categoryResponse =
-          await CategoryService.getCategories(type: typeCategory);
-      if (categoryResponse != null) {
-        data.assignAll(categoryResponse);
-      }
+      final response = await TransactionService.getTransactionDetails();
+
+      transactionDetailData.update((transactionDetail) {
+        transactionDetail!.totalBalance = response.totalBalance;
+        transactionDetail.totalIncome = response.totalIncome;
+        transactionDetail.totalOutcome = response.totalOutcome;
+      });
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Gagal Menambahkan Transaksi !',
+        '$e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
     }
   }
 
-  Future<void> createTransaction(String type) async {
+  Future<void> createTransaction() async {
+    Get.closeAllSnackbars();
+    EasyLoading.show(status: 'Mohon Tunggu');
     // ignore: unrelated_type_equality_checks
     if (amountTextController.value == "0") {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Masukkan Nominal Transaksi',
@@ -89,6 +110,7 @@ class TransactionController extends GetxController
       );
       throw ("Masukkan Nominal Transaksi");
     } else if (walletId.value == 0) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Pilih Salah Satu Wallet Terlebih Dahulu',
@@ -101,6 +123,7 @@ class TransactionController extends GetxController
       );
       throw ("Pilih Salah Satu Wallet Terlebih Dahulu");
     } else if (categoryId.value == 0) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Pilih Salah Satu Kategori Terlebih Dahulu',
@@ -117,12 +140,15 @@ class TransactionController extends GetxController
     var data = <String, dynamic>{
       'amount': amountTextController,
       'category_id': categoryId.value,
+      'subcategory_id': subCategoryId.value,
       'wallet_id': walletId.value,
-      'type': type,
       'description': descriptionTextController.text,
       'date': dateRFC3399.value,
-      'image': null,
     };
+
+    if (transactionReceiptImage != null) {
+      data['receipt_image'] = transactionReceiptImage;
+    }
 
     try {
       // ignore: unrelated_type_equality_checks
@@ -132,8 +158,18 @@ class TransactionController extends GetxController
             await TransactionService.createTransaction(data);
 
         if (transactionResponse) {
-          Get.delete<TransactionController>();
-          Get.delete<DashboardController>();
+          await getTransactionsDetail();
+          await dashboardController.getTransactions();
+          await dashboardController.getWallets();
+
+          await EasyLoading.dismiss();
+
+          if (isScanReceipt) {
+            navigationController.changeTabIndex(0);
+            Get.offAllNamed(RoutesName.navigation);
+          } else {
+            Get.back();
+          }
 
           Get.snackbar(
             'Sukses !',
@@ -147,11 +183,10 @@ class TransactionController extends GetxController
           );
 
           clearInput();
-
-          Get.toNamed(RoutesName.navigation);
         }
       }
     } catch (e) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         '$e',
@@ -166,14 +201,21 @@ class TransactionController extends GetxController
   }
 
   Future<void> deleteTransaction(int transactionId) async {
+    Get.closeAllSnackbars();
+    EasyLoading.show(status: 'Mohon Tunggu');
     try {
       navigationController.tabIndex = 0;
 
       final response =
           await TransactionService.destroyTransaction(transactionId);
       if (response) {
-        Get.delete<TransactionController>();
-        Get.delete<DashboardController>();
+        await getTransactionsDetail();
+        await dashboardController.getTransactions();
+        await dashboardController.getWallets();
+
+        await EasyLoading.dismiss();
+
+        Get.offAllNamed(RoutesName.navigation);
 
         Get.snackbar(
           'Sukses !',
@@ -187,10 +229,9 @@ class TransactionController extends GetxController
         );
 
         clearInput();
-
-        Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         '$e',
@@ -204,32 +245,49 @@ class TransactionController extends GetxController
     }
   }
 
+  Future<void> formUploadReceiptTransaction(String amount, File image) async {
+    isScanReceipt = true;
+    amountTextController.value = amount;
+    transactionReceiptImage = image;
+    displayAmount.text = CurrencyFormat.convertToIdr(int.parse(amount), 2);
+
+    Get.toNamed(RoutesName.addtransaction);
+  }
+
   Future<void> formEditTransaction(TransactionDataModel data) async {
     if (data.type == "income") {
-      Get.toNamed(RoutesName.addincome, arguments: {"isUpdate": true});
+      Get.toNamed(RoutesName.addtransaction, arguments: {"isUpdate": true});
     } else if (data.type == "outcome") {
-      Get.toNamed(RoutesName.addoutcome, arguments: {"isUpdate": true});
+      Get.toNamed(RoutesName.addtransaction, arguments: {"isUpdate": true});
     }
     transactionId = data.id;
     transactionType = data.type;
     amountTextController.value = data.amount.toString();
+    displayAmount.text =
+        CurrencyFormat.convertToIdr(int.parse(data.amount.toString()), 2);
     categoryId.value = data.categoryId;
     walletId.value = data.walletId;
     descriptionTextController.text = data.description ?? "";
-    displayWalletName.value = data.wallet.name;
-    displayCategoryName.value = data.category.name;
-    // dateRFC3399.value = DateFormat("d MMMM yyyy - HH:mm")
-    //     .parse(data.date.toString())
-    //     .toUtc()
-    //     .toString();
+    displayWalletName.text = data.wallet.name;
+    displayCategoryName.text = data.category.name;
+
+    if (data.subcategoryId != null) {
+      subCategoryId.value = data.subcategoryId!;
+      displayCategoryName.text =
+          "${data.category.name} - ${data.subcategory?.name}";
+    }
+
     dateTextController.text = DateFormat("d MMMM yyyy - HH:mm")
         .format(DateFormat("yyyy-mm-dd HH:mm").parse(data.date.toString()))
         .toString();
   }
 
-  Future<void> updateTransaction(int transactionId, String type) async {
+  Future<void> updateTransaction() async {
+    Get.closeAllSnackbars();
+    EasyLoading.show(status: 'Mohon Tunggu');
     // ignore: unrelated_type_equality_checks
     if (amountTextController.value == "0") {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Masukkan Nominal Transaksi',
@@ -241,6 +299,7 @@ class TransactionController extends GetxController
         ),
       );
     } else if (walletId.value == 0) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Pilih Salah Satu Wallet Terlebih Dahulu',
@@ -252,6 +311,7 @@ class TransactionController extends GetxController
         ),
       );
     } else if (categoryId.value == 0) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
         'Pilih Salah Satu Kategori Terlebih Dahulu',
@@ -267,9 +327,8 @@ class TransactionController extends GetxController
     var data = <String, dynamic>{
       'amount': amountTextController,
       'category_id': categoryId.value,
-      'sub_category_id': "",
+      'subcategory_id': subCategoryId.value,
       'wallet_id': walletId.value,
-      'type': type,
       'description': descriptionTextController.text,
       'date': dateRFC3399.value,
       'image': null,
@@ -278,11 +337,16 @@ class TransactionController extends GetxController
     try {
       navigationController.tabIndex = 0;
       var transactionResponse =
-          await TransactionService.updateTransaction(data, transactionId);
+          await TransactionService.updateTransaction(data, transactionId!);
 
       if (transactionResponse) {
-        Get.delete<TransactionController>();
-        Get.delete<DashboardController>();
+        await getTransactionsDetail();
+        await dashboardController.getTransactions();
+        await dashboardController.getWallets();
+
+        await EasyLoading.dismiss();
+
+        Get.offAllNamed(RoutesName.navigation);
 
         Get.snackbar(
           'Sukses !',
@@ -296,10 +360,9 @@ class TransactionController extends GetxController
         );
 
         clearInput();
-
-        Get.toNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
       Get.snackbar(
         'Gagal Memperbarui Transaksi !',
         '$e',
@@ -314,13 +377,17 @@ class TransactionController extends GetxController
   }
 
   Future<void> clearInput() async {
-    displayDate.value = "";
-    dateRFC3399.value = "";
+    isScanReceipt = false;
+    dateTextController.text =
+        DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
+    dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
+    displayDate.value = dateTextController.text;
     amountTextController.value = "0";
     walletId.value = 0;
     categoryId.value = 0;
-    displayWalletName.value = "";
-    displayCategoryName.value = "";
+    displayAmount.text = "Rp 0";
+    displayWalletName.text = "";
+    displayCategoryName.text = "";
     Get.delete<ScanReceipeController>();
   }
 }

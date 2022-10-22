@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -216,57 +215,9 @@ class ScanReceipeView extends StatelessWidget {
                                   ),
                                   onPressed: () async {
                                     try {
-                                      controller.uploadReceipt();
-                                      // setState(() {
-                                      //   _isLoading = true;
-                                      // });
-                                      // await ScanService()
-                                      //     .cropImage(_image)
-                                      //     .then((imageCropped) async {
-                                      //   try {
-                                      //     var response = await ScanService()
-                                      //         .uploadImage(imageCropped!);
-                                      //     if (response
-                                      //         .toString()
-                                      //         .isNotEmpty) {
-                                      //       // setState(() {
-                                      //       //   _isLoading = false;
-                                      //       // });
-
-                                      //       // setState(() {
-                                      //       //   nominal = response;
-                                      //       // });
-                                      //     } else {
-                                      //       // setState(() {
-                                      //       //   _isLoading = false;
-                                      //       // });
-                                      //     }
-                                      //   } catch (e) {
-                                      //     // setState(() {
-                                      //     //   _isLoading = false;
-                                      //     // });
-                                      //   }
-                                      // });
-                                      // Navigator.pushNamed(context,
-                                      //     ValidasiScanScreen.routeName,
-                                      //     arguments: ArgumentsValidation(
-                                      //         nominal: nominal,
-                                      //         filePath: imageFilePath =
-                                      //             _image!.path));
+                                      await controller.uploadReceipt();
                                     } catch (e) {
-                                      Flushbar(
-                                        message:
-                                            "Tidak Dapat Menemukan Total !",
-                                        icon: const Icon(
-                                          Icons.check,
-                                          size: 28.0,
-                                          color: Colors.white,
-                                        ),
-                                        margin: const EdgeInsets.all(8),
-                                        borderRadius: BorderRadius.circular(8),
-                                        backgroundColor: defaultError,
-                                        duration: const Duration(seconds: 3),
-                                      ).show(context);
+                                      print(e);
                                     }
                                   },
                                   child: Text(

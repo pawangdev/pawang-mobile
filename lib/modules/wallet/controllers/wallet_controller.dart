@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
@@ -25,18 +26,26 @@ class WalletController extends GetxController {
   }
 
   Future<void> createWallet() async {
+    Get.closeAllSnackbars();
+
     var input = <String, dynamic>{
       'name': nameTextController.text,
       'balance': int.parse(balanceTextController.text),
     };
 
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       var walletUpdateResponse = await WalletService.createWallet(input);
       if (walletUpdateResponse) {
         await dashboardController.getWallets();
         await dashboardController.getTransactions();
 
         resetAllInput();
+
+        await EasyLoading.dismiss();
+
+        Get.back();
 
         Get.snackbar(
           'Sukses !',
@@ -48,13 +57,10 @@ class WalletController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        nameTextController.clear();
-        balanceTextController.clear();
-
-        Get.offNamed(RoutesName.wallet);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal Membuat Wallet !',
         '$e',
@@ -69,12 +75,15 @@ class WalletController extends GetxController {
   }
 
   Future<void> updateWallet() async {
+    Get.closeAllSnackbars();
+
     var input = <String, dynamic>{
       'name': nameTextController.text,
       'balance': int.parse(balanceTextController.text),
     };
 
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
       var walletUpdateResponse =
           await WalletService.updateWallet(input, idWallet);
       if (walletUpdateResponse) {
@@ -82,6 +91,10 @@ class WalletController extends GetxController {
         await dashboardController.getTransactions();
 
         resetAllInput();
+
+        await EasyLoading.dismiss();
+
+        Get.back();
 
         Get.snackbar(
           'Sukses !',
@@ -93,14 +106,10 @@ class WalletController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        idWallet = 0;
-        nameTextController.clear();
-        balanceTextController.clear();
-
-        Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal Memperbarui Wallet !',
         '$e',
@@ -115,7 +124,9 @@ class WalletController extends GetxController {
   }
 
   Future<void> deleteWallet() async {
+    Get.closeAllSnackbars();
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
       var walletDeleteResponse = await WalletService.deleteWallet(idWallet);
 
       if (walletDeleteResponse) {
@@ -123,6 +134,10 @@ class WalletController extends GetxController {
         await dashboardController.getTransactions();
 
         resetAllInput();
+
+        await EasyLoading.dismiss();
+
+        Get.back();
 
         Get.snackbar(
           'Sukses !',
@@ -134,12 +149,10 @@ class WalletController extends GetxController {
             color: Colors.white,
           ),
         );
-
-        idWallet = 0;
-
-        Get.toNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal Menghapus Wallet !',
         '$e',
@@ -154,6 +167,7 @@ class WalletController extends GetxController {
   }
 
   Future<void> resetAllInput() async {
+    idWallet = 0;
     nameTextController.text = "";
     balanceTextController.text = "0";
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
@@ -24,13 +25,10 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconBack(
-                            blueMode: true,
-                            onTap: () {
-                              Get.back();
-                            },
-                          )),
+                        alignment: Alignment.centerLeft,
+                        child:
+                            IconBack(blueMode: true, onTap: () => Get.back()),
+                      ),
                     ),
                     Expanded(
                       flex: 2,
@@ -83,10 +81,17 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                TextField(
-                  controller: controller.emailTextController,
-                  decoration:
-                      const InputDecoration(label: Text("Alamat Email")),
+                Form(
+                  key: controller.formKey,
+                  child: TextFormField(
+                    controller: controller.emailTextController,
+                    validator: ValidationBuilder(localeName: 'id')
+                        .required()
+                        .email()
+                        .build(),
+                    decoration:
+                        const InputDecoration(label: Text("Alamat Email")),
+                  ),
                 ),
                 const SizedBox(
                   height: 32,
@@ -94,7 +99,10 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => controller.sendRequestToken(),
+                    onPressed: () {
+                      controller.formValdidate();
+                      controller.sendRequestToken();
+                    },
                     child: Text(
                       "Kirim Kode",
                       style: kOpenSans.copyWith(fontWeight: semiBold),

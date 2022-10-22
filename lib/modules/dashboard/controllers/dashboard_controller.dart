@@ -52,10 +52,7 @@ class DashboardController extends GetxController {
 
   Future<void> getWallets() async {
     try {
-      var walletsResponse = await WalletService.getWallets();
-      if (walletsResponse != null) {
-        wallets.assignAll(walletsResponse);
-      }
+      WalletService.getWallets().then((value) => wallets.assignAll(value!));
     } catch (e) {
       print(e);
     }
@@ -63,10 +60,8 @@ class DashboardController extends GetxController {
 
   Future<void> getTransactions() async {
     try {
-      var transactionsResponse = await TransactionService.getTransactions();
-      if (transactionsResponse != null) {
-        transactions.assignAll(transactionsResponse);
-      }
+      await TransactionService.getTransactions()
+          .then((value) => transactions.assignAll(value!));
     } catch (e) {
       print(e);
     }
@@ -74,10 +69,8 @@ class DashboardController extends GetxController {
 
   Future<void> getReminders() async {
     try {
-      var remindersResponse = await ReminderService.getReminders();
-      if (remindersResponse != null) {
-        reminders.assignAll(remindersResponse);
-      }
+      await ReminderService.getReminders()
+          .then((value) => reminders.assignAll(value!));
     } catch (e) {
       print(e);
     }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
@@ -118,51 +117,7 @@ class SettingsView extends StatelessWidget {
                         color: defaultGray,
                         height: 0.05.h,
                       ),
-                      height: 2.8.h,
-                    ),
-                    InkWell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: 3.9.h,
-                                    width: 8.3.w,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: const Icon(
-                                      Icons.alarm,
-                                      color: defaultWhite,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text('Reminder',
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 14, fontWeight: semiBold))
-                              ],
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 16,
-                            )
-                          ],
-                        ),
-                        onTap: () {
-                          Get.toNamed(RoutesName.reminder);
-                        }),
-                    SizedBox(
-                      child: Divider(
-                        color: defaultGray,
-                        height: 0.05.h,
-                      ),
-                      height: 2.8.h,
+                      height: Get.height * 0.035,
                     ),
                     InkWell(
                       child: Row(
@@ -300,7 +255,7 @@ class SettingsView extends StatelessWidget {
                         color: defaultGray,
                         height: 0.05.h,
                       ),
-                      height: 2.8.h,
+                      height: Get.height * 0.035,
                     ),
                   ],
                 )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/routes/routes.dart';
@@ -20,6 +21,8 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> updateProfile() async {
+    EasyLoading.show(status: 'Mohon Tunggu');
+
     var input = <String, dynamic>{
       'name': nameTextController.text,
       'phone': phoneTextController.text,
@@ -35,6 +38,8 @@ class EditProfileController extends GetxController {
           user?.phone = editProfileResponse.phone;
         });
 
+        EasyLoading.dismiss();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Memperbarui Profil",
@@ -49,6 +54,8 @@ class EditProfileController extends GetxController {
         Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal Memperbarui Profil !',
         '$e',

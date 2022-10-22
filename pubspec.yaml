@@ -27,23 +27,20 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  another_flushbar: ^1.10.29
-  basic_utils: ^4.2.2
+  cached_network_image: ^3.2.2
   carousel_slider: ^4.1.1
   cupertino_icons: ^1.0.2
   currency_text_input_formatter: ^2.1.7
   date_time_picker: ^2.1.0
-  dio: ^4.0.6
-  dropdown_button2: ^1.8.5
   expandable: ^5.0.1
   firebase_analytics: ^9.1.9
   firebase_core: ^1.17.1
   flutter:
     sdk: flutter
+  flutter_easyloading: ^3.0.5
   flutter_slidable: ^2.0.0
   flutter_spinkit: ^5.1.0
   flutter_svg: ^1.0.3
-  flutter_tabler_icons: ^1.1.1
   form_validator: ^1.0.2
   get: ^4.6.5
   get_storage: ^2.0.3

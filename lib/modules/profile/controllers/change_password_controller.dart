@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/routes/routes.dart';
@@ -12,8 +13,11 @@ class ChangePasswordController extends GetxController {
       TextEditingController();
 
   Future<void> updatePassword() async {
+    EasyLoading.show(status: 'Mohon Tunggu');
     if (passwordNewTextController.text !=
         passwordNewConfirmationTextController.text) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal !',
         'Password Baru Konfirmasi Tidak Sama',
@@ -35,6 +39,8 @@ class ChangePasswordController extends GetxController {
       var changePasswordResponse = await UserService.userChangePassword(input);
 
       if (changePasswordResponse) {
+        EasyLoading.dismiss();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Memperbarui Password",
@@ -49,6 +55,8 @@ class ChangePasswordController extends GetxController {
         Get.offNamed(RoutesName.navigation);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal !',
         '$e',

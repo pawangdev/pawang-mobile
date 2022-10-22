@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
-import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/scan_service.dart';
 
 class ScanReceipeController extends GetxController {
@@ -18,8 +18,6 @@ class ScanReceipeController extends GetxController {
       final getImage = await ScanService().getImage(isFromGal);
       if (getImage != null) {
         imageFilePath = getImage;
-
-        print(imageFilePath?.path.toString());
       }
     } catch (e) {}
     update();
@@ -32,13 +30,14 @@ class ScanReceipeController extends GetxController {
 
   Future<void> uploadReceipt() async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
       final fileImage = File(imageFilePath!.path);
-      await ScanService.uploadReceipt(fileImage).then((value) async {
+      ScanService.uploadReceipt(fileImage).then((value) async {
         if (value['status'] == "true") {
-          String tempAmounts = value['amounts'];
-          transactionController.amountTextController.value =
-              tempAmounts.replaceAll(',', '');
-          Get.toNamed(RoutesName.addoutcome);
+          EasyLoading.dismiss();
+
+          String tempAmounts = value['amounts'].toString();
+
           Get.snackbar(
             'Berhasil Memindai Struk !',
             'Struk akan disimpan',
@@ -49,6 +48,11 @@ class ScanReceipeController extends GetxController {
               color: Colors.white,
             ),
           );
+
+          await transactionController.formUploadReceiptTransaction(
+              tempAmounts, fileImage);
+
+          resetScan();
         }
       });
     } catch (e) {

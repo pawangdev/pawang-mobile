@@ -1,24 +1,19 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/reminder_model.dart';
+import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/services/reminder_service.dart';
 
 class ReminderController extends GetxController {
-  final reminders = <ReminderDataModel>[].obs;
+  final DashboardController dashboardController = Get.find();
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
   final type = "once".obs;
-
-  @override
-  void onInit() {
-    getRemindersData();
-    super.onInit();
-  }
 
   final List<dynamic> typeData = [
     {'name': 'Tidak Berulang', 'id': 'once'},
@@ -28,27 +23,9 @@ class ReminderController extends GetxController {
     {'name': 'Tahunan', 'id': 'yearly'},
   ];
 
-  Future<void> getRemindersData() async {
-    try {
-      final response = await ReminderService.getReminders();
-      if (response != null) {
-        reminders.assignAll(response);
-      }
-    } catch (e) {
-      Get.snackbar(
-        'Tedapat Kesalahan !',
-        e.toString(),
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-      );
-    }
-  }
-
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
+    EasyLoading.show(status: 'Mohon Tunggu');
+
     if (isAdding) {
       try {
         final input = <String, dynamic>{
@@ -61,7 +38,9 @@ class ReminderController extends GetxController {
         final response = await ReminderService.createReminder(input);
 
         if (response) {
-          await getRemindersData();
+          await dashboardController
+              .getReminders()
+              .then((value) => EasyLoading.dismiss());
 
           nameTextController.text = "";
           dateTextController.text = "";
@@ -75,7 +54,8 @@ class ReminderController extends GetxController {
           );
         }
       } catch (e) {
-        log(e.toString());
+        EasyLoading.dismiss();
+
         Get.snackbar(
           'Tedapat Kesalahan !',
           e.toString(),
@@ -99,13 +79,15 @@ class ReminderController extends GetxController {
         final response = await ReminderService.updateReminder(id!, input);
 
         if (response) {
+          await dashboardController
+              .getReminders()
+              .then((value) => EasyLoading.dismiss());
+
           Get.rawSnackbar(
             title: "Sukses",
             message: "Berhasil Memperbarui Pengingat",
             backgroundColor: defaultSuccess,
           );
-
-          getRemindersData();
 
           nameTextController.text = "";
           dateTextController.text = "";
@@ -113,7 +95,8 @@ class ReminderController extends GetxController {
           Get.offNamed(RoutesName.reminder);
         }
       } catch (e) {
-        log(e.toString());
+        EasyLoading.dismiss();
+
         Get.snackbar(
           'Tedapat Kesalahan !',
           e.toString(),
@@ -130,9 +113,13 @@ class ReminderController extends GetxController {
 
   Future<void> deleteReminder(id) async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       final response = await ReminderService.deleteReminder(id);
       if (response) {
-        getRemindersData();
+        await dashboardController
+            .getReminders()
+            .then((value) => EasyLoading.dismiss());
 
         Get.snackbar(
           'Sukses !',
@@ -146,6 +133,8 @@ class ReminderController extends GetxController {
         );
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Gagal Menghapus Pengingat !',
         '$e',

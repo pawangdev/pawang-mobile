@@ -1,4 +1,4 @@
-import 'package:flutter_svg/svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -54,10 +54,18 @@ class TransactionDetailView extends StatelessWidget {
                     Center(
                       child: Column(
                         children: [
-                          SvgPicture.network(
-                            baseHOSTAPI + transaction.category.icon,
+                          CachedNetworkImage(
+                            imageUrl: baseHOSTAPI + transaction.category.icon,
                             fit: BoxFit.cover,
                             width: 80,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                           SizedBox(
                             height: Get.height * 0.012,
@@ -104,9 +112,7 @@ class TransactionDetailView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            transaction.description! == ""
-                                ? "-"
-                                : transaction.description!,
+                            transaction.description ?? "-",
                             style: kOpenSans.copyWith(
                                 fontSize: 16, color: defaultPrimary),
                           )
@@ -177,9 +183,9 @@ class TransactionDetailView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                transaction.subcategory?.name == null
+                                transaction.subcategory == null
                                     ? "-"
-                                    : transaction.subcategory.name,
+                                    : transaction.subcategory!.name,
                                 style: kOpenSans.copyWith(
                                     fontSize: 12,
                                     color: defaultPrimary.withOpacity(0.6)),

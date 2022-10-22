@@ -74,6 +74,10 @@ class UserService {
         throw ("Email Tidak Ditemukan!");
       } else if (e.toString() == "Password invalid!") {
         throw ("Password Salah!");
+      } else if (e.toString() == "email is not allowed to be empty") {
+        throw ("Email Tidak Boleh Kosong!");
+      } else if (e.toString() == "password is not allowed to be empty") {
+        throw ("Password Tidak Boleh Kosong!");
       } else {
         rethrow;
       }

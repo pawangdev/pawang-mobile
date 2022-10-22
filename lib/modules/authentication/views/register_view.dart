@@ -51,8 +51,9 @@ class RegisterView extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: InputField(
-                            validator:
-                                ValidationBuilder(localeName: 'id').build(),
+                            validator: ValidationBuilder(localeName: 'id')
+                                .required()
+                                .build(),
                             inputLabel: "Nama Lengkap",
                             inputController: controller.nameTextController,
                             keyboardType: TextInputType.name,
@@ -62,7 +63,8 @@ class RegisterView extends StatelessWidget {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: InputField(
                             validator: ValidationBuilder(localeName: 'id')
-                                .email('Isi dengan format email')
+                                .required()
+                                .email()
                                 .build(),
                             inputLabel: "Email",
                             capitalization: TextCapitalization.none,
@@ -89,7 +91,8 @@ class RegisterView extends StatelessWidget {
                               Obx(
                                 () => TextFormField(
                                   validator: ValidationBuilder(localeName: 'id')
-                                      .minLength(8, 'Minimal 8 huruf')
+                                      .required()
+                                      .minLength(8)
                                       .build(),
                                   controller: controller.passwordTextController,
                                   decoration: InputDecoration(
@@ -122,7 +125,8 @@ class RegisterView extends StatelessWidget {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: InputField(
                             validator: ValidationBuilder(localeName: 'id')
-                                .phone('Isi dengan format nomer telepon')
+                                .required()
+                                .phone()
                                 .build(),
                             inputLabel: "Nomer Telepon",
                             inputController: controller.phoneTextController,
@@ -209,7 +213,10 @@ class RegisterView extends StatelessWidget {
                               end: Alignment.centerRight,
                               colors: [defaultPrimary, defaultPurple])),
                       child: TextButton(
-                        onPressed: () => controller.register(),
+                        onPressed: () {
+                          controller.formValdidate();
+                          controller.register();
+                        },
                         child: Text(
                           "Daftar",
                           style: kOpenSans.copyWith(

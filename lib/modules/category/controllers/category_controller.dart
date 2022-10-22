@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/category_model.dart';
@@ -16,17 +17,25 @@ class CategoryController extends GetxController {
 
   Future<void> getCategories() async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       var categoryResponse = await CategoryService.getCategories();
       if (categoryResponse != null) {
+        EasyLoading.dismiss();
+
         categories.assignAll(categoryResponse);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       print(e);
     }
   }
 
   Future<void> addSubCategory(int id) async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       var data = <String, dynamic>{
         'name': nameTextController.text,
       };
@@ -35,6 +44,8 @@ class CategoryController extends GetxController {
           await CategoryService.addSubCategory(id, data);
 
       if (subCategoryResponse) {
+        EasyLoading.dismiss();
+
         Get.rawSnackbar(
           title: "Sukses",
           message: "Berhasil Menambahkan Subkategori",
@@ -48,6 +59,8 @@ class CategoryController extends GetxController {
         Get.close(1);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.rawSnackbar(
         title: 'Gagal Membuat Subkategori !',
         message: '$e',
@@ -58,6 +71,8 @@ class CategoryController extends GetxController {
 
   Future<void> updateSubCategory({categoryId, subCategoryId}) async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       var data = <String, dynamic>{
         'name': nameTextController.text,
       };
@@ -66,6 +81,8 @@ class CategoryController extends GetxController {
           data: data, idCategory: categoryId, idSubCategory: subCategoryId);
 
       if (subCategoryResponse) {
+        EasyLoading.dismiss();
+
         Get.rawSnackbar(
           title: "Sukses",
           message: "Berhasil Memperbarui Subkategori",
@@ -79,6 +96,8 @@ class CategoryController extends GetxController {
         Get.close(1);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.rawSnackbar(
         title: 'Gagal Memperbarui Subkategori !',
         message: '$e',
@@ -89,9 +108,13 @@ class CategoryController extends GetxController {
 
   Future<void> deleteSubCategory({categoryId, subCategoryId}) async {
     try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
       final response = await CategoryService.deleteSubCategory(
           idCategory: categoryId, idSubCategory: subCategoryId);
       if (response) {
+        EasyLoading.dismiss();
+
         getCategories();
 
         Get.rawSnackbar(
@@ -103,6 +126,8 @@ class CategoryController extends GetxController {
         Get.close(1);
       }
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.rawSnackbar(
         title: 'Gagal Menghapus Subkategori !',
         message: '$e',

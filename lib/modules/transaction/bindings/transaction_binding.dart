@@ -7,7 +7,7 @@ class TransactionBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<TransactionController>(TransactionController());
-    Get.lazyPut<DashboardController>(() => DashboardController());
-    Get.lazyPut<ScanReceipeController>(() => ScanReceipeController());
+    Get.put<DashboardController>(DashboardController());
+    Get.put<ScanReceipeController>(ScanReceipeController());
   }
 }

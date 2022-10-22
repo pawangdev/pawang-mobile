@@ -6,5 +6,6 @@ class ScanReceipeBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<ScanReceipeController>(ScanReceipeController());
+    Get.lazyPut<TransactionController>(() => TransactionController());
   }
 }

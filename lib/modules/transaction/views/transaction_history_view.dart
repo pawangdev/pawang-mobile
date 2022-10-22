@@ -3,6 +3,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
+import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 
 class TransactionHistoryView extends StatelessWidget {
@@ -59,12 +60,18 @@ class TransactionHistoryView extends StatelessWidget {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  Text(
-                                    'Rp. 1.500.000',
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 24,
-                                        fontWeight: bold,
-                                        color: defaultWhite),
+                                  Obx(
+                                    () => Text(
+                                      CurrencyFormat.convertToIdr(
+                                              controller.transactionDetailData
+                                                  .value.totalBalance,
+                                              2)
+                                          .toString(),
+                                      style: kOpenSans.copyWith(
+                                          fontSize: 24,
+                                          fontWeight: bold,
+                                          color: defaultWhite),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -105,12 +112,12 @@ class TransactionHistoryView extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.arrow_downward_rounded,
                                 size: 13,
                                 color: defaultSuccess,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text('Pemasukan',
@@ -120,11 +127,19 @@ class TransactionHistoryView extends StatelessWidget {
                                       color: defaultBlack)),
                             ],
                           ),
-                          Text('Rp. 2.000.000',
+                          Obx(
+                            () => Text(
+                              CurrencyFormat.convertToIdr(
+                                      controller.transactionDetailData.value
+                                          .totalIncome,
+                                      2)
+                                  .toString(),
                               style: kOpenSans.copyWith(
                                   fontSize: 12,
                                   fontWeight: bold,
-                                  color: defaultSuccess))
+                                  color: defaultSuccess),
+                            ),
+                          )
                         ],
                       ),
                       Container(
@@ -137,12 +152,12 @@ class TransactionHistoryView extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.arrow_upward_rounded,
                                 size: 13,
                                 color: defaultError,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text('Pengeluaran',
@@ -152,11 +167,19 @@ class TransactionHistoryView extends StatelessWidget {
                                       color: defaultBlack)),
                             ],
                           ),
-                          Text('Rp. 500.000',
+                          Obx(
+                            () => Text(
+                              CurrencyFormat.convertToIdr(
+                                      controller.transactionDetailData.value
+                                          .totalOutcome,
+                                      2)
+                                  .toString(),
                               style: kOpenSans.copyWith(
                                   fontSize: 12,
                                   fontWeight: bold,
-                                  color: defaultError))
+                                  color: defaultError),
+                            ),
+                          )
                         ],
                       ),
                     ],

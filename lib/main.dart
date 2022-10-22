@@ -1,10 +1,12 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pawang_mobile/constants/strings.dart';
-import 'package:pawang_mobile/modules/onboarding/views/onboarding_view.dart';
+import 'package:pawang_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -15,19 +17,24 @@ void main() async {
   await GetStorage.init();
   await Firebase.initializeApp();
 
-  //Remove this method to stop OneSignal Debugging
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-
   OneSignal.shared.setAppId(oneSignalAPPID);
-
   OneSignal.shared.getDeviceState();
-
-// The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-    print("Accepted permission: $accepted");
-  });
-
+  OneSignal.shared.promptUserForPushNotificationPermission();
+  configLoading();
   runApp(const MyApp());
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 40.0
+    ..radius = defaultBorderRadius
+    ..maskType = EasyLoadingMaskType.black
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }
 
 class MyApp extends StatelessWidget {
@@ -48,6 +55,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "OpenSans",
           ),
+          builder: EasyLoading.init(),
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.pages,
           debugShowCheckedModeBanner: false,

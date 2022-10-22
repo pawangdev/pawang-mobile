@@ -18,6 +18,7 @@ abstract class RoutesName {
   static const addwallet = '/add-wallet';
   static const addincome = '/add-income';
   static const addtransaction = '/add-transaction';
+  static const transactionnumpad = '/transaction-numpad';
   static const transactionhistory = '/transaction-history';
   static const tabbar = '/tab-bar';
   static const addoutcome = '/add-outcome';

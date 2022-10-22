@@ -11,7 +11,6 @@ import 'package:pawang_mobile/widgets/layanan_card.dart';
 import 'package:pawang_mobile/widgets/remind_card.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
 import 'package:skeleton_text/skeleton_text.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
@@ -27,10 +26,8 @@ class DashboardView extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Container(
-                    height: Get.height * 0.42,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.vertical(bottom: Radius.circular(60)),
+                    height: Get.height * 0.40,
+                    decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -158,7 +155,7 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * 0.035,
+                      height: Get.height * 0.040,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -169,7 +166,7 @@ class DashboardView extends StatelessWidget {
                             icon: 'assets/images/pemasukan.png',
                             title: 'Transaksi',
                             onTap: () {
-                              Get.toNamed(RoutesName.tabbar);
+                              Get.toNamed(RoutesName.addtransaction);
                             },
                           ),
                           LayananCard(
@@ -206,7 +203,8 @@ class DashboardView extends StatelessWidget {
                       blurRadius: 10,
                     )
                   ],
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(10)),
                   color: defaultWhite,
                 ),
                 child: Padding(
@@ -293,7 +291,8 @@ class DashboardView extends StatelessWidget {
                       blurRadius: 10,
                     )
                   ],
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(10)),
                   color: defaultWhite,
                 ),
                 child: Padding(

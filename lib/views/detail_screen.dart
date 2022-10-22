@@ -1,4 +1,3 @@
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -82,7 +81,7 @@ class DetailScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const Icon(
-                          TablerIcons.apple,
+                          Icons.apple,
                           size: 40,
                         ),
                         const SizedBox(

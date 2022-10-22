@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -22,14 +23,17 @@ class CardPengeluaran extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 3.4.h,
-                  width: 7.2.w,
+                  width: 24,
                   decoration: const BoxDecoration(
-                      color: defaultSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: SvgPicture.network(
-                    baseHOSTAPI + data.category.icon,
+                  child: CachedNetworkImage(
+                    imageUrl: baseHOSTAPI + data.category.icon,
                     fit: BoxFit.cover,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
                 SizedBox(

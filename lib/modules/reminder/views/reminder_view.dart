@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/widgets/reminder_card.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 
 class ReminderView extends StatelessWidget {
   final ReminderController controller = Get.find();
+  final DashboardController dashboardController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -68,25 +70,37 @@ class ReminderView extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: Obx(() => ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final reminder = controller.reminders[index];
-                    return ReminderCard(
-                      item: reminder,
-                      index: index,
-                      onDelete: (context) =>
-                          controller.deleteReminder(reminder.id),
-                      onUpdate: (context) {
-                        controller.nameTextController.text = reminder.name!;
-                        controller.dateTextController.text = reminder.date!;
-                        Get.toNamed(RoutesName.addreminder,
-                            arguments: {"is_adding": true, "id": reminder.id});
+            child: Obx(
+              () => dashboardController.reminders.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Pengingat Masih Kosong",
+                        style: textMuted.copyWith(
+                            fontSize: 18, fontWeight: semiBold),
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final reminder = dashboardController.reminders[index];
+                        return ReminderCard(
+                          item: reminder,
+                          index: index,
+                          onDelete: (context) =>
+                              controller.deleteReminder(reminder.id),
+                          onUpdate: (context) {
+                            controller.nameTextController.text = reminder.name!;
+                            controller.dateTextController.text = reminder.date!;
+                            Get.toNamed(RoutesName.addreminder, arguments: {
+                              "is_adding": true,
+                              "id": reminder.id
+                            });
+                          },
+                        );
                       },
-                    );
-                  },
-                  itemCount: controller.reminders.length,
-                )),
+                      itemCount: dashboardController.reminders.length,
+                    ),
+            ),
           )
         ],
       ),

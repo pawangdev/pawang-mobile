@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/constants/strings.dart';
@@ -7,11 +8,16 @@ import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class RegisterController extends GetxController {
+  final formKey = GlobalKey<FormState>();
+
+  Future<void> formValdidate() async {
+    formKey.currentState?.validate();
+  }
+
   final nameTextController = TextEditingController();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final phoneTextController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   final isObsecure = true.obs;
 
   var genderTextController = ''.obs;
@@ -31,6 +37,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void> register() async {
+    EasyLoading.show(status: 'Mohon Tunggu');
     final status = await OneSignal.shared.getDeviceState();
     final String? osUserID = status?.userId;
 
@@ -46,7 +53,8 @@ class RegisterController extends GetxController {
     try {
       var registerResponse = await UserService.userRegister(input);
 
-      Storage.saveValue(storageToken, registerResponse?.accessToken);
+      Storage.saveValue(storageToken, registerResponse?.accessToken)
+          .then((value) => EasyLoading.dismiss());
       Get.snackbar('Berhasil Mendaftar !',
           'Selamat Datang ${registerResponse?.user.name}',
           backgroundColor: Colors.green,
@@ -57,6 +65,8 @@ class RegisterController extends GetxController {
           ));
       Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
+      EasyLoading.dismiss();
+
       Get.snackbar(
         'Tedapat Kesalahan !',
         e.toString(),
