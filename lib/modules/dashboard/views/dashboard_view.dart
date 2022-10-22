@@ -256,16 +256,21 @@ class DashboardView extends StatelessWidget {
                                         data: controller.transactions[index]),
                                   );
                                 },
-                                itemCount: controller.transactions.length,
+                                itemCount: controller.transactions.length > 3
+                                    ? 3
+                                    : controller.transactions.length,
                               )
-                            : Center(
-                                child: Text(
-                                  "Anda belum memiliki transaksi",
-                                  style: kOpenSans.copyWith(
-                                      color: defaultGray,
-                                      fontSize: 13,
-                                      fontWeight: medium),
-                                  textAlign: TextAlign.center,
+                            : Padding(
+                                padding: const EdgeInsets.only(top: 25),
+                                child: Center(
+                                  child: Text(
+                                    "Anda belum memiliki transaksi",
+                                    style: kOpenSans.copyWith(
+                                        color: defaultGray,
+                                        fontSize: 13,
+                                        fontWeight: medium),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                       ),
@@ -328,7 +333,9 @@ class DashboardView extends StatelessWidget {
                       Obx(
                         () => controller.reminders.isNotEmpty
                             ? CarouselSlider.builder(
-                                itemCount: controller.reminders.length,
+                                itemCount: controller.reminders.length > 3
+                                    ? 3
+                                    : controller.reminders.length,
                                 options: CarouselOptions(
                                   height: Get.height * 0.155,
                                   disableCenter: true,
@@ -350,14 +357,17 @@ class DashboardView extends StatelessWidget {
                                   );
                                 },
                               )
-                            : Center(
-                                child: Text(
-                                  "Anda belum memiliki Tagihan",
-                                  style: kOpenSans.copyWith(
-                                      color: defaultGray,
-                                      fontSize: 13,
-                                      fontWeight: medium),
-                                  textAlign: TextAlign.center,
+                            : Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Center(
+                                  child: Text(
+                                    "Anda belum memiliki Tagihan",
+                                    style: kOpenSans.copyWith(
+                                        color: defaultGray,
+                                        fontSize: 13,
+                                        fontWeight: medium),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                       ),
