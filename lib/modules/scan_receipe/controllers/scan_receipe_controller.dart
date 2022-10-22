@@ -49,8 +49,7 @@ class ScanReceipeController extends GetxController {
             ),
           );
 
-          await transactionController.formUploadReceiptTransaction(
-              tempAmounts, fileImage);
+          await transactionController.formUploadReceiptTransaction(tempAmounts);
 
           resetScan();
         }

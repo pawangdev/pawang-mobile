@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +43,6 @@ class TransactionController extends GetxController {
   var categoryId = 0.obs;
   var subCategoryId = 0.obs;
   var type = "".obs;
-  late File transactionReceiptImage;
 
   var transactionDetailData = TransactionDetailDataModel(
           totalIncome: 0, totalOutcome: 0, totalBalance: 0)
@@ -146,10 +143,6 @@ class TransactionController extends GetxController {
       'date': dateRFC3399.value,
     };
 
-    if (transactionReceiptImage != null) {
-      data['receipt_image'] = transactionReceiptImage;
-    }
-
     try {
       // ignore: unrelated_type_equality_checks
       if (amountTextController != 0) {
@@ -245,10 +238,9 @@ class TransactionController extends GetxController {
     }
   }
 
-  Future<void> formUploadReceiptTransaction(String amount, File image) async {
+  Future<void> formUploadReceiptTransaction(String amount) async {
     isScanReceipt = true;
     amountTextController.value = amount;
-    transactionReceiptImage = image;
     displayAmount.text = CurrencyFormat.convertToIdr(int.parse(amount), 2);
 
     Get.toNamed(RoutesName.addtransaction);

@@ -52,7 +52,7 @@ class TransactionService {
       'Authorization': "Bearer $token",
     });
 
-    if (data['receipt_image'] != null) {
+    if (data['receipt_image'] == null) {
       request.fields['amount'] = data['amount'].toString();
       request.fields['category_id'] = data['category_id'].toString();
       request.fields['wallet_id'] = data['wallet_id'].toString();
