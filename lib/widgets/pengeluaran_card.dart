@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -23,7 +23,7 @@ class CardPengeluaran extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 24,
+                  width: Get.width * 0.072,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: CachedNetworkImage(
@@ -85,7 +85,10 @@ class CardPengeluaran extends StatelessWidget {
                     overflow: TextOverflow.ellipsis)),
           ],
         ),
-        Divider(
+        SizedBox(
+          height: Get.width * 0.012,
+        ),
+        const Divider(
           thickness: 1,
         )
       ],

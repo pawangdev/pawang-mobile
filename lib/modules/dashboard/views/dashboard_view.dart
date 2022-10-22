@@ -26,7 +26,7 @@ class DashboardView extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Container(
-                    height: Get.height * 0.40,
+                    height: Get.height * 0.45,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
@@ -36,7 +36,7 @@ class DashboardView extends StatelessWidget {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 50, left: 32, right: 32),
+                          const EdgeInsets.only(top: 35, left: 32, right: 32),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -107,7 +107,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: Get.height * 0.025),
+                    SizedBox(height: Get.height * 0.02),
                     Obx(
                       () => CarouselSlider.builder(
                         itemCount: controller.wallets.length + 1,
@@ -155,7 +155,7 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * 0.040,
+                      height: Get.height * 0.042,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -186,11 +186,11 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: Get.height * 0.034),
                   ],
                 ),
               ],
             ),
+            SizedBox(height: Get.height * 0.035),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Container(
@@ -203,8 +203,7 @@ class DashboardView extends StatelessWidget {
                       blurRadius: 10,
                     )
                   ],
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: defaultWhite,
                 ),
                 child: Padding(
@@ -237,7 +236,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: Get.height * 0.02,
+                        height: Get.height * 0.008,
                       ),
                       Obx(
                         () => controller.transactions.isNotEmpty
@@ -276,7 +275,7 @@ class DashboardView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: Get.height * 0.02,
+              height: Get.height * 0.035,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -291,8 +290,7 @@ class DashboardView extends StatelessWidget {
                       blurRadius: 10,
                     )
                   ],
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: defaultWhite,
                 ),
                 child: Padding(
