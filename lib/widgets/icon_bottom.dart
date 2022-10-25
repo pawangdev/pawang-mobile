@@ -44,6 +44,8 @@ class IconBottomBar extends StatelessWidget {
             selected
                 ? Text(
                     text,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style:
                         TextStyle(fontSize: 8, height: 1, color: primaryColor),
                   )

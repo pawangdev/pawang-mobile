@@ -77,11 +77,18 @@ class DashboardView extends StatelessWidget {
                                             color: defaultWhite),
                                       ),
                                       controller.user.value.name != ""
-                                          ? Text(controller.user.value.name,
-                                              style: kOpenSans.copyWith(
-                                                  fontSize: 13,
-                                                  fontWeight: bold,
-                                                  color: defaultWhite))
+                                          ? SizedBox(
+                                              width: Get.width * 0.5,
+                                              child: Text(
+                                                  controller.user.value.name,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: kOpenSans.copyWith(
+                                                      fontSize: 13,
+                                                      fontWeight: bold,
+                                                      color: defaultWhite)),
+                                            )
                                           : SkeletonAnimation(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
@@ -216,6 +223,8 @@ class DashboardView extends StatelessWidget {
                         children: [
                           Text(
                             'Transaksi terakhir',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
                                 fontSize: 12,
                                 fontWeight: bold,
@@ -308,6 +317,8 @@ class DashboardView extends StatelessWidget {
                         children: [
                           Text(
                             'Jangan lupa dibayar',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
                                 fontSize: 12,
                                 fontWeight: bold,
@@ -348,7 +359,7 @@ class DashboardView extends StatelessWidget {
                                   var remind = controller.reminders[index];
                                   return GestureDetector(
                                     onTap: () =>
-                                        Get.toNamed(RoutesName.reminder),
+                                        controllerNavigation.changeTabIndex(3),
                                     child: RemindCard(
                                       data: remind,
                                       icon: '-',

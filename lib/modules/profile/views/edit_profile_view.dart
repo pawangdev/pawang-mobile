@@ -48,7 +48,7 @@ class EditProfileView extends StatelessWidget {
                     Obx(
                       () => SizedBox(
                         height: Get.height * 0.138,
-                        width: Get.width * 0.028,
+                        width: Get.width * 0.28,
                         child: Image.asset(dashboardController
                                     .user.value.gender ==
                                 "male"
@@ -58,7 +58,7 @@ class EditProfileView extends StatelessWidget {
                                 : "assets/images/user.png"),
                       ),
                     ),
-                    SizedBox(height: Get.height * 0.024),
+                    SizedBox(height: Get.height * 0.014),
                   ],
                 ),
                 SizedBox(
@@ -144,7 +144,7 @@ class EditProfileView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: Get.height * 0.01,
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -179,7 +179,7 @@ class EditProfileView extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(defaultBorderRadius),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                   colors: [defaultPrimary, defaultPurple])),

@@ -61,6 +61,7 @@ class CardPengeluaran extends StatelessWidget {
                           DateFormat("dd/MM/yyyy")
                               .format(data.date.toLocal())
                               .toString(),
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
                             fontSize: 12,
@@ -79,6 +80,8 @@ class CardPengeluaran extends StatelessWidget {
                         CurrencyFormat.convertToIdr(data.amount, 2).toString()
                     : '- ' +
                         CurrencyFormat.convertToIdr(data.amount, 2).toString(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: kOpenSans.copyWith(
                     color:
                         data.type == "income" ? defaultSuccess : defaultError,

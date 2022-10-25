@@ -45,13 +45,18 @@ class WalletCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  name,
-                  style: kOpenSans.copyWith(
-                    color: defaultWhite.withOpacity(0.8),
-                    fontWeight: medium,
-                    fontSize: 12,
-                    //0.253.dp,
+                SizedBox(
+                  width: Get.width * 0.5,
+                  child: Text(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: kOpenSans.copyWith(
+                      color: defaultWhite.withOpacity(0.8),
+                      fontWeight: medium,
+                      fontSize: 12,
+                      //0.253.dp,
+                    ),
                   ),
                 ),
                 Image.asset(
@@ -64,12 +69,16 @@ class WalletCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(namaWallet,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: kOpenSans.copyWith(
                         color: defaultWhite.withOpacity(0.8),
                         fontWeight: semiBold,
                         fontSize: 14)),
                 Text(
                   balance.toString(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: kOpenSans.copyWith(
                       color: defaultWhite.withOpacity(0.9),
                       fontWeight: bold,

@@ -49,6 +49,8 @@ class SettingsView extends StatelessWidget {
                       dashboardController.user.value.name != ""
                           ? Text(
                               dashboardController.user.value.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: kOpenSans.copyWith(
                                   fontSize: 14,
                                   fontWeight: bold,

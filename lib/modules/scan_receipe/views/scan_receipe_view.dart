@@ -19,7 +19,6 @@ class ScanReceipeView extends StatelessWidget {
               Center(
                 child: Text(
                   "Scan Struk",
-                  //0.253.dp
                   style: kOpenSans.copyWith(
                       fontSize: 16, fontWeight: bold, color: defaultBlack),
                 ),
@@ -30,7 +29,6 @@ class ScanReceipeView extends StatelessWidget {
               Center(
                 child: Text(
                   "Mohon atur posisi struk agar dapat terdeteksi",
-                  //0.23.dp
                   textAlign: TextAlign.center,
                   style: kOpenSans.copyWith(fontSize: 12, color: defaultBlack),
                 ),
@@ -50,7 +48,6 @@ class ScanReceipeView extends StatelessWidget {
                         : Center(
                             child: Text(
                               "Silahkan pilih struk terlebih dahulu",
-                              //0.22.dp
                               style: kOpenSans.copyWith(
                                   color: defaultGray,
                                   fontSize: 10,
@@ -114,7 +111,6 @@ class ScanReceipeView extends StatelessWidget {
                                         horizontal: 10),
                                     child: Text(
                                       "atau",
-                                      //0.235.dp
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: defaultGray,
@@ -134,11 +130,10 @@ class ScanReceipeView extends StatelessWidget {
                             Container(
                               margin: const EdgeInsets.only(top: 12),
                               child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
+                                width: Get.width,
                                 child: OutlinedButton(
                                   child: Text(
                                     "Pilih dari Galeri",
-                                    //0.255.dp
                                     style: kOpenSans.copyWith(
                                         fontSize: 16,
                                         fontWeight: bold,
@@ -170,7 +165,6 @@ class ScanReceipeView extends StatelessWidget {
                                 child: OutlinedButton(
                                   child: Text(
                                     "Ulangi",
-                                    //0.235.dp
                                     style: kOpenSans.copyWith(
                                         fontSize: 14,
                                         fontWeight: bold,

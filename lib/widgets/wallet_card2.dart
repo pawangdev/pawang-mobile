@@ -30,6 +30,8 @@ class WalletCard2 extends StatelessWidget {
         children: [
           Text(
             wallet.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: kOpenSans.copyWith(
               color: defaultPrimary,
               fontWeight: semiBold,
@@ -41,6 +43,8 @@ class WalletCard2 extends StatelessWidget {
           ),
           Text(
             CurrencyFormat.convertToIdr(wallet.balance, 2),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: kOpenSans.copyWith(
               color: defaultBlack,
               fontWeight: medium,

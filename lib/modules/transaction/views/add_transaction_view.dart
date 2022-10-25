@@ -40,9 +40,7 @@ class AddTransactionView extends StatelessWidget {
                       Text(
                         args == null ? "Tambah Transaksi" : "Edit Transaksi",
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14
-                            //0.27.dp
-                            ),
+                            fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                       const SizedBox(
                         width: 32,

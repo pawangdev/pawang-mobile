@@ -116,6 +116,8 @@ class CategoryView extends StatelessWidget {
                                         ),
                                         Text(
                                           category.name,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: kOpenSans.copyWith(
                                               fontWeight: semiBold,
                                               fontSize: 16),
@@ -144,6 +146,8 @@ class CategoryView extends StatelessWidget {
                                       ),
                                       Text(
                                         category.name,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: kOpenSans.copyWith(
                                             fontWeight: semiBold, fontSize: 16),
                                       ),
@@ -182,13 +186,21 @@ class CategoryView extends StatelessWidget {
                                                         .spaceBetween,
                                                 children: [
                                                   args == null
-                                                      ? Text(
-                                                          e.name,
-                                                          style: kOpenSans
-                                                              .copyWith(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      medium),
+                                                      ? SizedBox(
+                                                          width:
+                                                              Get.width * 0.5,
+                                                          child: Text(
+                                                            e.name,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: kOpenSans
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        medium),
+                                                          ),
                                                         )
                                                       : TextButton(
                                                           onPressed: () {
@@ -222,16 +234,23 @@ class CategoryView extends StatelessWidget {
                                                                       .shrinkWrap,
                                                               alignment: Alignment
                                                                   .centerLeft),
-                                                          child: Text(
-                                                            e.name,
-                                                            style: kOpenSans
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        medium,
-                                                                    color:
-                                                                        defaultBlack),
+                                                          child: SizedBox(
+                                                            width:
+                                                                Get.width * 0.5,
+                                                            child: Text(
+                                                              e.name,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: kOpenSans
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          medium,
+                                                                      color:
+                                                                          defaultBlack),
+                                                            ),
                                                           )),
                                                   args == null
                                                       ? Row(
@@ -298,6 +317,8 @@ class CategoryView extends StatelessWidget {
                                                                             ),
                                                                             Text(
                                                                               category.name,
+                                                                              maxLines: 1,
+                                                                              overflow: TextOverflow.ellipsis,
                                                                               style: kOpenSans.copyWith(fontWeight: semiBold, fontSize: 12),
                                                                             ),
                                                                           ],
@@ -490,6 +511,8 @@ class CategoryView extends StatelessWidget {
                                                         ),
                                                         Text(
                                                           category.name,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: kOpenSans
                                                               .copyWith(
                                                                   fontWeight:

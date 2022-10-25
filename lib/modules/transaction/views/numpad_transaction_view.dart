@@ -33,6 +33,8 @@ class NumpadTransactionView extends StatelessWidget {
                     () => Text(
                       CurrencyFormat.convertToIdr(
                           int.parse(controller.amountTextController.value), 2),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: kOpenSans.copyWith(fontSize: 24, fontWeight: bold),
                     ),
                   ),

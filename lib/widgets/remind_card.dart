@@ -43,19 +43,27 @@ class RemindCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    name,
-                    style: kOpenSans.copyWith(
-                      color: defaultBlack,
-                      fontWeight: semiBold,
-                      fontSize: 12,
-                      //0.253.dp,
+                  SizedBox(
+                    width: Get.width * 0.3,
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      textAlign: TextAlign.end,
+                      overflow: TextOverflow.ellipsis,
+                      style: kOpenSans.copyWith(
+                        color: defaultBlack,
+                        fontWeight: semiBold,
+                        fontSize: 12,
+                        //0.253.dp,
+                      ),
                     ),
                   ),
                   Text(
                     DateFormat("dd/MM/yyyy - HH:mm")
                         .format(DateTime.parse(data.date!).toLocal())
                         .toString(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: kOpenSans.copyWith(fontSize: 10),
                   ),
                 ],

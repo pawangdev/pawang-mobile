@@ -67,6 +67,8 @@ class TransactionHistoryView extends StatelessWidget {
                                                   .value.totalBalance,
                                               2)
                                           .toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: kOpenSans.copyWith(
                                           fontSize: 24,
                                           fontWeight: bold,
@@ -128,16 +130,22 @@ class TransactionHistoryView extends StatelessWidget {
                             ],
                           ),
                           Obx(
-                            () => Text(
-                              CurrencyFormat.convertToIdr(
-                                      controller.transactionDetailData.value
-                                          .totalIncome,
-                                      2)
-                                  .toString(),
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: bold,
-                                  color: defaultSuccess),
+                            () => SizedBox(
+                              width: Get.width * 0.25,
+                              child: Text(
+                                CurrencyFormat.convertToIdr(
+                                        controller.transactionDetailData.value
+                                            .totalIncome,
+                                        2)
+                                    .toString(),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: bold,
+                                    color: defaultSuccess),
+                              ),
                             ),
                           )
                         ],
@@ -168,16 +176,22 @@ class TransactionHistoryView extends StatelessWidget {
                             ],
                           ),
                           Obx(
-                            () => Text(
-                              CurrencyFormat.convertToIdr(
-                                      controller.transactionDetailData.value
-                                          .totalOutcome,
-                                      2)
-                                  .toString(),
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: bold,
-                                  color: defaultError),
+                            () => SizedBox(
+                              width: Get.width * 0.25,
+                              child: Text(
+                                CurrencyFormat.convertToIdr(
+                                        controller.transactionDetailData.value
+                                            .totalOutcome,
+                                        2)
+                                    .toString(),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: bold,
+                                    color: defaultError),
+                              ),
                             ),
                           )
                         ],

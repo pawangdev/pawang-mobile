@@ -71,16 +71,23 @@ class ReminderCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            item.name!,
-                            style: kOpenSans.copyWith(
-                                fontWeight: semiBold, fontSize: 16),
+                          SizedBox(
+                            width: Get.width * 0.48,
+                            child: Text(
+                              item.name!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kOpenSans.copyWith(
+                                  fontWeight: semiBold, fontSize: 16),
+                            ),
                           ),
                           SizedBox(width: Get.width * 0.05),
                           Text(
                             DateFormat("dd/MM/yyyy - HH:mm")
                                 .format(DateTime.parse(item.date!).toLocal())
                                 .toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(fontSize: 14),
                           ),
                         ],

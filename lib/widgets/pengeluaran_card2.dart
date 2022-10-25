@@ -43,6 +43,8 @@ class CardPengeluaran2 extends StatelessWidget {
               Expanded(
                 child: Text(
                   data.kategoriPengeluaran,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: kOpenSans.copyWith(fontSize: 12, fontWeight: semiBold),
                 ),
               ),
@@ -51,6 +53,8 @@ class CardPengeluaran2 extends StatelessWidget {
               Expanded(
                 child: Text(
                   "- Rp. ${data.nominalPengeluaran.toString()}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: kOpenSans.copyWith(
                       fontSize: 12,
                       fontWeight: semiBold,

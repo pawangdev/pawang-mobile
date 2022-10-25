@@ -43,6 +43,8 @@ class NumberButton extends StatelessWidget {
         },
         child: Text(
           number.toString(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: kOpenSans.copyWith(
               fontWeight: semiBold, color: defaultBlack, fontSize: 22),
         ),

@@ -34,9 +34,7 @@ class TransactionDetailView extends StatelessWidget {
                   ),
                   const Text(
                     "Detail Transaksi",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16
-                        //0.27.dp
-                        ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(
                     width: 32,
@@ -72,6 +70,8 @@ class TransactionDetailView extends StatelessWidget {
                           ),
                           Text(
                             transaction.category.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
                                 fontSize: 20, fontWeight: semiBold),
                           ),
@@ -111,10 +111,16 @@ class TransactionDetailView extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Text(
-                            transaction.description ?? "-",
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, color: defaultPrimary),
+                          SizedBox(
+                            width: Get.width * 0.35,
+                            child: Text(
+                              transaction.description ?? "-",
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, color: defaultPrimary),
+                            ),
                           )
                         ],
                       ),
@@ -134,13 +140,19 @@ class TransactionDetailView extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Text(
-                            DateFormat("d MMMM yyyy")
-                                .format(DateFormat("yyyy-mm-dd")
-                                    .parse(transaction.date.toString()))
-                                .toString(),
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, color: defaultPrimary),
+                          SizedBox(
+                            width: Get.width * 0.35,
+                            child: Text(
+                              DateFormat("d MMMM yyyy")
+                                  .format(DateFormat("yyyy-mm-dd")
+                                      .parse(transaction.date.toString()))
+                                  .toString(),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              textAlign: TextAlign.end,
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, color: defaultPrimary),
+                            ),
                           )
                         ],
                       ),
@@ -162,10 +174,16 @@ class TransactionDetailView extends StatelessWidget {
                                   fontSize: 16,
                                 ),
                               ),
-                              Text(
-                                transaction.category.name,
-                                style: kOpenSans.copyWith(
-                                    fontSize: 16, color: defaultPrimary),
+                              SizedBox(
+                                width: Get.width * 0.35,
+                                child: Text(
+                                  transaction.category.name,
+                                  textAlign: TextAlign.end,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 16, color: defaultPrimary),
+                                ),
                               )
                             ],
                           ),
@@ -182,13 +200,19 @@ class TransactionDetailView extends StatelessWidget {
                                   fontSize: 12,
                                 ),
                               ),
-                              Text(
-                                transaction.subcategory == null
-                                    ? "-"
-                                    : transaction.subcategory!.name,
-                                style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    color: defaultPrimary.withOpacity(0.6)),
+                              SizedBox(
+                                width: Get.width * 0.35,
+                                child: Text(
+                                  transaction.subcategory == null
+                                      ? "-"
+                                      : transaction.subcategory!.name,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.end,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kOpenSans.copyWith(
+                                      fontSize: 12,
+                                      color: defaultPrimary.withOpacity(0.6)),
+                                ),
                               )
                             ],
                           ),
@@ -210,10 +234,16 @@ class TransactionDetailView extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Text(
-                            transaction.wallet.name,
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, color: defaultPrimary),
+                          SizedBox(
+                            width: Get.width * 0.35,
+                            child: Text(
+                              transaction.wallet.name,
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, color: defaultPrimary),
+                            ),
                           )
                         ],
                       ),
@@ -233,12 +263,18 @@ class TransactionDetailView extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Text(
-                            transaction.type == "income"
-                                ? 'Pemasukan'
-                                : 'Pengeluaran',
-                            style: kOpenSans.copyWith(
-                                fontSize: 16, color: defaultPrimary),
+                          SizedBox(
+                            width: Get.width * 0.35,
+                            child: Text(
+                              transaction.type == "income"
+                                  ? 'Pemasukan'
+                                  : 'Pengeluaran',
+                              textAlign: TextAlign.end,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: kOpenSans.copyWith(
+                                  fontSize: 16, color: defaultPrimary),
+                            ),
                           )
                         ],
                       ),

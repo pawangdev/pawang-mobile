@@ -40,6 +40,7 @@ class LayananCard extends StatelessWidget {
             ),
             Text(
               title,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: kOpenSans.copyWith(
                   //0.18.dp

@@ -55,6 +55,8 @@ class NewAddTransaction extends StatelessWidget {
                     () => Text(
                       CurrencyFormat.convertToIdr(
                           int.parse(controller.amountController.value), 0),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: kOpenSans.copyWith(fontSize: 24, fontWeight: bold),
                     ),
                   ),
