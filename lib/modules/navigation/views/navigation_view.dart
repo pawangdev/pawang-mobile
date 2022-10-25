@@ -8,7 +8,6 @@ import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
 import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class NavigationView extends StatelessWidget {
   final NavigationController controller = Get.find<NavigationController>();
@@ -35,8 +34,8 @@ class NavigationView extends StatelessWidget {
         notchMargin: 3,
         color: Colors.white,
         child: SizedBox(
-          height: 8.h,
-          width: MediaQuery.of(context).size.width,
+          height: Get.height * 0.08,
+          width: Get.width,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: GetBuilder<NavigationController>(

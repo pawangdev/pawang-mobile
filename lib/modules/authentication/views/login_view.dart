@@ -7,7 +7,6 @@ import 'package:pawang_mobile/modules/authentication/controllers/login_controlle
 import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 2.5.h,
+                    height: Get.height * 0.025,
                   ),
                   Text(
                     "Masuk dulu yuk!",
@@ -44,7 +43,7 @@ class LoginView extends StatelessWidget {
                         fontWeight: bold,
                         fontSize: 20),
                   ),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: Get.height * 0.01),
                   Text(
                     "Kami sudah lama menantimu",
                     style: TextStyle(
@@ -57,7 +56,7 @@ class LoginView extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 3.5.h,
+                          height: Get.height * 0.035,
                         ),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
@@ -86,7 +85,7 @@ class LoginView extends StatelessWidget {
                                     color: defaultBlack),
                               ),
                               SizedBox(
-                                height: 1.5.h,
+                                height: Get.height * 0.015,
                               ),
                               Obx(
                                 () => TextFormField(
@@ -119,8 +118,8 @@ class LoginView extends StatelessWidget {
                                   obscureText: controller.isObsecure.value,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 12,
+                              SizedBox(
+                                height: Get.height * 0.012,
                               ),
                               SizedBox(
                                 width: double.infinity,
@@ -149,7 +148,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 3.5.h,
+                    height: Get.height * 0.035,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -178,7 +177,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 1.h,
+                    height: Get.height * 0.01,
                   ),
                   SizedBox(
                     width: Get.width,
@@ -204,13 +203,13 @@ class LoginView extends StatelessWidget {
                               'assets/images/google.svg',
                               width: 24,
                             ),
-                            const SizedBox(width: 10),
+                            SizedBox(width: Get.width * 0.01),
                             Text('Masuk dengan Google', style: kOpenSans)
                           ],
                         )),
                   ),
                   SizedBox(
-                    height: 3.5.h,
+                    height: Get.height * 0.035,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

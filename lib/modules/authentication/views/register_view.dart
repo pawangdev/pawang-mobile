@@ -5,8 +5,6 @@ import 'package:pawang_mobile/modules/authentication/controllers/register_contro
 import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:pawang_mobile/widgets/loading.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class RegisterView extends StatelessWidget {
@@ -35,19 +33,17 @@ class RegisterView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 2.5.h,
+                    height: Get.height * 0.025,
                   ),
                   const Text(
                     "Buat Akun",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20
-                        //0.27.dp
-                        ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Form(
                     key: controller.formKey,
                     child: Column(
                       children: [
-                        SizedBox(height: 3.5.h),
+                        SizedBox(height: Get.height * 0.035),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: InputField(
@@ -81,12 +77,11 @@ class RegisterView extends StatelessWidget {
                                 'Password',
                                 style: kOpenSans.copyWith(
                                     fontSize: 12,
-                                    // 0.21.dp,
                                     fontWeight: bold,
                                     color: defaultBlack),
                               ),
                               SizedBox(
-                                height: 1.4.h,
+                                height: Get.height * 0.014,
                               ),
                               Obx(
                                 () => TextFormField(
@@ -142,7 +137,6 @@ class RegisterView extends StatelessWidget {
                                 "Jenis Kelamin",
                                 style: kOpenSans.copyWith(
                                     fontSize: 12,
-                                    // 0.21.dp,
                                     fontWeight: bold,
                                     color: defaultBlack),
                               ),
@@ -170,7 +164,7 @@ class RegisterView extends StatelessWidget {
                                     ],
                                   ),
                                   SizedBox(
-                                    width: 2.5.w,
+                                    width: Get.width * 0.025,
                                   ),
                                   Row(
                                     children: [
@@ -200,10 +194,10 @@ class RegisterView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 3.5.h,
+                    height: Get.height * 0.035,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
@@ -229,7 +223,7 @@ class RegisterView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 3.4.h,
+                    height: Get.height * 0.034,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

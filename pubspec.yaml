@@ -51,7 +51,6 @@ dependencies:
   onesignal_flutter: ^3.4.1
   path: ^1.8.0
   path_provider: ^2.0.9
-  responsive_sizer: ^3.0.8
   skeleton_text: ^3.0.0
 
 dev_dependencies:

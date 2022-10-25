@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/splash/controllers/splash_controller.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SplashView extends StatelessWidget {
   SplashView({Key? key}) : super(key: key);
@@ -41,8 +40,8 @@ class SplashView extends StatelessWidget {
           children: [
             Center(
               child: SizedBox(
-                  width: 35.w,
-                  height: 35.w,
+                  width: Get.width * 0.35,
+                  height: Get.height * 0.35,
                   child: Image.asset('assets/images/splash.png')),
             ),
             Positioned.fill(

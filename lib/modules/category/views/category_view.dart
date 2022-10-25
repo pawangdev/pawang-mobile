@@ -7,7 +7,6 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/category/controllers/category_controller.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class CategoryView extends StatelessWidget {
@@ -58,8 +57,7 @@ class CategoryView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 7.2.w,
-                      height: 3.6.h,
+                      width: Get.width * 0.072,
                     ),
                   ],
                 ),
@@ -400,7 +398,7 @@ class CategoryView extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           SizedBox(
-                                                                              width: 1.w),
+                                                                              width: Get.width * 0.01),
                                                                           Expanded(
                                                                             child:
                                                                                 OutlinedButton(

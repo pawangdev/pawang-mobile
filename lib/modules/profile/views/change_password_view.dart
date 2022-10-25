@@ -5,7 +5,6 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/profile/controllers/change_password_controller.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ChangePasswordView extends StatelessWidget {
   final ChangePasswordController controller = Get.find();
@@ -92,13 +91,11 @@ class ChangePasswordView extends StatelessWidget {
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(
-                    width: 7.2.w,
+                    width: Get.width * 0.072,
                   )
                 ],
               ),
-              SizedBox(
-                height: 4.4.h,
-              ),
+              SizedBox(height: Get.height * 0.045),
               Form(
                 key: Key('change-password'),
                 child: Column(

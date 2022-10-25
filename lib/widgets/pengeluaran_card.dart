@@ -6,7 +6,6 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CardPengeluaran extends StatelessWidget {
   const CardPengeluaran({Key? key, required this.data}) : super(key: key);
@@ -40,7 +39,7 @@ class CardPengeluaran extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 30.w,
+                  width: Get.width * 0.3,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Column(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DetailScreen extends StatelessWidget {
   DetailScreen({Key? key}) : super(key: key);
@@ -69,7 +68,7 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 2.h,
+              height: Get.height * 0.02,
             ),
             Container(
               //margin: const EdgeInsets.(top: 20, bottom: 20),
@@ -190,7 +189,7 @@ class DetailScreen extends StatelessWidget {
                                 color: defaultWhite,
                                 size: 20,
                               ),
-                              SizedBox(width: 3.w),
+                              SizedBox(width: Get.width * 0.03),
                               Text(
                                 'Ubah Data',
                                 style: kOpenSans.copyWith(
@@ -204,7 +203,7 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 1.w,
+                      width: Get.width * 0.01,
                     ),
                     Expanded(
                       child: OutlinedButton(
@@ -255,7 +254,7 @@ class DetailScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 1.w),
+                                    SizedBox(width: Get.width * 0.01),
                                     Expanded(
                                       child: OutlinedButton(
                                           style: OutlinedButton.styleFrom(
@@ -290,7 +289,7 @@ class DetailScreen extends StatelessWidget {
                               color: defaultError,
                               size: 20,
                             ),
-                            SizedBox(width: 3.w),
+                            SizedBox(width: Get.width * 0.03),
                             Text(
                               "Hapus Data",
                               style: kOpenSans.copyWith(

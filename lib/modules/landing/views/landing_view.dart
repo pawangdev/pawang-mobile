@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/landing/controllers/landing_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LandingView extends StatelessWidget {
   final LandingController controller = Get.find();
@@ -18,7 +17,7 @@ class LandingView extends StatelessWidget {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 60.h,
+                height: Get.height * 0.6,
                 decoration: const BoxDecoration(
                     color: defaultPrimary,
                     borderRadius: BorderRadius.only(
@@ -35,22 +34,22 @@ class LandingView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 2.5.h),
+                    SizedBox(height: Get.height * 0.025),
                     Container(
-                      margin: EdgeInsets.only(top: 4.h),
+                      margin: EdgeInsets.only(top: Get.height * 0.04),
                       child: Image.asset(
                         'assets/images/logo_pawang.png',
                         color: defaultWhite.withOpacity(0.6),
-                        width: 40.w,
-                        height: 10.h,
+                        width: Get.width * 0.4,
+                        height: Get.height * 0.1,
                       ),
                     ),
                     SizedBox(
-                      height: 2.8.h,
+                      height: Get.height * 0.028,
                     ),
                     Container(
-                      width: 80.w,
-                      height: 35.h,
+                      width: Get.width * 0.8,
+                      height: Get.height * 0.35,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image:
@@ -62,7 +61,7 @@ class LandingView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 0.25.h,
+                height: Get.height * 0.025,
               ),
               Column(children: [
                 Text(
@@ -74,7 +73,7 @@ class LandingView extends StatelessWidget {
                       color: defaultBlack),
                 ),
                 SizedBox(
-                  height: 0.8.h,
+                  height: Get.height * 0.08,
                 ),
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
@@ -83,12 +82,12 @@ class LandingView extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
-                  height: 3.4.h,
+                  height: Get.height * 0.034,
                 ),
               ]),
               SizedBox(
-                width: 75.w,
-                height: 12.h,
+                width: Get.width * 0.74,
+                height: Get.height * 0.12,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -114,7 +113,7 @@ class LandingView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: Get.width * 0.02),
                     Expanded(
                       child: OutlinedButton(
                         child: Text(

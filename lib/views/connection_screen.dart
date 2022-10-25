@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:get/get.dart';
 
 class ConnectionScreen extends StatefulWidget {
   static const String routeName = "/connection-check";
@@ -20,7 +20,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 15.4.h,
+                height: Get.height * 0.154,
               ),
               Center(
                 child: Text(
@@ -30,11 +30,11 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 ),
               ),
               SizedBox(
-                height: 3.6.h,
+                height: Get.height * 0.036,
               ),
               Container(
-                width: 40.w,
-                height: 15.5.h,
+                width: Get.width * 0.4,
+                height: Get.height * 0.155,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/no_connection.png'),
@@ -42,7 +42,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 ),
               ),
               SizedBox(
-                height: 3.6.h,
+                height: Get.height * 0.036,
               ),
               Text(
                 "No Internet Connection",
@@ -51,7 +51,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 3.2.h,
+                height: Get.height * 0.032,
               ),
               Text(
                 "Kamu kehilangan koneksi internet. Silahkan periksa kembali koneksi internet.",
@@ -60,7 +60,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 3.6.h,
+                height: Get.height * 0.036,
               ),
               Container(
                 decoration: BoxDecoration(

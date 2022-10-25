@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:get/get.dart';
 
 class ImageDialog extends StatelessWidget {
   final String imageUrl;
@@ -9,7 +9,7 @@ class ImageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: 50.h,
+        height: Get.height * 0.5,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(imageUrl), fit: BoxFit.contain)),

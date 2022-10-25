@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconBack extends StatelessWidget {
   const IconBack({Key? key, required this.blueMode, required this.onTap})
@@ -14,8 +14,8 @@ class IconBack extends StatelessWidget {
     return blueMode
         ? InkWell(
             child: Container(
-              width: 7.2.w,
-              height: 3.6.h,
+              width: Get.width * 0.072,
+              height: Get.height * 0.036,
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 border: Border.all(color: defaultPrimary),
@@ -31,8 +31,8 @@ class IconBack extends StatelessWidget {
           )
         : InkWell(
             child: Container(
-              width: 7.2.w,
-              height: 3.6.h,
+              width: Get.width * 0.072,
+              height: Get.height * 0.036,
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 border: Border.all(color: defaultWhite),

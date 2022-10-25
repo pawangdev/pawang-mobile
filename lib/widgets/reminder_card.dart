@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ReminderCard extends StatelessWidget {
   final ReminderDataModel item;
@@ -67,7 +67,7 @@ class ReminderCard extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Icon(Icons.wifi),
-                      SizedBox(width: 5.w),
+                      SizedBox(width: Get.width * 0.05),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -76,9 +76,7 @@ class ReminderCard extends StatelessWidget {
                             style: kOpenSans.copyWith(
                                 fontWeight: semiBold, fontSize: 16),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          SizedBox(width: Get.width * 0.05),
                           Text(
                             DateFormat("dd/MM/yyyy - HH:mm")
                                 .format(DateTime.parse(item.date!).toLocal())

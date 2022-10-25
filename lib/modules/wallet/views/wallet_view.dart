@@ -7,7 +7,6 @@ import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/wallet_card2.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class WalletView extends StatelessWidget {
@@ -70,8 +69,8 @@ class WalletView extends StatelessWidget {
                       )
                     else
                       SizedBox(
-                        width: 7.2.w,
-                        height: 3.6.h,
+                        width: Get.width * 0.072,
+                        height: Get.height * 0.036,
                       ),
                   ],
                 ),
@@ -79,7 +78,7 @@ class WalletView extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 0.5.h,
+            height: Get.height * 0.005,
           ),
           Expanded(
             child: Padding(

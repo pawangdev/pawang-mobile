@@ -5,7 +5,6 @@ import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WalletCard2 extends StatelessWidget {
   final WalletsDataModel wallet;
@@ -38,7 +37,7 @@ class WalletCard2 extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 1.4.h,
+            height: Get.height * 0.014,
           ),
           Text(
             CurrencyFormat.convertToIdr(wallet.balance, 2),
@@ -89,7 +88,7 @@ class WalletCard2 extends StatelessWidget {
                                 return Padding(
                                   padding: MediaQuery.of(context).viewInsets,
                                   child: Container(
-                                    height: 45.h,
+                                    height: Get.height * 0.45,
                                     color: defaultWhite,
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),
@@ -181,7 +180,7 @@ class WalletCard2 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Expanded(
@@ -247,7 +246,7 @@ class WalletCard2 extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 1.w),
+                                      SizedBox(width: Get.width * 0.01),
                                       Expanded(
                                         child: OutlinedButton(
                                           style: OutlinedButton.styleFrom(

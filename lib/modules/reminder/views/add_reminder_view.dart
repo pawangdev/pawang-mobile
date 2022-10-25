@@ -5,7 +5,6 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/reminder.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AddReminderView extends StatelessWidget {
   AddReminderView({Key? key}) : super(key: key);
@@ -41,12 +40,12 @@ class AddReminderView extends StatelessWidget {
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(
-                    width: 7.2.w,
+                    width: Get.width * 0.072,
                   )
                 ],
               ),
               SizedBox(
-                height: 4.4.h,
+                height: Get.height * 0.044,
               ),
               Expanded(
                 child: Form(
@@ -69,7 +68,7 @@ class AddReminderView extends StatelessWidget {
                             color: defaultBlack),
                       ),
                       SizedBox(
-                        height: 1.4.h,
+                        height: Get.height * 0.014,
                       ),
                       DateTimePicker(
                         type: DateTimePickerType.dateTime,

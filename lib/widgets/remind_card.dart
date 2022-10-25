@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/reminder_model.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RemindCard extends StatelessWidget {
   final ReminderDataModel data;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/pengeluaran_model.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CardPengeluaran2 extends StatelessWidget {
   const CardPengeluaran2({Key? key, required this.data}) : super(key: key);
@@ -12,7 +12,7 @@ class CardPengeluaran2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
-      height: 8.4.h,
+      height: Get.height * 0.084,
       decoration: BoxDecoration(
         color: defaultWhite,
         borderRadius: BorderRadius.circular(12),
@@ -28,7 +28,7 @@ class CardPengeluaran2 extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          height: 6.4.h,
+          height: Get.height * 0.064,
           child: Row(
             children: [
               // ICON

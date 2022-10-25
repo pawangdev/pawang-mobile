@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DropdownField extends StatelessWidget {
   const DropdownField({
@@ -24,13 +23,10 @@ class DropdownField extends StatelessWidget {
       Text(
         inputLabel,
         style: kOpenSans.copyWith(
-            fontSize: 12,
-            //0.21.dp,
-            fontWeight: bold,
-            color: defaultBlack),
+            fontSize: 12, fontWeight: bold, color: defaultBlack),
       ),
       SizedBox(
-        height: 1.4.h,
+        height: Get.height * 0.014,
       ),
       DecoratedBox(
         decoration: BoxDecoration(

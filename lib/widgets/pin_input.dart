@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:get/get.dart';
 
 class PinInput extends StatelessWidget {
   final int selectedIndex;
@@ -11,8 +11,7 @@ class PinInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 7.w,
-      width: 7.w,
+      width: Get.width * 0.07,
       margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
           color: Colors.white,

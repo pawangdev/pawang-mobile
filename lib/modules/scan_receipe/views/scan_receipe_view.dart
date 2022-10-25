@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ScanReceipeView extends StatelessWidget {
   final ScanReceipeController controller = Get.find();
@@ -26,7 +25,7 @@ class ScanReceipeView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 3.8.h,
+                height: Get.height * 0.038,
               ),
               Center(
                 child: Text(
@@ -37,7 +36,7 @@ class ScanReceipeView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 3.2.h,
+                height: Get.height * 0.032,
               ),
               // ----- BOX IMAGE -----
               Expanded(
@@ -66,7 +65,7 @@ class ScanReceipeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 1.75.h),
+              SizedBox(height: Get.height * 0.0175),
               SizedBox(
                 child: GetBuilder<ScanReceipeController>(
                   builder: (controller) => controller.imageFilePath == null
@@ -107,7 +106,7 @@ class ScanReceipeView extends StatelessWidget {
                                   Expanded(
                                     child: Divider(
                                       color: defaultBlack,
-                                      height: 0.15.h,
+                                      height: Get.height * 0.0015,
                                     ),
                                   ),
                                   Padding(
@@ -126,7 +125,7 @@ class ScanReceipeView extends StatelessWidget {
                                   Expanded(
                                     child: Divider(
                                       color: defaultBlack,
-                                      height: 0.15.h,
+                                      height: Get.height * 0.0015,
                                     ),
                                   )
                                 ],
@@ -193,7 +192,7 @@ class ScanReceipeView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 2.8.w,
+                              width: Get.width * 0.028,
                             ),
                             Flexible(
                               fit: FlexFit.tight,

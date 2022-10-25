@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/loading.dart';
 import 'package:pawang_mobile/widgets/pin_input.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PinView extends StatelessWidget {
   const PinView({Key? key}) : super(key: key);
@@ -41,18 +41,18 @@ class PinView extends StatelessWidget {
                               color: defaultBlack),
                         ),
                         Container(
-                          width: 7.2.w,
+                          width: Get.width * 0.072,
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 6.h,
+                      height: Get.height * 0.06,
                     ),
                     SvgPicture.asset(
                       'assets/images/pin.svg',
                     ),
                     SizedBox(
-                      height: 6.h,
+                      height: Get.height * 0.06,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

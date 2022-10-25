@@ -7,7 +7,6 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class EditProfileView extends StatelessWidget {
   final EditProfileController controller = Get.find();
@@ -36,20 +35,20 @@ class EditProfileView extends StatelessWidget {
                           fontSize: 16, fontWeight: bold, color: defaultBlack),
                     ),
                     SizedBox(
-                      width: 7.2.w,
+                      width: Get.width * 0.072,
                     )
                   ],
                 ),
                 SizedBox(
-                  height: 4.4.h,
+                  height: Get.height * 0.044,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Obx(
                       () => SizedBox(
-                        height: 13.8.h,
-                        width: 28.w,
+                        height: Get.height * 0.138,
+                        width: Get.width * 0.028,
                         child: Image.asset(dashboardController
                                     .user.value.gender ==
                                 "male"
@@ -59,11 +58,11 @@ class EditProfileView extends StatelessWidget {
                                 : "assets/images/user.png"),
                       ),
                     ),
-                    SizedBox(height: 2.4.h),
+                    SizedBox(height: Get.height * 0.024),
                   ],
                 ),
                 SizedBox(
-                  height: 4.4.h,
+                  height: Get.height * 0.044,
                 ),
                 Form(
                   key: Key('edit-profile'),
@@ -118,7 +117,7 @@ class EditProfileView extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            width: 2.5.w,
+                            width: Get.width * 0.025,
                           ),
                           Row(
                             children: [
@@ -173,7 +172,7 @@ class EditProfileView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: Get.height * 0.02),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Container(

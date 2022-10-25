@@ -4,7 +4,6 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 
 class AddWalletView extends StatelessWidget {
@@ -35,12 +34,12 @@ class AddWalletView extends StatelessWidget {
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   Container(
-                    width: 7.2.w,
+                    width: Get.width * 0.072,
                   ),
                 ],
               ),
               SizedBox(
-                height: 3.4.h,
+                height: Get.height * 0.034,
               ),
               Form(
                 key: const Key('add-wallet'),

@@ -7,8 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/services/base_service.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'routes/routes.dart';
@@ -49,20 +47,16 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return GetMaterialApp(
-          title: 'Pawang',
-          theme: ThemeData(
-            fontFamily: "OpenSans",
-          ),
-          builder: EasyLoading.init(),
-          initialRoute: AppPages.INITIAL,
-          getPages: AppPages.pages,
-          debugShowCheckedModeBanner: false,
-          defaultTransition: Transition.fade,
-        );
-      },
+    return GetMaterialApp(
+      title: 'Pawang',
+      theme: ThemeData(
+        fontFamily: "OpenSans",
+      ),
+      builder: EasyLoading.init(),
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.pages,
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.fade,
     );
   }
 }

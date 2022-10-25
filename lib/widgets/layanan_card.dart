@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LayananCard extends StatelessWidget {
   const LayananCard(
@@ -13,7 +13,7 @@ class LayananCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 23.w,
+      width: Get.width * 0.23,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -36,7 +36,7 @@ class LayananCard extends StatelessWidget {
               onTap: onTap,
             ),
             SizedBox(
-              height: 1.4.h,
+              height: Get.height * 0.014,
             ),
             Text(
               title,
