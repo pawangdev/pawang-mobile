@@ -78,7 +78,7 @@ class OnboardingView extends StatelessWidget {
                 Get.toNamed(RoutesName.landing);
               } else {
                 _controller.pageController
-                    .nextPage(duration: 1.5.seconds, curve: Curves.ease);
+                    .nextPage(duration: 0.2.seconds, curve: Curves.ease);
               }
             },
             child: Obx(() {

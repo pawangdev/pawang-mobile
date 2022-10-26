@@ -63,7 +63,6 @@ class AddReminderView extends StatelessWidget {
                         "Tanggal & Waktu",
                         style: kOpenSans.copyWith(
                             fontSize: 12,
-                            //0.21.dp,
                             fontWeight: bold,
                             color: defaultBlack),
                       ),

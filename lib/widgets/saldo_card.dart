@@ -54,8 +54,7 @@ class WalletCard extends StatelessWidget {
                     style: kOpenSans.copyWith(
                       color: defaultWhite.withOpacity(0.8),
                       fontWeight: medium,
-                      fontSize: 12,
-                      //0.253.dp,
+                      fontSize: 13,
                     ),
                   ),
                 ),
@@ -73,17 +72,16 @@ class WalletCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: kOpenSans.copyWith(
                         color: defaultWhite.withOpacity(0.8),
-                        fontWeight: semiBold,
+                        fontWeight: medium,
                         fontSize: 14)),
                 Text(
                   balance.toString(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: kOpenSans.copyWith(
-                      color: defaultWhite.withOpacity(0.9),
+                      color: defaultWhite.withOpacity(0.8),
                       fontWeight: bold,
-                      fontSize: 19 //0.26.dp,
-                      ),
+                      fontSize: 16),
                 ),
               ],
             ),

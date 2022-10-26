@@ -40,7 +40,7 @@ class AddTransactionView extends StatelessWidget {
                       Text(
                         args == null ? "Tambah Transaksi" : "Edit Transaksi",
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(
                         width: 32,
@@ -199,7 +199,7 @@ class AddTransactionView extends StatelessWidget {
                                     style: kOpenSans.copyWith(
                                         color: defaultPrimary,
                                         fontSize: 16,
-                                        fontWeight: medium),
+                                        fontWeight: semiBold),
                                   ),
                                   style: OutlinedButton.styleFrom(
                                     padding: const EdgeInsets.all(13),

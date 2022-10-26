@@ -97,7 +97,7 @@ class ScanReceipeView extends StatelessWidget {
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 20),
-                              width: MediaQuery.of(context).size.width,
+                              width: Get.width,
                               child: Row(
                                 children: <Widget>[
                                   Expanded(

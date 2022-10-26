@@ -20,7 +20,7 @@ class IconBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 70,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -46,8 +46,8 @@ class IconBottomBar extends StatelessWidget {
                     text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:
-                        TextStyle(fontSize: 8, height: 1, color: primaryColor),
+                    style: TextStyle(
+                        fontSize: 10, fontWeight: medium, color: primaryColor),
                   )
                 : SizedBox()
           ],

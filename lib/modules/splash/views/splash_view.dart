@@ -40,9 +40,29 @@ class SplashView extends StatelessWidget {
           children: [
             Center(
               child: SizedBox(
-                  width: Get.width * 0.35,
+                  width: Get.width * 0.40,
                   height: Get.height * 0.35,
-                  child: Image.asset('assets/images/splash.png')),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 10.0),
+                        child: Image.asset('assets/images/splash.png'),
+                      ),
+                      Text(
+                        'PAWANG',
+                        style: kOpenSans.copyWith(
+                            fontSize: 30,
+                            fontWeight: extraBold,
+                            color: defaultWhite),
+                      ),
+                      Text(
+                        'P e n c a t a t   K e u a n g a n',
+                        style: kOpenSans.copyWith(
+                            fontSize: 9, fontWeight: bold, color: defaultWhite),
+                      )
+                    ],
+                  )),
             ),
             Positioned.fill(
               child: Align(

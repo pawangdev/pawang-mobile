@@ -51,7 +51,6 @@ class CardPengeluaran extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: kOpenSans.copyWith(
-                            //0.22.dp
                             fontSize: 14,
                             fontWeight: semiBold,
                           ),
@@ -85,7 +84,7 @@ class CardPengeluaran extends StatelessWidget {
                 style: kOpenSans.copyWith(
                     color:
                         data.type == "income" ? defaultSuccess : defaultError,
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: semiBold,
                     overflow: TextOverflow.ellipsis)),
           ],

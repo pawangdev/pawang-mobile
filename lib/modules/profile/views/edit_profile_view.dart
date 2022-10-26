@@ -89,7 +89,6 @@ class EditProfileView extends StatelessWidget {
                         "Jenis Kelamin",
                         style: kOpenSans.copyWith(
                             fontSize: 12,
-                            // 0.21.dp,
                             fontWeight: bold,
                             color: defaultBlack),
                       ),
@@ -152,7 +151,7 @@ class EditProfileView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
+                        width: Get.width,
                         child: OutlinedButton(
                           child: Text(
                             "Ganti Password",
@@ -174,7 +173,7 @@ class EditProfileView extends StatelessWidget {
                       ),
                       SizedBox(height: Get.height * 0.02),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
+                        width: Get.width,
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius:

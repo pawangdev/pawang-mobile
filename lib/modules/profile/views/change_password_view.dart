@@ -135,7 +135,7 @@ class ChangePasswordView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
+                        width: Get.width,
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius:

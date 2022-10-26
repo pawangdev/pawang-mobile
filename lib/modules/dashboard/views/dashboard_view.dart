@@ -45,8 +45,8 @@ class DashboardView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  width: 35,
-                                  height: 35,
+                                  width: Get.width * 0.085,
+                                  height: Get.height * 0.05,
                                   decoration: BoxDecoration(
                                     color: defaultWhite,
                                     borderRadius: BorderRadius.circular(50.0),
@@ -58,7 +58,7 @@ class DashboardView extends StatelessWidget {
                                                       "female"
                                                   ? "assets/images/woman.png"
                                                   : "assets/images/user.png"),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
@@ -71,8 +71,7 @@ class DashboardView extends StatelessWidget {
                                       Text(
                                         "Hallo,",
                                         style: kOpenSans.copyWith(
-                                            fontSize: 10,
-                                            //0.2.dp,
+                                            fontSize: 12,
                                             fontWeight: medium,
                                             color: defaultWhite),
                                       ),
@@ -85,8 +84,8 @@ class DashboardView extends StatelessWidget {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: kOpenSans.copyWith(
-                                                      fontSize: 13,
-                                                      fontWeight: bold,
+                                                      fontSize: 14,
+                                                      fontWeight: semiBold,
                                                       color: defaultWhite)),
                                             )
                                           : SkeletonAnimation(
@@ -143,6 +142,7 @@ class DashboardView extends StatelessWidget {
                                 child: Center(
                                     child: Icon(
                                   Icons.add_rounded,
+                                  size: 30,
                                   color: defaultWhite.withOpacity(0.8),
                                 )),
                               ),
@@ -226,7 +226,7 @@ class DashboardView extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: bold,
                                 color: defaultBlack),
                           ),
@@ -237,7 +237,7 @@ class DashboardView extends StatelessWidget {
                             child: Text(
                               'Lihat semua',
                               style: kOpenSans.copyWith(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   fontWeight: medium,
                                   color: Colors.blue),
                             ),
@@ -320,7 +320,7 @@ class DashboardView extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: bold,
                                 color: defaultBlack),
                           ),
@@ -331,7 +331,7 @@ class DashboardView extends StatelessWidget {
                             child: Text(
                               'Lihat semua',
                               style: kOpenSans.copyWith(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   fontWeight: medium,
                                   color: Colors.blue),
                             ),

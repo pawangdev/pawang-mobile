@@ -120,7 +120,7 @@ class CategoryView extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                           style: kOpenSans.copyWith(
                                               fontWeight: semiBold,
-                                              fontSize: 16),
+                                              fontSize: 15),
                                         ),
                                       ],
                                     ),
@@ -149,7 +149,7 @@ class CategoryView extends StatelessWidget {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: kOpenSans.copyWith(
-                                            fontWeight: semiBold, fontSize: 16),
+                                            fontWeight: semiBold, fontSize: 15),
                                       ),
                                     ],
                                   ),
@@ -197,7 +197,7 @@ class CategoryView extends StatelessWidget {
                                                             style: kOpenSans
                                                                 .copyWith(
                                                                     fontSize:
-                                                                        16,
+                                                                        14,
                                                                     fontWeight:
                                                                         medium),
                                                           ),
@@ -245,7 +245,7 @@ class CategoryView extends StatelessWidget {
                                                               style: kOpenSans
                                                                   .copyWith(
                                                                       fontSize:
-                                                                          16,
+                                                                          14,
                                                                       fontWeight:
                                                                           medium,
                                                                       color:
@@ -277,7 +277,7 @@ class CategoryView extends StatelessWidget {
                                                                       'Memperbarui Sub Kategori',
                                                                   titleStyle: kOpenSans.copyWith(
                                                                       fontSize:
-                                                                          14,
+                                                                          16,
                                                                       fontWeight:
                                                                           bold),
                                                                   textConfirm:

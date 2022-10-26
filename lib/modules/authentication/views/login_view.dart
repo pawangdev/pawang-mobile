@@ -38,18 +38,12 @@ class LoginView extends StatelessWidget {
                   ),
                   Text(
                     "Masuk dulu yuk!",
-                    style: TextStyle(
-                        //0.27.dp
-                        fontWeight: bold,
-                        fontSize: 20),
+                    style: kOpenSans.copyWith(fontWeight: bold, fontSize: 18),
                   ),
                   SizedBox(height: Get.height * 0.01),
                   Text(
                     "Kami sudah lama menantimu",
-                    style: TextStyle(
-                        //0.255.dp
-                        fontWeight: medium,
-                        fontSize: 16),
+                    style: kOpenSans.copyWith(fontWeight: medium, fontSize: 14),
                   ),
                   Form(
                     key: controller.formKey,
@@ -80,7 +74,6 @@ class LoginView extends StatelessWidget {
                                 'Password',
                                 style: kOpenSans.copyWith(
                                     fontSize: 12,
-                                    // 0.21.dp,
                                     fontWeight: bold,
                                     color: defaultBlack),
                               ),
@@ -136,7 +129,7 @@ class LoginView extends StatelessWidget {
                                         alignment: Alignment.center),
                                     child: Text(
                                       "Lupa Password",
-                                      style: kOpenSans,
+                                      style: kOpenSans.copyWith(fontSize: 14),
                                     ),
                                   ),
                                 ),
@@ -151,7 +144,7 @@ class LoginView extends StatelessWidget {
                     height: Get.height * 0.035,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
@@ -170,8 +163,7 @@ class LoginView extends StatelessWidget {
                           style: kOpenSans.copyWith(
                               color: defaultWhite,
                               fontSize: 16,
-                              //0.25.dp,
-                              fontWeight: bold),
+                              fontWeight: semiBold),
                         ),
                       ),
                     ),
@@ -203,8 +195,10 @@ class LoginView extends StatelessWidget {
                               'assets/images/google.svg',
                               width: 24,
                             ),
-                            SizedBox(width: Get.width * 0.01),
-                            Text('Masuk dengan Google', style: kOpenSans)
+                            SizedBox(width: Get.width * 0.04),
+                            Text('Masuk dengan Google',
+                                style: kOpenSans.copyWith(
+                                    fontSize: 16, fontWeight: semiBold))
                           ],
                         )),
                   ),
@@ -217,16 +211,15 @@ class LoginView extends StatelessWidget {
                       Text(
                         "Belum punya akun?",
                         style: kOpenSans.copyWith(
-                            fontSize: 12,
-                            //0.235.dp,
+                            fontSize: 14,
                             color: defaultBlack,
-                            fontWeight: light),
+                            fontWeight: FontWeight.w400),
                       ),
                       TextButton(
                         child: Text(
                           'Daftar',
                           style: kOpenSans.copyWith(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: defaultPrimary,
                               fontWeight: bold),
                         ),

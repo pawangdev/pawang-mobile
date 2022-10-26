@@ -55,7 +55,7 @@ class TransactionDetailView extends StatelessWidget {
                           CachedNetworkImage(
                             imageUrl: baseHOSTAPI + transaction.category.icon,
                             fit: BoxFit.cover,
-                            width: 80,
+                            width: 60,
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) => Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -73,7 +73,7 @@ class TransactionDetailView extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
-                                fontSize: 20, fontWeight: semiBold),
+                                fontSize: 18, fontWeight: semiBold),
                           ),
                           SizedBox(
                             height: Get.height * 0.012,
@@ -89,7 +89,7 @@ class TransactionDetailView extends StatelessWidget {
                                             transaction.amount, 2)
                                         .toString(),
                             style: kOpenSans.copyWith(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: transaction.type == "income"
                                     ? defaultSuccess
                                     : defaultError),
@@ -108,7 +108,7 @@ class TransactionDetailView extends StatelessWidget {
                           Text(
                             'Keterangan',
                             style: kOpenSans.copyWith(
-                              fontSize: 16,
+                              fontSize: 14,
                             ),
                           ),
                           SizedBox(
@@ -119,14 +119,14 @@ class TransactionDetailView extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: kOpenSans.copyWith(
-                                  fontSize: 16, color: defaultPrimary),
+                                  fontSize: 14, color: defaultPrimary),
                             ),
                           )
                         ],
                       ),
                     ),
                     const Divider(
-                      thickness: 0.4,
+                      thickness: 0.9,
                       color: defaultGray,
                     ),
                     Padding(
@@ -137,7 +137,7 @@ class TransactionDetailView extends StatelessWidget {
                           Text(
                             'Tanggal Transaksi',
                             style: kOpenSans.copyWith(
-                              fontSize: 16,
+                              fontSize: 14,
                             ),
                           ),
                           SizedBox(
@@ -151,14 +151,14 @@ class TransactionDetailView extends StatelessWidget {
                               maxLines: 1,
                               textAlign: TextAlign.end,
                               style: kOpenSans.copyWith(
-                                  fontSize: 16, color: defaultPrimary),
+                                  fontSize: 14, color: defaultPrimary),
                             ),
                           )
                         ],
                       ),
                     ),
                     const Divider(
-                      thickness: 0.4,
+                      thickness: 0.9,
                       color: defaultGray,
                     ),
                     Padding(
@@ -171,7 +171,7 @@ class TransactionDetailView extends StatelessWidget {
                               Text(
                                 'Kategori',
                                 style: kOpenSans.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                               SizedBox(
@@ -182,7 +182,7 @@ class TransactionDetailView extends StatelessWidget {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: kOpenSans.copyWith(
-                                      fontSize: 16, color: defaultPrimary),
+                                      fontSize: 14, color: defaultPrimary),
                                 ),
                               )
                             ],
@@ -220,7 +220,7 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                     ),
                     const Divider(
-                      thickness: 0.4,
+                      thickness: 0.9,
                       color: defaultGray,
                     ),
                     Padding(
@@ -231,7 +231,7 @@ class TransactionDetailView extends StatelessWidget {
                           Text(
                             'Dompet',
                             style: kOpenSans.copyWith(
-                              fontSize: 16,
+                              fontSize: 14,
                             ),
                           ),
                           SizedBox(
@@ -242,14 +242,14 @@ class TransactionDetailView extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: kOpenSans.copyWith(
-                                  fontSize: 16, color: defaultPrimary),
+                                  fontSize: 14, color: defaultPrimary),
                             ),
                           )
                         ],
                       ),
                     ),
                     const Divider(
-                      thickness: 0.4,
+                      thickness: 0.9,
                       color: defaultGray,
                     ),
                     Padding(
@@ -260,7 +260,7 @@ class TransactionDetailView extends StatelessWidget {
                           Text(
                             'Jenis',
                             style: kOpenSans.copyWith(
-                              fontSize: 16,
+                              fontSize: 14,
                             ),
                           ),
                           SizedBox(
@@ -273,14 +273,14 @@ class TransactionDetailView extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: kOpenSans.copyWith(
-                                  fontSize: 16, color: defaultPrimary),
+                                  fontSize: 14, color: defaultPrimary),
                             ),
                           )
                         ],
                       ),
                     ),
                     const Divider(
-                      thickness: 0.4,
+                      thickness: 0.9,
                       color: defaultGray,
                     ),
                   ],
@@ -314,13 +314,13 @@ class TransactionDetailView extends StatelessWidget {
                                 const Icon(
                                   Icons.edit,
                                   color: defaultWhite,
-                                  size: 20,
+                                  size: 18,
                                 ),
                                 SizedBox(width: Get.width * 0.03),
                                 Text(
                                   'Ubah Data',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: medium,
                                       color: defaultWhite),
                                 ),
@@ -417,14 +417,14 @@ class TransactionDetailView extends StatelessWidget {
                               const Icon(
                                 Icons.delete_rounded,
                                 color: defaultError,
-                                size: 20,
+                                size: 18,
                               ),
                               SizedBox(width: Get.width * 0.03),
                               Text(
                                 "Hapus Data",
                                 style: kOpenSans.copyWith(
                                     color: defaultError,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontWeight: medium),
                               ),
                             ],

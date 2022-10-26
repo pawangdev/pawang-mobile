@@ -19,7 +19,7 @@ class WalletCard2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      width: MediaQuery.of(context).size.width,
+      width: Get.width,
       padding: const EdgeInsets.symmetric(
         horizontal: 24,
         vertical: 12,
@@ -28,14 +28,17 @@ class WalletCard2 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            wallet.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: kOpenSans.copyWith(
-              color: defaultPrimary,
-              fontWeight: semiBold,
-              fontSize: 16,
+          SizedBox(
+            width: Get.width * 0.5,
+            child: Text(
+              wallet.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: kOpenSans.copyWith(
+                color: defaultPrimary,
+                fontWeight: semiBold,
+                fontSize: 16,
+              ),
             ),
           ),
           SizedBox(
@@ -77,7 +80,7 @@ class WalletCard2 extends StatelessWidget {
                             style: kOpenSans.copyWith(
                                 color: defaultWhite,
                                 fontWeight: medium,
-                                fontSize: 16),
+                                fontSize: 14),
                           ),
                           onPressed: () {
                             controller.idWallet = wallet.id;
@@ -104,7 +107,10 @@ class WalletCard2 extends StatelessWidget {
                                           Text(
                                             'Ubah Data',
                                             style: kOpenSans.copyWith(
-                                                fontSize: 18, fontWeight: bold),
+                                                fontSize: 16, fontWeight: bold),
+                                          ),
+                                          SizedBox(
+                                            height: Get.height * 0.04,
                                           ),
                                           Container(
                                             margin: const EdgeInsets.only(
@@ -136,40 +142,35 @@ class WalletCard2 extends StatelessWidget {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: SizedBox(
-                                                width: Get.width,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    padding:
-                                                        MaterialStateProperty
-                                                            .all(
-                                                                const EdgeInsets
-                                                                    .all(10)),
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(
-                                                                defaultPrimary),
-                                                    shape: MaterialStateProperty
-                                                        .all(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
+                                            child: SizedBox(
+                                              width: Get.width,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  padding:
+                                                      MaterialStateProperty.all(
+                                                          const EdgeInsets.all(
+                                                              10)),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          defaultPrimary),
+                                                  shape:
+                                                      MaterialStateProperty.all(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
                                                     ),
                                                   ),
-                                                  child: Text(
-                                                    'Simpan Perubahan',
-                                                    style: kOpenSans.copyWith(
-                                                        color: defaultWhite,
-                                                        fontWeight: medium,
-                                                        fontSize: 16),
-                                                  ),
-                                                  onPressed: () =>
-                                                      controller.updateWallet(),
                                                 ),
+                                                child: Text(
+                                                  'Simpan Perubahan',
+                                                  style: kOpenSans.copyWith(
+                                                      color: defaultWhite,
+                                                      fontWeight: medium,
+                                                      fontSize: 14),
+                                                ),
+                                                onPressed: () =>
+                                                    controller.updateWallet(),
                                               ),
                                             ),
                                           ),

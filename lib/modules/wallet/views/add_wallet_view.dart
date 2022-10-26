@@ -69,7 +69,7 @@ class AddWalletView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:

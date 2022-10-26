@@ -35,9 +35,9 @@ class RegisterView extends StatelessWidget {
                   SizedBox(
                     height: Get.height * 0.025,
                   ),
-                  const Text(
+                  Text(
                     "Buat Akun",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: kOpenSans.copyWith(fontWeight: bold, fontSize: 18),
                   ),
                   Form(
                     key: controller.formKey,
@@ -216,27 +216,26 @@ class RegisterView extends StatelessWidget {
                           style: kOpenSans.copyWith(
                               color: defaultWhite,
                               fontSize: 16,
-                              //0.25.dp,
-                              fontWeight: bold),
+                              fontWeight: semiBold),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: Get.height * 0.034,
+                    height: Get.height * 0.03,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Sudah punya akun? ",
                           style: kOpenSans.copyWith(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: defaultBlack,
-                              fontWeight: light)),
+                              fontWeight: FontWeight.w400)),
                       TextButton(
                         child: Text('Masuk',
                             style: kOpenSans.copyWith(
-                                fontSize: 12,
+                                fontSize: 14,
                                 color: defaultPrimary,
                                 fontWeight: bold)),
                         onPressed: () {

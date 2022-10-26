@@ -11,12 +11,12 @@ class LandingView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
+          height: Get.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width,
+                width: Get.width,
                 height: Get.height * 0.6,
                 decoration: const BoxDecoration(
                     color: defaultPrimary,
@@ -37,11 +37,34 @@ class LandingView extends StatelessWidget {
                     SizedBox(height: Get.height * 0.025),
                     Container(
                       margin: EdgeInsets.only(top: Get.height * 0.04),
-                      child: Image.asset(
-                        'assets/images/logo_pawang.png',
-                        color: defaultWhite.withOpacity(0.6),
-                        width: Get.width * 0.4,
-                        height: Get.height * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/pawang_wallet.png',
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.02,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                'PAWANG',
+                                style: kOpenSans.copyWith(
+                                    fontSize: 22,
+                                    fontWeight: bold,
+                                    color: defaultWhite.withOpacity(0.6)),
+                              ),
+                              Text(
+                                'Pencatat  Keuangan',
+                                style: kOpenSans.copyWith(
+                                    fontSize: 10,
+                                    fontWeight: semiBold,
+                                    color: defaultWhite.withOpacity(0.6)),
+                              )
+                            ],
+                          )
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -67,18 +90,17 @@ class LandingView extends StatelessWidget {
                 Text(
                   "Selamat Datang",
                   style: kOpenSans.copyWith(
-                      //0.30.dp
-                      fontSize: 20,
-                      fontWeight: bold,
-                      color: defaultBlack),
+                      fontSize: 18, fontWeight: bold, color: defaultBlack),
                 ),
                 SizedBox(
-                  height: Get.height * 0.08,
+                  height: Get.height * 0.04,
                 ),
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
                   style: kOpenSans.copyWith(
-                      fontSize: 16, fontWeight: medium, color: defaultGray),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: defaultBlack),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
