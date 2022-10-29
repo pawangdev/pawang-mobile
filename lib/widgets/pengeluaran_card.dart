@@ -90,7 +90,7 @@ class CardPengeluaran extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: Get.width * 0.012,
+          height: Get.height * 0.0135,
         ),
         const Divider(
           thickness: 1,

@@ -16,58 +16,54 @@ class RemindCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-            color: defaultWhite,
-            boxShadow: [
-              BoxShadow(
-                color: defaultBlack.withOpacity(0.09),
-                spreadRadius: 2,
-                blurRadius: 10,
-              )
-            ],
-            borderRadius: BorderRadius.circular(20)),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.wifi,
-                size: 40,
-                color: defaultPrimary,
+    return Container(
+      width: Get.width * 0.42,
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+          color: defaultWhite,
+          boxShadow: [
+            BoxShadow(
+              color: defaultBlack.withOpacity(0.06),
+              spreadRadius: 2,
+              blurRadius: 10,
+            )
+          ],
+          borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Icon(
+              Icons.wifi,
+              size: Get.width * 0.05,
+              color: defaultPrimary,
+            ),
+            SizedBox(
+              width: Get.width * 0.3,
+              child: Text(
+                name,
+                maxLines: 1,
+                textAlign: TextAlign.end,
+                overflow: TextOverflow.ellipsis,
+                style: kOpenSans.copyWith(
+                  color: defaultBlack,
+                  fontWeight: semiBold,
+                  fontSize: 14,
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: Get.width * 0.3,
-                    child: Text(
-                      name,
-                      maxLines: 1,
-                      textAlign: TextAlign.end,
-                      overflow: TextOverflow.ellipsis,
-                      style: kOpenSans.copyWith(
-                        color: defaultBlack,
-                        fontWeight: semiBold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    DateFormat("dd/MM/yyyy - HH:mm")
-                        .format(DateTime.parse(data.date!).toLocal())
-                        .toString(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: kOpenSans.copyWith(fontSize: 12, color: defaultGray),
-                  ),
-                ],
-              ),
-            ]),
+            ),
+          ]),
+          Text(
+            DateFormat("dd/MM/yyyy - HH:mm")
+                .format(DateTime.parse(data.date!).toLocal())
+                .toString(),
+            maxLines: 1,
+            textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+            style: kOpenSans.copyWith(fontSize: 12, color: defaultGray),
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 
 class IconBottomBar extends StatelessWidget {
@@ -20,38 +21,36 @@ class IconBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 70,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: onPressed,
-              child: selected
-                  ? Image.asset(
-                      iconEnable,
-                      width: 28,
-                      height: 28,
-                    )
-                  : Image.asset(
-                      iconDisable,
-                      width: 25,
-                      height: 25,
-                    ),
-            ),
-            selected
-                ? Text(
-                    text,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 10, fontWeight: medium, color: primaryColor),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      width: Get.width * 0.2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GestureDetector(
+            onTap: onPressed,
+            child: selected
+                ? Image.asset(
+                    iconEnable,
+                    width: 26,
+                    height: 26,
                   )
-                : SizedBox()
-          ],
-        ),
+                : Image.asset(
+                    iconDisable,
+                    width: 24,
+                    height: 24,
+                  ),
+          ),
+          selected
+              ? Text(
+                  text,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: kOpenSans.copyWith(
+                      fontSize: 12, fontWeight: semiBold, color: primaryColor),
+                )
+              : const SizedBox()
+        ],
       ),
     );
   }

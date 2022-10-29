@@ -37,7 +37,7 @@ class NavigationView extends StatelessWidget {
           height: Get.height * 0.08,
           width: Get.width,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
             child: GetBuilder<NavigationController>(
               init: NavigationController(),
               builder: (controller) {

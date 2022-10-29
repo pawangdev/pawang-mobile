@@ -12,42 +12,49 @@ class LayananCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width * 0.23,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: defaultBlack.withOpacity(0.12),
-            spreadRadius: 2,
-            blurRadius: 10,
-          )
-        ],
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: defaultWhite,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            GestureDetector(
-              child: Center(
-                child: Image.asset(icon),
-              ),
-              onTap: onTap,
+    return Column(
+      children: [
+        Container(
+          width: Get.width * 0.22,
+          height: Get.height * 0.115,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: defaultBlack.withOpacity(0.09),
+                spreadRadius: 2,
+                blurRadius: 10,
+              )
+            ],
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: defaultWhite,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                GestureDetector(
+                  child: Center(
+                    child: Image.asset(icon, width: 45),
+                  ),
+                  onTap: onTap,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: kOpenSans.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: defaultPrimary),
+                ),
+              ],
             ),
-            SizedBox(
-              height: Get.height * 0.014,
-            ),
-            Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: kOpenSans.copyWith(
-                  fontSize: 12, fontWeight: semiBold, color: defaultPrimary),
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

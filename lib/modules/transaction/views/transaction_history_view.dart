@@ -91,10 +91,10 @@ class TransactionHistoryView extends StatelessWidget {
               ),
               Positioned(
                 top: Get.height * 0.21,
-                left: Get.width * 0.155,
+                left: Get.width * 0.135,
                 child: Container(
                   height: Get.height * 0.07,
-                  width: Get.width * 0.69,
+                  width: Get.width * 0.74,
                   decoration: BoxDecoration(
                     color: defaultWhite,
                     borderRadius: BorderRadius.circular(15),
@@ -131,7 +131,7 @@ class TransactionHistoryView extends StatelessWidget {
                           ),
                           Obx(
                             () => SizedBox(
-                              width: Get.width * 0.25,
+                              width: Get.width * 0.34,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value
@@ -177,7 +177,7 @@ class TransactionHistoryView extends StatelessWidget {
                           ),
                           Obx(
                             () => SizedBox(
-                              width: Get.width * 0.25,
+                              width: Get.width * 0.34,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value

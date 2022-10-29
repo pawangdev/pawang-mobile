@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
+import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
@@ -15,6 +16,8 @@ import 'package:skeleton_text/skeleton_text.dart';
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
   final DashboardController controller = Get.find();
+
+  final TransactionController controllerTransaction = Get.find();
   final NavigationController controllerNavigation = Get.find();
 
   @override
@@ -22,16 +25,50 @@ class DashboardView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Stack(
               children: <Widget>[
                 Container(
-                    height: Get.height * 0.45,
+                    height: Get.height * 0.275,
                     decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [defaultPrimary, defaultPurple]))),
+                      borderRadius: BorderRadius.vertical(
+                          bottom: Radius.elliptical(60, 20)),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [defaultPrimary, defaultPurple]),
+                      // color: defaultPrimary,
+                    )),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: Get.width * 0.5,
+                    ),
+                    Container(
+                        width: Get.width * 0.5,
+                        height: Get.height * 0.275,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(1000)),
+                          // color: Colors.amber
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              defaultWhite.withOpacity(0.02),
+                              defaultWhite.withOpacity(0.5),
+                              // defaultWhite.withOpacity(0.2),
+                              //     // Colors.white38
+                              //   ],
+                              //   // stops: [0.0, 1.0],
+                              // ),
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
                 Column(
                   children: [
                     Padding(
@@ -115,57 +152,101 @@ class DashboardView extends StatelessWidget {
                     ),
                     SizedBox(height: Get.height * 0.02),
                     Obx(
-                      () => CarouselSlider.builder(
-                        itemCount: controller.wallets.length + 1,
-                        options: CarouselOptions(
-                          disableCenter: true,
-                          aspectRatio: 2.8,
-                          enlargeCenterPage: true,
-                          enableInfiniteScroll: false,
-                        ),
-                        itemBuilder:
-                            (BuildContext context, int index, int realIndex) {
-                          if (index == controller.wallets.length) {
-                            return GestureDetector(
-                              onTap: () => Get.toNamed(RoutesName.addwallet),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          defaultWhite.withOpacity(0.5),
-                                          defaultWhite.withOpacity(0.3),
-                                          defaultWhite.withOpacity(0.5)
-                                        ]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(
-                                    child: Icon(
-                                  Icons.add_rounded,
-                                  size: 30,
-                                  color: defaultWhite.withOpacity(0.8),
-                                )),
+                      () => Container(
+                        // padding: EdgeInsets.only(left: 32),
+                        // color: Colors.blueAccent,
+                        child: CarouselSlider.builder(
+                          itemCount: controller.wallets.length + 1,
+                          options: CarouselOptions(
+                            viewportFraction: 0.86,
+                            // padEnds: false,
+                            clipBehavior: Clip.none,
+                            aspectRatio: 2.3,
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: false,
+                          ),
+                          itemBuilder:
+                              (BuildContext context, int index, int realIndex) {
+                            if (index == controller.wallets.length) {
+                              return GestureDetector(
+                                onTap: () => Get.toNamed(RoutesName.addwallet),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color:
+                                                defaultBlack.withOpacity(0.2),
+                                            blurRadius: 10,
+                                            spreadRadius: 2)
+                                      ],
+                                      gradient: const LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            defaultPrimary,
+                                            defaultPurple
+                                          ]),
+                                      // gradient: LinearGradient(
+                                      //     begin: Alignment.topLeft,
+                                      //     end: Alignment.bottomRight,
+                                      //     colors: [
+                                      //       defaultPrimary,
+                                      //       defaultPurple
+                                      //     ]),
+                                      // LinearGradient(
+                                      //     begin: Alignment.topLeft,
+                                      //     end: Alignment.bottomRight,
+                                      //     colors: [
+                                      //       defaultWhite.withOpacity(0.5),
+                                      //       defaultWhite.withOpacity(0.3),
+                                      //       defaultWhite.withOpacity(0.5)
+                                      //     ]),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.add_rounded,
+                                    size: 30,
+                                    color: defaultWhite.withOpacity(0.8),
+                                  )),
+                                ),
+                              );
+                            }
+                            var wallet = controller.wallets[index];
+                            return Container(
+                              width: Get.width,
+                              // color: Colors.amber,
+                              child: GestureDetector(
+                                onTap: () => Get.toNamed(RoutesName.wallet),
+                                child: WalletCard(
+                                    income: CurrencyFormat.convertToIdr(
+                                            controllerTransaction
+                                                .transactionDetailData
+                                                .value
+                                                .totalIncome,
+                                            2)
+                                        .toString(),
+                                    outcome: CurrencyFormat.convertToIdr(
+                                            controllerTransaction
+                                                .transactionDetailData
+                                                .value
+                                                .totalOutcome,
+                                            2)
+                                        .toString(),
+                                    namaWallet: wallet.name,
+                                    balance: CurrencyFormat.convertToIdr(
+                                            wallet.balance, 2)
+                                        .toString()),
                               ),
                             );
-                          }
-                          var wallet = controller.wallets[index];
-                          return GestureDetector(
-                            onTap: () => Get.toNamed(RoutesName.wallet),
-                            child: WalletCard(
-                                name: controller.user.value.name,
-                                namaWallet: wallet.name,
-                                balance: CurrencyFormat.convertToIdr(
-                                        wallet.balance, 2)
-                                    .toString()),
-                          );
-                        },
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * 0.042,
+                      height: Get.height * 0.03,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -198,166 +279,134 @@ class DashboardView extends StatelessWidget {
               ],
             ),
             SizedBox(height: Get.height * 0.035),
+
+            // SizedBox(height: Get.height * 0.035),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Container(
-                width: Get.width,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: defaultBlack.withOpacity(0.05),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                    )
-                  ],
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: defaultWhite,
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  child: Column(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Transaksi terakhir',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(
-                                fontSize: 14,
-                                fontWeight: bold,
-                                color: defaultBlack),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              controllerNavigation.changeTabIndex(1);
-                            },
-                            child: Text(
-                              'Lihat semua',
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: medium,
-                                  color: Colors.blue),
-                            ),
-                          )
-                        ],
+                      Text(
+                        'Transaksi terakhir',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: kOpenSans.copyWith(
+                            fontSize: 14,
+                            fontWeight: bold,
+                            color: defaultBlack),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.008,
-                      ),
-                      Obx(
-                        () => controller.transactions.isNotEmpty
-                            ? ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return InkWell(
-                                    highlightColor: Colors.transparent,
-                                    splashColor: Colors.transparent,
-                                    onTap: () => Get.toNamed(
-                                        RoutesName.detailtransaction,
-                                        arguments:
-                                            controller.transactions[index]),
-                                    child: CardPengeluaran(
-                                        data: controller.transactions[index]),
-                                  );
-                                },
-                                itemCount: controller.transactions.length > 3
-                                    ? 3
-                                    : controller.transactions.length,
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(top: 25),
-                                child: Center(
-                                  child: Text(
-                                    "Anda belum memiliki transaksi",
-                                    style: kOpenSans.copyWith(
-                                        color: defaultGray,
-                                        fontSize: 13,
-                                        fontWeight: medium),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                      ),
+                      InkWell(
+                        onTap: () {
+                          controllerNavigation.changeTabIndex(1);
+                        },
+                        child: Text(
+                          'Lihat semua',
+                          style: kOpenSans.copyWith(
+                              fontSize: 12,
+                              fontWeight: medium,
+                              color: Colors.blue),
+                        ),
+                      )
                     ],
                   ),
-                ),
+                  SizedBox(
+                    height: Get.height * 0.008,
+                  ),
+                  Obx(
+                    () => controller.transactions.isNotEmpty
+                        ? ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                onTap: () => Get.toNamed(
+                                    RoutesName.detailtransaction,
+                                    arguments: controller.transactions[index]),
+                                child: CardPengeluaran(
+                                    data: controller.transactions[index]),
+                              );
+                            },
+                            itemCount: controller.transactions.length > 3
+                                ? 3
+                                : controller.transactions.length,
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25),
+                            child: Center(
+                              child: Text(
+                                "Anda belum memiliki transaksi",
+                                style: kOpenSans.copyWith(
+                                    color: defaultGray,
+                                    fontSize: 13,
+                                    fontWeight: medium),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.035,
-            ),
+            SizedBox(height: Get.height * 0.035),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Container(
-                width: Get.width,
-                // height: 200.h,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: defaultBlack.withOpacity(0.05),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                    )
-                  ],
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: defaultWhite,
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  child: Column(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Jangan lupa dibayar',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(
-                                fontSize: 14,
-                                fontWeight: bold,
-                                color: defaultBlack),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              controllerNavigation.changeTabIndex(3);
-                            },
-                            child: Text(
-                              'Lihat semua',
-                              style: kOpenSans.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: medium,
-                                  color: Colors.blue),
-                            ),
-                          )
-                        ],
+                      Text(
+                        'Jangan lupa dibayar',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: kOpenSans.copyWith(
+                            fontSize: 14,
+                            fontWeight: bold,
+                            color: defaultBlack),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.02,
-                      ),
-                      Obx(
-                        () => controller.reminders.isNotEmpty
-                            ? CarouselSlider.builder(
-                                itemCount: controller.reminders.length > 3
-                                    ? 3
-                                    : controller.reminders.length,
-                                options: CarouselOptions(
-                                  height: Get.height * 0.155,
-                                  disableCenter: true,
-                                  aspectRatio: 2,
-                                  enlargeCenterPage: true,
-                                  enableInfiniteScroll: false,
-                                ),
-                                itemBuilder: (BuildContext context, int index,
-                                    int realIndex) {
-                                  var remind = controller.reminders[index];
-                                  return GestureDetector(
+                      InkWell(
+                        onTap: () {
+                          controllerNavigation.changeTabIndex(3);
+                        },
+                        child: Text(
+                          'Lihat semua',
+                          style: kOpenSans.copyWith(
+                              fontSize: 12,
+                              fontWeight: medium,
+                              color: Colors.blue),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: Get.height * 0.02,
+                  ),
+                  Obx(
+                    () => controller.reminders.isNotEmpty
+                        ? SizedBox(
+                            height: 100,
+                            child: ListView.builder(
+                              physics: const ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: controller.reminders.length > 3
+                                  ? 3
+                                  : controller.reminders.length,
+                              itemBuilder: (
+                                BuildContext context,
+                                int index,
+                              ) {
+                                // return Text('Data Dummy');
+                                var remind = controller.reminders[index];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 3, vertical: 8),
+                                  child: GestureDetector(
                                     onTap: () =>
                                         controllerNavigation.changeTabIndex(3),
                                     child: RemindCard(
@@ -365,30 +414,30 @@ class DashboardView extends StatelessWidget {
                                       icon: '-',
                                       name: remind.name!,
                                     ),
-                                  );
-                                },
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Center(
-                                  child: Text(
-                                    "Anda belum memiliki Tagihan",
-                                    style: kOpenSans.copyWith(
-                                        color: defaultGray,
-                                        fontSize: 13,
-                                        fontWeight: medium),
-                                    textAlign: TextAlign.center,
                                   ),
-                                ),
+                                );
+                              },
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25),
+                            child: Center(
+                              child: Text(
+                                "Anda belum memiliki Tagihan",
+                                style: kOpenSans.copyWith(
+                                    color: defaultGray,
+                                    fontSize: 13,
+                                    fontWeight: medium),
+                                textAlign: TextAlign.center,
                               ),
-                      ),
-                    ],
+                            ),
+                          ),
                   ),
-                ),
+                ],
               ),
             ),
             SizedBox(
-              height: Get.height * 0.02,
+              height: Get.height * 0.05,
             ),
           ],
         ),
