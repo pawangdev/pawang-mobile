@@ -89,6 +89,32 @@ class TransactionHistoryView extends StatelessWidget {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Container(
+                      width: Get.width * 0.5,
+                      height: Get.height * 0.24,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(1000)),
+                        // color: Colors.amber
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            defaultWhite.withOpacity(0.02),
+                            defaultWhite.withOpacity(0.5),
+                            // defaultWhite.withOpacity(0.2),
+                            //     // Colors.white38
+                            //   ],
+                            //   // stops: [0.0, 1.0],
+                            // ),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
               Positioned(
                 top: Get.height * 0.21,
                 left: Get.width * 0.135,

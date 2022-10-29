@@ -1,5 +1,6 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/reminder.dart';
@@ -70,6 +71,10 @@ class AddReminderView extends StatelessWidget {
                         height: Get.height * 0.014,
                       ),
                       DateTimePicker(
+                        cancelText: 'Batal',
+                        use24HourFormat: false,
+                        calendarTitle: 'Pilih Tanggal',
+                        timePickerEntryModeInput: true,
                         type: DateTimePickerType.dateTime,
                         initialDate: DateTime.now().toLocal(),
                         dateMask: 'd MMMM yyyy - HH:mm',

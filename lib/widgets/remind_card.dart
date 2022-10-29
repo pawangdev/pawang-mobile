@@ -17,7 +17,7 @@ class RemindCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.42,
+      width: Get.width * 0.4,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
           color: defaultWhite,
@@ -29,42 +29,44 @@ class RemindCard extends StatelessWidget {
             )
           ],
           borderRadius: BorderRadius.circular(20)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Icon(
-              Icons.wifi,
-              size: Get.width * 0.05,
-              color: defaultPrimary,
+      child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              icon,
+              width: Get.width * 0.07,
             ),
-            SizedBox(
-              width: Get.width * 0.3,
-              child: Text(
-                name,
-                maxLines: 1,
-                textAlign: TextAlign.end,
-                overflow: TextOverflow.ellipsis,
-                style: kOpenSans.copyWith(
-                  color: defaultBlack,
-                  fontWeight: semiBold,
-                  fontSize: 14,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: Get.width * 0.25,
+                  child: Text(
+                    name,
+                    maxLines: 1,
+                    textAlign: TextAlign.end,
+                    overflow: TextOverflow.ellipsis,
+                    style: kOpenSans.copyWith(
+                      color: defaultBlack,
+                      fontWeight: semiBold,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  DateFormat("dd MMMM")
+                      .format(DateTime.parse(data.date!).toLocal())
+                      .toString(),
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: kOpenSans.copyWith(color: defaultGray),
+                ),
+              ],
             ),
           ]),
-          Text(
-            DateFormat("dd/MM/yyyy - HH:mm")
-                .format(DateTime.parse(data.date!).toLocal())
-                .toString(),
-            maxLines: 1,
-            textAlign: TextAlign.end,
-            overflow: TextOverflow.ellipsis,
-            style: kOpenSans.copyWith(fontSize: 12, color: defaultGray),
-          ),
-        ],
-      ),
     );
   }
 }

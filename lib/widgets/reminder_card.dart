@@ -66,8 +66,11 @@ class ReminderCard extends StatelessWidget {
                   child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.wifi),
-                      SizedBox(width: Get.width * 0.05),
+                      Image.asset(
+                        'assets/images/bell.png',
+                        width: Get.width * 0.08,
+                      ),
+                      SizedBox(width: Get.width * 0.08),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

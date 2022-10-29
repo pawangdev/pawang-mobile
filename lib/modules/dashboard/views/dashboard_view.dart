@@ -389,7 +389,7 @@ class DashboardView extends StatelessWidget {
                   Obx(
                     () => controller.reminders.isNotEmpty
                         ? SizedBox(
-                            height: 100,
+                            height: Get.height * 0.12,
                             child: ListView.builder(
                               physics: const ClampingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
@@ -411,7 +411,7 @@ class DashboardView extends StatelessWidget {
                                         controllerNavigation.changeTabIndex(3),
                                     child: RemindCard(
                                       data: remind,
-                                      icon: '-',
+                                      icon: 'assets/images/bell.png',
                                       name: remind.name!,
                                     ),
                                   ),
