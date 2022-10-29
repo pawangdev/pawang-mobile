@@ -30,27 +30,27 @@ class LayananCard extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                GestureDetector(
-                  child: Center(
-                    child: Image.asset(icon, width: 45),
+            child: GestureDetector(
+              child: Column(
+                children: [
+                  Center(
+                    child: Image.asset(icon, width: 35),
                   ),
-                  onTap: onTap,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: kOpenSans.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: defaultPrimary),
-                ),
-              ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: kOpenSans.copyWith(
+                        fontSize: 12,
+                        fontWeight: semiBold,
+                        color: defaultPrimary),
+                  ),
+                ],
+              ),
+              onTap: onTap,
             ),
           ),
         ),
