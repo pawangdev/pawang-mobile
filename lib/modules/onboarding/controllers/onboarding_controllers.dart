@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 
 class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;
@@ -8,11 +9,11 @@ class OnboardingController extends GetxController {
 
   List<OnboardingInfo> onboardingPages = [
     OnboardingInfo('assets/images/OB-Scan.png', 'Scan Struk',
-        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!'),
-    OnboardingInfo('assets/images/OB-Dompetku.png', 'DompetKu',
-        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!'),
+        'Permudah pencatatan pengeluaranmu hanya dengan scan struk belanja'),
+    OnboardingInfo('assets/images/OB-Dompetku.png', 'Dompetku',
+        'Simpan dan pisahkan danamu di wallet Pawang untuk mempermudah transaksimu'),
     OnboardingInfo('assets/images/OB-Transaksi.png', 'Transaksi',
-        'Mengatur keuanganmu sekarang menjadi lebih mudah dan menyenangkan! Masuk sekarang, yuk!')
+        'Yuk mulai catat pengeluaran dan pemasukan kamu di aplikasi Pawang sekarang !')
   ];
 }
 
@@ -20,6 +21,5 @@ class OnboardingInfo {
   final imageAsset;
   final title;
   final description;
-
   OnboardingInfo(this.imageAsset, this.title, this.description);
 }
