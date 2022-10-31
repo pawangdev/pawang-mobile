@@ -5,6 +5,7 @@ import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 import 'package:get/get.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class SettingsView extends StatelessWidget {
@@ -168,7 +169,7 @@ class SettingsView extends StatelessWidget {
                             content: Text(
                               'Apakah anda yakin ingin keluar?',
                               style: kOpenSans.copyWith(
-                                  fontSize: 15, fontWeight: light),
+                                  fontSize: 14, fontWeight: medium),
                               textAlign: TextAlign.center,
                             ),
                             shape: RoundedRectangleBorder(
@@ -179,50 +180,21 @@ class SettingsView extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: OutlinedButton(
-                                      child: Text(
-                                        "Kembali",
-                                        style: kOpenSans.copyWith(
-                                            fontSize: 14,
-                                            fontWeight: medium,
-                                            color: defaultPrimary),
-                                      ),
-                                      onPressed: () {
+                                    child: ButtonCustom(
+                                      text: "Kembali",
+                                      elevatedMode: false,
+                                      onTap: () {
                                         Get.back();
                                       },
-                                      style: OutlinedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4),
-                                        side: const BorderSide(
-                                            color: defaultPrimary),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                      ),
                                     ),
                                   ),
                                   SizedBox(width: Get.width * 0.01),
                                   Expanded(
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                defaultPrimary),
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Keluar',
-                                        style: kOpenSans.copyWith(
-                                            color: defaultWhite,
-                                            fontWeight: medium,
-                                            fontSize: 14),
-                                      ),
-                                      onPressed: () async {
+                                    child: ButtonCustom(
+                                      text: 'Keluar',
+                                      elevatedMode: false,
+                                      blueMode: false,
+                                      onTap: () async {
                                         Get.snackbar(
                                           'Sukses !',
                                           "Berhasil Keluar !",

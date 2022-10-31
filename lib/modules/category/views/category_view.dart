@@ -6,6 +6,7 @@ import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/category/controllers/category_controller.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:get/get.dart';
 
@@ -111,8 +112,8 @@ class CategoryView extends StatelessWidget {
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
                                         ),
-                                        const SizedBox(
-                                          width: 10,
+                                        SizedBox(
+                                          width: Get.width * 0.05,
                                         ),
                                         Text(
                                           category.name,
@@ -120,7 +121,7 @@ class CategoryView extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                           style: kOpenSans.copyWith(
                                               fontWeight: semiBold,
-                                              fontSize: 15),
+                                              fontSize: 16),
                                         ),
                                       ],
                                     ),
@@ -141,21 +142,21 @@ class CategoryView extends StatelessWidget {
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error),
                                       ),
-                                      const SizedBox(
-                                        width: 10,
+                                      SizedBox(
+                                        width: Get.width * 0.05,
                                       ),
                                       Text(
                                         category.name,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: kOpenSans.copyWith(
-                                            fontWeight: semiBold, fontSize: 15),
+                                            fontWeight: semiBold, fontSize: 16),
                                       ),
                                     ],
                                   ),
                           ],
                         ),
-                        collapsed: const SizedBox(height: 20),
+                        collapsed: SizedBox(height: Get.height * 0.03),
                         expanded: Container(
                           margin: const EdgeInsets.all(20),
                           child: Column(
@@ -188,7 +189,7 @@ class CategoryView extends StatelessWidget {
                                                   args == null
                                                       ? SizedBox(
                                                           width:
-                                                              Get.width * 0.5,
+                                                              Get.width * 0.45,
                                                           child: Text(
                                                             e.name,
                                                             overflow:
@@ -254,9 +255,9 @@ class CategoryView extends StatelessWidget {
                                                           )),
                                                   args == null
                                                       ? Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
                                                             IconButton(
                                                               onPressed: () {
@@ -280,18 +281,28 @@ class CategoryView extends StatelessWidget {
                                                                           16,
                                                                       fontWeight:
                                                                           bold),
-                                                                  textConfirm:
-                                                                      'Simpan',
-                                                                  confirmTextColor:
-                                                                      defaultWhite,
-                                                                  buttonColor:
-                                                                      defaultPrimary,
-                                                                  onConfirm: () => controller.updateSubCategory(
-                                                                      categoryId:
-                                                                          category
-                                                                              .id,
-                                                                      subCategoryId:
-                                                                          e.id),
+                                                                  confirm:
+                                                                      ButtonCustom(
+                                                                    elevatedMode:
+                                                                        true,
+                                                                    text:
+                                                                        'Simpan Perubahan',
+                                                                    onTap: () => controller.updateSubCategory(
+                                                                        categoryId:
+                                                                            category
+                                                                                .id,
+                                                                        subCategoryId:
+                                                                            e.id),
+                                                                  ),
+                                                                  titlePadding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                              top: 25),
+                                                                  contentPadding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              20),
+
                                                                   // cancel: ,
                                                                   content:
                                                                       Column(
@@ -303,7 +314,7 @@ class CategoryView extends StatelessWidget {
                                                                             Row(
                                                                           children: [
                                                                             CachedNetworkImage(
-                                                                              width: 30,
+                                                                              width: 40,
                                                                               imageUrl: baseHOSTAPI + category.icon,
                                                                               fit: BoxFit.cover,
                                                                               progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
@@ -312,14 +323,14 @@ class CategoryView extends StatelessWidget {
                                                                               ),
                                                                               errorWidget: (context, url, error) => const Icon(Icons.error),
                                                                             ),
-                                                                            const SizedBox(
-                                                                              width: 5,
+                                                                            SizedBox(
+                                                                              width: Get.width * 0.05,
                                                                             ),
                                                                             Text(
                                                                               category.name,
                                                                               maxLines: 1,
                                                                               overflow: TextOverflow.ellipsis,
-                                                                              style: kOpenSans.copyWith(fontWeight: semiBold, fontSize: 12),
+                                                                              style: kOpenSans.copyWith(fontWeight: medium, fontSize: 16),
                                                                             ),
                                                                           ],
                                                                         ),
@@ -338,7 +349,7 @@ class CategoryView extends StatelessWidget {
                                                                           hintText:
                                                                               'Isi Sub Kategori',
                                                                           hintStyle:
-                                                                              kOpenSans.copyWith(fontSize: 12),
+                                                                              kOpenSans.copyWith(fontSize: 16),
                                                                           fillColor:
                                                                               defaultPrimary,
                                                                           border:
@@ -355,7 +366,8 @@ class CategoryView extends StatelessWidget {
                                                                 );
                                                               },
                                                               icon: const Icon(
-                                                                  Icons.edit,
+                                                                  Icons
+                                                                      .edit_outlined,
                                                                   color:
                                                                       defaultPrimary),
                                                             ),
@@ -374,7 +386,7 @@ class CategoryView extends StatelessWidget {
                                                                       'Hapus Sub Kategori',
                                                                       style: kOpenSans.copyWith(
                                                                           fontSize:
-                                                                              18,
+                                                                              16,
                                                                           fontWeight:
                                                                               bold),
                                                                       textAlign:
@@ -386,9 +398,9 @@ class CategoryView extends StatelessWidget {
                                                                       'Apakah kamu yakin akan menghapus sub kategori ini?',
                                                                       style: kOpenSans.copyWith(
                                                                           fontSize:
-                                                                              16,
+                                                                              14,
                                                                           fontWeight:
-                                                                              light),
+                                                                              medium),
                                                                       textAlign:
                                                                           TextAlign
                                                                               .center,
@@ -403,38 +415,27 @@ class CategoryView extends StatelessWidget {
                                                                         children: [
                                                                           Expanded(
                                                                             child:
-                                                                                OutlinedButton(
-                                                                              child: Text(
-                                                                                "Kembali",
-                                                                                style: kOpenSans.copyWith(fontSize: 16, fontWeight: medium, color: defaultPrimary),
-                                                                              ),
-                                                                              onPressed: () {
+                                                                                ButtonCustom(
+                                                                              elevatedMode: false,
+                                                                              text: 'Kembali',
+                                                                              onTap: () {
                                                                                 Navigator.pop(context, 'Kembali');
                                                                               },
-                                                                              style: OutlinedButton.styleFrom(
-                                                                                padding: const EdgeInsets.symmetric(vertical: 4),
-                                                                                side: const BorderSide(color: defaultPrimary),
-                                                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                                                              ),
                                                                             ),
                                                                           ),
                                                                           SizedBox(
                                                                               width: Get.width * 0.01),
                                                                           Expanded(
-                                                                            child:
-                                                                                OutlinedButton(
-                                                                              style: OutlinedButton.styleFrom(
-                                                                                padding: const EdgeInsets.symmetric(vertical: 4),
-                                                                                side: const BorderSide(color: defaultError),
-                                                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                                                              ),
-                                                                              child: Text(
+                                                                              child: ButtonCustom(
+                                                                            elevatedMode:
+                                                                                false,
+                                                                            text:
                                                                                 'Hapus',
-                                                                                style: kOpenSans.copyWith(color: defaultError, fontWeight: medium, fontSize: 16),
-                                                                              ),
-                                                                              onPressed: () => controller.deleteSubCategory(categoryId: category.id, subCategoryId: e.id),
-                                                                            ),
-                                                                          ),
+                                                                            blueMode:
+                                                                                false,
+                                                                            onTap: () =>
+                                                                                controller.deleteSubCategory(categoryId: category.id, subCategoryId: e.id),
+                                                                          )),
                                                                         ],
                                                                       ),
                                                                     ],
@@ -442,7 +443,8 @@ class CategoryView extends StatelessWidget {
                                                                 );
                                                               },
                                                               icon: const Icon(
-                                                                Icons.delete,
+                                                                Icons
+                                                                    .delete_outlined,
                                                                 color:
                                                                     defaultError,
                                                               ),
@@ -468,14 +470,18 @@ class CategoryView extends StatelessWidget {
                                             Get.defaultDialog(
                                               title: 'Tambah Sub Kategori',
                                               titleStyle: kOpenSans.copyWith(
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                   fontWeight: bold),
-                                              textConfirm: 'Simpan',
-                                              confirmTextColor: defaultWhite,
-                                              buttonColor: defaultPrimary,
-                                              onConfirm: () => controller
-                                                  .addSubCategory(category.id),
-                                              // cancel: ,
+                                              confirm: ButtonCustom(
+                                                text: 'Simpan Sub Kategori',
+                                                onTap: () =>
+                                                    controller.addSubCategory(
+                                                        category.id),
+                                              ),
+                                              titlePadding:
+                                                  EdgeInsets.only(top: 25),
+                                              contentPadding:
+                                                  EdgeInsets.all(20),
                                               content: Column(
                                                 children: [
                                                   Padding(
@@ -485,7 +491,7 @@ class CategoryView extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         CachedNetworkImage(
-                                                          width: 30,
+                                                          width: 40,
                                                           imageUrl:
                                                               baseHOSTAPI +
                                                                   category.icon,
@@ -506,8 +512,9 @@ class CategoryView extends StatelessWidget {
                                                               const Icon(
                                                                   Icons.error),
                                                         ),
-                                                        const SizedBox(
-                                                          width: 5,
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * 0.05,
                                                         ),
                                                         Text(
                                                           category.name,
@@ -516,8 +523,8 @@ class CategoryView extends StatelessWidget {
                                                           style: kOpenSans
                                                               .copyWith(
                                                                   fontWeight:
-                                                                      semiBold,
-                                                                  fontSize: 12),
+                                                                      medium,
+                                                                  fontSize: 16),
                                                         ),
                                                       ],
                                                     ),
@@ -530,13 +537,13 @@ class CategoryView extends StatelessWidget {
                                                       contentPadding:
                                                           const EdgeInsets
                                                                   .symmetric(
-                                                              vertical: 0,
+                                                              vertical: 5,
                                                               horizontal: 10),
                                                       hintText:
                                                           'Isi Sub Kategori',
                                                       hintStyle:
                                                           kOpenSans.copyWith(
-                                                              fontSize: 12),
+                                                              fontSize: 14),
                                                       fillColor: defaultPrimary,
                                                       border:
                                                           OutlineInputBorder(

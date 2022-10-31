@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/landing/controllers/landing_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 
 class LandingView extends StatelessWidget {
   final LandingController controller = Get.find();
@@ -114,46 +115,21 @@ class LandingView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            gradient: const LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [defaultPrimary, defaultPurple])),
-                        child: TextButton(
-                          onPressed: () {
-                            Get.toNamed(RoutesName.login);
-                          },
-                          child: Text(
-                            "Masuk",
-                            style: kOpenSans.copyWith(
-                                color: defaultWhite,
-                                fontSize: 14,
-                                fontWeight: semiBold),
-                          ),
-                        ),
+                      child: ButtonCustom(
+                        text: 'Masuk',
+                        onTap: () {
+                          Get.toNamed(RoutesName.login);
+                        },
                       ),
                     ),
                     SizedBox(width: Get.width * 0.02),
                     Expanded(
-                      child: OutlinedButton(
-                        child: Text(
-                          "Daftar",
-                          style: kOpenSans.copyWith(
-                              fontSize: 14,
-                              fontWeight: semiBold,
-                              color: defaultPrimary),
-                        ),
-                        onPressed: () {
+                      child: ButtonCustom(
+                        text: 'Daftar',
+                        elevatedMode: false,
+                        onTap: () {
                           Get.toNamed(RoutesName.register);
                         },
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: const BorderSide(color: defaultPrimary),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
                       ),
                     ),
                   ],

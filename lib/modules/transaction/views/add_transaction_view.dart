@@ -7,6 +7,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class AddTransactionView extends StatelessWidget {
@@ -180,43 +181,21 @@ class AddTransactionView extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.035,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    controller.formValdidate();
-                                    if (args == null) {
-                                      await controller.createTransaction();
-                                    } else {
-                                      await controller.updateTransaction();
-                                    }
-                                  },
-                                  child: Text(
-                                    "Simpan",
-                                    style: kOpenSans.copyWith(
-                                        color: defaultPrimary,
-                                        fontSize: 16,
-                                        fontWeight: semiBold),
-                                  ),
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.all(13),
-                                    side:
-                                        const BorderSide(color: defaultPrimary),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          defaultBorderRadius),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
+                  ),
+                  ButtonCustom(
+                    elevatedMode: false,
+                    text: 'Simpan Transaksi',
+                    onTap: () async {
+                      controller.formValdidate();
+                      if (args == null) {
+                        await controller.createTransaction();
+                      } else {
+                        await controller.updateTransaction();
+                      }
+                    },
                   ),
                 ],
               ),

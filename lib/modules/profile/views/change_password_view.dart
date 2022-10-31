@@ -3,6 +3,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/profile/controllers/change_password_controller.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 
@@ -131,38 +132,9 @@ class ChangePasswordView extends StatelessWidget {
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: Get.width,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                              gradient: const LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [defaultPrimary, defaultPurple])),
-                          child: TextButton(
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(vertical: 15),
-                              ),
-                            ),
-                            onPressed: () => controller.updatePassword(),
-                            child: Text(
-                              "Simpan Perubahan",
-                              style: kOpenSans.copyWith(
-                                color: defaultWhite,
-                                fontSize: 16,
-                                fontWeight: bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: ButtonCustom(
+                    text: 'Simpan Perubahan',
+                    onTap: () => controller.updatePassword(),
                   ),
                 ),
               )

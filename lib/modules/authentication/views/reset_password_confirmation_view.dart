@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class ResetPasswordConfirmationView extends StatelessWidget {
@@ -94,26 +95,10 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => controller.createNewPassword(),
-                    child: Text(
-                      "Ganti Password",
-                      style: kOpenSans.copyWith(fontWeight: semiBold),
-                    ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius))),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blue.shade300),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.all(12.0),
-                      ),
-                    ),
-                  ),
-                )
+                ButtonCustom(
+                  text: 'Ganti Password',
+                  onTap: () => controller.createNewPassword(),
+                ),
               ],
             ),
           ),

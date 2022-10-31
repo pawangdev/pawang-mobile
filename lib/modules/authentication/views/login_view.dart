@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
@@ -143,49 +144,25 @@ class LoginView extends StatelessWidget {
                   SizedBox(
                     height: Get.height * 0.035,
                   ),
-                  SizedBox(
-                    width: Get.width,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius),
-                          gradient: const LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [defaultPrimary, defaultPurple])),
-                      child: TextButton(
-                        onPressed: () {
-                          controller.formValdidate();
-                          controller.login();
-                        },
-                        child: Text(
-                          "Masuk",
-                          style: kOpenSans.copyWith(
-                              color: defaultWhite,
-                              fontSize: 16,
-                              fontWeight: semiBold),
-                        ),
-                      ),
-                    ),
+                  ButtonCustom(
+                    text: "Masuk",
+                    onTap: () {
+                      controller.formValdidate();
+                      controller.login();
+                    },
                   ),
                   SizedBox(
-                    height: Get.height * 0.01,
+                    height: Get.height * 0.02,
                   ),
                   SizedBox(
                     width: Get.width,
                     child: OutlinedButton(
                         onPressed: () => controller.signInGoogle(),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                            ),
-                          ),
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 12.0),
-                          ),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          side: const BorderSide(color: defaultPrimary),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

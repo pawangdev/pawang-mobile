@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 
 class ScanReceipeView extends StatelessWidget {
   final ScanReceipeController controller = Get.find();
@@ -127,33 +128,15 @@ class ScanReceipeView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Container(
-                              margin: const EdgeInsets.only(top: 12),
-                              child: SizedBox(
-                                width: Get.width,
-                                child: OutlinedButton(
-                                  child: Text(
-                                    "Pilih dari Galeri",
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: bold,
-                                        color: defaultPrimary),
-                                  ),
-                                  onPressed: () {
-                                    controller.scanReceipt(true);
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    side:
-                                        const BorderSide(color: defaultPrimary),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                  ),
-                                ),
-                              ),
+                            SizedBox(
+                              height: Get.height * 0.015,
                             ),
+                            ButtonCustom(
+                                elevatedMode: false,
+                                text: "Pilih dari Galeri",
+                                onTap: () {
+                                  controller.scanReceipt(true);
+                                }),
                           ],
                         )
                       : Row(
@@ -162,26 +145,12 @@ class ScanReceipeView extends StatelessWidget {
                               fit: FlexFit.tight,
                               child: Container(
                                 margin: const EdgeInsets.only(top: 12),
-                                child: OutlinedButton(
-                                  child: Text(
-                                    "Ulangi",
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: bold,
-                                        color: defaultPrimary),
-                                  ),
-                                  onPressed: () {
+                                child: ButtonCustom(
+                                  text: 'Ulangi',
+                                  elevatedMode: false,
+                                  onTap: () {
                                     controller.resetScan();
                                   },
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    side:
-                                        const BorderSide(color: defaultPrimary),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            defaultBorderRadius)),
-                                  ),
                                 ),
                               ),
                             ),
@@ -192,34 +161,15 @@ class ScanReceipeView extends StatelessWidget {
                               fit: FlexFit.tight,
                               child: Container(
                                 margin: const EdgeInsets.only(top: 12),
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.all(
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                    ),
-                                    backgroundColor: MaterialStateProperty.all(
-                                        defaultPrimary),
-                                    shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            defaultBorderRadius),
-                                      ),
-                                    ),
-                                  ),
-                                  onPressed: () async {
+                                child: ButtonCustom(
+                                  text: 'Lanjut',
+                                  onTap: () async {
                                     try {
                                       await controller.uploadReceipt();
                                     } catch (e) {
                                       print(e);
                                     }
                                   },
-                                  child: Text(
-                                    "Lanjut",
-                                    style: kOpenSans.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: bold,
-                                    ),
-                                  ),
                                 ),
                               ),
                             ),

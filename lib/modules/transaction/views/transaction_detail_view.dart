@@ -7,6 +7,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class TransactionDetailView extends StatelessWidget {
@@ -297,44 +298,21 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                              gradient: const LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [defaultPrimary, defaultPurple])),
-                          child: TextButton(
-                            onPressed: () =>
-                                controller.formEditTransaction(transaction),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.edit,
-                                  color: defaultWhite,
-                                  size: 18,
-                                ),
-                                SizedBox(width: Get.width * 0.03),
-                                Text(
-                                  'Ubah Data',
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: medium,
-                                      color: defaultWhite),
-                                ),
-                              ],
-                            ),
-                          ),
+                        child: ButtonCustom(
+                          text: 'Edit Data',
+                          onTap: () =>
+                              controller.formEditTransaction(transaction),
                         ),
                       ),
                       SizedBox(
                         width: Get.width * 0.01,
                       ),
                       Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
+                        child: ButtonCustom(
+                          text: 'Hapus Data',
+                          elevatedMode: false,
+                          blueMode: false,
+                          onTap: () {
                             showDialog<void>(
                               context: context,
                               barrierDismissible: false,
@@ -359,51 +337,24 @@ class TransactionDetailView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
-                                        child: OutlinedButton(
-                                          child: Text(
-                                            "Kembali",
-                                            style: kOpenSans.copyWith(
-                                                fontSize: 16,
-                                                fontWeight: medium,
-                                                color: defaultPrimary),
-                                          ),
-                                          onPressed: () {
+                                        child: ButtonCustom(
+                                          text: 'Kembali',
+                                          elevatedMode: false,
+                                          onTap: () {
                                             Navigator.pop(context, 'Kembali');
                                           },
-                                          style: OutlinedButton.styleFrom(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            side: const BorderSide(
-                                                color: defaultPrimary),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
                                         ),
                                       ),
                                       SizedBox(width: Get.width * 0.01),
                                       Expanded(
-                                        child: OutlinedButton(
-                                            style: OutlinedButton.styleFrom(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4),
-                                              side: const BorderSide(
-                                                  color: defaultError),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8)),
-                                            ),
-                                            child: Text(
-                                              'Hapus',
-                                              style: kOpenSans.copyWith(
-                                                  color: defaultError,
-                                                  fontWeight: medium,
-                                                  fontSize: 16),
-                                            ),
-                                            onPressed: () =>
-                                                controller.deleteTransaction(
-                                                    transaction.id)),
+                                        child: ButtonCustom(
+                                          text: 'Hapus',
+                                          elevatedMode: false,
+                                          blueMode: false,
+                                          onTap: () =>
+                                              controller.deleteTransaction(
+                                                  transaction.id),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -411,32 +362,6 @@ class TransactionDetailView extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.delete_rounded,
-                                color: defaultError,
-                                size: 18,
-                              ),
-                              SizedBox(width: Get.width * 0.03),
-                              Text(
-                                "Hapus Data",
-                                style: kOpenSans.copyWith(
-                                    color: defaultError,
-                                    fontSize: 14,
-                                    fontWeight: medium),
-                              ),
-                            ],
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.all(13),
-                            side: const BorderSide(color: defaultError),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                            ),
-                          ),
                         ),
                       ),
                     ],

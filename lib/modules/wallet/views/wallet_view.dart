@@ -49,7 +49,7 @@ class WalletView extends StatelessWidget {
                           height: Get.height * 0.01,
                         ),
                         Text(
-                          'Wallet',
+                          'Dompet',
                           style: kOpenSans.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,

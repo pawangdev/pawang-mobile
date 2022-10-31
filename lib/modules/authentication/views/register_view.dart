@@ -3,6 +3,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/register_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:get/get.dart';
@@ -194,35 +195,17 @@ class RegisterView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: Get.height * 0.035,
+                    height: Get.height * 0.01,
+                  ),
+                  ButtonCustom(
+                    text: "Daftar",
+                    onTap: () {
+                      controller.formValdidate();
+                      controller.register();
+                    },
                   ),
                   SizedBox(
-                    width: Get.width,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius),
-                          gradient: const LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [defaultPrimary, defaultPurple])),
-                      child: TextButton(
-                        onPressed: () {
-                          controller.formValdidate();
-                          controller.register();
-                        },
-                        child: Text(
-                          "Daftar",
-                          style: kOpenSans.copyWith(
-                              color: defaultWhite,
-                              fontSize: 16,
-                              fontWeight: semiBold),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.03,
+                    height: Get.height * 0.01,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

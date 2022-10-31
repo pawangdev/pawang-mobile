@@ -3,6 +3,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class ResetPasswordRequestEmailView extends StatelessWidget {
@@ -96,29 +97,13 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.formValdidate();
-                      controller.sendRequestToken();
-                    },
-                    child: Text(
-                      "Kirim Kode",
-                      style: kOpenSans.copyWith(fontWeight: semiBold),
-                    ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius))),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blue.shade300),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.all(12.0),
-                      ),
-                    ),
-                  ),
-                )
+                ButtonCustom(
+                  text: 'Kirim Kode',
+                  onTap: () {
+                    controller.formValdidate();
+                    controller.sendRequestToken();
+                  },
+                ),
               ],
             ),
           ),

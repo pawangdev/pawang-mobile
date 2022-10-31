@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/reminder/reminder.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 
@@ -106,30 +107,15 @@ class AddReminderView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  child: Text(
-                    reminderUpdate == null
-                        ? "Tambah Pengingat"
-                        : "Edit Pengingat",
-                    style: kOpenSans.copyWith(
-                        fontSize: 14,
-                        fontWeight: semiBold,
-                        color: defaultPrimary),
-                  ),
-                  onPressed: () => reminderUpdate != null
-                      ? controller.onSubmit(
-                          isAdding: false, id: reminderUpdate['id'])
-                      : controller.onSubmit(),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    side: const BorderSide(color: defaultPrimary),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
+              ButtonCustom(
+                elevatedMode: false,
+                text: reminderUpdate == null
+                    ? "Tambah Pengingat"
+                    : "Edit Pengingat",
+                onTap: () => reminderUpdate != null
+                    ? controller.onSubmit(
+                        isAdding: false, id: reminderUpdate['id'])
+                    : controller.onSubmit(),
               ),
             ],
           ),
