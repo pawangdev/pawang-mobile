@@ -18,10 +18,11 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          child: Row(
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
@@ -54,16 +55,12 @@ class SettingItem extends StatelessWidget {
               )
             ],
           ),
-          onTap: onTap,
-        ),
-        SizedBox(
-          child: Divider(
+          Divider(
             color: defaultGray,
-            height: Get.height * 0.5,
+            height: Get.height * 0.05,
           ),
-          height: Get.height * 0.05,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
