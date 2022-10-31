@@ -142,7 +142,7 @@ class SettingsView extends StatelessWidget {
                                         );
                                         Storage.removeValue("token").then(
                                             (value) => Get.offAllNamed(
-                                                RoutesName.landing));
+                                                RoutesName.login));
                                         // Navigator.pushNamedAndRemoveUntil(
                                         //   context,
                                         //   LandingScreen.routeName,

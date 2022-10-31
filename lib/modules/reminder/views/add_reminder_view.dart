@@ -58,18 +58,8 @@ class AddReminderView extends StatelessWidget {
                         inputLabel: 'Nama Pengingat',
                         inputController: controller.nameTextController,
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Tanggal & Waktu",
-                        style: kOpenSans.copyWith(
-                            fontSize: 12,
-                            fontWeight: bold,
-                            color: defaultBlack),
-                      ),
                       SizedBox(
-                        height: Get.height * 0.014,
+                        height: Get.height * 0.034,
                       ),
                       DateTimePicker(
                         cancelText: 'Batal',
@@ -90,12 +80,12 @@ class AddReminderView extends StatelessWidget {
                           controller.dateTextController.text = value;
                         },
                         decoration: InputDecoration(
+                          labelText: 'Tanggal & Waktu',
+                          hintText: 'Pilih Tanggal',
                           fillColor: const Color(0xFFF5F5F5),
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(40),
                           ),
                           focusColor: defaultPrimary,
                         ),

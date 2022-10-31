@@ -35,8 +35,8 @@ class DashboardView extends StatelessWidget {
                       borderRadius: BorderRadius.vertical(
                           bottom: Radius.elliptical(60, 20)),
                       gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
                           colors: [defaultPrimary, defaultPurple]),
                       // color: defaultPrimary,
                     )),
@@ -153,8 +153,6 @@ class DashboardView extends StatelessWidget {
                     SizedBox(height: Get.height * 0.02),
                     Obx(
                       () => Container(
-                        // padding: EdgeInsets.only(left: 32),
-                        // color: Colors.blueAccent,
                         child: CarouselSlider.builder(
                           itemCount: controller.wallets.length + 1,
                           options: CarouselOptions(
@@ -186,21 +184,6 @@ class DashboardView extends StatelessWidget {
                                             defaultPrimary,
                                             defaultPurple
                                           ]),
-                                      // gradient: LinearGradient(
-                                      //     begin: Alignment.topLeft,
-                                      //     end: Alignment.bottomRight,
-                                      //     colors: [
-                                      //       defaultPrimary,
-                                      //       defaultPurple
-                                      //     ]),
-                                      // LinearGradient(
-                                      //     begin: Alignment.topLeft,
-                                      //     end: Alignment.bottomRight,
-                                      //     colors: [
-                                      //       defaultWhite.withOpacity(0.5),
-                                      //       defaultWhite.withOpacity(0.3),
-                                      //       defaultWhite.withOpacity(0.5)
-                                      //     ]),
                                       borderRadius: BorderRadius.circular(20)),
                                   child: Center(
                                       child: Icon(
@@ -293,9 +276,7 @@ class DashboardView extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kOpenSans.copyWith(
-                            fontSize: 14,
-                            fontWeight: bold,
-                            color: defaultBlack),
+                            fontWeight: bold, color: defaultBlack),
                       ),
                       InkWell(
                         onTap: () {
@@ -365,9 +346,7 @@ class DashboardView extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kOpenSans.copyWith(
-                            fontSize: 14,
-                            fontWeight: bold,
-                            color: defaultBlack),
+                            fontWeight: bold, color: defaultBlack),
                       ),
                       InkWell(
                         onTap: () {

@@ -110,7 +110,7 @@ class WalletCard2 extends StatelessWidget {
                                               // errorText: _inputData ? null : 'Nominal wajib diisi',
                                             ),
                                             SizedBox(
-                                              height: 5,
+                                              height: Get.height * 0.035,
                                             ),
                                             InputField(
                                               inputLabel: "Saldo",
@@ -125,9 +125,13 @@ class WalletCard2 extends StatelessWidget {
                                         ),
                                       ),
                                       Expanded(
-                                          child: ButtonCustom(
-                                        text: 'Simpan Perubahan',
-                                        onTap: () => controller.updateWallet(),
+                                          child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: ButtonCustom(
+                                          text: 'Simpan Perubahan',
+                                          onTap: () =>
+                                              controller.updateWallet(),
+                                        ),
                                       )),
                                     ],
                                   ),
