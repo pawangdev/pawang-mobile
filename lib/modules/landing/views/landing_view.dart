@@ -99,18 +99,18 @@ class LandingView extends StatelessWidget {
                 Text(
                   "Mengatur keuanganmu sekarang menjadi\nlebih mudah dan menyenangkan!\nMasuk sekarang, yuk!",
                   style: kOpenSans.copyWith(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: defaultBlack),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
-                  height: Get.height * 0.034,
+                  height: Get.height * 0.025,
                 ),
               ]),
-              SizedBox(
-                width: Get.width * 0.74,
-                height: Get.height * 0.12,
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

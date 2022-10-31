@@ -32,11 +32,10 @@ class InputField extends StatelessWidget {
         inputLabel,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: kOpenSans.copyWith(
-            fontSize: 12, fontWeight: bold, color: defaultBlack),
+        style: kOpenSans.copyWith(fontWeight: regular, color: defaultBlack),
       ),
       SizedBox(
-        height: Get.height * 0.014,
+        height: Get.height * 0.01,
       ),
       TextFormField(
         validator: validator,
@@ -48,6 +47,7 @@ class InputField extends StatelessWidget {
         onTap: onTap,
         controller: inputController,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(15),
           fillColor: const Color(0xFFF5F5F5),
           filled: true,
           border: OutlineInputBorder(

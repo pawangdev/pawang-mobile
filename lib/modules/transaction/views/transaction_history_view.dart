@@ -53,12 +53,11 @@ class TransactionHistoryView extends StatelessWidget {
                                   Text(
                                     'Sisa Uang Kamu',
                                     style: kOpenSans.copyWith(
-                                        fontSize: 12,
                                         fontWeight: medium,
                                         color: defaultWhite),
                                   ),
                                   SizedBox(
-                                    height: Get.height * 0.02,
+                                    height: Get.height * 0.01,
                                   ),
                                   Obx(
                                     () => Text(
@@ -70,7 +69,7 @@ class TransactionHistoryView extends StatelessWidget {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: kOpenSans.copyWith(
-                                          fontSize: 24,
+                                          fontSize: 20,
                                           fontWeight: bold,
                                           color: defaultWhite),
                                     ),
@@ -96,20 +95,14 @@ class TransactionHistoryView extends StatelessWidget {
                       height: Get.height * 0.24,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             bottomRight: Radius.circular(1000)),
-                        // color: Colors.amber
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
                             defaultWhite.withOpacity(0.02),
                             defaultWhite.withOpacity(0.5),
-                            // defaultWhite.withOpacity(0.2),
-                            //     // Colors.white38
-                            //   ],
-                            //   // stops: [0.0, 1.0],
-                            // ),
                           ],
                         ),
                       )),
@@ -117,10 +110,10 @@ class TransactionHistoryView extends StatelessWidget {
               ),
               Positioned(
                 top: Get.height * 0.21,
-                left: Get.width * 0.135,
+                left: Get.width * 0.072,
                 child: Container(
-                  height: Get.height * 0.07,
-                  width: Get.width * 0.74,
+                  height: Get.height * 0.08,
+                  width: Get.width * 0.85,
                   decoration: BoxDecoration(
                     color: defaultWhite,
                     borderRadius: BorderRadius.circular(15),
@@ -142,7 +135,7 @@ class TransactionHistoryView extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.arrow_downward_rounded,
-                                size: 13,
+                                size: 16,
                                 color: defaultSuccess,
                               ),
                               const SizedBox(
@@ -150,14 +143,14 @@ class TransactionHistoryView extends StatelessWidget {
                               ),
                               Text('Pemasukan',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 10,
+                                      fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
                             ],
                           ),
                           Obx(
                             () => SizedBox(
-                              width: Get.width * 0.34,
+                              width: Get.width * 0.39,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value
@@ -168,9 +161,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: defaultSuccess),
+                                    fontWeight: medium, color: defaultSuccess),
                               ),
                             ),
                           )
@@ -188,7 +179,7 @@ class TransactionHistoryView extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.arrow_upward_rounded,
-                                size: 13,
+                                size: 16,
                                 color: defaultError,
                               ),
                               const SizedBox(
@@ -196,14 +187,14 @@ class TransactionHistoryView extends StatelessWidget {
                               ),
                               Text('Pengeluaran',
                                   style: kOpenSans.copyWith(
-                                      fontSize: 10,
+                                      fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
                             ],
                           ),
                           Obx(
                             () => SizedBox(
-                              width: Get.width * 0.34,
+                              width: Get.width * 0.39,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value
@@ -214,9 +205,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: defaultError),
+                                    fontWeight: medium, color: defaultError),
                               ),
                             ),
                           )
@@ -234,8 +223,8 @@ class TransactionHistoryView extends StatelessWidget {
               children: [
                 Text(
                   'Riwayat Transaksi',
-                  style: kOpenSans.copyWith(
-                      fontSize: 14, fontWeight: bold, color: defaultGray),
+                  style:
+                      kOpenSans.copyWith(fontWeight: bold, color: defaultGray),
                 ),
                 SizedBox(
                   height: Get.height * 0.0125,

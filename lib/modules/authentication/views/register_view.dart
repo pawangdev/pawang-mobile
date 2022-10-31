@@ -77,9 +77,7 @@ class RegisterView extends StatelessWidget {
                               Text(
                                 'Password',
                                 style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: defaultBlack),
+                                    fontWeight: regular, color: defaultBlack),
                               ),
                               SizedBox(
                                 height: Get.height * 0.014,
@@ -92,6 +90,7 @@ class RegisterView extends StatelessWidget {
                                       .build(),
                                   controller: controller.passwordTextController,
                                   decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(15),
                                     fillColor: const Color(0xFFF5F5F5),
                                     filled: true,
                                     border: OutlineInputBorder(
@@ -137,9 +136,7 @@ class RegisterView extends StatelessWidget {
                               Text(
                                 "Jenis Kelamin",
                                 style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: defaultBlack),
+                                    fontWeight: regular, color: defaultBlack),
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,

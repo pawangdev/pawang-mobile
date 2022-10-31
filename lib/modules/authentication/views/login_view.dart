@@ -44,7 +44,8 @@ class LoginView extends StatelessWidget {
                   SizedBox(height: Get.height * 0.01),
                   Text(
                     "Kami sudah lama menantimu",
-                    style: kOpenSans.copyWith(fontWeight: medium, fontSize: 14),
+                    style:
+                        kOpenSans.copyWith(fontWeight: regular, fontSize: 16),
                   ),
                   Form(
                     key: controller.formKey,
@@ -74,9 +75,7 @@ class LoginView extends StatelessWidget {
                               Text(
                                 'Password',
                                 style: kOpenSans.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: defaultBlack),
+                                    fontWeight: regular, color: defaultBlack),
                               ),
                               SizedBox(
                                 height: Get.height * 0.015,
@@ -90,6 +89,7 @@ class LoginView extends StatelessWidget {
                                   keyboardType: TextInputType.visiblePassword,
                                   controller: controller.passwordTextController,
                                   decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(15),
                                     fillColor: const Color(0xFFF5F5F5),
                                     filled: true,
                                     border: OutlineInputBorder(

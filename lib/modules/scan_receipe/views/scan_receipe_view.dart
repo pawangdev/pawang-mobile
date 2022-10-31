@@ -13,7 +13,7 @@ class ScanReceipeView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -21,49 +21,25 @@ class ScanReceipeView extends StatelessWidget {
                 child: Text(
                   "Scan Struk",
                   style: kOpenSans.copyWith(
-                      fontSize: 16, fontWeight: bold, color: defaultBlack),
+                    fontSize: 16,
+                    fontWeight: bold,
+                  ),
                 ),
               ),
               SizedBox(
                 height: Get.height * 0.038,
               ),
-              Center(
+              const Center(
                 child: Text(
                   "Mohon atur posisi struk agar dapat terdeteksi",
                   textAlign: TextAlign.center,
-                  style: kOpenSans.copyWith(fontSize: 12, color: defaultBlack),
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.032,
+                height: Get.height * 0.042,
               ),
               // ----- BOX IMAGE -----
-              Expanded(
-                child: Container(
-                  child: GetBuilder<ScanReceipeController>(
-                    builder: (controller) => controller.imageFilePath != null
-                        ? Image.file(
-                            File(controller.imageFilePath!.path),
-                            fit: BoxFit.contain,
-                          )
-                        : Center(
-                            child: Text(
-                              "Silahkan pilih struk terlebih dahulu",
-                              style: kOpenSans.copyWith(
-                                  color: defaultGray,
-                                  fontSize: 10,
-                                  fontWeight: medium),
-                            ),
-                          ),
-                  ),
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: defaultGray, width: 0.5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              SizedBox(height: Get.height * 0.0175),
+
               SizedBox(
                 child: GetBuilder<ScanReceipeController>(
                   builder: (controller) => controller.imageFilePath == null
@@ -71,33 +47,69 @@ class ScanReceipeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [defaultPrimary, defaultPurple])),
-                              child: TextButton(
-                                  child: Image.asset(
-                                    'assets/images/scan3.png',
-                                    width: 32,
-                                    fit: BoxFit.cover,
+                            Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: Get.height * 0.5,
+                                      child: Center(
+                                        child: Text(
+                                          "Silahkan pilih struk terlebih dahulu",
+                                          style: kOpenSans.copyWith(
+                                              color: defaultGray,
+                                              fontSize: 12,
+                                              fontWeight: medium),
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: defaultGray, width: 0.5),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: Get.height * 0.04,
+                                    )
+                                  ],
+                                ),
+                                Positioned(
+                                  top: Get.height * 0.462,
+                                  left: Get.width * 0.32,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius),
+                                        gradient: const LinearGradient(
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            colors: [
+                                              defaultPrimary,
+                                              defaultPurple
+                                            ])),
+                                    child: TextButton(
+                                        child: Image.asset(
+                                          'assets/images/scan3.png',
+                                          width: 32,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        style: ButtonStyle(
+                                            padding: MaterialStateProperty.all(
+                                                const EdgeInsets.all(14)),
+                                            shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12)))),
+                                        onPressed: () {
+                                          controller.scanReceipt(false);
+                                        }),
                                   ),
-                                  style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(
-                                          const EdgeInsets.all(14)),
-                                      shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12)))),
-                                  onPressed: () {
-                                    controller.scanReceipt(false);
-                                  }),
+                                ),
+                              ],
                             ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 20),
+                            SizedBox(
                               width: Get.width,
                               child: Row(
                                 children: <Widget>[
@@ -139,39 +151,57 @@ class ScanReceipeView extends StatelessWidget {
                                 }),
                           ],
                         )
-                      : Row(
+                      : Column(
                           children: [
-                            Flexible(
-                              fit: FlexFit.tight,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 12),
-                                child: ButtonCustom(
-                                  text: 'Ulangi',
-                                  elevatedMode: false,
-                                  onTap: () {
-                                    controller.resetScan();
-                                  },
-                                ),
+                            Container(
+                              width: Get.width,
+                              height: Get.height * 0.58,
+                              child: Image.file(
+                                File(controller.imageFilePath!.path),
+                                fit: BoxFit.contain,
+                              ),
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: defaultGray, width: 0.5),
+                                borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            SizedBox(
-                              width: Get.width * 0.028,
-                            ),
-                            Flexible(
-                              fit: FlexFit.tight,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 12),
-                                child: ButtonCustom(
-                                  text: 'Lanjut',
-                                  onTap: () async {
-                                    try {
-                                      await controller.uploadReceipt();
-                                    } catch (e) {
-                                      print(e);
-                                    }
-                                  },
+                            Row(
+                              children: [
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(top: 12),
+                                    child: ButtonCustom(
+                                      text: 'Ulangi',
+                                      elevatedMode: false,
+                                      onTap: () {
+                                        controller.resetScan();
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                SizedBox(
+                                  width: Get.width * 0.028,
+                                ),
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(top: 12),
+                                    child: ButtonCustom(
+                                      text: 'Lanjut',
+                                      onTap: () async {
+                                        try {
+                                          await controller.uploadReceipt();
+                                        } catch (e) {
+                                          print(e);
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
