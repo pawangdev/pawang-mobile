@@ -6,6 +6,7 @@ import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
+import 'package:pawang_mobile/widgets/setting_item.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class SettingsView extends StatelessWidget {
@@ -77,84 +78,18 @@ class SettingsView extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    InkWell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: Get.height * 0.039,
-                                    width: Get.width * 0.083,
-                                    decoration: BoxDecoration(
-                                      color: Colors.orange,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: const Icon(
-                                      Icons.edit_rounded,
-                                      color: defaultWhite,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text('Edit Profil',
-                                    style: kOpenSans.copyWith(
-                                        fontSize: 14, fontWeight: semiBold))
-                              ],
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 16,
-                            )
-                          ],
-                        ),
-                        onTap: () {
-                          Get.toNamed(RoutesName.editprofile);
-                        }),
-                    SizedBox(
-                      child: Divider(
-                        color: defaultGray,
-                        height: Get.height * 0.0005,
-                      ),
-                      height: Get.height * 0.035,
+                    SettingItem(
+                      color: Colors.orange,
+                      text: 'Edit Profile',
+                      icon: Icons.edit_rounded,
+                      onTap: () {
+                        Get.toNamed(RoutesName.editprofile);
+                      },
                     ),
-                    InkWell(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  height: Get.height * 0.04,
-                                  width: Get.width * 0.083,
-                                  decoration: BoxDecoration(
-                                    color: defaultPurple,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: const Icon(
-                                    Icons.logout_rounded,
-                                    color: defaultWhite,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              Text('Keluar',
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 14, fontWeight: semiBold))
-                            ],
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          )
-                        ],
-                      ),
+                    SettingItem(
+                      color: defaultPurple,
+                      text: 'Keluar',
+                      icon: Icons.logout_rounded,
                       onTap: () {
                         showDialog<void>(
                           context: context,
@@ -222,13 +157,6 @@ class SettingsView extends StatelessWidget {
                           ),
                         );
                       },
-                    ),
-                    SizedBox(
-                      child: Divider(
-                        color: defaultGray,
-                        height: Get.height * 0.0005,
-                      ),
-                      height: Get.height * 0.035,
                     ),
                   ],
                 )
