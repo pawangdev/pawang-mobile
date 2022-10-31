@@ -18,49 +18,54 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      height: Get.height * 0.039,
-                      width: Get.width * 0.083,
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        icon,
-                        color: defaultWhite,
-                        size: 20,
+    return Column(
+      children: [
+        InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: onTap,
+          child: SizedBox(
+            width: Get.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        height: Get.height * 0.039,
+                        width: Get.width * 0.083,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          icon,
+                          color: defaultWhite,
+                          size: 20,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(text,
-                      style: kOpenSans.copyWith(
-                          fontSize: 14, fontWeight: semiBold))
-                ],
-              ),
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 16,
-              )
-            ],
+                    Text(text,
+                        style: kOpenSans.copyWith(
+                            fontSize: 14, fontWeight: semiBold))
+                  ],
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                )
+              ],
+            ),
           ),
-          Divider(
-            color: defaultGray,
-            height: Get.height * 0.05,
-          ),
-        ],
-      ),
+        ),
+        Divider(
+          color: defaultGray,
+          height: Get.height * 0.05,
+        ),
+      ],
     );
   }
 }
