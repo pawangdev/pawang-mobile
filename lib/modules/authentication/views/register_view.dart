@@ -75,7 +75,8 @@ class RegisterView extends StatelessWidget {
                           fillColor: defaultWhite,
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                           ),
                           suffixIcon: IconButton(
                             color: defaultGray,

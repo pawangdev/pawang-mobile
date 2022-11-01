@@ -85,7 +85,8 @@ class AddReminderView extends StatelessWidget {
                           fillColor: const Color(0xFFF5F5F5),
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                           ),
                           focusColor: defaultPrimary,
                         ),

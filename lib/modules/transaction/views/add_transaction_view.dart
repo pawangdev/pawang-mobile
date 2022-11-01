@@ -98,7 +98,8 @@ class AddTransactionView extends StatelessWidget {
                           labelText: 'Kategori',
                           hintText: 'Tentukan Kategori Anda',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                           ),
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(20),
@@ -126,7 +127,8 @@ class AddTransactionView extends StatelessWidget {
                           labelText: 'Dompet',
                           hintText: 'Tentukan Dompet Anda',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                           ),
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(20),
@@ -158,7 +160,8 @@ class AddTransactionView extends StatelessWidget {
                           labelText: 'Tanggal',
                           hintText: 'Tentukan Dompet Anda',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                           ),
                           suffixIcon: Container(
                               padding: EdgeInsets.all(20),

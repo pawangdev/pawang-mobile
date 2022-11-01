@@ -40,9 +40,9 @@ class InputField extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Colors.white,
         labelText: inputLabel,
-        filled: true,
+        // filled: true,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
         ),
       ),
     );

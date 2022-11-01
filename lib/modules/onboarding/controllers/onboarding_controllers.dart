@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;
   bool get isLastPage => selectedPageIndex.value == onboardingPages.length - 1;
+  bool get isFirstPage => selectedPageIndex.value == onboardingPages.length - 3;
   var pageController = PageController();
 
   List<OnboardingInfo> onboardingPages = [

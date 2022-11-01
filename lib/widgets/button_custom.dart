@@ -52,7 +52,8 @@ class ButtonCustom extends StatelessWidget {
                 side: BorderSide(
                     color: blueMode! ? defaultPrimary : defaultError),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
               ),
             ),
     );
