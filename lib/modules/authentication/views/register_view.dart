@@ -109,7 +109,7 @@ class RegisterView extends StatelessWidget {
                                 },
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Laki-Laki",
                             ),
                           ],
@@ -130,7 +130,7 @@ class RegisterView extends StatelessWidget {
                                 },
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Perempuan",
                             ),
                           ],

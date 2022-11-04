@@ -26,11 +26,6 @@ class RegisterController extends GetxController {
   var genderTextController = ''.obs;
 
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
   void onClose() {
     nameTextController.dispose();
     emailTextController.dispose();

@@ -1,13 +1,12 @@
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'routes/routes.dart';
 
@@ -50,7 +49,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Pawang',
       theme: ThemeData(
-        fontFamily: "OpenSans",
+        fontFamily: "Inter",
+        errorColor: defaultError,
       ),
       builder: EasyLoading.init(),
       initialRoute: AppPages.INITIAL,

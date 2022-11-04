@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/utils/currency_format.dart';
 
 class WalletCard extends StatelessWidget {
   final String income;
@@ -30,7 +29,7 @@ class WalletCard extends StatelessWidget {
                 blurRadius: 10,
                 spreadRadius: 2)
           ],
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [defaultPrimary, defaultPurple]),
@@ -96,11 +95,11 @@ class WalletCard extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
+                                    const BorderRadius.all(Radius.circular(50)),
                                 color: defaultWhite.withOpacity(0.5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: const Icon(
+                            child: const Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Icon(
                                 Icons.arrow_downward_rounded,
                                 size: 15,
                                 color: defaultWhite,
@@ -116,7 +115,7 @@ class WalletCard extends StatelessWidget {
                                   color: defaultWhite.withOpacity(0.8))),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SizedBox(
@@ -144,11 +143,11 @@ class WalletCard extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
+                                  const BorderRadius.all(Radius.circular(50)),
                               color: defaultWhite.withOpacity(0.5)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: const Icon(
+                          child: const Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Icon(
                               Icons.arrow_upward_rounded,
                               size: 15,
                               color: defaultWhite,
@@ -164,7 +163,7 @@ class WalletCard extends StatelessWidget {
                                 color: defaultWhite.withOpacity(0.8))),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     SizedBox(

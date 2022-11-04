@@ -51,7 +51,7 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                   child: Container(
                     width: 180,
                     height: 180,
-                    padding: EdgeInsets.all(34.0),
+                    padding: const EdgeInsets.all(34.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100.0),
                       color: Colors.blue.shade100,

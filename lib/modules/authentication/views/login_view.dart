@@ -21,8 +21,8 @@ class LoginView extends StatelessWidget {
         onFirstBackPress: (context) {
           Get.rawSnackbar(
             snackPosition: SnackPosition.BOTTOM,
-            padding: EdgeInsets.all(10),
-            duration: Duration(milliseconds: 900),
+            padding: const EdgeInsets.all(10),
+            duration: const Duration(milliseconds: 900),
             margin: const EdgeInsets.symmetric(horizontal: 60, vertical: 40),
             borderRadius: 20,
             icon: Padding(

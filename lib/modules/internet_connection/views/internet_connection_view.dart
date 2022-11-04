@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:get/get.dart';
 
-class ConnectionScreen extends StatefulWidget {
-  static const String routeName = "/connection-check";
-  const ConnectionScreen({Key? key}) : super(key: key);
+class InternetConnectionView extends StatelessWidget {
+  const InternetConnectionView({Key? key}) : super(key: key);
 
-  @override
-  State<ConnectionScreen> createState() => _ConnectionScreenState();
-}
-
-class _ConnectionScreenState extends State<ConnectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

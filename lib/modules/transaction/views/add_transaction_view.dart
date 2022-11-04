@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -104,7 +106,7 @@ class AddTransactionView extends StatelessWidget {
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(20),
                             child: SvgPicture.asset(
-                              'assets/images/chevron_down.svg',
+                              'assets/images/)b.svg',
                               color: defaultGray,
                             ),
                           ),
@@ -164,8 +166,8 @@ class AddTransactionView extends StatelessWidget {
                                 BorderRadius.circular(defaultBorderRadius),
                           ),
                           suffixIcon: Container(
-                              padding: EdgeInsets.all(20),
-                              child: Icon(
+                              padding: const EdgeInsets.all(20),
+                              child: const Icon(
                                 Icons.calendar_month,
                                 color: defaultGray,
                               )),

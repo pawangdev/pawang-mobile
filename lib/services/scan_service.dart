@@ -49,7 +49,7 @@ class ScanService {
 
       return responseJson;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 

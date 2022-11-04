@@ -19,7 +19,9 @@ class ScanReceipeController extends GetxController {
       if (getImage != null) {
         imageFilePath = getImage;
       }
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
     update();
   }
 

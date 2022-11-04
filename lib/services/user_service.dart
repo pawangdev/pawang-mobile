@@ -40,8 +40,6 @@ class UserService extends BaseService {
         'onesignal_id': data['onesignal_id']
       };
 
-      print(dataLogin);
-
       final response = await post("/auth/login", dataLogin);
 
       if (response.statusCode == 200) {

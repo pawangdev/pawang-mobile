@@ -7,6 +7,7 @@ import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:get/get.dart';
 
+// ignore: use_key_in_widget_constructors
 class AddWalletView extends StatelessWidget {
   final WalletController controller = Get.find();
 
