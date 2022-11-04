@@ -88,7 +88,7 @@ class ChangePasswordView extends StatelessWidget {
                       }),
                   Text(
                     "Ganti Password",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(

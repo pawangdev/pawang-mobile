@@ -48,7 +48,7 @@ class RemindCard extends StatelessWidget {
                     maxLines: 1,
                     textAlign: TextAlign.end,
                     overflow: TextOverflow.ellipsis,
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                       color: defaultBlack,
                       fontWeight: semiBold,
                       fontSize: 16,
@@ -62,7 +62,7 @@ class RemindCard extends StatelessWidget {
                   maxLines: 1,
                   textAlign: TextAlign.end,
                   overflow: TextOverflow.ellipsis,
-                  style: kOpenSans.copyWith(color: defaultGray),
+                  style: kInter.copyWith(color: defaultGray),
                 ),
               ],
             ),

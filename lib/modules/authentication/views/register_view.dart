@@ -34,7 +34,7 @@ class RegisterView extends StatelessWidget {
             backgroundColor: defaultBlack.withOpacity(0.8),
             messageText: Text(
               'Tekan sekali lagi untuk keluar',
-              style: kOpenSans.copyWith(color: defaultWhite),
+              style: kInter.copyWith(color: defaultWhite),
             ),
           );
         },
@@ -53,13 +53,12 @@ class RegisterView extends StatelessWidget {
                 children: [
                   Text(
                     "Buat Akun",
-                    style: kOpenSans.copyWith(fontWeight: bold, fontSize: 20),
+                    style: kInter.copyWith(fontWeight: bold, fontSize: 20),
                   ),
                   SizedBox(height: Get.height * 0.008),
                   Text(
                     "Kami sangat senang dengan kehadiranmu",
-                    style:
-                        kOpenSans.copyWith(fontWeight: regular, fontSize: 16),
+                    style: kInter.copyWith(fontWeight: regular, fontSize: 16),
                   ),
                 ],
               ),
@@ -195,13 +194,13 @@ class RegisterView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Sudah punya akun? ",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 14,
                         color: defaultBlack,
                         fontWeight: FontWeight.w400)),
                 TextButton(
                   child: Text('Masuk',
-                      style: kOpenSans.copyWith(
+                      style: kInter.copyWith(
                           fontSize: 14,
                           color: defaultPrimary,
                           fontWeight: bold)),

@@ -36,7 +36,7 @@ class WalletCard2 extends StatelessWidget {
               wallet.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: kOpenSans.copyWith(
+              style: kInter.copyWith(
                 color: defaultPrimary,
                 fontWeight: semiBold,
                 fontSize: 16,
@@ -50,7 +50,7 @@ class WalletCard2 extends StatelessWidget {
             CurrencyFormat.convertToIdr(wallet.balance, 2),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: kOpenSans.copyWith(
+            style: kInter.copyWith(
               color: defaultBlack,
               fontWeight: medium,
               fontSize: 15,
@@ -91,7 +91,7 @@ class WalletCard2 extends StatelessWidget {
                                       // Nominal
                                       Text(
                                         'Ubah Data',
-                                        style: kOpenSans.copyWith(
+                                        style: kInter.copyWith(
                                             fontSize: 16, fontWeight: bold),
                                       ),
                                       SizedBox(
@@ -163,13 +163,13 @@ class WalletCard2 extends StatelessWidget {
                             builder: (BuildContext context) => AlertDialog(
                               title: Text(
                                 'Hapus Dompet',
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontSize: 18, fontWeight: bold),
                                 textAlign: TextAlign.center,
                               ),
                               content: Text(
                                 'Apakah kamu yakin akan menghapus dompet ini?',
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontSize: 16, fontWeight: light),
                                 textAlign: TextAlign.center,
                               ),

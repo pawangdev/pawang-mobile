@@ -49,8 +49,8 @@ class SettingItem extends StatelessWidget {
                       ),
                     ),
                     Text(text,
-                        style: kOpenSans.copyWith(
-                            fontSize: 14, fontWeight: semiBold))
+                        style:
+                            kInter.copyWith(fontSize: 14, fontWeight: semiBold))
                   ],
                 ),
                 const Icon(

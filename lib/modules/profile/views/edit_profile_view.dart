@@ -31,7 +31,7 @@ class EditProfileView extends StatelessWidget {
                       }),
                   Text(
                     "Edit Profile",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(
@@ -104,7 +104,7 @@ class EditProfileView extends StatelessWidget {
                             ),
                             Text(
                               "Laki-Laki",
-                              style: kOpenSans.copyWith(fontSize: 12),
+                              style: kInter.copyWith(fontSize: 12),
                             ),
                           ],
                         ),
@@ -126,7 +126,7 @@ class EditProfileView extends StatelessWidget {
                             ),
                             Text(
                               "Perempuan",
-                              style: kOpenSans.copyWith(fontSize: 12),
+                              style: kInter.copyWith(fontSize: 12),
                             ),
                           ],
                         ),

@@ -25,7 +25,7 @@ class SettingsView extends StatelessWidget {
                 Center(
                   child: Text(
                     "Pengaturan",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                 ),
@@ -53,7 +53,7 @@ class SettingsView extends StatelessWidget {
                               dashboardController.user.value.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                   fontSize: 14,
                                   fontWeight: bold,
                                   color: defaultBlack),
@@ -97,13 +97,13 @@ class SettingsView extends StatelessWidget {
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(
                               'Keluar',
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                   fontSize: 16, fontWeight: bold),
                               textAlign: TextAlign.center,
                             ),
                             content: Text(
                               'Apakah anda yakin ingin keluar?',
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                   fontSize: 14, fontWeight: medium),
                               textAlign: TextAlign.center,
                             ),

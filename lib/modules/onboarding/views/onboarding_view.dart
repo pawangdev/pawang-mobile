@@ -59,7 +59,7 @@ class OnboardingView extends StatelessWidget {
                     child: Center(
                         child: Text(
                       'Skip',
-                      style: kOpenSans.copyWith(
+                      style: kInter.copyWith(
                           color: defaultPrimary, fontWeight: semiBold),
                     )),
                   ))),
@@ -105,7 +105,7 @@ class OnboardingView extends StatelessWidget {
                         children: [
                           Text(
                             _controller.isLastPage ? 'Get Started' : 'Next',
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 color: defaultPrimary, fontWeight: semiBold),
                           ),
                           const SizedBox(

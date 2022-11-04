@@ -51,14 +51,14 @@ class SplashView extends StatelessWidget {
                       ),
                       Text(
                         'PAWANG',
-                        style: kOpenSans.copyWith(
+                        style: kInter.copyWith(
                             fontSize: 30,
                             fontWeight: extraBold,
                             color: defaultWhite),
                       ),
                       Text(
                         'P e n c a t a t   K e u a n g a n',
-                        style: kOpenSans.copyWith(
+                        style: kInter.copyWith(
                             fontSize: 9, fontWeight: bold, color: defaultWhite),
                       )
                     ],
@@ -71,7 +71,7 @@ class SplashView extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 10),
                   child: Text(
                     'Pawang version ${controller.version}',
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                       fontSize: 14,
                       color: defaultWhite.withOpacity(0.75),
                       fontWeight: semiBold,

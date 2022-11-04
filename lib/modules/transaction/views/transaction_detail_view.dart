@@ -71,7 +71,7 @@ class TransactionDetailView extends StatelessWidget {
                           transaction.category.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 18, fontWeight: semiBold),
                         ),
                         SizedBox(
@@ -87,7 +87,7 @@ class TransactionDetailView extends StatelessWidget {
                                   CurrencyFormat.convertToIdr(
                                           transaction.amount, 2)
                                       .toString(),
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 16,
                               color: transaction.type == "income"
                                   ? defaultSuccess
@@ -106,7 +106,7 @@ class TransactionDetailView extends StatelessWidget {
                       children: [
                         Text(
                           'Keterangan',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontSize: 14,
                           ),
                         ),
@@ -117,7 +117,7 @@ class TransactionDetailView extends StatelessWidget {
                             textAlign: TextAlign.end,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 fontSize: 14, color: defaultPrimary),
                           ),
                         )
@@ -135,7 +135,7 @@ class TransactionDetailView extends StatelessWidget {
                       children: [
                         Text(
                           'Tanggal Transaksi',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontSize: 14,
                           ),
                         ),
@@ -149,7 +149,7 @@ class TransactionDetailView extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             textAlign: TextAlign.end,
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 fontSize: 14, color: defaultPrimary),
                           ),
                         )
@@ -169,7 +169,7 @@ class TransactionDetailView extends StatelessWidget {
                           children: [
                             Text(
                               'Kategori',
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                 fontSize: 14,
                               ),
                             ),
@@ -180,7 +180,7 @@ class TransactionDetailView extends StatelessWidget {
                                 textAlign: TextAlign.end,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontSize: 14, color: defaultPrimary),
                               ),
                             )
@@ -194,7 +194,7 @@ class TransactionDetailView extends StatelessWidget {
                           children: [
                             Text(
                               'Sub Kategori',
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                 color: defaultGray,
                                 fontSize: 12,
                               ),
@@ -208,7 +208,7 @@ class TransactionDetailView extends StatelessWidget {
                                 maxLines: 1,
                                 textAlign: TextAlign.end,
                                 overflow: TextOverflow.ellipsis,
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontSize: 12,
                                     color: defaultPrimary.withOpacity(0.6)),
                               ),
@@ -229,7 +229,7 @@ class TransactionDetailView extends StatelessWidget {
                       children: [
                         Text(
                           'Dompet',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontSize: 14,
                           ),
                         ),
@@ -240,7 +240,7 @@ class TransactionDetailView extends StatelessWidget {
                             textAlign: TextAlign.end,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 fontSize: 14, color: defaultPrimary),
                           ),
                         )
@@ -258,7 +258,7 @@ class TransactionDetailView extends StatelessWidget {
                       children: [
                         Text(
                           'Jenis',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontSize: 14,
                           ),
                         ),
@@ -271,7 +271,7 @@ class TransactionDetailView extends StatelessWidget {
                             textAlign: TextAlign.end,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 fontSize: 14, color: defaultPrimary),
                           ),
                         )
@@ -316,13 +316,13 @@ class TransactionDetailView extends StatelessWidget {
                               builder: (BuildContext context) => AlertDialog(
                                 title: Text(
                                   'Hapus Pengeluaran',
-                                  style: kOpenSans.copyWith(
+                                  style: kInter.copyWith(
                                       fontSize: 18, fontWeight: bold),
                                   textAlign: TextAlign.center,
                                 ),
                                 content: Text(
                                   'Apakah kamu yakin akan menghapus pengeluaran ini?',
-                                  style: kOpenSans.copyWith(
+                                  style: kInter.copyWith(
                                       fontSize: 16, fontWeight: light),
                                   textAlign: TextAlign.center,
                                 ),

@@ -19,7 +19,7 @@ class InternetConnectionView extends StatelessWidget {
               Center(
                 child: Text(
                   "Oops !!",
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                       color: defaultBlack, fontWeight: bold, fontSize: 20),
                 ),
               ),
@@ -40,7 +40,7 @@ class InternetConnectionView extends StatelessWidget {
               ),
               Text(
                 "No Internet Connection",
-                style: kOpenSans.copyWith(
+                style: kInter.copyWith(
                     color: defaultBlack, fontSize: 16, fontWeight: bold),
                 textAlign: TextAlign.center,
               ),
@@ -49,7 +49,7 @@ class InternetConnectionView extends StatelessWidget {
               ),
               Text(
                 "Kamu kehilangan koneksi internet. Silahkan periksa kembali koneksi internet.",
-                style: kOpenSans.copyWith(
+                style: kInter.copyWith(
                     color: defaultGray, fontSize: 12, fontWeight: medium),
                 textAlign: TextAlign.center,
               ),
@@ -66,7 +66,7 @@ class InternetConnectionView extends StatelessWidget {
                 child: TextButton(
                     child: Text(
                       "Coba Lagi",
-                      style: kOpenSans.copyWith(
+                      style: kInter.copyWith(
                           fontSize: 16, fontWeight: bold, color: defaultWhite),
                     ),
                     style: ButtonStyle(

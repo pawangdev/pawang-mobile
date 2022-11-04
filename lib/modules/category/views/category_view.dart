@@ -50,7 +50,7 @@ class CategoryView extends StatelessWidget {
                         ),
                         Text(
                           'Kategori',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
                               color: defaultWhite),
@@ -116,7 +116,7 @@ class CategoryView extends StatelessWidget {
                                           category.name,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: kOpenSans.copyWith(
+                                          style: kInter.copyWith(
                                               fontWeight: semiBold,
                                               fontSize: 16),
                                         ),
@@ -146,7 +146,7 @@ class CategoryView extends StatelessWidget {
                                         category.name,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: kOpenSans.copyWith(
+                                        style: kInter.copyWith(
                                             fontWeight: semiBold, fontSize: 16),
                                       ),
                                     ],
@@ -172,7 +172,7 @@ class CategoryView extends StatelessWidget {
                                         padding: const EdgeInsets.all(15.0),
                                         child: Text(
                                           "Belum Ada Sub Kategori",
-                                          style: kOpenSans.copyWith(
+                                          style: kInter.copyWith(
                                               color: defaultGray),
                                         ),
                                       ),
@@ -201,8 +201,8 @@ class CategoryView extends StatelessWidget {
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
-                                                            style: kOpenSans
-                                                                .copyWith(
+                                                            style:
+                                                                kInter.copyWith(
                                                                     fontSize:
                                                                         14,
                                                                     fontWeight:
@@ -250,14 +250,12 @@ class CategoryView extends StatelessWidget {
                                                               overflow:
                                                                   TextOverflow
                                                                       .ellipsis,
-                                                              style: kOpenSans
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          medium,
-                                                                      color:
-                                                                          defaultBlack),
+                                                              style: kInter.copyWith(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      medium,
+                                                                  color:
+                                                                      defaultBlack),
                                                             ),
                                                           )),
                                                   args == null
@@ -280,7 +278,7 @@ class CategoryView extends StatelessWidget {
                                                                   },
                                                                   title:
                                                                       'Memperbarui Sub Kategori',
-                                                                  titleStyle: kOpenSans.copyWith(
+                                                                  titleStyle: kInter.copyWith(
                                                                       fontSize:
                                                                           16,
                                                                       fontWeight:
@@ -334,7 +332,7 @@ class CategoryView extends StatelessWidget {
                                                                               category.name,
                                                                               maxLines: 1,
                                                                               overflow: TextOverflow.ellipsis,
-                                                                              style: kOpenSans.copyWith(fontWeight: medium, fontSize: 16),
+                                                                              style: kInter.copyWith(fontWeight: medium, fontSize: 16),
                                                                             ),
                                                                           ],
                                                                         ),
@@ -353,7 +351,7 @@ class CategoryView extends StatelessWidget {
                                                                           hintText:
                                                                               'Isi Sub Kategori',
                                                                           hintStyle:
-                                                                              kOpenSans.copyWith(fontSize: 16),
+                                                                              kInter.copyWith(fontSize: 16),
                                                                           fillColor:
                                                                               defaultPrimary,
                                                                           border:
@@ -388,7 +386,7 @@ class CategoryView extends StatelessWidget {
                                                                       AlertDialog(
                                                                     title: Text(
                                                                       'Hapus Sub Kategori',
-                                                                      style: kOpenSans.copyWith(
+                                                                      style: kInter.copyWith(
                                                                           fontSize:
                                                                               16,
                                                                           fontWeight:
@@ -400,7 +398,7 @@ class CategoryView extends StatelessWidget {
                                                                     content:
                                                                         Text(
                                                                       'Apakah kamu yakin akan menghapus sub kategori ini?',
-                                                                      style: kOpenSans.copyWith(
+                                                                      style: kInter.copyWith(
                                                                           fontSize:
                                                                               14,
                                                                           fontWeight:
@@ -473,7 +471,7 @@ class CategoryView extends StatelessWidget {
                                           onTap: () {
                                             Get.defaultDialog(
                                               title: 'Tambah Sub Kategori',
-                                              titleStyle: kOpenSans.copyWith(
+                                              titleStyle: kInter.copyWith(
                                                   fontSize: 16,
                                                   fontWeight: bold),
                                               confirm: ButtonCustom(
@@ -525,8 +523,8 @@ class CategoryView extends StatelessWidget {
                                                           category.name,
                                                           overflow: TextOverflow
                                                               .ellipsis,
-                                                          style: kOpenSans
-                                                              .copyWith(
+                                                          style:
+                                                              kInter.copyWith(
                                                                   fontWeight:
                                                                       medium,
                                                                   fontSize: 16),
@@ -547,7 +545,7 @@ class CategoryView extends StatelessWidget {
                                                       hintText:
                                                           'Isi Sub Kategori',
                                                       hintStyle:
-                                                          kOpenSans.copyWith(
+                                                          kInter.copyWith(
                                                               fontSize: 14),
                                                       fillColor: defaultPrimary,
                                                       border:

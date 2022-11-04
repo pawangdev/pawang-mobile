@@ -34,7 +34,7 @@ class NavigationView extends StatelessWidget {
           backgroundColor: defaultBlack.withOpacity(0.8),
           messageText: Text(
             'Tekan sekali lagi untuk keluar',
-            style: kOpenSans.copyWith(color: defaultWhite),
+            style: kInter.copyWith(color: defaultWhite),
           ),
         );
       },

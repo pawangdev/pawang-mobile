@@ -37,7 +37,7 @@ class TransactionHistoryView extends StatelessWidget {
                           ),
                           Text(
                             'Transaksi',
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 fontSize: 16,
                                 fontWeight: bold,
                                 color: defaultWhite),
@@ -54,7 +54,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Sisa Uang Kamu',
-                                    style: kOpenSans.copyWith(
+                                    style: kInter.copyWith(
                                         fontWeight: medium,
                                         color: defaultWhite),
                                   ),
@@ -70,7 +70,7 @@ class TransactionHistoryView extends StatelessWidget {
                                           .toString(),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: kOpenSans.copyWith(
+                                      style: kInter.copyWith(
                                           fontSize: 20,
                                           fontWeight: bold,
                                           color: defaultWhite),
@@ -144,7 +144,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 width: 5,
                               ),
                               Text('Pemasukan',
-                                  style: kOpenSans.copyWith(
+                                  style: kInter.copyWith(
                                       fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
@@ -162,7 +162,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontWeight: medium, color: defaultSuccess),
                               ),
                             ),
@@ -188,7 +188,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 width: 5,
                               ),
                               Text('Pengeluaran',
-                                  style: kOpenSans.copyWith(
+                                  style: kInter.copyWith(
                                       fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
@@ -206,7 +206,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     fontWeight: medium, color: defaultError),
                               ),
                             ),
@@ -225,8 +225,7 @@ class TransactionHistoryView extends StatelessWidget {
               children: [
                 Text(
                   'Riwayat Transaksi',
-                  style:
-                      kOpenSans.copyWith(fontWeight: bold, color: defaultGray),
+                  style: kInter.copyWith(fontWeight: bold, color: defaultGray),
                 ),
                 SizedBox(
                   height: Get.height * 0.0125,
@@ -263,7 +262,7 @@ class TransactionHistoryView extends StatelessWidget {
                       : Center(
                           child: Text(
                             "Anda belum memiliki transaksi",
-                            style: kOpenSans.copyWith(
+                            style: kInter.copyWith(
                                 color: defaultGray,
                                 fontSize: 13,
                                 fontWeight: medium),

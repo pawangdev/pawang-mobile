@@ -50,7 +50,7 @@ class CardPengeluaran extends StatelessWidget {
                           data.category.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontWeight: semiBold,
                           ),
                         ),
@@ -61,7 +61,7 @@ class CardPengeluaran extends StatelessWidget {
                               .toString(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                             fontSize: 12,
                             color: defaultGray.withOpacity(0.9),
                           ),
@@ -80,7 +80,7 @@ class CardPengeluaran extends StatelessWidget {
                         CurrencyFormat.convertToIdr(data.amount, 2).toString(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: kOpenSans.copyWith(
+                style: kInter.copyWith(
                     color:
                         data.type == "income" ? defaultSuccess : defaultError,
                     fontWeight: semiBold,

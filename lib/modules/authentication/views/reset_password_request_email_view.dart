@@ -37,7 +37,7 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           "Lupa Password",
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
@@ -76,7 +76,7 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                 ),
                 Text(
                   "Masukkan email yang kamu gunakan untuk mendaftar. Kami akan mengirimkan token untuk mengatur ulang password kamu.",
-                  style: kOpenSans.copyWith(color: defaultGray),
+                  style: kInter.copyWith(color: defaultGray),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(

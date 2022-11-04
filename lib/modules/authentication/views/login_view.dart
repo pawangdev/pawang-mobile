@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
             backgroundColor: defaultBlack.withOpacity(0.8),
             messageText: Text(
               'Tekan sekali lagi untuk keluar',
-              style: kOpenSans.copyWith(color: defaultWhite),
+              style: kInter.copyWith(color: defaultWhite),
             ),
           );
         },
@@ -54,14 +54,13 @@ class LoginView extends StatelessWidget {
                 children: [
                   Text(
                     "Masuk dulu yuk!",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontWeight: bold, fontSize: 20, color: defaultBlack),
                   ),
                   SizedBox(height: Get.height * 0.008),
                   Text(
                     "Kami sudah lama menantimu",
-                    style:
-                        kOpenSans.copyWith(fontWeight: regular, fontSize: 16),
+                    style: kInter.copyWith(fontWeight: regular, fontSize: 16),
                   ),
                 ],
               ),
@@ -133,7 +132,7 @@ class LoginView extends StatelessWidget {
                               alignment: Alignment.center),
                           child: Text(
                             "Lupa Password",
-                            style: kOpenSans.copyWith(fontSize: 14),
+                            style: kInter.copyWith(fontSize: 14),
                           ),
                         ),
                       ),
@@ -180,8 +179,8 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(width: Get.width * 0.04),
                     Text('Masuk dengan Google',
-                        style: kOpenSans.copyWith(
-                            fontSize: 16, fontWeight: semiBold))
+                        style:
+                            kInter.copyWith(fontSize: 16, fontWeight: semiBold))
                   ],
                 ),
               ),
@@ -191,7 +190,7 @@ class LoginView extends StatelessWidget {
               children: [
                 Text(
                   "Belum punya akun?",
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                       fontSize: 14,
                       color: defaultBlack,
                       fontWeight: FontWeight.w400),
@@ -199,7 +198,7 @@ class LoginView extends StatelessWidget {
                 TextButton(
                   child: Text(
                     'Daftar',
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 14, color: defaultPrimary, fontWeight: bold),
                   ),
                   onPressed: () {

@@ -52,7 +52,7 @@ class WalletView extends StatelessWidget {
                         ),
                         Text(
                           'Dompet',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
                               color: defaultWhite),

@@ -33,7 +33,7 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           "Buat Password Baru",
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
@@ -72,7 +72,7 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                 ),
                 Text(
                   "Silahkan masukkan password baru anda",
-                  style: kOpenSans.copyWith(color: defaultGray),
+                  style: kInter.copyWith(color: defaultGray),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(

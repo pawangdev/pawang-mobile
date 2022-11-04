@@ -80,7 +80,7 @@ class ReminderCard extends StatelessWidget {
                               item.name!,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: kOpenSans.copyWith(
+                              style: kInter.copyWith(
                                   fontWeight: semiBold, fontSize: 16),
                             ),
                           ),
@@ -91,7 +91,7 @@ class ReminderCard extends StatelessWidget {
                                 .toString(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: kOpenSans.copyWith(fontSize: 14),
+                            style: kInter.copyWith(fontSize: 14),
                           ),
                         ],
                       ),

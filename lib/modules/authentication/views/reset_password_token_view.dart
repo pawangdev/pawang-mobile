@@ -34,7 +34,7 @@ class ResetPasswordTokenView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           "Verifikasi Token",
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
@@ -73,7 +73,7 @@ class ResetPasswordTokenView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
                     "Silahkan masukkan token yang telah kamu dapat pada email kamu, jika tidak masuk check pada kotak spam email kamu",
-                    style: kOpenSans.copyWith(color: defaultGray),
+                    style: kInter.copyWith(color: defaultGray),
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -22,7 +22,7 @@ class ScanReceipeView extends StatelessWidget {
               Center(
                 child: Text(
                   "Scan Struk",
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                     fontSize: 16,
                     fontWeight: bold,
                   ),
@@ -58,7 +58,7 @@ class ScanReceipeView extends StatelessWidget {
                                       child: Center(
                                         child: Text(
                                           "Silahkan pilih struk terlebih dahulu",
-                                          style: kOpenSans.copyWith(
+                                          style: kInter.copyWith(
                                               color: defaultGray,
                                               fontSize: 12,
                                               fontWeight: medium),

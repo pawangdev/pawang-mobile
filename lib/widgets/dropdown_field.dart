@@ -24,7 +24,7 @@ class DropdownField extends StatelessWidget {
         inputLabel,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: kOpenSans.copyWith(
+        style: kInter.copyWith(
             fontSize: 12, fontWeight: bold, color: defaultBlack),
       ),
       SizedBox(

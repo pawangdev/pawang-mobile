@@ -33,7 +33,7 @@ class ButtonCustom extends StatelessWidget {
                 onPressed: onTap,
                 child: Text(
                   text,
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                       color: defaultWhite, fontSize: 16, fontWeight: semiBold),
                 ),
               ),
@@ -43,7 +43,7 @@ class ButtonCustom extends StatelessWidget {
               child: OutlinedButton(
                 child: Text(
                   text,
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,
                       color: blueMode! ? defaultPrimary : defaultError),

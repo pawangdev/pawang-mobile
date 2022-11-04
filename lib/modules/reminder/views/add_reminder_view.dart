@@ -37,7 +37,7 @@ class AddReminderView extends StatelessWidget {
                     reminderUpdate == null
                         ? "Tambah Pengingat"
                         : "Edit Pengingat",
-                    style: kOpenSans.copyWith(
+                    style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
                   SizedBox(

@@ -107,7 +107,7 @@ class DashboardView extends StatelessWidget {
                                     children: [
                                       Text(
                                         "Hallo,",
-                                        style: kOpenSans.copyWith(
+                                        style: kInter.copyWith(
                                             fontSize: 12,
                                             fontWeight: medium,
                                             color: defaultWhite),
@@ -120,7 +120,7 @@ class DashboardView extends StatelessWidget {
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style: kOpenSans.copyWith(
+                                                  style: kInter.copyWith(
                                                       fontSize: 14,
                                                       fontWeight: semiBold,
                                                       color: defaultWhite)),
@@ -277,7 +277,7 @@ class DashboardView extends StatelessWidget {
                         'Transaksi Terakhir',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: kOpenSans.copyWith(
+                        style: kInter.copyWith(
                             fontWeight: bold, color: defaultBlack),
                       ),
                       InkWell(
@@ -286,7 +286,7 @@ class DashboardView extends StatelessWidget {
                         },
                         child: Text(
                           'Lihat Semua',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
                               color: Colors.blue),
@@ -341,7 +341,7 @@ class DashboardView extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     "Anda Belum Memiliki transaksi",
-                                    style: kOpenSans.copyWith(
+                                    style: kInter.copyWith(
                                         color: defaultGray,
                                         fontSize: 13,
                                         fontWeight: medium),
@@ -354,7 +354,7 @@ class DashboardView extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 "Anda Belum Memiliki dompet",
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                     color: defaultGray,
                                     fontSize: 13,
                                     fontWeight: medium),
@@ -378,7 +378,7 @@ class DashboardView extends StatelessWidget {
                         'Jangan Lupa Dibayar',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: kOpenSans.copyWith(
+                        style: kInter.copyWith(
                             fontWeight: bold, color: defaultBlack),
                       ),
                       InkWell(
@@ -387,7 +387,7 @@ class DashboardView extends StatelessWidget {
                         },
                         child: Text(
                           'Lihat Semua',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
                               color: Colors.blue),
@@ -436,7 +436,7 @@ class DashboardView extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 "Anda Belum Memiliki Tagihan",
-                                style: kOpenSans.copyWith(
+                                style: kInter.copyWith(
                                   color: defaultGray,
                                   fontSize: 13,
                                   fontWeight: medium,

@@ -45,7 +45,7 @@ class NumberButton extends StatelessWidget {
           number.toString(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: kOpenSans.copyWith(
+          style: kInter.copyWith(
               fontWeight: semiBold, color: defaultBlack, fontSize: 22),
         ),
       ),

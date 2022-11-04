@@ -44,7 +44,7 @@ class CardPengeluaran2 extends StatelessWidget {
                   data.kategoriPengeluaran,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: kOpenSans.copyWith(fontSize: 12, fontWeight: semiBold),
+                  style: kInter.copyWith(fontSize: 12, fontWeight: semiBold),
                 ),
               ),
               //NOMINAL
@@ -54,7 +54,7 @@ class CardPengeluaran2 extends StatelessWidget {
                   "- Rp. ${data.nominalPengeluaran.toString()}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: kOpenSans.copyWith(
+                  style: kInter.copyWith(
                       fontSize: 12,
                       fontWeight: semiBold,
                       color: defaultSecondary),

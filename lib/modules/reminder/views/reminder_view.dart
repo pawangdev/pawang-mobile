@@ -48,7 +48,7 @@ class ReminderView extends StatelessWidget {
                         ),
                         Text(
                           'Pengingat',
-                          style: kOpenSans.copyWith(
+                          style: kInter.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
                               color: defaultWhite),
