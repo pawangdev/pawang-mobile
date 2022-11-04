@@ -166,7 +166,16 @@ class CategoryView extends StatelessWidget {
                                 height: 10,
                               ),
                               category.subcategories.isEmpty
-                                  ? const Text("Belum Ada Sub Kategori")
+                                  ? Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Text(
+                                          "Belum Ada Sub Kategori",
+                                          style: kOpenSans.copyWith(
+                                              color: defaultGray),
+                                        ),
+                                      ),
+                                    )
                                   : Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -251,9 +260,6 @@ class CategoryView extends StatelessWidget {
                                                           )),
                                                   args == null
                                                       ? Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
                                                           children: [
                                                             IconButton(
                                                               onPressed: () {
@@ -558,8 +564,14 @@ class CategoryView extends StatelessWidget {
                                             height: 25,
                                             width: 25,
                                             decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  colors: [
+                                                    defaultPrimary,
+                                                    defaultPurple
+                                                  ]),
                                               shape: BoxShape.circle,
-                                              color: defaultPrimary,
                                             ),
                                             child: const Icon(
                                               Icons.add,

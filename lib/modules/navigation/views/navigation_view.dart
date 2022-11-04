@@ -1,3 +1,4 @@
+import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -11,10 +12,32 @@ import 'package:pawang_mobile/widgets/icon_bottom.dart';
 
 class NavigationView extends StatelessWidget {
   final NavigationController controller = Get.find<NavigationController>();
+  DateTime timeBackPressed = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return DoubleBack(
+      onFirstBackPress: (context) {
+        Get.rawSnackbar(
+          snackPosition: SnackPosition.BOTTOM,
+          padding: EdgeInsets.all(10),
+          duration: Duration(milliseconds: 900),
+          margin: const EdgeInsets.symmetric(horizontal: 60, vertical: 40),
+          borderRadius: 20,
+          icon: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image.asset(
+              'assets/images/lock.png',
+              fit: BoxFit.fill,
+            ),
+          ),
+          backgroundColor: defaultBlack.withOpacity(0.8),
+          messageText: Text(
+            'Tekan sekali lagi untuk keluar',
+            style: kOpenSans.copyWith(color: defaultWhite),
+          ),
+        );
+      },
       child: Scaffold(
         body: GetBuilder<NavigationController>(
           init: NavigationController(),

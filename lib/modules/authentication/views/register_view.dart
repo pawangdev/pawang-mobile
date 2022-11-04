@@ -5,7 +5,6 @@ import 'package:pawang_mobile/modules/authentication/controllers/register_contro
 import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
-import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:get/get.dart';
 
 class RegisterView extends StatelessWidget {

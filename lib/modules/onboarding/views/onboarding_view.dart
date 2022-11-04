@@ -25,7 +25,7 @@ class OnboardingView extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: Get.height * 0.075),
+                    SizedBox(height: Get.height * 0.095),
                     Image.asset(
                       _controller.onboardingPages[index].imageAsset,
                       fit: BoxFit.contain,
@@ -47,94 +47,83 @@ class OnboardingView extends StatelessWidget {
                   ],
                 );
               }),
+          Obx(() => _controller.isLastPage
+              ? const SizedBox()
+              : Positioned(
+                  top: 50,
+                  right: 40,
+                  child: GestureDetector(
+                    onTap: () {
+                      _controller.pageController.jumpToPage(2);
+                    },
+                    child: Center(
+                        child: Text(
+                      'Skip',
+                      style: kOpenSans.copyWith(
+                          color: defaultPrimary, fontWeight: semiBold),
+                    )),
+                  ))),
           Positioned(
-            bottom: 10,
+            bottom: 30,
             left: 20,
             right: 20,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Obx(() => Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  width: Get.width,
-                  height: Get.height * 0.1,
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [defaultPrimary, defaultPurple]),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: _controller.isLastPage
-                      ? InkWell(
-                          onTap: () {
-                            Storage.saveValue('is_first_open', true);
-                            Get.toNamed(RoutesName.login);
-                          },
-                          child: Center(
-                              child: Text(
-                            'Get Started',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: List.generate(
+                      _controller.onboardingPages.length,
+                      (index) => Obx(() {
+                        return Container(
+                          margin: const EdgeInsets.all(4),
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: _controller.selectedPageIndex.value == index
+                                ? defaultPrimary
+                                : defaultGray.withOpacity(0.7),
+                            shape: BoxShape.circle,
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  Obx(
+                    () => TextButton(
+                      onPressed: () {
+                        if (_controller.isLastPage) {
+                          Storage.saveValue('is_first_open', true);
+                          Get.offNamed(RoutesName.login);
+                        } else {
+                          _controller.pageController.nextPage(
+                              duration: 0.5.seconds, curve: Curves.ease);
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            _controller.isLastPage ? 'Get Started' : 'Next',
                             style: kOpenSans.copyWith(
-                                fontSize: 16,
-                                fontWeight: semiBold,
-                                color: defaultBlack),
-                          )),
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                if (_controller.isFirstPage) {
-                                  _controller.pageController.jumpToPage(2);
-                                } else {
-                                  _controller.pageController.previousPage(
-                                      duration: 0.5.seconds,
-                                      curve: Curves.ease);
-                                }
-                              },
-                              child: Obx(() {
-                                return Text(
-                                  _controller.isFirstPage ? 'Skip' : 'Prev',
-                                  style: kOpenSans.copyWith(
-                                      fontWeight: semiBold,
-                                      color: defaultBlack),
-                                );
-                              }),
-                            ),
-                            Row(
-                              children: List.generate(
-                                _controller.onboardingPages.length,
-                                (index) => Obx(() {
-                                  return Container(
-                                    margin: const EdgeInsets.all(4),
-                                    width: 12,
-                                    height: 12,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          _controller.selectedPageIndex.value ==
-                                                  index
-                                              ? defaultBlack.withOpacity(0.7)
-                                              : Colors.grey,
-                                      shape: BoxShape.circle,
-                                    ),
-                                  );
-                                }),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                _controller.pageController.nextPage(
-                                    duration: 0.5.seconds, curve: Curves.ease);
-                              },
-                              child: Text(
-                                'Next',
-                                style: kOpenSans.copyWith(
-                                    fontWeight: semiBold, color: defaultBlack),
-                              ),
-                            ),
-                          ],
-                        ))),
+                                color: defaultPrimary, fontWeight: semiBold),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: defaultPrimary,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       )),
     );

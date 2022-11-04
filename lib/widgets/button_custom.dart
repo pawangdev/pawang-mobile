@@ -38,21 +38,24 @@ class ButtonCustom extends StatelessWidget {
                 ),
               ),
             )
-          : OutlinedButton(
-              child: Text(
-                text,
-                style: kOpenSans.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                    color: blueMode! ? defaultPrimary : defaultError),
-              ),
-              onPressed: onTap,
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                side: BorderSide(
-                    color: blueMode! ? defaultPrimary : defaultError),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+          : SizedBox(
+              height: Get.height * 0.07,
+              child: OutlinedButton(
+                child: Text(
+                  text,
+                  style: kOpenSans.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                      color: blueMode! ? defaultPrimary : defaultError),
+                ),
+                onPressed: onTap,
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  side: BorderSide(
+                      color: blueMode! ? defaultPrimary : defaultError),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  ),
                 ),
               ),
             ),
