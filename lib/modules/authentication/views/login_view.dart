@@ -39,163 +39,176 @@ class LoginView extends StatelessWidget {
             ),
           );
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 35),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Masuk dulu yuk!",
-                  style: kOpenSans.copyWith(
-                      fontWeight: bold, fontSize: 18, color: defaultBlack),
-                ),
-                SizedBox(height: Get.height * 0.01),
-                Text(
-                  "Kami sudah lama menantimu",
-                  style: kOpenSans.copyWith(fontWeight: regular, fontSize: 16),
-                ),
-                SizedBox(
-                  height: Get.height * 0.045,
-                ),
-                Form(
-                  key: controller.formKey,
-                  child: Column(
-                    children: [
-                      InputField(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(
+              'assets/images/login.png',
+              fit: BoxFit.fill,
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Masuk dulu yuk!",
+                    style: kOpenSans.copyWith(
+                        fontWeight: bold, fontSize: 20, color: defaultBlack),
+                  ),
+                  SizedBox(height: Get.height * 0.008),
+                  Text(
+                    "Kami sudah lama menantimu",
+                    style:
+                        kOpenSans.copyWith(fontWeight: regular, fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: Get.height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    InputField(
+                      validator: ValidationBuilder(localeName: 'id')
+                          .required()
+                          .email()
+                          .build(),
+                      icon: const Icon(Icons.alternate_email_rounded),
+                      inputLabel: "Email",
+                      capitalization: TextCapitalization.none,
+                      inputController: controller.emailTextController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: Get.height * 0.025),
+                    Obx(
+                      () => TextFormField(
+                        textInputAction: TextInputAction.done,
                         validator: ValidationBuilder(localeName: 'id')
                             .required()
-                            .email()
+                            .minLength(8)
                             .build(),
-                        inputLabel: "Email",
-                        capitalization: TextCapitalization.none,
-                        inputController: controller.emailTextController,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(height: Get.height * 0.035),
-                      Obx(
-                        () => TextFormField(
-                          textInputAction: TextInputAction.done,
-                          validator: ValidationBuilder(localeName: 'id')
-                              .required()
-                              .minLength(8)
-                              .build(),
-                          keyboardType: TextInputType.visiblePassword,
-                          controller: controller.passwordTextController,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            fillColor: defaultWhite,
-                            // filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                            ),
-                            focusColor: defaultPrimary,
-                            suffixIcon: IconButton(
-                              color: defaultGray,
-                              icon: Icon(controller.isObsecure.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              onPressed: () {
-                                controller.isObsecure.value =
-                                    !controller.isObsecure.value;
-                              },
-                            ),
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: controller.passwordTextController,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.lock_rounded),
+                          hintText: 'Password',
+                          fillColor: defaultWhite,
+                          focusColor: defaultPrimary,
+                          suffixIcon: IconButton(
+                            color: defaultGray,
+                            icon: Icon(controller.isObsecure.value
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            onPressed: () {
+                              controller.isObsecure.value =
+                                  !controller.isObsecure.value;
+                            },
                           ),
-                          autofocus: false,
-                          obscureText: controller.isObsecure.value,
                         ),
+                        autofocus: false,
+                        obscureText: controller.isObsecure.value,
                       ),
-                      SizedBox(
-                        height: Get.height * 0.012,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () =>
-                                Get.toNamed(RoutesName.resetpasswordemail),
-                            style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                minimumSize: const Size(50, 30),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                alignment: Alignment.center),
-                            child: Text(
-                              "Lupa Password",
-                              style: kOpenSans.copyWith(fontSize: 14),
-                            ),
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.012,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () =>
+                              Get.toNamed(RoutesName.resetpasswordemail),
+                          style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size(50, 30),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              alignment: Alignment.center),
+                          child: Text(
+                            "Lupa Password",
+                            style: kOpenSans.copyWith(fontSize: 14),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ButtonCustom(
-                      text: "Masuk",
-                      onTap: () {
-                        controller.formValdidate();
-                        controller.login();
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: Get.height * 0.02,
-                ),
-                OutlinedButton(
-                  onPressed: () => controller.signInGoogle(),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    side: const BorderSide(color: defaultPrimary),
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/google.svg',
-                        width: 24,
-                      ),
-                      SizedBox(width: Get.width * 0.04),
-                      Text('Masuk dengan Google',
-                          style: kOpenSans.copyWith(
-                              fontSize: 16, fontWeight: semiBold))
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Belum punya akun?",
-                      style: kOpenSans.copyWith(
-                          fontSize: 14,
-                          color: defaultBlack,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    TextButton(
-                      child: Text(
-                        'Daftar',
-                        style: kOpenSans.copyWith(
-                            fontSize: 14,
-                            color: defaultPrimary,
-                            fontWeight: bold),
-                      ),
-                      onPressed: () {
-                        Get.offNamed(RoutesName.register);
-                      },
                     ),
                   ],
                 ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ButtonCustom(
+                    text: "Masuk",
+                    onTap: () {
+                      controller.formValdidate();
+                      controller.login();
+                    },
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: Get.height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: OutlinedButton(
+                onPressed: () => controller.signInGoogle(),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  side: const BorderSide(color: defaultPrimary),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/google.svg',
+                      width: 24,
+                    ),
+                    SizedBox(width: Get.width * 0.04),
+                    Text('Masuk dengan Google',
+                        style: kOpenSans.copyWith(
+                            fontSize: 16, fontWeight: semiBold))
+                  ],
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Belum punya akun?",
+                  style: kOpenSans.copyWith(
+                      fontSize: 14,
+                      color: defaultBlack,
+                      fontWeight: FontWeight.w400),
+                ),
+                TextButton(
+                  child: Text(
+                    'Daftar',
+                    style: kOpenSans.copyWith(
+                        fontSize: 14, color: defaultPrimary, fontWeight: bold),
+                  ),
+                  onPressed: () {
+                    Get.offNamed(RoutesName.register);
+                  },
+                ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

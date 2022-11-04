@@ -103,6 +103,7 @@ class ChangePasswordView extends StatelessWidget {
                   children: [
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Lama',
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,
@@ -110,6 +111,7 @@ class ChangePasswordView extends StatelessWidget {
                     SizedBox(height: Get.height * 0.025),
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Baru',
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,
@@ -117,6 +119,7 @@ class ChangePasswordView extends StatelessWidget {
                     SizedBox(height: Get.height * 0.025),
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Baru Konfirmasi',
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,

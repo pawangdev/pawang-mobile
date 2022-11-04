@@ -71,13 +71,15 @@ class EditProfileView extends StatelessWidget {
                   children: [
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.person_outline_rounded),
                         inputLabel: 'Nama Lengkap',
                         inputController: controller.nameTextController),
                     SizedBox(
-                      height: Get.height * 0.034,
+                      height: Get.height * 0.02,
                     ),
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.phone_rounded),
                         inputLabel: 'Nomer Telepon',
                         inputController: controller.phoneTextController),
                     SizedBox(

@@ -59,6 +59,7 @@ class AddTransactionView extends StatelessWidget {
                         validator: ValidationBuilder(localeName: 'id')
                             .required()
                             .build(),
+                        icon: const Icon(Icons.monetization_on_outlined),
                         inputLabel: 'Nominal',
                         inputController: controller.displayAmount,
                         onTap: (() =>
@@ -95,14 +96,10 @@ class AddTransactionView extends StatelessWidget {
                         readOnly: true,
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
-                          labelText: 'Kategori',
-                          hintText: 'Tentukan Kategori Anda',
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
+                          icon: const Icon(Icons.grid_view),
+                          hintText: 'Kategori',
                           suffixIcon: Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(10),
                             child: SvgPicture.asset(
                               'assets/images/chevron_down.svg',
                               color: defaultGray,
@@ -124,14 +121,10 @@ class AddTransactionView extends StatelessWidget {
                         readOnly: true,
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
-                          labelText: 'Dompet',
-                          hintText: 'Tentukan Dompet Anda',
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
+                          hintText: 'Dompet',
+                          icon: const Icon(Icons.payment_rounded),
                           suffixIcon: Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(10),
                             child: SvgPicture.asset(
                               'assets/images/chevron_down.svg',
                               color: defaultGray,
@@ -139,8 +132,8 @@ class AddTransactionView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 25,
+                      SizedBox(
+                        height: Get.height * 0.025,
                       ),
 
                       DateTimePicker(
@@ -157,24 +150,22 @@ class AddTransactionView extends StatelessWidget {
                           controller.dateTextController.text = value;
                         },
                         decoration: InputDecoration(
-                          labelText: 'Tanggal',
-                          hintText: 'Tentukan Dompet Anda',
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
+                          hintText: 'Tanggal',
+                          icon: const Icon(Icons.calendar_month),
                           suffixIcon: Container(
-                              padding: EdgeInsets.all(20),
-                              child: Icon(
-                                Icons.calendar_month,
-                                color: defaultGray,
-                              )),
+                            padding: EdgeInsets.all(10),
+                            child: SvgPicture.asset(
+                              'assets/images/chevron_down.svg',
+                              color: defaultGray,
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: Get.height * 0.025,
                       ),
                       InputField(
+                        icon: const Icon(Icons.format_quote_rounded),
                         inputLabel: 'Keterangan',
                         inputController: controller.descriptionTextController,
                       ),

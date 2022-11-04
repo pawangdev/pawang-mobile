@@ -13,9 +13,11 @@ class InputField extends StatelessWidget {
       this.onTap,
       this.keyboardType,
       this.capitalization = TextCapitalization.sentences,
-      this.validator})
+      this.validator,
+      required this.icon})
       : super(key: key);
   final String inputLabel;
+  final Widget icon;
   final bool enable;
   final bool readOnly;
   final TextEditingController inputController;
@@ -38,12 +40,9 @@ class InputField extends StatelessWidget {
       onTap: onTap,
       controller: inputController,
       decoration: InputDecoration(
+        hintText: inputLabel,
+        icon: icon,
         fillColor: Colors.white,
-        labelText: inputLabel,
-        // filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(defaultBorderRadius),
-        ),
       ),
     );
   }

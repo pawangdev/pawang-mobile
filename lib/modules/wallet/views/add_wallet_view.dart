@@ -50,6 +50,7 @@ class AddWalletView extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 20),
                       child: InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.payment_rounded),
                         inputLabel: "Nama Dompet",
                         inputController: controller.nameTextController,
                       ),
@@ -58,6 +59,7 @@ class AddWalletView extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 20),
                       child: InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.monetization_on_outlined),
                         inputLabel: "Saldo Awal",
                         inputController: controller.balanceTextController,
                         keyboardType: TextInputType.number,

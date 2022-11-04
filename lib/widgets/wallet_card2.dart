@@ -102,6 +102,8 @@ class WalletCard2 extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             InputField(
+                                              icon: const Icon(
+                                                  Icons.payment_rounded),
                                               inputLabel: "Nama Dompet",
                                               inputController:
                                                   controller.nameTextController,
@@ -113,6 +115,8 @@ class WalletCard2 extends StatelessWidget {
                                               height: Get.height * 0.035,
                                             ),
                                             InputField(
+                                              icon: const Icon(Icons
+                                                  .monetization_on_outlined),
                                               inputLabel: "Saldo",
                                               inputController: controller
                                                   .balanceTextController,

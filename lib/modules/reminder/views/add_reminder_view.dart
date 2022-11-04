@@ -54,6 +54,7 @@ class AddReminderView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InputField(
+                        icon: const Icon(Icons.campaign_outlined),
                         inputLabel: 'Nama Pengingat',
                         inputController: controller.nameTextController,
                       ),
@@ -78,15 +79,10 @@ class AddReminderView extends StatelessWidget {
                         onChanged: (value) {
                           controller.dateTextController.text = value;
                         },
-                        decoration: InputDecoration(
-                          labelText: 'Tanggal & Waktu',
-                          hintText: 'Pilih Tanggal',
-                          fillColor: const Color(0xFFF5F5F5),
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.calendar_month),
+                          hintText: 'Tanggal & Waktu',
+                          fillColor: defaultWhite,
                           focusColor: defaultPrimary,
                         ),
                       ),

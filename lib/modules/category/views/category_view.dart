@@ -98,6 +98,7 @@ class CategoryView extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         CachedNetworkImage(
+                                          width: 30,
                                           imageUrl: baseHOSTAPI + category.icon,
                                           fit: BoxFit.cover,
                                           progressIndicatorBuilder: (context,
@@ -493,7 +494,7 @@ class CategoryView extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         CachedNetworkImage(
-                                                          width: 40,
+                                                          width: 20,
                                                           imageUrl:
                                                               baseHOSTAPI +
                                                                   category.icon,
