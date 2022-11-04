@@ -1,8 +1,7 @@
 // To parse this JSON data, do
 //
-//     final transactionModel = transactionModelFromJson(jsonString);
+//     final transactionModel = transactionModelFromJsoßn(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 TransactionModel transactionModelFromJson(String str) =>

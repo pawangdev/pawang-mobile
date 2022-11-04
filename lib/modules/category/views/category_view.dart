@@ -98,17 +98,13 @@ class CategoryView extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         CachedNetworkImage(
-                                          width: 30,
                                           imageUrl: baseHOSTAPI + category.icon,
                                           fit: BoxFit.cover,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
-                                              Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: CircularProgressIndicator(
-                                                value:
-                                                    downloadProgress.progress),
-                                          ),
+                                              CircularProgressIndicator(
+                                                  value: downloadProgress
+                                                      .progress),
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
                                         ),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
@@ -7,8 +5,8 @@ import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/modules/reminder/services/reminder_service.dart';
 import 'package:pawang_mobile/modules/transaction/services/transaction_service.dart';
-import 'package:pawang_mobile/services/user_service.dart';
 import 'package:pawang_mobile/modules/wallet/services/wallet_service.dart';
+import 'package:pawang_mobile/services/user_service.dart';
 
 class DashboardController extends GetxController {
   // Services
@@ -16,8 +14,9 @@ class DashboardController extends GetxController {
   final reminderService = Get.put(ReminderService());
   final transactionService = Get.put(TransactionService());
   final userService = Get.put(UserService());
+  final selectedWallets = 0.obs;
 
-  var wallets = <WalletsDataModel>[].obs;
+  var wallets = <WalletDataModel>[].obs;
   var transactions = <TransactionDataModel>[].obs;
   var reminders = <ReminderDataModel>[].obs;
   var user = UserProfileDataModel(

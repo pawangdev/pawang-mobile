@@ -58,11 +58,9 @@ class TransactionDetailView extends StatelessWidget {
                             fit: BoxFit.cover,
                             width: 60,
                             progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),

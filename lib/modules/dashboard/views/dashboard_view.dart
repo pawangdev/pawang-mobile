@@ -7,8 +7,8 @@ import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
-import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
+import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/remind_card.dart';
 import 'package:pawang_mobile/widgets/saldo_card.dart';
 import 'package:skeleton_text/skeleton_text.dart';
@@ -50,7 +50,7 @@ class DashboardView extends StatelessWidget {
                         height: Get.height * 0.275,
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(1000)),
                           // color: Colors.amber
                           gradient: LinearGradient(
@@ -152,77 +152,79 @@ class DashboardView extends StatelessWidget {
                     ),
                     SizedBox(height: Get.height * 0.02),
                     Obx(
-                      () => Container(
-                        child: CarouselSlider.builder(
-                          itemCount: controller.wallets.length + 1,
-                          options: CarouselOptions(
-                            viewportFraction: 0.86,
-                            // padEnds: false,
-                            clipBehavior: Clip.none,
-                            aspectRatio: 2.3,
-                            enlargeCenterPage: true,
-                            enableInfiniteScroll: false,
-                          ),
-                          itemBuilder:
-                              (BuildContext context, int index, int realIndex) {
-                            if (index == controller.wallets.length) {
-                              return GestureDetector(
-                                onTap: () => Get.toNamed(RoutesName.addwallet),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color:
-                                                defaultBlack.withOpacity(0.2),
-                                            blurRadius: 10,
-                                            spreadRadius: 2)
-                                      ],
-                                      gradient: const LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            defaultPrimary,
-                                            defaultPurple
-                                          ]),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.add_rounded,
-                                    size: 30,
-                                    color: defaultWhite.withOpacity(0.8),
-                                  )),
-                                ),
-                              );
+                      () => CarouselSlider.builder(
+                        itemCount: controller.wallets.length + 1,
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            if (controller.wallets.length > index) {
+                              controller.selectedWallets.value = index;
                             }
-                            var wallet = controller.wallets[index];
-                            return Container(
-                              width: Get.width,
-                              // color: Colors.amber,
-                              child: GestureDetector(
-                                onTap: () => Get.toNamed(RoutesName.wallet),
-                                child: WalletCard(
-                                    income: CurrencyFormat.convertToIdr(
-                                            controllerTransaction
-                                                .transactionDetailData
-                                                .value
-                                                .totalIncome,
-                                            2)
-                                        .toString(),
-                                    outcome: CurrencyFormat.convertToIdr(
-                                            controllerTransaction
-                                                .transactionDetailData
-                                                .value
-                                                .totalOutcome,
-                                            2)
-                                        .toString(),
-                                    namaWallet: wallet.name,
-                                    balance: CurrencyFormat.convertToIdr(
-                                            wallet.balance, 2)
-                                        .toString()),
+                          },
+                          viewportFraction: 0.86,
+                          // padEnds: false,
+                          clipBehavior: Clip.none,
+                          aspectRatio: 2.3,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: false,
+                        ),
+                        itemBuilder:
+                            (BuildContext context, int index, int realIndex) {
+                          if (index == controller.wallets.length) {
+                            return GestureDetector(
+                              onTap: () => Get.toNamed(RoutesName.addwallet),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: defaultBlack.withOpacity(0.2),
+                                          blurRadius: 10,
+                                          spreadRadius: 2)
+                                    ],
+                                    gradient: const LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          defaultPrimary,
+                                          defaultPurple
+                                        ]),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.add_rounded,
+                                  size: 30,
+                                  color: defaultWhite.withOpacity(0.8),
+                                )),
                               ),
                             );
-                          },
-                        ),
+                          }
+                          var wallet = controller.wallets[index];
+                          return SizedBox(
+                            width: Get.width,
+                            // color: Colors.amber,
+                            child: GestureDetector(
+                              onTap: () => Get.toNamed(RoutesName.wallet),
+                              child: WalletCard(
+                                  income: CurrencyFormat.convertToIdr(
+                                          controllerTransaction
+                                              .transactionDetailData
+                                              .value
+                                              .totalIncome,
+                                          2)
+                                      .toString(),
+                                  outcome: CurrencyFormat.convertToIdr(
+                                          controllerTransaction
+                                              .transactionDetailData
+                                              .value
+                                              .totalOutcome,
+                                          2)
+                                      .toString(),
+                                  namaWallet: wallet.name,
+                                  balance: CurrencyFormat.convertToIdr(
+                                          wallet.balance, 2)
+                                      .toString()),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(
@@ -272,7 +274,7 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Transaksi terakhir',
+                        'Transaksi Terakhir',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kOpenSans.copyWith(
@@ -283,7 +285,7 @@ class DashboardView extends StatelessWidget {
                           controllerNavigation.changeTabIndex(1);
                         },
                         child: Text(
-                          'Lihat semua',
+                          'Lihat Semua',
                           style: kOpenSans.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
@@ -296,31 +298,62 @@ class DashboardView extends StatelessWidget {
                     height: Get.height * 0.008,
                   ),
                   Obx(
-                    () => controller.transactions.isNotEmpty
-                        ? ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                highlightColor: Colors.transparent,
-                                splashColor: Colors.transparent,
-                                onTap: () => Get.toNamed(
-                                    RoutesName.detailtransaction,
-                                    arguments: controller.transactions[index]),
-                                child: CardPengeluaran(
-                                    data: controller.transactions[index]),
-                              );
-                            },
-                            itemCount: controller.transactions.length > 3
-                                ? 3
-                                : controller.transactions.length,
-                          )
+                    () => controller.wallets.isNotEmpty
+                        ? controller.wallets[controller.selectedWallets.value]
+                                .transactions.isNotEmpty
+                            ? ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    highlightColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
+                                    onTap: () => Get.toNamed(
+                                        RoutesName.detailtransaction,
+                                        arguments: controller
+                                            .wallets[controller
+                                                .selectedWallets.value]
+                                            .transactions[index]),
+                                    child: CardPengeluaran(
+                                        data: controller
+                                            .wallets[controller
+                                                .selectedWallets.value]
+                                            .transactions[index]),
+                                  );
+                                },
+                                itemCount: controller
+                                            .wallets[controller
+                                                .selectedWallets.value]
+                                            .transactions
+                                            .length >
+                                        3
+                                    ? 3
+                                    : controller
+                                        .wallets[
+                                            controller.selectedWallets.value]
+                                        .transactions
+                                        .length,
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: Center(
+                                  child: Text(
+                                    "Anda Belum Memiliki transaksi",
+                                    style: kOpenSans.copyWith(
+                                        color: defaultGray,
+                                        fontSize: 13,
+                                        fontWeight: medium),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              )
                         : Padding(
                             padding: const EdgeInsets.symmetric(vertical: 25),
                             child: Center(
                               child: Text(
-                                "Anda belum memiliki transaksi",
+                                "Anda Belum Memiliki dompet",
                                 style: kOpenSans.copyWith(
                                     color: defaultGray,
                                     fontSize: 13,
@@ -329,7 +362,7 @@ class DashboardView extends StatelessWidget {
                               ),
                             ),
                           ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -342,7 +375,7 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Jangan lupa dibayar',
+                        'Jangan Lupa Dibayar',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kOpenSans.copyWith(
@@ -353,7 +386,7 @@ class DashboardView extends StatelessWidget {
                           controllerNavigation.changeTabIndex(3);
                         },
                         child: Text(
-                          'Lihat semua',
+                          'Lihat Semua',
                           style: kOpenSans.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
@@ -402,11 +435,12 @@ class DashboardView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 25),
                             child: Center(
                               child: Text(
-                                "Anda belum memiliki Tagihan",
+                                "Anda Belum Memiliki Tagihan",
                                 style: kOpenSans.copyWith(
-                                    color: defaultGray,
-                                    fontSize: 13,
-                                    fontWeight: medium),
+                                  color: defaultGray,
+                                  fontSize: 13,
+                                  fontWeight: medium,
+                                ),
                                 textAlign: TextAlign.center,
                               ),
                             ),

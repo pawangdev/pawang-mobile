@@ -4,13 +4,13 @@ import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/services/base_service.dart';
 
 class WalletService extends BaseService {
-  Future<List<WalletsDataModel>?> getWallets() async {
+  Future<List<WalletDataModel>?> getWallets() async {
     try {
       final response = await get("/wallets");
 
       if (response.statusCode == 200) {
         List jsonResponse = response.body['data'];
-        return jsonResponse.map((e) => WalletsDataModel.fromJson(e)).toList();
+        return jsonResponse.map((e) => WalletDataModel.fromJson(e)).toList();
       } else {
         throw (response.body['data'] ?? response.body['message']);
       }

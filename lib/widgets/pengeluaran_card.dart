@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 
 class CardPengeluaran extends StatelessWidget {
   const CardPengeluaran({Key? key, required this.data}) : super(key: key);
-  final TransactionDataModel data;
+  final dynamic data;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +23,17 @@ class CardPengeluaran extends StatelessWidget {
                 Container(
                   width: Get.width * 0.072,
                   decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
                   child: CachedNetworkImage(
                     imageUrl: baseHOSTAPI + data.category.icon,
                     fit: BoxFit.cover,
                     progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CircularProgressIndicator(
-                          value: downloadProgress.progress),
-                    ),
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),

@@ -8,7 +8,7 @@ import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 
 class WalletCard2 extends StatelessWidget {
-  final WalletsDataModel wallet;
+  final WalletDataModel wallet;
   bool isChoose = false;
 
   WalletCard2({Key? key, required this.wallet, required this.isChoose})
