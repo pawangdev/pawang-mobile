@@ -21,7 +21,6 @@ class SplashController extends GetxController {
           ? Get.offAllNamed(RoutesName.navigation)
           : Get.offAllNamed(RoutesName.login);
     } else {
-      print(Storage.getValue("is_first_open"));
       Get.offAllNamed(RoutesName.onboarding);
     }
   }

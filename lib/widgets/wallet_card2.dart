@@ -7,6 +7,7 @@ import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 
+// ignore: must_be_immutable
 class WalletCard2 extends StatelessWidget {
   final WalletDataModel wallet;
   bool isChoose = false;

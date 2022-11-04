@@ -9,14 +9,14 @@ class ReminderModel {
     if (json['data'] != null) {
       data = <ReminderDataModel>[];
       json['data'].forEach((v) {
-        data!.add(new ReminderDataModel.fromJson(v));
+        data!.add(ReminderDataModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -53,14 +53,14 @@ class ReminderDataModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['date'] = this.date;
-    data['time'] = this.time;
-    data['is_active'] = this.isActive;
-    data['user_id'] = this.userId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    data['date'] = date;
+    data['time'] = time;
+    data['is_active'] = isActive;
+    data['user_id'] = userId;
     return data;
   }
 }

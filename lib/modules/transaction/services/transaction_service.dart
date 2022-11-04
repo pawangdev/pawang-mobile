@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get/get_connect.dart';
 import 'package:pawang_mobile/models/transaction_detail_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';

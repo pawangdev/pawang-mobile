@@ -12,17 +12,17 @@ class PinInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width * 0.07,
-      margin: EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color(0xFF2685D9)),
+          border: Border.all(color: const Color(0xFF2685D9)),
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
               color: index == selectedIndex
                   ? Colors.lightBlue
                   : Colors.transparent,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
               spreadRadius: 1.5,
               blurRadius: 2,
             )

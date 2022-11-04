@@ -108,10 +108,10 @@ class OnboardingView extends StatelessWidget {
                             style: kOpenSans.copyWith(
                                 color: defaultPrimary, fontWeight: semiBold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.arrow_forward_rounded,
                             color: defaultPrimary,
                             size: 20,

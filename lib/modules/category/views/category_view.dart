@@ -235,7 +235,8 @@ class CategoryView extends StatelessWidget {
                                                                   EdgeInsets
                                                                       .zero,
                                                               minimumSize:
-                                                                  Size(50, 30),
+                                                                  const Size(
+                                                                      50, 30),
                                                               tapTargetSize:
                                                                   MaterialTapTargetSize
                                                                       .shrinkWrap,
@@ -298,13 +299,13 @@ class CategoryView extends StatelessWidget {
                                                                             e.id),
                                                                   ),
                                                                   titlePadding:
-                                                                      EdgeInsets
-                                                                          .only(
-                                                                              top: 25),
+                                                                      const EdgeInsets
+                                                                              .only(
+                                                                          top:
+                                                                              25),
                                                                   contentPadding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              20),
+                                                                      const EdgeInsets
+                                                                          .all(20),
 
                                                                   // cancel: ,
                                                                   content:
@@ -482,9 +483,10 @@ class CategoryView extends StatelessWidget {
                                                         category.id),
                                               ),
                                               titlePadding:
-                                                  EdgeInsets.only(top: 25),
+                                                  const EdgeInsets.only(
+                                                      top: 25),
                                               contentPadding:
-                                                  EdgeInsets.all(20),
+                                                  const EdgeInsets.all(20),
                                               content: Column(
                                                 children: [
                                                   Padding(

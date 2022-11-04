@@ -98,7 +98,7 @@ class ChangePasswordView extends StatelessWidget {
               ),
               SizedBox(height: Get.height * 0.045),
               Form(
-                key: Key('change-password'),
+                key: const Key('change-password'),
                 child: Column(
                   children: [
                     InputField(

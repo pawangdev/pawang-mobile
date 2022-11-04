@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,245 +47,242 @@ class TransactionDetailView extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.05,
               ),
-              Container(
-                //margin: const EdgeInsets.(top: 20, bottom: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Column(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: baseHOSTAPI + transaction.category.icon,
-                            fit: BoxFit.cover,
-                            width: 60,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: baseHOSTAPI + transaction.category.icon,
+                          fit: BoxFit.cover,
+                          width: 60,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.012,
+                        ),
+                        Text(
+                          transaction.category.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: kOpenSans.copyWith(
+                              fontSize: 18, fontWeight: semiBold),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.012,
+                        ),
+                        Text(
+                          transaction.type == "income"
+                              ? '+ ' +
+                                  CurrencyFormat.convertToIdr(
+                                          transaction.amount, 2)
+                                      .toString()
+                              : '- ' +
+                                  CurrencyFormat.convertToIdr(
+                                          transaction.amount, 2)
+                                      .toString(),
+                          style: kOpenSans.copyWith(
+                              fontSize: 16,
+                              color: transaction.type == "income"
+                                  ? defaultSuccess
+                                  : defaultError),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Keterangan',
+                          style: kOpenSans.copyWith(
+                            fontSize: 14,
                           ),
-                          SizedBox(
-                            height: Get.height * 0.012,
-                          ),
-                          Text(
-                            transaction.category.name,
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.35,
+                          child: Text(
+                            transaction.description ?? "-",
+                            textAlign: TextAlign.end,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
-                                fontSize: 18, fontWeight: semiBold),
+                                fontSize: 14, color: defaultPrimary),
                           ),
-                          SizedBox(
-                            height: Get.height * 0.012,
+                        )
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 0.9,
+                    color: defaultGray,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Tanggal Transaksi',
+                          style: kOpenSans.copyWith(
+                            fontSize: 14,
                           ),
-                          Text(
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.35,
+                          child: Text(
+                            DateFormat("d MMMM yyyy")
+                                .format(DateFormat("yyyy-mm-dd")
+                                    .parse(transaction.date.toString()))
+                                .toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            textAlign: TextAlign.end,
+                            style: kOpenSans.copyWith(
+                                fontSize: 14, color: defaultPrimary),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 0.9,
+                    color: defaultGray,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 4),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Kategori',
+                              style: kOpenSans.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.35,
+                              child: Text(
+                                transaction.category.name,
+                                textAlign: TextAlign.end,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: kOpenSans.copyWith(
+                                    fontSize: 14, color: defaultPrimary),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Sub Kategori',
+                              style: kOpenSans.copyWith(
+                                color: defaultGray,
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.35,
+                              child: Text(
+                                transaction.subcategory == null
+                                    ? "-"
+                                    : transaction.subcategory!.name,
+                                maxLines: 1,
+                                textAlign: TextAlign.end,
+                                overflow: TextOverflow.ellipsis,
+                                style: kOpenSans.copyWith(
+                                    fontSize: 12,
+                                    color: defaultPrimary.withOpacity(0.6)),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 0.9,
+                    color: defaultGray,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dompet',
+                          style: kOpenSans.copyWith(
+                            fontSize: 14,
+                          ),
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.35,
+                          child: Text(
+                            transaction.wallet.name,
+                            textAlign: TextAlign.end,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: kOpenSans.copyWith(
+                                fontSize: 14, color: defaultPrimary),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 0.9,
+                    color: defaultGray,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Jenis',
+                          style: kOpenSans.copyWith(
+                            fontSize: 14,
+                          ),
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.35,
+                          child: Text(
                             transaction.type == "income"
-                                ? '+ ' +
-                                    CurrencyFormat.convertToIdr(
-                                            transaction.amount, 2)
-                                        .toString()
-                                : '- ' +
-                                    CurrencyFormat.convertToIdr(
-                                            transaction.amount, 2)
-                                        .toString(),
+                                ? 'Pemasukan'
+                                : 'Pengeluaran',
+                            textAlign: TextAlign.end,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: kOpenSans.copyWith(
-                                fontSize: 16,
-                                color: transaction.type == "income"
-                                    ? defaultSuccess
-                                    : defaultError),
+                                fontSize: 14, color: defaultPrimary),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Keterangan',
-                            style: kOpenSans.copyWith(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.35,
-                            child: Text(
-                              transaction.description ?? "-",
-                              textAlign: TextAlign.end,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: kOpenSans.copyWith(
-                                  fontSize: 14, color: defaultPrimary),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 0.9,
-                      color: defaultGray,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Tanggal Transaksi',
-                            style: kOpenSans.copyWith(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.35,
-                            child: Text(
-                              DateFormat("d MMMM yyyy")
-                                  .format(DateFormat("yyyy-mm-dd")
-                                      .parse(transaction.date.toString()))
-                                  .toString(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              textAlign: TextAlign.end,
-                              style: kOpenSans.copyWith(
-                                  fontSize: 14, color: defaultPrimary),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 0.9,
-                      color: defaultGray,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 4),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Kategori',
-                                style: kOpenSans.copyWith(
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(
-                                width: Get.width * 0.35,
-                                child: Text(
-                                  transaction.category.name,
-                                  textAlign: TextAlign.end,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 14, color: defaultPrimary),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.01,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Sub Kategori',
-                                style: kOpenSans.copyWith(
-                                  color: defaultGray,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              SizedBox(
-                                width: Get.width * 0.35,
-                                child: Text(
-                                  transaction.subcategory == null
-                                      ? "-"
-                                      : transaction.subcategory!.name,
-                                  maxLines: 1,
-                                  textAlign: TextAlign.end,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kOpenSans.copyWith(
-                                      fontSize: 12,
-                                      color: defaultPrimary.withOpacity(0.6)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 0.9,
-                      color: defaultGray,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Dompet',
-                            style: kOpenSans.copyWith(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.35,
-                            child: Text(
-                              transaction.wallet.name,
-                              textAlign: TextAlign.end,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: kOpenSans.copyWith(
-                                  fontSize: 14, color: defaultPrimary),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 0.9,
-                      color: defaultGray,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Jenis',
-                            style: kOpenSans.copyWith(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.35,
-                            child: Text(
-                              transaction.type == "income"
-                                  ? 'Pemasukan'
-                                  : 'Pengeluaran',
-                              textAlign: TextAlign.end,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: kOpenSans.copyWith(
-                                  fontSize: 14, color: defaultPrimary),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 0.9,
-                      color: defaultGray,
-                    ),
-                  ],
-                ),
+                  ),
+                  const Divider(
+                    thickness: 0.9,
+                    color: defaultGray,
+                  ),
+                ],
               ),
               SizedBox(
                 height: Get.height * 0.04,

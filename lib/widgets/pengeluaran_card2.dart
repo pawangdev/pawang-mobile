@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/pengeluaran_model.dart';
 
 class CardPengeluaran2 extends StatelessWidget {
   const CardPengeluaran2({Key? key, required this.data}) : super(key: key);
-  final PengeluaranModel data;
+  final dynamic data;
 
   @override
   Widget build(BuildContext context) {

@@ -20,8 +20,8 @@ class NavigationView extends StatelessWidget {
       onFirstBackPress: (context) {
         Get.rawSnackbar(
           snackPosition: SnackPosition.BOTTOM,
-          padding: EdgeInsets.all(10),
-          duration: Duration(milliseconds: 900),
+          padding: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 900),
           margin: const EdgeInsets.symmetric(horizontal: 60, vertical: 40),
           borderRadius: 20,
           icon: Padding(
@@ -55,7 +55,7 @@ class NavigationView extends StatelessWidget {
           },
         ),
         bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
+          shape: const CircularNotchedRectangle(),
           notchMargin: 3,
           color: Colors.white,
           child: SizedBox(
@@ -91,7 +91,7 @@ class NavigationView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(),
+                      const SizedBox(),
                       Row(
                         children: [
                           IconBottomBar(

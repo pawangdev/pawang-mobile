@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/reminder/services/reminder_service.dart';
-import 'package:pawang_mobile/routes/routes.dart';
 
 class ReminderController extends GetxController {
   final DashboardController dashboardController = Get.find();

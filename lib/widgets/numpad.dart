@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/widgets/number_button.dart';
 
+// ignore: must_be_immutable, use_key_in_widget_constructors
 class NumpadWidget extends StatelessWidget {
   TransactionController controller = Get.find();
 

@@ -25,7 +25,7 @@ class LayananCard extends StatelessWidget {
               blurRadius: 10,
             )
           ],
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
           color: defaultWhite,
         ),
         child: Padding(
@@ -35,7 +35,7 @@ class LayananCard extends StatelessWidget {
               Center(
                 child: Image.asset(icon, width: 35),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(

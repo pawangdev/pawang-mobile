@@ -4,7 +4,6 @@ import 'package:pawang_mobile/modules/authentication/bindings/reset_password_bin
 import 'package:pawang_mobile/modules/category/bindings/category_binding.dart';
 import 'package:pawang_mobile/modules/category/views/category_view.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
-import 'package:pawang_mobile/modules/landing/landing.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/onboarding/onboarding.dart';
 import 'package:pawang_mobile/modules/profile/profile.dart';
@@ -19,6 +18,7 @@ import 'package:pawang_mobile/modules/wallet/wallet.dart';
 part './app_routes.dart';
 
 class AppPages {
+  // ignore: constant_identifier_names
   static const INITIAL = RoutesName.splash;
 
   static final pages = [
@@ -41,11 +41,6 @@ class AppPages {
       name: RoutesName.login,
       page: () => LoginView(),
       binding: LoginBinding(),
-    ),
-    GetPage(
-      name: RoutesName.landing,
-      page: () => LandingView(),
-      binding: LandingBinding(),
     ),
     GetPage(
       name: RoutesName.dashboard,

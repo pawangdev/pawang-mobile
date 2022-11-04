@@ -65,7 +65,7 @@ class EditProfileView extends StatelessWidget {
                 height: Get.height * 0.044,
               ),
               Form(
-                key: Key('edit-profile'),
+                key: const Key('edit-profile'),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

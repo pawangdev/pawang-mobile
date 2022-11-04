@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 
 class InputField extends StatelessWidget {

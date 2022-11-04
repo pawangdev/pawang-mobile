@@ -19,9 +19,8 @@ const double defaultPadding2x = 32.0;
 const double defaultBorderRadius = 12.0;
 
 // Fonts
-TextStyle kOpenSans = const TextStyle(fontFamily: 'OpenSans');
-TextStyle textMuted =
-    const TextStyle(fontFamily: 'OpenSans', color: defaultGray);
+TextStyle kOpenSans = const TextStyle(fontFamily: 'Inter');
+TextStyle textMuted = const TextStyle(fontFamily: 'Inter', color: defaultGray);
 
 // Font Weight
 FontWeight light = FontWeight.w300;
