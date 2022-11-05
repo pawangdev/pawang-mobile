@@ -60,7 +60,6 @@ class ScanReceipeView extends StatelessWidget {
                                           "Silahkan pilih struk terlebih dahulu",
                                           style: kInter.copyWith(
                                               color: defaultGray,
-                                              fontSize: 12,
                                               fontWeight: medium),
                                         ),
                                       ),

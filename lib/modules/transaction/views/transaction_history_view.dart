@@ -145,7 +145,6 @@ class TransactionHistoryView extends StatelessWidget {
                               ),
                               Text('Pemasukan',
                                   style: kInter.copyWith(
-                                      fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
                             ],
@@ -189,7 +188,6 @@ class TransactionHistoryView extends StatelessWidget {
                               ),
                               Text('Pengeluaran',
                                   style: kInter.copyWith(
-                                      fontSize: 13,
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
                             ],
@@ -263,9 +261,7 @@ class TransactionHistoryView extends StatelessWidget {
                           child: Text(
                             "Anda belum memiliki transaksi",
                             style: kInter.copyWith(
-                                color: defaultGray,
-                                fontSize: 13,
-                                fontWeight: medium),
+                                color: defaultGray, fontWeight: medium),
                             textAlign: TextAlign.center,
                           ),
                         ),

@@ -196,7 +196,6 @@ class TransactionDetailView extends StatelessWidget {
                               'Sub Kategori',
                               style: kInter.copyWith(
                                 color: defaultGray,
-                                fontSize: 12,
                               ),
                             ),
                             SizedBox(
@@ -209,7 +208,6 @@ class TransactionDetailView extends StatelessWidget {
                                 textAlign: TextAlign.end,
                                 overflow: TextOverflow.ellipsis,
                                 style: kInter.copyWith(
-                                    fontSize: 12,
                                     color: defaultPrimary.withOpacity(0.6)),
                               ),
                             )

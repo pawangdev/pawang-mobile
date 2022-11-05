@@ -62,7 +62,6 @@ class CardPengeluaran extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: kInter.copyWith(
-                            fontSize: 12,
                             color: defaultGray.withOpacity(0.9),
                           ),
                         ),

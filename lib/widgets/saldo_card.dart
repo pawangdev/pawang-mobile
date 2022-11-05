@@ -126,7 +126,6 @@ class WalletCard extends StatelessWidget {
                           textAlign: TextAlign.start,
                           overflow: TextOverflow.ellipsis,
                           style: kInter.copyWith(
-                              fontSize: 12,
                               fontWeight: bold,
                               color: defaultWhite.withOpacity(0.8)),
                         ),
@@ -174,7 +173,6 @@ class WalletCard extends StatelessWidget {
                         textAlign: TextAlign.end,
                         overflow: TextOverflow.ellipsis,
                         style: kInter.copyWith(
-                            fontSize: 12,
                             fontWeight: bold,
                             color: defaultWhite.withOpacity(0.8)),
                       ),

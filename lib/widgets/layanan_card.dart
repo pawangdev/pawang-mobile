@@ -16,7 +16,7 @@ class LayananCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: Get.width * 0.22,
-        height: Get.height * 0.115,
+        height: Get.height * 0.100,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -43,7 +43,7 @@ class LayananCard extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: kInter.copyWith(
-                    fontSize: 12, fontWeight: semiBold, color: defaultPrimary),
+                    fontWeight: semiBold, color: defaultPrimary),
               ),
             ],
           ),
