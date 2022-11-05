@@ -23,14 +23,15 @@ class CategoryView extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(
-                height: Get.height * 0.18,
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [defaultPrimary, defaultPurple])),
-              ),
+              Image.asset('assets/images/background.png'),
+              // Container(
+              //   height: Get.height * 0.18,
+              //   decoration: const BoxDecoration(
+              //       gradient: LinearGradient(
+              //           begin: Alignment.centerLeft,
+              //           end: Alignment.centerRight,
+              //           colors: [defaultPrimary, defaultPurple])),
+              // ),
               Container(
                 padding: EdgeInsets.only(
                     top: Get.height * 0.07, left: 32, right: 32),
