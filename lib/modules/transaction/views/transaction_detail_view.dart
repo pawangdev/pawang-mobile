@@ -51,49 +51,52 @@ class TransactionDetailView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Column(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: baseHOSTAPI + transaction.category.icon,
-                          fit: BoxFit.cover,
-                          width: 60,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) =>
-                                  CircularProgressIndicator(
-                                      value: downloadProgress.progress),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                        SizedBox(
-                          height: Get.height * 0.012,
-                        ),
-                        Text(
-                          transaction.category.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: kInter.copyWith(
-                              fontSize: 18, fontWeight: semiBold),
-                        ),
-                        SizedBox(
-                          height: Get.height * 0.012,
-                        ),
-                        Text(
-                          transaction.type == "income"
-                              ? '+ ' +
-                                  CurrencyFormat.convertToIdr(
-                                          transaction.amount, 2)
-                                      .toString()
-                              : '- ' +
-                                  CurrencyFormat.convertToIdr(
-                                          transaction.amount, 2)
-                                      .toString(),
-                          style: kInter.copyWith(
-                              fontSize: 16,
-                              color: transaction.type == "income"
-                                  ? defaultSuccess
-                                  : defaultError),
-                        ),
-                      ],
+                    child: FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: Column(
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: baseHOSTAPI + transaction.category.icon,
+                            fit: BoxFit.cover,
+                            width: 60,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.012,
+                          ),
+                          Text(
+                            transaction.category.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: kInter.copyWith(
+                                fontSize: 18, fontWeight: semiBold),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.012,
+                          ),
+                          Text(
+                            transaction.type == "income"
+                                ? '+ ' +
+                                    CurrencyFormat.convertToIdr(
+                                            transaction.amount, 2)
+                                        .toString()
+                                : '- ' +
+                                    CurrencyFormat.convertToIdr(
+                                            transaction.amount, 2)
+                                        .toString(),
+                            style: kInter.copyWith(
+                                fontSize: 16,
+                                color: transaction.type == "income"
+                                    ? defaultSuccess
+                                    : defaultError),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(

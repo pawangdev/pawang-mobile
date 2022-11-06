@@ -77,7 +77,7 @@ class ScanReceipeView extends StatelessWidget {
                                 ),
                                 Positioned(
                                   top: Get.height * 0.462,
-                                  left: Get.width * 0.32,
+                                  left: Get.width * 0.335,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
@@ -111,12 +111,15 @@ class ScanReceipeView extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
+                              height: Get.height * 0.008,
+                            ),
+                            SizedBox(
                               width: Get.width,
                               child: Row(
                                 children: <Widget>[
                                   Expanded(
                                     child: Divider(
-                                      color: defaultBlack,
+                                      color: defaultGray,
                                       height: Get.height * 0.0015,
                                     ),
                                   ),
@@ -134,7 +137,7 @@ class ScanReceipeView extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Divider(
-                                      color: defaultBlack,
+                                      color: defaultGray,
                                       height: Get.height * 0.0015,
                                     ),
                                   )
@@ -142,7 +145,7 @@ class ScanReceipeView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: Get.height * 0.015,
+                              height: Get.height * 0.02,
                             ),
                             ButtonCustom(
                                 elevatedMode: false,

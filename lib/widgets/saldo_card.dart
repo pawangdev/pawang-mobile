@@ -65,6 +65,7 @@ class WalletCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 8),
                     Text(
                       balance.toString(),
                       maxLines: 1,
@@ -78,7 +79,7 @@ class WalletCard extends StatelessWidget {
                 ),
                 Image.asset(
                   'assets/images/pawang_wallet.png',
-                  width: Get.width * 0.07,
+                  width: Get.width * 0.09,
                 )
               ],
             ),
@@ -118,8 +119,8 @@ class WalletCard extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      SizedBox(
-                        width: Get.width * 0.34,
+                      FittedBox(
+                        fit: BoxFit.fitWidth,
                         child: Text(
                           income,
                           maxLines: 1,
@@ -132,6 +133,9 @@ class WalletCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  width: 5,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -165,8 +169,8 @@ class WalletCard extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
-                      width: Get.width * 0.34,
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
                       child: Text(
                         outcome,
                         maxLines: 1,
@@ -181,18 +185,6 @@ class WalletCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     Text(namaWallet,
-            //         maxLines: 1,
-            //         overflow: TextOverflow.ellipsis,
-            //         style: kInter.copyWith(
-            //             color: defaultWhite.withOpacity(0.8),
-            //             fontWeight: medium,
-            //             fontSize: 14)),
-            //   ],
-            // ),
           ]),
     );
   }

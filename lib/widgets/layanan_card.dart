@@ -28,24 +28,30 @@ class LayananCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           color: defaultWhite,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Center(
-                child: Image.asset(icon, width: 35),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: kInter.copyWith(
-                    fontWeight: semiBold, color: defaultPrimary),
-              ),
-            ],
+        child: FittedBox(
+          fit: BoxFit.fitHeight,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Center(
+                  child: Image.asset(icon, width: 35),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: kInter.copyWith(
+                        fontWeight: semiBold, color: defaultPrimary),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

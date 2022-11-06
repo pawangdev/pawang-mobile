@@ -56,12 +56,15 @@ class SplashView extends StatelessWidget {
                             fontWeight: extraBold,
                             color: defaultWhite),
                       ),
-                      Text(
-                        'P e n c a t a t   K e u a n g a n',
-                        style: kInter.copyWith(
-                            fontSize: 14,
-                            fontWeight: bold,
-                            color: defaultWhite),
+                      FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text(
+                          'P e n c a t a t   K e u a n g a n',
+                          style: kInter.copyWith(
+                              fontSize: 14,
+                              fontWeight: bold,
+                              color: defaultWhite),
+                        ),
                       )
                     ],
                   )),

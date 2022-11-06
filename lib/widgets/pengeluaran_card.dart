@@ -71,19 +71,23 @@ class CardPengeluaran extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-                data.type == "income"
-                    ? '+ ' +
-                        CurrencyFormat.convertToIdr(data.amount, 2).toString()
-                    : '- ' +
-                        CurrencyFormat.convertToIdr(data.amount, 2).toString(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: kInter.copyWith(
-                    color:
-                        data.type == "income" ? defaultSuccess : defaultError,
-                    fontWeight: semiBold,
-                    overflow: TextOverflow.ellipsis)),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                  data.type == "income"
+                      ? '+ ' +
+                          CurrencyFormat.convertToIdr(data.amount, 2).toString()
+                      : '- ' +
+                          CurrencyFormat.convertToIdr(data.amount, 2)
+                              .toString(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: kInter.copyWith(
+                      color:
+                          data.type == "income" ? defaultSuccess : defaultError,
+                      fontWeight: semiBold,
+                      overflow: TextOverflow.ellipsis)),
+            ),
           ],
         ),
         SizedBox(

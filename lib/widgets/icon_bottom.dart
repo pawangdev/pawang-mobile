@@ -42,12 +42,15 @@ class IconBottomBar extends StatelessWidget {
                   ),
           ),
           selected
-              ? Text(
-                  text,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: kInter.copyWith(
-                      fontWeight: semiBold, color: primaryColor),
+              ? FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    text,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: kInter.copyWith(
+                        fontWeight: semiBold, color: primaryColor),
+                  ),
                 )
               : const SizedBox()
         ],

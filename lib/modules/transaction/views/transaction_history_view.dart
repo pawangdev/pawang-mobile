@@ -150,8 +150,8 @@ class TransactionHistoryView extends StatelessWidget {
                             ],
                           ),
                           Obx(
-                            () => SizedBox(
-                              width: Get.width * 0.39,
+                            () => FittedBox(
+                              fit: BoxFit.fitWidth,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value
@@ -193,8 +193,8 @@ class TransactionHistoryView extends StatelessWidget {
                             ],
                           ),
                           Obx(
-                            () => SizedBox(
-                              width: Get.width * 0.39,
+                            () => FittedBox(
+                              fit: BoxFit.fitWidth,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
                                         controller.transactionDetailData.value
