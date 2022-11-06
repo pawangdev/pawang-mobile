@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
+import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/layanan_card.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
 import 'package:pawang_mobile/widgets/remind_card.dart';
@@ -19,6 +21,7 @@ class DashboardView extends StatelessWidget {
 
   final TransactionController controllerTransaction = Get.find();
   final NavigationController controllerNavigation = Get.find();
+  final ReminderController controllerReminder = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -419,8 +422,85 @@ class DashboardView extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 3, vertical: 8),
                                   child: GestureDetector(
-                                    onTap: () =>
-                                        controllerNavigation.changeTabIndex(3),
+                                    onTap: () {
+                                      showDialog<void>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: Text(
+                                            'Edit',
+                                            style: kInter.copyWith(
+                                                fontSize: 18, fontWeight: bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Row(
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/bell.png',
+                                                width: 20,
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                controllerReminder
+                                                    .nameTextController
+                                                    .text = remind.name!,
+                                                style: kInter.copyWith(
+                                                    fontSize: 16,
+                                                    fontWeight: medium),
+                                              ),
+                                            ],
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          actions: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: ButtonCustom(
+                                                    text: "Edit",
+                                                    elevatedMode: false,
+                                                    onTap: () {
+                                                      controllerReminder
+                                                          .nameTextController
+                                                          .text = remind.name!;
+                                                      controllerReminder
+                                                          .dateTextController
+                                                          .text = remind.date!;
+                                                      Get.toNamed(
+                                                          RoutesName
+                                                              .addreminder,
+                                                          arguments: {
+                                                            "is_adding": true,
+                                                            "id": remind.id
+                                                          });
+                                                    },
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: Get.width * 0.01),
+                                                Expanded(
+                                                  child: ButtonCustom(
+                                                    text: 'Hapus',
+                                                    elevatedMode: false,
+                                                    blueMode: false,
+                                                    onTap: () =>
+                                                        controllerReminder
+                                                            .deleteReminder(
+                                                                remind.id),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
                                     child: RemindCard(
                                       data: remind,
                                       icon: 'assets/images/bell.png',

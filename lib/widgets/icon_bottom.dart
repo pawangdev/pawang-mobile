@@ -49,7 +49,7 @@ class IconBottomBar extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: kInter.copyWith(
-                        fontWeight: semiBold, color: primaryColor),
+                        fontWeight: medium, color: primaryColor),
                   ),
                 )
               : const SizedBox()
