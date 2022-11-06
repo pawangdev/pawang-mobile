@@ -89,46 +89,58 @@ class EditProfileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Obx(
-                              () => Radio(
-                                value: "male",
-                                groupValue:
-                                    controller.genderTextController.value,
-                                onChanged: (value) {
-                                  controller.genderTextController.value =
-                                      value as String;
-                                },
+                        GestureDetector(
+                          onTap: () {
+                            controller.genderTextController.value =
+                                'male' as String;
+                          },
+                          child: Row(
+                            children: [
+                              Obx(
+                                () => Radio(
+                                  value: "male",
+                                  groupValue:
+                                      controller.genderTextController.value,
+                                  onChanged: (value) {
+                                    controller.genderTextController.value =
+                                        value as String;
+                                  },
+                                ),
                               ),
-                            ),
-                            Text(
-                              "Laki-Laki",
-                              style: kInter.copyWith(fontSize: 12),
-                            ),
-                          ],
+                              Text(
+                                "Laki-Laki",
+                                style: kInter.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: Get.width * 0.025,
                         ),
-                        Row(
-                          children: [
-                            Obx(
-                              () => Radio(
-                                value: "female",
-                                groupValue:
-                                    controller.genderTextController.value,
-                                onChanged: (value) {
-                                  controller.genderTextController.value =
-                                      value as String;
-                                },
+                        GestureDetector(
+                          onTap: () {
+                            controller.genderTextController.value =
+                                'female' as String;
+                          },
+                          child: Row(
+                            children: [
+                              Obx(
+                                () => Radio(
+                                  value: "female",
+                                  groupValue:
+                                      controller.genderTextController.value,
+                                  onChanged: (value) {
+                                    controller.genderTextController.value =
+                                        value as String;
+                                  },
+                                ),
                               ),
-                            ),
-                            Text(
-                              "Perempuan",
-                              style: kInter.copyWith(fontSize: 12),
-                            ),
-                          ],
+                              Text(
+                                "Perempuan",
+                                style: kInter.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
