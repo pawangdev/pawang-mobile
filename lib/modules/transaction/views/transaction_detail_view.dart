@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
-import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
@@ -14,7 +13,7 @@ import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class TransactionDetailView extends StatelessWidget {
   final TransactionController controller = Get.find();
-  final TransactionDataModel transaction = Get.arguments;
+  final dynamic transaction = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/models/reminder_model.dart';
+import 'package:pawang_mobile/models/transaction_detail_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/models/user_profile_model.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
@@ -19,6 +21,9 @@ class DashboardController extends GetxController {
   var wallets = <WalletDataModel>[].obs;
   var transactions = <TransactionDataModel>[].obs;
   var reminders = <ReminderDataModel>[].obs;
+  var transactionDetailData = TransactionDetailDataModel(
+          totalIncome: 0, totalOutcome: 0, totalBalance: 0)
+      .obs;
   var user = UserProfileDataModel(
           id: 0,
           name: "",
@@ -38,7 +43,22 @@ class DashboardController extends GetxController {
     getWallets();
     getTransactions();
     getReminders();
+    getTransactionsDetail();
     super.onInit();
+  }
+
+  Future<void> getTransactionsDetail() async {
+    try {
+      final response = await transactionService.getTransactionDetails();
+
+      transactionDetailData.update((transactionDetail) {
+        transactionDetail?.totalBalance = response.totalBalance;
+        transactionDetail?.totalIncome = response.totalIncome;
+        transactionDetail?.totalOutcome = response.totalOutcome;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> getUserProfile() async {
@@ -70,6 +90,7 @@ class DashboardController extends GetxController {
       final response = await transactionService.getTransactions();
       if (response != null) {
         transactions.assignAll(response);
+        await getTransactionsDetail();
       }
     } catch (e) {
       print(e);

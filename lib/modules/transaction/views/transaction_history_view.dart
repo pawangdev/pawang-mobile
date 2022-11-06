@@ -64,8 +64,11 @@ class TransactionHistoryView extends StatelessWidget {
                                   Obx(
                                     () => Text(
                                       CurrencyFormat.convertToIdr(
-                                              controller.transactionDetailData
-                                                  .value.totalBalance,
+                                              controller
+                                                  .dashboardController
+                                                  .transactionDetailData
+                                                  .value
+                                                  .totalBalance,
                                               2)
                                           .toString(),
                                       maxLines: 1,
@@ -154,7 +157,10 @@ class TransactionHistoryView extends StatelessWidget {
                               fit: BoxFit.fitWidth,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
-                                        controller.transactionDetailData.value
+                                        controller
+                                            .dashboardController
+                                            .transactionDetailData
+                                            .value
                                             .totalIncome,
                                         2)
                                     .toString(),
@@ -197,7 +203,10 @@ class TransactionHistoryView extends StatelessWidget {
                               fit: BoxFit.fitWidth,
                               child: Text(
                                 CurrencyFormat.convertToIdr(
-                                        controller.transactionDetailData.value
+                                        controller
+                                            .dashboardController
+                                            .transactionDetailData
+                                            .value
                                             .totalOutcome,
                                         2)
                                     .toString(),
@@ -229,24 +238,31 @@ class TransactionHistoryView extends StatelessWidget {
                   height: Get.height * 0.0125,
                 ),
                 Obx(
-                  () => controller.dashboardController.transactions.isNotEmpty
+                  () => controller
+                          .dashboardController
+                          .wallets[controller
+                              .dashboardController.selectedWallets.value]
+                          .transactions
+                          .isNotEmpty
                       ? ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
+                            final wallet = controller
+                                .dashboardController
+                                .wallets[controller
+                                    .dashboardController.selectedWallets.value]
+                                .transactions[index];
                             return InkWell(
                               highlightColor: Colors.transparent,
                               splashColor: Colors.transparent,
                               onTap: () => Get.toNamed(
                                   RoutesName.detailtransaction,
-                                  arguments: controller
-                                      .dashboardController.transactions[index]),
+                                  arguments: wallet),
                               child: Column(
                                 children: [
-                                  CardPengeluaran(
-                                      data: controller.dashboardController
-                                          .transactions[index]),
+                                  CardPengeluaran(data: wallet),
                                   SizedBox(
                                     height: Get.height * 0.018,
                                   ),
@@ -255,7 +271,11 @@ class TransactionHistoryView extends StatelessWidget {
                             );
                           },
                           itemCount: controller
-                              .dashboardController.transactions.length,
+                              .dashboardController
+                              .wallets[controller
+                                  .dashboardController.selectedWallets.value]
+                              .transactions
+                              .length,
                         )
                       : Center(
                           child: Text(

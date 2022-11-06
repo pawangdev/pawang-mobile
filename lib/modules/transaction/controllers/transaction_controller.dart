@@ -50,17 +50,12 @@ class TransactionController extends GetxController {
   var type = "".obs;
   late File fileImageReceipt;
 
-  var transactionDetailData = TransactionDetailDataModel(
-          totalIncome: 0, totalOutcome: 0, totalBalance: 0)
-      .obs;
-
   @override
   void onInit() {
     dateTextController.text =
         DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
     displayDate.value = dateTextController.text;
-    getTransactionsDetail();
     super.onInit();
   }
 
@@ -70,29 +65,6 @@ class TransactionController extends GetxController {
     descriptionTextController.dispose();
     dateTextController.dispose();
     super.onClose();
-  }
-
-  Future<void> getTransactionsDetail() async {
-    try {
-      final response = await transactionService.getTransactionDetails();
-
-      transactionDetailData.update((transactionDetail) {
-        transactionDetail?.totalBalance = response.totalBalance;
-        transactionDetail?.totalIncome = response.totalIncome;
-        transactionDetail?.totalOutcome = response.totalOutcome;
-      });
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Mengambil Transaksi !',
-        '$e',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-      );
-    }
   }
 
   Future<void> createTransaction() async {
@@ -157,7 +129,6 @@ class TransactionController extends GetxController {
             await transactionService.createTransaction(data);
 
         if (transactionResponse) {
-          await getTransactionsDetail();
           await dashboardController.getTransactions();
           await dashboardController.getWallets();
 
@@ -208,7 +179,6 @@ class TransactionController extends GetxController {
       final response =
           await transactionService.destroyTransaction(transactionId);
       if (response) {
-        await getTransactionsDetail();
         await dashboardController.getTransactions();
         await dashboardController.getWallets();
 
@@ -340,7 +310,6 @@ class TransactionController extends GetxController {
           await transactionService.updateTransaction(data, transactionId!);
 
       if (transactionResponse) {
-        await getTransactionsDetail();
         await dashboardController.getTransactions();
         await dashboardController.getWallets();
 

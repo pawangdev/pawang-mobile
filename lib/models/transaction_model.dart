@@ -1,17 +1,13 @@
-// To parse this JSON data, do
-//
-//     final transactionModel = transactionModelFromJsoßn(jsonString);
-
 import 'dart:convert';
 
-TransactionModel transactionModelFromJson(String str) =>
-    TransactionModel.fromJson(json.decode(str));
+TransactionsModel transactionsModelFromJson(String str) =>
+    TransactionsModel.fromJson(json.decode(str));
 
-String transactionModelToJson(TransactionModel data) =>
+String transactionsModelToJson(TransactionsModel data) =>
     json.encode(data.toJson());
 
-class TransactionModel {
-  TransactionModel({
+class TransactionsModel {
+  TransactionsModel({
     required this.message,
     required this.data,
   });
@@ -19,8 +15,8 @@ class TransactionModel {
   String message;
   List<TransactionDataModel> data;
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      TransactionModel(
+  factory TransactionsModel.fromJson(Map<String, dynamic> json) =>
+      TransactionsModel(
         message: json["message"],
         data: List<TransactionDataModel>.from(
             json["data"].map((x) => TransactionDataModel.fromJson(x))),
@@ -58,7 +54,7 @@ class TransactionDataModel {
   int? subcategoryId;
   String type;
   String? description;
-  dynamic? imageUrl;
+  String? imageUrl;
   DateTime date;
   int userId;
   DateTime createdAt;
@@ -96,15 +92,15 @@ class TransactionDataModel {
         "wallet_id": walletId,
         "subcategory_id": subcategoryId == null ? null : subcategoryId,
         "type": type,
-        "description": description,
-        "image_url": imageUrl,
+        "description": description == null ? null : description,
+        "image_url": imageUrl == null ? null : imageUrl,
         "date": date.toIso8601String(),
         "user_id": userId,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "wallet": wallet.toJson(),
         "category": category.toJson(),
-        "subcategory": subcategory == null ? null : subcategory!.toJson(),
+        "subcategory": subcategory == null ? null : subcategory?.toJson(),
       };
 }
 

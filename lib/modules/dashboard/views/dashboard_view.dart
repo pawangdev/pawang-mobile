@@ -208,19 +208,9 @@ class DashboardView extends StatelessWidget {
                               onTap: () => Get.toNamed(RoutesName.wallet),
                               child: WalletCard(
                                   income: CurrencyFormat.convertToIdr(
-                                          controllerTransaction
-                                              .transactionDetailData
-                                              .value
-                                              .totalIncome,
-                                          2)
-                                      .toString(),
+                                      wallet.totalIncome, 2),
                                   outcome: CurrencyFormat.convertToIdr(
-                                          controllerTransaction
-                                              .transactionDetailData
-                                              .value
-                                              .totalOutcome,
-                                          2)
-                                      .toString(),
+                                      wallet.totalOutcome, 2),
                                   namaWallet: wallet.name,
                                   balance: CurrencyFormat.convertToIdr(
                                           wallet.balance, 2)
@@ -302,48 +292,68 @@ class DashboardView extends StatelessWidget {
                   ),
                   Obx(
                     () => controller.wallets.isNotEmpty
-                        ? controller.wallets[controller.selectedWallets.value]
-                                .transactions.isNotEmpty
-                            ? ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return InkWell(
-                                    highlightColor: Colors.transparent,
-                                    splashColor: Colors.transparent,
-                                    onTap: () => Get.toNamed(
-                                        RoutesName.detailtransaction,
-                                        arguments: controller
-                                            .wallets[controller
-                                                .selectedWallets.value]
-                                            .transactions[index]),
-                                    child: CardPengeluaran(
-                                        data: controller
-                                            .wallets[controller
-                                                .selectedWallets.value]
-                                            .transactions[index]),
-                                  );
-                                },
-                                itemCount: controller
+                        ? controller.wallets.length >
+                                controller.selectedWallets.value
+                            ? controller
+                                    .wallets[controller.selectedWallets.value]
+                                    .transactions
+                                    .isNotEmpty
+                                ? ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return InkWell(
+                                        highlightColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
+                                        onTap: () => Get.toNamed(
+                                            RoutesName.detailtransaction,
+                                            arguments: controller
+                                                .wallets[controller
+                                                    .selectedWallets.value]
+                                                .transactions[index]),
+                                        child: CardPengeluaran(
+                                            data: controller
+                                                .wallets[controller
+                                                    .selectedWallets.value]
+                                                .transactions[index]),
+                                      );
+                                    },
+                                    itemCount: controller
+                                                .wallets[controller
+                                                    .selectedWallets.value]
+                                                .transactions
+                                                .length >
+                                            3
+                                        ? 3
+                                        : controller
                                             .wallets[controller
                                                 .selectedWallets.value]
                                             .transactions
-                                            .length >
-                                        3
-                                    ? 3
-                                    : controller
-                                        .wallets[
-                                            controller.selectedWallets.value]
-                                        .transactions
-                                        .length,
-                              )
+                                            .length,
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 25),
+                                    child: Center(
+                                      child: Text(
+                                        "Anda Belum Memiliki Transaksi",
+                                        style: kInter.copyWith(
+                                            color: defaultGray,
+                                            fontSize: 13,
+                                            fontWeight: medium),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  )
                             : Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 25),
                                 child: Center(
                                   child: Text(
-                                    "Anda Belum Memiliki transaksi",
+                                    "Anda Belum Memiliki Dompet",
                                     style: kInter.copyWith(
                                         color: defaultGray,
                                         fontSize: 13,
@@ -356,7 +366,7 @@ class DashboardView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 25),
                             child: Center(
                               child: Text(
-                                "Anda Belum Memiliki dompet",
+                                "Anda Belum Memilih Dompet",
                                 style: kInter.copyWith(
                                     color: defaultGray,
                                     fontSize: 13,
@@ -365,7 +375,7 @@ class DashboardView extends StatelessWidget {
                               ),
                             ),
                           ),
-                  )
+                  ),
                 ],
               ),
             ),
