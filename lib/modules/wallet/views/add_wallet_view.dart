@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -64,6 +65,10 @@ class AddWalletView extends StatelessWidget {
                         inputLabel: "Saldo Awal",
                         inputController: controller.balanceTextController,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          CurrencyTextInputFormatter(
+                              locale: 'id', decimalDigits: 0, symbol: '')
+                        ],
                       ),
                     ),
                   ],

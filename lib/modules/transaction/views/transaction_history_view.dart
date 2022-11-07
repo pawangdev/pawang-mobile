@@ -47,56 +47,49 @@ class TransactionHistoryView extends StatelessWidget {
                                     color: defaultWhite),
                               ),
                               GestureDetector(
-                                  child: const Icon(
-                                    Icons.list_rounded,
-                                    color: defaultWhite,
-                                  ),
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.vertical(
-                                                top: Radius.circular(30))),
-                                        builder: (BuildContext context) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 30.0, right: 32, left: 25),
-                                            child: Container(
-                                              child: ListView(
-                                                children: [
-                                                  Center(
-                                                    child: Text(
-                                                      'Pilih Dompet',
-                                                      style: kInter.copyWith(
-                                                          fontWeight: semiBold,
-                                                          fontSize: 16),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  WalletCard3(
-                                                    nama: 'Dompet 1',
-                                                  ),
-                                                  SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  WalletCard3(
-                                                    nama: 'Dompet 2',
-                                                    isSelected: true,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  WalletCard3(
-                                                    nama: 'Dompet 3',
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        });
-                                  })
+                                child: const Icon(
+                                  Icons.list_rounded,
+                                  color: defaultWhite,
+                                ),
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(30))),
+                                    builder: (BuildContext context) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 30.0, right: 32, left: 25),
+                                        child: Container(
+                                          child: controller.dashboardController
+                                                  .wallets.isEmpty
+                                              ? const Center(
+                                                  child:
+                                                      Text('Tidak Ada Dompet'),
+                                                )
+                                              : ListView.builder(
+                                                  itemCount: controller
+                                                      .dashboardController
+                                                      .wallets
+                                                      .length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return WalletCard3(
+                                                      nama: controller
+                                                          .dashboardController
+                                                          .wallets[index]
+                                                          .name,
+                                                    );
+                                                  },
+                                                ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              )
                             ],
                           ),
                           SizedBox(
@@ -295,48 +288,57 @@ class TransactionHistoryView extends StatelessWidget {
                   height: Get.height * 0.0125,
                 ),
                 Obx(
-                  () => controller
-                          .dashboardController
-                          .wallets[controller
-                              .dashboardController.selectedWallets.value]
-                          .transactions
-                          .isNotEmpty
-                      ? ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) {
-                            final wallet = controller
-                                .dashboardController
-                                .wallets[controller
-                                    .dashboardController.selectedWallets.value]
-                                .transactions[index];
-                            return InkWell(
-                              highlightColor: Colors.transparent,
-                              splashColor: Colors.transparent,
-                              onTap: () => Get.toNamed(
-                                  RoutesName.detailtransaction,
-                                  arguments: wallet),
-                              child: Column(
-                                children: [
-                                  CardPengeluaran(data: wallet),
-                                  SizedBox(
-                                    height: Get.height * 0.018,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          itemCount: controller
+                  () => controller.dashboardController.wallets.isNotEmpty
+                      ? controller
                               .dashboardController
                               .wallets[controller
                                   .dashboardController.selectedWallets.value]
                               .transactions
-                              .length,
-                        )
+                              .isNotEmpty
+                          ? ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                final wallet = controller
+                                    .dashboardController
+                                    .wallets[controller.dashboardController
+                                        .selectedWallets.value]
+                                    .transactions[index];
+                                return InkWell(
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () => Get.toNamed(
+                                      RoutesName.detailtransaction,
+                                      arguments: wallet),
+                                  child: Column(
+                                    children: [
+                                      CardPengeluaran(data: wallet),
+                                      SizedBox(
+                                        height: Get.height * 0.018,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              itemCount: controller
+                                  .dashboardController
+                                  .wallets[controller.dashboardController
+                                      .selectedWallets.value]
+                                  .transactions
+                                  .length,
+                            )
+                          : Center(
+                              child: Text(
+                                "Anda belum memiliki transaksi",
+                                style: kInter.copyWith(
+                                    color: defaultGray, fontWeight: medium),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                       : Center(
                           child: Text(
-                            "Anda belum memiliki transaksi",
+                            "Anda belum memiliki dompet",
                             style: kInter.copyWith(
                                 color: defaultGray, fontWeight: medium),
                             textAlign: TextAlign.center,

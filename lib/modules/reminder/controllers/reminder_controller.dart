@@ -13,13 +13,15 @@ class ReminderController extends GetxController {
   final TextEditingController dateTextController = TextEditingController();
   final type = "once".obs;
 
-  final List<dynamic> typeData = [
-    {'name': 'Tidak Berulang', 'id': 'once'},
-    {'name': 'Harian', 'id': 'daily'},
-    {'name': 'Mingguan', 'id': 'weekly'},
-    {'name': 'Bulanan', 'id': 'monthly'},
-    {'name': 'Tahunan', 'id': 'yearly'},
+  final List<String> typeData = [
+    'Tidak Berulang',
+    'Harian',
+    'Mingguan',
+    'Bulanan',
+    'Tahunan',
   ];
+
+  String? selectedType;
 
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
     EasyLoading.show(status: 'Mohon Tunggu');
@@ -39,8 +41,7 @@ class ReminderController extends GetxController {
           await dashboardController.getReminders().then(
               (value) => EasyLoading.dismiss().then((value) => Get.back()));
 
-          nameTextController.text = "";
-          dateTextController.text = "";
+          resetAllInput();
 
           Get.rawSnackbar(
             title: "Sukses",
@@ -74,17 +75,19 @@ class ReminderController extends GetxController {
         final response = await reminderService.updateReminder(id!, input);
 
         if (response) {
-          await dashboardController.getReminders().then(
-              (value) => EasyLoading.dismiss().then((value) => Get.back()));
+          await dashboardController
+              .getReminders()
+              .then((value) => EasyLoading.dismiss().then((value) {
+                    Get.back();
+                  }));
+
+          resetAllInput();
 
           Get.rawSnackbar(
             title: "Sukses",
             message: "Berhasil Memperbarui Pengingat",
             backgroundColor: defaultSuccess,
           );
-
-          nameTextController.text = "";
-          dateTextController.text = "";
         }
       } catch (e) {
         EasyLoading.dismiss();
@@ -113,6 +116,8 @@ class ReminderController extends GetxController {
             .getReminders()
             .then((value) => EasyLoading.dismiss());
 
+        resetAllInput();
+
         Get.snackbar(
           'Sukses !',
           "Berhasil Menghapus Pengingat",
@@ -138,5 +143,11 @@ class ReminderController extends GetxController {
         ),
       );
     }
+  }
+
+  Future<void> resetAllInput() async {
+    nameTextController.text = "";
+    dateTextController.text = "";
+    type.value = "once";
   }
 }

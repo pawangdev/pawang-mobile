@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 
 class WalletCard3 extends StatelessWidget {
-  const WalletCard3({Key? key, required this.nama, this.isSelected = false})
-      : super(key: key);
+  const WalletCard3({
+    Key? key,
+    required this.nama,
+    this.isSelected = false,
+  }) : super(key: key);
 
   final String nama;
   final bool? isSelected;
@@ -14,6 +17,7 @@ class WalletCard3 extends StatelessWidget {
     return Container(
       width: Get.width,
       height: Get.height * 0.1,
+      margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: defaultWhite,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -32,7 +36,7 @@ class WalletCard3 extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Center(
             child: Text(
           nama,

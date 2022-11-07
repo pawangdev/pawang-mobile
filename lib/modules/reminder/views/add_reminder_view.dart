@@ -29,8 +29,7 @@ class AddReminderView extends StatelessWidget {
                       onTap: () {
                         Get.back();
                         if (reminderUpdate != null) {
-                          controller.nameTextController.text = "";
-                          controller.dateTextController.text = "";
+                          controller.resetAllInput();
                         }
                       }),
                   Text(
@@ -63,7 +62,7 @@ class AddReminderView extends StatelessWidget {
                       ),
                       DateTimePicker(
                         cancelText: 'Batal',
-                        use24HourFormat: false,
+                        use24HourFormat: true,
                         calendarTitle: 'Pilih Tanggal',
                         timePickerEntryModeInput: true,
                         type: DateTimePickerType.dateTime,
@@ -86,8 +85,8 @@ class AddReminderView extends StatelessWidget {
                           focusColor: defaultPrimary,
                         ),
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: Get.height * 0.034,
                       ),
                     ],
                   ),

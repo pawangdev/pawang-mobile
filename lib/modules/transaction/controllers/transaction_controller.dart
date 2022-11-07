@@ -358,6 +358,7 @@ class TransactionController extends GetxController {
     displayWalletName.text = "";
     displayCategoryName.text = "";
     descriptionTextController.text = "";
+    dashboardController.selectedWallets.value = 0;
     Get.delete<ScanReceipeController>();
   }
 }

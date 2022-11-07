@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/wallet/services/wallet_service.dart';
 
@@ -30,7 +30,7 @@ class WalletController extends GetxController {
 
     var input = <String, dynamic>{
       'name': nameTextController.text,
-      'balance': int.parse(balanceTextController.text),
+      'balance': balanceTextController.text.replaceAll('.', ''),
     };
 
     try {
@@ -79,7 +79,7 @@ class WalletController extends GetxController {
 
     var input = <String, dynamic>{
       'name': nameTextController.text,
-      'balance': int.parse(balanceTextController.text),
+      'balance': balanceTextController.text.replaceAll('.', ''),
     };
 
     try {
@@ -170,5 +170,6 @@ class WalletController extends GetxController {
     idWallet = 0;
     nameTextController.text = "";
     balanceTextController.text = "0";
+    dashboardController.selectedWallets.value = 0;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -124,6 +125,12 @@ class WalletCard2 extends StatelessWidget {
                                               keyboardType:
                                                   TextInputType.number,
                                               enable: true,
+                                              inputFormatters: [
+                                                CurrencyTextInputFormatter(
+                                                    locale: 'id',
+                                                    decimalDigits: 0,
+                                                    symbol: '')
+                                              ],
                                               // errorText: _inputData ? null : 'Nominal wajib diisi',
                                             ),
                                           ],

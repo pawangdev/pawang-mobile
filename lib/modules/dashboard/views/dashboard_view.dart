@@ -290,92 +290,68 @@ class DashboardView extends StatelessWidget {
                   SizedBox(
                     height: Get.height * 0.008,
                   ),
-                  Obx(
-                    () => controller.wallets.isNotEmpty
-                        ? controller.wallets.length >
-                                controller.selectedWallets.value
-                            ? controller
-                                    .wallets[controller.selectedWallets.value]
-                                    .transactions
-                                    .isNotEmpty
-                                ? ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return InkWell(
-                                        highlightColor: Colors.transparent,
-                                        splashColor: Colors.transparent,
-                                        onTap: () => Get.toNamed(
-                                            RoutesName.detailtransaction,
-                                            arguments: controller
-                                                .wallets[controller
-                                                    .selectedWallets.value]
-                                                .transactions[index]),
-                                        child: CardPengeluaran(
-                                            data: controller
-                                                .wallets[controller
-                                                    .selectedWallets.value]
-                                                .transactions[index]),
-                                      );
-                                    },
-                                    itemCount: controller
-                                                .wallets[controller
-                                                    .selectedWallets.value]
-                                                .transactions
-                                                .length >
-                                            3
-                                        ? 3
-                                        : controller
-                                            .wallets[controller
-                                                .selectedWallets.value]
-                                            .transactions
-                                            .length,
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 25),
-                                    child: Center(
-                                      child: Text(
-                                        "Anda Belum Memiliki Transaksi",
-                                        style: kInter.copyWith(
-                                            color: defaultGray,
-                                            fontSize: 13,
-                                            fontWeight: medium),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  )
-                            : Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 25),
-                                child: Center(
-                                  child: Text(
-                                    "Anda Belum Memiliki Dompet",
-                                    style: kInter.copyWith(
-                                        color: defaultGray,
-                                        fontSize: 13,
-                                        fontWeight: medium),
-                                    textAlign: TextAlign.center,
-                                  ),
+                  Obx(() => controller.wallets.isNotEmpty
+                      ? controller.wallets[controller.selectedWallets.value]
+                              .transactions.isNotEmpty
+                          ? ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () => Get.toNamed(
+                                      RoutesName.detailtransaction,
+                                      arguments: controller
+                                          .wallets[
+                                              controller.selectedWallets.value]
+                                          .transactions[index]),
+                                  child: CardPengeluaran(
+                                      data: controller
+                                          .wallets[
+                                              controller.selectedWallets.value]
+                                          .transactions[index]),
+                                );
+                              },
+                              itemCount: controller
+                                          .wallets[
+                                              controller.selectedWallets.value]
+                                          .transactions
+                                          .length >
+                                      3
+                                  ? 3
+                                  : controller
+                                      .wallets[controller.selectedWallets.value]
+                                      .transactions
+                                      .length,
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 25),
+                              child: Center(
+                                child: Text(
+                                  "Anda Belum Memiliki Transaksi",
+                                  style: kInter.copyWith(
+                                      color: defaultGray,
+                                      fontSize: 13,
+                                      fontWeight: medium),
+                                  textAlign: TextAlign.center,
                                 ),
-                              )
-                        : Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25),
-                            child: Center(
-                              child: Text(
-                                "Anda Belum Memilih Dompet",
-                                style: kInter.copyWith(
-                                    color: defaultGray,
-                                    fontSize: 13,
-                                    fontWeight: medium),
-                                textAlign: TextAlign.center,
                               ),
+                            )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25),
+                          child: Center(
+                            child: Text(
+                              "Anda Belum Memiliki Dompet",
+                              style: kInter.copyWith(
+                                  color: defaultGray,
+                                  fontSize: 13,
+                                  fontWeight: medium),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                  ),
+                        )),
                 ],
               ),
             ),

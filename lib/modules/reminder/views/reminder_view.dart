@@ -20,14 +20,6 @@ class ReminderView extends StatelessWidget {
           Stack(
             children: [
               Image.asset('assets/images/background.png'),
-              // Container(
-              //   height: Get.height * 0.18,
-              //   decoration: const BoxDecoration(
-              //       gradient: LinearGradient(
-              //           begin: Alignment.centerLeft,
-              //           end: Alignment.centerRight,
-              //           colors: [defaultPrimary, defaultPurple])),
-              // ),
               Container(
                 padding: EdgeInsets.only(
                     top: Get.height * 0.07, left: 32, right: 32),
@@ -59,6 +51,7 @@ class ReminderView extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Get.toNamed(RoutesName.addreminder);
+                        controller.resetAllInput();
                       },
                       child: const Icon(
                         Icons.add_rounded,
