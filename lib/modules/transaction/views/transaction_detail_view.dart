@@ -132,29 +132,61 @@ class TransactionDetailView extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        Text(
-                          'Tanggal Transaksi',
-                          style: kInter.copyWith(
-                            fontSize: 14,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Tanggal Transaksi',
+                              style: kInter.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.35,
+                              child: Text(
+                                DateFormat("d MMMM yyyy")
+                                    .format(DateFormat("yyyy-mm-dd")
+                                        .parse(transaction.date.toString()))
+                                    .toString(),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                textAlign: TextAlign.end,
+                                style: kInter.copyWith(
+                                    fontSize: 14, color: defaultPrimary),
+                              ),
+                            )
+                          ],
                         ),
                         SizedBox(
-                          width: Get.width * 0.35,
-                          child: Text(
-                            DateFormat("d MMMM yyyy")
-                                .format(DateFormat("yyyy-mm-dd")
-                                    .parse(transaction.date.toString()))
-                                .toString(),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            textAlign: TextAlign.end,
-                            style: kInter.copyWith(
-                                fontSize: 14, color: defaultPrimary),
-                          ),
-                        )
+                          height: Get.height * 0.01,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Waktu',
+                              style: kInter.copyWith(
+                                color: defaultGray,
+                              ),
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.35,
+                              child: Text(
+                                DateFormat("hh:mm")
+                                    .format(DateFormat("yyyy-mm-dd")
+                                        .parse(transaction.date.toString()))
+                                    .toString(),
+                                maxLines: 1,
+                                textAlign: TextAlign.end,
+                                overflow: TextOverflow.ellipsis,
+                                style: kInter.copyWith(
+                                    color: defaultPrimary.withOpacity(0.6)),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
