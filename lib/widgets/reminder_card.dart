@@ -61,43 +61,40 @@ class ReminderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'assets/images/bell.png',
-                        width: Get.width * 0.08,
-                      ),
-                      SizedBox(width: Get.width * 0.08),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.48,
-                            child: Text(
-                              item.name!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: kInter.copyWith(
-                                  fontWeight: semiBold, fontSize: 16),
-                            ),
-                          ),
-                          SizedBox(width: Get.width * 0.05),
-                          Text(
-                            DateFormat("dd/MM/yyyy - HH:mm")
-                                .format(DateTime.parse(item.date!).toLocal())
-                                .toString(),
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/bell.png',
+                      width: Get.width * 0.06,
+                    ),
+                    SizedBox(width: Get.width * 0.04),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            item.name!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: kInter.copyWith(fontSize: 14),
+                            style: kInter.copyWith(
+                                fontWeight: semiBold, fontSize: 16),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        SizedBox(width: Get.width * 0.05),
+                        Text(
+                          DateFormat("dd/MM/yyyy - HH:mm")
+                              .format(DateTime.parse(item.date!).toLocal())
+                              .toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: kInter.copyWith(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+                Switch(value: true, onChanged: (value) {})
               ],
             ),
           ),
