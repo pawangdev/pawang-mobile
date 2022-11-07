@@ -6,6 +6,7 @@ import 'package:pawang_mobile/modules/reminder/reminder.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
+import 'package:pawang_mobile/widgets/reminder_loop.dart';
 
 class AddReminderView extends StatelessWidget {
   AddReminderView({Key? key}) : super(key: key);
@@ -87,6 +88,46 @@ class AddReminderView extends StatelessWidget {
                       ),
                       SizedBox(
                         height: Get.height * 0.034,
+                      ),
+                      InputField(
+                        icon: const Icon(Icons.event_repeat_rounded),
+                        inputLabel: 'Perulangan',
+                        inputController: controller.dateTextController,
+                        onTap: () {
+                          return showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(30))),
+                            builder: (context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: ListView(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        'Ulangi Reminder',
+                                        style: kInter.copyWith(
+                                            fontWeight: semiBold, fontSize: 18),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ReminderLoop(nama: 'Harian'),
+                                    ReminderLoop(
+                                      nama: 'Mingguan',
+                                      isSelected: true,
+                                    ),
+                                    ReminderLoop(nama: 'Bulanan'),
+                                    ReminderLoop(nama: 'Tahunan'),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
