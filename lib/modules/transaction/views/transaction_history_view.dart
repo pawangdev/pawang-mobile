@@ -7,6 +7,7 @@ import 'package:pawang_mobile/modules/transaction/controllers/transaction_contro
 import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 import 'package:pawang_mobile/widgets/pengeluaran_card.dart';
+import 'package:pawang_mobile/widgets/wallet_card3.dart';
 
 class TransactionHistoryView extends StatelessWidget {
   final TransactionController controller = Get.find();
@@ -35,12 +36,68 @@ class TransactionHistoryView extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.012,
                           ),
-                          Text(
-                            'Transaksi',
-                            style: kInter.copyWith(
-                                fontSize: 16,
-                                fontWeight: bold,
-                                color: defaultWhite),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Transaksi',
+                                style: kInter.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: defaultWhite),
+                              ),
+                              GestureDetector(
+                                  child: const Icon(
+                                    Icons.list_rounded,
+                                    color: defaultWhite,
+                                  ),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(30))),
+                                        builder: (BuildContext context) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 30.0, right: 32, left: 25),
+                                            child: Container(
+                                              child: ListView(
+                                                children: [
+                                                  Center(
+                                                    child: Text(
+                                                      'Pilih Dompet',
+                                                      style: kInter.copyWith(
+                                                          fontWeight: semiBold,
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  WalletCard3(
+                                                    nama: 'Dompet 1',
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  WalletCard3(
+                                                    nama: 'Dompet 2',
+                                                    isSelected: true,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  WalletCard3(
+                                                    nama: 'Dompet 3',
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  })
+                            ],
                           ),
                           SizedBox(
                             height: Get.height * 0.03,
