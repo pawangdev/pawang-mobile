@@ -95,6 +95,7 @@ class AddTransactionView extends StatelessWidget {
                         onTap: (() => Get.toNamed(RoutesName.category,
                             arguments: {'is_choose': true})),
                         keyboardType: TextInputType.none,
+                        textInputAction: TextInputAction.next,
                         readOnly: true,
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
@@ -103,7 +104,7 @@ class AddTransactionView extends StatelessWidget {
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(10),
                             child: SvgPicture.asset(
-                              'assets/images/)b.svg',
+                              'assets/images/chevron_down.svg',
                               color: defaultGray,
                             ),
                           ),
@@ -121,6 +122,7 @@ class AddTransactionView extends StatelessWidget {
                             arguments: {'is_choose': true})),
                         keyboardType: TextInputType.none,
                         readOnly: true,
+                        textInputAction: TextInputAction.next,
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
                           hintText: 'Dompet',
@@ -143,6 +145,7 @@ class AddTransactionView extends StatelessWidget {
                             .required()
                             .build(),
                         controller: controller.dateTextController,
+                        textInputAction: TextInputAction.next,
                         type: DateTimePickerType.dateTime,
                         initialDate: DateTime.now().toLocal(),
                         dateMask: 'd MMMM yyyy - HH:mm',
@@ -167,6 +170,15 @@ class AddTransactionView extends StatelessWidget {
                         height: Get.height * 0.025,
                       ),
                       InputField(
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) async {
+                          controller.formValdidate();
+                          if (args == null) {
+                            await controller.createTransaction();
+                          } else {
+                            await controller.updateTransaction();
+                          }
+                        },
                         icon: const Icon(Icons.format_quote_rounded),
                         inputLabel: 'Keterangan',
                         inputController: controller.descriptionTextController,

@@ -105,6 +105,10 @@ class RegisterView extends StatelessWidget {
                   Obx(
                     () => TextFormField(
                       textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) {
+                        controller.formValdidate();
+                        controller.register();
+                      },
                       validator: ValidationBuilder(localeName: 'id')
                           .required()
                           .minLength(8)

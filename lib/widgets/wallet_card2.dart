@@ -117,6 +117,11 @@ class WalletCard2 extends StatelessWidget {
                                               height: Get.height * 0.035,
                                             ),
                                             InputField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              onFieldSubmitted: (_) {
+                                                controller.updateWallet();
+                                              },
                                               icon: const Icon(Icons
                                                   .monetization_on_outlined),
                                               inputLabel: "Saldo",

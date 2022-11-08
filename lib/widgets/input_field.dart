@@ -17,6 +17,8 @@ class InputField extends StatelessWidget {
     required this.icon,
     this.initialValue,
     this.inputFormatters,
+    this.textInputAction = TextInputAction.next,
+    this.onFieldSubmitted,
   }) : super(key: key);
   final String inputLabel;
   final Widget icon;
@@ -24,7 +26,9 @@ class InputField extends StatelessWidget {
   final bool readOnly;
   final TextEditingController inputController;
   final Function()? onTap;
+  final Function(String)? onFieldSubmitted;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final TextCapitalization? capitalization;
   final String? Function(String?)? validator;
   final bool? isPassword;
@@ -34,7 +38,8 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textInputAction: TextInputAction.next,
+      onFieldSubmitted: onFieldSubmitted,
+      textInputAction: textInputAction,
       validator: validator,
       readOnly: readOnly,
       enabled: enable,

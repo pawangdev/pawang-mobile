@@ -118,6 +118,10 @@ class ChangePasswordView extends StatelessWidget {
                         inputController: controller.passwordNewTextController),
                     SizedBox(height: Get.height * 0.025),
                     InputField(
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          controller.updatePassword();
+                        },
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Baru Konfirmasi',

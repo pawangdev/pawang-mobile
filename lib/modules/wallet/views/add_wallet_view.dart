@@ -60,6 +60,10 @@ class AddWalletView extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(bottom: 20),
                       child: InputField(
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          controller.createWallet();
+                        },
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.monetization_on_outlined),
                         inputLabel: "Saldo Awal",

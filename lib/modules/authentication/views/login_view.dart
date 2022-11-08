@@ -89,6 +89,10 @@ class LoginView extends StatelessWidget {
                     Obx(
                       () => TextFormField(
                         textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          controller.formValdidate();
+                          controller.login();
+                        },
                         validator: ValidationBuilder(localeName: 'id')
                             .required()
                             .minLength(8)
