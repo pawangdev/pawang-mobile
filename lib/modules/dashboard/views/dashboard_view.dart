@@ -276,6 +276,9 @@ class DashboardView extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           controllerNavigation.changeTabIndex(1);
+                          controllerTransaction.isFilter.value = true;
+                          controllerTransaction.selectedFilterWalletId.value =
+                              controller.selectedWallets.value;
                         },
                         child: Text(
                           'Lihat Semua',
@@ -459,12 +462,12 @@ class DashboardView extends StatelessWidget {
                                                           .dateTextController
                                                           .text = remind.date!;
                                                       Get.toNamed(
-                                                          RoutesName
-                                                              .addreminder,
-                                                          arguments: {
-                                                            "is_adding": true,
-                                                            "id": remind.id
-                                                          });
+                                                        RoutesName.addreminder,
+                                                        arguments: {
+                                                          "is_adding": true,
+                                                          "id": remind.id
+                                                        },
+                                                      );
                                                     },
                                                   ),
                                                 ),
@@ -478,7 +481,8 @@ class DashboardView extends StatelessWidget {
                                                     onTap: () =>
                                                         controllerReminder
                                                             .deleteReminder(
-                                                                remind.id),
+                                                      remind.id,
+                                                    ),
                                                   ),
                                                 ),
                                               ],

@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -93,6 +95,7 @@ class AddReminderView extends StatelessWidget {
                         icon: const Icon(Icons.event_repeat_rounded),
                         inputLabel: 'Perulangan',
                         inputController: controller.dateTextController,
+                        readOnly: true,
                         onTap: () {
                           return showModalBottomSheet(
                             context: context,
@@ -102,8 +105,9 @@ class AddReminderView extends StatelessWidget {
                             builder: (context) {
                               return Padding(
                                 padding: const EdgeInsets.all(30.0),
-                                child: ListView(
-                                  clipBehavior: Clip.none,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Center(
                                       child: Text(
@@ -112,16 +116,32 @@ class AddReminderView extends StatelessWidget {
                                             fontWeight: semiBold, fontSize: 18),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
-                                    ReminderLoop(nama: 'Harian'),
-                                    ReminderLoop(
-                                      nama: 'Mingguan',
-                                      isSelected: true,
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemBuilder: (context, index) {
+                                          final typeRepeate =
+                                              controller.typeData[index];
+                                          return Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            // ignore: unrelated_type_equality_checks
+                                            child: Obx(
+                                              () => ReminderLoop(
+                                                nama: typeRepeate,
+                                                isSelected: typeRepeate ==
+                                                        controller
+                                                            .selectedType.value
+                                                    ? true
+                                                    : false,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        itemCount: controller.typeData.length,
+                                      ),
                                     ),
-                                    ReminderLoop(nama: 'Bulanan'),
-                                    ReminderLoop(nama: 'Tahunan'),
                                   ],
                                 ),
                               );

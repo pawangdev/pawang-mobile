@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
@@ -60,30 +60,83 @@ class TransactionHistoryView extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return Padding(
                                         padding: const EdgeInsets.only(
-                                            top: 30.0, right: 32, left: 25),
-                                        child: Container(
-                                          child: controller.dashboardController
-                                                  .wallets.isEmpty
-                                              ? const Center(
-                                                  child:
-                                                      Text('Tidak Ada Dompet'),
-                                                )
-                                              : ListView.builder(
-                                                  itemCount: controller
-                                                      .dashboardController
-                                                      .wallets
-                                                      .length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return WalletCard3(
-                                                      nama: controller
-                                                          .dashboardController
-                                                          .wallets[index]
-                                                          .name,
-                                                    );
-                                                  },
+                                            top: 15.0, right: 32, left: 25),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Filter Dompet',
+                                                  style: kInter.copyWith(
+                                                    fontWeight: medium,
+                                                  ),
                                                 ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    controller.isFilter.value =
+                                                        false;
+
+                                                    controller
+                                                        .selectedFilterWalletId
+                                                        .value = 10000;
+
+                                                    Get.back();
+                                                  },
+                                                  child: const Text("Reset"),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            controller.dashboardController
+                                                    .wallets.isEmpty
+                                                ? const Center(
+                                                    child: Text(
+                                                        'Tidak Ada Dompet'),
+                                                  )
+                                                : Expanded(
+                                                    child: ListView.builder(
+                                                      itemCount: controller
+                                                          .dashboardController
+                                                          .wallets
+                                                          .length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        final wallet = controller
+                                                            .dashboardController
+                                                            .wallets[index];
+                                                        return GestureDetector(
+                                                          onTap: () {
+                                                            controller.isFilter
+                                                                .value = true;
+                                                            controller
+                                                                .selectedFilterWalletId
+                                                                .value = index;
+
+                                                            Get.back();
+                                                          },
+                                                          child: Obx(
+                                                            () => WalletCard3(
+                                                              isSelected: controller
+                                                                      .selectedFilterWalletId
+                                                                      .value ==
+                                                                  index,
+                                                              nama: wallet.name,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                          ],
                                         ),
                                       );
                                     },
@@ -113,14 +166,24 @@ class TransactionHistoryView extends StatelessWidget {
                                   ),
                                   Obx(
                                     () => Text(
-                                      CurrencyFormat.convertToIdr(
-                                              controller
-                                                  .dashboardController
-                                                  .transactionDetailData
-                                                  .value
-                                                  .totalBalance,
-                                              2)
-                                          .toString(),
+                                      !controller.isFilter.value
+                                          ? CurrencyFormat.convertToIdr(
+                                                  controller
+                                                      .dashboardController
+                                                      .transactionDetailData
+                                                      .value
+                                                      .totalBalance,
+                                                  2)
+                                              .toString()
+                                          : CurrencyFormat.convertToIdr(
+                                                  controller
+                                                      .dashboardController
+                                                      .wallets[controller
+                                                          .selectedFilterWalletId
+                                                          .value]
+                                                      .balance,
+                                                  2)
+                                              .toString(),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: kInter.copyWith(
@@ -206,14 +269,24 @@ class TransactionHistoryView extends StatelessWidget {
                             () => FittedBox(
                               fit: BoxFit.fitWidth,
                               child: Text(
-                                CurrencyFormat.convertToIdr(
-                                        controller
-                                            .dashboardController
-                                            .transactionDetailData
-                                            .value
-                                            .totalIncome,
-                                        2)
-                                    .toString(),
+                                !controller.isFilter.value
+                                    ? CurrencyFormat.convertToIdr(
+                                            controller
+                                                .dashboardController
+                                                .transactionDetailData
+                                                .value
+                                                .totalIncome,
+                                            2)
+                                        .toString()
+                                    : CurrencyFormat.convertToIdr(
+                                            controller
+                                                .dashboardController
+                                                .wallets[controller
+                                                    .selectedFilterWalletId
+                                                    .value]
+                                                .totalIncome,
+                                            2)
+                                        .toString(),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
@@ -252,14 +325,24 @@ class TransactionHistoryView extends StatelessWidget {
                             () => FittedBox(
                               fit: BoxFit.fitWidth,
                               child: Text(
-                                CurrencyFormat.convertToIdr(
-                                        controller
-                                            .dashboardController
-                                            .transactionDetailData
-                                            .value
-                                            .totalOutcome,
-                                        2)
-                                    .toString(),
+                                !controller.isFilter.value
+                                    ? CurrencyFormat.convertToIdr(
+                                            controller
+                                                .dashboardController
+                                                .transactionDetailData
+                                                .value
+                                                .totalOutcome,
+                                            2)
+                                        .toString()
+                                    : CurrencyFormat.convertToIdr(
+                                            controller
+                                                .dashboardController
+                                                .wallets[controller
+                                                    .selectedFilterWalletId
+                                                    .value]
+                                                .totalOutcome,
+                                            2)
+                                        .toString(),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
@@ -288,11 +371,10 @@ class TransactionHistoryView extends StatelessWidget {
                   height: Get.height * 0.0125,
                 ),
                 Obx(
-                  () => controller.dashboardController.wallets.isNotEmpty
+                  () => controller.isFilter.value
                       ? controller
                               .dashboardController
-                              .wallets[controller
-                                  .dashboardController.selectedWallets.value]
+                              .wallets[controller.selectedFilterWalletId.value]
                               .transactions
                               .isNotEmpty
                           ? ListView.builder(
@@ -302,8 +384,8 @@ class TransactionHistoryView extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 final wallet = controller
                                     .dashboardController
-                                    .wallets[controller.dashboardController
-                                        .selectedWallets.value]
+                                    .wallets[
+                                        controller.selectedFilterWalletId.value]
                                     .transactions[index];
                                 return InkWell(
                                   highlightColor: Colors.transparent,
@@ -323,10 +405,44 @@ class TransactionHistoryView extends StatelessWidget {
                               },
                               itemCount: controller
                                   .dashboardController
-                                  .wallets[controller.dashboardController
-                                      .selectedWallets.value]
+                                  .wallets[
+                                      controller.selectedFilterWalletId.value]
                                   .transactions
                                   .length,
+                            )
+                          : Center(
+                              child: Text(
+                                'Tidak ada transaksi',
+                                style: kInter.copyWith(
+                                    fontWeight: medium, color: defaultGray),
+                              ),
+                            )
+                      : controller.dashboardController.transactions.isNotEmpty
+                          ? ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                final wallet = controller
+                                    .dashboardController.transactions[index];
+                                return InkWell(
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () => Get.toNamed(
+                                      RoutesName.detailtransaction,
+                                      arguments: wallet),
+                                  child: Column(
+                                    children: [
+                                      CardPengeluaran(data: wallet),
+                                      SizedBox(
+                                        height: Get.height * 0.018,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              itemCount: controller
+                                  .dashboardController.transactions.length,
                             )
                           : Center(
                               child: Text(
@@ -335,15 +451,7 @@ class TransactionHistoryView extends StatelessWidget {
                                     color: defaultGray, fontWeight: medium),
                                 textAlign: TextAlign.center,
                               ),
-                            )
-                      : Center(
-                          child: Text(
-                            "Anda belum memiliki dompet",
-                            style: kInter.copyWith(
-                                color: defaultGray, fontWeight: medium),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                            ),
                 ),
               ],
             ),

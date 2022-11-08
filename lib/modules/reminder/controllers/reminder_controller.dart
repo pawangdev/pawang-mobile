@@ -11,7 +11,6 @@ class ReminderController extends GetxController {
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
-  final type = "once".obs;
 
   final List<String> typeData = [
     'Tidak Berulang',
@@ -21,7 +20,7 @@ class ReminderController extends GetxController {
     'Tahunan',
   ];
 
-  String? selectedType;
+  final selectedType = "Tidak Berulang".obs;
 
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
     EasyLoading.show(status: 'Mohon Tunggu');
@@ -30,7 +29,7 @@ class ReminderController extends GetxController {
       try {
         final input = <String, dynamic>{
           'name': nameTextController.text,
-          'type': type.value,
+          'type': selectedType.value,
           'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
@@ -67,7 +66,7 @@ class ReminderController extends GetxController {
       try {
         final input = <String, dynamic>{
           'name': nameTextController.text,
-          'type': type.value,
+          'type': selectedType.value,
           'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
@@ -148,6 +147,10 @@ class ReminderController extends GetxController {
   Future<void> resetAllInput() async {
     nameTextController.text = "";
     dateTextController.text = "";
-    type.value = "once";
+    selectedType.value = "Tidak Berulang";
+
+    if (Get.isDialogOpen!) {
+      Get.back();
+    }
   }
 }

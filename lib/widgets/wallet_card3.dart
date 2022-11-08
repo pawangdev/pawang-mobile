@@ -17,7 +17,7 @@ class WalletCard3 extends StatelessWidget {
     return Container(
       width: Get.width,
       height: Get.height * 0.1,
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: defaultWhite,
         borderRadius: const BorderRadius.all(Radius.circular(12)),

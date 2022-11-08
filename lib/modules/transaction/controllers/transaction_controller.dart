@@ -1,16 +1,15 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pawang_mobile/models/transaction_detail_model.dart';
 import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
-import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/modules/transaction/services/transaction_service.dart';
+import 'package:pawang_mobile/routes/routes.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
 
 class TransactionController extends GetxController {
@@ -49,6 +48,10 @@ class TransactionController extends GetxController {
   var subCategoryId = 0.obs;
   var type = "".obs;
   late File fileImageReceipt;
+
+  // Filter Wallets
+  final isFilter = false.obs;
+  final selectedFilterWalletId = 0.obs;
 
   @override
   void onInit() {

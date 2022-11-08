@@ -56,7 +56,7 @@ class CardPengeluaran extends StatelessWidget {
                         ),
                         // TANGGAL
                         Text(
-                          DateFormat("dd/MM/yyyy")
+                          DateFormat("dd MMMM yyyy")
                               .format(data.date.toLocal())
                               .toString(),
                           maxLines: 1,
