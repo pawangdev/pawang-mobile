@@ -39,180 +39,193 @@ class LoginView extends StatelessWidget {
             ),
           );
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Image.asset(
-              'assets/images/login.png',
-              fit: BoxFit.fill,
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Masuk dulu yuk!",
-                    style: kInter.copyWith(
-                        fontWeight: bold, fontSize: 20, color: defaultBlack),
-                  ),
-                  SizedBox(height: Get.height * 0.008),
-                  Text(
-                    "Kami sudah lama menantimu",
-                    style: kInter.copyWith(fontWeight: regular, fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Form(
-                key: controller.formKey,
+        child: LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
                 child: Column(
-                  children: [
-                    InputField(
-                      validator: ValidationBuilder(localeName: 'id')
-                          .required()
-                          .email()
-                          .build(),
-                      icon: const Icon(Icons.alternate_email_rounded),
-                      inputLabel: "Email",
-                      capitalization: TextCapitalization.none,
-                      inputController: controller.emailTextController,
-                      keyboardType: TextInputType.emailAddress,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/images/login.png',
+                      fit: BoxFit.fill,
                     ),
-                    SizedBox(height: Get.height * 0.025),
-                    Obx(
-                      () => TextFormField(
-                        textInputAction: TextInputAction.done,
-                        onFieldSubmitted: (_) {
-                          controller.formValdidate();
-                          controller.login();
-                        },
-                        validator: ValidationBuilder(localeName: 'id')
-                            .required()
-                            .minLength(8)
-                            .build(),
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: controller.passwordTextController,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.lock_rounded),
-                          hintText: 'Password',
-                          fillColor: defaultWhite,
-                          focusColor: defaultPrimary,
-                          suffixIcon: IconButton(
-                            color: defaultGray,
-                            icon: Icon(controller.isObsecure.value
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            onPressed: () {
-                              controller.isObsecure.value =
-                                  !controller.isObsecure.value;
+                    SizedBox(height: Get.height * 0.05),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Masuk dulu yuk!",
+                            style: kInter.copyWith(
+                                fontWeight: bold,
+                                fontSize: 20,
+                                color: defaultBlack),
+                          ),
+                          SizedBox(height: Get.height * 0.008),
+                          Text(
+                            "Kami sudah lama menantimu",
+                            style: kInter.copyWith(
+                                fontWeight: regular, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            InputField(
+                              validator: ValidationBuilder(localeName: 'id')
+                                  .required()
+                                  .email()
+                                  .build(),
+                              icon: const Icon(Icons.alternate_email_rounded),
+                              inputLabel: "Email",
+                              capitalization: TextCapitalization.none,
+                              inputController: controller.emailTextController,
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            SizedBox(height: Get.height * 0.025),
+                            Obx(
+                              () => TextFormField(
+                                textInputAction: TextInputAction.done,
+                                onFieldSubmitted: (_) {
+                                  controller.formValdidate();
+                                  controller.login();
+                                },
+                                validator: ValidationBuilder(localeName: 'id')
+                                    .required()
+                                    .minLength(8)
+                                    .build(),
+                                keyboardType: TextInputType.visiblePassword,
+                                controller: controller.passwordTextController,
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.lock_rounded),
+                                  hintText: 'Password',
+                                  fillColor: defaultWhite,
+                                  focusColor: defaultPrimary,
+                                  suffixIcon: IconButton(
+                                    color: defaultGray,
+                                    icon: Icon(controller.isObsecure.value
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      controller.isObsecure.value =
+                                          !controller.isObsecure.value;
+                                    },
+                                  ),
+                                ),
+                                autofocus: false,
+                                obscureText: controller.isObsecure.value,
+                              ),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.012,
+                            ),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () => Get.toNamed(
+                                      RoutesName.resetpasswordemail),
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      minimumSize: const Size(50, 30),
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      alignment: Alignment.center),
+                                  child: Text(
+                                    "Lupa Password",
+                                    style: kInter.copyWith(fontSize: 14),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                      child: Column(
+                        children: [
+                          ButtonCustom(
+                            text: "Masuk",
+                            onTap: () {
+                              controller.formValdidate();
+                              controller.login();
                             },
                           ),
-                        ),
-                        autofocus: false,
-                        obscureText: controller.isObsecure.value,
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.012,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () =>
-                              Get.toNamed(RoutesName.resetpasswordemail),
-                          style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: const Size(50, 30),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              alignment: Alignment.center),
-                          child: Text(
-                            "Lupa Password",
-                            style: kInter.copyWith(fontSize: 14),
+                          SizedBox(
+                            height: Get.height * 0.02,
                           ),
-                        ),
+                          OutlinedButton(
+                            onPressed: () => controller.signInGoogle(),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              side: const BorderSide(color: defaultPrimary),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      defaultBorderRadius)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/images/google.svg',
+                                  width: 24,
+                                ),
+                                SizedBox(width: Get.width * 0.04),
+                                Text('Masuk dengan Google',
+                                    style: kInter.copyWith(
+                                        fontSize: 16, fontWeight: semiBold))
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Belum punya akun?",
+                                style: kInter.copyWith(
+                                    fontSize: 14,
+                                    color: defaultBlack,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              TextButton(
+                                child: Text(
+                                  'Daftar',
+                                  style: kInter.copyWith(
+                                      fontSize: 14,
+                                      color: defaultPrimary,
+                                      fontWeight: bold),
+                                ),
+                                onPressed: () {
+                                  Get.offNamed(RoutesName.register);
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ButtonCustom(
-                    text: "Masuk",
-                    onTap: () {
-                      controller.formValdidate();
-                      controller.login();
-                    },
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: OutlinedButton(
-                onPressed: () => controller.signInGoogle(),
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  side: const BorderSide(color: defaultPrimary),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/google.svg',
-                      width: 24,
-                    ),
-                    SizedBox(width: Get.width * 0.04),
-                    Text('Masuk dengan Google',
-                        style:
-                            kInter.copyWith(fontSize: 16, fontWeight: semiBold))
-                  ],
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Belum punya akun?",
-                  style: kInter.copyWith(
-                      fontSize: 14,
-                      color: defaultBlack,
-                      fontWeight: FontWeight.w400),
-                ),
-                TextButton(
-                  child: Text(
-                    'Daftar',
-                    style: kInter.copyWith(
-                        fontSize: 14, color: defaultPrimary, fontWeight: bold),
-                  ),
-                  onPressed: () {
-                    Get.offNamed(RoutesName.register);
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }
