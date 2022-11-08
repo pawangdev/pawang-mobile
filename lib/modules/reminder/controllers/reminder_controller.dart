@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/models/reminder_model.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/reminder/services/reminder_service.dart';
 
@@ -11,6 +12,8 @@ class ReminderController extends GetxController {
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
+  final TextEditingController typeRepeateTextController =
+      TextEditingController(text: "Tidak Berulang");
 
   final List<String> typeData = [
     'Tidak Berulang',
@@ -20,16 +23,35 @@ class ReminderController extends GetxController {
     'Tahunan',
   ];
 
-  final selectedType = "Tidak Berulang".obs;
+  final typeRepeate = "Tidak Berulang".obs;
 
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
+    String? selectedType;
     EasyLoading.show(status: 'Mohon Tunggu');
+
+    switch (typeRepeate.value) {
+      case "Tidak Berulang":
+        selectedType = "once";
+        break;
+      case "Harian":
+        selectedType = "daily";
+        break;
+      case "Mingguan":
+        selectedType = "weekly";
+        break;
+      case "Bulanan":
+        selectedType = "monthly";
+        break;
+      case "Tahunan":
+        selectedType = "yearly";
+        break;
+    }
 
     if (isAdding) {
       try {
         final input = <String, dynamic>{
           'name': nameTextController.text,
-          'type': selectedType.value,
+          'type': selectedType,
           'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
@@ -66,7 +88,7 @@ class ReminderController extends GetxController {
       try {
         final input = <String, dynamic>{
           'name': nameTextController.text,
-          'type': selectedType.value,
+          'type': selectedType,
           'date': DateTime.parse(dateTextController.text).toUtc().toString(),
           'is_active': true
         };
@@ -144,10 +166,78 @@ class ReminderController extends GetxController {
     }
   }
 
+  Future<bool> toggleReminder(ReminderDataModel reminder) async {
+    try {
+      EasyLoading.show(status: 'Mohon Tunggu');
+
+      final input = <String, dynamic>{
+        'name': reminder.name,
+        'type': reminder.type,
+        'date': reminder.date,
+        'is_active': !reminder.isActive!
+      };
+
+      final response =
+          await reminderService.updateReminder(reminder.id!, input);
+
+      if (response) {
+        await dashboardController
+            .getReminders()
+            .then((value) => EasyLoading.dismiss());
+
+        resetAllInput();
+
+        if (!reminder.isActive!) {
+          Get.snackbar(
+            'Sukses !',
+            "Berhasil Menyalakan Pengingat",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          );
+
+          return true;
+        } else {
+          Get.snackbar(
+            'Sukses !',
+            "Berhasil Mematikan Pengingat",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          );
+
+          return false;
+        }
+      }
+      return false;
+    } catch (e) {
+      EasyLoading.dismiss();
+
+      Get.snackbar(
+        'Gagal Memperbarui Pengingat !',
+        '$e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+
+      throw false;
+    }
+  }
+
   Future<void> resetAllInput() async {
     nameTextController.text = "";
     dateTextController.text = "";
-    selectedType.value = "Tidak Berulang";
+    typeRepeateTextController.text = "Tidak Berulang";
 
     if (Get.isDialogOpen!) {
       Get.back();

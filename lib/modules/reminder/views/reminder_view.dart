@@ -80,6 +80,9 @@ class ReminderView extends StatelessWidget {
                         return ReminderCard(
                           item: reminder,
                           index: index,
+                          onToogle: (value) {
+                            controller.toggleReminder(reminder);
+                          },
                           onDelete: (context) =>
                               controller.deleteReminder(reminder.id),
                           onUpdate: (context) {

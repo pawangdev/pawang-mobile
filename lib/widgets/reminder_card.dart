@@ -10,12 +10,14 @@ class ReminderCard extends StatelessWidget {
   final int index;
   final Function(BuildContext)? onDelete;
   final Function(BuildContext)? onUpdate;
+  final Function(bool)? onToogle;
   const ReminderCard(
       {Key? key,
       required this.item,
       required this.index,
       required this.onDelete,
-      required this.onUpdate})
+      required this.onUpdate,
+      this.onToogle})
       : super(key: key);
 
   @override
@@ -83,7 +85,7 @@ class ReminderCard extends StatelessWidget {
                         ),
                         SizedBox(width: Get.width * 0.05),
                         Text(
-                          DateFormat("dd/MM/yyyy - HH:mm")
+                          DateFormat("dd MMMM yyyy - HH:mm")
                               .format(DateTime.parse(item.date!).toLocal())
                               .toString(),
                           maxLines: 1,
@@ -94,7 +96,7 @@ class ReminderCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Switch(value: true, onChanged: (value) {})
+                Switch(value: item.isActive!, onChanged: onToogle)
               ],
             ),
           ),

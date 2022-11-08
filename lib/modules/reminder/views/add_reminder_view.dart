@@ -76,7 +76,7 @@ class AddReminderView extends StatelessWidget {
                             : DateTime.parse(controller.dateTextController.text)
                                 .toLocal()
                                 .toString(),
-                        firstDate: DateTime(2000),
+                        firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
                         onChanged: (value) {
                           controller.dateTextController.text = value;
@@ -93,8 +93,9 @@ class AddReminderView extends StatelessWidget {
                       ),
                       InputField(
                         icon: const Icon(Icons.event_repeat_rounded),
+                        keyboardType: TextInputType.none,
                         inputLabel: 'Perulangan',
-                        inputController: controller.dateTextController,
+                        inputController: controller.typeRepeateTextController,
                         readOnly: true,
                         onTap: () {
                           return showModalBottomSheet(
@@ -127,14 +128,26 @@ class AddReminderView extends StatelessWidget {
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             // ignore: unrelated_type_equality_checks
-                                            child: Obx(
-                                              () => ReminderLoop(
-                                                nama: typeRepeate,
-                                                isSelected: typeRepeate ==
-                                                        controller
-                                                            .selectedType.value
-                                                    ? true
-                                                    : false,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                controller
+                                                    .typeRepeateTextController
+                                                    .text = typeRepeate;
+
+                                                controller.typeRepeate.value =
+                                                    typeRepeate;
+
+                                                Get.back();
+                                              },
+                                              child: Obx(
+                                                () => ReminderLoop(
+                                                  nama: typeRepeate,
+                                                  isSelected: typeRepeate ==
+                                                          controller
+                                                              .typeRepeate.value
+                                                      ? true
+                                                      : false,
+                                                ),
                                               ),
                                             ),
                                           );
