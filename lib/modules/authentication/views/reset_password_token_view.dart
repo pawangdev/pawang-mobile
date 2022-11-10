@@ -84,6 +84,12 @@ class ResetPasswordTokenView extends StatelessWidget {
                 Form(
                   // key: controller.formKey,
                   child: TextFormField(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) {
+                      controller.sendVerifyToken();
+                    },
+                    scrollPadding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
                     controller: controller.tokenTextController,
                     validator: ValidationBuilder(localeName: 'id')
                         .required()

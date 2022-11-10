@@ -74,6 +74,8 @@ class AddTransactionView extends StatelessWidget {
                         height: Get.height * 0.025,
                       ),
                       TextFormField(
+                        scrollPadding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
                         validator: ValidationBuilder(localeName: 'id')
                             .required()
                             .build(),
@@ -100,6 +102,8 @@ class AddTransactionView extends StatelessWidget {
                         height: Get.height * 0.025,
                       ),
                       TextFormField(
+                        scrollPadding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
                         validator: ValidationBuilder(localeName: 'id')
                             .required()
                             .build(),

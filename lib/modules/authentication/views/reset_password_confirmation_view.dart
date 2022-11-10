@@ -4,6 +4,7 @@ import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/reset_password_controller.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/icon_back.dart';
+import 'package:pawang_mobile/widgets/input_field.dart';
 
 class ResetPasswordConfirmationView extends StatelessWidget {
   final ResetPasswordController controller = Get.find();
@@ -78,18 +79,22 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                TextField(
-                  controller: controller.passwordTextController,
+                InputField(
+                  icon: const Icon(Icons.password),
+                  inputController: controller.passwordTextController,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(label: Text("Password Baru".tr)),
+                  isPassword: true,
+                  inputLabel: "Password Baru".tr,
                 ),
-                TextField(
-                  controller: controller.passwordConfirmationTextController,
+                InputField(
+                  textInputAction: TextInputAction.done,
+                  icon: const Icon(Icons.password),
+                  onFieldSubmitted: (_) => controller.createNewPassword(),
+                  inputController:
+                      controller.passwordConfirmationTextController,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration:
-                      InputDecoration(label: Text("Password Konfirmasi".tr)),
+                  isPassword: true,
+                  inputLabel: "Password Konfirmasi".tr,
                 ),
                 const SizedBox(
                   height: 32,

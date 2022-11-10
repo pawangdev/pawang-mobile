@@ -350,6 +350,8 @@ class CategoryView extends StatelessWidget {
                                                                             height:
                                                                                 20),
                                                                         TextFormField(
+                                                                          scrollPadding:
+                                                                              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                                                                           controller:
                                                                               controller.nameTextController,
                                                                           decoration:
@@ -543,6 +545,12 @@ class CategoryView extends StatelessWidget {
                                                     ),
                                                     const SizedBox(height: 20),
                                                     TextFormField(
+                                                      scrollPadding:
+                                                          EdgeInsets.only(
+                                                              bottom: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets
+                                                                  .bottom),
                                                       controller: controller
                                                           .nameTextController,
                                                       decoration:

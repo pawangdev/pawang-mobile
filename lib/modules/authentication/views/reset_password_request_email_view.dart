@@ -86,6 +86,12 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                 Form(
                   key: controller.formKey,
                   child: TextFormField(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) {
+                      controller.formValdidate();
+                      controller.sendRequestToken();
+                    },
+                    scrollPadding: EdgeInsets.only(bottom: Get.height * 0.4),
                     controller: controller.emailTextController,
                     validator: ValidationBuilder(localeName: 'id')
                         .required()

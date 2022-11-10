@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pawang_mobile/constants/theme.dart';
+import 'package:get/get.dart';
 
 class InputField extends StatelessWidget {
   const InputField({
@@ -38,6 +38,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      scrollPadding: EdgeInsets.only(bottom: Get.height * 0.4),
       onFieldSubmitted: onFieldSubmitted,
       textInputAction: textInputAction,
       validator: validator,
