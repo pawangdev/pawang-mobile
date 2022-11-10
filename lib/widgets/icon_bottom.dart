@@ -21,39 +21,48 @@ class IconBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      width: Get.width * 0.2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          GestureDetector(
-            onTap: onPressed,
-            child: selected
-                ? Image.asset(
-                    iconEnable,
-                    width: 26,
-                    height: 26,
-                  )
-                : Image.asset(
-                    iconDisable,
-                    width: 24,
-                    height: 24,
-                  ),
+    return InkWell(
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: onPressed,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          width: Get.width * 0.2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              selected
+                  ? Image.asset(
+                      iconEnable,
+                      width: 26,
+                      height: 26,
+                    )
+                  : Image.asset(
+                      iconDisable,
+                      width: 24,
+                      height: 24,
+                    ),
+              selected
+                  ? FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        text,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: kInter.copyWith(
+                            fontWeight: bold,
+                            color: primaryColor,
+                            fontSize: 11),
+                      ),
+                    )
+                  : const SizedBox()
+            ],
           ),
-          selected
-              ? FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(
-                    text,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: kInter.copyWith(
-                        fontWeight: bold, color: primaryColor, fontSize: 11),
-                  ),
-                )
-              : const SizedBox()
-        ],
+        ),
       ),
     );
   }

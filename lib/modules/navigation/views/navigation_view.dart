@@ -60,64 +60,62 @@ class NavigationView extends StatelessWidget {
           color: Colors.white,
           child: SizedBox(
             height: Get.height * 0.08,
-            width: Get.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: GetBuilder<NavigationController>(
-                init: NavigationController(),
-                builder: (controller) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          IconBottomBar(
-                            text: "Beranda".tr,
-                            iconEnable: "assets/images/home1.png",
-                            iconDisable: "assets/images/home2.png",
-                            selected: controller.tabIndex == 0 ? true : false,
-                            onPressed: () {
-                              controller.changeTabIndex(0);
-                            },
-                          ),
-                          IconBottomBar(
-                            text: "Transaksi".tr,
-                            iconEnable: "assets/images/transaksi1.png",
-                            iconDisable: "assets/images/transaksi2.png",
-                            selected: controller.tabIndex == 1 ? true : false,
-                            onPressed: () {
-                              controller.changeTabIndex(1);
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(),
-                      Row(
-                        children: [
-                          IconBottomBar(
-                            text: "Pengingat".tr,
-                            iconEnable: "assets/images/remin1.png",
-                            iconDisable: "assets/images/remin2.png",
-                            selected: controller.tabIndex == 3 ? true : false,
-                            onPressed: () {
-                              controller.changeTabIndex(3);
-                            },
-                          ),
-                          IconBottomBar(
-                            text: "Pengaturan".tr,
-                            iconEnable: "assets/images/setting1.png",
-                            iconDisable: "assets/images/setting2.png",
-                            selected: controller.tabIndex == 4 ? true : false,
-                            onPressed: () {
-                              controller.changeTabIndex(4);
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ),
+            child: GetBuilder<NavigationController>(
+              init: NavigationController(),
+              builder: (controller) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconBottomBar(
+                          text: "Beranda".tr,
+                          iconEnable: "assets/images/home1.png",
+                          iconDisable: "assets/images/home2.png",
+                          selected: controller.tabIndex == 0 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(0);
+                          },
+                        ),
+                        IconBottomBar(
+                          text: "Transaksi".tr,
+                          iconEnable: "assets/images/transaksi1.png",
+                          iconDisable: "assets/images/transaksi2.png",
+                          selected: controller.tabIndex == 1 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(1);
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.03,
+                    ),
+                    Row(
+                      children: [
+                        IconBottomBar(
+                          text: "Pengingat".tr,
+                          iconEnable: "assets/images/remin1.png",
+                          iconDisable: "assets/images/remin2.png",
+                          selected: controller.tabIndex == 3 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(3);
+                          },
+                        ),
+                        IconBottomBar(
+                          text: "Pengaturan".tr,
+                          iconEnable: "assets/images/setting1.png",
+                          iconDisable: "assets/images/setting2.png",
+                          selected: controller.tabIndex == 4 ? true : false,
+                          onPressed: () {
+                            controller.changeTabIndex(4);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

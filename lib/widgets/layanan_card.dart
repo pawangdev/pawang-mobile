@@ -14,34 +14,33 @@ class LayananCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: Get.width * 0.25,
-        height: Get.height * 0.13,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: defaultBlack.withOpacity(0.09),
-              spreadRadius: 2,
-              blurRadius: 10,
-            )
-          ],
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          color: defaultWhite,
-        ),
-        child: FittedBox(
-          fit: BoxFit.fitHeight,
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: Container(
+          width: Get.width * 0.2,
+          height: Get.height * 0.09,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: defaultBlack.withOpacity(0.09),
+                spreadRadius: 2,
+                blurRadius: 10,
+              )
+            ],
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: defaultWhite,
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Image.asset(icon, width: 35),
+                  child: Image.asset(icon, width: 30),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: Get.width * 0.23,
+                SizedBox(height: Get.height * 0.01),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
                   child: Center(
                     child: Text(
                       title,
@@ -49,7 +48,7 @@ class LayananCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kInter.copyWith(
                           fontSize: 12,
-                          fontWeight: regular,
+                          fontWeight: medium,
                           color: defaultBlack),
                     ),
                   ),
