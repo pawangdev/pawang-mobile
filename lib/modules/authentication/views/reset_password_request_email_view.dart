@@ -36,7 +36,7 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Lupa Password",
+                          "Lupa Password".tr,
                           style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
@@ -75,7 +75,8 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                   height: 24,
                 ),
                 Text(
-                  "Masukkan email yang kamu gunakan untuk mendaftar. Kami akan mengirimkan token untuk mengatur ulang password kamu.",
+                  "Masukkan email yang kamu gunakan untuk mendaftar. Kami akan mengirimkan token untuk mengatur ulang password kamu."
+                      .tr,
                   style: kInter.copyWith(color: defaultGray),
                   textAlign: TextAlign.center,
                 ),
@@ -90,15 +91,14 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                         .required()
                         .email()
                         .build(),
-                    decoration:
-                        const InputDecoration(label: Text("Alamat Email")),
+                    decoration: InputDecoration(label: Text("Alamat Email".tr)),
                   ),
                 ),
                 const SizedBox(
                   height: 32,
                 ),
                 ButtonCustom(
-                  text: 'Kirim Kode',
+                  text: 'Kirim Kode'.tr,
                   onTap: () {
                     controller.formValdidate();
                     controller.sendRequestToken();

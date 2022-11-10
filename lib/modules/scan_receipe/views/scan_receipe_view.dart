@@ -21,7 +21,7 @@ class ScanReceipeView extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  "Scan Struk",
+                  "Scan Struk".tr,
                   style: kInter.copyWith(
                     fontSize: 16,
                     fontWeight: bold,
@@ -31,9 +31,9 @@ class ScanReceipeView extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.038,
               ),
-              const Center(
+              Center(
                 child: Text(
-                  "Mohon atur posisi struk agar dapat terdeteksi",
+                  "Mohon atur posisi struk agar dapat terdeteksi".tr,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -57,7 +57,8 @@ class ScanReceipeView extends StatelessWidget {
                                       height: Get.height * 0.5,
                                       child: Center(
                                         child: Text(
-                                          "Silahkan pilih struk terlebih dahulu",
+                                          "Silahkan pilih struk terlebih dahulu"
+                                              .tr,
                                           style: kInter.copyWith(
                                               color: defaultGray,
                                               fontWeight: medium),
@@ -127,7 +128,7 @@ class ScanReceipeView extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     child: Text(
-                                      "atau",
+                                      "atau".tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: defaultGray,
@@ -149,7 +150,7 @@ class ScanReceipeView extends StatelessWidget {
                             ),
                             ButtonCustom(
                                 elevatedMode: false,
-                                text: "Pilih dari Galeri",
+                                text: "Pilih dari Galeri".tr,
                                 onTap: () {
                                   controller.scanReceipt(true);
                                 }),
@@ -178,7 +179,7 @@ class ScanReceipeView extends StatelessWidget {
                                   child: Container(
                                     margin: const EdgeInsets.only(top: 12),
                                     child: ButtonCustom(
-                                      text: 'Ulangi',
+                                      text: 'Ulangi'.tr,
                                       elevatedMode: false,
                                       onTap: () {
                                         controller.resetScan();
@@ -194,7 +195,7 @@ class ScanReceipeView extends StatelessWidget {
                                   child: Container(
                                     margin: const EdgeInsets.only(top: 12),
                                     child: ButtonCustom(
-                                      text: 'Lanjut',
+                                      text: 'Lanjut'.tr,
                                       onTap: () async {
                                         try {
                                           await controller.uploadReceipt();

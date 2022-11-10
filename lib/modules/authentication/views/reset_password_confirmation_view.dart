@@ -32,7 +32,7 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Buat Password Baru",
+                          "Buat Password Baru".tr,
                           style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
@@ -71,7 +71,7 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                   height: 24,
                 ),
                 Text(
-                  "Silahkan masukkan password baru anda",
+                  "Silahkan masukkan password baru anda".tr,
                   style: kInter.copyWith(color: defaultGray),
                   textAlign: TextAlign.center,
                 ),
@@ -82,21 +82,20 @@ class ResetPasswordConfirmationView extends StatelessWidget {
                   controller: controller.passwordTextController,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
-                  decoration:
-                      const InputDecoration(label: Text("Password Baru")),
+                  decoration: InputDecoration(label: Text("Password Baru".tr)),
                 ),
                 TextField(
                   controller: controller.passwordConfirmationTextController,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   decoration:
-                      const InputDecoration(label: Text("Password Konfirmasi")),
+                      InputDecoration(label: Text("Password Konfirmasi".tr)),
                 ),
                 const SizedBox(
                   height: 32,
                 ),
                 ButtonCustom(
-                  text: 'Ganti Password',
+                  text: 'Ganti Password'.tr,
                   onTap: () => controller.createNewPassword(),
                 ),
               ],

@@ -32,7 +32,7 @@ class AddWalletView extends StatelessWidget {
                     },
                   ),
                   Text(
-                    "Tambah Dompet",
+                    "Tambah Dompet".tr,
                     style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
@@ -53,7 +53,7 @@ class AddWalletView extends StatelessWidget {
                       child: InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.payment_rounded),
-                        inputLabel: "Nama Dompet",
+                        inputLabel: "Nama Dompet".tr,
                         inputController: controller.nameTextController,
                       ),
                     ),
@@ -66,7 +66,7 @@ class AddWalletView extends StatelessWidget {
                         },
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.monetization_on_outlined),
-                        inputLabel: "Saldo Awal",
+                        inputLabel: "Saldo Awal".tr,
                         inputController: controller.balanceTextController,
                         keyboardType: TextInputType.number,
                         inputFormatters: [
@@ -82,7 +82,7 @@ class AddWalletView extends StatelessWidget {
                   child: Align(
                 alignment: Alignment.bottomCenter,
                 child: ButtonCustom(
-                  text: 'Simpan Dompet',
+                  text: 'Simpan Dompet'.tr,
                   onTap: () => controller.createWallet(),
                 ),
               )),

@@ -41,7 +41,6 @@ class DashboardView extends StatelessWidget {
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [defaultPrimary, defaultPurple]),
-                      // color: defaultPrimary,
                     )),
                 Row(
                   children: [
@@ -55,18 +54,12 @@ class DashboardView extends StatelessWidget {
                           shape: BoxShape.rectangle,
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(1000)),
-                          // color: Colors.amber
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
                               defaultWhite.withOpacity(0.02),
                               defaultWhite.withOpacity(0.5),
-                              // defaultWhite.withOpacity(0.2),
-                              //     // Colors.white38
-                              //   ],
-                              //   // stops: [0.0, 1.0],
-                              // ),
                             ],
                           ),
                         )),
@@ -109,7 +102,7 @@ class DashboardView extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Hallo,",
+                                        "Selamat Datang,".tr,
                                         style: kInter.copyWith(
                                             fontSize: 12,
                                             fontWeight: medium,
@@ -164,7 +157,6 @@ class DashboardView extends StatelessWidget {
                             }
                           },
                           viewportFraction: 0.86,
-                          // padEnds: false,
                           clipBehavior: Clip.none,
                           aspectRatio: 2.3,
                           enlargeCenterPage: true,
@@ -230,21 +222,21 @@ class DashboardView extends StatelessWidget {
                         children: [
                           LayananCard(
                             icon: 'assets/images/pemasukan.png',
-                            title: 'Transaksi',
+                            title: 'Transaksi'.tr,
                             onTap: () {
                               Get.toNamed(RoutesName.addtransaction);
                             },
                           ),
                           LayananCard(
                             icon: 'assets/images/wallet.png',
-                            title: 'Dompet',
+                            title: 'Dompet'.tr,
                             onTap: () {
                               Get.toNamed(RoutesName.wallet);
                             },
                           ),
                           LayananCard(
                             icon: 'assets/images/kategori.png',
-                            title: 'Kategori',
+                            title: 'Kategori'.tr,
                             onTap: () {
                               Get.toNamed(RoutesName.category);
                             },
@@ -257,8 +249,6 @@ class DashboardView extends StatelessWidget {
               ],
             ),
             SizedBox(height: Get.height * 0.035),
-
-            // SizedBox(height: Get.height * 0.035),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Column(
@@ -267,7 +257,7 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Transaksi Terakhir',
+                        'Transaksi Terakhir'.tr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kInter.copyWith(
@@ -281,7 +271,7 @@ class DashboardView extends StatelessWidget {
                               controller.selectedWallets.value;
                         },
                         child: Text(
-                          'Lihat Semua',
+                          'Lihat Semua'.tr,
                           style: kInter.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
@@ -291,7 +281,7 @@ class DashboardView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: Get.height * 0.008,
+                    height: Get.height * 0.02,
                   ),
                   Obx(() => controller.wallets.isNotEmpty
                       ? controller.wallets[controller.selectedWallets.value]
@@ -333,7 +323,7 @@ class DashboardView extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(vertical: 25),
                               child: Center(
                                 child: Text(
-                                  "Anda Belum Memiliki Transaksi",
+                                  "Anda Belum Memiliki Transaksi".tr,
                                   style: kInter.copyWith(
                                       color: defaultGray,
                                       fontSize: 13,
@@ -346,7 +336,7 @@ class DashboardView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 25),
                           child: Center(
                             child: Text(
-                              "Anda Belum Memiliki Dompet",
+                              "Anda Belum Memiliki Dompet".tr,
                               style: kInter.copyWith(
                                   color: defaultGray,
                                   fontSize: 13,
@@ -367,7 +357,7 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Jangan Lupa Dibayar',
+                        'Jangan Lupa Dibayar'.tr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kInter.copyWith(
@@ -378,7 +368,7 @@ class DashboardView extends StatelessWidget {
                           controllerNavigation.changeTabIndex(3);
                         },
                         child: Text(
-                          'Lihat Semua',
+                          'Lihat Semua'.tr,
                           style: kInter.copyWith(
                               fontSize: 12,
                               fontWeight: medium,
@@ -475,7 +465,7 @@ class DashboardView extends StatelessWidget {
                                                     width: Get.width * 0.01),
                                                 Expanded(
                                                   child: ButtonCustom(
-                                                    text: 'Hapus',
+                                                    text: 'Hapus'.tr,
                                                     elevatedMode: false,
                                                     blueMode: false,
                                                     onTap: () =>
@@ -505,7 +495,7 @@ class DashboardView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 25),
                             child: Center(
                               child: Text(
-                                "Anda Belum Memiliki Tagihan",
+                                "Anda Belum Memiliki Tagihan".tr,
                                 style: kInter.copyWith(
                                   color: defaultGray,
                                   fontSize: 13,

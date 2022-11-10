@@ -22,7 +22,6 @@ class WalletCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-          color: defaultPrimary,
           boxShadow: [
             BoxShadow(
                 color: defaultBlack.withOpacity(0.2),
@@ -37,10 +36,10 @@ class WalletCard extends StatelessWidget {
           //     begin: Alignment.topLeft,
           //     end: Alignment.bottomRight,
           //     colors: [
-          //       defaultWhite.withOpacity(0.5),
-          //       defaultWhite.withOpacity(0.3),
-          //       defaultWhite.withOpacity(0.5)
-          //     ]),
+          //   defaultWhite.withOpacity(0.5),
+          //   defaultWhite.withOpacity(0.3),
+          //   defaultWhite.withOpacity(0.5)
+          // ]),
           borderRadius: BorderRadius.circular(20)),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +59,7 @@ class WalletCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kInter.copyWith(
-                          color: defaultWhite.withOpacity(0.8),
+                          color: defaultWhite.withOpacity(0.55),
                           fontWeight: medium,
                         ),
                       ),
@@ -71,7 +70,7 @@ class WalletCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kInter.copyWith(
-                          color: defaultWhite.withOpacity(0.8),
+                          color: defaultWhite.withOpacity(0.9),
                           fontWeight: bold,
                           fontSize: 18),
                     ),
@@ -97,20 +96,20 @@ class WalletCard extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(50)),
-                                color: defaultWhite.withOpacity(0.5)),
+                                color: defaultBlack.withOpacity(0.15)),
                             child: const Padding(
                               padding: EdgeInsets.all(2.0),
                               child: Icon(
                                 Icons.arrow_downward_rounded,
                                 size: 15,
-                                color: defaultWhite,
+                                color: Colors.amber,
                               ),
                             ),
                           ),
                           const SizedBox(
                             width: 5,
                           ),
-                          Text('Pemasukan',
+                          Text('Pemasukan'.tr,
                               style: kInter.copyWith(
                                   fontWeight: semiBold,
                                   color: defaultWhite.withOpacity(0.8))),
@@ -147,20 +146,20 @@ class WalletCard extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(50)),
-                              color: defaultWhite.withOpacity(0.5)),
+                              color: defaultBlack.withOpacity(0.15)),
                           child: const Padding(
                             padding: EdgeInsets.all(2.0),
                             child: Icon(
                               Icons.arrow_upward_rounded,
                               size: 15,
-                              color: defaultWhite,
+                              color: Colors.amber,
                             ),
                           ),
                         ),
                         const SizedBox(
                           width: 5,
                         ),
-                        Text('Pengeluaran',
+                        Text('Pengeluaran'.trArgs(),
                             style: kInter.copyWith(
                                 fontWeight: semiBold,
                                 color: defaultWhite.withOpacity(0.8))),

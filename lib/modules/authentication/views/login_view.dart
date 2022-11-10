@@ -34,7 +34,7 @@ class LoginView extends StatelessWidget {
             ),
             backgroundColor: defaultBlack.withOpacity(0.8),
             messageText: Text(
-              'Tekan sekali lagi untuk keluar',
+              'Tekan sekali lagi untuk keluar'.tr,
               style: kInter.copyWith(color: defaultWhite),
             ),
           );
@@ -58,17 +58,22 @@ class LoginView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Masuk dulu yuk!",
+                            "Masuk dulu yuk!".tr,
                             style: kInter.copyWith(
                                 fontWeight: bold,
                                 fontSize: 20,
                                 color: defaultBlack),
                           ),
                           SizedBox(height: Get.height * 0.008),
-                          Text(
-                            "Kami sudah lama menantimu",
-                            style: kInter.copyWith(
-                                fontWeight: regular, fontSize: 16),
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              "Kami sudah lama menantimu".tr,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: kInter.copyWith(
+                                  fontWeight: regular, fontSize: 16),
+                            ),
                           ),
                         ],
                       ),
@@ -144,7 +149,7 @@ class LoginView extends StatelessWidget {
                                           MaterialTapTargetSize.shrinkWrap,
                                       alignment: Alignment.center),
                                   child: Text(
-                                    "Lupa Password",
+                                    "Lupa Password".tr,
                                     style: kInter.copyWith(fontSize: 14),
                                   ),
                                 ),
@@ -160,7 +165,7 @@ class LoginView extends StatelessWidget {
                       child: Column(
                         children: [
                           ButtonCustom(
-                            text: "Masuk",
+                            text: "Masuk".tr,
                             onTap: () {
                               controller.formValdidate();
                               controller.login();
@@ -187,7 +192,7 @@ class LoginView extends StatelessWidget {
                                   width: 24,
                                 ),
                                 SizedBox(width: Get.width * 0.04),
-                                Text('Masuk dengan Google',
+                                Text('Masuk dengan Google'.tr,
                                     style: kInter.copyWith(
                                         fontSize: 16, fontWeight: semiBold))
                               ],
@@ -197,7 +202,7 @@ class LoginView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Belum punya akun?",
+                                "Belum punya akun?".tr,
                                 style: kInter.copyWith(
                                     fontSize: 14,
                                     color: defaultBlack,
@@ -205,7 +210,7 @@ class LoginView extends StatelessWidget {
                               ),
                               TextButton(
                                 child: Text(
-                                  'Daftar',
+                                  'Daftar'.tr,
                                   style: kInter.copyWith(
                                       fontSize: 14,
                                       color: defaultPrimary,

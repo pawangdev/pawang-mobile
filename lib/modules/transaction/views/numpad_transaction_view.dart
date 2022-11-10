@@ -20,7 +20,7 @@ class NumpadTransactionView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Center(
                   child: Text(
-                "Masukkan Nominal",
+                "Masukkan Nominal".tr,
                 style: textMuted.copyWith(fontSize: 18, fontWeight: semiBold),
               )),
             ),
@@ -72,7 +72,7 @@ class NumpadTransactionView extends StatelessWidget {
                             vertical: 12.0, horizontal: 12.0),
                       ),
                     ),
-                    child: Text('Simpan', style: kInter)),
+                    child: Text('Simpan'.tr, style: kInter)),
               ),
             ),
           ],

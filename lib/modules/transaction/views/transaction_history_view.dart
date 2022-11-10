@@ -40,7 +40,7 @@ class TransactionHistoryView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Transaksi',
+                                'Transaksi'.tr,
                                 style: kInter.copyWith(
                                     fontSize: 16,
                                     fontWeight: bold,
@@ -72,7 +72,7 @@ class TransactionHistoryView extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Filter Dompet',
+                                                  'Filter Dompet'.tr,
                                                   style: kInter.copyWith(
                                                     fontWeight: medium,
                                                   ),
@@ -88,7 +88,7 @@ class TransactionHistoryView extends StatelessWidget {
 
                                                     Get.back();
                                                   },
-                                                  child: const Text("Reset"),
+                                                  child: Text("Reset".tr),
                                                 ),
                                               ],
                                             ),
@@ -97,9 +97,9 @@ class TransactionHistoryView extends StatelessWidget {
                                             ),
                                             controller.dashboardController
                                                     .wallets.isEmpty
-                                                ? const Center(
+                                                ? Center(
                                                     child: Text(
-                                                        'Tidak Ada Dompet'),
+                                                        'Tidak Ada Dompet'.tr),
                                                   )
                                                 : Expanded(
                                                     child: ListView.builder(
@@ -156,7 +156,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Sisa Uang Kamu',
+                                    'Sisa Uang Kamu'.tr,
                                     style: kInter.copyWith(
                                         fontWeight: medium,
                                         color: defaultWhite),
@@ -259,7 +259,7 @@ class TransactionHistoryView extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text('Pemasukan',
+                              Text('Pemasukan'.tr,
                                   style: kInter.copyWith(
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
@@ -315,7 +315,7 @@ class TransactionHistoryView extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text('Pengeluaran',
+                              Text('Pengeluaran'.tr,
                                   style: kInter.copyWith(
                                       fontWeight: semiBold,
                                       color: defaultBlack)),
@@ -364,7 +364,7 @@ class TransactionHistoryView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Riwayat Transaksi',
+                  'Riwayat Transaksi'.tr,
                   style: kInter.copyWith(fontWeight: bold, color: defaultGray),
                 ),
                 SizedBox(
@@ -412,7 +412,7 @@ class TransactionHistoryView extends StatelessWidget {
                             )
                           : Center(
                               child: Text(
-                                'Tidak ada transaksi',
+                                'Tidak ada transaksi'.tr,
                                 style: kInter.copyWith(
                                     fontWeight: medium, color: defaultGray),
                               ),
@@ -446,7 +446,7 @@ class TransactionHistoryView extends StatelessWidget {
                             )
                           : Center(
                               child: Text(
-                                "Anda belum memiliki transaksi",
+                                "Anda Belum Memiliki Transaksi".tr,
                                 style: kInter.copyWith(
                                     color: defaultGray, fontWeight: medium),
                                 textAlign: TextAlign.center,

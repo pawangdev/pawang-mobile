@@ -30,23 +30,12 @@ class ReminderView extends StatelessWidget {
                     SizedBox(
                       width: Get.width * 0.025,
                     ),
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/reminder.svg',
-                          color: defaultWhite,
-                        ),
-                        SizedBox(
-                          height: Get.height * 0.01,
-                        ),
-                        Text(
-                          'Pengingat',
-                          style: kInter.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
-                              color: defaultWhite),
-                        ),
-                      ],
+                    Text(
+                      'Pengingat'.tr,
+                      style: kInter.copyWith(
+                          fontSize: 16,
+                          fontWeight: semiBold,
+                          color: defaultWhite),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -68,9 +57,12 @@ class ReminderView extends StatelessWidget {
               () => dashboardController.reminders.isEmpty
                   ? Center(
                       child: Text(
-                        "Pengingat Masih Kosong",
-                        style: textMuted.copyWith(
-                            fontSize: 18, fontWeight: semiBold),
+                        "Pengingat Masih Kosong".tr,
+                        style: kInter.copyWith(
+                            color: defaultGray,
+                            fontSize: 13,
+                            fontWeight: medium),
+                        textAlign: TextAlign.center,
                       ),
                     )
                   : ListView.builder(

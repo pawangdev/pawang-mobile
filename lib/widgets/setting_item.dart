@@ -61,10 +61,12 @@ class SettingItem extends StatelessWidget {
             ),
           ),
         ),
-        Divider(
-          color: defaultGray,
-          height: Get.height * 0.05,
+        SizedBox(
+          height: Get.height * 0.0135,
         ),
+        const Divider(
+          thickness: 1,
+        )
       ],
     );
   }

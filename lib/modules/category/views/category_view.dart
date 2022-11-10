@@ -34,23 +34,12 @@ class CategoryView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconBack(blueMode: false, onTap: (() => Get.back())),
-                      Column(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/kategori.svg',
-                            color: defaultWhite,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.01,
-                          ),
-                          Text(
-                            'Kategori',
-                            style: kInter.copyWith(
-                                fontSize: 16,
-                                fontWeight: semiBold,
-                                color: defaultWhite),
-                          ),
-                        ],
+                      Text(
+                        'Kategori'.tr,
+                        style: kInter.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
+                            color: defaultWhite),
                       ),
                       SizedBox(
                         width: Get.width * 0.072,
@@ -63,18 +52,21 @@ class CategoryView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
-                padding: EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: defaultGray,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const TabBar(
-                    indicator: BoxDecoration(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    color: defaultBlack.withOpacity(0.2),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: TabBar(
+                    indicator: const BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [defaultPrimary, defaultPurple]),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    tabs: [Tab(text: 'Pemasukan'), Tab(text: 'Pengeluaran')]),
+                    tabs: [
+                      Tab(text: 'Pemasukan'.tr),
+                      Tab(text: 'Pengeluaran'.tr)
+                    ]),
               ),
             ),
             Expanded(
@@ -177,7 +169,7 @@ class CategoryView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Sub Kategori',
+                                  'Sub Kategori'.tr,
                                   style: textMuted,
                                 ),
                                 const SizedBox(
@@ -188,7 +180,7 @@ class CategoryView extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(15.0),
                                           child: Text(
-                                            "Belum Ada Sub Kategori",
+                                            "Belum Ada Sub Kategori".tr,
                                             style: kInter.copyWith(
                                                 color: defaultGray),
                                           ),
@@ -295,7 +287,8 @@ class CategoryView extends StatelessWidget {
                                                                       return true;
                                                                     },
                                                                     title:
-                                                                        'Memperbarui Sub Kategori',
+                                                                        'Memperbarui Sub Kategori'
+                                                                            .tr,
                                                                     titleStyle: kInter.copyWith(
                                                                         fontSize:
                                                                             16,
@@ -305,8 +298,8 @@ class CategoryView extends StatelessWidget {
                                                                         ButtonCustom(
                                                                       elevatedMode:
                                                                           true,
-                                                                      text:
-                                                                          'Simpan Perubahan',
+                                                                      text: 'Simpan Perubahan'
+                                                                          .tr,
                                                                       onTap: () => controller.updateSubCategory(
                                                                           categoryId: category
                                                                               .id,
@@ -364,7 +357,7 @@ class CategoryView extends StatelessWidget {
                                                                             contentPadding:
                                                                                 const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                                                                             hintText:
-                                                                                'Isi Sub Kategori',
+                                                                                'Isi Sub Kategori'.tr,
                                                                             hintStyle:
                                                                                 kInter.copyWith(fontSize: 16),
                                                                             fillColor:
@@ -399,7 +392,8 @@ class CategoryView extends StatelessWidget {
                                                                         AlertDialog(
                                                                       title:
                                                                           Text(
-                                                                        'Hapus Sub Kategori',
+                                                                        'Hapus Sub Kategori'
+                                                                            .tr,
                                                                         style: kInter.copyWith(
                                                                             fontSize:
                                                                                 16,
@@ -410,7 +404,8 @@ class CategoryView extends StatelessWidget {
                                                                       ),
                                                                       content:
                                                                           Text(
-                                                                        'Apakah kamu yakin akan menghapus sub kategori ini?',
+                                                                        'Apakah kamu yakin akan menghapus sub kategori ini?'
+                                                                            .tr,
                                                                         style: kInter.copyWith(
                                                                             fontSize:
                                                                                 14,
@@ -430,7 +425,7 @@ class CategoryView extends StatelessWidget {
                                                                             Expanded(
                                                                               child: ButtonCustom(
                                                                                 elevatedMode: false,
-                                                                                text: 'Kembali',
+                                                                                text: 'Kembali'.tr,
                                                                                 onTap: () {
                                                                                   Navigator.pop(context, 'Kembali');
                                                                                 },
@@ -440,7 +435,7 @@ class CategoryView extends StatelessWidget {
                                                                             Expanded(
                                                                                 child: ButtonCustom(
                                                                               elevatedMode: false,
-                                                                              text: 'Hapus',
+                                                                              text: 'Hapus'.tr,
                                                                               blueMode: false,
                                                                               onTap: () => controller.deleteSubCategory(categoryId: category.id, subCategoryId: e.id),
                                                                             )),
@@ -478,12 +473,13 @@ class CategoryView extends StatelessWidget {
                                           GestureDetector(
                                             onTap: () {
                                               Get.defaultDialog(
-                                                title: 'Tambah Sub Kategori',
+                                                title: 'Tambah Sub Kategori'.tr,
                                                 titleStyle: kInter.copyWith(
                                                     fontSize: 16,
                                                     fontWeight: bold),
                                                 confirm: ButtonCustom(
-                                                  text: 'Simpan Sub Kategori',
+                                                  text:
+                                                      'Simpan Sub Kategori'.tr,
                                                   onTap: () =>
                                                       controller.addSubCategory(
                                                           category.id),
@@ -557,7 +553,8 @@ class CategoryView extends StatelessWidget {
                                                                 vertical: 5,
                                                                 horizontal: 10),
                                                         hintText:
-                                                            'Isi Sub Kategori',
+                                                            'Isi Sub Kategori'
+                                                                .tr,
                                                         hintStyle:
                                                             kInter.copyWith(
                                                                 fontSize: 14),

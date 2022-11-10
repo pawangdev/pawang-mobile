@@ -10,66 +10,6 @@ import 'package:pawang_mobile/widgets/input_field.dart';
 class ChangePasswordView extends StatelessWidget {
   final ChangePasswordController controller = Get.find();
 
-  // void _submit() {
-  //   final form = formKey.currentState;
-
-  //   if (form!.validate()) {
-  //     form.save();
-  //     var data = <String, dynamic>{
-  //       "password_now": passwordNowTextController.text,
-  //       "password_new": passwordNewTextController.text,
-  //       "password_new_confirmation": passwordNewConfirmationTextController.text,
-  //     };
-
-  //     try {
-  //       setState(() {
-  //         _isLoading = true;
-  //       });
-  //       UserService().userChangePassword(data).then((response) {
-  //         if (response.success) {
-  //           setState(() {
-  //             _isLoading = false;
-  //           });
-  //           Navigator.pushReplacementNamed(context, NavigationScreen.routeName);
-
-  //           Flushbar(
-  //             message: "Berhasil Ganti Password !",
-  //             icon: const Icon(
-  //               Icons.check,
-  //               size: 28.0,
-  //               color: Colors.white,
-  //             ),
-  //             margin: const EdgeInsets.all(8),
-  //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: defaultSuccess,
-  //             duration: const Duration(seconds: 3),
-  //           ).show(context);
-  //         } else {
-  //           setState(() {
-  //             _isLoading = false;
-  //           });
-  //           Flushbar(
-  //             message: response.message,
-  //             icon: const Icon(
-  //               Icons.check,
-  //               size: 28.0,
-  //               color: Colors.white,
-  //             ),
-  //             margin: const EdgeInsets.all(8),
-  //             borderRadius: BorderRadius.circular(8),
-  //             backgroundColor: defaultError,
-  //             duration: const Duration(seconds: 3),
-  //           ).show(context);
-  //         }
-  //       });
-  //     } catch (e) {
-  //       setState(() {
-  //         _isLoading = false;
-  //       });
-  //     }
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +27,7 @@ class ChangePasswordView extends StatelessWidget {
                         Navigator.pop(context);
                       }),
                   Text(
-                    "Ganti Password",
+                    "Ganti Password".tr,
                     style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
@@ -104,7 +44,7 @@ class ChangePasswordView extends StatelessWidget {
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.lock_outline_rounded),
-                        inputLabel: 'Password Lama',
+                        inputLabel: 'Password Lama'.tr,
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,
                         inputController: controller.passwordNowTextController),
@@ -112,7 +52,7 @@ class ChangePasswordView extends StatelessWidget {
                     InputField(
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.lock_outline_rounded),
-                        inputLabel: 'Password Baru',
+                        inputLabel: 'Password Baru'.tr,
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,
                         inputController: controller.passwordNewTextController),
@@ -124,7 +64,7 @@ class ChangePasswordView extends StatelessWidget {
                         },
                         validator: ValidationBuilder(localeName: 'id').build(),
                         icon: const Icon(Icons.lock_outline_rounded),
-                        inputLabel: 'Password Baru Konfirmasi',
+                        inputLabel: 'Password Baru Konfirmasi'.tr,
                         isPassword: true,
                         keyboardType: TextInputType.visiblePassword,
                         inputController:
@@ -136,7 +76,7 @@ class ChangePasswordView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ButtonCustom(
-                    text: 'Simpan Perubahan',
+                    text: 'Simpan Perubahan'.tr,
                     onTap: () => controller.updatePassword(),
                   ),
                 ),

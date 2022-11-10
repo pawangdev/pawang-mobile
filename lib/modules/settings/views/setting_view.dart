@@ -24,7 +24,7 @@ class SettingsView extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    "Pengaturan",
+                    "Pengaturan".tr,
                     style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
@@ -80,15 +80,69 @@ class SettingsView extends StatelessWidget {
                   children: [
                     SettingItem(
                       color: Colors.orange,
-                      text: 'Edit Profile',
+                      text: 'Edit Profil'.tr,
                       icon: Icons.edit_rounded,
                       onTap: () {
                         Get.toNamed(RoutesName.editprofile);
                       },
                     ),
                     SettingItem(
+                      color: defaultSuccess,
+                      text: 'Bahasa'.tr,
+                      icon: Icons.language,
+                      onTap: () {
+                        showModalBottomSheet<void>(
+                          isScrollControlled: true,
+                          enableDrag: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height: Get.height * 0.3,
+                                color: defaultWhite,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      // Nominal
+                                      Text(
+                                        'Bahasa'.tr,
+                                        style: kInter.copyWith(
+                                            fontSize: 16, fontWeight: bold),
+                                      ),
+                                      const Spacer(),
+                                      ButtonCustom(
+                                        elevatedMode: false,
+                                        text: 'Bahasa Indonesia',
+                                        onTap: () {
+                                          Get.updateLocale(const Locale('id'));
+                                          Get.back();
+                                        },
+                                      ),
+                                      const Spacer(),
+                                      ButtonCustom(
+                                        elevatedMode: false,
+                                        text: 'English Language',
+                                        onTap: () {
+                                          Get.updateLocale(const Locale('en'));
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    SettingItem(
                       color: defaultPurple,
-                      text: 'Keluar',
+                      text: 'Keluar'.tr,
                       icon: Icons.logout_rounded,
                       onTap: () {
                         showDialog<void>(
@@ -96,13 +150,13 @@ class SettingsView extends StatelessWidget {
                           barrierDismissible: false,
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(
-                              'Keluar',
+                              'Keluar'.tr,
                               style: kInter.copyWith(
                                   fontSize: 16, fontWeight: bold),
                               textAlign: TextAlign.center,
                             ),
                             content: Text(
-                              'Apakah anda yakin ingin keluar?',
+                              'Apakah anda yakin ingin keluar?'.tr,
                               style: kInter.copyWith(
                                   fontSize: 14, fontWeight: medium),
                               textAlign: TextAlign.center,
@@ -116,7 +170,7 @@ class SettingsView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: ButtonCustom(
-                                      text: "Kembali",
+                                      text: "Kembali".tr,
                                       elevatedMode: false,
                                       onTap: () {
                                         Get.back();
@@ -126,7 +180,7 @@ class SettingsView extends StatelessWidget {
                                   SizedBox(width: Get.width * 0.01),
                                   Expanded(
                                     child: ButtonCustom(
-                                      text: 'Keluar',
+                                      text: 'Keluar'.tr,
                                       elevatedMode: false,
                                       blueMode: false,
                                       onTap: () async {

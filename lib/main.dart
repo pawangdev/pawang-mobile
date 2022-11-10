@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/utils/translation.dart';
 
 import 'routes/routes.dart';
 
@@ -52,6 +53,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Inter",
         errorColor: defaultError,
       ),
+      translations: Translation(),
+      locale: const Locale('id'),
       builder: EasyLoading.init(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.pages,

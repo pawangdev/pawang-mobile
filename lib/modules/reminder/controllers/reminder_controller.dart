@@ -13,17 +13,17 @@ class ReminderController extends GetxController {
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController dateTextController = TextEditingController();
   final TextEditingController typeRepeateTextController =
-      TextEditingController(text: "Tidak Berulang");
+      TextEditingController(text: "Tidak Berulang".tr);
 
   final List<String> typeData = [
-    'Tidak Berulang',
-    'Harian',
-    'Mingguan',
-    'Bulanan',
-    'Tahunan',
+    'Tidak Berulang'.tr,
+    'Harian'.tr,
+    'Mingguan'.tr,
+    'Bulanan'.tr,
+    'Tahunan'.tr,
   ];
 
-  final typeRepeate = "Tidak Berulang".obs;
+  final typeRepeate = "Tidak Berulang".tr.obs;
 
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
     String? selectedType;
@@ -43,6 +43,21 @@ class ReminderController extends GetxController {
         selectedType = "monthly";
         break;
       case "Tahunan":
+        selectedType = "yearly";
+        break;
+      case "Once":
+        selectedType = "once";
+        break;
+      case "Daily":
+        selectedType = "daily";
+        break;
+      case "Weekly":
+        selectedType = "weekly";
+        break;
+      case "Monthly":
+        selectedType = "monthly";
+        break;
+      case "Yearly":
         selectedType = "yearly";
         break;
     }
@@ -237,7 +252,7 @@ class ReminderController extends GetxController {
   Future<void> resetAllInput() async {
     nameTextController.text = "";
     dateTextController.text = "";
-    typeRepeateTextController.text = "Tidak Berulang";
+    typeRepeateTextController.text = "Tidak Berulang".tr;
 
     if (Get.isDialogOpen!) {
       Get.back();

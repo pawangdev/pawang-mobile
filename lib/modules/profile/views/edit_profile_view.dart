@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
@@ -36,7 +35,7 @@ class EditProfileView extends StatelessWidget {
                               Navigator.pop(context);
                             }),
                         Text(
-                          "Edit Profile",
+                          "Edit Profil".tr,
                           style: kInter.copyWith(
                               fontSize: 16,
                               fontWeight: bold,
@@ -81,7 +80,7 @@ class EditProfileView extends StatelessWidget {
                               validator:
                                   ValidationBuilder(localeName: 'id').build(),
                               icon: const Icon(Icons.person_outline_rounded),
-                              inputLabel: 'Nama Lengkap',
+                              inputLabel: 'Nama Lengkap'.tr,
                               inputController: controller.nameTextController),
                           SizedBox(
                             height: Get.height * 0.02,
@@ -90,7 +89,7 @@ class EditProfileView extends StatelessWidget {
                               validator:
                                   ValidationBuilder(localeName: 'id').build(),
                               icon: const Icon(Icons.phone_rounded),
-                              inputLabel: 'Nomer Telepon',
+                              inputLabel: 'Nomer Telepon'.tr,
                               inputController: controller.phoneTextController),
                           SizedBox(
                             height: Get.height * 0.014,
@@ -118,7 +117,7 @@ class EditProfileView extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "Laki-Laki",
+                                      "Laki-Laki".tr,
                                       style: kInter.copyWith(fontSize: 12),
                                     ),
                                   ],
@@ -146,7 +145,7 @@ class EditProfileView extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "Perempuan",
+                                      "Perempuan".tr,
                                       style: kInter.copyWith(fontSize: 12),
                                     ),
                                   ],
@@ -160,14 +159,14 @@ class EditProfileView extends StatelessWidget {
                     const Spacer(),
                     ButtonCustom(
                       elevatedMode: false,
-                      text: 'Ganti Password',
+                      text: 'Ganti Password'.tr,
                       onTap: () {
                         Get.toNamed(RoutesName.changepassword);
                       },
                     ),
                     SizedBox(height: Get.height * 0.02),
                     ButtonCustom(
-                      text: 'Simpan Perubahan',
+                      text: 'Simpan Perubahan'.tr,
                       onTap: () {
                         controller.updateProfile();
                       },

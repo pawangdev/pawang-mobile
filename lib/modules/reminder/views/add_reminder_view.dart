@@ -37,8 +37,8 @@ class AddReminderView extends StatelessWidget {
                       }),
                   Text(
                     reminderUpdate == null
-                        ? "Tambah Pengingat"
-                        : "Edit Pengingat",
+                        ? "Tambah Pengingat".tr
+                        : "Edit Pengingat".tr,
                     style: kInter.copyWith(
                         fontSize: 16, fontWeight: bold, color: defaultBlack),
                   ),
@@ -57,16 +57,16 @@ class AddReminderView extends StatelessWidget {
                     children: [
                       InputField(
                         icon: const Icon(Icons.campaign_outlined),
-                        inputLabel: 'Nama Pengingat',
+                        inputLabel: 'Nama Pengingat'.tr,
                         inputController: controller.nameTextController,
                       ),
                       SizedBox(
                         height: Get.height * 0.034,
                       ),
                       DateTimePicker(
-                        cancelText: 'Batal',
+                        cancelText: 'Batal'.tr,
                         use24HourFormat: true,
-                        calendarTitle: 'Pilih Tanggal',
+                        calendarTitle: 'Pilih Tanggal'.tr,
                         timePickerEntryModeInput: true,
                         type: DateTimePickerType.dateTime,
                         initialDate: DateTime.now().toLocal(),
@@ -81,9 +81,9 @@ class AddReminderView extends StatelessWidget {
                         onChanged: (value) {
                           controller.dateTextController.text = value;
                         },
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.calendar_month),
-                          hintText: 'Tanggal & Waktu',
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.calendar_month),
+                          hintText: 'Tanggal & Waktu'.tr,
                           fillColor: defaultWhite,
                           focusColor: defaultPrimary,
                         ),
@@ -94,7 +94,7 @@ class AddReminderView extends StatelessWidget {
                       InputField(
                         icon: const Icon(Icons.event_repeat_rounded),
                         keyboardType: TextInputType.none,
-                        inputLabel: 'Perulangan',
+                        inputLabel: 'Perulangan'.tr,
                         inputController: controller.typeRepeateTextController,
                         readOnly: true,
                         onTap: () {
@@ -112,7 +112,7 @@ class AddReminderView extends StatelessWidget {
                                   children: [
                                     Center(
                                       child: Text(
-                                        'Ulangi Reminder',
+                                        'Ulangi Pengingat'.tr,
                                         style: kInter.copyWith(
                                             fontWeight: semiBold, fontSize: 18),
                                       ),
@@ -124,7 +124,7 @@ class AddReminderView extends StatelessWidget {
                                       child: ListView.builder(
                                         itemBuilder: (context, index) {
                                           final typeRepeate =
-                                              controller.typeData[index];
+                                              controller.typeData[index].tr;
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             // ignore: unrelated_type_equality_checks
@@ -132,19 +132,19 @@ class AddReminderView extends StatelessWidget {
                                               onTap: () {
                                                 controller
                                                     .typeRepeateTextController
-                                                    .text = typeRepeate;
+                                                    .text = typeRepeate.tr;
 
                                                 controller.typeRepeate.value =
-                                                    typeRepeate;
+                                                    typeRepeate.tr;
 
                                                 Get.back();
                                               },
                                               child: Obx(
                                                 () => ReminderLoop(
-                                                  nama: typeRepeate,
+                                                  nama: typeRepeate.tr,
                                                   isSelected: typeRepeate ==
-                                                          controller
-                                                              .typeRepeate.value
+                                                          controller.typeRepeate
+                                                              .value.tr
                                                       ? true
                                                       : false,
                                                 ),
@@ -169,8 +169,8 @@ class AddReminderView extends StatelessWidget {
               ButtonCustom(
                 elevatedMode: false,
                 text: reminderUpdate == null
-                    ? "Tambah Pengingat"
-                    : "Edit Pengingat",
+                    ? "Tambah Pengingat".tr
+                    : "Edit Pengingat".tr,
                 onTap: () => reminderUpdate != null
                     ? controller.onSubmit(
                         isAdding: false, id: reminderUpdate['id'])

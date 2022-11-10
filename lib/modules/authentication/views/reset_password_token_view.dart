@@ -33,7 +33,7 @@ class ResetPasswordTokenView extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Verifikasi Token",
+                          "Verifikasi Token".tr,
                           style: kInter.copyWith(
                               fontWeight: semiBold, fontSize: 16),
                           textAlign: TextAlign.center,
@@ -72,7 +72,8 @@ class ResetPasswordTokenView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
-                    "Silahkan masukkan token yang telah kamu dapat pada email kamu, jika tidak masuk check pada kotak spam email kamu",
+                    "Silahkan masukkan token yang telah kamu dapat pada email kamu, jika tidak masuk check pada kotak spam email kamu"
+                        .tr,
                     style: kInter.copyWith(color: defaultGray),
                     textAlign: TextAlign.center,
                   ),
@@ -90,15 +91,14 @@ class ResetPasswordTokenView extends StatelessWidget {
                         .maxLength(6)
                         .build(),
                     maxLength: 6,
-                    decoration:
-                        const InputDecoration(label: Text("Token Kode")),
+                    decoration: InputDecoration(label: Text("Token Kode".tr)),
                   ),
                 ),
                 const SizedBox(
                   height: 32,
                 ),
                 ButtonCustom(
-                  text: 'Verifikasi Token',
+                  text: 'Verifikasi Token'.tr,
                   onTap: () {
                     // controller.formValdidate();
                     controller.sendVerifyToken();

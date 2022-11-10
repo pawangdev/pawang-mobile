@@ -33,7 +33,7 @@ class NavigationView extends StatelessWidget {
           ),
           backgroundColor: defaultBlack.withOpacity(0.8),
           messageText: Text(
-            'Tekan sekali lagi untuk keluar',
+            'Tekan sekali lagi untuk keluar'.tr,
             style: kInter.copyWith(color: defaultWhite),
           ),
         );
@@ -62,7 +62,7 @@ class NavigationView extends StatelessWidget {
             height: Get.height * 0.08,
             width: Get.width,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0),
+              padding: const EdgeInsets.symmetric(horizontal: 0),
               child: GetBuilder<NavigationController>(
                 init: NavigationController(),
                 builder: (controller) {
@@ -72,7 +72,7 @@ class NavigationView extends StatelessWidget {
                       Row(
                         children: [
                           IconBottomBar(
-                            text: "Beranda",
+                            text: "Beranda".tr,
                             iconEnable: "assets/images/home1.png",
                             iconDisable: "assets/images/home2.png",
                             selected: controller.tabIndex == 0 ? true : false,
@@ -81,7 +81,7 @@ class NavigationView extends StatelessWidget {
                             },
                           ),
                           IconBottomBar(
-                            text: "Transaksi",
+                            text: "Transaksi".tr,
                             iconEnable: "assets/images/transaksi1.png",
                             iconDisable: "assets/images/transaksi2.png",
                             selected: controller.tabIndex == 1 ? true : false,
@@ -95,7 +95,7 @@ class NavigationView extends StatelessWidget {
                       Row(
                         children: [
                           IconBottomBar(
-                            text: "Pengingat",
+                            text: "Pengingat".tr,
                             iconEnable: "assets/images/remin1.png",
                             iconDisable: "assets/images/remin2.png",
                             selected: controller.tabIndex == 3 ? true : false,
@@ -104,7 +104,7 @@ class NavigationView extends StatelessWidget {
                             },
                           ),
                           IconBottomBar(
-                            text: "Pengaturan",
+                            text: "Pengaturan".tr,
                             iconEnable: "assets/images/setting1.png",
                             iconDisable: "assets/images/setting2.png",
                             selected: controller.tabIndex == 4 ? true : false,

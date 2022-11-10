@@ -34,8 +34,8 @@ class TransactionDetailView extends StatelessWidget {
                       Get.back();
                     },
                   ),
-                  const Text(
-                    "Detail Transaksi",
+                  Text(
+                    "Detail Transaksi".tr,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(
@@ -107,7 +107,7 @@ class TransactionDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Keterangan',
+                          'Keterangan'.tr,
                           style: kInter.copyWith(
                             fontSize: 14,
                           ),
@@ -138,7 +138,7 @@ class TransactionDetailView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Tanggal Transaksi',
+                              'Tanggal Transaksi'.tr,
                               style: kInter.copyWith(
                                 fontSize: 14,
                               ),
@@ -168,7 +168,7 @@ class TransactionDetailView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Waktu',
+                              'Waktu'.tr,
                               style: kInter.copyWith(
                                 color: defaultGray,
                               ),
@@ -206,7 +206,7 @@ class TransactionDetailView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Kategori',
+                              'Kategori'.tr,
                               style: kInter.copyWith(
                                 fontSize: 14,
                               ),
@@ -231,7 +231,7 @@ class TransactionDetailView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Sub Kategori',
+                              'Sub Kategori'.tr,
                               style: kInter.copyWith(
                                 color: defaultGray,
                               ),
@@ -264,7 +264,7 @@ class TransactionDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Dompet',
+                          'Dompet'.tr,
                           style: kInter.copyWith(
                             fontSize: 14,
                           ),
@@ -293,7 +293,7 @@ class TransactionDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Jenis',
+                          'Jenis'.tr,
                           style: kInter.copyWith(
                             fontSize: 14,
                           ),
@@ -302,8 +302,8 @@ class TransactionDetailView extends StatelessWidget {
                           width: Get.width * 0.35,
                           child: Text(
                             transaction.type == "income"
-                                ? 'Pemasukan'
-                                : 'Pengeluaran',
+                                ? 'Pemasukan'.tr
+                                : 'Pengeluaran'.tr,
                             textAlign: TextAlign.end,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -332,7 +332,7 @@ class TransactionDetailView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ButtonCustom(
-                          text: 'Edit Data',
+                          text: 'Edit',
                           onTap: () =>
                               controller.formEditTransaction(transaction),
                         ),
@@ -342,7 +342,7 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                       Expanded(
                         child: ButtonCustom(
-                          text: 'Hapus Data',
+                          text: 'Hapus'.tr,
                           elevatedMode: false,
                           blueMode: false,
                           onTap: () {
@@ -351,13 +351,14 @@ class TransactionDetailView extends StatelessWidget {
                               barrierDismissible: false,
                               builder: (BuildContext context) => AlertDialog(
                                 title: Text(
-                                  'Hapus Pengeluaran',
+                                  'Hapus Transaksi'.tr,
                                   style: kInter.copyWith(
                                       fontSize: 18, fontWeight: bold),
                                   textAlign: TextAlign.center,
                                 ),
                                 content: Text(
-                                  'Apakah kamu yakin akan menghapus pengeluaran ini?',
+                                  'Apakah kamu yakin akan menghapus transaksi ini?'
+                                      .tr,
                                   style: kInter.copyWith(
                                       fontSize: 16, fontWeight: light),
                                   textAlign: TextAlign.center,
@@ -371,7 +372,7 @@ class TransactionDetailView extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: ButtonCustom(
-                                          text: 'Kembali',
+                                          text: 'Kembali'.tr,
                                           elevatedMode: false,
                                           onTap: () {
                                             Navigator.pop(context, 'Kembali');
@@ -381,7 +382,7 @@ class TransactionDetailView extends StatelessWidget {
                                       SizedBox(width: Get.width * 0.01),
                                       Expanded(
                                         child: ButtonCustom(
-                                          text: 'Hapus',
+                                          text: 'Hapus'.tr,
                                           elevatedMode: false,
                                           blueMode: false,
                                           onTap: () =>

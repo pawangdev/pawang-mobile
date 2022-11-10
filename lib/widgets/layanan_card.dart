@@ -15,8 +15,8 @@ class LayananCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: Get.width * 0.22,
-        height: Get.height * 0.100,
+        width: Get.width * 0.25,
+        height: Get.height * 0.13,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -31,7 +31,7 @@ class LayananCard extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.fitHeight,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12),
             child: Column(
               children: [
                 Center(
@@ -40,14 +40,18 @@ class LayananCard extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: kInter.copyWith(
-                        fontWeight: semiBold, color: defaultPrimary),
+                SizedBox(
+                  width: Get.width * 0.23,
+                  child: Center(
+                    child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: kInter.copyWith(
+                          fontSize: 12,
+                          fontWeight: regular,
+                          color: defaultBlack),
+                    ),
                   ),
                 ),
               ],

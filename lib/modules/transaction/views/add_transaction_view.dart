@@ -39,7 +39,7 @@ class AddTransactionView extends StatelessWidget {
                     },
                   ),
                   Text(
-                    args == null ? "Tambah Transaksi" : "Edit Transaksi",
+                    args == null ? "Tambah Transaksi".tr : "Edit Transaksi".tr,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -69,21 +69,7 @@ class AddTransactionView extends StatelessWidget {
                         keyboardType: TextInputType.none,
                         readOnly: true,
                       ),
-                      // TextFormField(
-                      //   validator: ValidationBuilder(localeName: 'id')
-                      //       .required()
-                      //       .build(),
-                      //   controller: controller.displayAmount,
-                      //   onTap: (() =>
-                      //       Get.toNamed(RoutesName.transactionnumpad)),
-                      //   keyboardType: TextInputType.none,
-                      //   readOnly: true,
-                      //   enableInteractiveSelection: false,
-                      //   decoration: const InputDecoration(
-                      //     hintText: 'Tentukan Nominal Anda',
-                      //   ),
-                      //   onSaved: (String? value) {},
-                      // ),
+
                       SizedBox(
                         height: Get.height * 0.025,
                       ),
@@ -100,7 +86,7 @@ class AddTransactionView extends StatelessWidget {
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.grid_view),
-                          hintText: 'Kategori',
+                          hintText: 'Kategori'.tr,
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(10),
                             child: SvgPicture.asset(
@@ -125,7 +111,7 @@ class AddTransactionView extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         enableInteractiveSelection: false,
                         decoration: InputDecoration(
-                          hintText: 'Dompet',
+                          hintText: 'Dompet'.tr,
                           icon: const Icon(Icons.payment_rounded),
                           suffixIcon: Container(
                             padding: const EdgeInsets.all(10),
@@ -155,7 +141,7 @@ class AddTransactionView extends StatelessWidget {
                           controller.dateTextController.text = value;
                         },
                         decoration: InputDecoration(
-                          hintText: 'Tanggal',
+                          hintText: 'Tanggal'.tr,
                           icon: const Icon(Icons.calendar_month),
                           suffixIcon: Container(
                             padding: EdgeInsets.all(10),
@@ -180,7 +166,7 @@ class AddTransactionView extends StatelessWidget {
                           }
                         },
                         icon: const Icon(Icons.format_quote_rounded),
-                        inputLabel: 'Keterangan',
+                        inputLabel: 'Keterangan'.tr,
                         inputController: controller.descriptionTextController,
                       ),
                       // TextFormField(
@@ -202,7 +188,7 @@ class AddTransactionView extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: ButtonCustom(
                     elevatedMode: false,
-                    text: 'Simpan Transaksi',
+                    text: 'Simpan Transaksi'.tr,
                     onTap: () async {
                       controller.formValdidate();
                       if (args == null) {

@@ -33,7 +33,7 @@ class RegisterView extends StatelessWidget {
             ),
             backgroundColor: defaultBlack.withOpacity(0.8),
             messageText: Text(
-              'Tekan sekali lagi untuk keluar',
+              'Tekan sekali lagi untuk keluar'.tr,
               style: kInter.copyWith(color: defaultWhite),
             ),
           );
@@ -57,13 +57,13 @@ class RegisterView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Buat Akun",
+                            "Buat Akun".tr,
                             style:
                                 kInter.copyWith(fontWeight: bold, fontSize: 20),
                           ),
                           SizedBox(height: Get.height * 0.008),
                           Text(
-                            "Kami sangat senang dengan kehadiranmu",
+                            "Kami sangat senang dengan kehadiranmu".tr,
                             style: kInter.copyWith(
                                 fontWeight: regular, fontSize: 16),
                           ),
@@ -83,7 +83,7 @@ class RegisterView extends StatelessWidget {
                                 .required()
                                 .build(),
                             icon: const Icon(Icons.person_outline_rounded),
-                            inputLabel: "Nama Lengkap",
+                            inputLabel: "Nama Lengkap".tr,
                             inputController: controller.nameTextController,
                             // keyboardType: TextInputType.name,
                           ),
@@ -138,7 +138,7 @@ class RegisterView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32.0),
                       child: ButtonCustom(
-                        text: "Daftar",
+                        text: "Daftar".tr,
                         onTap: () {
                           controller.formValdidate();
                           controller.register();
@@ -148,13 +148,13 @@ class RegisterView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Sudah punya akun? ",
+                        Text("Sudah punya akun?".tr,
                             style: kInter.copyWith(
                                 fontSize: 14,
                                 color: defaultBlack,
                                 fontWeight: FontWeight.w400)),
                         TextButton(
-                          child: Text('Masuk',
+                          child: Text('Masuk'.tr,
                               style: kInter.copyWith(
                                   fontSize: 14,
                                   color: defaultPrimary,
