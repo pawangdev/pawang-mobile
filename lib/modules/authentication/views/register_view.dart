@@ -173,9 +173,7 @@ class RegisterView extends StatelessWidget {
                           children: [
                             Text("Sudah punya akun?".tr,
                                 style: kInter.copyWith(
-                                    fontSize: 14,
-                                    color: defaultBlack,
-                                    fontWeight: FontWeight.w400)),
+                                    fontSize: 14, fontWeight: FontWeight.w400)),
                             TextButton(
                               child: Text('Masuk'.tr,
                                   style: kInter.copyWith(

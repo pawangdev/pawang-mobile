@@ -18,7 +18,7 @@ class LayananCard extends StatelessWidget {
         fit: BoxFit.fitHeight,
         child: Container(
           width: Get.width * 0.2,
-          height: Get.height * 0.09,
+          height: Get.height * 0.097,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -28,7 +28,9 @@ class LayananCard extends StatelessWidget {
               )
             ],
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: defaultWhite,
+            color: Theme.of(context).brightness == Brightness.light
+                ? defaultWhite
+                : Color(0XFF2E2E2E),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -46,10 +48,7 @@ class LayananCard extends StatelessWidget {
                       title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: kInter.copyWith(
-                          fontSize: 12,
-                          fontWeight: medium,
-                          color: defaultBlack),
+                      style: kInter.copyWith(fontSize: 12, fontWeight: medium),
                     ),
                   ),
                 ),

@@ -202,7 +202,6 @@ class TransactionHistoryView extends StatelessWidget {
                   ),
                   Container(
                     height: Get.height * 0.05,
-                    color: defaultWhite,
                   ),
                 ],
               ),
@@ -233,7 +232,9 @@ class TransactionHistoryView extends StatelessWidget {
                   height: Get.height * 0.08,
                   width: Get.width * 0.85,
                   decoration: BoxDecoration(
-                    color: defaultWhite,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? defaultWhite
+                        : Color(0XFF1B2430),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
@@ -260,9 +261,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 width: 5,
                               ),
                               Text('Pemasukan'.tr,
-                                  style: kInter.copyWith(
-                                      fontWeight: semiBold,
-                                      color: defaultBlack)),
+                                  style: kInter.copyWith(fontWeight: semiBold)),
                             ],
                           ),
                           Obx(
@@ -316,9 +315,7 @@ class TransactionHistoryView extends StatelessWidget {
                                 width: 5,
                               ),
                               Text('Pengeluaran'.tr,
-                                  style: kInter.copyWith(
-                                      fontWeight: semiBold,
-                                      color: defaultBlack)),
+                                  style: kInter.copyWith(fontWeight: semiBold)),
                             ],
                           ),
                           Obx(

@@ -28,65 +28,64 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [defaultPrimary, defaultPurple])),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            Center(
-              child: SizedBox(
-                  width: Get.width * 0.40,
-                  height: Get.height * 0.35,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10.0),
-                        child: Image.asset('assets/images/splash.png'),
-                      ),
-                      Text(
-                        'PAWANG',
+    return Scaffold(
+      // backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/images/Splash1.png',
+            fit: BoxFit.fitHeight,
+            width: Get.width,
+            height: Get.height,
+          ),
+          Center(
+            child: SizedBox(
+                width: Get.width * 0.40,
+                height: Get.height * 0.35,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
+                      child: Image.asset('assets/images/splash.png'),
+                    ),
+                    Text(
+                      'PAWANG',
+                      style: kInter.copyWith(
+                          fontSize: 30,
+                          fontWeight: extraBold,
+                          color: defaultWhite),
+                    ),
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        'P e n c a t a t   K e u a n g a n',
                         style: kInter.copyWith(
-                            fontSize: 30,
-                            fontWeight: extraBold,
+                            fontSize: 14,
+                            fontWeight: bold,
                             color: defaultWhite),
                       ),
-                      FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Text(
-                          'P e n c a t a t   K e u a n g a n',
-                          style: kInter.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold,
-                              color: defaultWhite),
-                        ),
-                      )
-                    ],
-                  )),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    'Pawang version ${controller.version}',
-                    style: kInter.copyWith(
-                      fontSize: 14,
-                      color: defaultWhite.withOpacity(0.75),
-                      fontWeight: semiBold,
-                    ),
+                    )
+                  ],
+                )),
+          ),
+          Positioned(
+            child: Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Pawang version ${controller.version}',
+                  style: kInter.copyWith(
+                    fontSize: 14,
+                    color: defaultBlack.withOpacity(0.75),
+                    fontWeight: semiBold,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

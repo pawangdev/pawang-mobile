@@ -37,9 +37,9 @@ class EditProfileView extends StatelessWidget {
                         Text(
                           "Edit Profil".tr,
                           style: kInter.copyWith(
-                              fontSize: 16,
-                              fontWeight: bold,
-                              color: defaultBlack),
+                            fontSize: 16,
+                            fontWeight: bold,
+                          ),
                         ),
                         SizedBox(
                           width: Get.width * 0.072,

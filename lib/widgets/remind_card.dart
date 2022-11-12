@@ -20,7 +20,9 @@ class RemindCard extends StatelessWidget {
       width: Get.width * 0.4,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-          color: defaultWhite,
+          color: Theme.of(context).brightness == Brightness.light
+              ? defaultWhite
+              : Color(0XFF1B2430),
           boxShadow: [
             BoxShadow(
               color: defaultBlack.withOpacity(0.06),
@@ -49,7 +51,6 @@ class RemindCard extends StatelessWidget {
                     textAlign: TextAlign.end,
                     overflow: TextOverflow.ellipsis,
                     style: kInter.copyWith(
-                      color: defaultBlack,
                       fontWeight: semiBold,
                       fontSize: 16,
                     ),

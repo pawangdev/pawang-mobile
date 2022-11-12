@@ -66,9 +66,9 @@ class LoginView extends StatelessWidget {
                                   Text(
                                     "Masuk dulu yuk!".tr,
                                     style: kInter.copyWith(
-                                        fontWeight: bold,
-                                        fontSize: 20,
-                                        color: defaultBlack),
+                                      fontWeight: bold,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                   SizedBox(height: Get.height * 0.008),
                                   FittedBox(
@@ -227,9 +227,7 @@ class LoginView extends StatelessWidget {
                               Text(
                                 "Belum punya akun?".tr,
                                 style: kInter.copyWith(
-                                    fontSize: 14,
-                                    color: defaultBlack,
-                                    fontWeight: FontWeight.w400),
+                                    fontSize: 14, fontWeight: FontWeight.w400),
                               ),
                               TextButton(
                                 child: Text(

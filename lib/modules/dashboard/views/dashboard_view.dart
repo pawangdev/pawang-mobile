@@ -49,11 +49,11 @@ class DashboardView extends StatelessWidget {
                     ),
                     Container(
                         width: Get.width * 0.5,
-                        height: Get.height * 0.275,
+                        height: Get.height * 0.25,
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(1000)),
+                              bottomLeft: Radius.circular(200)),
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -260,8 +260,7 @@ class DashboardView extends StatelessWidget {
                         'Transaksi Terakhir'.tr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: kInter.copyWith(
-                            fontWeight: bold, color: defaultBlack),
+                        style: kInter.copyWith(fontWeight: bold),
                       ),
                       InkWell(
                         onTap: () {
@@ -281,7 +280,7 @@ class DashboardView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: Get.height * 0.02,
+                    height: Get.height * 0.005,
                   ),
                   Obx(() => controller.wallets.isNotEmpty
                       ? controller.wallets[controller.selectedWallets.value]
@@ -360,8 +359,7 @@ class DashboardView extends StatelessWidget {
                         'Jangan Lupa Dibayar'.tr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: kInter.copyWith(
-                            fontWeight: bold, color: defaultBlack),
+                        style: kInter.copyWith(fontWeight: bold),
                       ),
                       InkWell(
                         onTap: () {

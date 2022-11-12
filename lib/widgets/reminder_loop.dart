@@ -16,7 +16,9 @@ class ReminderLoop extends StatelessWidget {
       height: Get.height * 0.1,
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: defaultWhite,
+        color: Theme.of(context).brightness == Brightness.light
+            ? defaultWhite
+            : Color(0XFF1B2430),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           isSelected == false
@@ -41,6 +43,5 @@ class ReminderLoop extends StatelessWidget {
         )),
       ),
     );
-    ;
   }
 }

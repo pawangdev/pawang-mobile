@@ -15,79 +15,75 @@ class AddWalletView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconBack(
+                  blueMode: true,
+                  onTap: () {
+                    Get.back();
+                  },
+                ),
+                Text(
+                  "Tambah Dompet".tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: bold),
+                ),
+                Container(
+                  width: Get.width * 0.072,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: Get.height * 0.034,
+            ),
+            Form(
+              key: const Key('add-wallet'),
+              child: Column(
                 children: [
-                  IconBack(
-                    blueMode: true,
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
-                  Text(
-                    "Tambah Dompet".tr,
-                    style: kInter.copyWith(
-                        fontSize: 16, fontWeight: bold, color: defaultBlack),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: InputField(
+                      validator: ValidationBuilder(localeName: 'id').build(),
+                      icon: const Icon(Icons.payment_rounded),
+                      inputLabel: "Nama Dompet".tr,
+                      inputController: controller.nameTextController,
+                    ),
                   ),
                   Container(
-                    width: Get.width * 0.072,
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: InputField(
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) {
+                        controller.createWallet();
+                      },
+                      validator: ValidationBuilder(localeName: 'id').build(),
+                      icon: const Icon(Icons.monetization_on_outlined),
+                      inputLabel: "Saldo Awal".tr,
+                      inputController: controller.balanceTextController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        CurrencyTextInputFormatter(
+                            locale: 'id', decimalDigits: 0, symbol: '')
+                      ],
+                    ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: Get.height * 0.034,
+            ),
+            Expanded(
+                child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ButtonCustom(
+                text: 'Simpan Dompet'.tr,
+                onTap: () => controller.createWallet(),
               ),
-              Form(
-                key: const Key('add-wallet'),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
-                        icon: const Icon(Icons.payment_rounded),
-                        inputLabel: "Nama Dompet".tr,
-                        inputController: controller.nameTextController,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: InputField(
-                        textInputAction: TextInputAction.done,
-                        onFieldSubmitted: (_) {
-                          controller.createWallet();
-                        },
-                        validator: ValidationBuilder(localeName: 'id').build(),
-                        icon: const Icon(Icons.monetization_on_outlined),
-                        inputLabel: "Saldo Awal".tr,
-                        inputController: controller.balanceTextController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          CurrencyTextInputFormatter(
-                              locale: 'id', decimalDigits: 0, symbol: '')
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ButtonCustom(
-                  text: 'Simpan Dompet'.tr,
-                  onTap: () => controller.createWallet(),
-                ),
-              )),
-            ],
-          ),
+            )),
+          ],
         ),
       ),
     );

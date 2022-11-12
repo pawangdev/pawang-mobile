@@ -50,7 +50,9 @@ class ReminderCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? defaultWhite
+                    : Color(0XFF1B2430),
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
@@ -90,13 +92,17 @@ class ReminderCard extends StatelessWidget {
                               .toString(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: kInter.copyWith(fontSize: 14),
+                          style: kInter.copyWith(color: defaultGray),
                         ),
                       ],
                     ),
                   ],
                 ),
-                Switch(value: item.isActive!, onChanged: onToogle)
+                Switch(
+                  value: item.isActive!,
+                  onChanged: onToogle,
+                  activeColor: defaultPrimary,
+                )
               ],
             ),
           ),

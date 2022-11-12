@@ -57,7 +57,6 @@ class NavigationView extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           notchMargin: 3,
-          color: Colors.white,
           child: SizedBox(
             height: Get.height * 0.08,
             child: GetBuilder<NavigationController>(
