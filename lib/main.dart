@@ -49,25 +49,8 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Pawang',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: defaultPrimary,
-          onPrimary: defaultGray,
-          secondary: defaultPurple,
-          onSecondary: Colors.white,
-          primaryContainer: Colors.transparent,
-          error: defaultBlack,
-          onError: defaultError,
-          background: Colors.blue,
-          onBackground: defaultWhite,
-          surface: Colors.pink,
-          onSurface: defaultGray,
-        ),
-      ),
+      theme: ThemeData(),
       darkTheme: ThemeData(
-        useMaterial3: true,
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
           primary: defaultPrimary,

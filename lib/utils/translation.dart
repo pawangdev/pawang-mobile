@@ -123,6 +123,9 @@ class Translation extends Translations {
           'Jenis': 'Jenis',
           'Waktu': 'Waktu',
           'Bahasa': 'Bahasa',
+          'Mode Malam': 'Mode Malam',
+          'Aktif': 'Aktif',
+          'Nonaktif': 'Nonaktif',
         },
         'en': {
           'Masuk dulu yuk!': 'Let\'s login first!',
@@ -242,6 +245,9 @@ class Translation extends Translations {
           'Jenis': 'Type',
           'Waktu': 'Time',
           'Bahasa': 'Language',
+          'Mode Malam': 'Dark Mode',
+          'Aktif': 'Active',
+          'Nonaktif': 'Non Active',
         },
       };
 }

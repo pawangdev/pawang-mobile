@@ -137,14 +137,14 @@ class SettingsView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               SelectButton(
-                                nama: 'Aktif',
+                                nama: 'Aktif'.tr,
                                 onTap: () {
                                   Get.changeTheme(ThemeData.dark());
                                   Get.back();
                                 },
                               ),
                               SelectButton(
-                                nama: 'Mati',
+                                nama: 'Nonaktif'.tr,
                                 onTap: () {
                                   Get.changeTheme(ThemeData.light());
                                   Get.back();
