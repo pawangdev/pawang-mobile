@@ -16,7 +16,7 @@ class AddWalletView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 33.0, horizontal: 32.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
           children: [
             Row(

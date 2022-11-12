@@ -69,7 +69,7 @@ class DashboardView extends StatelessWidget {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 35, left: 32, right: 32),
+                          const EdgeInsets.only(top: 32, left: 32, right: 32),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

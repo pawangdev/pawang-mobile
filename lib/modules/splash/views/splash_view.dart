@@ -29,14 +29,18 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/Splash1.png',
-            fit: BoxFit.fitHeight,
-            width: Get.width,
+          Container(
             height: Get.height,
+            width: Get.width,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [defaultPrimary, defaultPurple, defaultPrimary]),
+            ),
           ),
           Center(
             child: SizedBox(
@@ -77,8 +81,7 @@ class SplashView extends StatelessWidget {
                 child: Text(
                   'Pawang version ${controller.version}',
                   style: kInter.copyWith(
-                    fontSize: 14,
-                    color: defaultBlack.withOpacity(0.75),
+                    color: defaultWhite.withOpacity(0.75),
                     fontWeight: semiBold,
                   ),
                 ),

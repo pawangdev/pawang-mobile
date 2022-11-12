@@ -19,7 +19,7 @@ class SettingsView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 32, right: 32),
+          padding: const EdgeInsets.all(32),
           child: Column(
             children: [
               Center(
@@ -138,6 +138,10 @@ class SettingsView extends StatelessWidget {
                             children: [
                               SelectButton(
                                 nama: 'Aktif'.tr,
+                                isSelected: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? false
+                                    : true,
                                 onTap: () {
                                   Get.changeTheme(ThemeData.dark());
                                   Get.back();
@@ -145,6 +149,10 @@ class SettingsView extends StatelessWidget {
                               ),
                               SelectButton(
                                 nama: 'Nonaktif'.tr,
+                                isSelected: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? true
+                                    : false,
                                 onTap: () {
                                   Get.changeTheme(ThemeData.light());
                                   Get.back();

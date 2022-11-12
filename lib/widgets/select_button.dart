@@ -30,7 +30,7 @@ class SelectButton extends StatelessWidget {
           boxShadow: [
             isSelected == false
                 ? BoxShadow(
-                    color: defaultBlack.withOpacity(0.14),
+                    color: defaultBlack.withOpacity(0.1),
                     spreadRadius: 2,
                     blurRadius: 10,
                   )

@@ -49,7 +49,10 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Pawang',
-      theme: ThemeData(),
+      theme: ThemeData(
+        fontFamily: "Inter",
+        errorColor: defaultError,
+      ),
       darkTheme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,

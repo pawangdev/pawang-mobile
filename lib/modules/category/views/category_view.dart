@@ -50,7 +50,7 @@ class CategoryView extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Container(
                 padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
@@ -611,7 +611,11 @@ class CategoryView extends StatelessWidget {
                             collapsed: collapsed,
                             expanded: expanded,
                           ),
-                          theme: const ExpandableThemeData(
+                          theme: ExpandableThemeData(
+                            iconColor:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : defaultWhite,
                             animationDuration: Duration(milliseconds: 300),
                           ),
                         );

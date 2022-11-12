@@ -23,7 +23,7 @@ class AddTransactionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+        padding: const EdgeInsets.all(32),
         child: Column(
           children: [
             Row(
@@ -114,6 +114,7 @@ class AddTransactionView extends StatelessWidget {
                         hintText: 'Dompet'.tr,
                         icon: const Icon(Icons.payment_rounded),
                         suffixIcon: Container(
+                          width: 2,
                           padding: const EdgeInsets.all(10),
                           child: SvgPicture.asset(
                             'assets/images/chevron_down.svg',

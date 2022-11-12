@@ -14,7 +14,7 @@ class ChangePasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+        padding: const EdgeInsets.all(32),
         child: Column(
           children: [
             Row(

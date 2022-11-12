@@ -13,7 +13,7 @@ class ResetPasswordTokenView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+          padding: const EdgeInsets.all(32),
           child: Column(
             children: [
               Row(

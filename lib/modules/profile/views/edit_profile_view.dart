@@ -22,8 +22,7 @@ class EditProfileView extends StatelessWidget {
             constraints: BoxConstraints(minHeight: constraint.maxHeight),
             child: IntrinsicHeight(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+                padding: const EdgeInsets.all(32),
                 child: Column(
                   children: [
                     Row(

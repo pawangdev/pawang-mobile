@@ -16,7 +16,7 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 30),
+          padding: const EdgeInsets.all(32),
           child: Column(
             children: [
               Row(
