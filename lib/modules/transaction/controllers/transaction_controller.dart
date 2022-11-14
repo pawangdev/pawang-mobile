@@ -226,7 +226,7 @@ class TransactionController extends GetxController {
     Get.toNamed(RoutesName.addtransaction);
   }
 
-  Future<void> formEditTransaction(TransactionDataModel data) async {
+  Future<void> formEditTransaction(dynamic data) async {
     if (data.type == "income") {
       Get.toNamed(RoutesName.addtransaction, arguments: {"isUpdate": true});
     } else if (data.type == "outcome") {
