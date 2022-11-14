@@ -169,25 +169,25 @@ class DashboardView extends StatelessWidget {
                               onTap: () => Get.toNamed(RoutesName.addwallet),
                               child: Container(
                                 decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: defaultBlack.withOpacity(0.2),
-                                          blurRadius: 10,
-                                          spreadRadius: 2)
-                                    ],
-                                    gradient: const LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          defaultPrimary,
-                                          defaultPurple
-                                        ]),
-                                    borderRadius: BorderRadius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: defaultBlack.withOpacity(0.2),
+                                        blurRadius: 25,
+                                        spreadRadius: -5)
+                                  ],
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomCenter,
+                                      colors: [Colors.white60, Colors.white10]),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      width: 2, color: Colors.white30),
+                                ),
                                 child: Center(
                                     child: Icon(
                                   Icons.add_rounded,
                                   size: 30,
-                                  color: defaultWhite.withOpacity(0.8),
+                                  color: defaultBlack.withOpacity(0.7),
                                 )),
                               ),
                             );
