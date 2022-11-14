@@ -88,7 +88,7 @@ class NavigationView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: Get.width * 0.03,
+                      width: Get.width * 0.02,
                     ),
                     Row(
                       children: [

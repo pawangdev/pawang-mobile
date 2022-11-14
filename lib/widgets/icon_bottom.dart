@@ -31,7 +31,7 @@ class IconBottomBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
-          width: Get.width * 0.2,
+          width: Get.width * 0.18,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

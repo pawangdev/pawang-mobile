@@ -101,6 +101,9 @@ class SettingsView extends StatelessWidget {
                             children: [
                               SelectButton(
                                 nama: 'Bahasa Indonesia',
+                                isSelected: Get.locale?.toLanguageTag() == 'id'
+                                    ? true
+                                    : false,
                                 onTap: () {
                                   Get.updateLocale(const Locale('id'));
                                   Get.back();
@@ -108,6 +111,9 @@ class SettingsView extends StatelessWidget {
                               ),
                               SelectButton(
                                 nama: 'English Language',
+                                isSelected: Get.locale?.toLanguageTag() == 'en'
+                                    ? true
+                                    : false,
                                 onTap: () {
                                   Get.updateLocale(const Locale('en'));
                                   Get.back();
