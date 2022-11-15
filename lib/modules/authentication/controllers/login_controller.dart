@@ -66,16 +66,7 @@ class LoginController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
 
-      Get.snackbar(
-        'Tedapat Kesalahan !',
-        e.toString(),
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-      );
+      print(e);
     }
   }
 
