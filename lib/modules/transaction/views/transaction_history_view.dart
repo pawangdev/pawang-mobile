@@ -103,6 +103,8 @@ class TransactionHistoryView extends StatelessWidget {
                                                   )
                                                 : Expanded(
                                                     child: ListView.builder(
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
                                                       itemCount: controller
                                                           .dashboardController
                                                           .wallets

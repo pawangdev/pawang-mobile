@@ -66,6 +66,7 @@ class ReminderView extends StatelessWidget {
                       ),
                     )
                   : ListView.builder(
+                      physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         final reminder = dashboardController.reminders[index];

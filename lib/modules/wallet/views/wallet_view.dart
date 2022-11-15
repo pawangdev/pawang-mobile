@@ -84,6 +84,7 @@ class WalletView extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
+                        physics: const BouncingScrollPhysics(),
                         itemCount: dashboardController.wallets.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index) {

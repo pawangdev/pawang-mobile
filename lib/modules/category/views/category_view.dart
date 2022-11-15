@@ -75,11 +75,13 @@ class CategoryView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Obx(
                   () => TabBarView(
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       //Outcome
                       ListView.builder(
                         itemCount: controller.categories.length,
                         scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           var category = controller.categories[index];
@@ -634,6 +636,7 @@ class CategoryView extends StatelessWidget {
                       ListView.builder(
                         itemCount: controller.categories.length,
                         scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           var category = controller.categories[index];
