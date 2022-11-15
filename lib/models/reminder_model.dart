@@ -1,10 +1,12 @@
 class ReminderModel {
+  bool? status;
   String? message;
   List<ReminderDataModel>? data;
 
-  ReminderModel({this.message, this.data});
+  ReminderModel({this.status, this.message, this.data});
 
   ReminderModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
       data = <ReminderDataModel>[];

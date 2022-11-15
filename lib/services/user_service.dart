@@ -109,7 +109,7 @@ class UserService extends BaseService {
       final response = await get("/auth/profile");
 
       if (response.statusCode == 200) {
-        return UserProfileDataModel.fromJson(response.body['data']['user']);
+        return UserProfileDataModel.fromJson(response.body['data']);
       } else {
         throw (response.body['data'] ?? response.body['message']);
       }

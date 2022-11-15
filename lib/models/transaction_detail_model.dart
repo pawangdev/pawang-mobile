@@ -8,15 +8,18 @@ String transactionDetailModelToJson(TransactionDetailModel data) =>
 
 class TransactionDetailModel {
   TransactionDetailModel({
+    required this.status,
     required this.message,
     required this.data,
   });
 
+  bool status;
   String message;
   TransactionDetailDataModel data;
 
   factory TransactionDetailModel.fromJson(Map<String, dynamic> json) =>
       TransactionDetailModel(
+        status: json["status"],
         message: json["message"],
         data: TransactionDetailDataModel.fromJson(json["data"]),
       );

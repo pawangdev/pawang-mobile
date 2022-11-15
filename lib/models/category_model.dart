@@ -11,14 +11,17 @@ String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
 class CategoryModel {
   CategoryModel({
+    required this.status,
     required this.message,
     required this.data,
   });
 
+  bool status;
   String message;
   List<CategoryDataModel> data;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+        status: json["status"],
         message: json["message"],
         data: List<CategoryDataModel>.from(
             json["data"].map((x) => CategoryDataModel.fromJson(x))),

@@ -7,14 +7,17 @@ String walletsModelToJson(WalletsModel data) => json.encode(data.toJson());
 
 class WalletsModel {
   WalletsModel({
+    required this.status,
     required this.message,
     required this.data,
   });
 
+  bool status;
   String message;
   List<WalletDataModel> data;
 
   factory WalletsModel.fromJson(Map<String, dynamic> json) => WalletsModel(
+        status: json["status"],
         message: json["message"],
         data: List<WalletDataModel>.from(
             json["data"].map((x) => WalletDataModel.fromJson(x))),

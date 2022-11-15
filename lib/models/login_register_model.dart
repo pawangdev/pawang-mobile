@@ -8,15 +8,18 @@ String userLoginRegisterModelToJson(UserLoginRegisterModel data) =>
 
 class UserLoginRegisterModel {
   UserLoginRegisterModel({
+    required this.status,
     required this.message,
     required this.data,
   });
 
+  bool status;
   String message;
   UserLoginRegisterDataModel data;
 
   factory UserLoginRegisterModel.fromJson(Map<String, dynamic> json) =>
       UserLoginRegisterModel(
+        status: json["status"],
         message: json["message"],
         data: UserLoginRegisterDataModel.fromJson(json["data"]),
       );

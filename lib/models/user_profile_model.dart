@@ -11,15 +11,18 @@ String welcomeToJson(UserProfileModel data) => json.encode(data.toJson());
 
 class UserProfileModel {
   UserProfileModel({
+    required this.status,
     required this.message,
     required this.data,
   });
 
+  bool status;
   String message;
   Data data;
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       UserProfileModel(
+        status: json["status"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
       );
