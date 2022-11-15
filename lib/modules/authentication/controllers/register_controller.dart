@@ -43,8 +43,6 @@ class RegisterController extends GetxController {
       'name': nameTextController.text,
       'email': emailTextController.text,
       'password': passwordTextController.text,
-      'phone': phoneTextController.text,
-      'gender': genderTextController.value,
       'onesignal_id': osUserID,
     };
 

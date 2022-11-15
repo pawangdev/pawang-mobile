@@ -10,8 +10,6 @@ class UserService extends BaseService {
         'name': data['name'],
         'email': data['email'],
         'password': data['password'],
-        'phone': data['phone'],
-        'gender': data['gender'],
         'onesignal_id': data['onesignal_id']
       };
 
