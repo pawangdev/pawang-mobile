@@ -23,10 +23,50 @@ class AddTransactionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        controller.clearInput();
-        Get.back();
-        return Future.value(false);
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                'Apakah anda ingin membuang perubahan ini?'.tr,
+                style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                textAlign: TextAlign.center,
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: ButtonCustom(
+                        elevatedMode: false,
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        text: 'Tidak'.tr,
+                      ),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Expanded(
+                      child: ButtonCustom(
+                        elevatedMode: false,
+                        onTap: () {
+                          Navigator.pop(context, true);
+                          controller.clearInput();
+                          Get.back();
+                        },
+                        text: 'Ya'.tr,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
       },
       child: Scaffold(
         body: Padding(
@@ -39,8 +79,49 @@ class AddTransactionView extends StatelessWidget {
                   IconBack(
                     blueMode: true,
                     onTap: () {
-                      controller.clearInput();
-                      Get.back();
+                      showDialog<bool>(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Apakah anda ingin membuang perubahan ini?'.tr,
+                              style: kInter.copyWith(
+                                  fontSize: 16, fontWeight: semiBold),
+                              textAlign: TextAlign.center,
+                            ),
+                            actionsAlignment: MainAxisAlignment.center,
+                            actions: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ButtonCustom(
+                                      elevatedMode: false,
+                                      onTap: () {
+                                        Navigator.pop(context, false);
+                                      },
+                                      text: 'Tidak'.tr,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: Get.width * 0.01,
+                                  ),
+                                  Expanded(
+                                    child: ButtonCustom(
+                                      elevatedMode: false,
+                                      onTap: () {
+                                        Navigator.pop(context, true);
+                                        controller.clearInput();
+                                        Get.back();
+                                      },
+                                      text: 'Ya'.tr,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                   Text(

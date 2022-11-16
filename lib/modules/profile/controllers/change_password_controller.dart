@@ -71,4 +71,10 @@ class ChangePasswordController extends GetxController {
       );
     }
   }
+
+  Future<void> resetAllInput() async {
+    passwordNowTextController.text = '';
+    passwordNewTextController.text = '';
+    passwordNewConfirmationTextController.text = '';
+  }
 }

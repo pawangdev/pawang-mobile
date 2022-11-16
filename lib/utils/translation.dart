@@ -126,6 +126,8 @@ class Translation extends Translations {
           'Mode Malam': 'Mode Malam',
           'Aktif': 'Aktif',
           'Nonaktif': 'Nonaktif',
+          'Apakah anda ingin membuang perubahan ini?':
+              'Apakah anda ingin membuang perubahan ini?',
         },
         'en': {
           'Masuk dulu yuk!': 'Let\'s login first!',
@@ -248,6 +250,8 @@ class Translation extends Translations {
           'Mode Malam': 'Dark Mode',
           'Aktif': 'Active',
           'Nonaktif': 'Non Active',
+          'Apakah anda ingin membuang perubahan ini?':
+              'Do you want to discard this change?'
         },
       };
 }

@@ -12,74 +12,163 @@ class ChangePasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconBack(
-                    blueMode: true,
-                    onTap: () {
-                      Navigator.pop(context);
-                    }),
-                Text(
-                  "Ganti Password".tr,
-                  style: kInter.copyWith(fontSize: 16, fontWeight: bold),
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                'Apakah anda ingin membuang perubahan ini?'.tr,
+                style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                textAlign: TextAlign.center,
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: ButtonCustom(
+                        elevatedMode: false,
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        text: 'Tidak'.tr,
+                      ),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Expanded(
+                      child: ButtonCustom(
+                        elevatedMode: false,
+                        onTap: () {
+                          Navigator.pop(context, true);
+                          controller.resetAllInput();
+                          Get.back();
+                        },
+                        text: 'Ya'.tr,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: Get.width * 0.072,
-                )
               ],
-            ),
-            SizedBox(height: Get.height * 0.045),
-            Form(
-              key: const Key('change-password'),
-              child: Column(
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InputField(
-                      validator: ValidationBuilder(localeName: 'id').build(),
-                      icon: const Icon(Icons.lock_outline_rounded),
-                      inputLabel: 'Password Lama'.tr,
-                      isPassword: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      inputController: controller.passwordNowTextController),
-                  SizedBox(height: Get.height * 0.025),
-                  InputField(
-                      validator: ValidationBuilder(localeName: 'id').build(),
-                      icon: const Icon(Icons.lock_outline_rounded),
-                      inputLabel: 'Password Baru'.tr,
-                      isPassword: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      inputController: controller.passwordNewTextController),
-                  SizedBox(height: Get.height * 0.025),
-                  InputField(
-                      textInputAction: TextInputAction.done,
-                      onFieldSubmitted: (_) {
-                        controller.updatePassword();
-                      },
-                      validator: ValidationBuilder(localeName: 'id').build(),
-                      icon: const Icon(Icons.lock_outline_rounded),
-                      inputLabel: 'Password Baru Konfirmasi'.tr,
-                      isPassword: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      inputController:
-                          controller.passwordNewConfirmationTextController),
+                  IconBack(
+                      blueMode: true,
+                      onTap: () {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                'Apakah anda ingin membuang perubahan ini?'.tr,
+                                style: kInter.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                                textAlign: TextAlign.center,
+                              ),
+                              actionsAlignment: MainAxisAlignment.center,
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        text: 'Tidak'.tr,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, true);
+                                          controller.resetAllInput();
+                                          Get.back();
+                                        },
+                                        text: 'Ya'.tr,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }),
+                  Text(
+                    "Ganti Password".tr,
+                    style: kInter.copyWith(fontSize: 16, fontWeight: bold),
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.072,
+                  )
                 ],
               ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ButtonCustom(
-                  text: 'Simpan Perubahan'.tr,
-                  onTap: () => controller.updatePassword(),
+              SizedBox(height: Get.height * 0.045),
+              Form(
+                key: const Key('change-password'),
+                child: Column(
+                  children: [
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
+                        inputLabel: 'Password Lama'.tr,
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: controller.passwordNowTextController),
+                    SizedBox(height: Get.height * 0.025),
+                    InputField(
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
+                        inputLabel: 'Password Baru'.tr,
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController: controller.passwordNewTextController),
+                    SizedBox(height: Get.height * 0.025),
+                    InputField(
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          controller.updatePassword();
+                        },
+                        validator: ValidationBuilder(localeName: 'id').build(),
+                        icon: const Icon(Icons.lock_outline_rounded),
+                        inputLabel: 'Password Baru Konfirmasi'.tr,
+                        isPassword: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        inputController:
+                            controller.passwordNewConfirmationTextController),
+                  ],
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ButtonCustom(
+                    text: 'Simpan Perubahan'.tr,
+                    onTap: () => controller.updatePassword(),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

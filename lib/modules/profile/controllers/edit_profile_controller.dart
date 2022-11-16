@@ -76,4 +76,10 @@ class EditProfileController extends GetxController {
       );
     }
   }
+
+  Future<void> resetAllInput() async {
+    nameTextController.text = dashboardController.user.value.name;
+    phoneTextController.text = dashboardController.user.value.phone ?? "";
+    genderTextController.value = dashboardController.user.value.gender ?? "";
+  }
 }
