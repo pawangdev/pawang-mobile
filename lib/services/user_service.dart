@@ -211,4 +211,22 @@ class UserService extends BaseService {
       }
     }
   }
+
+  Future<bool> userLogout(Map<String, dynamic> data) async {
+    try {
+      var payload = <String, dynamic>{
+        "onesignal_id": data['onesignal_id'],
+      };
+
+      final response = await post("/auth/logout", payload);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

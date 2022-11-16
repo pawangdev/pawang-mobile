@@ -212,26 +212,7 @@ class SettingsView extends StatelessWidget {
                                     text: 'Keluar'.tr,
                                     elevatedMode: false,
                                     blueMode: false,
-                                    onTap: () async {
-                                      Get.snackbar(
-                                        'Sukses !',
-                                        "Berhasil Keluar !",
-                                        backgroundColor: Colors.green,
-                                        colorText: Colors.white,
-                                        icon: const Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                      Storage.removeValue("token").then(
-                                          (value) => Get.offAllNamed(
-                                              RoutesName.login));
-                                      // Navigator.pushNamedAndRemoveUntil(
-                                      //   context,
-                                      //   LandingScreen.routeName,
-                                      //   (route) => false,
-                                      // );
-                                    },
+                                    onTap: () => controller.logout(),
                                   ),
                                 ),
                               ],
