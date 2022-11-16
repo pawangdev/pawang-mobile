@@ -146,7 +146,7 @@ class TransactionDetailView extends StatelessWidget {
                             width: Get.width * 0.35,
                             child: Text(
                               DateFormat("d MMMM yyyy")
-                                  .format(DateFormat("yyyy-mm-dd hh:mm")
+                                  .format(DateFormat("yyyy-mm-dd HH:mm")
                                       .parse(transaction.date.toString(), true)
                                       .toLocal())
                                   .toString(),
@@ -175,7 +175,7 @@ class TransactionDetailView extends StatelessWidget {
                             width: Get.width * 0.35,
                             child: Text(
                               DateFormat("HH:mm")
-                                  .format(DateFormat("yyyy-mm-dd hh:mm")
+                                  .format(DateFormat("yyyy-mm-dd HH:mm")
                                       .parse(transaction.date.toString(), true)
                                       .toLocal())
                                   .toString(),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pawang_mobile/models/transaction_model.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/navigation/navigation.dart';
 import 'package:pawang_mobile/modules/scan_receipe/scan_receipe.dart';
@@ -24,6 +23,9 @@ class TransactionController extends GetxController {
 
   final DashboardController dashboardController = Get.find();
   final NavigationController navigationController = Get.find();
+
+  // Check Update
+  bool isUpdate = false;
 
   // Check If Scan Struk Page
   bool isScanReceipt = false;
@@ -121,7 +123,7 @@ class TransactionController extends GetxController {
       'subcategory_id': subCategoryId.value,
       'wallet_id': walletId.value,
       'description': descriptionTextController.text,
-      'date': dateRFC3399.value,
+      'date': DateTime.parse(dateTextController.text).toUtc().toString(),
     };
 
     try {
@@ -227,6 +229,7 @@ class TransactionController extends GetxController {
   }
 
   Future<void> formEditTransaction(dynamic data) async {
+    print(DateTime.parse(data.date.toString()).toLocal());
     if (data.type == "income") {
       Get.toNamed(RoutesName.addtransaction, arguments: {"isUpdate": true});
     } else if (data.type == "outcome") {
@@ -250,9 +253,11 @@ class TransactionController extends GetxController {
           "${data.category.name} - ${data.subcategory?.name}";
     }
 
-    dateTextController.text = DateFormat("d MMMM yyyy - HH:mm")
-        .format(DateFormat("yyyy-mm-dd HH:mm").parse(data.date.toString()))
-        .toString();
+    dateTextController.text = data.date.toString();
+
+    dateRFC3399.value = data.date.toString();
+
+    isUpdate = true;
   }
 
   Future<void> updateTransaction() async {
@@ -303,7 +308,7 @@ class TransactionController extends GetxController {
       'subcategory_id': subCategoryId.value,
       'wallet_id': walletId.value,
       'description': descriptionTextController.text,
-      'date': dateRFC3399.value,
+      'date': DateTime.parse(dateTextController.text).toUtc().toString(),
       'image': null,
     };
 
@@ -319,6 +324,8 @@ class TransactionController extends GetxController {
         await EasyLoading.dismiss();
 
         Get.offAllNamed(RoutesName.navigation);
+
+        isUpdate = false;
 
         Get.snackbar(
           'Sukses !',
@@ -349,6 +356,7 @@ class TransactionController extends GetxController {
   }
 
   Future<void> clearInput() async {
+    isUpdate = false;
     isScanReceipt = false;
     dateTextController.text =
         DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();

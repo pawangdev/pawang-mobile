@@ -253,6 +253,7 @@ class ReminderController extends GetxController {
     nameTextController.text = "";
     dateTextController.text = "";
     typeRepeateTextController.text = "Tidak Berulang".tr;
+    typeRepeate.value = "Tidak Berulang".tr;
 
     if (Get.isDialogOpen!) {
       Get.back();

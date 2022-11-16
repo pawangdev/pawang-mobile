@@ -21,8 +21,8 @@ class UserService extends BaseService {
         throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
-      if (e.toString() == "Email telah terdaftar") {
-        throw ("Email Telah Terdaftar!");
+      if (e.toString() == "EMAIL_HAS_REGISTERED") {
+        throw ("Email Telah Terdaftar !");
       } else {
         rethrow;
       }
@@ -46,14 +46,14 @@ class UserService extends BaseService {
         throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
-      if (e.toString() == "Email not found") {
+      if (e.toString() == "EMAIL_NOT_FOUND") {
         throw ("Email Tidak Ditemukan!");
-      } else if (e.toString() == "Password invalid!") {
-        throw ("Password Salah!");
+      } else if (e.toString() == "WRONG_PASSWORD") {
+        throw ("Kata Sandi Salah!");
       } else if (e.toString() == "email is not allowed to be empty") {
         throw ("Email Tidak Boleh Kosong!");
-      } else if (e.toString() == "password is not allowed to be empty") {
-        throw ("Password Tidak Boleh Kosong!");
+      } else if (e.toString() == "Kata Sandi is not allowed to be empty") {
+        throw ("Kata Sandi Tidak Boleh Kosong!");
       } else {
         rethrow;
       }
@@ -95,7 +95,7 @@ class UserService extends BaseService {
       final response = await post("/auth/change-profile", dataProfile);
 
       if (response.statusCode == 200) {
-        return UserProfileDataModel.fromJson(response.body['data']['user']);
+        return UserProfileDataModel.fromJson(response.body['data']);
       } else {
         throw (response.body['data'] ?? response.body['message']);
       }
@@ -150,7 +150,7 @@ class UserService extends BaseService {
         throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
-      if (e.toString() == "Email tidak terdaftar") {
+      if (e.toString() == "EMAIL_NOT_FOUND") {
         throw ("Ups, Email Tidak Terdaftar !");
       } else {
         rethrow;
@@ -173,11 +173,12 @@ class UserService extends BaseService {
         throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
-      if (e.toString() == "token tidak valid") {
-        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
-      } else if (e.toString() ==
-          "token tidak valid, silahkan request token kembali") {
-        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      if (e.toString() == "TOKEN_NOT_MISMATCH") {
+        throw ("Maaf, token kamu salah / tidak sesuai silahkan request ulang !");
+      } else if (e.toString() == "TOKEN_EXPIRED") {
+        throw ("Maaf, token sudah expired silahkan request ulang !");
+      } else if (e.toString() == "EMAIL_NOT_FOUND") {
+        throw ("Ups, Email Tidak Terdaftar !");
       } else {
         rethrow;
       }
@@ -201,11 +202,12 @@ class UserService extends BaseService {
         throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
-      if (e.toString() == "token tidak valid") {
-        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
-      } else if (e.toString() ==
-          "token tidak valid, silahkan request token kembali") {
-        throw ("Maaf, token sudah tidak valid silahkan request ulang !");
+      if (e.toString() == "TOKEN_NOT_MISMATCH") {
+        throw ("Maaf, token kamu salah / tidak sesuai silahkan request ulang !");
+      } else if (e.toString() == "TOKEN_EXPIRED") {
+        throw ("Maaf, token sudah expired silahkan request ulang !");
+      } else if (e.toString() == "EMAIL_NOT_FOUND") {
+        throw ("Ups, Email Tidak Terdaftar !");
       } else {
         rethrow;
       }
