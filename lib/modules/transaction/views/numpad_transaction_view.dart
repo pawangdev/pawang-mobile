@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
+import 'package:pawang_mobile/widgets/button_custom.dart';
+import 'package:pawang_mobile/widgets/icon_back.dart';
 import 'package:pawang_mobile/widgets/numpad.dart';
 
 class NumpadTransactionView extends StatelessWidget {
@@ -11,21 +13,31 @@ class NumpadTransactionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Center(
-                child: Text(
-              "Masukkan Nominal".tr,
-              style: textMuted.copyWith(fontSize: 18, fontWeight: semiBold),
-            )),
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 8),
-              width: double.infinity,
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconBack(
+                  blueMode: true,
+                  onTap: () {
+                    controller.clearInput();
+                    Get.back();
+                  },
+                ),
+                Text(
+                  "Masukkan Nominal".tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                ),
+                const SizedBox(
+                  width: 32,
+                ),
+              ],
+            ),
+            Expanded(
               child: Center(
                 child: Obx(
                   () => Text(
@@ -38,40 +50,23 @@ class NumpadTransactionView extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const Expanded(child: SizedBox()),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: NumpadWidget(),
-          ),
-          SizedBox(
-            width: Get.width,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
-              child: OutlinedButton(
-                  onPressed: () {
-                    controller.displayAmount.text = CurrencyFormat.convertToIdr(
-                        int.parse(controller.amountTextController.value), 2);
-
-                    Get.back();
-                  },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius),
-                      ),
-                    ),
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 12.0),
-                    ),
-                  ),
-                  child: Text('Simpan'.tr, style: kInter)),
+            const Expanded(child: SizedBox()),
+            NumpadWidget(),
+            SizedBox(
+              height: Get.height * 0.05,
             ),
-          ),
-        ],
+            ButtonCustom(
+              text: 'Simpan'.tr,
+              elevatedMode: false,
+              onTap: () {
+                controller.displayAmount.text = CurrencyFormat.convertToIdr(
+                    int.parse(controller.amountTextController.value), 2);
+
+                Get.back();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

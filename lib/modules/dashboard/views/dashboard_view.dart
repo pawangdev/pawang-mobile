@@ -79,7 +79,7 @@ class DashboardView extends StatelessWidget {
                               children: [
                                 Container(
                                   width: Get.width * 0.085,
-                                  height: Get.height * 0.05,
+                                  height: Get.height * 0.047,
                                   decoration: BoxDecoration(
                                     color: defaultWhite,
                                     borderRadius: BorderRadius.circular(50.0),
@@ -91,7 +91,7 @@ class DashboardView extends StatelessWidget {
                                                       "female"
                                                   ? "assets/images/woman.png"
                                                   : "assets/images/user.png"),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),

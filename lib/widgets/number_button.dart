@@ -46,7 +46,11 @@ class NumberButton extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: kInter.copyWith(
-              fontWeight: semiBold, color: defaultBlack, fontSize: 22),
+              fontWeight: semiBold,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : defaultWhite,
+              fontSize: 22),
         ),
       ),
     );

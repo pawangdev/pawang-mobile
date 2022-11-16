@@ -145,10 +145,8 @@ class TransactionDetailView extends StatelessWidget {
                           SizedBox(
                             width: Get.width * 0.35,
                             child: Text(
-                              DateFormat("d MMMM yyyy")
-                                  .format(DateFormat("yyyy-mm-dd HH:mm")
-                                      .parse(transaction.date.toString(), true)
-                                      .toLocal())
+                              DateFormat("dd MMMM yyyy")
+                                  .format(transaction.date.toLocal())
                                   .toString(),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
@@ -174,10 +172,8 @@ class TransactionDetailView extends StatelessWidget {
                           SizedBox(
                             width: Get.width * 0.35,
                             child: Text(
-                              DateFormat("HH:mm")
-                                  .format(DateFormat("yyyy-mm-dd HH:mm")
-                                      .parse(transaction.date.toString(), true)
-                                      .toLocal())
+                              DateFormat("HH: mm")
+                                  .format(transaction.date.toLocal())
                                   .toString(),
                               maxLines: 1,
                               textAlign: TextAlign.end,
