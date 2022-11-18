@@ -50,7 +50,6 @@ class ButtonCustom extends StatelessWidget {
                 ),
                 onPressed: onTap,
                 style: OutlinedButton.styleFrom(
-                  shadowColor: Colors.amber,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   side: BorderSide(
                       color: blueMode! ? defaultPrimary : defaultError),

@@ -33,18 +33,23 @@ class ReminderView extends StatelessWidget {
                     Text(
                       'Pengingat'.tr,
                       style: kInter.copyWith(
-                          fontSize: 16,
-                          fontWeight: semiBold,
-                          color: defaultWhite),
+                        fontSize: 16,
+                        fontWeight: semiBold,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? defaultWhite
+                            : const Color(0XFF39434D),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
                         Get.toNamed(RoutesName.addreminder);
                         controller.resetAllInput();
                       },
-                      child: const Icon(
+                      child: Icon(
                         Icons.add_rounded,
-                        color: defaultWhite,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? defaultWhite
+                            : const Color(0XFF39434D),
                       ),
                     )
                   ],

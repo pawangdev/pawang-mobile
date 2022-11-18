@@ -21,26 +21,52 @@ class WalletCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: defaultBlack.withOpacity(0.2),
-                blurRadius: 10,
-                spreadRadius: 2)
-          ],
-          gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [defaultPrimary, defaultPurple]),
-          // LinearGradient(
-          //     begin: Alignment.topLeft,
-          //     end: Alignment.bottomRight,
-          //     colors: [
-          //   defaultWhite.withOpacity(0.5),
-          //   defaultWhite.withOpacity(0.3),
-          //   defaultWhite.withOpacity(0.5)
-          // ]),
-          borderRadius: BorderRadius.circular(20)),
+      decoration: Theme.of(context).brightness == Brightness.light
+          ? BoxDecoration(
+              boxShadow: [
+                  BoxShadow(
+                      color: defaultBlack.withOpacity(0.2),
+                      blurRadius: 10,
+                      spreadRadius: 2)
+                ],
+              gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [defaultPrimary, defaultPurple]),
+              // LinearGradient(
+              //     begin: Alignment.topLeft,
+              //     end: Alignment.bottomRight,
+              //     colors: [
+              //   defaultWhite.withOpacity(0.5),
+              //   defaultWhite.withOpacity(0.3),
+              //   defaultWhite.withOpacity(0.5)
+              // ]),
+              borderRadius: BorderRadius.circular(20))
+          : BoxDecoration(
+              boxShadow: [
+                  BoxShadow(
+                      color: defaultBlack.withOpacity(0.2),
+                      blurRadius: 10,
+                      spreadRadius: 2)
+                ],
+              gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0XFF39434D),
+                    Color(0XFF47494E),
+                    Color(0XFF39434D),
+                  ]),
+              // color: const Color(0XFF39434D),
+              // LinearGradient(
+              //     begin: Alignment.topLeft,
+              //     end: Alignment.bottomRight,
+              //     colors: [
+              //   defaultWhite.withOpacity(0.5),
+              //   defaultWhite.withOpacity(0.3),
+              //   defaultWhite.withOpacity(0.5)
+              // ]),
+              borderRadius: BorderRadius.circular(20)),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -41,7 +41,9 @@ class WalletCard2 extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: kInter.copyWith(
-                  color: defaultPrimary,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? defaultWhite
+                      : defaultPrimary,
                   fontWeight: semiBold,
                   fontSize: 16,
                 ),
@@ -55,7 +57,6 @@ class WalletCard2 extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: kInter.copyWith(
-                color: defaultBlack,
                 fontWeight: medium,
                 fontSize: 15,
               ),
@@ -68,7 +69,9 @@ class WalletCard2 extends StatelessWidget {
           ],
         ),
         decoration: BoxDecoration(
-            color: defaultWhite,
+            color: Theme.of(context).brightness == Brightness.light
+                ? defaultWhite
+                : const Color(0XFF39434D),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             boxShadow: [
               BoxShadow(

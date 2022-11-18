@@ -37,9 +37,13 @@ class CategoryView extends StatelessWidget {
                       Text(
                         'Kategori'.tr,
                         style: kInter.copyWith(
-                            fontSize: 16,
-                            fontWeight: semiBold,
-                            color: defaultWhite),
+                          fontSize: 16,
+                          fontWeight: semiBold,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? defaultWhite
+                                  : const Color(0XFF39434D),
+                        ),
                       ),
                       SizedBox(
                         width: Get.width * 0.072,
@@ -114,6 +118,11 @@ class CategoryView extends StatelessWidget {
                                                 imageUrl:
                                                     baseHOSTAPI + category.icon,
                                                 fit: BoxFit.cover,
+                                                color: Theme.of(context)
+                                                            .brightness ==
+                                                        Brightness.dark
+                                                    ? defaultWhite
+                                                    : null,
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
@@ -146,6 +155,11 @@ class CategoryView extends StatelessWidget {
                                               imageUrl:
                                                   baseHOSTAPI + category.icon,
                                               fit: BoxFit.cover,
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? defaultWhite
+                                                  : null,
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                           downloadProgress) =>
@@ -279,13 +293,11 @@ class CategoryView extends StatelessWidget {
                                                                     overflow:
                                                                         TextOverflow
                                                                             .ellipsis,
-                                                                    style: kInter.copyWith(
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontWeight:
-                                                                            medium,
-                                                                        color:
-                                                                            defaultBlack),
+                                                                    style: kInter
+                                                                        .copyWith(
+                                                                      fontWeight:
+                                                                          medium,
+                                                                    ),
                                                                   ),
                                                                 )),
                                                         args == null
@@ -338,9 +350,10 @@ class CategoryView extends StatelessWidget {
                                                                               child: Row(
                                                                                 children: [
                                                                                   CachedNetworkImage(
-                                                                                    width: 40,
+                                                                                    width: 20,
                                                                                     imageUrl: baseHOSTAPI + category.icon,
                                                                                     fit: BoxFit.cover,
+                                                                                    color: Theme.of(context).brightness == Brightness.dark ? defaultWhite : null,
                                                                                     progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
                                                                                       padding: const EdgeInsets.all(16.0),
                                                                                       child: CircularProgressIndicator(value: downloadProgress.progress),
@@ -504,6 +517,12 @@ class CategoryView extends StatelessWidget {
                                                                     baseHOSTAPI +
                                                                         category
                                                                             .icon,
+                                                                color: Theme.of(context)
+                                                                            .brightness ==
+                                                                        Brightness
+                                                                            .dark
+                                                                    ? defaultWhite
+                                                                    : null,
                                                                 fit: BoxFit
                                                                     .cover,
                                                                 progressIndicatorBuilder:
@@ -669,6 +688,11 @@ class CategoryView extends StatelessWidget {
                                                 imageUrl:
                                                     baseHOSTAPI + category.icon,
                                                 fit: BoxFit.cover,
+                                                color: Theme.of(context)
+                                                            .brightness ==
+                                                        Brightness.dark
+                                                    ? defaultWhite
+                                                    : null,
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
@@ -701,6 +725,11 @@ class CategoryView extends StatelessWidget {
                                               imageUrl:
                                                   baseHOSTAPI + category.icon,
                                               fit: BoxFit.cover,
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? defaultWhite
+                                                  : null,
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                           downloadProgress) =>
@@ -834,13 +863,11 @@ class CategoryView extends StatelessWidget {
                                                                     overflow:
                                                                         TextOverflow
                                                                             .ellipsis,
-                                                                    style: kInter.copyWith(
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontWeight:
-                                                                            medium,
-                                                                        color:
-                                                                            defaultBlack),
+                                                                    style: kInter
+                                                                        .copyWith(
+                                                                      fontWeight:
+                                                                          medium,
+                                                                    ),
                                                                   ),
                                                                 )),
                                                         args == null
@@ -893,9 +920,10 @@ class CategoryView extends StatelessWidget {
                                                                               child: Row(
                                                                                 children: [
                                                                                   CachedNetworkImage(
-                                                                                    width: 40,
+                                                                                    width: 20,
                                                                                     imageUrl: baseHOSTAPI + category.icon,
                                                                                     fit: BoxFit.cover,
+                                                                                    color: Theme.of(context).brightness == Brightness.dark ? defaultWhite : null,
                                                                                     progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
                                                                                       padding: const EdgeInsets.all(16.0),
                                                                                       child: CircularProgressIndicator(value: downloadProgress.progress),
@@ -1061,6 +1089,12 @@ class CategoryView extends StatelessWidget {
                                                                             .icon,
                                                                 fit: BoxFit
                                                                     .cover,
+                                                                color: Theme.of(context)
+                                                                            .brightness ==
+                                                                        Brightness
+                                                                            .dark
+                                                                    ? defaultWhite
+                                                                    : null,
                                                                 progressIndicatorBuilder:
                                                                     (context,
                                                                             url,

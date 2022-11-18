@@ -41,18 +41,24 @@ class WalletView extends StatelessWidget {
                     Text(
                       'Dompet'.tr,
                       style: kInter.copyWith(
-                          fontSize: 16,
-                          fontWeight: semiBold,
-                          color: defaultWhite),
+                        fontSize: 16,
+                        fontWeight: semiBold,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? defaultWhite
+                            : const Color(0XFF39434D),
+                      ),
                     ),
                     if (args == null)
                       GestureDetector(
                         onTap: () {
                           Get.toNamed(RoutesName.addwallet);
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.add_rounded,
-                          color: defaultWhite,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? defaultWhite
+                                  : const Color(0XFF39434D),
                         ),
                       )
                     else

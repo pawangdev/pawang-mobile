@@ -52,7 +52,7 @@ class ReminderCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.light
                     ? defaultWhite
-                    : Color(0XFF1B2430),
+                    : const Color(0XFF39434D),
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
@@ -70,6 +70,9 @@ class ReminderCard extends StatelessWidget {
                     Image.asset(
                       'assets/images/bell.png',
                       width: Get.width * 0.06,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? defaultWhite
+                          : null,
                     ),
                     SizedBox(width: Get.width * 0.04),
                     Column(
@@ -101,7 +104,6 @@ class ReminderCard extends StatelessWidget {
                 Switch(
                   value: item.isActive!,
                   onChanged: onToogle,
-                  activeColor: defaultPrimary,
                 )
               ],
             ),

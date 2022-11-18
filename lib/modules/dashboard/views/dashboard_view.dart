@@ -81,7 +81,10 @@ class DashboardView extends StatelessWidget {
                                   width: Get.width * 0.085,
                                   height: Get.height * 0.047,
                                   decoration: BoxDecoration(
-                                    color: defaultWhite,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? defaultWhite
+                                        : const Color(0XFF39434D),
                                     borderRadius: BorderRadius.circular(50.0),
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -104,9 +107,13 @@ class DashboardView extends StatelessWidget {
                                       Text(
                                         "Selamat Datang,".tr,
                                         style: kInter.copyWith(
-                                            fontSize: 12,
-                                            fontWeight: medium,
-                                            color: defaultWhite),
+                                          fontSize: 12,
+                                          fontWeight: medium,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.light
+                                              ? defaultWhite
+                                              : const Color(0XFF39434D),
+                                        ),
                                       ),
                                       controller.user.value.name != ""
                                           ? SizedBox(
@@ -117,9 +124,15 @@ class DashboardView extends StatelessWidget {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: kInter.copyWith(
-                                                      fontSize: 14,
-                                                      fontWeight: semiBold,
-                                                      color: defaultWhite)),
+                                                    fontSize: 14,
+                                                    fontWeight: semiBold,
+                                                    color: Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.light
+                                                        ? defaultWhite
+                                                        : const Color(
+                                                            0XFF39434D),
+                                                  )),
                                             )
                                           : SkeletonAnimation(
                                               borderRadius:
@@ -383,7 +396,7 @@ class DashboardView extends StatelessWidget {
                         ? SizedBox(
                             height: Get.height * 0.12,
                             child: ListView.builder(
-                              physics: const ClampingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemCount: controller.reminders.length > 3

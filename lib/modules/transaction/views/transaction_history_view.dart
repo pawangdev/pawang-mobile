@@ -42,14 +42,21 @@ class TransactionHistoryView extends StatelessWidget {
                               Text(
                                 'Transaksi'.tr,
                                 style: kInter.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: bold,
-                                    color: defaultWhite),
+                                  fontSize: 16,
+                                  fontWeight: bold,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? defaultWhite
+                                      : defaultBlack,
+                                ),
                               ),
                               GestureDetector(
-                                child: const Icon(
+                                child: Icon(
                                   Icons.list_rounded,
-                                  color: defaultWhite,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? defaultWhite
+                                      : const Color(0XFF39434D),
                                 ),
                                 onTap: () {
                                   showModalBottomSheet(
@@ -160,8 +167,12 @@ class TransactionHistoryView extends StatelessWidget {
                                   Text(
                                     'Sisa Uang Kamu'.tr,
                                     style: kInter.copyWith(
-                                        fontWeight: medium,
-                                        color: defaultWhite),
+                                      fontWeight: medium,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? defaultWhite
+                                          : const Color(0XFF39434D),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: Get.height * 0.01,
@@ -189,9 +200,13 @@ class TransactionHistoryView extends StatelessWidget {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: kInter.copyWith(
-                                          fontSize: 20,
-                                          fontWeight: bold,
-                                          color: defaultWhite),
+                                        fontSize: 20,
+                                        fontWeight: bold,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? defaultWhite
+                                            : const Color(0XFF39434D),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -207,25 +222,23 @@ class TransactionHistoryView extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Container(
-                      width: Get.width * 0.5,
-                      height: Get.height * 0.24,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(1000)),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            defaultWhite.withOpacity(0.02),
-                            defaultWhite.withOpacity(0.5),
-                          ],
-                        ),
-                      )),
-                ],
+              Container(
+                width: Get.width * 0.4,
+                height: Get.height * 0.24,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(1000),
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      defaultWhite.withOpacity(0.02),
+                      defaultWhite.withOpacity(0.5),
+                    ],
+                  ),
+                ),
               ),
               Positioned(
                 top: Get.height * 0.21,
@@ -236,7 +249,7 @@ class TransactionHistoryView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Theme.of(context).brightness == Brightness.light
                         ? defaultWhite
-                        : Color(0XFF1B2430),
+                        : const Color(0XFF39434D),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(

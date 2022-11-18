@@ -30,6 +30,9 @@ class CardPengeluaran extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: baseHOSTAPI + data.category.icon,
                     fit: BoxFit.cover,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? defaultWhite
+                        : null,
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) =>
                             CircularProgressIndicator(

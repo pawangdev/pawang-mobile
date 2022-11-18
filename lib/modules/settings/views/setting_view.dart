@@ -29,7 +29,7 @@ class SettingsView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.044,
+                height: Get.height * 0.04,
               ),
               Obx(
                 () => Column(
@@ -133,37 +133,40 @@ class SettingsView extends StatelessWidget {
                       showDialog<void>(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
-                          title: Text(
-                            'Mode Malam'.tr,
-                            textAlign: TextAlign.center,
-                            style:
-                                kInter.copyWith(fontSize: 16, fontWeight: bold),
-                          ),
+                          // title: Text(
+                          //   'Mode Malam'.tr,
+                          //   textAlign: TextAlign.center,
+                          //   style:
+                          //       kInter.copyWith(fontSize: 16, fontWeight: bold),
+                          // ),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              SelectButton(
-                                nama: 'Aktif'.tr,
-                                isSelected: Theme.of(context).brightness ==
-                                        Brightness.light
-                                    ? false
-                                    : true,
-                                onTap: () {
-                                  Get.changeTheme(ThemeData.dark());
-                                  Get.back();
-                                },
-                              ),
-                              SelectButton(
-                                nama: 'Nonaktif'.tr,
-                                isSelected: Theme.of(context).brightness ==
-                                        Brightness.light
-                                    ? true
-                                    : false,
-                                onTap: () {
-                                  Get.changeTheme(ThemeData.light());
-                                  Get.back();
-                                },
-                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Mode Malam'.tr,
+                                    style: kInter.copyWith(
+                                        fontSize: 16, fontWeight: bold),
+                                  ),
+                                  Switch(
+                                      value: Theme.of(context).brightness ==
+                                          Brightness.dark,
+                                      onChanged: (value) {
+                                        if (value == true) {
+                                          Get.changeTheme(
+                                            ThemeData.dark(),
+                                          );
+                                        } else {
+                                          Get.changeTheme(
+                                            ThemeData.light(),
+                                          );
+                                        }
+                                      })
+                                ],
+                              )
                             ],
                           ),
                         ),

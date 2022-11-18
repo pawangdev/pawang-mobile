@@ -22,7 +22,7 @@ class RemindCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.light
               ? defaultWhite
-              : Color(0XFF1B2430),
+              : const Color(0XFF39434D),
           boxShadow: [
             BoxShadow(
               color: defaultBlack.withOpacity(0.06),
@@ -38,6 +38,9 @@ class RemindCard extends StatelessWidget {
             Image.asset(
               icon,
               width: Get.width * 0.07,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? defaultWhite
+                  : null,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,

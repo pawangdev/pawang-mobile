@@ -30,7 +30,7 @@ class LayananCard extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: Theme.of(context).brightness == Brightness.light
                 ? defaultWhite
-                : Color(0XFF2E2E2E),
+                : const Color(0XFF39434D),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -38,7 +38,13 @@ class LayananCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Image.asset(icon, width: 30),
+                  child: Image.asset(
+                    icon,
+                    width: 30,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? defaultWhite
+                        : null,
+                  ),
                 ),
                 SizedBox(height: Get.height * 0.01),
                 FittedBox(

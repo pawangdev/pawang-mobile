@@ -21,7 +21,7 @@ class WalletCard3 extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
             ? defaultWhite
-            : Color(0XFF1B2430),
+            : const Color(0XFF39434D),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           isSelected == false
