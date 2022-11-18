@@ -398,7 +398,6 @@ class DashboardView extends StatelessWidget {
                             child: ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
                               itemCount: controller.reminders.length > 3
                                   ? 3
                                   : controller.reminders.length,
