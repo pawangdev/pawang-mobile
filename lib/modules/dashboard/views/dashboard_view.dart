@@ -406,7 +406,6 @@ class DashboardView extends StatelessWidget {
                                 BuildContext context,
                                 int index,
                               ) {
-                                // return Text('Data Dummy');
                                 var remind = controller.reminders[index];
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -462,6 +461,7 @@ class DashboardView extends StatelessWidget {
                                                       controllerReminder
                                                           .dateTextController
                                                           .text = remind.date!;
+                                                      Get.back();
                                                       Get.toNamed(
                                                         RoutesName.addreminder,
                                                         arguments: {
@@ -476,15 +476,16 @@ class DashboardView extends StatelessWidget {
                                                     width: Get.width * 0.01),
                                                 Expanded(
                                                   child: ButtonCustom(
-                                                    text: 'Hapus'.tr,
-                                                    elevatedMode: false,
-                                                    blueMode: false,
-                                                    onTap: () =>
+                                                      text: 'Hapus'.tr,
+                                                      elevatedMode: false,
+                                                      blueMode: false,
+                                                      onTap: () {
+                                                        Get.back();
                                                         controllerReminder
                                                             .deleteReminder(
-                                                      remind.id,
-                                                    ),
-                                                  ),
+                                                          remind.id,
+                                                        );
+                                                      }),
                                                 ),
                                               ],
                                             ),

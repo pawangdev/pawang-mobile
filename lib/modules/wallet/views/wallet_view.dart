@@ -132,6 +132,7 @@ class WalletView extends StatelessWidget {
                                                 child: ButtonCustom(
                                               text: 'Edit',
                                               onTap: () {
+                                                Get.back();
                                                 controller.idWallet = wallet.id;
                                                 controller.nameTextController
                                                     .text = wallet.name;
@@ -278,6 +279,7 @@ class WalletView extends StatelessWidget {
                                                 elevatedMode: false,
                                                 blueMode: false,
                                                 onTap: () {
+                                                  Get.back();
                                                   controller.idWallet =
                                                       wallet.id;
                                                   controller.deleteWallet();
