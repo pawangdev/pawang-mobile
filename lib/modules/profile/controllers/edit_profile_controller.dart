@@ -55,6 +55,8 @@ class EditProfileController extends GetxController {
           "Berhasil Memperbarui Profil",
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -69,6 +71,8 @@ class EditProfileController extends GetxController {
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

@@ -74,47 +74,53 @@ class TransactionController extends GetxController {
 
   Future<void> createTransaction() async {
     Get.closeAllSnackbars();
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     // ignore: unrelated_type_equality_checks
     if (amountTextController.value == "0") {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Masukkan Nominal Transaksi',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Masukkan Nominal Transaksi'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
         ),
       );
-      throw ("Masukkan Nominal Transaksi");
+      throw ('Masukkan Nominal Transaksi'.tr);
     } else if (walletId.value == 0) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Pilih Salah Satu Wallet Terlebih Dahulu',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Pilih Salah Satu Wallet Terlebih Dahulu'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
         ),
       );
-      throw ("Pilih Salah Satu Wallet Terlebih Dahulu");
+      throw ("Pilih Salah Satu Wallet Terlebih Dahulu".tr);
     } else if (categoryId.value == 0) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Pilih Salah Satu Kategori Terlebih Dahulu',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Pilih Salah Satu Kategori Terlebih Dahulu'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
         ),
       );
-      throw ("Pilih Salah Satu Kategori Terlebih Dahulu");
+      throw ("Pilih Salah Satu Kategori Terlebih Dahulu".tr);
     }
 
     var data = <String, dynamic>{
@@ -147,10 +153,12 @@ class TransactionController extends GetxController {
           }
 
           Get.snackbar(
-            'Sukses !',
-            "Berhasil Menambahkan Transaksi",
+            'Sukses'.tr,
+            'Berhasil Menambahkan Transaksi'.tr,
             backgroundColor: Colors.green,
             colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
             icon: const Icon(
               Icons.check,
               color: Colors.white,
@@ -163,10 +171,12 @@ class TransactionController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
+        'Gagal Menambahkan Transaksi !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -177,7 +187,7 @@ class TransactionController extends GetxController {
 
   Future<void> deleteTransaction(int transactionId) async {
     Get.closeAllSnackbars();
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     try {
       navigationController.tabIndex = 0;
 
@@ -192,10 +202,12 @@ class TransactionController extends GetxController {
         Get.offAllNamed(RoutesName.navigation);
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Menghapus Transaksi",
+          'Sukses'.tr,
+          'Berhasil Menghapus Transaksi'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -207,10 +219,12 @@ class TransactionController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
+        'Gagal Menambahkan Transaksi !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -262,15 +276,17 @@ class TransactionController extends GetxController {
 
   Future<void> updateTransaction() async {
     Get.closeAllSnackbars();
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     // ignore: unrelated_type_equality_checks
     if (amountTextController.value == "0") {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Masukkan Nominal Transaksi',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Masukkan Nominal Transaksi'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -279,10 +295,12 @@ class TransactionController extends GetxController {
     } else if (walletId.value == 0) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Pilih Salah Satu Wallet Terlebih Dahulu',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Pilih Salah Satu Wallet Terlebih Dahulu'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -291,10 +309,12 @@ class TransactionController extends GetxController {
     } else if (categoryId.value == 0) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Menambahkan Transaksi !',
-        'Pilih Salah Satu Kategori Terlebih Dahulu',
+        'Gagal Menambahkan Transaksi !'.tr,
+        'Pilih Salah Satu Kategori Terlebih Dahulu'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -328,10 +348,12 @@ class TransactionController extends GetxController {
         isUpdate = false;
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Memperbarui Transaksi",
+          'Sukses'.tr,
+          'Berhasil Memperbarui Transaksi'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -343,10 +365,12 @@ class TransactionController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Gagal Memperbarui Transaksi !',
+        'Gagal Memperbarui Transaksi !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

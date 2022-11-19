@@ -10,12 +10,23 @@ class OnboardingController extends GetxController {
   var pageController = PageController();
 
   List<OnboardingInfo> onboardingPages = [
-    OnboardingInfo('assets/images/OB-Scan.png', 'Scan Struk',
-        'Permudah pencatatan pengeluaranmu hanya dengan scan struk belanja'),
-    OnboardingInfo('assets/images/OB-Dompetku.png', 'Dompetku',
-        'Simpan dan pisahkan danamu di wallet Pawang untuk mempermudah transaksimu'),
-    OnboardingInfo('assets/images/OB-Transaksi.png', 'Transaksi',
-        'Yuk mulai catat pengeluaran dan pemasukan kamu di aplikasi Pawang sekarang !')
+    OnboardingInfo(
+      'assets/images/OB-Scan.png',
+      'Scan Struk'.tr,
+      'Permudah pencatatan pengeluaranmu hanya dengan scan struk belanja'.tr,
+    ),
+    OnboardingInfo(
+      'assets/images/OB-Dompetku.png',
+      'Dompetku'.tr,
+      'Simpan dan pisahkan danamu di wallet Pawang untuk mempermudah transaksimu'
+          .tr,
+    ),
+    OnboardingInfo(
+      'assets/images/OB-Transaksi.png',
+      'Transaksi'.tr,
+      'Yuk mulai catat pengeluaran dan pemasukan kamu di aplikasi Pawang sekarang !'
+          .tr,
+    )
   ];
 }
 

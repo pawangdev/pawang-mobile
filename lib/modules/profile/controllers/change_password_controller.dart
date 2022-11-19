@@ -15,16 +15,18 @@ class ChangePasswordController extends GetxController {
       TextEditingController();
 
   Future<void> updatePassword() async {
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     if (passwordNewTextController.text !=
         passwordNewConfirmationTextController.text) {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal !',
-        'Password Baru Konfirmasi Tidak Sama',
+        'Gagal'.tr,
+        'Password Baru Konfirmasi Tidak Sama'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -46,10 +48,12 @@ class ChangePasswordController extends GetxController {
         Get.back();
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Memperbarui Password",
+          'Sukses'.tr,
+          'Berhasil Memperbarui Password'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -60,10 +64,12 @@ class ChangePasswordController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal !',
+        'Gagal'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

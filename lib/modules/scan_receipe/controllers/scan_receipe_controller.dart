@@ -32,7 +32,7 @@ class ScanReceipeController extends GetxController {
 
   Future<void> uploadReceipt() async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
       final fileImage = File(imageFilePath!.path);
       ScanService.uploadReceipt(fileImage).then((value) async {
         if (value['status'] == "true") {
@@ -41,10 +41,12 @@ class ScanReceipeController extends GetxController {
           String tempAmounts = value['amounts'].toString();
 
           Get.snackbar(
-            'Berhasil Memindai Struk !',
-            'Struk akan disimpan',
+            'Berhasil Memindai Struk !'.tr,
+            'Struk akan disimpan'.tr,
             backgroundColor: Colors.green,
             colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
             icon: const Icon(
               Icons.check,
               color: Colors.white,
@@ -60,10 +62,12 @@ class ScanReceipeController extends GetxController {
     } catch (e) {
       if (!Get.isSnackbarOpen) {
         Get.snackbar(
-          'Gagal Memindai Struk !',
-          'Total Tidak Dapat Ditemukan',
+          'Gagal Memindai Struk !'.tr,
+          'Total Tidak Dapat Ditemukan'.tr,
           backgroundColor: Colors.red,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.cancel,
             color: Colors.white,

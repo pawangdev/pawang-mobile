@@ -32,6 +32,8 @@ class NumberButton extends StatelessWidget {
                   'Melebihi Nilai Limit',
                   backgroundColor: Colors.red,
                   colorText: Colors.white,
+                  snackPosition: SnackPosition.BOTTOM,
+                  margin: const EdgeInsets.all(20),
                   icon: const Icon(
                     Icons.cancel,
                     color: Colors.white,

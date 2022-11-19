@@ -34,7 +34,7 @@ class WalletController extends GetxController {
     };
 
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       var walletUpdateResponse = await walletService.createWallet(input);
       if (walletUpdateResponse) {
@@ -48,10 +48,12 @@ class WalletController extends GetxController {
         Get.back();
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Membuat Wallet",
+          'Sukses'.tr,
+          'Berhasil Membuat Wallet'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -62,10 +64,12 @@ class WalletController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Membuat Wallet !',
+        'Gagal Membuat Wallet !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -83,7 +87,7 @@ class WalletController extends GetxController {
     };
 
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
       var walletUpdateResponse =
           await walletService.updateWallet(input, idWallet);
       if (walletUpdateResponse) {
@@ -97,10 +101,12 @@ class WalletController extends GetxController {
         Get.back();
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Memperbarui Wallet",
+          'Sukses'.tr,
+          'Berhasil Memperbarui Wallet'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -111,10 +117,12 @@ class WalletController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Memperbarui Wallet !',
+        'Gagal Memperbarui Wallet !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -126,7 +134,7 @@ class WalletController extends GetxController {
   Future<void> deleteWallet() async {
     Get.closeAllSnackbars();
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
       var walletDeleteResponse = await walletService.deleteWallet(idWallet);
 
       if (walletDeleteResponse) {
@@ -140,10 +148,12 @@ class WalletController extends GetxController {
         Get.back();
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Menghapus Wallet",
+          'Sukses'.tr,
+          'Berhasil Menghapus Wallet'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -154,10 +164,12 @@ class WalletController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Menghapus Wallet !',
+        'Gagal Menghapus Wallet !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

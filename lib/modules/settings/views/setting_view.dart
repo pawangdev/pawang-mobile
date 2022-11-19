@@ -156,17 +156,44 @@ class SettingsView extends StatelessWidget {
                                           Brightness.dark,
                                       onChanged: (value) {
                                         if (value == true) {
-                                          Get.changeTheme(
-                                            ThemeData.dark(),
+                                          Get.changeThemeMode(
+                                            ThemeMode.dark,
                                           );
+                                          Get.back();
                                         } else {
-                                          Get.changeTheme(
-                                            ThemeData.light(),
+                                          Get.changeThemeMode(
+                                            ThemeMode.light,
                                           );
+                                          Get.back();
                                         }
                                       })
                                 ],
-                              )
+                              ),
+                              // GestureDetector(
+                              //   onTap: () {},
+                              //   child: Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceBetween,
+                              //     children: [
+                              //       Text(
+                              //         'Ikuti Mode Perangkat'.tr,
+                              //         style: kInter.copyWith(
+                              //             fontSize: 16, fontWeight: bold),
+                              //       ),
+                              //       Checkbox(
+                              //         value:
+                              //             ThemeMode.values == ThemeMode.system
+                              //                 ? true
+                              //                 : false,
+                              //         onChanged: (bool? value) {
+                              //           Get.changeThemeMode(ThemeMode.system);
+
+                              //           Get.back();
+                              //         },
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

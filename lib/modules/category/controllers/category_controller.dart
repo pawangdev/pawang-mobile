@@ -18,7 +18,7 @@ class CategoryController extends GetxController {
 
   Future<void> getCategories() async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       var categoryResponse = await categoryService.getCategories();
       if (categoryResponse != null) {
@@ -35,7 +35,7 @@ class CategoryController extends GetxController {
 
   Future<void> addSubCategory(int id) async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       var data = <String, dynamic>{
         'name': nameTextController.text,
@@ -47,10 +47,17 @@ class CategoryController extends GetxController {
       if (subCategoryResponse) {
         EasyLoading.dismiss();
 
-        Get.rawSnackbar(
-          title: "Sukses",
-          message: "Berhasil Menambahkan Subkategori",
+        Get.snackbar(
+          'Sukses'.tr,
+          'Berhasil Menambahkan Subkategori'.tr,
           backgroundColor: defaultSuccess,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
         );
 
         getCategories();
@@ -62,17 +69,24 @@ class CategoryController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
 
-      Get.rawSnackbar(
-        title: 'Gagal Membuat Subkategori !',
-        message: '$e',
+      Get.snackbar(
+        'Gagal Membuat Subkategori !'.tr,
+        '$e',
         backgroundColor: defaultError,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
       );
     }
   }
 
   Future<void> updateSubCategory({categoryId, subCategoryId}) async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       var data = <String, dynamic>{
         'name': nameTextController.text,
@@ -84,11 +98,15 @@ class CategoryController extends GetxController {
       if (subCategoryResponse) {
         EasyLoading.dismiss();
 
-        Get.rawSnackbar(
-          title: "Sukses",
-          message: "Berhasil Memperbarui Subkategori",
-          backgroundColor: defaultSuccess,
-        );
+        Get.snackbar('Sukses'.tr, 'Berhasil Memperbarui Subkategori'.tr,
+            backgroundColor: defaultSuccess,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ));
 
         getCategories();
 
@@ -99,10 +117,17 @@ class CategoryController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
 
-      Get.rawSnackbar(
-        title: 'Gagal Memperbarui Subkategori !',
-        message: '$e',
+      Get.snackbar(
+        'Gagal Memperbarui Subkategori !'.tr,
+        '$e',
         backgroundColor: defaultError,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
       );
     }
   }
@@ -110,7 +135,7 @@ class CategoryController extends GetxController {
   Future<void> deleteSubCategory(
       {required int categoryId, required int subCategoryId}) async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       final response = await categoryService.deleteSubCategory(
           idCategory: categoryId, idSubCategory: subCategoryId);
@@ -119,10 +144,17 @@ class CategoryController extends GetxController {
 
         getCategories();
 
-        Get.rawSnackbar(
-          title: "Sukses",
-          message: "Berhasil Menghapus Subkategori",
+        Get.snackbar(
+          "Sukses".tr,
+          'Berhasil Menghapus Subkategori'.tr,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           backgroundColor: defaultSuccess,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
         );
 
         Get.close(1);
@@ -130,10 +162,17 @@ class CategoryController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
 
-      Get.rawSnackbar(
-        title: 'Gagal Menghapus Subkategori !',
-        message: '$e',
+      Get.snackbar(
+        'Gagal Menghapus Subkategori !'.tr,
+        '$e',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         backgroundColor: defaultError,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
       );
     }
   }

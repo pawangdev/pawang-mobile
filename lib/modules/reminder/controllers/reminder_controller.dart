@@ -27,7 +27,7 @@ class ReminderController extends GetxController {
 
   Future<void> onSubmit({bool isAdding = true, int? id}) async {
     String? selectedType;
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
     switch (typeRepeate.value) {
       case "Tidak Berulang":
@@ -79,20 +79,29 @@ class ReminderController extends GetxController {
 
           resetAllInput();
 
-          Get.rawSnackbar(
-            title: "Sukses",
-            message: "Berhasil Membuat Pengingat",
+          Get.snackbar(
+            "Sukses".tr,
+            'Berhasil Membuat Pengingat'.tr,
             backgroundColor: defaultSuccess,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
           );
         }
       } catch (e) {
         EasyLoading.dismiss();
 
         Get.snackbar(
-          'Tedapat Kesalahan !',
+          'Tedapat Kesalahan !'.tr,
           e.toString(),
           backgroundColor: Colors.red,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.cancel,
             color: Colors.white,
@@ -119,20 +128,29 @@ class ReminderController extends GetxController {
 
           resetAllInput();
 
-          Get.rawSnackbar(
-            title: "Sukses",
-            message: "Berhasil Memperbarui Pengingat",
+          Get.snackbar(
+            'Sukses',
+            'Berhasil Memperbarui Pengingat'.tr,
             backgroundColor: defaultSuccess,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
+            colorText: Colors.white,
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
           );
         }
       } catch (e) {
         EasyLoading.dismiss();
 
         Get.snackbar(
-          'Tedapat Kesalahan !',
+          'Tedapat Kesalahan !'.tr,
           e.toString(),
           backgroundColor: Colors.red,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.cancel,
             color: Colors.white,
@@ -144,7 +162,7 @@ class ReminderController extends GetxController {
 
   Future<void> deleteReminder(id) async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       final response = await reminderService.deleteReminder(id);
       if (response) {
@@ -155,10 +173,12 @@ class ReminderController extends GetxController {
         resetAllInput();
 
         Get.snackbar(
-          'Sukses !',
-          "Berhasil Menghapus Pengingat",
+          'Sukses'.tr,
+          'Berhasil Menghapus Pengingat'.tr,
           backgroundColor: Colors.green,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.check,
             color: Colors.white,
@@ -169,10 +189,12 @@ class ReminderController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Menghapus Pengingat !',
+        'Gagal Menghapus Pengingat !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -183,7 +205,7 @@ class ReminderController extends GetxController {
 
   Future<bool> toggleReminder(ReminderDataModel reminder) async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
 
       final input = <String, dynamic>{
         'name': reminder.name,
@@ -204,10 +226,12 @@ class ReminderController extends GetxController {
 
         if (!reminder.isActive!) {
           Get.snackbar(
-            'Sukses !',
-            "Berhasil Menyalakan Pengingat",
+            'Sukses'.tr,
+            'Berhasil Menyalakan Pengingat'.tr,
             backgroundColor: Colors.green,
             colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
             icon: const Icon(
               Icons.check,
               color: Colors.white,
@@ -217,10 +241,12 @@ class ReminderController extends GetxController {
           return true;
         } else {
           Get.snackbar(
-            'Sukses !',
-            "Berhasil Mematikan Pengingat",
+            'Sukses'.tr,
+            'Berhasil Mematikan Pengingat'.tr,
             backgroundColor: Colors.green,
             colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
             icon: const Icon(
               Icons.check,
               color: Colors.white,
@@ -235,10 +261,12 @@ class ReminderController extends GetxController {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Memperbarui Pengingat !',
+        'Gagal Memperbarui Pengingat !'.tr,
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

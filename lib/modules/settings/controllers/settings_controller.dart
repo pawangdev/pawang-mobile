@@ -12,10 +12,12 @@ class SettingsController extends GetxController {
   Future<void> logout() async {
     try {
       Get.snackbar(
-        'Sukses !',
-        "Berhasil Keluar !",
+        'Sukses'.tr,
+        'Berhasil Keluar !'.tr,
         backgroundColor: Colors.green,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.check,
           color: Colors.white,

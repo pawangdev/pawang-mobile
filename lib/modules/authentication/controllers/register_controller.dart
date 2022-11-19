@@ -35,7 +35,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void> register() async {
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     final status = await OneSignal.shared.getDeviceState();
     final String? osUserID = status?.userId;
 
@@ -51,23 +51,29 @@ class RegisterController extends GetxController {
 
       Storage.saveValue(storageToken, registerResponse?.accessToken)
           .then((value) => EasyLoading.dismiss());
-      Get.snackbar('Berhasil Mendaftar !',
-          'Selamat Datang ${registerResponse?.user.name}',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ));
+      Get.snackbar(
+        'Berhasil Mendaftar !'.tr,
+        'Selamat Datang '.tr + '${registerResponse?.user.name}',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
       Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Tedapat Kesalahan !',
+        'Tedapat Kesalahan !'.tr,
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

@@ -57,6 +57,8 @@ class LoginController extends GetxController {
       Get.snackbar(
           'Berhasil Masuk !', 'Selamat Datang ${loginResponse.user.name}',
           backgroundColor: Colors.green,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           colorText: Colors.white,
           icon: const Icon(
             Icons.check,
@@ -72,7 +74,7 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     try {
-      EasyLoading.show(status: 'Mohon Tunggu');
+      EasyLoading.show(status: 'Mohon Tunggu'.tr);
       final status = await OneSignal.shared.getDeviceState();
       final String? osUserID = status?.userId;
 
@@ -87,22 +89,28 @@ class LoginController extends GetxController {
       Storage.saveValue(storageToken, loginResponse!.accessToken)
           .then((value) => EasyLoading.dismiss());
       Get.snackbar(
-          'Berhasil Masuk !', 'Selamat Datang ${loginResponse.user.name}',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ));
+        'Berhasil Masuk !'.tr,
+        'Selamat Datang '.tr + '${loginResponse.user.name}',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
       Get.offAllNamed(RoutesName.navigation);
     } catch (e) {
       EasyLoading.dismiss();
 
       Get.snackbar(
-        'Gagal Masuk !',
+        'Gagal Masuk !'.tr,
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,

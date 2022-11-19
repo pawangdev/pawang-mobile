@@ -21,7 +21,7 @@ class ResetPasswordController extends GetxController {
       TextEditingController();
 
   Future<void> sendRequestToken() async {
-    EasyLoading.show(status: 'Mohon Tunggu');
+    EasyLoading.show(status: 'Mohon Tunggu'.tr);
     final input = <String, dynamic>{"email": emailTextController.text};
 
     try {
@@ -30,10 +30,12 @@ class ResetPasswordController extends GetxController {
           .then((value) => EasyLoading.dismiss());
 
       Get.snackbar(
-        'Berhasil Mengirim Token !',
-        'Silahkan Cek Token Pada Email Anda',
+        'Berhasil Mengirim Token !'.tr,
+        'Silahkan Cek Token Pada Email Anda'.tr,
         backgroundColor: Colors.green,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.check,
           color: Colors.white,
@@ -43,10 +45,12 @@ class ResetPasswordController extends GetxController {
     } catch (e) {
       EasyLoading.dismiss();
       Get.snackbar(
-        'Tedapat Kesalahan !',
+        'Tedapat Kesalahan !'.tr,
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -73,6 +77,8 @@ class ResetPasswordController extends GetxController {
         'Silahkan Buat Password Baru Anda',
         backgroundColor: Colors.green,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.check,
           color: Colors.white,
@@ -87,6 +93,8 @@ class ResetPasswordController extends GetxController {
         e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.cancel,
           color: Colors.white,
@@ -115,6 +123,8 @@ class ResetPasswordController extends GetxController {
             'Gagal Membuat Password !',
             'Password Konfirmasi Tidak Sesuai',
             backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
             colorText: Colors.white,
             icon: const Icon(
               Icons.cancel,
@@ -135,6 +145,8 @@ class ResetPasswordController extends GetxController {
         'Silahkan Login Kembali !',
         backgroundColor: Colors.green,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
         icon: const Icon(
           Icons.check,
           color: Colors.white,
@@ -150,6 +162,8 @@ class ResetPasswordController extends GetxController {
           e.toString(),
           backgroundColor: Colors.red,
           colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(20),
           icon: const Icon(
             Icons.cancel,
             color: Colors.white,
