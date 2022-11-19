@@ -167,8 +167,12 @@ class EditProfileView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InputField(
-                                validator:
-                                    ValidationBuilder(localeName: 'id').build(),
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
+                                    .build(),
                                 icon: const Icon(Icons.person_outline_rounded),
                                 inputLabel: 'Nama Lengkap'.tr,
                                 inputController: controller.nameTextController),
@@ -176,8 +180,12 @@ class EditProfileView extends StatelessWidget {
                               height: Get.height * 0.02,
                             ),
                             InputField(
-                                validator:
-                                    ValidationBuilder(localeName: 'id').build(),
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
+                                    .build(),
                                 icon: const Icon(Icons.phone_rounded),
                                 inputLabel: 'Nomer Telepon'.tr,
                                 inputController:

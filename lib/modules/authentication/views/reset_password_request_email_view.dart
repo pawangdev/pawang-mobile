@@ -91,7 +91,9 @@ class ResetPasswordRequestEmailView extends StatelessWidget {
                   },
                   scrollPadding: EdgeInsets.only(bottom: Get.height * 0.4),
                   controller: controller.emailTextController,
-                  validator: ValidationBuilder(localeName: 'id')
+                  validator: ValidationBuilder(
+                          localeName:
+                              Get.locale?.toLanguageTag() == 'en' ? 'en' : 'id')
                       .required()
                       .email()
                       .build(),

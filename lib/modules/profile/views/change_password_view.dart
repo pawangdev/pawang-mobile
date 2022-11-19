@@ -128,7 +128,11 @@ class ChangePasswordView extends StatelessWidget {
                 child: Column(
                   children: [
                     InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
+                        validator: ValidationBuilder(
+                                localeName: Get.locale?.toLanguageTag() == 'en'
+                                    ? 'en'
+                                    : 'id')
+                            .build(),
                         icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Lama'.tr,
                         isPassword: true,
@@ -136,7 +140,11 @@ class ChangePasswordView extends StatelessWidget {
                         inputController: controller.passwordNowTextController),
                     SizedBox(height: Get.height * 0.025),
                     InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
+                        validator: ValidationBuilder(
+                                localeName: Get.locale?.toLanguageTag() == 'en'
+                                    ? 'en'
+                                    : 'id')
+                            .build(),
                         icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Baru'.tr,
                         isPassword: true,
@@ -148,7 +156,11 @@ class ChangePasswordView extends StatelessWidget {
                         onFieldSubmitted: (_) {
                           controller.updatePassword();
                         },
-                        validator: ValidationBuilder(localeName: 'id').build(),
+                        validator: ValidationBuilder(
+                                localeName: Get.locale?.toLanguageTag() == 'en'
+                                    ? 'en'
+                                    : 'id')
+                            .build(),
                         icon: const Icon(Icons.lock_outline_rounded),
                         inputLabel: 'Password Baru Konfirmasi'.tr,
                         isPassword: true,

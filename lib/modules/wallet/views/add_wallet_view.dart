@@ -136,7 +136,11 @@ class AddWalletView extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(bottom: 20),
                       child: InputField(
-                        validator: ValidationBuilder(localeName: 'id').build(),
+                        validator: ValidationBuilder(
+                                localeName: Get.locale?.toLanguageTag() == 'en'
+                                    ? 'en'
+                                    : 'id')
+                            .build(),
                         icon: const Icon(Icons.payment_rounded),
                         inputLabel: "Nama Dompet".tr,
                         inputController: controller.nameTextController,
@@ -149,7 +153,11 @@ class AddWalletView extends StatelessWidget {
                         onFieldSubmitted: (_) {
                           controller.createWallet();
                         },
-                        validator: ValidationBuilder(localeName: 'id').build(),
+                        validator: ValidationBuilder(
+                                localeName: Get.locale?.toLanguageTag() == 'en'
+                                    ? 'en'
+                                    : 'id')
+                            .build(),
                         icon: const Icon(Icons.monetization_on_outlined),
                         inputLabel: "Saldo Awal".tr,
                         inputController: controller.balanceTextController,

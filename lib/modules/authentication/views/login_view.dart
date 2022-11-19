@@ -149,11 +149,15 @@ class LoginView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       InputField(
-                                        validator:
-                                            ValidationBuilder(localeName: 'id')
-                                                .required()
-                                                .email()
-                                                .build(),
+                                        validator: ValidationBuilder(
+                                                localeName: Get.locale
+                                                            ?.toLanguageTag() ==
+                                                        'en'
+                                                    ? 'en'
+                                                    : 'id')
+                                            .required()
+                                            .email()
+                                            .build(),
                                         icon: const Icon(
                                             Icons.alternate_email_rounded),
                                         inputLabel: "Email",

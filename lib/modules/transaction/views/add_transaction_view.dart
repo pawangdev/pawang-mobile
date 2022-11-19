@@ -153,7 +153,11 @@ class AddTransactionView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InputField(
-                                validator: ValidationBuilder(localeName: 'id')
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
                                     .required()
                                     .build(),
                                 icon:
@@ -173,7 +177,11 @@ class AddTransactionView extends StatelessWidget {
                                     bottom: MediaQuery.of(context)
                                         .viewInsets
                                         .bottom),
-                                validator: ValidationBuilder(localeName: 'id')
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
                                     .required()
                                     .build(),
                                 controller: controller.displayCategoryName,
@@ -203,7 +211,11 @@ class AddTransactionView extends StatelessWidget {
                                     bottom: MediaQuery.of(context)
                                         .viewInsets
                                         .bottom),
-                                validator: ValidationBuilder(localeName: 'id')
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
                                     .required()
                                     .build(),
                                 controller: controller.displayWalletName,
@@ -230,7 +242,11 @@ class AddTransactionView extends StatelessWidget {
                                 height: Get.height * 0.025,
                               ),
                               DateTimePicker(
-                                validator: ValidationBuilder(localeName: 'id')
+                                validator: ValidationBuilder(
+                                        localeName:
+                                            Get.locale?.toLanguageTag() == 'en'
+                                                ? 'en'
+                                                : 'id')
                                     .required()
                                     .build(),
                                 textInputAction: TextInputAction.next,

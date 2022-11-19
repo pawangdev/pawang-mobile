@@ -89,7 +89,9 @@ class ResetPasswordTokenView extends StatelessWidget {
                   scrollPadding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   controller: controller.tokenTextController,
-                  validator: ValidationBuilder(localeName: 'id')
+                  validator: ValidationBuilder(
+                          localeName:
+                              Get.locale?.toLanguageTag() == 'en' ? 'en' : 'id')
                       .required()
                       .minLength(6)
                       .maxLength(6)

@@ -141,24 +141,32 @@ class RegisterView extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     InputField(
-                                      validator:
-                                          ValidationBuilder(localeName: 'id')
-                                              .required()
-                                              .build(),
+                                      validator: ValidationBuilder(
+                                              localeName:
+                                                  Get.locale?.toLanguageTag() ==
+                                                          'en'
+                                                      ? 'en'
+                                                      : 'id')
+                                          .required()
+                                          .build(),
                                       icon: const Icon(
                                           Icons.person_outline_rounded),
                                       inputLabel: "Nama Lengkap".tr,
                                       inputController:
                                           controller.nameTextController,
-                                      // keyboardType: TextInputType.name,
+                                      keyboardType: TextInputType.name,
                                     ),
                                     SizedBox(height: Get.height * 0.025),
                                     InputField(
-                                      validator:
-                                          ValidationBuilder(localeName: 'id')
-                                              .required()
-                                              .email()
-                                              .build(),
+                                      validator: ValidationBuilder(
+                                              localeName:
+                                                  Get.locale?.toLanguageTag() ==
+                                                          'en'
+                                                      ? 'en'
+                                                      : 'id')
+                                          .required()
+                                          .email()
+                                          .build(),
                                       icon: const Icon(
                                           Icons.alternate_email_rounded),
                                       inputLabel: "Email",
@@ -177,11 +185,15 @@ class RegisterView extends StatelessWidget {
                                           controller.formValdidate();
                                           controller.register();
                                         },
-                                        validator:
-                                            ValidationBuilder(localeName: 'id')
-                                                .required()
-                                                .minLength(8)
-                                                .build(),
+                                        validator: ValidationBuilder(
+                                                localeName: Get.locale
+                                                            ?.toLanguageTag() ==
+                                                        'en'
+                                                    ? 'en'
+                                                    : 'id')
+                                            .required()
+                                            .minLength(8)
+                                            .build(),
                                         controller:
                                             controller.passwordTextController,
                                         decoration: InputDecoration(
