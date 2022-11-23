@@ -86,6 +86,12 @@ class SettingsView extends StatelessWidget {
                     color: defaultSuccess,
                     text: 'Bahasa'.tr,
                     icon: Icons.language,
+                    iconSufix: false,
+                    contentSufix: Text(
+                      Get.locale?.toLanguageTag() == 'id' ? 'ID' : 'EN',
+                      style: kInter.copyWith(
+                          fontWeight: medium, color: defaultGray),
+                    ),
                     onTap: () {
                       showDialog<void>(
                         context: context,
@@ -129,76 +135,23 @@ class SettingsView extends StatelessWidget {
                     color: Colors.indigoAccent,
                     text: 'Mode Malam'.tr,
                     icon: Icons.dark_mode,
-                    onTap: () {
-                      showDialog<void>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          // title: Text(
-                          //   'Mode Malam'.tr,
-                          //   textAlign: TextAlign.center,
-                          //   style:
-                          //       kInter.copyWith(fontSize: 16, fontWeight: bold),
-                          // ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Mode Malam'.tr,
-                                    style: kInter.copyWith(
-                                        fontSize: 16, fontWeight: bold),
-                                  ),
-                                  Switch(
-                                      value: Theme.of(context).brightness ==
-                                          Brightness.dark,
-                                      onChanged: (value) {
-                                        if (value == true) {
-                                          Get.changeThemeMode(
-                                            ThemeMode.dark,
-                                          );
-                                          Get.back();
-                                        } else {
-                                          Get.changeThemeMode(
-                                            ThemeMode.light,
-                                          );
-                                          Get.back();
-                                        }
-                                      })
-                                ],
-                              ),
-                              // GestureDetector(
-                              //   onTap: () {},
-                              //   child: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text(
-                              //         'Ikuti Mode Perangkat'.tr,
-                              //         style: kInter.copyWith(
-                              //             fontSize: 16, fontWeight: bold),
-                              //       ),
-                              //       Checkbox(
-                              //         value:
-                              //             ThemeMode.values == ThemeMode.system
-                              //                 ? true
-                              //                 : false,
-                              //         onChanged: (bool? value) {
-                              //           Get.changeThemeMode(ThemeMode.system);
-
-                              //           Get.back();
-                              //         },
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                    iconSufix: false,
+                    contentSufix: Switch(
+                      value: Theme.of(context).brightness == Brightness.dark,
+                      onChanged: (value) {
+                        if (value == true) {
+                          Get.changeThemeMode(
+                            ThemeMode.dark,
+                          );
+                          Get.back();
+                        } else {
+                          Get.changeThemeMode(
+                            ThemeMode.light,
+                          );
+                          Get.back();
+                        }
+                      },
+                    ),
                   ),
                   SettingItem(
                     color: defaultPurple,

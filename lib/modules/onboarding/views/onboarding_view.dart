@@ -34,7 +34,10 @@ class OnboardingView extends StatelessWidget {
                         ),
                         Text(
                           _controller.onboardingPages[index].title,
-                          style: TextStyle(fontSize: 24, fontWeight: bold),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: bold,
+                              color: defaultBlack),
                         ),
                         const SizedBox(height: 15),
                         Padding(
@@ -42,7 +45,8 @@ class OnboardingView extends StatelessWidget {
                           child: Text(
                             _controller.onboardingPages[index].description,
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: medium),
+                            style: TextStyle(
+                                fontWeight: medium, color: defaultBlack),
                           ),
                         ),
                       ],
