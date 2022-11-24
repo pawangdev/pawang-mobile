@@ -44,19 +44,13 @@ class TransactionHistoryView extends StatelessWidget {
                                 style: kInter.copyWith(
                                   fontSize: 16,
                                   fontWeight: bold,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? defaultWhite
-                                      : defaultBlack,
+                                  color: defaultWhite,
                                 ),
                               ),
                               GestureDetector(
-                                child: Icon(
+                                child: const Icon(
                                   Icons.list_rounded,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? defaultWhite
-                                      : const Color(0XFF39434D),
+                                  color: defaultWhite,
                                 ),
                                 onTap: () {
                                   showModalBottomSheet(
@@ -168,10 +162,7 @@ class TransactionHistoryView extends StatelessWidget {
                                     'Sisa Uang Kamu'.tr,
                                     style: kInter.copyWith(
                                       fontWeight: medium,
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? defaultWhite
-                                          : const Color(0XFF39434D),
+                                      color: defaultWhite,
                                     ),
                                   ),
                                   SizedBox(
@@ -202,10 +193,7 @@ class TransactionHistoryView extends StatelessWidget {
                                       style: kInter.copyWith(
                                         fontSize: 20,
                                         fontWeight: bold,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? defaultWhite
-                                            : const Color(0XFF39434D),
+                                        color: defaultWhite,
                                       ),
                                     ),
                                   ),

@@ -39,10 +39,7 @@ class CategoryView extends StatelessWidget {
                         style: kInter.copyWith(
                           fontSize: 16,
                           fontWeight: semiBold,
-                          color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? defaultWhite
-                                  : const Color(0XFF39434D),
+                          color: defaultWhite,
                         ),
                       ),
                       SizedBox(

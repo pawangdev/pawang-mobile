@@ -43,9 +43,7 @@ class WalletView extends StatelessWidget {
                       style: kInter.copyWith(
                         fontSize: 16,
                         fontWeight: semiBold,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? defaultWhite
-                            : const Color(0XFF39434D),
+                        color: defaultWhite,
                       ),
                     ),
                     if (args == null)
@@ -53,12 +51,9 @@ class WalletView extends StatelessWidget {
                         onTap: () {
                           Get.toNamed(RoutesName.addwallet);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.add_rounded,
-                          color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? defaultWhite
-                                  : const Color(0XFF39434D),
+                          color: defaultWhite,
                         ),
                       )
                     else

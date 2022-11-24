@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Inter",
         errorColor: defaultError,
       ),
+      themeMode: ThemeMode.light,
       darkTheme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,

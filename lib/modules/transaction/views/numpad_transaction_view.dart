@@ -14,49 +14,52 @@ class NumpadTransactionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                'Apakah anda ingin membuang perubahan ini?'.tr,
-                style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
-                textAlign: TextAlign.center,
-              ),
-              actionsAlignment: MainAxisAlignment.center,
-              actions: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: ButtonCustom(
-                        elevatedMode: false,
-                        onTap: () {
-                          Navigator.pop(context, false);
-                        },
-                        text: 'Tidak'.tr,
-                      ),
-                    ),
-                    SizedBox(
-                      width: Get.width * 0.01,
-                    ),
-                    Expanded(
-                      child: ButtonCustom(
-                        elevatedMode: false,
-                        onTap: () {
-                          Navigator.pop(context, true);
-                          controller.clearInput();
-                          Get.back();
-                        },
-                        text: 'Ya'.tr,
-                      ),
-                    ),
-                  ],
+        if (controller.amountTextController.value != '0') {
+          showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Apakah anda ingin membuang perubahan ini?'.tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            );
-          },
-        );
-        return shouldPop!;
+                actionsAlignment: MainAxisAlignment.center,
+                actions: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, false);
+                          },
+                          text: 'Tidak'.tr,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, true);
+                            controller.clearInput();
+                            Get.back();
+                          },
+                          text: 'Ya'.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          );
+          return false;
+        }
+        return true;
       },
       child: Scaffold(
         body: Padding(
@@ -70,49 +73,53 @@ class NumpadTransactionView extends StatelessWidget {
                   IconBack(
                     blueMode: true,
                     onTap: () {
-                      showDialog<bool>(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'Apakah anda ingin membuang perubahan ini?'.tr,
-                              style: kInter.copyWith(
-                                  fontSize: 16, fontWeight: semiBold),
-                              textAlign: TextAlign.center,
-                            ),
-                            actionsAlignment: MainAxisAlignment.center,
-                            actions: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ButtonCustom(
-                                      elevatedMode: false,
-                                      onTap: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      text: 'Tidak'.tr,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: Get.width * 0.01,
-                                  ),
-                                  Expanded(
-                                    child: ButtonCustom(
-                                      elevatedMode: false,
-                                      onTap: () {
-                                        Navigator.pop(context, true);
-                                        controller.clearInput();
-                                        Get.back();
-                                      },
-                                      text: 'Ya'.tr,
-                                    ),
-                                  ),
-                                ],
+                      if (controller.amountTextController.value != '0') {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                'Apakah anda ingin membuang perubahan ini?'.tr,
+                                style: kInter.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                                textAlign: TextAlign.center,
                               ),
-                            ],
-                          );
-                        },
-                      );
+                              actionsAlignment: MainAxisAlignment.center,
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        text: 'Tidak'.tr,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, true);
+                                          controller.clearInput();
+                                          Get.back();
+                                        },
+                                        text: 'Ya'.tr,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return false;
+                      }
+                      Get.back();
                     },
                   ),
                   Text(

@@ -36,18 +36,14 @@ class IconBack extends StatelessWidget {
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? defaultWhite
-                      : const Color(0XFF39434D),
+                  color: defaultWhite,
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 12,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? defaultWhite
-                    : const Color(0XFF39434D),
+                color: defaultWhite,
               ),
             ),
             onTap: onTap,

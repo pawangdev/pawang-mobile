@@ -19,49 +19,142 @@ class AddReminderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                'Apakah anda ingin membuang perubahan ini?'.tr,
-                style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
-                textAlign: TextAlign.center,
-              ),
-              actionsAlignment: MainAxisAlignment.center,
-              actions: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: ButtonCustom(
-                        elevatedMode: false,
-                        onTap: () {
-                          Navigator.pop(context, false);
-                        },
-                        text: 'Tidak'.tr,
-                      ),
-                    ),
-                    SizedBox(
-                      width: Get.width * 0.01,
-                    ),
-                    Expanded(
-                      child: ButtonCustom(
-                        elevatedMode: false,
-                        onTap: () {
-                          Navigator.pop(context, true);
-                          controller.resetAllInput();
-                          Get.back();
-                        },
-                        text: 'Ya'.tr,
-                      ),
-                    ),
-                  ],
+        if (controller.nameTextController.text != '') {
+          showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Apakah anda ingin membuang perubahan ini?'.tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            );
-          },
-        );
-        return shouldPop!;
+                actionsAlignment: MainAxisAlignment.center,
+                actions: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, false);
+                          },
+                          text: 'Tidak'.tr,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, true);
+                            controller.resetAllInput();
+                            Get.back();
+                          },
+                          text: 'Ya'.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          );
+          return false;
+        }
+        if (controller.dateTextController.text != '') {
+          showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Apakah anda ingin membuang perubahan ini?'.tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                  textAlign: TextAlign.center,
+                ),
+                actionsAlignment: MainAxisAlignment.center,
+                actions: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, false);
+                          },
+                          text: 'Tidak'.tr,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, true);
+                            controller.resetAllInput();
+                            Get.back();
+                          },
+                          text: 'Ya'.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          );
+          return false;
+        }
+        if (controller.typeRepeateTextController.text != "Tidak Berulang".tr) {
+          showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Apakah anda ingin membuang perubahan ini?'.tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                  textAlign: TextAlign.center,
+                ),
+                actionsAlignment: MainAxisAlignment.center,
+                actions: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, false);
+                          },
+                          text: 'Tidak'.tr,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Expanded(
+                        child: ButtonCustom(
+                          elevatedMode: false,
+                          onTap: () {
+                            Navigator.pop(context, true);
+                            controller.resetAllInput();
+                            Get.back();
+                          },
+                          text: 'Ya'.tr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          );
+          return false;
+        }
+        return true;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -73,12 +166,9 @@ class AddReminderView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconBack(
-                      blueMode: true,
-                      onTap: () {
-                        // Get.back();
-                        // if (reminderUpdate != null) {
-                        //   controller.resetAllInput();
-                        // }
+                    blueMode: true,
+                    onTap: () {
+                      if (controller.nameTextController.text != '') {
                         showDialog<bool>(
                           context: context,
                           builder: (context) {
@@ -122,7 +212,104 @@ class AddReminderView extends StatelessWidget {
                             );
                           },
                         );
-                      }),
+                        return false;
+                      }
+                      if (controller.dateTextController.text != '') {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                'Apakah anda ingin membuang perubahan ini?'.tr,
+                                style: kInter.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                                textAlign: TextAlign.center,
+                              ),
+                              actionsAlignment: MainAxisAlignment.center,
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        text: 'Tidak'.tr,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, true);
+                                          controller.resetAllInput();
+                                          Get.back();
+                                        },
+                                        text: 'Ya'.tr,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return false;
+                      }
+                      if (controller.typeRepeateTextController.text !=
+                          "Tidak Berulang".tr) {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                'Apakah anda ingin membuang perubahan ini?'.tr,
+                                style: kInter.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                                textAlign: TextAlign.center,
+                              ),
+                              actionsAlignment: MainAxisAlignment.center,
+                              actions: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        text: 'Tidak'.tr,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Expanded(
+                                      child: ButtonCustom(
+                                        elevatedMode: false,
+                                        onTap: () {
+                                          Navigator.pop(context, true);
+                                          controller.resetAllInput();
+                                          Get.back();
+                                        },
+                                        text: 'Ya'.tr,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return false;
+                      }
+                      Get.back();
+                    },
+                  ),
                   Text(
                     reminderUpdate == null
                         ? "Tambah Pengingat".tr

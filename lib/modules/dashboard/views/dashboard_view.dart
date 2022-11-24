@@ -81,10 +81,7 @@ class DashboardView extends StatelessWidget {
                                   width: Get.width * 0.085,
                                   height: Get.height * 0.047,
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? defaultWhite
-                                        : const Color(0XFF39434D),
+                                    color: defaultWhite,
                                     borderRadius: BorderRadius.circular(50.0),
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -109,10 +106,7 @@ class DashboardView extends StatelessWidget {
                                         style: kInter.copyWith(
                                           fontSize: 12,
                                           fontWeight: medium,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.light
-                                              ? defaultWhite
-                                              : const Color(0XFF39434D),
+                                          color: defaultWhite,
                                         ),
                                       ),
                                       controller.user.value.name != ""
@@ -126,12 +120,7 @@ class DashboardView extends StatelessWidget {
                                                   style: kInter.copyWith(
                                                     fontSize: 14,
                                                     fontWeight: semiBold,
-                                                    color: Theme.of(context)
-                                                                .brightness ==
-                                                            Brightness.light
-                                                        ? defaultWhite
-                                                        : const Color(
-                                                            0XFF39434D),
+                                                    color: defaultWhite,
                                                   )),
                                             )
                                           : SkeletonAnimation(

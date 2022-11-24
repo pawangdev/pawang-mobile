@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/reminder/controllers/reminder_controller.dart';
@@ -35,9 +34,7 @@ class ReminderView extends StatelessWidget {
                       style: kInter.copyWith(
                         fontSize: 16,
                         fontWeight: semiBold,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? defaultWhite
-                            : const Color(0XFF39434D),
+                        color: defaultWhite,
                       ),
                     ),
                     GestureDetector(
@@ -45,11 +42,9 @@ class ReminderView extends StatelessWidget {
                         Get.toNamed(RoutesName.addreminder);
                         controller.resetAllInput();
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.add_rounded,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? defaultWhite
-                            : const Color(0XFF39434D),
+                        color: defaultWhite,
                       ),
                     )
                   ],
