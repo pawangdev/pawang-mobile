@@ -22,61 +22,64 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: onTap,
-          child: SizedBox(
-            width: Get.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        height: Get.height * 0.039,
-                        width: Get.width * 0.083,
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(
-                          icon,
-                          color: defaultWhite,
-                          size: 20,
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Column(
+        children: [
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: onTap,
+            child: SizedBox(
+              width: Get.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          height: Get.height * 0.039,
+                          width: Get.width * 0.083,
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            icon,
+                            color: defaultWhite,
+                            size: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      text,
-                      style: kInter.copyWith(fontWeight: semiBold),
-                    )
-                  ],
-                ),
-                iconSufix == true
-                    ? const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 16,
+                      Text(
+                        text,
+                        style: kInter.copyWith(fontWeight: semiBold),
                       )
-                    : SizedBox(
-                        child: contentSufix,
-                      )
-              ],
+                    ],
+                  ),
+                  iconSufix == true
+                      ? const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 16,
+                        )
+                      : SizedBox(
+                          child: contentSufix,
+                        )
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: Get.height * 0.0135,
-        ),
-        const Divider(
-          thickness: 1,
-        )
-      ],
+          SizedBox(
+            height: Get.height * 0.01,
+          ),
+          const Divider(
+            thickness: 1,
+          )
+        ],
+      ),
     );
   }
 }

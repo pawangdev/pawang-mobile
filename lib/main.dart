@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
+import 'package:pawang_mobile/utils/storage.dart';
 import 'package:pawang_mobile/utils/translation.dart';
 
 import 'routes/routes.dart';
@@ -53,7 +54,9 @@ class MyApp extends StatelessWidget {
         fontFamily: "Inter",
         errorColor: defaultError,
       ),
-      themeMode: ThemeMode.light,
+      themeMode: Storage.getValue('themeMode') == "light"
+          ? ThemeMode.light
+          : ThemeMode.dark,
       darkTheme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
@@ -74,7 +77,9 @@ class MyApp extends StatelessWidget {
         errorColor: defaultError,
       ),
       translations: Translation(),
-      locale: const Locale('id'),
+      locale: Storage.getValue('locale') == "id"
+          ? const Locale('id')
+          : const Locale('en'),
       builder: EasyLoading.init(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.pages,

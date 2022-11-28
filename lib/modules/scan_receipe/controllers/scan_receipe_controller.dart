@@ -35,10 +35,11 @@ class ScanReceipeController extends GetxController {
       EasyLoading.show(status: 'Mohon Tunggu'.tr);
       final fileImage = File(imageFilePath!.path);
       ScanService.uploadReceipt(fileImage).then((value) async {
-        if (value['status'] == "true") {
+        if (value?.status == true) {
           EasyLoading.dismiss();
 
-          String tempAmounts = value['amounts'].toString();
+          String tempAmounts = value!.amount.toString();
+          print(tempAmounts);
 
           Get.snackbar(
             'Berhasil Memindai Struk !'.tr,
@@ -55,6 +56,23 @@ class ScanReceipeController extends GetxController {
 
           await transactionController.formUploadReceiptTransaction(
               tempAmounts, fileImage);
+
+          resetScan();
+        } else {
+          EasyLoading.dismiss();
+
+          Get.snackbar(
+            'Gagal Memindai Struk !'.tr,
+            'Total Tidak Dapat Ditemukan'.tr,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.all(20),
+            icon: const Icon(
+              Icons.cancel,
+              color: Colors.white,
+            ),
+          );
 
           resetScan();
         }

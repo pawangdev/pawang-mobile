@@ -143,11 +143,13 @@ class SettingsView extends StatelessWidget {
                           Get.changeThemeMode(
                             ThemeMode.dark,
                           );
+                          Storage.saveValue('themeMode', 'dark');
                           Get.back();
                         } else {
                           Get.changeThemeMode(
                             ThemeMode.light,
                           );
+                          Storage.saveValue('themeMode', 'light');
                           Get.back();
                         }
                       },

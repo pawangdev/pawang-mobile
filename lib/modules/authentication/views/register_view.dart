@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/authentication/controllers/register_controller.dart';
 import 'package:pawang_mobile/routes/app_pages.dart';
+import 'package:pawang_mobile/utils/storage.dart';
 import 'package:pawang_mobile/widgets/button_custom.dart';
 import 'package:pawang_mobile/widgets/input_field.dart';
 import 'package:get/get.dart';
@@ -71,8 +72,10 @@ class RegisterView extends StatelessWidget {
                                     onTap: (int index) {
                                       if (index == 0) {
                                         Get.updateLocale(const Locale('id'));
+                                        Storage.saveValue('locale', 'id');
                                       } else {
                                         Get.updateLocale(const Locale('en'));
+                                        Storage.saveValue('locale', 'en');
                                       }
                                     },
                                     labelColor: defaultBlack,

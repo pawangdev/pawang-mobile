@@ -57,10 +57,10 @@ class TransactionController extends GetxController {
 
   @override
   void onInit() {
-    dateTextController.text =
-        DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
+    dateTextController.text = DateTime.now().toUtc().toIso8601String();
     dateRFC3399.value = DateTime.now().toUtc().toIso8601String();
-    displayDate.value = dateTextController.text;
+    displayDate.value =
+        DateFormat("d MMMM yyyy - HH:mm").format(DateTime.now()).toString();
     super.onInit();
   }
 
