@@ -71,10 +71,14 @@ class RegisterView extends StatelessWidget {
                                   child: TabBar(
                                     onTap: (int index) {
                                       if (index == 0) {
-                                        Get.updateLocale(const Locale('id'));
+                                        Get.updateLocale(const Locale('id'))
+                                            .then((value) =>
+                                                Storage.removeValue('locale'));
                                         Storage.saveValue('locale', 'id');
                                       } else {
-                                        Get.updateLocale(const Locale('en'));
+                                        Get.updateLocale(const Locale('en'))
+                                            .then((value) =>
+                                                Storage.removeValue('locale'));
                                         Storage.saveValue('locale', 'en');
                                       }
                                     },

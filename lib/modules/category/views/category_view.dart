@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/strings.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/category/controllers/category_controller.dart';
@@ -14,6 +13,8 @@ class CategoryView extends StatelessWidget {
   final CategoryController controller = Get.find();
   final TransactionController transactionController = Get.find();
   final args = Get.arguments;
+
+  CategoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -640,11 +641,12 @@ class CategoryView extends StatelessWidget {
                                         Brightness.light
                                     ? Colors.black
                                     : defaultWhite,
-                                animationDuration: Duration(milliseconds: 300),
+                                animationDuration:
+                                    const Duration(milliseconds: 300),
                               ),
                             );
                           } else {
-                            return SizedBox();
+                            return const SizedBox();
                           }
                         },
                       ),
@@ -1210,11 +1212,12 @@ class CategoryView extends StatelessWidget {
                                         Brightness.light
                                     ? Colors.black
                                     : defaultWhite,
-                                animationDuration: Duration(milliseconds: 300),
+                                animationDuration:
+                                    const Duration(milliseconds: 300),
                               ),
                             );
                           } else {
-                            return SizedBox();
+                            return const SizedBox();
                           }
                         },
                       ),

@@ -14,6 +14,8 @@ class SettingsView extends StatelessWidget {
   final SettingsController controller = Get.find();
   final DashboardController dashboardController = Get.find();
 
+  SettingsView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +113,9 @@ class SettingsView extends StatelessWidget {
                                     ? true
                                     : false,
                                 onTap: () {
-                                  Get.updateLocale(const Locale('id'));
+                                  Get.updateLocale(const Locale('id')).then(
+                                      (value) => Storage.removeValue('locale'));
+                                  Storage.saveValue('locale', 'id');
                                   Get.back();
                                 },
                               ),
@@ -121,7 +125,9 @@ class SettingsView extends StatelessWidget {
                                     ? true
                                     : false,
                                 onTap: () {
-                                  Get.updateLocale(const Locale('en'));
+                                  Get.updateLocale(const Locale('en')).then(
+                                      (value) => Storage.removeValue('locale'));
+                                  Storage.saveValue('locale', 'en');
                                   Get.back();
                                 },
                               ),
@@ -143,12 +149,14 @@ class SettingsView extends StatelessWidget {
                           Get.changeThemeMode(
                             ThemeMode.dark,
                           );
+                          Storage.removeValue('themeMode');
                           Storage.saveValue('themeMode', 'dark');
                           Get.back();
                         } else {
                           Get.changeThemeMode(
                             ThemeMode.light,
                           );
+                          Storage.removeValue('themeMode');
                           Storage.saveValue('themeMode', 'light');
                           Get.back();
                         }

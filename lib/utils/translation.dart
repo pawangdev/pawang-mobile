@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 
 class Translation extends Translations {
   @override
-  // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'id': {
           'Masuk dulu yuk!': 'Masuk dulu yuk!',
@@ -291,7 +290,8 @@ class Translation extends Translations {
           'Saldo Awal': 'Initial Balance',
           'Saldo': 'Balance',
           'Hapus Dompet': 'Delete Wallet',
-          'Apakah kamu yakin akan menghapus dompet ini?': 'Are you sure you want to delete this wallet?',
+          'Apakah kamu yakin akan menghapus dompet ini?':
+              'Are you sure you want to delete this wallet?',
           'Sisa Uang Kamu': 'Remaining',
           'Riwayat Transaksi': 'Transaction History',
           'Tidak ada transaksi': 'No Transactions',
@@ -328,12 +328,14 @@ class Translation extends Translations {
           'Berhasil Mengirim Token !': 'Token Sent Successfully !',
           'Gagal Menghapus Subkategori !': 'Failed to delete sub-category !',
           'Sukses': 'Success',
-          'Berhasil Menambahkan Subkategori': 'Sub-Category Added Successfully ',
+          'Berhasil Menambahkan Subkategori':
+              'Sub-Category Added Successfully ',
           'Gagal Membuat Subkategori !': 'Failed to Create Sub-Category !',
           'Berhasil Memperbarui Subkategori':
               'Sub-Category Updated Successfully ',
           'Gagal Memperbarui Subkategori !': 'Failed to Update Sub-Category !',
-          'Berhasil Menghapus Subkategori': 'Sub-Category Deleted Successfully ',
+          'Berhasil Menghapus Subkategori':
+              'Sub-Category Deleted Successfully ',
           'Yuk mulai catat pengeluaran dan pemasukan kamu di aplikasi Pawang sekarang !':
               'Let\'s start managing by recording your outcome and income with Pawang app now!',
           'Simpan dan pisahkan danamu di wallet Pawang untuk mempermudah transaksimu':
@@ -364,7 +366,8 @@ class Translation extends Translations {
           'Berhasil Menambahkan Transaksi': 'Transaction Added Successfully ',
           'Pilih Salah Satu Kategori Terlebih Dahulu':
               'You have to Select One Category First',
-          'Pilih Salah Satu Wallet Terlebih Dahulu': 'You have to Choose One Wallet First',
+          'Pilih Salah Satu Wallet Terlebih Dahulu':
+              'You have to Choose One Wallet First',
           'Masukkan Nominal Transaksi': 'Enter Transaction Nominal',
           'Gagal Menghapus Wallet !': 'Failed to Delete Wallet !',
           'Berhasil Menghapus Wallet': 'Wallet Deleted Successfully ',

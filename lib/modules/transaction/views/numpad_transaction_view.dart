@@ -10,6 +10,8 @@ import 'package:pawang_mobile/widgets/numpad.dart';
 class NumpadTransactionView extends StatelessWidget {
   final TransactionController controller = Get.find<TransactionController>();
 
+  NumpadTransactionView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

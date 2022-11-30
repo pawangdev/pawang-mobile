@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 WalletsModel walletsModelFromJson(String str) =>
@@ -150,6 +152,7 @@ class Transaction {
         "updated_at": updatedAt.toIso8601String(),
         "wallet": wallet.toJson(),
         "category": category.toJson(),
+        // ignore: prefer_null_aware_operators
         "subcategory": subcategory == null ? null : subcategory?.toJson(),
       };
 }

@@ -10,6 +10,8 @@ class ReminderView extends StatelessWidget {
   final ReminderController controller = Get.find();
   final DashboardController dashboardController = Get.find();
 
+  ReminderView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

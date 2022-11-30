@@ -8,6 +8,8 @@ import 'package:pawang_mobile/widgets/input_field.dart';
 
 class ResetPasswordConfirmationView extends StatelessWidget {
   final ResetPasswordController controller = Get.find();
+
+  ResetPasswordConfirmationView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/transaction/controllers/transaction_controller.dart';
@@ -463,7 +462,7 @@ class AddTransactionView extends StatelessWidget {
                                   hintText: 'Tanggal'.tr,
                                   icon: const Icon(Icons.calendar_month),
                                   suffixIcon: Container(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     child: SvgPicture.asset(
                                       'assets/images/chevron_down.svg',
                                       color: defaultGray,

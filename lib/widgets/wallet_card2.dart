@@ -1,12 +1,9 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/models/wallet_model.dart';
 import 'package:pawang_mobile/modules/wallet/wallet.dart';
 import 'package:pawang_mobile/utils/currency_format.dart';
-import 'package:pawang_mobile/widgets/button_custom.dart';
-import 'package:pawang_mobile/widgets/input_field.dart';
 
 // ignore: must_be_immutable
 class WalletCard2 extends StatelessWidget {

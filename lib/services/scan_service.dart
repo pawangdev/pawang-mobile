@@ -14,7 +14,7 @@ class ScanService {
     if (isFromGal) {
       try {
         XFile? image = await ImagePicker()
-            .pickImage(source: ImageSource.gallery, imageQuality: 50);
+            .pickImage(source: ImageSource.gallery, imageQuality: 40);
         file = image;
       } catch (e) {
         print(e);
@@ -22,7 +22,7 @@ class ScanService {
     } else {
       try {
         XFile? image = await ImagePicker()
-            .pickImage(source: ImageSource.camera, imageQuality: 50);
+            .pickImage(source: ImageSource.camera, imageQuality: 40);
         file = image;
       } catch (e) {
         print(e);

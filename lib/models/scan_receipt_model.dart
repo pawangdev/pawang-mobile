@@ -17,6 +17,7 @@ class ScanReceiptModel {
 
   factory ScanReceiptModel.fromJson(Map<String, dynamic> json) =>
       ScanReceiptModel(
+        // ignore: prefer_if_null_operators
         amount: json["amount"] == null ? 0 : json["amount"],
         status: json["status"],
       );

@@ -2,7 +2,6 @@
 
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pawang_mobile/constants/theme.dart';
 import 'package:pawang_mobile/modules/dashboard/dashboard.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';

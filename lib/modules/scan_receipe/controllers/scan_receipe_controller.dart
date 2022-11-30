@@ -16,6 +16,7 @@ class ScanReceipeController extends GetxController {
     // GET AND CROP THE IMAGE
     try {
       final getImage = await ScanService().getImage(isFromGal);
+      // ignore: unnecessary_null_comparison
       if (getImage != null) {
         imageFilePath = getImage;
       }

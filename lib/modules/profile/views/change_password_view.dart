@@ -10,6 +10,8 @@ import 'package:pawang_mobile/widgets/input_field.dart';
 class ChangePasswordView extends StatelessWidget {
   final ChangePasswordController controller = Get.find();
 
+  ChangePasswordView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

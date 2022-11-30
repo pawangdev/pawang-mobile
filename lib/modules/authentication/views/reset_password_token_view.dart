@@ -8,6 +8,8 @@ import 'package:pawang_mobile/widgets/icon_back.dart';
 
 class ResetPasswordTokenView extends StatelessWidget {
   final ResetPasswordController controller = Get.find();
+
+  ResetPasswordTokenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

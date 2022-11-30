@@ -10,9 +10,12 @@ import 'package:pawang_mobile/modules/settings/settings.dart';
 import 'package:pawang_mobile/modules/transaction/transaction.dart';
 import 'package:pawang_mobile/widgets/icon_bottom.dart';
 
+// ignore: must_be_immutable
 class NavigationView extends StatelessWidget {
   final NavigationController controller = Get.find<NavigationController>();
   DateTime timeBackPressed = DateTime.now();
+
+  NavigationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

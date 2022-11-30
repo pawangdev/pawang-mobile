@@ -90,6 +90,7 @@ class LoginController extends GetxController {
           .then((value) => EasyLoading.dismiss());
       Get.snackbar(
         'Berhasil Masuk !'.tr,
+        // ignore: unnecessary_string_interpolations
         'Selamat Datang '.tr + '${loginResponse.user.name}',
         snackPosition: SnackPosition.BOTTOM,
         margin: const EdgeInsets.all(20),

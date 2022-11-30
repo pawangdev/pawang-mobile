@@ -13,6 +13,8 @@ class EditProfileView extends StatelessWidget {
   final EditProfileController controller = Get.find();
   final DashboardController dashboardController = Get.find();
 
+  EditProfileView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -200,6 +202,7 @@ class EditProfileView extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     controller.genderTextController.value =
+                                        // ignore: unnecessary_cast
                                         'male' as String;
                                   },
                                   child: Row(
@@ -228,6 +231,7 @@ class EditProfileView extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     controller.genderTextController.value =
+                                        // ignore: unnecessary_cast
                                         'female' as String;
                                   },
                                   child: Row(
