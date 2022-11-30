@@ -3,7 +3,7 @@ import 'package:pawang_mobile/routes/app_pages.dart';
 import 'package:pawang_mobile/utils/storage.dart';
 
 class SplashController extends GetxController {
-  final version = '4.1.0';
+  final version = '5.1.0';
 
   @override
   void onInit() {

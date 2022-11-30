@@ -12,155 +12,58 @@ class NumpadTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (controller.amountTextController.value != '0') {
-          showDialog<bool>(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text(
-                  'Apakah anda ingin membuang perubahan ini?'.tr,
-                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
-                  textAlign: TextAlign.center,
-                ),
-                actionsAlignment: MainAxisAlignment.center,
-                actions: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ButtonCustom(
-                          elevatedMode: false,
-                          onTap: () {
-                            Navigator.pop(context, false);
-                          },
-                          text: 'Tidak'.tr,
-                        ),
-                      ),
-                      SizedBox(
-                        width: Get.width * 0.01,
-                      ),
-                      Expanded(
-                        child: ButtonCustom(
-                          elevatedMode: false,
-                          onTap: () {
-                            Navigator.pop(context, true);
-                            controller.clearInput();
-                            Get.back();
-                          },
-                          text: 'Ya'.tr,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
-          );
-          return false;
-        }
-        return true;
-      },
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconBack(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconBack(
                     blueMode: true,
                     onTap: () {
-                      if (controller.amountTextController.value != '0') {
-                        showDialog<bool>(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                'Apakah anda ingin membuang perubahan ini?'.tr,
-                                style: kInter.copyWith(
-                                    fontSize: 16, fontWeight: semiBold),
-                                textAlign: TextAlign.center,
-                              ),
-                              actionsAlignment: MainAxisAlignment.center,
-                              actions: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ButtonCustom(
-                                        elevatedMode: false,
-                                        onTap: () {
-                                          Navigator.pop(context, false);
-                                        },
-                                        text: 'Tidak'.tr,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: Get.width * 0.01,
-                                    ),
-                                    Expanded(
-                                      child: ButtonCustom(
-                                        elevatedMode: false,
-                                        onTap: () {
-                                          Navigator.pop(context, true);
-                                          controller.clearInput();
-                                          Get.back();
-                                        },
-                                        text: 'Ya'.tr,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        return false;
-                      }
                       Get.back();
-                    },
-                  ),
-                  Text(
-                    "Masukkan Nominal".tr,
-                    style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
-                  ),
-                  const SizedBox(
-                    width: 32,
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Center(
-                  child: Obx(
-                    () => Text(
-                      CurrencyFormat.convertToIdr(
-                          int.parse(controller.amountTextController.value), 2),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: kInter.copyWith(fontSize: 24, fontWeight: bold),
-                    ),
+                    }),
+                Text(
+                  "Masukkan Nominal".tr,
+                  style: kInter.copyWith(fontSize: 16, fontWeight: semiBold),
+                ),
+                const SizedBox(
+                  width: 32,
+                ),
+              ],
+            ),
+            Expanded(
+              child: Center(
+                child: Obx(
+                  () => Text(
+                    CurrencyFormat.convertToIdr(
+                        int.parse(controller.amountTextController.value), 2),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: kInter.copyWith(fontSize: 24, fontWeight: bold),
                   ),
                 ),
               ),
-              const Expanded(child: SizedBox()),
-              NumpadWidget(),
-              SizedBox(
-                height: Get.height * 0.05,
-              ),
-              ButtonCustom(
-                text: 'Simpan'.tr,
-                elevatedMode: false,
-                onTap: () {
-                  controller.displayAmount.text = CurrencyFormat.convertToIdr(
-                      int.parse(controller.amountTextController.value), 2);
+            ),
+            const Expanded(child: SizedBox()),
+            NumpadWidget(),
+            SizedBox(
+              height: Get.height * 0.05,
+            ),
+            ButtonCustom(
+              text: 'Simpan'.tr,
+              elevatedMode: false,
+              onTap: () {
+                controller.displayAmount.text = CurrencyFormat.convertToIdr(
+                    int.parse(controller.amountTextController.value), 2);
 
-                  Get.back();
-                },
-              ),
-            ],
-          ),
+                Get.back();
+              },
+            ),
+          ],
         ),
       ),
     );

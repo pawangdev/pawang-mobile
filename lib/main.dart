@@ -54,9 +54,9 @@ class MyApp extends StatelessWidget {
         fontFamily: "Inter",
         errorColor: defaultError,
       ),
-      themeMode: Storage.getValue('themeMode') == "light"
-          ? ThemeMode.light
-          : ThemeMode.dark,
+      themeMode: Storage.getValue('themeMode') == "dark"
+          ? ThemeMode.dark
+          : ThemeMode.light,
       darkTheme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
@@ -77,9 +77,9 @@ class MyApp extends StatelessWidget {
         errorColor: defaultError,
       ),
       translations: Translation(),
-      locale: Storage.getValue('locale') == "id"
-          ? const Locale('id')
-          : const Locale('en'),
+      locale: Storage.getValue('locale') == "en"
+          ? const Locale('en')
+          : const Locale('id'),
       builder: EasyLoading.init(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.pages,
