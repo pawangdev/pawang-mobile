@@ -93,4 +93,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.0'
+    implementation 'com.google.android.play:app-update:2.0.1'
+    implementation 'com.google.android.play:app-update-ktx:2.0.0'
 }
